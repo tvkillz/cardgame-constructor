@@ -1,7 +1,7 @@
 import type { CSSProperties } from 'react'
-import type { Metadata } from 'next'
 import { appConfig } from '@/config'
 import { getArenaBackground, getLobbyBackground } from '@/config/selectors'
+import { buildSiteMetadata } from '@/lib/seo/siteMetadata'
 import { AuthProvider } from '@/components/providers/AuthProvider'
 import { ThemeProvider } from '@/components/providers/ThemeProvider'
 import { rootFontClassName } from '@/lib/fonts'
@@ -11,13 +11,7 @@ import '@/components/ui/Button/Button.css'
 const lobbyBg = getLobbyBackground()
 const arenaBg = getArenaBackground()
 
-export const metadata: Metadata = {
-  title: appConfig.name.documentTitle,
-  description: appConfig.descriptions.hero.subheadline,
-  icons: {
-    icon: appConfig.logo.favicon,
-  },
-}
+export const metadata = buildSiteMetadata(appConfig)
 
 export default function RootLayout({
   children,

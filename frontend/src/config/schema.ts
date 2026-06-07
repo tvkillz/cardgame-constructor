@@ -41,11 +41,20 @@ export interface AppConfig {
     }
   }
 
-  /** Logo and favicon paths. */
+  /** Logo and favicon paths (favicon generated from logo at compile time). */
   logo: {
     src: string
     alt: string
     favicon: string
+  }
+
+  /** Page + social metadata from projects/{id}/copy/seo.json. */
+  seo: {
+    title: string
+    description: string
+    siteName: string
+    image: string
+    imageAlt: string
   }
 
   /** Palette — drives CSS custom properties via applyTheme(). */
@@ -87,6 +96,10 @@ export interface AppConfig {
     locations: {
       kicker: string
       paragraphs: string[]
+    }
+    dominions: {
+      title: string
+      description: string
     }
     play: {
       screenLabel: string
@@ -207,13 +220,29 @@ export interface CategoryConfig {
   locationIds: string[]
 }
 
+export interface DominionCitySlide {
+  image: string
+  name: string
+  description: string
+}
+
 export interface LocationConfig {
   id: string
   name: string
   categoryId: ElementCategory
+  categoryLabel: string
+  domainId: string
+  glowColor: string
   epithet: string
   short: string
+  /** Primary city image — preview frame + dominions first slide. */
   image: string
+  /** Decorative grey backdrop — another city from the same realm when available. */
+  backgroundImage: string
+  /** All city art URLs for dominions carousel. */
+  images: string[]
+  /** City slides with name + description (game/scenes.json + game/cities.json). */
+  cities: DominionCitySlide[]
 }
 
 export interface ThemeConfig {

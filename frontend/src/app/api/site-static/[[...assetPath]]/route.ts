@@ -66,7 +66,20 @@ async function resolveFile(segments: string[], request?: NextRequest): Promise<s
 
   let filePath: string
   if (segments.length === 1 && segments[0] === '__favicon__') {
-    filePath = path.join(root, 'favicon.svg')
+    for (const name of ['favicon.png', 'favicon.ico', 'favicon.svg']) {
+      const candidate = path.join(root, name)
+      try {
+        const info = await stat(candidate)
+        if (info.isFile()) return path.resolve(candidate)
+      } catch {
+        /* try next */
+      }
+    }
+    return null
+  } else if (segments.length === 1 && segments[0] === '__apple-touch-icon__') {
+    filePath = path.join(root, 'apple-touch-icon.png')
+  } else if (segments.length === 1 && segments[0] === '__og-image__') {
+    filePath = path.join(root, 'og-image.jpg')
   } else {
     filePath = path.join(root, ...segments)
   }

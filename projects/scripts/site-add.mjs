@@ -87,7 +87,7 @@ async function main() {
   console.log(`[site-add] Added registry entry (status=${status})`)
 
   printNextSteps([
-    `Edit projects/${id}/ copy, theme, game/*.json as needed`,
+    `Edit projects/${id}/ copy (descriptions.json, seo.json), theme, game/*.json as needed`,
     `npm run metadata:split --project=${id}  (if still using assets_metadata.json)`,
     'npm run compile:all  (from frontend/)',
     `PROJECT=${id} npm run build  (from frontend/)`,

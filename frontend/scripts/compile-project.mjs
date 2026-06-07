@@ -36,6 +36,10 @@ import {
 
 const THUMB_WIDTH = 320
 const BUCKET = 'cards'
+const OG_WIDTH = 1200
+const OG_HEIGHT = 630
+const FAVICON_SIZE = 32
+const APPLE_TOUCH_SIZE = 180
 
 async function readJson(filePath, label) {
   let raw
@@ -72,6 +76,90 @@ function rarityFromMana(mana) {
 function storagePublicUrl(baseUrl, bucket, objectPath) {
   const encoded = objectPath.split('/').map(encodeURIComponent).join('/')
   return `${baseUrl.replace(/\/$/, '')}/storage/v1/object/public/${bucket}/${encoded}`
+}
+
+async function readJsonOptional(filePath) {
+  try {
+    return await readJson(filePath, 'seo')
+  } catch {
+    return {}
+  }
+}
+
+function buildSeoConfig(seoJson, manifest, descriptions) {
+  const image = seoJson.image
+  const imagePath =
+    image && (image.startsWith('http') || image.startsWith('/')) ? image : '/og-image.jpg'
+
+  return {
+    title: seoJson.title ?? manifest.name.documentTitle,
+    description: seoJson.description ?? descriptions.hero.subheadline,
+    siteName: seoJson.siteName ?? manifest.name.display,
+    imageAlt: seoJson.imageAlt ?? manifest.brand?.logoAlt ?? manifest.name.short,
+    image: imagePath,
+  }
+}
+
+async function generateOgFromLogo(sharp, logoPath, destPath) {
+  const logoBuf = await sharp(logoPath)
+    .resize(480, 480, { fit: 'inside', withoutEnlargement: false })
+    .toBuffer()
+
+  await sharp({
+    create: {
+      width: OG_WIDTH,
+      height: OG_HEIGHT,
+      channels: 3,
+      background: { r: 10, g: 10, b: 12 },
+    },
+  })
+    .composite([{ input: logoBuf, gravity: 'centre' }])
+    .jpeg({ quality: 86 })
+    .toFile(destPath)
+}
+
+async function buildBrandSeoAssets({ sharp, paths, manifest, seoJson, out }) {
+  const logoRel = manifest.brand?.logo
+  const logoPath = logoRel && !logoRel.startsWith('http') && !logoRel.startsWith('/')
+    ? await resolveAssetFile(paths, logoRel)
+    : null
+
+  const customOgRel =
+    seoJson.image &&
+    !seoJson.image.startsWith('http') &&
+    !seoJson.image.startsWith('/')
+      ? seoJson.image
+      : null
+  const customOgPath = customOgRel ? await resolveAssetFile(paths, customOgRel) : null
+
+  if (customOgPath) {
+    const ext = path.extname(customOgPath).toLowerCase()
+    if (ext === '.jpg' || ext === '.jpeg') {
+      await copyFile(customOgPath, out.ogImage)
+    } else if (sharp) {
+      await sharp(customOgPath).resize(OG_WIDTH, OG_HEIGHT, { fit: 'cover' }).jpeg({ quality: 86 }).toFile(out.ogImage)
+    } else {
+      await copyFile(customOgPath, out.ogImage)
+    }
+  } else if (sharp && logoPath) {
+    await generateOgFromLogo(sharp, logoPath, out.ogImage)
+  } else if (logoPath) {
+    console.warn('Brand: skipped og-image (install sharp or add copy/seo.json image path)')
+  }
+
+  if (sharp && logoPath) {
+    await sharp(logoPath)
+      .resize(FAVICON_SIZE, FAVICON_SIZE, { fit: 'cover' })
+      .png()
+      .toFile(out.faviconPng)
+    await sharp(logoPath)
+      .resize(APPLE_TOUCH_SIZE, APPLE_TOUCH_SIZE, { fit: 'cover' })
+      .png()
+      .toFile(out.appleTouchIcon)
+    console.log('Brand: favicon + apple-touch-icon generated from logo')
+  } else if (logoPath) {
+    console.warn('Brand: skipped favicon (install sharp to generate from logo.jpg)')
+  }
 }
 
 async function loadSharp() {
@@ -147,17 +235,6 @@ async function copyProjectAssets(paths, manifest, out) {
     copied++
   }
 
-  const faviconRel = manifest.brand?.favicon
-  if (faviconRel && !faviconRel.startsWith('/') && !faviconRel.startsWith('http')) {
-    const source = await resolveAssetFile(paths, faviconRel)
-    if (source) {
-      await copyFile(source, out.favicon)
-      copied++
-    } else {
-      skipped++
-    }
-  }
-
   console.log(`Assets: copied ${copied}, skipped ${skipped} (missing on disk)`)
   return { publicBase, metadata }
 }
@@ -185,16 +262,56 @@ function buildFeaturedByLocation(locationsJson) {
   return featuredByLocation
 }
 
+function buildCityDescriptionIndex(citiesJson) {
+  const byPath = {}
+  const bySlug = {}
+  for (const city of citiesJson?.cities ?? []) {
+    if (city.path) byPath[city.path] = city
+    if (city.slug) bySlug[city.slug] = city
+  }
+  return { byPath, bySlug }
+}
+
+function buildCitySlidesByDomain(scenesJson, citiesJson, publicBase) {
+  const { byPath, bySlug } = buildCityDescriptionIndex(citiesJson)
+  const byDomain = {}
+
+  for (const asset of scenesJson.assets ?? []) {
+    if (asset.kind !== 'city' || !asset.domain || !asset.path) continue
+    const override = byPath[asset.path] ?? bySlug[asset.slug] ?? {}
+
+    const slide = {
+      image: assetUrl(publicBase, asset.path),
+      name: override.name ?? asset.title ?? 'Unknown City',
+      description: override.description ?? asset.notes ?? '',
+    }
+
+    if (!byDomain[asset.domain]) byDomain[asset.domain] = []
+    byDomain[asset.domain].push(slide)
+  }
+
+  for (const domainId of Object.keys(byDomain)) {
+    byDomain[domainId].sort((a, b) => a.image.localeCompare(b.image))
+  }
+
+  return byDomain
+}
+
 function buildAppConfig({
   manifest,
   colors,
   ui,
   descriptions,
+  dominionsJson,
+  seoJson,
   portal,
   credits,
   auth,
   categories,
   locationsJson,
+  scenesJson,
+  citiesJson,
+  domainGlow,
   publicBase,
   cdnBase,
 }) {
@@ -203,14 +320,53 @@ function buildAppConfig({
     loreLocations[loc.id] = { epithet: loc.epithet, short: loc.short.split(' — ')[0] ?? loc.short }
   }
 
-  const themeLocations = locationsJson.locations.map((loc) => ({
-    id: loc.id,
-    name: loc.name,
-    categoryId: loc.categoryId,
-    epithet: loc.epithet,
-    short: loc.short,
-    image: assetUrl(publicBase, loc.imageAsset),
-  }))
+  const categoryById = Object.fromEntries(
+    categories.categories.map((cat) => [cat.id, cat.label]),
+  )
+  const citySlidesByDomain = buildCitySlidesByDomain(scenesJson, citiesJson, publicBase)
+
+  const themeLocations = locationsJson.locations.map((loc) => {
+    const cities =
+      citySlidesByDomain[loc.domainId]?.length > 0
+        ? citySlidesByDomain[loc.domainId]
+        : [
+            {
+              image: assetUrl(publicBase, loc.imageAsset),
+              name: loc.name,
+              description: loc.short,
+            },
+          ]
+
+    const primaryImage = loc.imageAsset
+      ? assetUrl(publicBase, loc.imageAsset)
+      : cities[0]?.image ?? ''
+
+    const backgroundImage = loc.backgroundImageAsset
+      ? assetUrl(publicBase, loc.backgroundImageAsset)
+      : cities.find((city) => city.image !== primaryImage)?.image ??
+        cities[1]?.image ??
+        primaryImage
+
+    return {
+      id: loc.id,
+      name: loc.name,
+      categoryId: loc.categoryId,
+      categoryLabel: categoryById[loc.categoryId] ?? loc.categoryId,
+      domainId: loc.domainId,
+      glowColor: loc.glowColor ?? domainGlow[loc.domainId] ?? '#a855f7',
+      epithet: loc.epithet,
+      short: loc.short,
+      image: primaryImage,
+      backgroundImage,
+      images: cities.map((city) => city.image),
+      cities,
+    }
+  })
+
+  const dominionsCopy = {
+    title: dominionsJson.title ?? 'The Dominions',
+    description: dominionsJson.description ?? descriptions.hero.subheadline,
+  }
 
   return {
     siteId: manifest.id,
@@ -224,12 +380,9 @@ function buildAppConfig({
     logo: {
       src: assetUrl(publicBase, manifest.brand.logo),
       alt: manifest.brand.logoAlt ?? manifest.name.short,
-      favicon:
-        manifest.brand.favicon?.startsWith('http') ||
-        manifest.brand.favicon?.startsWith('/')
-          ? manifest.brand.favicon
-          : '/favicon.svg',
+      favicon: '/favicon.png',
     },
+    seo: buildSeoConfig(seoJson, manifest, descriptions),
     colors,
     arts: {
       introVideo: assetUrl(publicBase, manifest.brand.introVideo),
@@ -239,7 +392,10 @@ function buildAppConfig({
       locationsDir: `${publicBase}/locations`,
       cdnBase: cdnBase ?? null,
     },
-    descriptions,
+    descriptions: {
+      ...descriptions,
+      dominions: dominionsCopy,
+    },
     portal,
     credits,
     auth: {
@@ -556,12 +712,16 @@ async function main() {
   const colors = await readJson(paths.colors, 'theme/colors')
   const ui = await readJson(paths.ui, 'theme/ui')
   const descriptions = await readJson(paths.descriptions, 'copy/descriptions')
+  const dominionsJson = await readJsonOptional(paths.dominions)
+  const seoJson = await readJsonOptional(paths.seo)
   const portal = await readJson(paths.portal, 'portal/sections')
   const credits = await readJson(paths.credits, 'credits')
   const auth = await readJson(paths.auth, 'auth')
   const domainsJson = await readJson(paths.domains, 'game/domains')
   const categories = await readJson(paths.categories, 'game/categories')
   const locationsJson = await readJson(paths.locations, 'game/locations')
+  const scenesJson = await readJson(paths.gameScenes, 'game/scenes')
+  const citiesJson = await readJsonOptional(paths.gameCities)
 
   const out = buildPaths(projectId)
 
@@ -570,7 +730,9 @@ async function main() {
   const featuredByLocation = buildFeaturedByLocation(locationsJson)
 
   const { domainToCategory, domainGlow } = buildDomainMaps(domainsJson)
+  const sharp = await loadSharp()
   const { publicBase, metadata } = await copyProjectAssets(paths, manifest, out)
+  await buildBrandSeoAssets({ sharp, paths, manifest, seoJson, out })
   if (metadata.source === 'split') {
     console.log('Metadata: split (game/cards.json + game/scenes.json + game/keywords.json)')
   } else {
@@ -587,11 +749,16 @@ async function main() {
     colors,
     ui,
     descriptions,
+    dominionsJson,
+    seoJson,
     portal,
     credits,
     auth,
     categories,
     locationsJson,
+    scenesJson,
+    citiesJson,
+    domainGlow,
     publicBase,
     cdnBase,
   })

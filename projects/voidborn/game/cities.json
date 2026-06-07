@@ -1,0 +1,76 @@
+{
+  "cities": [
+    {
+      "slug": "terra_city_01_great_bastion",
+      "path": "cities/terra/terra_city_01_great_bastion.png",
+      "name": "The Great Bastion",
+      "description": "A massive fortress-city carved into a colossal mountain — grand stone arches, tiered terraces, and monolithic towers of granite."
+    },
+    {
+      "slug": "terra_city_02_obsidian_deep",
+      "path": "cities/terra/terra_city_02_obsidian_deep.png",
+      "name": "Obsidian Deep",
+      "description": "A subterranean metropolis lit by magma vents, where black glass spires rise from caverns older than the domains themselves."
+    },
+    {
+      "slug": "terra_city_03_weeping_grove",
+      "path": "cities/terra/terra_city_03_weeping_grove.png",
+      "name": "The Weeping Grove",
+      "description": "Petrifed trees weep amber sap beneath a perpetual twilight canopy, guarding druidic ruins swallowed by moss and silence."
+    },
+    {
+      "slug": "aqua_city_01_sunken_oakhaven",
+      "path": "cities/aqua/aqua_city_01_sunken_oakhaven.png",
+      "name": "Sunken Oakhaven",
+      "description": "Half-drowned halls of oak and coral where tide-priests commune with leviathans in chambers flooded by moonlit seawater."
+    },
+    {
+      "slug": "aqua_city_02_abyssal_citadel",
+      "path": "cities/aqua/aqua_city_02_abyssal_citadel.png",
+      "name": "The Abyssal Citadel",
+      "description": "A fortress suspended over a trench so deep that light dies before it reaches the bottom — chains of bioluminescent kelp hold the walls aloft."
+    },
+    {
+      "slug": "aqua_city_03_sirens_hollow",
+      "path": "cities/aqua/aqua_city_03_sirens_hollow.png",
+      "name": "Siren's Hollow",
+      "description": "Wind-carved sea caves echo with forbidden songs; decks wager their sanity to harvest void pearls from the singing depths."
+    },
+    {
+      "slug": "ignis_city_01_brimstone_hold",
+      "path": "cities/ignis/ignis_city_01_brimstone_hold.png",
+      "name": "Brimstone Hold",
+      "description": "Basalt ramparts ring a caldera lake of molten sulfur, where forge-clans temper weapons in rivers that never cool."
+    },
+    {
+      "slug": "ignis_city_02_cinderfall",
+      "path": "cities/ignis/ignis_city_02_cinderfall.png",
+      "name": "Cinderfall",
+      "description": "Ruins of a sky-bridge city collapsed into ash canyons — ember storms still replay the night the Void cracked the realm open."
+    },
+    {
+      "slug": "ignis_city_03_iron_foundry",
+      "path": "cities/ignis/ignis_city_03_iron_foundry.png",
+      "name": "The Iron Foundry",
+      "description": "Industrial cathedrals of iron and flame where golem hearts are cast; smoke pillars mark the border between craft and conquest."
+    },
+    {
+      "slug": "zephyr_city_01_eyrie_of_whispers",
+      "path": "cities/zephyr/zephyr_city_01_eyrie_of_whispers.png",
+      "name": "The Eyrie of Whispers",
+      "description": "Floating monoliths tethered by storm chains; wind-mages trade secrets that can unravel a deck before the first card is drawn."
+    },
+    {
+      "slug": "zephyr_city_02_zephyrs_end",
+      "path": "cities/zephyr/zephyr_city_02_zephyrs_end.png",
+      "name": "Zephyr's End",
+      "description": "The last plateau before the eternal hurricane — shattered airships litter the cliffs like warnings to those who chase the horizon."
+    },
+    {
+      "slug": "zephyr_city_03_cloud_sanctuary",
+      "path": "cities/zephyr/zephyr_city_03_cloud_sanctuary.png",
+      "name": "The Cloud Sanctuary",
+      "description": "Gothic spires drift on crystalline clouds, sanctifying pilots who dare the void vortex with vows written in lightning."
+    }
+  ]
+}

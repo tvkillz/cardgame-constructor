@@ -17,7 +17,7 @@ assets/
   domains/
   cities/
   cards/
-  brand/          logo.jpg, main.mp4, favicon.svg
+  brand/          logo.jpg, main.mp4 (favicon + og-image generated at compile)
   _variants/      optional alternates
 ```
 

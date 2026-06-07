@@ -111,7 +111,7 @@
 }
 
 .card__stat--attack {
-  bottom: 32px;
+  bottom: 3rem;
   left: 8px;
   min-width: 36px;
   height: 32px;
@@ -131,7 +131,7 @@
 } */
 
 .card__stat--health {
-  bottom: 32px;
+  bottom: 3rem;
   right: 8px;
   width: 32px;
   height: 38px;

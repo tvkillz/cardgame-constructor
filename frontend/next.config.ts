@@ -35,7 +35,11 @@ function isHybridProduction(projectId: string): boolean {
 const staticRewrites = [
   { source: '/assets/:path*', destination: '/api/site-static/assets/:path*' },
   { source: '/data/:path*', destination: '/api/site-static/data/:path*' },
+  { source: '/favicon.ico', destination: '/api/site-static/__favicon__' },
+  { source: '/favicon.png', destination: '/api/site-static/__favicon__' },
   { source: '/favicon.svg', destination: '/api/site-static/__favicon__' },
+  { source: '/apple-touch-icon.png', destination: '/api/site-static/__apple-touch-icon__' },
+  { source: '/og-image.jpg', destination: '/api/site-static/__og-image__' },
 ]
 
 const hybridPlayRewrites = [

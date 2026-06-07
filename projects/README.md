@@ -8,7 +8,7 @@ Each subdirectory is one frontend site (`voidborn`, `project2`, …). The global
 projects/{id}/
   manifest.json          # siteUrl, brand, routes
   theme/                 # colors, ui
-  copy/                  # descriptions
+  copy/                  # descriptions, seo, dominions
   portal/                # portal sections
   game/
     domains.json         # elemental domains (terra, aqua, ignis, zephyr)
@@ -22,6 +22,10 @@ projects/{id}/
 ```
 
 **Preferred metadata:** split files under `game/` (`keywords.json`, `scenes.json`, `cards.json`). The compiler merges them automatically. Legacy `assets_metadata.json` still works.
+
+**SEO:** `copy/seo.json` — page title, meta description, Open Graph / Twitter fields. Optional `image` path (e.g. `brand/og-image.jpg`); otherwise compile generates `og-image.jpg` from `manifest.brand.logo`. Favicon and apple-touch icon are also generated from the logo at compile time.
+
+**Dominions (landing):** `copy/dominions.json` — section title + lead. Cards use `game/locations.json`, `game/scenes.json` (art paths), and **`game/cities.json`** (city name + description per slide). Glow colors from `game/domains.json`.
 
 Location **lore and wiring** stay in `game/locations.json`. `scenes.json` only lists background image paths for domains and cities.
 

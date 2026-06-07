@@ -10,7 +10,7 @@ export function assetPath(
     case 'video':
       return `${ASSETS}/main.mp4`
     case 'favicon':
-      return '/favicon.svg'
+      return '/favicon.png'
     case 'card':
       return `${ASSETS}/cards/${file}`
     case 'location':

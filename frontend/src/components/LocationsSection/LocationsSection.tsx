@@ -3,9 +3,13 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { appConfig, LOCATIONS } from '@/config'
 import { Button } from '../ui/Button/Button'
+import FantasyFrame from '../ui/FantasyFrame/FantasyFrame'
+import { getLocationsSectionBackground } from './locationImages'
 import './LocationsSection.css'
 
 type LocationId = (typeof LOCATIONS)[number]['id']
+
+const LOCATIONS_SECTION_BG = getLocationsSectionBackground()
 
 export default function LocationsSection() {
   const sectionRef = useRef<HTMLElement>(null)
@@ -39,6 +43,17 @@ export default function LocationsSection() {
       className={`locations${isVisible ? ' visible' : ''}`}
       aria-label="Locations"
     >
+      <div className="locations__bg" aria-hidden="true">
+        <img
+          src={LOCATIONS_SECTION_BG}
+          alt=""
+          className="locations__bg-image locations__bg-image--active"
+          loading="eager"
+          decoding="async"
+        />
+        <div className="locations__bg-scrim" />
+      </div>
+
       <div className="landing-shell locations__inner">
         <div className="locations__grid">
           <div className="locations__left">
@@ -79,7 +94,7 @@ export default function LocationsSection() {
           </div>
 
           <div className="locations__right" aria-label="Location preview">
-            <div className="locations__preview">
+            <FantasyFrame className="locations__preview" glowColor={active.glowColor}>
               {LOCATIONS.map((loc) => (
                 <img
                   key={loc.id}
@@ -93,7 +108,7 @@ export default function LocationsSection() {
                 />
               ))}
               <div className="locations__preview-overlay" aria-hidden="true" />
-            </div>
+            </FantasyFrame>
           </div>
         </div>
       </div>

@@ -1,0 +1,16 @@
+{
+  "cities": [
+    {
+      "slug": "terra_city_01_great_bastion",
+      "path": "cities/terra/terra_city_01_great_bastion.png",
+      "name": "Emerald Grove",
+      "description": "Demo earth realm — moss-covered ruins and crystal roots, compiled from shared terra city art paths."
+    },
+    {
+      "slug": "aqua_city_01_sunken_oakhaven",
+      "path": "cities/aqua/aqua_city_01_sunken_oakhaven.png",
+      "name": "Tide Harbor",
+      "description": "Demo water realm — bioluminescent reefs and tide gates on the same multi-site engine."
+    }
+  ]
+}

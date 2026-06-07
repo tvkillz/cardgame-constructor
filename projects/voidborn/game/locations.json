@@ -9,10 +9,12 @@
       "name": "Kronos",
       "domainId": "terra",
       "categoryId": "earth",
+      "glowColor": "#c8ccd4",
       "featuredCardSlug": "terra_card_01_granite_warden",
       "epithet": "The Monolithic Depths",
       "short": "The Monolithic Depths — obsidian gates and buried titans.",
-      "imageAsset": "cities/terra/terra_city_01_great_bastion.png"
+      "imageAsset": "cities/terra/terra_city_01_great_bastion.png",
+      "backgroundImageAsset": "cities/terra/terra_city_02_obsidian_deep.png"
     },
     {
       "id": "thalassa",
@@ -22,7 +24,8 @@
       "featuredCardSlug": "aqua_card_01_tidebound_priestess",
       "epithet": "The Drowned Abyss",
       "short": "The Drowned Abyss — storm-black seas and sunken cathedrals.",
-      "imageAsset": "cities/aqua/aqua_city_01_sunken_oakhaven.png"
+      "imageAsset": "cities/aqua/aqua_city_01_sunken_oakhaven.png",
+      "backgroundImageAsset": "cities/aqua/aqua_city_02_abyssal_citadel.png"
     },
     {
       "id": "infernus",
@@ -32,7 +35,8 @@
       "featuredCardSlug": "ignis_card_02_lava_born",
       "epithet": "The Ashen Wastes",
       "short": "The Ashen Wastes — rivers of magma beneath sulfur skies.",
-      "imageAsset": "cities/ignis/ignis_city_01_brimstone_hold.png"
+      "imageAsset": "cities/ignis/ignis_city_01_brimstone_hold.png",
+      "backgroundImageAsset": "cities/ignis/ignis_city_02_cinderfall.png"
     },
     {
       "id": "anemos",
@@ -42,7 +46,8 @@
       "featuredCardSlug": "zephyr_card_01_void_stalker",
       "epithet": "The Void Vortex",
       "short": "The Void Vortex — floating ruins held by endless hurricanes.",
-      "imageAsset": "cities/zephyr/zephyr_city_01_eyrie_of_whispers.png"
+      "imageAsset": "cities/zephyr/zephyr_city_01_eyrie_of_whispers.png",
+      "backgroundImageAsset": "cities/zephyr/zephyr_city_02_zephyrs_end.png"
     }
   ],
   "lore": {

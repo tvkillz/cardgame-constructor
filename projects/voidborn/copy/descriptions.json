@@ -6,7 +6,7 @@
   "locations": {
     "kicker": "Face the Abyss",
     "paragraphs": [
-      "The delicate equilibrium of the domains is shattering. A catastrophic phenomenon known as the <strong>Aether Bleed</strong> is draining the lifeblood from the elemental realms, leaving behind volatile <strong>Null Zones</strong> where magic backfires and the laws of physics collapse.",
+      "The delicate equilibrium of the domains is shattering. A catastrophic phenomenon known as the <strong class=\"locations__lore-aether\">Aether Bleed</strong> is draining the lifeblood from the elemental realms, leaving behind volatile <strong class=\"locations__lore-null\">Null Zones</strong> where magic backfires and the laws of physics collapse.",
       "As the Void infects the land, wild elemental spirits are twisting into maddened behemoths. Deck wielders must not only fight for territory, but stabilize these reality tears before their chosen domains dissolve into absolute nothingness."
     ]
   },

@@ -34,5 +34,5 @@ export function applyTheme(): void {
     root.style.setProperty(key, value)
   }
 
-  document.title = appConfig.name.documentTitle
+  document.title = appConfig.seo.title
 }

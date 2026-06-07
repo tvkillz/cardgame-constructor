@@ -12,7 +12,6 @@
   },
   "brand": {
     "logo": "brand/logo.jpg",
-    "favicon": "brand/favicon.svg",
     "introVideo": "brand/main.mp4",
     "logoAlt": "Project Two logo"
   },
