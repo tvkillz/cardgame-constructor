@@ -1,0 +1,40 @@
+/* Shared horizontal rhythm + responsive layout tokens (see frontend/rules.md §4.1) */
+:root {
+  --layout-min-width: 350px;
+  --landing-gutter-x: 1.5rem;
+  --landing-content-max: 1910px;
+
+  --locations-preview-max: 800px;
+  /* 1:1 square minus ~40% height → 5:3 landscape */
+  --locations-preview-aspect: 5 / 3;
+  --locations-breakpoint-fluid: 1150px;
+  --locations-breakpoint-compact: 1350px;
+  --locations-breakpoint-stack: 919px;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --landing-gutter-x: 3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --landing-gutter-x: 1rem;
+  }
+}
+
+@media (max-width: 360px) {
+  :root {
+    --landing-gutter-x: 0.75rem;
+  }
+}
+
+.landing-shell {
+  width: 100%;
+  max-width: var(--landing-content-max);
+  min-width: 0;
+  margin-inline: auto;
+  padding-inline: var(--landing-gutter-x);
+  box-sizing: border-box;
+}

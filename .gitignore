@@ -1,0 +1,68 @@
+# =============================================================================
+# Universal site constructor — root .gitignore
+# Layout: frontend/  backend/  projects/  notes/
+# =============================================================================
+
+# --- OS & editors ---
+.DS_Store
+Thumbs.db
+*.sw?
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# --- Logs ---
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# --- Secrets & local env (keep *.example templates) ---
+**/.env
+**/.env.local
+**/.env.development
+**/.env.production
+**/.env.test
+**/.env.*.local
+**/.env.admin
+!**/.env.example
+!**/.env.*.example
+
+# --- Node / JS build artifacts ---
+**/node_modules/
+**/.next/
+**/.cache/
+**/.turbo/
+**/dist/
+**/dist-ssr/
+**/.build/
+**/.site-hybrid/
+**/.hybrid-production/
+**/.active-project/
+
+# --- Frontend compile outputs (regenerate: npm run compile) ---
+frontend/src/generated/
+frontend/public/assets/
+frontend/public/favicon.svg
+frontend/public/data/
+frontend/public/play/
+frontend/public/_play_dist_backup/
+frontend/deploy/output/
+
+# --- Optional local asset fallback (prefer projects/{id}/assets/) ---
+cursor_assets/
+
+# --- Backend (Supabase self-hosted stack) ---
+backend/docker-compose.override.yml
+backend/test.http
+backend/.env.old
+
+# Persisted Docker data — never commit
+backend/volumes/db/data/
+backend/volumes/storage/
+
+# TLS certs (managed on server)
+backend/volumes/proxy/**/letsencrypt/

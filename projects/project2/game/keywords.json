@@ -1,0 +1,8 @@
+{
+  "keywords_glossary": {
+    "Taunt": "Enemies must attack this unit if able.",
+    "Ward": "The next damage this unit would take is prevented.",
+    "Regenerate": "Restores Health at end of turn.",
+    "Stealth": "Cannot be targeted until it attacks."
+  }
+}

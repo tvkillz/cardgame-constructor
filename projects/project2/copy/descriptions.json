@@ -1,0 +1,86 @@
+{
+  "hero": {
+    "headline": ["Second Site Online.", "Multi-Tenant Demo Ready."],
+    "subheadline": "This is PROJECT TWO — a lightweight content pack running on the same engine as Voidborn. Edit projects/project2/ and watch this port update independently."
+  },
+  "locations": {
+    "kicker": "Sample Realms",
+    "paragraphs": [
+      "Two elemental domains power this demo: <strong>Emerald Grove</strong> and <strong>Tide Harbor</strong>. Each has its own cards, cities, and lore — compiled into an isolated <code>.build/project2/</code> folder.",
+      "Run <strong>voidborn-dev</strong> and <strong>project2-dev</strong> side by side to confirm parallel pm2 instances do not overwrite each other."
+    ]
+  },
+  "play": {
+    "screenLabel": "PROJECT TWO play screen",
+    "titleLine": "PROJECT TWO",
+    "titleAccent": "demo"
+  },
+  "collections": "Demo collection — placeholder.",
+  "leaderboard": "Demo leaderboard — placeholder.",
+  "portal": {
+    "gateTitle": "Sign In Optional",
+    "gateMessage": "This demo site allows guest play. Sign in to test portal features.",
+    "comingSoon": "This portal section is a stub for project2.",
+    "buyCredits": "+ BUY",
+    "withdraw": "WITHDRAW",
+    "cart": "CART",
+    "currencyLabel": "USD"
+  },
+  "credits": {
+    "title": "Demo Credits",
+    "subtitle": "Sample checkout UI — not connected to production billing.",
+    "standardRate": "DEMO RATE",
+    "popularBadge": "POPULAR",
+    "customAmount": "CUSTOM AMOUNT",
+    "amountToBuy": "AMOUNT TO BUY",
+    "amountPlaceholder": "Enter amount...",
+    "totalLabel": "TOTAL:",
+    "buy": "BUY",
+    "closeLabel": "Close"
+  },
+  "deckModal": {
+    "title": "Pick a Demo Deck",
+    "deckPlaceholder": "Choose a deck...",
+    "cancel": "Cancel",
+    "enterBattle": "Start Demo",
+    "manageDecks": "Manage Decks"
+  },
+  "header": {
+    "signIn": "Sign In",
+    "signOut": "Sign Out",
+    "signedInAs": "Signed in as"
+  },
+  "auth": {
+    "signInTitle": "Demo Sign In",
+    "signInSubtitle": "Optional — used to test auth UI on the second site.",
+    "registerTitle": "Create Demo Account",
+    "registerSubtitle": "Register to test multi-site auth redirects.",
+    "emailLabel": "Email",
+    "usernameLabel": "Username",
+    "passwordLabel": "Password",
+    "confirmPasswordLabel": "Confirm Password",
+    "signInSubmit": "Sign In",
+    "registerSubmit": "Create Account",
+    "switchToRegister": "Need an account? Register",
+    "switchToSignIn": "Have an account? Sign In",
+    "closeLabel": "Close",
+    "passwordHint": "At least 8 characters, one uppercase letter, and one symbol.",
+    "playGateTitle": "Guest Play Enabled",
+    "playGateMessage": "This demo allows play without signing in.",
+    "playGateCta": "Continue",
+    "loading": "Loading demo…",
+    "errors": {
+      "supabaseUnavailable": "Authentication is not configured.",
+      "invalidEmail": "Enter a valid email address.",
+      "invalidUsername": "Username must be 3–24 characters.",
+      "invalidPassword": "Password needs 8+ characters, one uppercase letter, and one symbol.",
+      "passwordMismatch": "Passwords do not match.",
+      "signInEmptyPassword": "Enter your password.",
+      "signInFailed": "Sign in failed.",
+      "invalidCredentials": "Invalid email or password.",
+      "registerFailed": "Registration failed.",
+      "emailTaken": "That email is already registered.",
+      "usernameTaken": "That username is taken."
+    }
+  }
+}

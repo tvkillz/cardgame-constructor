@@ -1,0 +1,38 @@
+{
+  "fonts": {
+    "fantasy": "'Cinzel', 'Times New Roman', serif",
+    "ui": "'Inter', system-ui, sans-serif",
+    "googleFontsUrl": "https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+  },
+  "navigation": [
+    { "label": "Play Demo", "href": "/play", "route": "play" },
+    { "label": "Market", "href": "/portal/market", "route": "portalMarket" },
+    { "label": "Leaderboard", "href": "/leaderboard", "route": "leaderboard" }
+  ],
+  "accountMenu": [
+    { "id": "play", "label": "Play Demo", "route": "play" },
+    { "id": "market", "label": "Market", "route": "portalMarket" },
+    { "id": "leaderboard", "label": "Leaderboard", "route": "leaderboard" },
+    { "id": "profile", "label": "Profile", "route": "portalProfile" },
+    { "id": "credits", "label": "Purchase Credits", "action": "purchaseCredits" },
+    { "id": "sign-out", "label": "Sign Out", "action": "signOut" }
+  ],
+  "heroCtas": [
+    { "label": "Play Demo", "id": "play", "route": "play", "accent": "purple" },
+    { "label": "View Market", "id": "market", "route": "portalMarket", "accent": "cyan" },
+    { "label": "Leaderboard", "id": "leaderboard", "route": "leaderboard", "accent": "ember" }
+  ],
+  "playModes": [
+    { "id": "casual", "title": "Casual Match", "subtitle": "Try the demo deck", "icon": "🎮" },
+    { "id": "ranked", "title": "Ranked", "subtitle": "Coming soon", "icon": "🏆" },
+    { "id": "tutorial", "title": "Tutorial", "subtitle": "Learn the basics", "icon": "📖" }
+  ],
+  "player": {
+    "fallbackName": "Demo Player",
+    "opponentName": "BOT-42",
+    "defaultCredits": 500
+  },
+  "particles": {
+    "colors": ["#2dd4bf", "#34d399"]
+  }
+}

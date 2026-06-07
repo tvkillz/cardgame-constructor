@@ -1,0 +1,12 @@
+[
+  {
+    "id": "voidborn",
+    "path": "./voidborn",
+    "status": "live"
+  },
+  {
+    "id": "project2",
+    "path": "./project2",
+    "status": "demo"
+  }
+]

@@ -1,0 +1,7 @@
+{
+  "_comment": "Deprecated mirror — source of truth is locations.json (featuredCardSlug per realm). Kept for reference; compile reads locations.json only.",
+  "featuredByLocation": {
+    "emerald": "terra_card_01_granite_warden",
+    "tidepool": "aqua_card_01_tidebound_priestess"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "domains": [
+    {
+      "id": "terra",
+      "label": "Terra",
+      "categoryId": "earth",
+      "glowColor": "#c9a227",
+      "domainAsset": "domains/terra_domain.png"
+    },
+    {
+      "id": "aqua",
+      "label": "Aqua",
+      "categoryId": "water",
+      "glowColor": "#4ec8ff",
+      "domainAsset": "domains/aqua_domain.png"
+    },
+    {
+      "id": "ignis",
+      "label": "Ignis",
+      "categoryId": "fire",
+      "glowColor": "#e85d5d",
+      "domainAsset": "domains/ignis_domain.png"
+    },
+    {
+      "id": "zephyr",
+      "label": "Zephyr",
+      "categoryId": "air",
+      "glowColor": "#9b59ff",
+      "domainAsset": "domains/zephyr_domain.png"
+    }
+  ]
+}

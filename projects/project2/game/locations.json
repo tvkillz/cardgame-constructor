@@ -1,0 +1,34 @@
+{
+  "defaults": {
+    "arenaLocationId": "tidepool",
+    "lobbyLocationId": "emerald"
+  },
+  "locations": [
+    {
+      "id": "emerald",
+      "name": "Emerald Grove",
+      "domainId": "terra",
+      "categoryId": "earth",
+      "featuredCardSlug": "terra_card_01_granite_warden",
+      "epithet": "The Verdant Spire",
+      "short": "The Verdant Spire — moss-covered ruins and crystal roots.",
+      "imageAsset": "cities/terra/terra_city_01_great_bastion.png"
+    },
+    {
+      "id": "tidepool",
+      "name": "Tide Harbor",
+      "domainId": "aqua",
+      "categoryId": "water",
+      "featuredCardSlug": "aqua_card_01_tidebound_priestess",
+      "epithet": "The Shimmering Dock",
+      "short": "The Shimmering Dock — bioluminescent reefs and tide gates.",
+      "imageAsset": "cities/aqua/aqua_city_01_sunken_oakhaven.png"
+    }
+  ],
+  "lore": {
+    "global": {
+      "aetherBleed": "Demo Rift",
+      "nullZones": "Glitch Fields"
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "_comment": "Deprecated mirror — source of truth is locations.json (featuredCardSlug per realm). Kept for reference; compile reads locations.json only.",
+  "featuredByLocation": {
+    "kronos": "terra_card_01_granite_warden",
+    "thalassa": "aqua_card_01_tidebound_priestess",
+    "infernus": "ignis_card_02_lava_born",
+    "anemos": "zephyr_card_01_void_stalker"
+  }
+}

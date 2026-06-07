@@ -1,0 +1,86 @@
+{
+  "hero": {
+    "headline": ["Conquer the Void.", "Rule the Elemental Realms."],
+    "subheadline": "Enter a shattered realm where cosmic corruption breeds legendary champions. Build your deck, harness the forbidden magic of the void, and dominate the battlefield."
+  },
+  "locations": {
+    "kicker": "Face the Abyss",
+    "paragraphs": [
+      "The delicate equilibrium of the domains is shattering. A catastrophic phenomenon known as the <strong>Aether Bleed</strong> is draining the lifeblood from the elemental realms, leaving behind volatile <strong>Null Zones</strong> where magic backfires and the laws of physics collapse.",
+      "As the Void infects the land, wild elemental spirits are twisting into maddened behemoths. Deck wielders must not only fight for territory, but stabilize these reality tears before their chosen domains dissolve into absolute nothingness."
+    ]
+  },
+  "play": {
+    "screenLabel": "VOIDBORN play screen",
+    "titleLine": "VOIDBORN",
+    "titleAccent": ""
+  },
+  "collections": "Deck collection portal — coming soon.",
+  "leaderboard": "Realm rankings — coming soon.",
+  "portal": {
+    "gateTitle": "Sign In Required",
+    "gateMessage": "The player portal is bound to your account. Sign in to access market, vaults, and profile.",
+    "comingSoon": "This section is being forged in the void — check back soon.",
+    "buyCredits": "+ BUY",
+    "withdraw": "WITHDRAW",
+    "cart": "CART",
+    "currencyLabel": "AUD"
+  },
+  "credits": {
+    "title": "Get Arcane Credits",
+    "subtitle": "Base rate: 100 credits = 1 EUR. No discounts or bonus credits.",
+    "standardRate": "STANDARD RATE",
+    "popularBadge": "POPULAR",
+    "customAmount": "CUSTOM AMOUNT",
+    "amountToBuy": "AMOUNT TO BUY",
+    "amountPlaceholder": "Enter amount...",
+    "totalLabel": "TOTAL:",
+    "buy": "BUY",
+    "closeLabel": "Close"
+  },
+  "deckModal": {
+    "title": "Select Your Deck",
+    "deckPlaceholder": "Choose a deck...",
+    "cancel": "Cancel",
+    "enterBattle": "Enter Battle",
+    "manageDecks": "Manage Decks"
+  },
+  "header": {
+    "signIn": "Sign In",
+    "signOut": "Sign Out",
+    "signedInAs": "Bound as"
+  },
+  "auth": {
+    "signInTitle": "Enter the Void",
+    "signInSubtitle": "Sign in with your email and password to continue.",
+    "registerTitle": "Forge Your Identity",
+    "registerSubtitle": "Create an account to enter the elemental realms.",
+    "emailLabel": "Email",
+    "usernameLabel": "Username",
+    "passwordLabel": "Password",
+    "confirmPasswordLabel": "Confirm Password",
+    "signInSubmit": "Sign In",
+    "registerSubmit": "Create Account",
+    "switchToRegister": "New to the realm? Register",
+    "switchToSignIn": "Already bound? Sign In",
+    "closeLabel": "Close",
+    "passwordHint": "At least 8 characters, one uppercase letter, and one symbol.",
+    "playGateTitle": "Sign In Required",
+    "playGateMessage": "You must bind your soul to the void before entering the arena.",
+    "playGateCta": "Sign In",
+    "loading": "Consulting the void…",
+    "errors": {
+      "supabaseUnavailable": "Authentication is not configured. Set Supabase env vars on the server.",
+      "invalidEmail": "Enter a valid email address.",
+      "invalidUsername": "Username must be 3–24 characters (letters, numbers, underscore).",
+      "invalidPassword": "Password needs 8+ characters, one uppercase letter, and one symbol.",
+      "passwordMismatch": "Passwords do not match.",
+      "signInEmptyPassword": "Enter your password.",
+      "signInFailed": "Sign in failed. Please try again.",
+      "invalidCredentials": "Invalid email or password.",
+      "signUpFailed": "Registration failed. Try a different email or username.",
+      "emailConfirmation": "Check your email to confirm your account, then sign in.",
+      "emailNotConfirmed": "Confirm your email before signing in, or use Register if you have no account."
+    }
+  }
+}

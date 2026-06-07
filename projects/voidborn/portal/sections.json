@@ -1,0 +1,46 @@
+{
+  "sections": [
+    {
+      "id": "store",
+      "label": "Store",
+      "route": "portalStore",
+      "title": "STORE",
+      "subtitle": "Buy credit packs and items. Secure checkout via Stripe."
+    },
+    {
+      "id": "market",
+      "label": "Market",
+      "route": "portalMarket",
+      "title": "MARKET",
+      "subtitle": "Buy, sell, and manage your market listings."
+    },
+    {
+      "id": "vaults",
+      "label": "Vaults",
+      "route": "portalVaults",
+      "title": "VAULTS",
+      "subtitle": "Unpack sealed arcane vaults and discover new cards."
+    },
+    {
+      "id": "collection",
+      "label": "Collection",
+      "route": "portalCollection",
+      "title": "COLLECTION",
+      "subtitle": "Build and edit decks for the arena. Each deck holds up to 30 cards."
+    },
+    {
+      "id": "transactions",
+      "label": "Transactions",
+      "route": "portalTransactions",
+      "title": "TRANSACTIONS",
+      "subtitle": "Review purchases, sales, and credit history."
+    },
+    {
+      "id": "profile",
+      "label": "Profile",
+      "route": "portalProfile",
+      "title": "PROFILE",
+      "subtitle": "Your champion identity and account settings."
+    }
+  ]
+}

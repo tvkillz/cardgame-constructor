@@ -1,0 +1,40 @@
+{
+  "assets": [
+    {
+      "title": "Terra Domain",
+      "slug": "terra_domain",
+      "category": "domains",
+      "domain": "",
+      "kind": "domain",
+      "path": "domains/terra_domain.png",
+      "format": "16:9"
+    },
+    {
+      "title": "Aqua Domain",
+      "slug": "aqua_domain",
+      "category": "domains",
+      "domain": "",
+      "kind": "domain",
+      "path": "domains/aqua_domain.png",
+      "format": "16:9"
+    },
+    {
+      "title": "Emerald Grove",
+      "slug": "terra_city_01_great_bastion",
+      "category": "cities",
+      "domain": "terra",
+      "kind": "city",
+      "path": "cities/terra/terra_city_01_great_bastion.png",
+      "format": "16:9"
+    },
+    {
+      "title": "Tide Harbor",
+      "slug": "aqua_city_01_sunken_oakhaven",
+      "category": "cities",
+      "domain": "aqua",
+      "kind": "city",
+      "path": "cities/aqua/aqua_city_01_sunken_oakhaven.png",
+      "format": "16:9"
+    }
+  ]
+}

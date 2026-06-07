@@ -1,0 +1,583 @@
+{
+  "project": "VOIDBORN",
+  "generated_at": "2026-05-28",
+  "structure": {
+    "domains": "4 main 16:9 domain backgrounds",
+    "cities": "12 city backgrounds, 3 per domain, 16:9",
+    "cards": "20 unit card visuals, 5 per domain, 3:4; each card has stats, keywords, ability",
+    "_variants": "extra generated alternatives not used as primary assets"
+  },
+  "keywords_glossary": {
+    "Taunt": "Enemies must attack this unit if able.",
+    "Ward": "The next damage this unit would take is prevented.",
+    "Charge": "Can attack the turn it is played.",
+    "Stealth": "Cannot be targeted until it attacks.",
+    "Flying": "Can only be blocked by units with Flying.",
+    "Lifesteal": "Damage dealt heals your player.",
+    "Overwhelm": "Excess combat damage hits the enemy player.",
+    "Siege": "Deals bonus damage when attacking a player.",
+    "Ranged": "Can attack without being blocked in melee.",
+    "Regenerate": "Restores Health at end of turn.",
+    "Reborn": "Returns to play with 1 Health once when destroyed.",
+    "Deathrattle": "Triggers when this unit is destroyed.",
+    "Armor": "Reduces incoming damage by the listed amount.",
+    "Freeze": "A frozen unit cannot attack until end of turn.",
+    "Charm": "Redirects an enemy unit's next attack.",
+    "Devour": "Destroys a target unit on trigger.",
+    "Rooted": "Unit cannot be moved this turn."
+  },
+  "assets": [
+    {
+      "title": "Terra Domain",
+      "slug": "terra_domain",
+      "category": "domains",
+      "domain": "",
+      "kind": "domain",
+      "role": null,
+      "path": "domains/terra_domain.png",
+      "source_file": "a_wide_epic_dark_fantasy_landscape_scene_cinemat.png",
+      "format": "16:9",
+      "notes": ""
+    },
+    {
+      "title": "Aqua Domain",
+      "slug": "aqua_domain",
+      "category": "domains",
+      "domain": "",
+      "kind": "domain",
+      "role": null,
+      "path": "domains/aqua_domain.png",
+      "source_file": "a_sweeping_dark_fantasy_landscape_scene_a_stormy.png",
+      "format": "16:9",
+      "notes": ""
+    },
+    {
+      "title": "Ignis Domain",
+      "slug": "ignis_domain",
+      "category": "domains",
+      "domain": "",
+      "kind": "domain",
+      "role": null,
+      "path": "domains/ignis_domain.png",
+      "source_file": "a_wide_cinematic_ultra_detailed_dark_fantasy_vol.png",
+      "format": "16:9",
+      "notes": ""
+    },
+    {
+      "title": "Zephyr Domain",
+      "slug": "zephyr_domain",
+      "category": "domains",
+      "domain": "",
+      "kind": "domain",
+      "role": null,
+      "path": "domains/zephyr_domain.png",
+      "source_file": "a_wide_cinematic_dark_fantasy_landscape_a_vast_s.png",
+      "format": "16:9",
+      "notes": ""
+    },
+    {
+      "title": "The Great Bastion",
+      "slug": "terra_city_01_great_bastion",
+      "category": "cities",
+      "domain": "terra",
+      "kind": "city",
+      "role": null,
+      "path": "cities/terra/terra_city_01_great_bastion.png",
+      "source_file": "a_wide_cinematic_dark_fantasy_landscape_concept_a.png",
+      "format": "16:9",
+      "notes": ""
+    },
+    {
+      "title": "Obsidian Deep",
+      "slug": "terra_city_02_obsidian_deep",
+      "category": "cities",
+      "domain": "terra",
+      "kind": "city",
+      "role": null,
+      "path": "cities/terra/terra_city_02_obsidian_deep.png",
+      "source_file": "a_wide_cinematic_fantasy_concept_art_scene_an_en.png",
+      "format": "16:9",
+      "notes": ""
+    },
+    {
+      "title": "The Weeping Grove",
+      "slug": "terra_city_03_weeping_grove",
+      "category": "cities",
+      "domain": "terra",
+      "kind": "city",
+      "role": null,
+      "path": "cities/terra/terra_city_03_weeping_grove.png",
+      "source_file": "a_wide_cinematic_fantasy_landscape_scene_a_gloom.png",
+      "format": "16:9",
+      "notes": ""
+    },
+    {
+      "title": "Sunken Oakhaven",
+      "slug": "aqua_city_01_sunken_oakhaven",
+      "category": "cities",
+      "domain": "aqua",
+      "kind": "city",
+      "role": null,
+      "path": "cities/aqua/aqua_city_01_sunken_oakhaven.png",
+      "source_file": "a_wide_cinematic_dark_fantasy_scene_a_gloomy_fo.png",
+      "format": "16:9",
+      "notes": ""
+    },
+    {
+      "title": "The Abyssal Citadel",
+      "slug": "aqua_city_02_abyssal_citadel",
+      "category": "cities",
+      "domain": "aqua",
+      "kind": "city",
+      "role": null,
+      "path": "cities/aqua/aqua_city_02_abyssal_citadel.png",
+      "source_file": "a_dramatic_dark_fantasy_landscape_scene_a_massive.png",
+      "format": "16:9",
+      "notes": ""
+    },
+    {
+      "title": "Siren's Hollow",
+      "slug": "aqua_city_03_sirens_hollow",
+      "category": "cities",
+      "domain": "aqua",
+      "kind": "city",
+      "role": null,
+      "path": "cities/aqua/aqua_city_03_sirens_hollow.png",
+      "source_file": "a_wide_cinematic_fantasy_environment_scene_an_en.png",
+      "format": "16:9",
+      "notes": ""
+    },
+    {
+      "title": "Brimstone Hold",
+      "slug": "ignis_city_01_brimstone_hold",
+      "category": "cities",
+      "domain": "ignis",
+      "kind": "city",
+      "role": null,
+      "path": "cities/ignis/ignis_city_01_brimstone_hold.png",
+      "source_file": "a_dramatic_dark_fantasy_sci_fi_landscape_a_vast.png",
+      "format": "16:9",
+      "notes": ""
+    },
+    {
+      "title": "Cinderfall",
+      "slug": "ignis_city_02_cinderfall",
+      "category": "cities",
+      "domain": "ignis",
+      "kind": "city",
+      "role": null,
+      "path": "cities/ignis/ignis_city_02_cinderfall.png",
+      "source_file": "a_sweeping_cinematic_wide_angle_scene_of_a_ruined.png",
+      "format": "16:9",
+      "notes": ""
+    },
+    {
+      "title": "The Iron Foundry",
+      "slug": "ignis_city_03_iron_foundry",
+      "category": "cities",
+      "domain": "ignis",
+      "kind": "city",
+      "role": null,
+      "path": "cities/ignis/ignis_city_03_iron_foundry.png",
+      "source_file": "wide_panoramic_scene_of_a_massive_dark_industrial.png",
+      "format": "16:9",
+      "notes": ""
+    },
+    {
+      "title": "The Eyrie of Whispers",
+      "slug": "zephyr_city_01_eyrie_of_whispers",
+      "category": "cities",
+      "domain": "zephyr",
+      "kind": "city",
+      "role": null,
+      "path": "cities/zephyr/zephyr_city_01_eyrie_of_whispers.png",
+      "source_file": "a_sweeping_dark_fantasy_landscape_scene_an_omino.png",
+      "format": "16:9",
+      "notes": ""
+    },
+    {
+      "title": "Zephyr's End",
+      "slug": "zephyr_city_02_zephyrs_end",
+      "category": "cities",
+      "domain": "zephyr",
+      "kind": "city",
+      "role": null,
+      "path": "cities/zephyr/zephyr_city_02_zephyrs_end.png",
+      "source_file": "a_vast_dramatic_sci_fi_fantasy_landscape_scene_a.png",
+      "format": "16:9",
+      "notes": ""
+    },
+    {
+      "title": "The Cloud Sanctuary",
+      "slug": "zephyr_city_03_cloud_sanctuary",
+      "category": "cities",
+      "domain": "zephyr",
+      "kind": "city",
+      "role": null,
+      "path": "cities/zephyr/zephyr_city_03_cloud_sanctuary.png",
+      "source_file": "a_dramatic_dark_fantasy_scene_a_massive_gothic_ca.png",
+      "format": "16:9",
+      "notes": ""
+    },
+    {
+      "title": "Granite Warden",
+      "slug": "terra_card_01_granite_warden",
+      "category": "cards",
+      "domain": "terra",
+      "kind": "card",
+      "role": "Heavy Tank / Defender",
+      "stats": { "mana": 6, "attack": 3, "health": 8 },
+      "keywords": ["Taunt", "Ward"],
+      "ability": {
+        "name": "Bedrock Aegis",
+        "text": "Ward. When this unit blocks, give an allied unit Ward until end of turn."
+      },
+      "path": "cards/terra/terra_card_01_granite_warden.png",
+      "source_file": "a_dramatic_fantasy_scene_a_colossal_stone_golem_g.png",
+      "format": "3:4",
+      "notes": ""
+    },
+    {
+      "title": "Rootbound Druid",
+      "slug": "terra_card_02_rootbound_druid",
+      "category": "cards",
+      "domain": "terra",
+      "kind": "card",
+      "role": "Support / Healer",
+      "stats": { "mana": 4, "attack": 2, "health": 5 },
+      "keywords": ["Regenerate"],
+      "ability": {
+        "name": "Verdant Mending",
+        "text": "Regenerate 2. Give an allied unit +2 Health and Rooted until end of turn."
+      },
+      "path": "cards/terra/terra_card_02_rootbound_druid.png",
+      "source_file": "a_dark_fantasy_scene_with_a_towering_ancient_drui.png",
+      "format": "3:4",
+      "notes": ""
+    },
+    {
+      "title": "Quarry Stalker",
+      "slug": "terra_card_03_quarry_stalker",
+      "category": "cards",
+      "domain": "terra",
+      "kind": "card",
+      "role": "Assassin / Scout",
+      "stats": { "mana": 3, "attack": 4, "health": 3 },
+      "keywords": ["Stealth", "Charge"],
+      "ability": {
+        "name": "Stonefang Ambush",
+        "text": "Stealth until this unit attacks. Charge. Deal 3 damage to a damaged enemy unit."
+      },
+      "path": "cards/terra/terra_card_03_quarry_stalker.png",
+      "source_file": "a_dark_moody_fantasy_concept_art_scene_a_rocky.png",
+      "format": "3:4",
+      "notes": ""
+    },
+    {
+      "title": "Petrified Colossus",
+      "slug": "terra_card_04_petrified_colossus",
+      "category": "cards",
+      "domain": "terra",
+      "kind": "card",
+      "role": "Siege Unit / Destroyer",
+      "stats": { "mana": 7, "attack": 5, "health": 7 },
+      "keywords": ["Siege"],
+      "ability": {
+        "name": "Earthshatter March",
+        "text": "Siege 2. When this unit attacks a player, deal 2 damage to all enemy units."
+      },
+      "path": "cards/terra/terra_card_04_petrified_colossus.png",
+      "source_file": "a_dramatic_fantasy_scene_a_towering_stone_colossu.png",
+      "format": "3:4",
+      "notes": ""
+    },
+    {
+      "title": "Mossfang Ravager",
+      "slug": "terra_card_05_mossfang_ravager",
+      "category": "cards",
+      "domain": "terra",
+      "kind": "card",
+      "role": "Fast Beast / Pressure Unit",
+      "stats": { "mana": 4, "attack": 4, "health": 3 },
+      "keywords": ["Charge", "Overwhelm"],
+      "ability": {
+        "name": "Mossfang Rush",
+        "text": "Charge. Overwhelm."
+      },
+      "path": "cards/terra/terra_card_05_mossfang_ravager.png",
+      "source_file": "a_dark_fantasy_scene_overall_a_massive_monstrous.png",
+      "format": "3:4",
+      "notes": ""
+    },
+    {
+      "title": "Tidebound Priestess",
+      "slug": "aqua_card_01_tidebound_priestess",
+      "category": "cards",
+      "domain": "aqua",
+      "kind": "card",
+      "role": "Mage / Control",
+      "stats": { "mana": 5, "attack": 2, "health": 6 },
+      "keywords": ["Freeze"],
+      "ability": {
+        "name": "Tidebind",
+        "text": "Freeze an enemy unit until end of turn. Draw a card if it was already damaged."
+      },
+      "path": "cards/aqua/aqua_card_01_tidebound_priestess.png",
+      "source_file": "a_dark_fantasy_underwater_scene_in_a_gothic_ocea.png",
+      "format": "3:4",
+      "notes": ""
+    },
+    {
+      "title": "Abyss Devourer",
+      "slug": "aqua_card_02_abyss_devourer",
+      "category": "cards",
+      "domain": "aqua",
+      "kind": "card",
+      "role": "Heavy Monster / Frontline",
+      "stats": { "mana": 6, "attack": 4, "health": 7 },
+      "keywords": ["Taunt", "Devour"],
+      "ability": {
+        "name": "Abyssal Hunger",
+        "text": "Taunt. When this unit survives combat, Devour the weakest enemy unit with 3 or less Health."
+      },
+      "path": "cards/aqua/aqua_card_02_abyss_devourer.png",
+      "source_file": "a_dark_cinematic_fantasy_illustration_scene_a_co.png",
+      "format": "3:4",
+      "notes": ""
+    },
+    {
+      "title": "Coral Revenant",
+      "slug": "aqua_card_03_coral_revenant",
+      "category": "cards",
+      "domain": "aqua",
+      "kind": "card",
+      "role": "Undead / Debuff",
+      "stats": { "mana": 4, "attack": 3, "health": 4 },
+      "keywords": ["Reborn"],
+      "ability": {
+        "name": "Coral Dirge",
+        "text": "Reborn. Enemy units at this location get -1 Attack."
+      },
+      "path": "cards/aqua/aqua_card_03_coral_revenant.png",
+      "source_file": "a_dark_fantasy_underwater_scene_overall_a_deep_b.png",
+      "format": "3:4",
+      "notes": ""
+    },
+    {
+      "title": "Blackwater Siren",
+      "slug": "aqua_card_04_blackwater_siren",
+      "category": "cards",
+      "domain": "aqua",
+      "kind": "card",
+      "role": "Assassin / Charm Unit",
+      "stats": { "mana": 4, "attack": 3, "health": 4 },
+      "keywords": ["Charm"],
+      "ability": {
+        "name": "Siren's Lure",
+        "text": "Charm: redirect an enemy unit's next attack to a random valid target."
+      },
+      "path": "cards/aqua/aqua_card_04_blackwater_siren.png",
+      "source_file": "a_dark_atmospheric_fantasy_scene_an_underwater_r.png",
+      "format": "3:4",
+      "notes": ""
+    },
+    {
+      "title": "Drowned Harpooner",
+      "slug": "aqua_card_05_drowned_harpooner",
+      "category": "cards",
+      "domain": "aqua",
+      "kind": "card",
+      "role": "Ranged / Hunter",
+      "stats": { "mana": 5, "attack": 3, "health": 5 },
+      "keywords": ["Ranged"],
+      "ability": {
+        "name": "Depth Strike",
+        "text": "Ranged. Deal 4 damage to the enemy unit with the lowest Health."
+      },
+      "path": "cards/aqua/aqua_card_05_drowned_harpooner.png",
+      "source_file": "a_dark_atmospheric_fantasy_scene_in_deep_underwat.png",
+      "format": "3:4",
+      "notes": ""
+    },
+    {
+      "title": "Fire-Smith Devastator",
+      "slug": "ignis_card_01_fire_smith_devastator",
+      "category": "cards",
+      "domain": "ignis",
+      "kind": "card",
+      "role": "Heavy Tank / Siege Unit",
+      "stats": { "mana": 6, "attack": 3, "health": 7 },
+      "keywords": ["Taunt", "Armor"],
+      "ability": {
+        "name": "Forge Retaliation",
+        "text": "Taunt. Armor 2. When damaged, deal 1 damage to all enemy units."
+      },
+      "path": "cards/ignis/ignis_card_01_fire_smith_devastator.png",
+      "source_file": "a_dramatic_fantasy_concept_art_scene_inside_a_dark.png",
+      "format": "3:4",
+      "notes": ""
+    },
+    {
+      "title": "Lava-Born",
+      "slug": "ignis_card_02_lava_born",
+      "category": "cards",
+      "domain": "ignis",
+      "kind": "card",
+      "role": "Elemental / Destroyer",
+      "stats": { "mana": 7, "attack": 4, "health": 5 },
+      "keywords": ["Charge"],
+      "ability": {
+        "name": "Molten Entry",
+        "text": "Charge. Deal 4 damage to all enemy units when this enters play."
+      },
+      "path": "cards/ignis/ignis_card_02_lava_born.png",
+      "source_file": "a_dramatic_high_detail_fantasy_sci_fi_illustratio.png",
+      "format": "3:4",
+      "notes": ""
+    },
+    {
+      "title": "Ash Herald",
+      "slug": "ignis_card_03_ash_herald",
+      "category": "cards",
+      "domain": "ignis",
+      "kind": "card",
+      "role": "Mage / Fire Caster",
+      "stats": { "mana": 4, "attack": 2, "health": 5 },
+      "keywords": [],
+      "ability": {
+        "name": "Ember Call",
+        "text": "Deal 3 damage to an enemy unit. If it dies, summon a 1/1 Ember to your side."
+      },
+      "path": "cards/ignis/ignis_card_03_ash_herald.png",
+      "source_file": "a_dark_fantasy_high_contrast_scene_a_lone_ominou.png",
+      "format": "3:4",
+      "notes": ""
+    },
+    {
+      "title": "Ash Hound",
+      "slug": "ignis_card_04_ash_hound",
+      "category": "cards",
+      "domain": "ignis",
+      "kind": "card",
+      "role": "Fast Unit / Assassin",
+      "stats": { "mana": 3, "attack": 5, "health": 2 },
+      "keywords": ["Charge", "Lifesteal"],
+      "ability": {
+        "name": "Ash Frenzy",
+        "text": "Charge. Lifesteal. Destroy this unit at end of turn."
+      },
+      "path": "cards/ignis/ignis_card_04_ash_hound.png",
+      "source_file": "a_dramatic_dark_fantasy_scene_a_massive_demonic_w.png",
+      "format": "3:4",
+      "notes": ""
+    },
+    {
+      "title": "Chain Lord",
+      "slug": "ignis_card_05_chain_lord",
+      "category": "cards",
+      "domain": "ignis",
+      "kind": "card",
+      "role": "Debuffer / Control",
+      "stats": { "mana": 5, "attack": 2, "health": 6 },
+      "keywords": [],
+      "ability": {
+        "name": "Iron Bindings",
+        "text": "Enemy units cannot Charge. Deal 2 damage to an enemy unit that attacked this turn."
+      },
+      "path": "cards/ignis/ignis_card_05_chain_lord.png",
+      "source_file": "a_dark_fantasy_high_detail_illustration_scene_a.png",
+      "format": "3:4",
+      "notes": ""
+    },
+    {
+      "title": "Void Stalker",
+      "slug": "zephyr_card_01_void_stalker",
+      "category": "cards",
+      "domain": "zephyr",
+      "kind": "card",
+      "role": "Assassin / Scout",
+      "stats": { "mana": 4, "attack": 4, "health": 3 },
+      "keywords": ["Stealth", "Charge"],
+      "ability": {
+        "name": "Void Ambush",
+        "text": "Stealth. Charge. Ambush: +3 Attack on the turn this enters play."
+      },
+      "path": "cards/zephyr/zephyr_card_01_void_stalker.png",
+      "source_file": "a_dramatic_fantasy_scene_in_a_dark_swirling_storm.png",
+      "format": "3:4",
+      "notes": ""
+    },
+    {
+      "title": "Hurricane Weaver",
+      "slug": "zephyr_card_02_hurricane_weaver",
+      "category": "cards",
+      "domain": "zephyr",
+      "kind": "card",
+      "role": "Mage / Field Control",
+      "stats": { "mana": 6, "attack": 3, "health": 5 },
+      "keywords": [],
+      "ability": {
+        "name": "Maelstrom Weave",
+        "text": "Deal 2 damage to all enemy units. Return a small enemy unit to its owner's hand."
+      },
+      "path": "cards/zephyr/zephyr_card_02_hurricane_weaver.png",
+      "source_file": "dark_fantasy_epic_scene_a_dramatic_stormy_other.png",
+      "format": "3:4",
+      "notes": ""
+    },
+    {
+      "title": "Cloud Colossus",
+      "slug": "zephyr_card_03_cloud_colossus",
+      "category": "cards",
+      "domain": "zephyr",
+      "kind": "card",
+      "role": "Heavy Unit / Guardian",
+      "stats": { "mana": 7, "attack": 4, "health": 8 },
+      "keywords": ["Flying", "Ward"],
+      "ability": {
+        "name": "Skyward Aegis",
+        "text": "Flying. Ward. Give an allied unit Flying until end of turn."
+      },
+      "path": "cards/zephyr/zephyr_card_03_cloud_colossus.png",
+      "source_file": "a_dramatic_high_detail_fantasy_concept_art_scene.png",
+      "format": "3:4",
+      "notes": ""
+    },
+    {
+      "title": "Bloodwind Harpy",
+      "slug": "zephyr_card_04_bloodwind_harpy",
+      "category": "cards",
+      "domain": "zephyr",
+      "kind": "card",
+      "role": "Fast Flying Unit",
+      "stats": { "mana": 5, "attack": 4, "health": 4 },
+      "keywords": ["Flying", "Charge"],
+      "ability": {
+        "name": "Bloodwind Dive",
+        "text": "Flying. Charge. When this attacks, deal 1 damage to all other enemy units."
+      },
+      "path": "cards/zephyr/zephyr_card_04_bloodwind_harpy.png",
+      "source_file": "a_dramatic_dark_fantasy_scene_overall_a_demonic_a.png",
+      "format": "3:4",
+      "notes": ""
+    },
+    {
+      "title": "Whispering Spirit",
+      "slug": "zephyr_card_05_whispering_spirit",
+      "category": "cards",
+      "domain": "zephyr",
+      "kind": "card",
+      "role": "Support / Undead",
+      "stats": { "mana": 3, "attack": 1, "health": 4 },
+      "keywords": ["Deathrattle"],
+      "ability": {
+        "name": "Final Whisper",
+        "text": "Deathrattle: give an allied unit Ward and draw a card."
+      },
+      "path": "cards/zephyr/zephyr_card_05_whispering_spirit.png",
+      "source_file": "a_dark_fantasy_surreal_scene_a_foreboding_stormy.png",
+      "format": "3:4",
+      "notes": ""
+    }
+  ]
+}

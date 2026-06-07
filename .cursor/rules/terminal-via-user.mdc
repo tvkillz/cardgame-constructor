@@ -1,0 +1,51 @@
+---
+description: Only the user runs VPS/server commands; the agent must not execute them
+alwaysApply: true
+---
+
+# Terminal commands — only the user runs VPS commands
+
+This repo is often **rclone-mounted** from the production VPS (`mount-voidborn.sh`). The mount is for editing code locally, not for running server workloads.
+
+## Hard rule: do not run VPS or production commands
+
+**Only the user** may run commands on the VPS (SSH), in production Docker, pm2, production builds, seeds, migrations, or anything that affects the live server.
+
+The agent must **not** use the Shell tool for:
+
+- `npm run build`, `npm run start`, `pm2` (start / restart / logs on the server)
+- `npm run seed:cards:upload` or any seed/upload against production
+- Docker / Supabase (`docker compose`, DB migrations, resets, `functions` deploy)
+- Applying SQL on the production database
+- Installing system packages, nginx/cert changes on the host
+- Any command intended to run on `/root/voidborn/...` or the production host
+
+When server work is needed, **ask the user** to run it on the VPS. Use this format:
+
+> On the VPS, from `…`, run:
+> ```bash
+> …
+> ```
+
+Include cwd, what success looks like, and never paste secrets from `.env` files.
+
+## What the agent may run locally
+
+- Read / Grep / Glob / semantic search (preferred over shell for inspection)
+- Local lint or typecheck **only if** the user explicitly asks for a local command on their machine
+- Do **not** assume the mounted workspace path is the VPS; syncing may lag
+
+## Exceptions (rare)
+
+- User explicitly says: “run it locally”, “you can execute on my machine”, or approves one specific local command for the current task
+- Read-only local commands with zero server effect (e.g. `git status` on a local clone that is not the VPS) — still prefer non-shell tools when possible
+
+## After code changes that need deploy
+
+Tell the user clearly:
+
+1. Sync files to the VPS (if using rclone)
+2. Run `npm run build` on the VPS
+3. Run `pm2 restart voidborn-frontend` (or their process name)
+
+Do not run those steps yourself unless the user overrides this rule for that message.

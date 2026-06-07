@@ -1,0 +1,48 @@
+{
+  "id": "voidborn",
+  "name": {
+    "display": "VOIDBORN",
+    "short": "Voidborn",
+    "documentTitle": "VOIDBORN"
+  },
+  "siteUrl": "https://voidborn.fun",
+  "assets": {
+    "publicBase": "/assets",
+    "cdnBase": null
+  },
+  "brand": {
+    "logo": "brand/logo.jpg",
+    "favicon": "brand/favicon.svg",
+    "introVideo": "brand/main.mp4",
+    "logoAlt": "Voidborn logo"
+  },
+  "routes": {
+    "home": "/",
+    "play": "/play",
+    "leaderboard": "/leaderboard",
+    "portal": "/portal",
+    "portalMarket": "/portal/market",
+    "portalVaults": "/portal/vaults",
+    "portalCollection": "/portal/collection",
+    "portalTransactions": "/portal/transactions",
+    "portalProfile": "/portal/profile",
+    "portalStore": "/portal/store",
+    "checkoutSuccess": "/portal/checkout/success",
+    "checkoutCancel": "/portal/checkout/cancel"
+  },
+  "legal": {
+    "termsUrl": "/terms",
+    "privacyUrl": "/privacy",
+    "refundPolicyUrl": "/refund-policy"
+  },
+  "anchors": {
+    "play": "#play",
+    "market": "#market",
+    "leaderboard": "#leaderboard"
+  },
+  "features": {
+    "auth": true,
+    "commerce": true,
+    "requireSignInForPlay": true
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "defaults": {
+    "arenaLocationId": "thalassa",
+    "lobbyLocationId": "kronos"
+  },
+  "locations": [
+    {
+      "id": "kronos",
+      "name": "Kronos",
+      "domainId": "terra",
+      "categoryId": "earth",
+      "featuredCardSlug": "terra_card_01_granite_warden",
+      "epithet": "The Monolithic Depths",
+      "short": "The Monolithic Depths — obsidian gates and buried titans.",
+      "imageAsset": "cities/terra/terra_city_01_great_bastion.png"
+    },
+    {
+      "id": "thalassa",
+      "name": "Thalassa",
+      "domainId": "aqua",
+      "categoryId": "water",
+      "featuredCardSlug": "aqua_card_01_tidebound_priestess",
+      "epithet": "The Drowned Abyss",
+      "short": "The Drowned Abyss — storm-black seas and sunken cathedrals.",
+      "imageAsset": "cities/aqua/aqua_city_01_sunken_oakhaven.png"
+    },
+    {
+      "id": "infernus",
+      "name": "Infernus",
+      "domainId": "ignis",
+      "categoryId": "fire",
+      "featuredCardSlug": "ignis_card_02_lava_born",
+      "epithet": "The Ashen Wastes",
+      "short": "The Ashen Wastes — rivers of magma beneath sulfur skies.",
+      "imageAsset": "cities/ignis/ignis_city_01_brimstone_hold.png"
+    },
+    {
+      "id": "anemos",
+      "name": "Anemos",
+      "domainId": "zephyr",
+      "categoryId": "air",
+      "featuredCardSlug": "zephyr_card_01_void_stalker",
+      "epithet": "The Void Vortex",
+      "short": "The Void Vortex — floating ruins held by endless hurricanes.",
+      "imageAsset": "cities/zephyr/zephyr_city_01_eyrie_of_whispers.png"
+    }
+  ],
+  "lore": {
+    "global": {
+      "aetherBleed": "Aether Bleed",
+      "nullZones": "Null Zones"
+    }
+  }
+}

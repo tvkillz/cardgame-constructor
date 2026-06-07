@@ -1,0 +1,46 @@
+{
+  "sections": [
+    {
+      "id": "store",
+      "label": "Store",
+      "route": "portalStore",
+      "title": "DEMO STORE",
+      "subtitle": "Sample credit packs for project2."
+    },
+    {
+      "id": "market",
+      "label": "Market",
+      "route": "portalMarket",
+      "title": "DEMO MARKET",
+      "subtitle": "Placeholder market for the second site."
+    },
+    {
+      "id": "vaults",
+      "label": "Vaults",
+      "route": "portalVaults",
+      "title": "DEMO VAULTS",
+      "subtitle": "Demo vault unboxing — placeholder."
+    },
+    {
+      "id": "collection",
+      "label": "Collection",
+      "route": "portalCollection",
+      "title": "COLLECTION",
+      "subtitle": "Demo deck builder with sample cards."
+    },
+    {
+      "id": "transactions",
+      "label": "Transactions",
+      "route": "portalTransactions",
+      "title": "TRANSACTIONS",
+      "subtitle": "Demo transaction history — placeholder."
+    },
+    {
+      "id": "profile",
+      "label": "Profile",
+      "route": "portalProfile",
+      "title": "PROFILE",
+      "subtitle": "Demo profile page."
+    }
+  ]
+}

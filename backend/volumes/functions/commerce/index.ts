@@ -1,0 +1,396 @@
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.49.8'
+
+const SUPABASE_URL = Deno.env.get('SUPABASE_URL')!
+const SERVICE_ROLE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
+const STRIPE_SECRET_KEY = Deno.env.get('STRIPE_SECRET_KEY') ?? ''
+const SITE_URL = (Deno.env.get('SITE_URL') ?? Deno.env.get('PUBLIC_SITE_URL') ?? 'https://voidborn.fun').replace(
+  /\/$/,
+  '',
+)
+
+const corsHeaders = {
+  'Content-Type': 'application/json',
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Headers':
+    'authorization, x-client-info, apikey, content-type, x-site-id',
+}
+
+function json(body: unknown, status = 200) {
+  return new Response(JSON.stringify(body), { status, headers: corsHeaders })
+}
+
+function siteIdFromRequest(req: Request): string | null {
+  return req.headers.get('X-Site-Id')?.trim() || req.headers.get('x-site-id')?.trim() || null
+}
+
+function siteIdFromAuthEmail(email: string | null | undefined): string | null {
+  if (!email) return null
+  const at = email.lastIndexOf('@')
+  if (at <= 0) return null
+  const local = email.slice(0, at).toLowerCase()
+  const sepIdx = local.lastIndexOf('+')
+  if (sepIdx <= 0) return null
+  const parsed = local.slice(sepIdx + 1)
+  return parsed || null
+}
+
+function displayEmailFromUser(user: { email?: string | null; user_metadata?: Record<string, unknown> }) {
+  const meta = user.user_metadata?.display_email
+  if (typeof meta === 'string' && meta.trim()) return meta.trim()
+  const email = user.email ?? ''
+  const at = email.lastIndexOf('@')
+  if (at <= 0) return email
+  const local = email.slice(0, at)
+  const domain = email.slice(at + 1)
+  const sepIdx = local.lastIndexOf('+')
+  if (sepIdx > 0) return `${local.slice(0, sepIdx)}@${domain}`
+  return email
+}
+
+async function assertSiteAccess(
+  admin: ReturnType<typeof createClient>,
+  userId: string,
+  siteId: string,
+): Promise<boolean> {
+  const { data } = await admin
+    .from('site_members')
+    .select('site_id')
+    .eq('user_id', userId)
+    .eq('site_id', siteId)
+    .maybeSingle()
+  if (data?.site_id) return true
+
+  const { data: userData, error } = await admin.auth.admin.getUserById(userId)
+  if (error || !userData?.user) return false
+  return siteIdFromAuthEmail(userData.user.email) === siteId
+}
+
+async function getUserId(req: Request): Promise<string | null> {
+  const auth = req.headers.get('Authorization')
+  if (!auth?.startsWith('Bearer ')) return null
+  const admin = createClient(SUPABASE_URL, SERVICE_ROLE_KEY)
+  const { data, error } = await admin.auth.getUser(auth.slice(7))
+  if (error || !data.user) return null
+  return data.user.id
+}
+
+async function isAdmin(admin: ReturnType<typeof createClient>, userId: string): Promise<boolean> {
+  const { data } = await admin.from('profiles').select('is_admin').eq('id', userId).maybeSingle()
+  if (data?.is_admin) return true
+  const { data: userData } = await admin.auth.admin.getUserById(userId)
+  return userData.user?.app_metadata?.is_admin === true
+}
+
+async function stripeRequest(path: string, body: URLSearchParams) {
+  const res = await fetch(`https://api.stripe.com/v1/${path}`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${STRIPE_SECRET_KEY}`,
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body,
+  })
+  const data = await res.json()
+  if (!res.ok) {
+    throw new Error(data?.error?.message ?? `Stripe error ${res.status}`)
+  }
+  return data
+}
+
+type CheckoutBody = {
+  type: 'checkout_create'
+  productId?: string
+  packId?: string
+  customCredits?: number
+  successUrl?: string
+  cancelUrl?: string
+}
+
+Deno.serve(async (req) => {
+  if (req.method === 'OPTIONS') {
+    return new Response(null, { status: 204, headers: corsHeaders })
+  }
+
+  if (req.method !== 'POST') {
+    return json({ error: 'method_not_allowed' }, 405)
+  }
+
+  let body: Record<string, unknown>
+  try {
+    body = await req.json()
+  } catch {
+    return json({ error: 'invalid_json' }, 400)
+  }
+
+  const action = String(body.type ?? '')
+  const admin = createClient(SUPABASE_URL, SERVICE_ROLE_KEY)
+  const siteId = siteIdFromRequest(req)
+
+  if (action === 'products_list') {
+    if (!siteId) return json({ error: 'missing_site_id' }, 400)
+    const { data, error } = await admin
+      .from('store_products')
+      .select('*')
+      .eq('active', true)
+      .eq('site_id', siteId)
+      .order('sort_order', { ascending: true })
+    if (error) return json({ error: error.message }, 500)
+    return json({ products: data })
+  }
+
+  const userId = await getUserId(req)
+  if (!userId) return json({ error: 'unauthorized' }, 401)
+
+  if (!siteId) return json({ error: 'missing_site_id' }, 400)
+  if (!(await assertSiteAccess(admin, userId, siteId))) {
+    return json({ error: 'site_forbidden' }, 403)
+  }
+
+  await admin.rpc('ensure_wallet', { p_user_id: userId })
+
+  if (action === 'wallet_get') {
+    const { data: wallet } = await admin.from('wallets').select('*').eq('user_id', userId).single()
+    return json({ wallet })
+  }
+
+  if (action === 'transactions_list') {
+    const limit = Math.min(Number(body.limit ?? 50), 100)
+    const { data, error } = await admin
+      .from('wallet_transactions')
+      .select('*')
+      .eq('user_id', userId)
+      .order('created_at', { ascending: false })
+      .limit(limit)
+    if (error) return json({ error: error.message }, 500)
+    return json({ transactions: data })
+  }
+
+  if (action === 'inventory_list') {
+    const { data, error } = await admin
+      .from('player_inventory')
+      .select('*, cards ( slug, title, thumb_storage_path )')
+      .eq('user_id', userId)
+      .order('acquired_at', { ascending: false })
+    if (error) return json({ error: error.message }, 500)
+    return json({ inventory: data })
+  }
+
+  if (action === 'orders_list') {
+    const { data, error } = await admin
+      .from('orders')
+      .select('*, order_items (*)')
+      .eq('user_id', userId)
+      .order('created_at', { ascending: false })
+      .limit(50)
+    if (error) return json({ error: error.message }, 500)
+    return json({ orders: data })
+  }
+
+  if (action === 'checkout_create') {
+    if (!STRIPE_SECRET_KEY) {
+      return json({ error: 'stripe_not_configured', message: 'STRIPE_SECRET_KEY missing on server' }, 503)
+    }
+
+    const payload = body as CheckoutBody
+    let productId = payload.productId ?? null
+    let credits = 0
+    let title = 'VOIDBORN Credits'
+    let unitCents = 0
+    let currency = 'eur'
+    let cardId: string | null = null
+
+    if (payload.packId || productId) {
+      const slugOrId = payload.packId ?? productId!
+      const uuidRe = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
+      let productQuery = admin.from('store_products').select('*').eq('active', true).eq('site_id', siteId)
+      productQuery = uuidRe.test(slugOrId)
+        ? productQuery.eq('id', slugOrId)
+        : productQuery.eq('slug', slugOrId)
+      const { data: product } = await productQuery.maybeSingle()
+
+      if (!product) return json({ error: 'product_not_found' }, 404)
+      productId = product.id
+      credits = product.credits_amount ?? 0
+      title = product.title
+      unitCents = product.price_cents
+      currency = product.currency ?? 'eur'
+      cardId = product.card_id
+    } else if (payload.customCredits && payload.customCredits > 0) {
+      credits = Math.floor(payload.customCredits)
+      unitCents = credits
+      title = `${credits} Credits`
+      productId = null
+    } else {
+      return json({ error: 'invalid_checkout' }, 400)
+    }
+
+    const { data: userData } = await admin.auth.admin.getUserById(userId)
+    const receiptEmail = userData.user ? displayEmailFromUser(userData.user) : null
+
+    const { data: order, error: orderErr } = await admin
+      .from('orders')
+      .insert({
+        user_id: userId,
+        status: 'pending_payment',
+        total_cents: unitCents,
+        currency,
+        credits_granted: credits,
+        receipt_email: receiptEmail,
+        metadata: { product_id: productId, card_id: cardId },
+      })
+      .select('id')
+      .single()
+
+    if (orderErr || !order) return json({ error: orderErr?.message ?? 'order_create_failed' }, 500)
+
+    await admin.from('order_items').insert({
+      order_id: order.id,
+      product_id: productId,
+      quantity: 1,
+      unit_price_cents: unitCents,
+      credits_amount: credits,
+      card_id: cardId,
+      title_snapshot: title,
+    })
+
+    const successUrl =
+      payload.successUrl ?? `${SITE_URL}/portal/checkout/success?session_id={CHECKOUT_SESSION_ID}`
+    const cancelUrl = payload.cancelUrl ?? `${SITE_URL}/portal/checkout/cancel`
+
+    const params = new URLSearchParams()
+    params.set('mode', 'payment')
+    params.set('success_url', successUrl)
+    params.set('cancel_url', cancelUrl)
+    params.set('client_reference_id', order.id)
+    params.set('metadata[user_id]', userId)
+    params.set('metadata[order_id]', order.id)
+    if (receiptEmail) params.set('customer_email', receiptEmail)
+    params.set('line_items[0][quantity]', '1')
+    params.set('line_items[0][price_data][currency]', currency)
+    params.set('line_items[0][price_data][unit_amount]', String(unitCents))
+    params.set('line_items[0][price_data][product_data][name]', title)
+    params.set('payment_method_types[0]', 'card')
+    params.append('payment_method_types[]', 'link')
+
+    const session = await stripeRequest('checkout/sessions', params)
+
+    await admin
+      .from('orders')
+      .update({
+        stripe_checkout_session_id: session.id,
+        updated_at: new Date().toISOString(),
+      })
+      .eq('id', order.id)
+
+    await admin.from('wallet_transactions').insert({
+      user_id: userId,
+      type: 'top_up',
+      status: 'pending',
+      amount_credits: credits,
+      description: `Checkout: ${title}`,
+      reference_type: 'order',
+      reference_id: order.id,
+      stripe_checkout_session_id: session.id,
+    })
+
+    return json({
+      orderId: order.id,
+      checkoutUrl: session.url,
+      sessionId: session.id,
+    })
+  }
+
+  if (action === 'purchase_with_credits') {
+    const productId = String(body.productId ?? '')
+    const { data: product } = await admin
+      .from('store_products')
+      .select('*')
+      .eq('id', productId)
+      .eq('active', true)
+      .eq('site_id', siteId)
+      .maybeSingle()
+    if (!product || product.kind !== 'card' || !product.card_id) {
+      return json({ error: 'product_not_found' }, 404)
+    }
+
+    const priceCredits = product.credits_amount ?? product.price_cents
+    try {
+      await admin.rpc('wallet_apply_credits', {
+        p_user_id: userId,
+        p_amount: -BigInt(priceCredits),
+        p_type: 'purchase',
+        p_status: 'completed',
+        p_description: `Purchased: ${product.title}`,
+        p_reference_type: 'product',
+        p_reference_id: product.id,
+      })
+    } catch (e) {
+      return json({ error: 'insufficient_credits', message: String(e) }, 400)
+    }
+
+    const { data: existing } = await admin
+      .from('player_inventory')
+      .select('quantity')
+      .eq('user_id', userId)
+      .eq('card_id', product.card_id)
+      .maybeSingle()
+
+    if (existing) {
+      await admin
+        .from('player_inventory')
+        .update({ quantity: existing.quantity + 1 })
+        .eq('user_id', userId)
+        .eq('card_id', product.card_id)
+    } else {
+      await admin.from('player_inventory').insert({
+        user_id: userId,
+        card_id: product.card_id,
+        quantity: 1,
+        source: 'purchase',
+      })
+    }
+
+    return json({ ok: true })
+  }
+
+  if (action === 'withdrawal_create') {
+    const amount = Math.floor(Number(body.amountCredits ?? 0))
+    if (amount <= 0) return json({ error: 'invalid_amount' }, 400)
+
+    const { data: row, error } = await admin
+      .from('withdrawal_requests')
+      .insert({
+        user_id: userId,
+        amount_credits: amount,
+        status: 'pending',
+        payout_method: body.payoutMethod ?? null,
+        payout_details: body.payoutDetails ?? {},
+      })
+      .select('*')
+      .single()
+    if (error) return json({ error: error.message }, 500)
+    return json({ withdrawal: row })
+  }
+
+  if (action === 'admin_transactions') {
+    if (!(await isAdmin(admin, userId))) return json({ error: 'forbidden' }, 403)
+    const { data, error } = await admin
+      .from('wallet_transactions')
+      .select('*')
+      .order('created_at', { ascending: false })
+      .limit(100)
+    if (error) return json({ error: error.message }, 500)
+    return json({ transactions: data })
+  }
+
+  if (action === 'admin_products_upsert') {
+    if (!(await isAdmin(admin, userId))) return json({ error: 'forbidden' }, 403)
+    const product = body.product as Record<string, unknown>
+    if (!product) return json({ error: 'invalid_product' }, 400)
+    const { data, error } = await admin.from('store_products').upsert(product).select('*').single()
+    if (error) return json({ error: error.message }, 500)
+    return json({ product: data })
+  }
+
+  return json({ error: 'unknown_action', action }, 400)
+})

@@ -1,0 +1,290 @@
+/** Elemental realm category (domain grouping for locations / cards). */
+export type ElementCategory = 'earth' | 'water' | 'fire' | 'air'
+
+export interface AppConfig {
+  /** Registry / content pack id — scopes auth and backend data to this site. */
+  siteId: string
+
+  /** Brand name (display, document title, aria labels). */
+  name: {
+    display: string
+    short: string
+    documentTitle: string
+  }
+
+  /** Site URL, routes, and in-page anchors. */
+  domain: {
+    siteUrl: string
+    routes: {
+      home: string
+      play: string
+      leaderboard: string
+      portal: string
+      portalMarket: string
+      portalVaults: string
+      portalCollection: string
+      portalTransactions: string
+      portalProfile: string
+      portalStore: string
+      checkoutSuccess: string
+      checkoutCancel: string
+    }
+    legal: {
+      termsUrl: string
+      privacyUrl: string
+      refundPolicyUrl: string
+    }
+    anchors: {
+      play: string
+      market: string
+      leaderboard: string
+    }
+  }
+
+  /** Logo and favicon paths. */
+  logo: {
+    src: string
+    alt: string
+    favicon: string
+  }
+
+  /** Palette — drives CSS custom properties via applyTheme(). */
+  colors: {
+    voidBlack: string
+    gold: string
+    purpleGlow: string
+    cyanGlow: string
+    ember: string
+    violetAccent: string
+    textPrimary: string
+    textMuted: string
+    accentPink: string
+    accentPurple: string
+    playCyan: string
+    playGold: string
+    triggerOrange: string
+    triggerGreen: string
+    triggerBlue: string
+  }
+
+  /** Static art asset paths (served from compiled public/assets/). */
+  arts: {
+    introVideo: string
+    defaultArenaLocationId: string
+    defaultLobbyLocationId: string
+    cardsDir: string
+    locationsDir: string
+    /** Optional CDN base for production card art (Supabase Storage). */
+    cdnBase?: string | null
+  }
+
+  /** UI copy keyed by surface. */
+  descriptions: {
+    hero: {
+      headline: string[]
+      subheadline: string
+    }
+    locations: {
+      kicker: string
+      paragraphs: string[]
+    }
+    play: {
+      screenLabel: string
+      titleLine: string
+      titleAccent: string
+    }
+    collections: string
+    leaderboard: string
+    portal: {
+      gateTitle: string
+      gateMessage: string
+      comingSoon: string
+      buyCredits: string
+      withdraw: string
+      cart: string
+      currencyLabel: string
+    }
+    credits: {
+      title: string
+      subtitle: string
+      standardRate: string
+      popularBadge: string
+      customAmount: string
+      amountToBuy: string
+      amountPlaceholder: string
+      totalLabel: string
+      buy: string
+      closeLabel: string
+    }
+    deckModal: {
+      title: string
+      deckPlaceholder: string
+      cancel: string
+      enterBattle: string
+      manageDecks: string
+    }
+    header: {
+      signIn: string
+      signOut: string
+      signedInAs: string
+    }
+    auth: {
+      signInTitle: string
+      signInSubtitle: string
+      registerTitle: string
+      registerSubtitle: string
+      emailLabel: string
+      usernameLabel: string
+      passwordLabel: string
+      confirmPasswordLabel: string
+      signInSubmit: string
+      registerSubmit: string
+      switchToRegister: string
+      switchToSignIn: string
+      closeLabel: string
+      passwordHint: string
+      playGateTitle: string
+      playGateMessage: string
+      playGateCta: string
+      loading: string
+      errors: {
+        supabaseUnavailable: string
+        invalidEmail: string
+        invalidUsername: string
+        invalidPassword: string
+        passwordMismatch: string
+        signInEmptyPassword: string
+        signInFailed: string
+        invalidCredentials: string
+        /** Shown when credentials fail — hints that the account may belong to another site. */
+        wrongSiteAccount?: string
+        signUpFailed: string
+        emailConfirmation: string
+        emailNotConfirmed: string
+      }
+    }
+  }
+
+  /** Credit shop packages and pricing (100 credits = 1 EUR). */
+  credits: {
+    creditsPerEur: number
+    currencySymbol: string
+    packages: CreditPackageConfig[]
+  }
+
+  /** Auth UI and validation rules (Supabase). */
+  auth: {
+    /** When false, play is open without login (e.g. local dev without env). */
+    requireSignInForPlay: boolean
+    passwordMinLength: number
+    usernameMinLength: number
+    usernameMaxLength: number
+  }
+
+  /** Taxonomy: elemental categories linked to location ids. */
+  categories: CategoryConfig[]
+
+  /** Player portal sections (tabs under /portal/*). */
+  portal: {
+    sections: PortalSectionConfig[]
+  }
+
+  /** Theme tokens, lore, navigation, game modes, VFX presets. */
+  theme: ThemeConfig
+}
+
+export interface PortalSectionConfig {
+  id: string
+  label: string
+  route: keyof AppConfig['domain']['routes']
+  title: string
+  subtitle: string
+}
+
+export interface CategoryConfig {
+  id: ElementCategory
+  label: string
+  locationIds: string[]
+}
+
+export interface LocationConfig {
+  id: string
+  name: string
+  categoryId: ElementCategory
+  epithet: string
+  short: string
+  image: string
+}
+
+export interface ThemeConfig {
+  fonts: {
+    fantasy: string
+    ui: string
+    googleFontsUrl: string
+  }
+  locations: LocationConfig[]
+  lore: {
+    locations: Record<string, { epithet: string; short: string }>
+    global: {
+      aetherBleed: string
+      nullZones: string
+    }
+  }
+  navigation: NavLinkConfig[]
+  /** Signed-in burger menu (routes + actions). */
+  accountMenu: AccountMenuItemConfig[]
+  heroCtas: CtaConfig[]
+  playModes: PlayModeConfig[]
+  player: {
+    /** Shown only when no auth session / username is available. */
+    fallbackName: string
+    /** Placeholder opponent name in arena until matchmaking. */
+    opponentName: string
+    defaultCredits: number
+  }
+  particles: {
+    colors: [string, string]
+  }
+}
+
+export interface CreditPackageConfig {
+  id: string
+  credits: number
+  priceEur: number
+  popular?: boolean
+}
+
+export type AccountMenuRoute =
+  | 'play'
+  | 'leaderboard'
+  | 'portalMarket'
+  | 'portalProfile'
+
+export interface AccountMenuItemConfig {
+  id: string
+  label: string
+  route?: AccountMenuRoute
+  action?: 'purchaseCredits' | 'signOut'
+}
+
+export interface NavLinkConfig {
+  label: string
+  href: string
+  route?: keyof AppConfig['domain']['routes']
+  anchor?: keyof AppConfig['domain']['anchors']
+}
+
+export interface CtaConfig {
+  label: string
+  id: string
+  route?: keyof AppConfig['domain']['routes']
+  anchor?: keyof AppConfig['domain']['anchors']
+  accent?: 'purple' | 'cyan' | 'ember'
+}
+
+export interface PlayModeConfig {
+  id: 'casual' | 'ranked' | 'tutorial'
+  title: string
+  subtitle: string
+  icon: string
+}

@@ -1,0 +1,308 @@
+.portal {
+  min-height: 100vh;
+  background: #0a0a0c;
+  color: #e8dcc8;
+}
+
+.portal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid rgba(123, 77, 255, 0.2);
+  background: linear-gradient(
+    180deg,
+    rgba(14, 16, 24, 0.98) 0%,
+    rgba(10, 10, 12, 0.92) 100%
+  );
+}
+
+.portal__brand {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+.portal__logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid rgba(201, 162, 39, 0.45);
+}
+
+.portal__brand-name {
+  font-family: var(--font-fantasy);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.portal__account {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.35rem 0.5rem 0.35rem 0.85rem;
+  border: 1px solid rgba(201, 162, 39, 0.35);
+  border-radius: 6px;
+  background: rgba(10, 10, 12, 0.65);
+}
+
+.portal__account-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.1rem;
+}
+
+.portal__account-name {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #f1e6c8;
+}
+
+.portal__account-credits,
+.portal__toolbar-balance {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #f3c74f;
+}
+
+.portal__credit-icon {
+  width: 0.85rem;
+  height: 0.85rem;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #fff7ed 0%, #f3c74f 55%, #b8860b 100%);
+  box-shadow: 0 0 8px rgba(243, 199, 79, 0.45);
+}
+
+.portal__menu-toggle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 34px;
+  height: 34px;
+  padding: 0 0 0 0.65rem;
+  margin-left: 0.15rem;
+  border: none;
+  border-left: 1px solid rgba(201, 162, 39, 0.25);
+  background: transparent;
+  cursor: pointer;
+}
+
+.portal__menu-toggle span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: #c42d78;
+  border-radius: 1px;
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
+}
+
+.portal__menu-toggle--open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.portal__menu-toggle--open span:nth-child(2) {
+  opacity: 0;
+}
+
+.portal__menu-toggle--open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+.portal__account-menu {
+  padding: 0 1.5rem 0.75rem;
+  border-bottom: 1px solid rgba(123, 77, 255, 0.15);
+  background: rgba(10, 10, 12, 0.95);
+}
+
+.portal__account-menu-list {
+  list-style: none;
+  margin: 0;
+  padding: 0.5rem 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.portal__account-menu-list a,
+.portal__account-menu-list button {
+  display: block;
+  width: 100%;
+  padding: 0.55rem 0.75rem;
+  border: none;
+  border-radius: 4px;
+  background: transparent;
+  color: #c4b8e0;
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.portal__account-menu-list a:hover,
+.portal__account-menu-list button:hover {
+  background: rgba(123, 77, 255, 0.12);
+  color: #f0e8ff;
+}
+
+.portal__account-menu-item--sign-out {
+  margin-top: 0.35rem;
+  padding-top: 0.45rem;
+  border-top: 1px solid rgba(201, 162, 39, 0.2);
+}
+
+.portal__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.25rem;
+  padding: 0 1.5rem;
+  border-bottom: 1px solid rgba(123, 77, 255, 0.15);
+  background: rgba(10, 10, 12, 0.85);
+}
+
+.portal__tab {
+  position: relative;
+  padding: 0.85rem 0.15rem;
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: rgba(196, 184, 224, 0.55);
+  transition: color 0.2s ease;
+}
+
+.portal__tab:hover {
+  color: #e8dcc8;
+}
+
+.portal__tab--active {
+  color: #7fd8ff;
+}
+
+.portal__tab--active::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #4ec8ff 0%, #7b4dff 100%);
+  box-shadow: 0 0 12px rgba(78, 200, 255, 0.45);
+}
+
+.portal__toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem 1.5rem;
+  padding: 1.25rem 1.5rem 1rem;
+}
+
+.portal__section-title {
+  margin: 0 0 0.35rem;
+  font-family: var(--font-fantasy);
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #f1e6c8;
+  text-shadow: 0 0 20px rgba(201, 162, 39, 0.2);
+}
+
+.portal__section-subtitle {
+  margin: 0;
+  max-width: 36rem;
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  line-height: 1.45;
+  color: rgba(232, 220, 200, 0.55);
+}
+
+.portal__toolbar-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.portal__toolbar-balance {
+  padding: 0.35rem 0.65rem;
+  border-radius: 6px;
+  border: 1px solid rgba(243, 199, 79, 0.25);
+  background: rgba(243, 199, 79, 0.06);
+}
+
+.portal__currency select {
+  padding: 0.45rem 0.65rem;
+  border-radius: 6px;
+  border: 1px solid rgba(123, 77, 255, 0.35);
+  background: rgba(10, 10, 12, 0.8);
+  color: rgba(232, 220, 200, 0.75);
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+}
+
+.portal__main {
+  padding: 0 1.5rem 2rem;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (min-width: 768px) {
+  .portal__header,
+  .portal__tabs,
+  .portal__toolbar,
+  .portal__main,
+  .portal__account-menu {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .portal__brand-name {
+    display: none;
+  }
+
+  .portal__toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .portal__toolbar-actions {
+    justify-content: flex-start;
+  }
+}

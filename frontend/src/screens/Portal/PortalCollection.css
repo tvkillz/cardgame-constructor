@@ -1,0 +1,172 @@
+.portal-collection {
+  display: grid;
+  grid-template-columns: minmax(200px, 260px) 1fr;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  align-items: start;
+}
+
+.portal-collection__status {
+  color: rgba(232, 220, 200, 0.85);
+  font-family: var(--font-ui);
+}
+
+.portal-collection__sidebar-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.portal-collection__heading {
+  margin: 0;
+  font-family: var(--font-fantasy);
+  font-size: 1rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #e8dcc8;
+}
+
+.portal-collection__deck-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.portal-collection__deck-item {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid rgba(201, 162, 39, 0.25);
+  border-radius: 6px;
+  background: rgba(10, 10, 12, 0.55);
+  color: #e8dcc8;
+  font-family: var(--font-ui);
+  cursor: pointer;
+  text-align: left;
+}
+
+.portal-collection__deck-item--active {
+  border-color: rgba(201, 162, 39, 0.75);
+  background: rgba(201, 162, 39, 0.12);
+}
+
+.portal-collection__deck-name {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.portal-collection__deck-count {
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+.portal-collection__toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.portal-collection__deck-title {
+  margin: 0 0 0.25rem;
+  font-family: var(--font-fantasy);
+  font-size: 1.15rem;
+  color: #f0e8d8;
+}
+
+.portal-collection__deck-meta {
+  margin: 0;
+  font-size: 0.85rem;
+  color: rgba(232, 220, 200, 0.75);
+}
+
+.portal-collection__toolbar-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.portal-collection__in-deck h4,
+.portal-collection__catalog h4 {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-fantasy);
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: rgba(232, 220, 200, 0.9);
+}
+
+.portal-collection__empty {
+  margin: 0;
+  font-size: 0.9rem;
+  color: rgba(232, 220, 200, 0.65);
+}
+
+.portal-collection__in-deck-list {
+  list-style: none;
+  margin: 0 0 1.5rem;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.portal-collection__in-deck-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.35rem 0.5rem;
+  background: rgba(10, 10, 12, 0.45);
+  border-radius: 4px;
+  font-size: 0.85rem;
+  color: #e8dcc8;
+}
+
+.portal-collection__qty {
+  margin-left: auto;
+  font-weight: 700;
+}
+
+.portal-collection__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 1rem;
+}
+
+.portal-collection__catalog-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.portal-collection__catalog-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.portal-collection__in-deck-badge {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #c9a227;
+}
+
+@media (max-width: 900px) {
+  .portal-collection {
+    grid-template-columns: 1fr;
+  }
+}

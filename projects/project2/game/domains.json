@@ -1,0 +1,18 @@
+{
+  "domains": [
+    {
+      "id": "terra",
+      "label": "Terra",
+      "categoryId": "earth",
+      "glowColor": "#2dd4bf",
+      "domainAsset": "domains/terra_domain.png"
+    },
+    {
+      "id": "aqua",
+      "label": "Aqua",
+      "categoryId": "water",
+      "glowColor": "#38bdf8",
+      "domainAsset": "domains/aqua_domain.png"
+    }
+  ]
+}

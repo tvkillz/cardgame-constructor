@@ -1,0 +1,9 @@
+{
+  "creditsPerEur": 100,
+  "currencySymbol": "$",
+  "packages": [
+    { "id": "pack-100", "credits": 100, "priceEur": 1 },
+    { "id": "pack-500", "credits": 500, "priceEur": 5, "popular": true },
+    { "id": "pack-1000", "credits": 1000, "priceEur": 10 }
+  ]
+}

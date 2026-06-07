@@ -1,0 +1,8 @@
+{
+  "categories": [
+    { "id": "earth", "label": "Earth", "locationIds": ["kronos"] },
+    { "id": "water", "label": "Water", "locationIds": ["thalassa"] },
+    { "id": "fire", "label": "Fire", "locationIds": ["infernus"] },
+    { "id": "air", "label": "Air", "locationIds": ["anemos"] }
+  ]
+}

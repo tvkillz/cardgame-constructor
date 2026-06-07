@@ -1,0 +1,17 @@
+{
+  "voidBlack": "#0a0a0c",
+  "gold": "#c9a227",
+  "purpleGlow": "#7b4dff",
+  "cyanGlow": "#4ec8ff",
+  "ember": "#e85d5d",
+  "violetAccent": "#9b59ff",
+  "textPrimary": "#e8dcc8",
+  "textMuted": "rgba(232, 220, 200, 0.85)",
+  "accentPink": "#ff3366",
+  "accentPurple": "#a855f7",
+  "playCyan": "#7fd8ff",
+  "playGold": "#f3c74f",
+  "triggerOrange": "#fb923c",
+  "triggerGreen": "#22c55e",
+  "triggerBlue": "#3b82f6"
+}

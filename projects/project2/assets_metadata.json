@@ -1,0 +1,117 @@
+{
+  "project": "PROJECT TWO",
+  "generated_at": "2026-06-06",
+  "structure": {
+    "domains": "2 demo domains",
+    "cities": "2 demo cities",
+    "cards": "4 demo unit cards"
+  },
+  "keywords_glossary": {
+    "Taunt": "Enemies must attack this unit if able.",
+    "Ward": "The next damage this unit would take is prevented.",
+    "Regenerate": "Restores Health at end of turn.",
+    "Stealth": "Cannot be targeted until it attacks."
+  },
+  "assets": [
+    {
+      "title": "Terra Domain",
+      "slug": "terra_domain",
+      "category": "domains",
+      "domain": "",
+      "kind": "domain",
+      "path": "domains/terra_domain.png",
+      "format": "16:9"
+    },
+    {
+      "title": "Aqua Domain",
+      "slug": "aqua_domain",
+      "category": "domains",
+      "domain": "",
+      "kind": "domain",
+      "path": "domains/aqua_domain.png",
+      "format": "16:9"
+    },
+    {
+      "title": "Emerald Grove",
+      "slug": "terra_city_01_great_bastion",
+      "category": "cities",
+      "domain": "terra",
+      "kind": "city",
+      "path": "cities/terra/terra_city_01_great_bastion.png",
+      "format": "16:9"
+    },
+    {
+      "title": "Tide Harbor",
+      "slug": "aqua_city_01_sunken_oakhaven",
+      "category": "cities",
+      "domain": "aqua",
+      "kind": "city",
+      "path": "cities/aqua/aqua_city_01_sunken_oakhaven.png",
+      "format": "16:9"
+    },
+    {
+      "title": "Granite Warden",
+      "slug": "terra_card_01_granite_warden",
+      "category": "cards",
+      "domain": "terra",
+      "kind": "card",
+      "role": "Defender",
+      "stats": { "mana": 5, "attack": 3, "health": 7 },
+      "keywords": ["Taunt"],
+      "ability": {
+        "name": "Demo Bulwark",
+        "text": "Taunt. A sample earth unit for project2."
+      },
+      "path": "cards/terra/terra_card_01_granite_warden.png",
+      "format": "3:4"
+    },
+    {
+      "title": "Rootbound Scout",
+      "slug": "terra_card_02_rootbound_druid",
+      "category": "cards",
+      "domain": "terra",
+      "kind": "card",
+      "role": "Support",
+      "stats": { "mana": 3, "attack": 2, "health": 4 },
+      "keywords": ["Regenerate"],
+      "ability": {
+        "name": "Sprout Watch",
+        "text": "Regenerate 1. Demo support card."
+      },
+      "path": "cards/terra/terra_card_02_rootbound_druid.png",
+      "format": "3:4"
+    },
+    {
+      "title": "Tidebound Priestess",
+      "slug": "aqua_card_01_tidebound_priestess",
+      "category": "cards",
+      "domain": "aqua",
+      "kind": "card",
+      "role": "Healer",
+      "stats": { "mana": 4, "attack": 2, "health": 5 },
+      "keywords": ["Ward"],
+      "ability": {
+        "name": "Tidal Blessing",
+        "text": "Ward. Restore 2 Health to your player."
+      },
+      "path": "cards/aqua/aqua_card_01_tidebound_priestess.png",
+      "format": "3:4"
+    },
+    {
+      "title": "Abyss Devourer",
+      "slug": "aqua_card_02_abyss_devourer",
+      "category": "cards",
+      "domain": "aqua",
+      "kind": "card",
+      "role": "Finisher",
+      "stats": { "mana": 6, "attack": 5, "health": 4 },
+      "keywords": ["Stealth"],
+      "ability": {
+        "name": "Deep Hunger",
+        "text": "Stealth. Demo aqua finisher."
+      },
+      "path": "cards/aqua/aqua_card_02_abyss_devourer.png",
+      "format": "3:4"
+    }
+  ]
+}

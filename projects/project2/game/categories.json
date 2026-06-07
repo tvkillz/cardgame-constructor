@@ -1,0 +1,6 @@
+{
+  "categories": [
+    { "id": "earth", "label": "Earth", "locationIds": ["emerald"] },
+    { "id": "water", "label": "Water", "locationIds": ["tidepool"] }
+  ]
+}

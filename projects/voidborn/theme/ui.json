@@ -1,0 +1,38 @@
+{
+  "fonts": {
+    "fantasy": "'Cinzel', 'Times New Roman', serif",
+    "ui": "'Inter', system-ui, sans-serif",
+    "googleFontsUrl": "https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+  },
+  "navigation": [
+    { "label": "Play Now", "href": "/play", "route": "play" },
+    { "label": "Market", "href": "/portal/market", "route": "portalMarket" },
+    { "label": "Leaderboard", "href": "/leaderboard", "route": "leaderboard" }
+  ],
+  "accountMenu": [
+    { "id": "play", "label": "Play Now", "route": "play" },
+    { "id": "market", "label": "Market", "route": "portalMarket" },
+    { "id": "leaderboard", "label": "Leaderboard", "route": "leaderboard" },
+    { "id": "profile", "label": "Profile", "route": "portalProfile" },
+    { "id": "credits", "label": "Purchase Credits", "action": "purchaseCredits" },
+    { "id": "sign-out", "label": "Sign Out", "action": "signOut" }
+  ],
+  "heroCtas": [
+    { "label": "Play Now", "id": "play", "route": "play", "accent": "purple" },
+    { "label": "View Market", "id": "market", "route": "portalMarket", "accent": "cyan" },
+    { "label": "Leaderboard", "id": "leaderboard", "route": "leaderboard", "accent": "ember" }
+  ],
+  "playModes": [
+    { "id": "casual", "title": "Casual Battle", "subtitle": "Play a relaxed match", "icon": "⚔️" },
+    { "id": "ranked", "title": "Ranked Match", "subtitle": "Play a competitive match", "icon": "🏆" },
+    { "id": "tutorial", "title": "Tutorial", "subtitle": "Learn cards with a random deck", "icon": "📖" }
+  ],
+  "player": {
+    "fallbackName": "Player",
+    "opponentName": "LZQWQ",
+    "defaultCredits": 988
+  },
+  "particles": {
+    "colors": ["#a855f7", "#ff3366"]
+  }
+}
