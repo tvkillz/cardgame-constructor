@@ -21,7 +21,7 @@ import {
 import './PortalCollection.css'
 
 export default function PortalCollection() {
-  const catalog = useCardCatalog()
+  const { cards: catalog } = useCardCatalog()
   const { decks, loading, refresh, userId } = usePlayerDecks()
   const [activeDeckId, setActiveDeckId] = useState<string>('')
   const [saving, setSaving] = useState(false)

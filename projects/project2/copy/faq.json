@@ -1,0 +1,30 @@
+{
+  "title": "Frequently Asked Questions",
+  "items": [
+    {
+      "id": "what-is-voidborn",
+      "question": "What is this game?",
+      "answer": "A tactical trading card game across four elemental dominions. Collect cards, build decks, trade on the market, and battle in ranked and casual matches."
+    },
+    {
+      "id": "how-to-start",
+      "question": "How do I start playing?",
+      "answer": "Open Play Now from the header. Tutorial matches use a random deck; casual battles are available while you grow your collection."
+    },
+    {
+      "id": "credits",
+      "question": "What are credits used for?",
+      "answer": "Credits buy individual cards, sealed vaults, and store bundles. Sell duplicates on the market to earn more."
+    },
+    {
+      "id": "trade-cards",
+      "question": "Can I trade or sell cards?",
+      "answer": "Yes — list cards on the player market or buy specific listings to finish your deck."
+    },
+    {
+      "id": "free-to-play",
+      "question": "Is it free to play?",
+      "answer": "Account creation and core play are free. Credits for faster collection growth are optional."
+    }
+  ]
+}

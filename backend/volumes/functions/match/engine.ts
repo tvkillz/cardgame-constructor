@@ -26,7 +26,7 @@ export interface BoardUnit extends MatchCardInstance {
   frozen?: boolean
 }
 
-const FREEZE_SLUGS = new Set(['aqua_card_01_tidebound_priestess'])
+const FREEZE_SLUGS = new Set(['thalassa_card_01_tidebound_priestess'])
 const FREEZE_PROC_CHANCE = 0.5
 
 export interface FreezeEvent {

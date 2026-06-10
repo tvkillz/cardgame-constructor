@@ -1,7 +1,7 @@
 import type { LocationConfig } from '@/config/schema'
 import { LOCATIONS } from '@/config'
 
-const OBSIDIAN_DEEP_PATH = 'cities/terra/terra_city_02_obsidian_deep.png'
+const OBSIDIAN_DEEP_PATH = 'cities/terra/terra_city_02_obsidian_deep.webp'
 
 /** Decorative backdrop — explicit compile field, else second city in realm. */
 export function getLocationBackgroundImage(loc: LocationConfig): string {

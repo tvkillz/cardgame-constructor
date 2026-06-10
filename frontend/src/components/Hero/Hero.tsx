@@ -1,10 +1,11 @@
 import type { CSSProperties } from 'react'
-import { appConfig, HERO_CARDS, LOCATION_SLIDES } from '@/config'
-import CardPlaceholder from '../CardPlaceholder/CardPlaceholder'
-import HeroCtas from './HeroCtas'
+import dynamic from 'next/dynamic'
+import { appConfig, LOCATION_SLIDES } from '@/config'
 import HeroMedia from './HeroMedia'
 import { HERO_PARTICLES } from './heroParticles'
 import './styles.css'
+
+const HeroInteractive = dynamic(() => import('./HeroInteractive'), { ssr: true })
 
 export default function Hero() {
   const { hero } = appConfig.descriptions
@@ -56,9 +57,7 @@ export default function Hero() {
 
         <p className="hero__subheadline">{hero.subheadline}</p>
 
-        <HeroCtas />
-
-        <CardPlaceholder cards={HERO_CARDS} layoutMode="hero" />
+        <HeroInteractive />
       </div>
     </section>
   )

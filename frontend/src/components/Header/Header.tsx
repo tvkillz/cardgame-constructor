@@ -1,13 +1,18 @@
 'use client'
 
+import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { useState } from 'react'
 import { appConfig, resolveNavHref, resolveAccountMenuHref } from '@/config'
 import type { AccountMenuItemConfig } from '@/config/schema'
 import PlayRouteLink from '@/components/auth/PlayRouteLink'
 import ProtectedNavLink from '@/components/auth/ProtectedNavLink'
-import PurchaseCreditsModal from '@/components/credits/PurchaseCreditsModal'
 import { useAuth } from '@/components/providers/AuthProvider'
+
+const PurchaseCreditsModal = dynamic(
+  () => import('@/components/credits/PurchaseCreditsModal'),
+  { ssr: false },
+)
 import { routeRequiresAuth } from '@/lib/auth/guards'
 import { Button } from '../ui/Button/Button'
 import './styles.css'
@@ -173,10 +178,12 @@ export default function Header() {
         </nav>
       </header>
 
-      <PurchaseCreditsModal
-        isOpen={creditsOpen}
-        onClose={() => setCreditsOpen(false)}
-      />
+      {creditsOpen ? (
+        <PurchaseCreditsModal
+          isOpen={creditsOpen}
+          onClose={() => setCreditsOpen(false)}
+        />
+      ) : null}
     </>
   )
 }

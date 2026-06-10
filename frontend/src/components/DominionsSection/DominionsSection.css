@@ -12,6 +12,7 @@
   display: flex;
   flex-direction: column;
   gap: clamp(2rem, 5vw, 3rem);
+  margin-top: 10rem;
 }
 
 .dominions__header {
@@ -122,16 +123,19 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0;
+  opacity: 1;
   transform: scale(1.06);
-  transition:
-    opacity 0.65s ease-in-out,
-    transform 6s ease-out;
+  animation: dominions-ken-burns 6s ease-out forwards;
 }
 
 .dominions__slide--active {
   opacity: 1;
-  transform: scale(1);
+}
+
+@keyframes dominions-ken-burns {
+  to {
+    transform: scale(1);
+  }
 }
 
 .dominions__card-overlay {

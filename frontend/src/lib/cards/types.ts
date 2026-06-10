@@ -23,6 +23,8 @@ export interface CardRecord {
   keywords: string[]
   ability: CardAbility
   glowColor: string
+  /** Shop price in cents (from DB or game/cards.json). */
+  priceCents?: number | null
   thumbUrl: string
   artUrl: string
   locationId?: string

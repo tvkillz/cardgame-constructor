@@ -7,7 +7,15 @@ import { toCardDisplayProps } from '@/lib/cards'
 import './PortalMarketGrid.css'
 
 export default function PortalMarketGrid() {
-  const catalog = useCardCatalog()
+  const { cards: catalog, loading } = useCardCatalog()
+
+  if (loading && catalog.length === 0) {
+    return (
+      <p className="portal-market-grid__loading" role="status" aria-live="polite">
+        Loading catalog…
+      </p>
+    )
+  }
 
   return (
     <div className="portal-market-grid" aria-label="Card market catalog">

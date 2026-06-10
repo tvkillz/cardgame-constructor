@@ -85,6 +85,11 @@
   }
 }
 
+.hero__media-root {
+  position: absolute;
+  inset: 0;
+}
+
 .hero__video,
 .hero__slide {
   position: absolute;
@@ -117,11 +122,6 @@
 }
 
 .hero__slide {
-  opacity: 0;
-  transition: opacity 1.2s ease;
-}
-
-.hero__slide--active {
   opacity: 1;
 }
 

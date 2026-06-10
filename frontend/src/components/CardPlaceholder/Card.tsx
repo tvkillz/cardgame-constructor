@@ -9,7 +9,7 @@ import {
 } from 'react'
 
 import { preloadImage } from '@/lib/cards/preload'
-import type { CardDomain } from '@/lib/cards/domains'
+import { DOMAIN_LABEL, type CardDomain } from '@/lib/cards/domains'
 import type { CardAbility, CardRarity } from '@/lib/cards/types'
 
 export interface CardDisplayProps {
@@ -41,16 +41,11 @@ interface CardComponentProps extends CardDisplayProps {
   showKeywords?: boolean
   showRarity?: boolean
   frozen?: boolean
+  /** Picker grids: keep thumbnail art; preview lives elsewhere. */
+  thumbOnly?: boolean
   className?: string
   onHoverChange?: (isHovered: boolean) => void
   onDoubleClick?: (event: MouseEvent<HTMLElement>) => void
-}
-
-const DOMAIN_LABEL: Record<CardDomain, string> = {
-  terra: 'Terra',
-  aqua: 'Aqua',
-  ignis: 'Ignis',
-  zephyr: 'Zephyr',
 }
 
 const Card = forwardRef<HTMLElement, CardComponentProps>(function Card(
@@ -72,6 +67,7 @@ const Card = forwardRef<HTMLElement, CardComponentProps>(function Card(
     showKeywords,
     showRarity,
     frozen = false,
+    thumbOnly = false,
     className = '',
     onHoverChange,
     onDoubleClick,
@@ -84,9 +80,9 @@ const Card = forwardRef<HTMLElement, CardComponentProps>(function Card(
   const displayKeywords = showKeywords ?? (layoutMode === 'hero' || displayAbility)
   const displayRarity = showRarity ?? (layoutMode !== 'game' && layoutMode !== 'hero')
   const imageSrc =
-    layoutMode === 'preview'
+    layoutMode === 'preview' || layoutMode === 'hero'
       ? artUrl
-      : layoutMode === 'game'
+      : layoutMode === 'game' || thumbOnly
         ? thumbUrl
         : isHovered && artUrl !== thumbUrl
           ? artUrl
@@ -165,8 +161,9 @@ const Card = forwardRef<HTMLElement, CardComponentProps>(function Card(
           '--tilt-y': '0deg',
         } as CSSProperties
       }
-      onMouseMove={handleMouseMove}
+      onMouseMove={thumbOnly ? undefined : handleMouseMove}
       onMouseEnter={() => {
+        if (thumbOnly) return
         if (layoutMode === 'game') void preloadImage(artUrl)
         setIsHovered(true)
         onHoverChange?.(true)
@@ -179,7 +176,8 @@ const Card = forwardRef<HTMLElement, CardComponentProps>(function Card(
           src={imageSrc}
           alt={title}
           className="card__art"
-          loading={layoutMode === 'game' ? 'eager' : 'lazy'}
+          loading={layoutMode === 'game' || layoutMode === 'hero' || layoutMode === 'default' ? 'eager' : 'lazy'}
+          fetchPriority={layoutMode === 'hero' ? 'high' : undefined}
           decoding="async"
         />
         <div className="card__overlay" />

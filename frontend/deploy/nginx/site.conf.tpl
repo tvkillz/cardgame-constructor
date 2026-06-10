@@ -18,7 +18,6 @@ server {
 server {
     listen 443 ssl;
     listen [::]:443 ssl;
-    http2 on;
     server_name {{DOMAIN}}{{#WWW}} www.{{DOMAIN}}{{/WWW}};
 
     ssl_certificate {{SSL_CERT}};

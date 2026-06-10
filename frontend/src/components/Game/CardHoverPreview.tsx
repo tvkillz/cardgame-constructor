@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from 'react'
 
-import Card, { type CardDisplayProps } from '@/components/CardPlaceholder/Card'
+import Card from '@/components/CardPlaceholder/Card'
+import type { CardDisplayProps } from '@/components/CardPlaceholder/Card'
 import { isImageCached, preloadImage } from '@/lib/cards/preload'
 
 interface CardHoverPreviewProps {

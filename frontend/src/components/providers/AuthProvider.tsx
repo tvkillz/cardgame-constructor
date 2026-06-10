@@ -10,12 +10,14 @@ import {
   useState,
   type ReactNode,
 } from 'react'
+import dynamic from 'next/dynamic'
 import { useRouter } from 'next/navigation'
 import type { Session, User } from '@supabase/supabase-js'
 import { appConfig } from '@/config'
 import { resolvePlayerName } from '@/lib/auth/player'
 import { getSupabaseBrowserClient, isSupabaseConfigured } from '@/lib/supabase'
-import AuthModal from '@/components/auth/AuthModal'
+
+const AuthModal = dynamic(() => import('@/components/auth/AuthModal'), { ssr: false })
 
 export type AuthModalMode = 'signIn' | 'register'
 
@@ -53,38 +55,52 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const playerName = resolvePlayerName(user)
 
   useEffect(() => {
-    const supabase = getSupabaseBrowserClient()
-    if (!supabase) {
-      setLoading(false)
-      return
+    let mounted = true
+    let subscription: { unsubscribe: () => void } | null = null
+
+    const initAuth = () => {
+      const supabase = getSupabaseBrowserClient()
+      if (!supabase) {
+        setLoading(false)
+        return
+      }
+
+      void supabase.auth.getSession().then(({ data }) => {
+        if (!mounted) return
+        setSession(data.session)
+        setLoading(false)
+      })
+
+      const {
+        data: { subscription: authSubscription },
+      } = supabase.auth.onAuthStateChange((_event, nextSession) => {
+        setSession(nextSession)
+        setLoading(false)
+        if (nextSession) {
+          setModalOpen(false)
+          const target = pendingPathRef.current
+          if (target) {
+            pendingPathRef.current = null
+            router.push(target)
+          }
+        }
+      })
+
+      subscription = authSubscription
     }
 
-    let mounted = true
-
-    supabase.auth.getSession().then(({ data }) => {
-      if (!mounted) return
-      setSession(data.session)
-      setLoading(false)
-    })
-
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, nextSession) => {
-      setSession(nextSession)
-      setLoading(false)
-      if (nextSession) {
-        setModalOpen(false)
-        const target = pendingPathRef.current
-        if (target) {
-          pendingPathRef.current = null
-          router.push(target)
-        }
-      }
-    })
+    // Defer Supabase client + session read until after first paint / idle time.
+    const idleId =
+      typeof requestIdleCallback !== 'undefined'
+        ? requestIdleCallback(initAuth, { timeout: 1500 })
+        : null
+    const timeoutId = idleId === null ? window.setTimeout(initAuth, 1) : null
 
     return () => {
       mounted = false
-      subscription.unsubscribe()
+      subscription?.unsubscribe()
+      if (idleId !== null) cancelIdleCallback(idleId)
+      if (timeoutId !== null) window.clearTimeout(timeoutId)
     }
   }, [router])
 
@@ -165,7 +181,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   return (
     <AuthContext.Provider value={value}>
       {children}
-      <AuthModal />
+      {modalOpen ? <AuthModal /> : null}
     </AuthContext.Provider>
   )
 }

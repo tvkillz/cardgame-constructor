@@ -10,22 +10,22 @@ set +e
 # --- 1. Define Base Paths ---
 BASE_VOIDBORN="/home/any/Desktop/constructor-mount"
 LOCAL_BACKEND="$BASE_VOIDBORN/backend"
-LOCAL_FRONTEND="$BASE_VOIDBORN/frontend"
+# LOCAL_FRONTEND="$BASE_VOIDBORN/frontend"
 LOCAL_PROJECTS="$BASE_VOIDBORN/projects"
 PERSISTENT_CACHE="/home/any/.rclone_cache"
 
 REMOTE_BACKEND="/root/constructor-files/backend"
-REMOTE_FRONTEND="/root/constructor-files/frontend"
+# REMOTE_FRONTEND="/root/constructor-files/frontend"
 REMOTE_PROJECTS="/root/constructor-files/projects"
 
 # --- 2. Cleanup Ghost Mounts ---
 echo "Cleaning up existing mounts..."
 
 pkill -f "rclone mount sportsy:" || true
-pkill -f "rclone mount voidborn:" || true
+# pkill -f "rclone mount voidborn:" || true
 
 fusermount -uz "$LOCAL_BACKEND" 2>/dev/null || true
-fusermount -uz "$LOCAL_FRONTEND" 2>/dev/null || true
+# fusermount -uz "$LOCAL_FRONTEND" 2>/dev/null || true
 fusermount -uz "$LOCAL_PROJECTS" 2>/dev/null || true
 
 set -e
@@ -47,7 +47,7 @@ RCLONE_OPTS="
 
 # --- 4. Create Local Directories ---
 echo "Creating local directories..."
-mkdir -p "$LOCAL_BACKEND" "$LOCAL_FRONTEND" "$LOCAL_PROJECTS"
+# mkdir -p "$LOCAL_BACKEND" "$LOCAL_FRONTEND" "$LOCAL_PROJECTS"
 
 # --- 5. Mounting Remote Drives ---
 echo "Mounting voidborn server..."
@@ -58,15 +58,15 @@ rclone mount "sportsy:$REMOTE_BACKEND" "$LOCAL_BACKEND" \
 rclone mount "sportsy:$REMOTE_PROJECTS" "$LOCAL_PROJECTS" \
     $RCLONE_OPTS --cache-dir "$PERSISTENT_CACHE/voidborn/constructor-projects" &
 
-rclone mount "voidborn:$REMOTE_FRONTEND" "$LOCAL_FRONTEND" \
-    $RCLONE_OPTS --cache-dir "$PERSISTENT_CACHE/voidborn/constructor-frontend" &
+# rclone mount "voidborn:$REMOTE_FRONTEND" "$LOCAL_FRONTEND" \
+#     $RCLONE_OPTS --cache-dir "$PERSISTENT_CACHE/voidborn/constructor-frontend" &
 
 # --- 6. Status ---
 echo "------------------------------------------"
 echo "All mounts active with isolated caches."
 echo "  Backend:  $LOCAL_BACKEND  (sportsy)"
 echo "  Projects: $LOCAL_PROJECTS  (sportsy)"
-echo "  Frontend: $LOCAL_FRONTEND  (voidborn)"
+# echo "  Frontend: $LOCAL_FRONTEND  (voidborn)"
 echo "------------------------------------------"
 
 # --- 7. Keep script running ---

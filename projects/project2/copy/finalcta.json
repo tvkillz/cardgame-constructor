@@ -1,0 +1,16 @@
+{
+  "title": "Enter the Void",
+  "subtitle": "Master the Elements. Rule the Arena.",
+  "description": "Join tacticians across the realms. Forge your deck, command elemental power, and carve your legacy into the Dominion.",
+  "buttonLabel": "Play Now",
+  "route": "play",
+  "backgroundImage": "cities/zephyr/zephyr_city_03_cloud_sanctuary.png",
+  "siege": {
+    "title": "The Eternal Siege",
+    "stats": [
+      { "id": "players", "value": "50K+", "label": "Players Aligned" },
+      { "id": "battles", "value": "200K+", "label": "Daily Battles" },
+      { "id": "cards", "value": "10M+", "label": "Cards Collected" }
+    ]
+  }
+}

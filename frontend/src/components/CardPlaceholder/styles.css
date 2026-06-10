@@ -155,19 +155,19 @@
   box-shadow: 0 0 10px color-mix(in srgb, var(--glow-color) 50%, transparent);
 }
 
-.card__domain--terra {
+.card__domain--kronos {
   background-image: radial-gradient(circle at 30% 30%, #e8c547, #6b4f12 70%);
 }
 
-.card__domain--aqua {
+.card__domain--thalassa {
   background-image: radial-gradient(circle at 30% 30%, #7fd8ff, #1a4a6e 70%);
 }
 
-.card__domain--ignis {
+.card__domain--infernus {
   background-image: radial-gradient(circle at 30% 30%, #ff8a5c, #6b1a0a 70%);
 }
 
-.card__domain--zephyr {
+.card__domain--anemos {
   background-image: radial-gradient(circle at 30% 30%, #c9a0ff, #3d2a6e 70%);
 }
 

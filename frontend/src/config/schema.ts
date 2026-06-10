@@ -101,6 +101,43 @@ export interface AppConfig {
       title: string
       description: string
     }
+    gameModel: {
+      title: string
+      description: string
+      pillars: GameModelPillarConfig[]
+      tags: GameModelTagConfig[]
+    }
+    collection: {
+      title: string
+      description: string
+      backgroundImage: string
+      stats: CollectionStatConfig[]
+      cards: CollectionCardDisplay[]
+    }
+    pathways: {
+      title: string
+      description: string
+      features: PathwaysFeatureConfig[]
+      tiers: PathwaysTierConfig[]
+      marketCta: PathwaysMarketCtaConfig | null
+    }
+    faq: {
+      title: string
+      items: FaqItemConfig[]
+    }
+    finalCta: {
+      title: string
+      subtitle: string
+      description: string
+      buttonLabel: string
+      route: keyof AppConfig['domain']['routes']
+      backgroundImage: string
+      siege: {
+        title: string
+        stats: FinalCtaStatConfig[]
+      }
+    }
+    footer: FooterConfig
     play: {
       screenLabel: string
       titleLine: string
@@ -224,6 +261,120 @@ export interface DominionCitySlide {
   image: string
   name: string
   description: string
+}
+
+export interface GameModelPillarConfig {
+  id: string
+  title: string
+  description: string
+  image: string
+  glowColor: string
+}
+
+export interface GameModelTagConfig {
+  id: string
+  label: string
+}
+
+export interface CollectionStatConfig {
+  id: string
+  value: string
+  label: string
+}
+
+export interface PathwaysFeatureConfig {
+  id: string
+  title: string
+  description: string
+  image: string
+  glowColor: string
+}
+
+export interface PathwaysTierConfig {
+  id: string
+  rarityLabel: string
+  title: string
+  description: string
+  glowColor: string
+}
+
+export interface PathwaysMarketCtaConfig {
+  description: string
+  buttonLabel: string
+  route: keyof AppConfig['domain']['routes']
+}
+
+export interface FaqItemConfig {
+  id: string
+  question: string
+  answer: string
+}
+
+export interface FinalCtaStatConfig {
+  id: string
+  value: string
+  label: string
+}
+
+export interface FooterLegalLinkConfig {
+  id: string
+  label: string
+  href: string
+}
+
+export interface CookieCategoryConfig {
+  id: string
+  label: string
+  description: string
+  required?: boolean
+}
+
+export interface CookieConsentCopyConfig {
+  title: string
+  intro: string
+  policyNote: string
+  consentNote: string
+  manageIntro: string
+  categories: CookieCategoryConfig[]
+  acceptAll: string
+  rejectNonEssential: string
+  managePreferences: string
+  savePreferences: string
+  closeLabel: string
+}
+
+export interface FooterConfig {
+  brand: {
+    name: string
+    tagline: string
+  }
+  legal: FooterLegalLinkConfig[]
+  contact: {
+    companyName: string
+    companyNumber: string
+    address: string
+    email: string
+  }
+  copyright: string
+  subCopyright: string
+  crafted: string
+  cookieSettingsLabel: string
+  cookies: CookieConsentCopyConfig | null
+}
+
+export interface CollectionCardDisplay {
+  id: string
+  slug: string
+  title: string
+  domain: string
+  rarity?: string
+  stats: { mana: number; attack: number; health: number }
+  keywords?: string[]
+  ability?: { name: string; text: string }
+  glowColor: string
+  thumbUrl: string
+  artUrl: string
+  fanIndex: number
 }
 
 export interface LocationConfig {

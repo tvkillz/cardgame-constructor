@@ -48,7 +48,7 @@ export default function LocationsSection() {
           src={LOCATIONS_SECTION_BG}
           alt=""
           className="locations__bg-image locations__bg-image--active"
-          loading="eager"
+          loading="lazy"
           decoding="async"
         />
         <div className="locations__bg-scrim" />
@@ -95,18 +95,14 @@ export default function LocationsSection() {
 
           <div className="locations__right" aria-label="Location preview">
             <FantasyFrame className="locations__preview" glowColor={active.glowColor}>
-              {LOCATIONS.map((loc) => (
-                <img
-                  key={loc.id}
-                  src={loc.image}
-                  alt={`${loc.name} realm preview`}
-                  className={`locations__image${
-                    loc.id === active.id ? ' locations__image--active' : ''
-                  }`}
-                  loading="lazy"
-                  decoding="async"
-                />
-              ))}
+              <img
+                key={active.id}
+                src={active.image}
+                alt={`${active.name} realm preview`}
+                className="locations__image locations__image--active"
+                loading="lazy"
+                decoding="async"
+              />
               <div className="locations__preview-overlay" aria-hidden="true" />
             </FantasyFrame>
           </div>

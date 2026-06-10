@@ -1,29 +1,29 @@
 {
   "domains": [
     {
-      "id": "terra",
-      "label": "Terra",
+      "id": "kronos",
+      "label": "Kronos",
       "categoryId": "earth",
       "glowColor": "#c9a227",
       "domainAsset": "domains/terra_domain.png"
     },
     {
-      "id": "aqua",
-      "label": "Aqua",
+      "id": "thalassa",
+      "label": "Thalassa",
       "categoryId": "water",
       "glowColor": "#4ec8ff",
       "domainAsset": "domains/aqua_domain.png"
     },
     {
-      "id": "ignis",
-      "label": "Ignis",
+      "id": "infernus",
+      "label": "Infernus",
       "categoryId": "fire",
       "glowColor": "#e85d5d",
       "domainAsset": "domains/ignis_domain.png"
     },
     {
-      "id": "zephyr",
-      "label": "Zephyr",
+      "id": "anemos",
+      "label": "Anemos",
       "categoryId": "air",
       "glowColor": "#9b59ff",
       "domainAsset": "domains/zephyr_domain.png"

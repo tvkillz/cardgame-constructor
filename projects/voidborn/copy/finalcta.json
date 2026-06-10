@@ -1,0 +1,16 @@
+{
+  "title": "Embrace the Corruption",
+  "subtitle": "Enter the Abyss. Master the Void.",
+  "description": "Join a relentless covenant of tacticians, soul-harvesters, and tattered champions. Forge your deck from the dark, command forbidden energies, and carve your legacy into the dying embers of the Dominion.",
+  "buttonLabel": "Claim Your Power",
+  "route": "play",
+  "backgroundImage": "cities/zephyr/zephyr_city_03_cloud_sanctuary.png",
+  "siege": {
+    "title": "The Eternal Siege",
+    "stats": [
+      { "id": "players", "value": "50K+", "label": "Wretched Souls Aligned" },
+      { "id": "battles", "value": "200K+", "label": "Daily Skirmishes" },
+      { "id": "cards", "value": "10M+", "label": "Relics Unearthed" }
+    ]
+  }
+}

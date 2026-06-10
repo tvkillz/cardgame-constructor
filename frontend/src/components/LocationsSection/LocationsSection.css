@@ -1,7 +1,7 @@
 .locations {
   position: relative;
   width: 100%;
-  overflow: hidden;
+  overflow: visible;
   background: #0a0a0c;
   /* Top: blend into hero. Bottom: fade out so dominions (opaque) shows through. */
   -webkit-mask-image: linear-gradient(
@@ -22,9 +22,35 @@
 
 .locations__bg {
   position: absolute;
-  inset: 0;
+  left: 0;
+  right: 0;
+  top: calc(-1 * var(--locations-bg-bleed-top));
+  bottom: calc(-1 * var(--locations-bg-bleed-bottom));
   z-index: 0;
   pointer-events: none;
+  /* move mask here so fade follows the stretched bg */
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.2) 6%,
+    rgba(0, 0, 0, 0.55) 14%,
+    black 24%,
+    black 76%,
+    rgba(0, 0, 0, 0.55) 86%,
+    rgba(0, 0, 0, 0.2) 94%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.2) 6%,
+    rgba(0, 0, 0, 0.55) 14%,
+    black 24%,
+    black 76%,
+    rgba(0, 0, 0, 0.55) 86%,
+    rgba(0, 0, 0, 0.2) 94%,
+    transparent 100%
+  );
 }
 
 .locations__bg-image {
@@ -36,7 +62,7 @@
   object-position: center 35%;
   opacity: 50;
   filter: grayscale(1) brightness(0.62) contrast(0.95);
-  transform: scale(1.06);
+  transform: scale(1.1);
   transition: opacity 0.65s ease-in-out;
 }
 
@@ -68,12 +94,13 @@
 
 .locations .landing-shell {
   margin-top: 10rem;
-  padding-bottom: 11rem;
+  padding-bottom: 8rem;
 }
 
 @media (max-width: 919px) {
   .locations .landing-shell {
     margin-top: 7rem;
+    /* height: 20rem; */
   }
 }
 
@@ -187,9 +214,9 @@
   filter: drop-shadow(0 0 16px rgba(255, 77, 109, 0.55))
     drop-shadow(0 0 32px rgba(196, 45, 120, 0.4))
     drop-shadow(0 0 48px rgba(123, 77, 255, 0.35));
-  /* animation:
+  animation:
     locations-lore-glow-pulse 3.5s ease-in-out infinite,
-    locations-lore-gradient-shift 8s ease-in-out infinite; */
+    locations-lore-gradient-shift 8s ease-in-out infinite;
 }
 
 .locations__lore-null {
@@ -210,9 +237,9 @@
   filter: drop-shadow(0 0 16px rgba(78, 200, 255, 0.5))
     drop-shadow(0 0 32px rgba(123, 77, 255, 0.4))
     drop-shadow(0 0 48px rgba(255, 77, 109, 0.35));
-  /* animation:
+  animation:
     locations-lore-glow-pulse-null 3.5s ease-in-out infinite,
-    locations-lore-gradient-shift 8s ease-in-out infinite; */
+    locations-lore-gradient-shift 8s ease-in-out infinite;
 }
 
 @keyframes locations-lore-glow-pulse {
@@ -377,13 +404,8 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0;
-  transition: opacity 0.5s ease-in-out;
-  transform: scale(1.02);
-}
-
-.locations__image--active {
   opacity: 1;
+  transform: scale(1.02);
 }
 
 .locations__preview-overlay {

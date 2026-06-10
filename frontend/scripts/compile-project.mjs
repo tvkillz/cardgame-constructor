@@ -14,8 +14,10 @@
 import {
   copyFile,
   mkdir,
+  readdir,
   readFile,
   stat,
+  unlink,
   writeFile,
 } from 'node:fs/promises'
 import path from 'node:path'
@@ -25,6 +27,14 @@ import {
   loadProjectEnv,
   resolveSupabaseAdminEnv,
 } from './load-project-env.mjs'
+import {
+  ensureFullArtStorage,
+  ensureStorageObject,
+  legacyFullStoragePath,
+  legacyThumbStoragePath,
+  upsertCardRow,
+  upsertFeaturedCard,
+} from './card-upload.mjs'
 import { createAdminClient } from './supabase-admin.mjs'
 import { loadProjectMetadata, siteStoragePaths } from './load-project-metadata.mjs'
 import {
@@ -35,6 +45,7 @@ import {
 } from './project-paths.mjs'
 
 const THUMB_WIDTH = 320
+const WEBP_QUALITY = 82
 const BUCKET = 'cards'
 const OG_WIDTH = 1200
 const OG_HEIGHT = 630
@@ -66,11 +77,47 @@ function assetUrl(publicBase, relativePath) {
   return `${publicBase.replace(/\/$/, '')}/${relativePath.replace(/^\//, '')}`
 }
 
+const RASTER_EXT = /\.(png|jpe?g)$/i
+
+function isConvertibleRaster(relativePath) {
+  return Boolean(relativePath && RASTER_EXT.test(relativePath))
+}
+
+/** Published site path — raster PNG/JPEG are served as WebP from compile output. */
+function toWebpRelativePath(relativePath) {
+  if (!relativePath || !isConvertibleRaster(relativePath)) return relativePath
+  return relativePath.replace(RASTER_EXT, '.webp')
+}
+
+async function writeCompiledAsset(sharp, sourcePath, rel, assetsRoot) {
+  const destRel = toWebpRelativePath(rel)
+  const dest = path.join(assetsRoot, destRel)
+  await mkdir(path.dirname(dest), { recursive: true })
+
+  if (isConvertibleRaster(rel) && sharp) {
+    await sharp(sourcePath).webp({ quality: WEBP_QUALITY }).toFile(dest)
+    return destRel
+  }
+
+  await copyFile(sourcePath, dest)
+  return destRel
+}
+
 function rarityFromMana(mana) {
   if (mana <= 2) return 'common'
   if (mana <= 4) return 'uncommon'
   if (mana <= 6) return 'rare'
   return 'epic'
+}
+
+/** Shop price in cents — optional in game/cards.json (`priceCents` or `priceEur`). */
+function resolvePriceCents(asset) {
+  if (typeof asset.priceCents === 'number' && asset.priceCents >= 0) return asset.priceCents
+  if (typeof asset.price_cents === 'number' && asset.price_cents >= 0) return asset.price_cents
+  if (typeof asset.priceEur === 'number' && asset.priceEur >= 0) {
+    return Math.round(asset.priceEur * 100)
+  }
+  return null
 }
 
 function storagePublicUrl(baseUrl, bucket, objectPath) {
@@ -175,12 +222,20 @@ async function buildThumb(sharp, sourcePath, destPath) {
   if (sharp) {
     await sharp(sourcePath)
       .resize(THUMB_WIDTH, null, { fit: 'inside', withoutEnlargement: true })
-      .webp({ quality: 82 })
+      .webp({ quality: WEBP_QUALITY })
       .toFile(destPath)
     return
   }
   const pngDest = destPath.replace(/\.webp$/, '.png')
   await copyFile(sourcePath, pngDest)
+}
+
+async function buildFullArt(sharp, sourcePath, destPath) {
+  await mkdir(path.dirname(destPath), { recursive: true })
+  if (!sharp) {
+    throw new Error('sharp is required to compile card full art as WebP (npm install in frontend/)')
+  }
+  await sharp(sourcePath).webp({ quality: WEBP_QUALITY }).toFile(destPath)
 }
 
 /** Resolve asset file on disk: projects/{id}/assets first, then cursor_assets/{id}. */
@@ -195,9 +250,10 @@ async function resolveAssetFile(paths, relativePath) {
   return null
 }
 
-async function copyProjectAssets(paths, manifest, out) {
+async function copyProjectAssets(paths, manifest, out, sharp) {
   const publicBase = manifest.assets?.publicBase ?? '/assets'
   let copied = 0
+  let converted = 0
   let skipped = 0
 
   const metadata = await loadProjectMetadata(paths)
@@ -207,14 +263,13 @@ async function copyProjectAssets(paths, manifest, out) {
     const rel = entry.path
     if (!rel) continue
     const source = await resolveAssetFile(paths, rel)
-    const dest = path.join(out.assets, rel)
     if (!source) {
       skipped++
       continue
     }
-    await mkdir(path.dirname(dest), { recursive: true })
-    await copyFile(source, dest)
+    const destRel = await writeCompiledAsset(sharp, source, rel, out.assets)
     copied++
+    if (destRel !== rel) converted++
   }
 
   const brandFiles = [
@@ -225,18 +280,340 @@ async function copyProjectAssets(paths, manifest, out) {
   for (const rel of brandFiles) {
     if (rel.startsWith('/') || rel.startsWith('http')) continue
     const source = await resolveAssetFile(paths, rel)
-    const dest = path.join(out.assets, rel)
     if (!source) {
       skipped++
       continue
     }
-    await mkdir(path.dirname(dest), { recursive: true })
-    await copyFile(source, dest)
+    const destRel = await writeCompiledAsset(sharp, source, rel, out.assets)
+    copied++
+    if (destRel !== rel) converted++
+  }
+
+  const convertNote = converted > 0 ? `, ${converted} raster→webp` : ''
+  const sharpNote = sharp ? '' : ' (sharp missing — rasters copied as-is)'
+  console.log(`Assets: copied ${copied}, skipped ${skipped}${convertNote}${sharpNote}`)
+  return { publicBase, metadata }
+}
+
+async function copyPathwaysAssets(paths, pathwaysJson, out, sharp) {
+  let copied = 0
+  let skipped = 0
+
+  for (const feature of pathwaysJson?.features ?? []) {
+    const rel = feature.image
+    if (!rel || rel.startsWith('/') || rel.startsWith('http')) continue
+    const source = await resolveAssetFile(paths, rel)
+    if (!source) {
+      skipped++
+      continue
+    }
+    await writeCompiledAsset(sharp, source, rel, out.assets)
     copied++
   }
 
-  console.log(`Assets: copied ${copied}, skipped ${skipped} (missing on disk)`)
-  return { publicBase, metadata }
+  if (copied > 0 || skipped > 0) {
+    console.log(`Pathways: copied ${copied}, skipped ${skipped} (missing on disk)`)
+  }
+}
+
+async function copyGamemodelAssets(paths, gamemodelJson, out, sharp) {
+  let copied = 0
+  let skipped = 0
+
+  for (const pillar of gamemodelJson?.pillars ?? []) {
+    const rel = pillar.image
+    if (!rel || rel.startsWith('/') || rel.startsWith('http')) continue
+    const source = await resolveAssetFile(paths, rel)
+    if (!source) {
+      skipped++
+      continue
+    }
+    await writeCompiledAsset(sharp, source, rel, out.assets)
+    copied++
+  }
+
+  if (copied > 0 || skipped > 0) {
+    console.log(`Gamemodel: copied ${copied}, skipped ${skipped} (missing on disk)`)
+  }
+}
+
+/** Baked frontend JSON — served from `.build/{id}/data/` via site-static (not Storage CDN). */
+function showcaseLocalArtUrls(card) {
+  const fullExt = card.storage_path.endsWith('.webp') ? 'webp' : 'png'
+  const thumbExt = card.thumb_storage_path.endsWith('.webp') ? 'webp' : 'png'
+  return {
+    artUrl: `/data/card-full/${card.slug}.${fullExt}`,
+    thumbUrl: `/data/card-thumbs/${card.slug}.${thumbExt}`,
+  }
+}
+
+function applyShowcaseLocalArt(card) {
+  Object.assign(card, showcaseLocalArtUrls(card))
+}
+
+function syncLandingCardsFromCatalog(landingCards, bySlug) {
+  for (let i = 0; i < landingCards.length; i++) {
+    const { locationId, fanIndex, slug } = landingCards[i]
+    const fresh = bySlug.get(slug)
+    if (!fresh) continue
+    landingCards[i] = { ...fresh, locationId, fanIndex }
+  }
+}
+
+function cardToCollectionDisplay(card, fanIndex) {
+  return {
+    id: card.id,
+    slug: card.slug,
+    title: card.title,
+    domain: card.domain,
+    rarity: card.rarity,
+    stats: card.stats,
+    keywords: card.keywords ?? [],
+    ability: card.ability,
+    glowColor: card.glowColor,
+    thumbUrl: card.thumbUrl,
+    artUrl: card.artUrl,
+    fanIndex,
+  }
+}
+
+function buildCollectionCopy(collectionJson, publicBase, bySlug) {
+  const fallback = {
+    title: 'Collection',
+    description: '',
+    backgroundImage: '',
+    stats: [],
+    cardSlugs: [],
+    cards: [],
+  }
+  const source = collectionJson ?? fallback
+
+  const cards = (source.cardSlugs ?? []).map((slug, fanIndex) => {
+    const card = bySlug?.get?.(slug) ?? bySlug?.[slug]
+    if (!card) {
+      console.warn(`Collection: card slug not found: ${slug}`)
+      return null
+    }
+    return cardToCollectionDisplay(card, fanIndex)
+  }).filter(Boolean)
+
+  const backgroundImage = source.backgroundImage
+    ? source.backgroundImage.startsWith('http') || source.backgroundImage.startsWith('/')
+      ? source.backgroundImage
+      : assetUrl(publicBase, toWebpRelativePath(source.backgroundImage))
+    : ''
+
+  return {
+    title: source.title ?? fallback.title,
+    description: source.description ?? fallback.description,
+    backgroundImage,
+    stats: (source.stats ?? []).map((stat) => ({
+      id: stat.id,
+      value: stat.value,
+      label: stat.label,
+    })),
+    cards,
+  }
+}
+
+async function copyCollectionAssets(paths, collectionJson, out, sharp) {
+  const rel = collectionJson?.backgroundImage
+  if (!rel || rel.startsWith('/') || rel.startsWith('http')) return
+
+  const source = await resolveAssetFile(paths, rel)
+  if (!source) {
+    console.warn(`Collection: missing background asset: ${rel}`)
+    return
+  }
+
+  await writeCompiledAsset(sharp, source, rel, out.assets)
+  console.log('Collection: background asset copied')
+}
+
+function buildFaqCopy(faqJson) {
+  const fallback = { title: 'FAQ', items: [] }
+  const source = faqJson ?? fallback
+  return {
+    title: source.title ?? fallback.title,
+    items: (source.items ?? []).map((item) => ({
+      id: item.id,
+      question: item.question,
+      answer: item.answer,
+    })),
+  }
+}
+
+function buildFinalCtaCopy(finalctaJson, publicBase) {
+  const fallback = {
+    title: '',
+    subtitle: '',
+    description: '',
+    buttonLabel: 'Play Now',
+    route: 'play',
+    backgroundImage: '',
+    siege: { title: '', stats: [] },
+  }
+  const source = finalctaJson ?? fallback
+
+  const backgroundImage = source.backgroundImage
+    ? source.backgroundImage.startsWith('http') || source.backgroundImage.startsWith('/')
+      ? source.backgroundImage
+      : assetUrl(publicBase, toWebpRelativePath(source.backgroundImage))
+    : ''
+
+  return {
+    title: source.title ?? fallback.title,
+    subtitle: source.subtitle ?? fallback.subtitle,
+    description: source.description ?? fallback.description,
+    buttonLabel: source.buttonLabel ?? fallback.buttonLabel,
+    route: source.route ?? fallback.route,
+    backgroundImage,
+    siege: {
+      title: source.siege?.title ?? '',
+      stats: (source.siege?.stats ?? []).map((stat) => ({
+        id: stat.id,
+        value: stat.value,
+        label: stat.label,
+      })),
+    },
+  }
+}
+
+async function copyFinalCtaAssets(paths, finalctaJson, out, sharp) {
+  const rel = finalctaJson?.backgroundImage
+  if (!rel || rel.startsWith('/') || rel.startsWith('http')) return
+
+  const source = await resolveAssetFile(paths, rel)
+  if (!source) {
+    console.warn(`Final CTA: missing background asset: ${rel}`)
+    return
+  }
+
+  await writeCompiledAsset(sharp, source, rel, out.assets)
+  console.log('Final CTA: background asset copied')
+}
+
+function buildFooterCopy(footerJson) {
+  const fallback = {
+    brand: { name: '', tagline: '' },
+    legal: [],
+    contact: { companyName: '', companyNumber: '', address: '', email: '' },
+    copyright: '',
+    subCopyright: '',
+    crafted: '',
+    cookieSettingsLabel: 'Cookie Settings',
+    cookies: null,
+  }
+  const source = footerJson ?? fallback
+
+  return {
+    brand: {
+      name: source.brand?.name ?? fallback.brand.name,
+      tagline: source.brand?.tagline ?? fallback.brand.tagline,
+    },
+    legal: (source.legal ?? []).map((link) => ({
+      id: link.id,
+      label: link.label,
+      href: link.href,
+    })),
+    contact: {
+      companyName: source.contact?.companyName ?? '',
+      companyNumber: source.contact?.companyNumber ?? '',
+      address: source.contact?.address ?? '',
+      email: source.contact?.email ?? '',
+    },
+    copyright: source.copyright ?? fallback.copyright,
+    subCopyright: source.subCopyright ?? fallback.subCopyright,
+    crafted: source.crafted ?? fallback.crafted,
+    cookieSettingsLabel: source.cookieSettingsLabel ?? fallback.cookieSettingsLabel,
+    cookies: source.cookies
+      ? {
+          title: source.cookies.title,
+          intro: source.cookies.intro,
+          policyNote: source.cookies.policyNote,
+          consentNote: source.cookies.consentNote,
+          manageIntro: source.cookies.manageIntro,
+          categories: (source.cookies.categories ?? []).map((cat) => ({
+            id: cat.id,
+            label: cat.label,
+            description: cat.description,
+            required: Boolean(cat.required),
+          })),
+          acceptAll: source.cookies.acceptAll,
+          rejectNonEssential: source.cookies.rejectNonEssential,
+          managePreferences: source.cookies.managePreferences,
+          savePreferences: source.cookies.savePreferences,
+          closeLabel: source.cookies.closeLabel,
+        }
+      : null,
+  }
+}
+
+function buildPathwaysCopy(pathwaysJson, publicBase) {
+  const fallback = {
+    title: 'Collect. Trade. Conquer.',
+    description: '',
+    features: [],
+    tiers: [],
+    marketCta: null,
+  }
+  const source = pathwaysJson ?? fallback
+
+  return {
+    title: source.title ?? fallback.title,
+    description: source.description ?? fallback.description,
+    features: (source.features ?? []).map((feature) => ({
+      id: feature.id,
+      title: feature.title,
+      description: feature.description,
+      image: feature.image?.startsWith('http') || feature.image?.startsWith('/')
+        ? feature.image
+        : assetUrl(publicBase, feature.image),
+      glowColor: feature.glowColor ?? '#a855f7',
+    })),
+    tiers: (source.tiers ?? []).map((tier) => ({
+      id: tier.id,
+      rarityLabel: tier.rarityLabel,
+      title: tier.title,
+      description: tier.description,
+      glowColor: tier.glowColor ?? '#a855f7',
+    })),
+    marketCta: source.marketCta
+      ? {
+          description: source.marketCta.description ?? '',
+          buttonLabel: source.marketCta.buttonLabel ?? 'Enter The Market',
+          route: source.marketCta.route ?? 'portalMarket',
+        }
+      : null,
+  }
+}
+
+function buildGameModelCopy(gamemodelJson, publicBase) {
+  const fallback = {
+    title: 'Game Model',
+    description: '',
+    pillars: [],
+    tags: [],
+  }
+  const source = gamemodelJson ?? fallback
+
+  return {
+    title: source.title ?? fallback.title,
+    description: source.description ?? fallback.description,
+    pillars: (source.pillars ?? []).map((pillar) => ({
+      id: pillar.id,
+      title: pillar.title,
+      description: pillar.description,
+      image: pillar.image?.startsWith('http') || pillar.image?.startsWith('/')
+        ? pillar.image
+        : assetUrl(publicBase, pillar.image),
+      glowColor: pillar.glowColor ?? '#4ec8ff',
+    })),
+    tags: (source.tags ?? []).map((tag) => ({
+      id: tag.id,
+      label: tag.label,
+    })),
+  }
 }
 
 function buildDomainMaps(domainsJson) {
@@ -262,6 +639,26 @@ function buildFeaturedByLocation(locationsJson) {
   return featuredByLocation
 }
 
+/** Slugs baked into the frontend bundle (hero + collection section). Full catalog lives in DB. */
+function buildFrontendShowcaseSlugs(featuredByLocation, collectionJson) {
+  const slugs = new Set()
+  for (const slug of Object.values(featuredByLocation)) {
+    if (slug) slugs.add(slug)
+  }
+  for (const slug of collectionJson?.cardSlugs ?? []) {
+    if (slug) slugs.add(slug)
+  }
+  return slugs
+}
+
+function writeCardsCatalogJson(out, payload) {
+  return writeFile(path.join(out.data, 'cards-catalog.json'), JSON.stringify(payload, null, 2))
+}
+
+function writeLandingCardsJson(out, payload) {
+  return writeFile(path.join(out.data, 'landing-cards.json'), JSON.stringify(payload, null, 2))
+}
+
 function buildCityDescriptionIndex(citiesJson) {
   const byPath = {}
   const bySlug = {}
@@ -281,7 +678,7 @@ function buildCitySlidesByDomain(scenesJson, citiesJson, publicBase) {
     const override = byPath[asset.path] ?? bySlug[asset.slug] ?? {}
 
     const slide = {
-      image: assetUrl(publicBase, asset.path),
+      image: assetUrl(publicBase, toWebpRelativePath(asset.path)),
       name: override.name ?? asset.title ?? 'Unknown City',
       description: override.description ?? asset.notes ?? '',
     }
@@ -303,6 +700,11 @@ function buildAppConfig({
   ui,
   descriptions,
   dominionsJson,
+  gamemodelJson,
+  pathwaysJson,
+  faqJson,
+  finalctaJson,
+  footerJson,
   seoJson,
   portal,
   credits,
@@ -331,18 +733,18 @@ function buildAppConfig({
         ? citySlidesByDomain[loc.domainId]
         : [
             {
-              image: assetUrl(publicBase, loc.imageAsset),
+              image: assetUrl(publicBase, toWebpRelativePath(loc.imageAsset)),
               name: loc.name,
               description: loc.short,
             },
           ]
 
     const primaryImage = loc.imageAsset
-      ? assetUrl(publicBase, loc.imageAsset)
+      ? assetUrl(publicBase, toWebpRelativePath(loc.imageAsset))
       : cities[0]?.image ?? ''
 
     const backgroundImage = loc.backgroundImageAsset
-      ? assetUrl(publicBase, loc.backgroundImageAsset)
+      ? assetUrl(publicBase, toWebpRelativePath(loc.backgroundImageAsset))
       : cities.find((city) => city.image !== primaryImage)?.image ??
         cities[1]?.image ??
         primaryImage
@@ -368,6 +770,12 @@ function buildAppConfig({
     description: dominionsJson.description ?? descriptions.hero.subheadline,
   }
 
+  const gameModelCopy = buildGameModelCopy(gamemodelJson, publicBase)
+  const pathwaysCopy = buildPathwaysCopy(pathwaysJson, publicBase)
+  const faqCopy = buildFaqCopy(faqJson)
+  const finalCtaCopy = buildFinalCtaCopy(finalctaJson, publicBase)
+  const footerCopy = buildFooterCopy(footerJson)
+
   return {
     siteId: manifest.id,
     name: manifest.name,
@@ -378,7 +786,7 @@ function buildAppConfig({
       anchors: manifest.anchors,
     },
     logo: {
-      src: assetUrl(publicBase, manifest.brand.logo),
+      src: assetUrl(publicBase, toWebpRelativePath(manifest.brand.logo)),
       alt: manifest.brand.logoAlt ?? manifest.name.short,
       favicon: '/favicon.png',
     },
@@ -395,6 +803,11 @@ function buildAppConfig({
     descriptions: {
       ...descriptions,
       dominions: dominionsCopy,
+      gameModel: gameModelCopy,
+      pathways: pathwaysCopy,
+      faq: faqCopy,
+      finalCta: finalCtaCopy,
+      footer: footerCopy,
     },
     portal,
     credits,
@@ -426,7 +839,7 @@ function buildAppConfig({
   }
 }
 
-/** Map elemental domain → realm location id from game/locations.json. */
+/** Map game/domains.json id → game/locations.json location id (via location.domainId). */
 function buildLocationByDomain(locationsJson) {
   const locationByDomain = {}
   for (const loc of locationsJson.locations) {
@@ -435,19 +848,62 @@ function buildLocationByDomain(locationsJson) {
   return locationByDomain
 }
 
+async function ensureCardThumb(sharp, fullPath, thumbDest) {
+  if (await pathExists(thumbDest)) return
+  await mkdir(path.dirname(thumbDest), { recursive: true })
+  await buildThumb(sharp, fullPath, thumbDest)
+}
+
+async function writeFrontendCardCatalog(out, generatedAt, totalCards, frontendCards) {
+  await writeCardsCatalogJson(out, {
+    generatedAt,
+    scope: 'frontend_showcase',
+    totalCards,
+    cards: frontendCards,
+  })
+}
+
+/** Drop stale local card art — only showcase slugs ship to the frontend VPS. */
+async function pruneLocalCardArt(out, showcaseSlugs) {
+  for (const dir of [out.dataThumbs, out.dataFull]) {
+    let entries = []
+    try {
+      entries = await readdir(dir)
+    } catch {
+      continue
+    }
+    for (const name of entries) {
+      const slug = name.replace(/\.(webp|png)$/i, '')
+      if (!showcaseSlugs.has(slug)) {
+        await unlink(path.join(dir, name)).catch(() => {})
+        continue
+      }
+      if (dir === out.dataFull && /\.png$/i.test(name)) {
+        await unlink(path.join(dir, name)).catch(() => {})
+      }
+    }
+  }
+}
+
 async function compileCards({
   metadata,
   paths,
   out,
   projectId,
+  manifest,
   locationsJson,
   featuredByLocation,
+  collectionJson,
+  domainIds,
   domainGlow,
   domainToCategory,
   supabaseUrl,
   shouldUpload,
+  forceUpload,
 }) {
+  const cardSlugMigration = manifest?.cardSlugMigration ?? null
   const locationByDomain = buildLocationByDomain(locationsJson)
+  const showcaseSlugs = buildFrontendShowcaseSlugs(featuredByLocation, collectionJson)
   const cardAssets = (metadata.assets ?? []).filter(
     (a) => a.kind === 'card' && a.stats && a.ability,
   )
@@ -463,26 +919,44 @@ async function compileCards({
   for (const asset of cardAssets) {
     const slug = asset.slug
     const domain = asset.domain
+    if (!domain) {
+      throw new Error(`cards.json: "${slug}" missing domain (must match game/domains.json id)`)
+    }
+    if (!domainIds.has(domain)) {
+      throw new Error(
+        `cards.json: "${slug}" domain "${domain}" not in game/domains.json — registered: ${[...domainIds].join(', ')}`,
+      )
+    }
+
     const localPath = await resolveAssetFile(paths, asset.path)
+    const isShowcase = showcaseSlugs.has(slug)
+    const priceCents = resolvePriceCents(asset)
 
     const useWebp = Boolean(sharp)
     const thumbExt = useWebp ? 'webp' : 'png'
+    const artStorageRel = useWebp ? toWebpRelativePath(asset.path) : asset.path
     const { storagePath, thumbStoragePath } = siteStoragePaths(
       projectId,
-      asset.path,
+      artStorageRel,
       domain,
       slug,
       thumbExt,
     )
     const thumbLocalRel = `/data/card-thumbs/${slug}.${thumbExt}`
     const thumbDest = path.join(out.dataThumbs, `${slug}.${thumbExt}`)
+    const fullExt = useWebp ? 'webp' : 'png'
+    const fullDest = path.join(out.dataFull, `${slug}.${fullExt}`)
 
-    if (localPath) {
+    if (localPath && isShowcase) {
       await buildThumb(sharp, localPath, thumbDest)
-      await copyFile(localPath, path.join(out.dataFull, `${slug}.png`))
+      if (useWebp) {
+        await buildFullArt(sharp, localPath, fullDest)
+      } else {
+        await copyFile(localPath, fullDest)
+      }
     }
 
-    const fullLocalRel = `/data/card-full/${slug}.png`
+    const fullLocalRel = `/data/card-full/${slug}.${fullExt}`
 
     const record = {
       id: slug,
@@ -499,13 +973,13 @@ async function compileCards({
         text: asset.ability.text,
       },
       glowColor: domainGlow[domain],
+      priceCents,
+      sourceAssetPath: asset.path,
       storage_bucket: BUCKET,
       storage_path: storagePath,
       thumb_storage_path: thumbStoragePath,
-      thumbUrl: thumbLocalRel,
-      artUrl: supabaseUrl
-        ? storagePublicUrl(supabaseUrl, BUCKET, storagePath)
-        : fullLocalRel,
+      thumbUrl: isShowcase ? thumbLocalRel : '',
+      artUrl: isShowcase ? fullLocalRel : '',
     }
 
     catalog.push(record)
@@ -519,19 +993,17 @@ async function compileCards({
   })
 
   const generatedAt = new Date().toISOString()
+  const frontendCatalog = catalog.filter((card) => showcaseSlugs.has(card.slug))
 
-  await writeFile(
-    path.join(out.data, 'cards-catalog.json'),
-    JSON.stringify({ generatedAt, cards: catalog }, null, 2),
+  await writeFrontendCardCatalog(out, generatedAt, catalog.length, frontendCatalog)
+  await writeLandingCardsJson(out, { generatedAt, cards: landingCards })
+  await pruneLocalCardArt(out, showcaseSlugs)
+
+  console.log(
+    `Cards: ${catalog.length} total, ${frontendCatalog.length} frontend showcase, ${landingCards.length} landing featured`,
   )
-  await writeFile(
-    path.join(out.data, 'landing-cards.json'),
-    JSON.stringify({ generatedAt, cards: landingCards }, null, 2),
-  )
 
-  console.log(`Cards: ${catalog.length} catalog, ${landingCards.length} landing featured`)
-
-  if (!shouldUpload) return { catalog, bySlug, generatedAt, landingCards }
+  if (!shouldUpload) return { catalog, bySlug, generatedAt, landingCards, frontendCatalog }
 
   const { supabaseUrl: url, serviceKey } = resolveSupabaseAdminEnv()
   if (!url || !serviceKey) {
@@ -539,12 +1011,10 @@ async function compileCards({
   }
 
   const supabase = createAdminClient(url, serviceKey)
+  const uploadStats = { skip: 0, move: 0, upload: 0, removedRaster: 0 }
 
   for (const card of catalog) {
-    const localRel = card.storage_path.startsWith(`${projectId}/`)
-      ? card.storage_path.slice(projectId.length + 1)
-      : card.storage_path
-    const fullPath = await resolveAssetFile(paths, localRel)
+    const fullPath = await resolveAssetFile(paths, card.sourceAssetPath)
     if (!fullPath) {
       console.warn(`Skip upload (no file): ${card.slug}`)
       continue
@@ -552,38 +1022,73 @@ async function compileCards({
 
     const thumbExt = card.thumb_storage_path.endsWith('.webp') ? 'webp' : 'png'
     const thumbPath = path.join(out.dataThumbs, `${card.slug}.${thumbExt}`)
+    await ensureCardThumb(sharp, fullPath, thumbPath)
 
-    const fullBuf = await readFile(fullPath)
-    const { error: fullErr } = await supabase.storage
-      .from(BUCKET)
-      .upload(card.storage_path, fullBuf, { contentType: 'image/png', upsert: true })
-    if (fullErr) throw new Error(`Upload full ${card.slug}: ${fullErr.message}`)
-
-    if (await pathExists(thumbPath)) {
-      const thumbBuf = await readFile(thumbPath)
-      const thumbContentType = thumbExt === 'webp' ? 'image/webp' : 'image/png'
-      const { error: thumbErr } = await supabase.storage
-        .from(BUCKET)
-        .upload(card.thumb_storage_path, thumbBuf, {
-          contentType: thumbContentType,
-          upsert: true,
-        })
-      if (thumbErr) throw new Error(`Upload thumb ${card.slug}: ${thumbErr.message}`)
+    const fullArtExt = card.storage_path.endsWith('.webp') ? 'webp' : 'png'
+    const fullArtPath = path.join(out.dataFull, `${card.slug}.${fullArtExt}`)
+    if (fullArtExt === 'webp') {
+      await buildFullArt(sharp, fullPath, fullArtPath)
+    } else {
+      await mkdir(path.dirname(fullArtPath), { recursive: true })
+      await copyFile(fullPath, fullArtPath)
     }
 
-    card.artUrl = storagePublicUrl(url, BUCKET, card.storage_path)
-    card.thumbUrl = storagePublicUrl(url, BUCKET, card.thumb_storage_path)
+    const legacyFull = legacyFullStoragePath(projectId, card.slug, cardSlugMigration)
+    const legacyRasterPaths = legacyFull ? [legacyFull] : []
+    const fullResult =
+      fullArtExt === 'webp'
+        ? await ensureFullArtStorage(supabase, {
+            bucket: BUCKET,
+            targetWebpPath: card.storage_path,
+            legacyRasterPaths,
+            webpLocalPath: fullArtPath,
+            force: forceUpload,
+          })
+        : await ensureStorageObject(supabase, {
+            bucket: BUCKET,
+            targetPath: card.storage_path,
+            legacyPath: legacyFull,
+            localPath: fullArtPath,
+            contentType: 'image/png',
+            force: forceUpload,
+          })
+    card.storage_path = fullResult.storagePath
+    uploadStats[fullResult.action] += 1
+    uploadStats.removedRaster += fullResult.removedRaster ?? 0
+
+    const legacyThumb = legacyThumbStoragePath(
+      projectId,
+      card.slug,
+      card.domain,
+      thumbExt,
+      cardSlugMigration,
+    )
+    const thumbResult = await ensureStorageObject(supabase, {
+      bucket: BUCKET,
+      targetPath: card.thumb_storage_path,
+      legacyPath: legacyThumb,
+      localPath: thumbPath,
+      contentType: thumbExt === 'webp' ? 'image/webp' : 'image/png',
+      force: forceUpload,
+    })
+    card.thumb_storage_path = thumbResult.storagePath
+    uploadStats[thumbResult.action] += 1
+
+    if (showcaseSlugs.has(card.slug)) {
+      applyShowcaseLocalArt(card)
+    } else {
+      card.artUrl = storagePublicUrl(url, BUCKET, card.storage_path)
+      card.thumbUrl = storagePublicUrl(url, BUCKET, card.thumb_storage_path)
+    }
   }
 
-  await writeFile(
-    path.join(out.data, 'cards-catalog.json'),
-    JSON.stringify({ generatedAt, cards: catalog }, null, 2),
-  )
-  await writeFile(
-    path.join(out.data, 'landing-cards.json'),
-    JSON.stringify({ generatedAt, cards: landingCards }, null, 2),
-  )
+  syncLandingCardsFromCatalog(landingCards, bySlug)
 
+  const frontendAfterUpload = catalog.filter((card) => showcaseSlugs.has(card.slug))
+  await writeFrontendCardCatalog(out, generatedAt, catalog.length, frontendAfterUpload)
+  await writeLandingCardsJson(out, { generatedAt, cards: landingCards })
+
+  let dbMigrated = 0
   for (const card of catalog) {
     const row = {
       site_id: projectId,
@@ -603,38 +1108,28 @@ async function compileCards({
       storage_path: card.storage_path,
       thumb_storage_path: card.thumb_storage_path,
       glow_color: card.glowColor,
+      price_cents: card.priceCents,
       published: true,
       updated_at: new Date().toISOString(),
     }
 
-    const { data: upserted, error } = await supabase
-      .from('cards')
-      .upsert(row, { onConflict: 'site_id,slug' })
-      .select('id')
-      .single()
-
-    if (error) throw new Error(`DB upsert ${card.slug}: ${error.message}`)
-    card.dbId = upserted.id
-    bySlug.set(card.slug, { ...card, dbId: upserted.id })
+    const { id, migrated } = await upsertCardRow(supabase, projectId, row, cardSlugMigration)
+    if (migrated) dbMigrated += 1
+    card.dbId = id
+    bySlug.set(card.slug, { ...card, dbId: id })
   }
 
   for (const [locationId, slug] of Object.entries(featuredByLocation)) {
     const card = bySlug.get(slug)
     if (!card?.dbId) continue
-    const { error } = await supabase.from('location_featured_cards').upsert(
-      {
-        site_id: projectId,
-        location_id: locationId,
-        card_id: card.dbId,
-        updated_at: new Date().toISOString(),
-      },
-      { onConflict: 'site_id,location_id' },
-    )
-    if (error) throw new Error(`Featured ${locationId}: ${error.message}`)
+    await upsertFeaturedCard(supabase, projectId, locationId, card.dbId)
   }
 
-  console.log('Uploaded art + synced Postgres (cards, location_featured_cards).')
-  return { catalog, bySlug, generatedAt, landingCards }
+  console.log(
+    `Storage: ${uploadStats.upload} uploaded, ${uploadStats.skip} skipped, ${uploadStats.move} moved, ${uploadStats.removedRaster} legacy raster removed. DB: ${dbMigrated} slug migrations.`,
+  )
+  console.log('Synced Postgres (cards, location_featured_cards).')
+  return { catalog, bySlug, generatedAt, landingCards, frontendCatalog: frontendAfterUpload }
 }
 
 function validateProject(manifest, domainsJson, locationsJson, categories, portal) {
@@ -658,16 +1153,26 @@ function validateProject(manifest, domainsJson, locationsJson, categories, porta
   }
 
   const domainIds = new Set(domainsJson.domains.map((d) => d.id))
+  const legacyElementalDomainIds = new Set(['terra', 'aqua', 'ignis', 'zephyr'])
+  const realmDomainIds = new Set(['kronos', 'thalassa', 'infernus', 'anemos'])
+  const usesRealmDomains = domainsJson.domains.some((d) => realmDomainIds.has(d.id))
   const locationIds = new Set()
 
   for (const loc of locationsJson.locations) {
     if (!loc.id || !loc.name) {
       throw new Error(`locations.json: each location needs id and name`)
     }
-    if (domainIds.has(loc.id)) {
-      throw new Error(
-        `locations.json: location id "${loc.id}" is a domain id — use realm ids (e.g. kronos, thalassa), not terra/aqua/ignis/zephyr`,
-      )
+    if (usesRealmDomains) {
+      if (legacyElementalDomainIds.has(loc.id)) {
+        throw new Error(
+          `locations.json: location id "${loc.id}" is a legacy elemental id — use realm ids (kronos, thalassa, infernus, anemos)`,
+        )
+      }
+      if (legacyElementalDomainIds.has(loc.domainId)) {
+        throw new Error(
+          `locations.json: location "${loc.id}" references legacy elemental domain "${loc.domainId}" — use realm domain ids (kronos, thalassa, infernus, anemos)`,
+        )
+      }
     }
     if (!domainIds.has(loc.domainId)) {
       throw new Error(
@@ -687,9 +1192,9 @@ function validateProject(manifest, domainsJson, locationsJson, categories, porta
           `categories.json: category "${cat.id}" references unknown location "${locId}"`,
         )
       }
-      if (domainIds.has(locId)) {
+      if (usesRealmDomains && legacyElementalDomainIds.has(locId)) {
         throw new Error(
-          `categories.json: locationIds must use realm ids (kronos, …), not domain ids (terra, …)`,
+          `categories.json: locationIds must use realm ids (kronos, thalassa, infernus, anemos), not legacy elemental ids (terra, aqua, ignis, zephyr)`,
         )
       }
     }
@@ -699,6 +1204,7 @@ function validateProject(manifest, domainsJson, locationsJson, categories, porta
 async function main() {
   const projectId = resolveProjectId()
   const shouldUpload = process.argv.includes('--upload')
+  const forceUpload = process.argv.includes('--force-upload')
   const paths = projectPaths(projectId)
 
   console.log(`[compile] Project: ${projectId}`)
@@ -713,6 +1219,12 @@ async function main() {
   const ui = await readJson(paths.ui, 'theme/ui')
   const descriptions = await readJson(paths.descriptions, 'copy/descriptions')
   const dominionsJson = await readJsonOptional(paths.dominions)
+  const gamemodelJson = await readJsonOptional(paths.gamemodel)
+  const collectionJson = await readJsonOptional(paths.collection)
+  const pathwaysJson = await readJsonOptional(paths.pathways)
+  const faqJson = await readJsonOptional(paths.faq)
+  const finalctaJson = await readJsonOptional(paths.finalcta)
+  const footerJson = await readJsonOptional(paths.footer)
   const seoJson = await readJsonOptional(paths.seo)
   const portal = await readJson(paths.portal, 'portal/sections')
   const credits = await readJson(paths.credits, 'credits')
@@ -729,9 +1241,14 @@ async function main() {
 
   const featuredByLocation = buildFeaturedByLocation(locationsJson)
 
-  const { domainToCategory, domainGlow } = buildDomainMaps(domainsJson)
+  const { domainToCategory, domainGlow, domainLabels } = buildDomainMaps(domainsJson)
+  const domainIds = new Set(domainsJson.domains.map((d) => d.id))
   const sharp = await loadSharp()
-  const { publicBase, metadata } = await copyProjectAssets(paths, manifest, out)
+  const { publicBase, metadata } = await copyProjectAssets(paths, manifest, out, sharp)
+  await copyGamemodelAssets(paths, gamemodelJson, out, sharp)
+  await copyCollectionAssets(paths, collectionJson, out, sharp)
+  await copyPathwaysAssets(paths, pathwaysJson, out, sharp)
+  await copyFinalCtaAssets(paths, finalctaJson, out, sharp)
   await buildBrandSeoAssets({ sharp, paths, manifest, seoJson, out })
   if (metadata.source === 'split') {
     console.log('Metadata: split (game/cards.json + game/scenes.json + game/keywords.json)')
@@ -740,9 +1257,7 @@ async function main() {
   }
 
   const cdnBase = manifest.assets?.cdnBase ?? null
-  const { supabaseUrl } = shouldUpload
-    ? resolveSupabaseAdminEnv()
-    : { supabaseUrl: process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_PUBLIC_URL || '' }
+  const { supabaseUrl } = shouldUpload ? resolveSupabaseAdminEnv() : { supabaseUrl: '' }
 
   const appConfig = buildAppConfig({
     manifest,
@@ -750,6 +1265,11 @@ async function main() {
     ui,
     descriptions,
     dominionsJson,
+    gamemodelJson,
+    pathwaysJson,
+    faqJson,
+    finalctaJson,
+    footerJson,
     seoJson,
     portal,
     credits,
@@ -763,24 +1283,31 @@ async function main() {
     cdnBase,
   })
 
-  await compileCards({
+  const { bySlug } = await compileCards({
     metadata,
     paths,
     out,
     projectId,
+    manifest,
     locationsJson,
     featuredByLocation,
+    collectionJson,
+    domainIds,
     domainGlow,
     domainToCategory,
     supabaseUrl,
     shouldUpload,
+    forceUpload,
   })
+
+  appConfig.descriptions.collection = buildCollectionCopy(collectionJson, publicBase, bySlug)
 
   const gameConfig = {
     projectId,
     domains: domainsJson.domains,
     domainToCategory,
     domainGlow,
+    domainLabels,
     featuredByLocation,
     keywords: metadata.keywords_glossary ?? {},
     locationOrder: locationsJson.locations.map((l) => l.id),

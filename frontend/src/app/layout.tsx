@@ -3,6 +3,7 @@ import { appConfig } from '@/config'
 import { getArenaBackground, getLobbyBackground } from '@/config/selectors'
 import { buildSiteMetadata } from '@/lib/seo/siteMetadata'
 import { AuthProvider } from '@/components/providers/AuthProvider'
+import { CookieConsentProvider } from '@/components/cookies/CookieConsentProvider'
 import { ThemeProvider } from '@/components/providers/ThemeProvider'
 import { rootFontClassName } from '@/lib/fonts'
 import '@/index.css'
@@ -32,17 +33,11 @@ export default function RootLayout({
       }
       suppressHydrationWarning
     >
-      <head>
-        <link
-          rel="preload"
-          href={appConfig.arts.introVideo}
-          as="video"
-          type="video/mp4"
-        />
-      </head>
       <body suppressHydrationWarning>
         <ThemeProvider>
-          <AuthProvider>{children}</AuthProvider>
+          <AuthProvider>
+            <CookieConsentProvider>{children}</CookieConsentProvider>
+          </AuthProvider>
         </ThemeProvider>
       </body>
     </html>

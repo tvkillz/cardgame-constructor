@@ -1,0 +1,32 @@
+{
+  "title": "Game Model",
+  "description": "Experience strategic depth through deck-building mastery, turn-based tactical warfare, and competitive progression.",
+  "pillars": [
+    {
+      "id": "tactical-battles",
+      "title": "Tactical Battles",
+      "description": "Plan every move carefully in turn-based duels where timing, positioning, and spell synergy decide victory.",
+      "image": "gamemodel/tactical-battles.webp",
+      "glowColor": "#4ec8ff"
+    },
+    {
+      "id": "collectible-cards",
+      "title": "Collectible Cards",
+      "description": "Unlock, collect, and build with rare cards, powerful abilities, and unique combinations across multiple playstyles.",
+      "image": "gamemodel/collectible-cards.webp",
+      "glowColor": "#a855f7"
+    },
+    {
+      "id": "ranked-climb",
+      "title": "Ranked Climb",
+      "description": "Rise through competitive ladders, refine your strategy, and prove your mastery in the Kingdom of Arcane.",
+      "image": "gamemodel/ranked-climb.webp",
+      "glowColor": "#f3c74f"
+    }
+  ],
+  "tags": [
+    { "id": "deck-building", "label": "Deck-Building Strategy" },
+    { "id": "class-champions", "label": "Class-Based Champions" },
+    { "id": "replayable-depth", "label": "Replayable Depth" }
+  ]
+}

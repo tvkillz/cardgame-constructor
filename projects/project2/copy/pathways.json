@@ -1,0 +1,76 @@
+{
+  "title": "Collect. Trade. Conquer.",
+  "description": "Voidborn rewards those who master the art of collection and strategy. Build your power through every card you acquire, every trade you make, and every deck you forge across the elemental realms.",
+  "features": [
+    {
+      "id": "expand-collection",
+      "title": "Expand Your Collection",
+      "description": "Continuously grow your arsenal of voidborn cards across four dominions, seasonal drops, and exclusive expansions.",
+      "image": "cta1/expand-collection.webp",
+      "glowColor": "#c9a227"
+    },
+    {
+      "id": "buy-cards",
+      "title": "Buy Individual Cards",
+      "description": "Target exactly the cards you need. Browse the portal market and acquire specific units to sharpen your strategy.",
+      "image": "cta1/buy-cards.webp",
+      "glowColor": "#4ec8ff"
+    },
+    {
+      "id": "sealed-vaults",
+      "title": "Sealed Vaults",
+      "description": "Crack open void vaults and discover their secrets. Every sealed pack holds the promise of a game-changing pull.",
+      "image": "cta1/sealed-vaults.webp",
+      "glowColor": "#e85d5d"
+    },
+    {
+      "id": "discover-rare",
+      "title": "Discover Rare & Legendary",
+      "description": "Unearth mythic-tier champions and legendary abilities with devastating power that can turn the tide of battle.",
+      "image": "cta1/discover-rare.webp",
+      "glowColor": "#9b59ff"
+    },
+    {
+      "id": "sell-cards",
+      "title": "Sell Your Cards",
+      "description": "Turn duplicates and unwanted cards into credits. List them on the market for other players to acquire.",
+      "image": "cta1/sell-cards.webp",
+      "glowColor": "#f3c74f"
+    },
+    {
+      "id": "shape-strategy",
+      "title": "Shape Your Strategy",
+      "description": "Craft and refine deadly deck builds. Experiment with synergies, counters, and elemental combinations.",
+      "image": "cta1/shape-strategy.webp",
+      "glowColor": "#a855f7"
+    }
+  ],
+  "tiers": [
+    {
+      "id": "uncommon",
+      "rarityLabel": "UNCOMMON",
+      "title": "Tactical Depth",
+      "description": "Every collection needs its backbone. Uncover versatile units, key synergy pieces, and battle-tested champions that bridge the gap between a starter deck and a masterclass strategy.",
+      "glowColor": "#5eead4"
+    },
+    {
+      "id": "rare",
+      "rarityLabel": "RARE",
+      "title": "Rare Discoveries",
+      "description": "Every vault is a portal to the unknown. Pull striking foils, coveted variants, and exclusive alternate-art cards that define your identity as a collector.",
+      "glowColor": "#9b59ff"
+    },
+    {
+      "id": "epic",
+      "rarityLabel": "EPIC",
+      "title": "Epic Synergy",
+      "description": "The arena favors the bold. Unleash devastating combos, high-tier elemental engines, and game-changing abilities that can turn the tide of battle in a single turn.",
+      "glowColor": "#c9a227"
+    }
+  ],
+  "marketCta": {
+    "description": "Ready to begin your collection? Over 10,000+ cards await in the market.",
+    "buttonLabel": "Enter The Market",
+    "route": "portalMarket"
+  }
+}

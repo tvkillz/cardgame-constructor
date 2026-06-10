@@ -35,6 +35,12 @@ function cleanNextOutput() {
     fs.rmSync(nextDir, { recursive: true, force: true })
     console.log(`[build:web] Cleared .build/${projectId}/.next`)
   }
+
+  const webpackCacheDir = path.join(root, '.build', projectId, '.webpack-cache')
+  if (fs.existsSync(webpackCacheDir)) {
+    fs.rmSync(webpackCacheDir, { recursive: true, force: true })
+    console.log(`[build:web] Cleared .build/${projectId}/.webpack-cache`)
+  }
 }
 
 function markHybridProduction() {

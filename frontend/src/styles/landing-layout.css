@@ -19,6 +19,8 @@
   --dominions-card-min: 260px;
   --dominions-breakpoint-2col: 640px;
   --dominions-breakpoint-4col: 1150px;
+  --locations-bg-bleed-top: clamp(4rem, 12vw, 9rem);    /* into Hero */
+  --locations-bg-bleed-bottom: clamp(4rem, 12vw, 9rem); /* into Dominions */
 }
 
 @media (min-width: 768px) {

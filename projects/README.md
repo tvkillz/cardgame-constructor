@@ -40,7 +40,7 @@ Location **lore and wiring** stay in `game/locations.json`. `scenes.json` only l
 
 Never use domain ids (`terra`, `aqua`, …) as realm **location** ids in Postgres or featured mappings. Each row in `locations.json` needs `id`, `name`, `domainId`, and `featuredCardSlug`.
 
-**`cards` table:** `domain` = elemental type (`terra`, `aqua`, …) for mechanics and art paths. `location_id` = realm id (`kronos`, `thalassa`, …) from `locations.json` via `domainId`. Run `backend/volumes/db/locations-id-migration.sql` on existing DBs, then `PROJECT=voidborn npm run upload:site` to refresh rows from projects.
+**`cards` table:** `domain` = id from `game/domains.json` (per site: `kronos` for voidborn, `terra` for project2, …). `location_id` = realm id from `locations.json` (where `location.domainId` matches the card's domain). Optional `price_cents` for shop. Run `backend/volumes/db/cards-schema-migration.sql` on existing DBs, then `PROJECT={id} npm run upload:site` to sync from projects.
 
 ## Site management scripts
 
@@ -76,9 +76,11 @@ PROJECT=project2 npm run upload:site
 npm run upload:all                  # upload every site
 ```
 
-Card art uploads to Supabase storage under **`{siteId}/cards/...`** and **`{siteId}/thumbs/...`** so sites never overwrite each other's files.
+Card art uploads to Supabase storage under **`{siteId}/cards/...`** (WebP) and **`{siteId}/thumbs/...`** (WebP). Source files in `assets/cards/` may be PNG/JPEG; `upload:site` / `upload:all` converts on upload and removes legacy raster objects. Landing assets (hero, pathways, …) are converted at **compile** time into `.build/{id}/assets/` — they do not go through the cards bucket.
 
-**New backend server:** storage is empty until you run `npm run upload:all` — see `notes/storage-upload.md`.
+Sites never overwrite each other's files (`{siteId}/` prefix). **imgproxy is not required** for card delivery.
+
+**New backend server:** storage is empty until you run `npm run upload:all` — see `notes/storage-upload.md`. **Adding cards / shop products:** see `notes/cards-and-products.md`.
 
 **Auth emails** use plus-addressing: `user+voidborn@domain` (not `::`). Rebuild all pm2 sites after changing auth code.
 

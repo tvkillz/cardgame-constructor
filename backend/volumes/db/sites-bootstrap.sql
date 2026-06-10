@@ -161,6 +161,22 @@ update public.location_featured_cards set site_id = 'voidborn' where site_id is 
 alter table public.location_featured_cards alter column site_id set not null;
 create index if not exists location_featured_cards_site_idx on public.location_featured_cards (site_id);
 
+alter table public.location_featured_cards drop constraint if exists location_featured_cards_pkey;
+create unique index if not exists location_featured_cards_site_location_idx
+  on public.location_featured_cards (site_id, location_id);
+do $$
+begin
+  if not exists (
+    select 1 from pg_constraint
+    where conname = 'location_featured_cards_pkey'
+      and conrelid = 'public.location_featured_cards'::regclass
+  ) then
+    alter table public.location_featured_cards
+      add constraint location_featured_cards_pkey
+      primary key using index location_featured_cards_site_location_idx;
+  end if;
+end $$;
+
 -- Legacy card paths: thumbs/domain/file → {site_id}/thumbs/domain/file
 update public.cards
 set storage_path = site_id || '/' || storage_path

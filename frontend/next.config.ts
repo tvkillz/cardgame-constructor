@@ -69,7 +69,7 @@ function createNextConfig(): NextConfig {
       SITE_HYBRID: hybridActive ? '1' : (process.env.SITE_HYBRID ?? '0'),
       NEXT_PUBLIC_SITE_HYBRID: hybridActive ? '1' : (process.env.NEXT_PUBLIC_SITE_HYBRID ?? '0'),
     },
-    webpack(config) {
+    webpack(config, { dev }) {
       const aliases = projectWebpackAliases(projectId, root)
       for (const key of Object.keys(config.resolve.alias)) {
         if (key === '@project/bundle' || key.startsWith('@project/')) {
@@ -78,8 +78,11 @@ function createNextConfig(): NextConfig {
       }
       Object.assign(config.resolve.alias, aliases)
 
-      if (config.cache && typeof config.cache === 'object') {
+      // Persistent cache must not survive a cleared distDir — stale graphs cause missing chunk errors.
+      if (dev && config.cache && typeof config.cache === 'object') {
         config.cache.cacheDirectory = path.join(root, '.build', projectId, '.webpack-cache')
+      } else {
+        config.cache = false
       }
 
       return config

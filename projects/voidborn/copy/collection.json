@@ -1,0 +1,21 @@
+{
+  "title": "The Voidborn Archive",
+  "description": "Every card is a tactical choice — forged across elemental realms, tuned for competitive play, and expanded every month. Explore a living collection built for deck architects and arena veterans alike.",
+  "backgroundImage": "cities/aqua/aqua_city_03_sirens_hollow.png",
+  "stats": [
+    { "id": "catalog", "value": "600+", "label": "Unique Cards" },
+    { "id": "rarity", "value": "4", "label": "Rarity Tiers" },
+    { "id": "strategies", "value": "∞", "label": "Deck Strategies" },
+    { "id": "monthly", "value": "25+", "label": "New Cards Monthly" }
+  ],
+  "cardSlugs": [
+    "kronos_card_04_petrified_colossus",
+    "thalassa_card_02_abyss_devourer",
+    "infernus_card_01_fire_smith_devastator",
+    "anemos_card_03_cloud_colossus",
+    "kronos_card_05_mossfang_ravager",
+    "thalassa_card_04_blackwater_siren",
+    "infernus_card_05_chain_lord",
+    "anemos_card_02_hurricane_weaver"
+  ]
+}

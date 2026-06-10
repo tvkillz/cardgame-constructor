@@ -39,7 +39,7 @@ export const Game: React.FC<Props> = ({
 }) => {
   const { playerName } = useAuth();
   const opponentName = appConfig.theme.player.opponentName;
-  const catalog = useCardCatalog();
+  const { cards: catalog } = useCardCatalog();
   const {
     state: match,
     booting,

@@ -2,7 +2,7 @@ import type { BoardUnit, MatchCardInstance, MatchState, MatchSide, FreezeEvent }
 
 export const FREEZE_PROC_CHANCE = 0.5
 
-const FREEZE_SLUGS = new Set(['aqua_card_01_tidebound_priestess'])
+const FREEZE_SLUGS = new Set(['thalassa_card_01_tidebound_priestess'])
 
 export function unitHasKeyword(unit: MatchCardInstance, keyword: string): boolean {
   const keywords = unit.display?.keywords ?? []

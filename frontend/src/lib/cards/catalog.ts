@@ -16,6 +16,8 @@ type CompiledCard = CardRecord & {
 }
 
 function withStorageUrls(card: CompiledCard): CardRecord {
+  // compile-project.mjs already sets thumbUrl/artUrl (local /data/ or CDN after --upload).
+  if (card.thumbUrl && card.artUrl) return card
   if (!card.storage_path || !card.thumb_storage_path) return card
   const { thumbUrl, artUrl } = resolveCardArtUrls({
     storage_bucket: card.storage_bucket,

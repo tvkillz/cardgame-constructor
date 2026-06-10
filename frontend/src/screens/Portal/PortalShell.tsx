@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import {
   appConfig,
   formatCredits,
@@ -12,6 +12,7 @@ import type { PortalSectionConfig } from '@/config/schema'
 import PortalAuthGate from '@/components/auth/PortalAuthGate'
 import PurchaseCreditsModal from '@/components/credits/PurchaseCreditsModal'
 import { useAuth } from '@/components/providers/AuthProvider'
+import { prefetchCardCatalog } from '@/hooks/useCardCatalog'
 import { useWallet } from '@/hooks/useWallet'
 import { Button } from '@/components/ui/Button/Button'
 import './PortalShell.css'
@@ -38,6 +39,10 @@ export default function PortalShell({ children }: { children: React.ReactNode })
 
   const { balanceCredits, loading: walletLoading, refresh: refreshWallet } = useWallet()
   const credits = walletLoading ? theme.player.defaultCredits : balanceCredits
+
+  useEffect(() => {
+    void prefetchCardCatalog()
+  }, [])
 
   return (
     <PortalAuthGate>

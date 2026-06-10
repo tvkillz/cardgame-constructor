@@ -6,31 +6,54 @@ import { appConfig, LOCATION_SLIDES } from '@/config'
 const SLIDE_INTERVAL_MS = 6000
 const VIDEO_MIN_PLAY_MS = 8000
 
+function preloadSlide(url: string) {
+  const img = new Image()
+  img.src = url
+}
+
 export default function HeroMedia() {
+  const rootRef = useRef<HTMLDivElement>(null)
   const videoRef = useRef<HTMLVideoElement>(null)
   const transitionedRef = useRef(false)
   const [showVideo, setShowVideo] = useState(true)
   const [videoPlaying, setVideoPlaying] = useState(false)
   const [activeSlide, setActiveSlide] = useState(0)
   const [slidesVisible, setSlidesVisible] = useState(false)
+  const [isInView, setIsInView] = useState(true)
+
+  const slideCount = LOCATION_SLIDES.length
+  const activeImage = LOCATION_SLIDES[activeSlide]?.image ?? ''
+  const posterUrl = LOCATION_SLIDES[0]?.image ?? ''
 
   const transitionToSlides = useCallback(() => {
     if (transitionedRef.current) return
     transitionedRef.current = true
     setShowVideo(false)
     setSlidesVisible(true)
-  }, [])
+    preloadSlide(LOCATION_SLIDES[0]?.image ?? '')
+    if (slideCount > 1) {
+      preloadSlide(LOCATION_SLIDES[1]?.image ?? '')
+    }
+  }, [slideCount])
 
   useEffect(() => {
-    for (const slide of LOCATION_SLIDES) {
-      const img = new Image()
-      img.src = slide.image
-    }
+    const el = rootRef.current
+    if (!el) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        setIsInView(Boolean(entries[0]?.isIntersecting))
+      },
+      { threshold: 0.05 },
+    )
+
+    observer.observe(el)
+    return () => observer.disconnect()
   }, [])
 
   useEffect(() => {
     const video = videoRef.current
-    if (!video) return
+    if (!video || !isInView) return
 
     const minTimer = window.setTimeout(() => {
       if (!video.ended) transitionToSlides()
@@ -56,17 +79,33 @@ export default function HeroMedia() {
       video.removeEventListener('ended', onEnded)
       video.removeEventListener('playing', onPlaying)
     }
-  }, [transitionToSlides])
+  }, [transitionToSlides, isInView])
 
   useEffect(() => {
-    if (!slidesVisible) return
+    const video = videoRef.current
+    if (!video) return
+    if (isInView && showVideo) {
+      void video.play().catch(() => {})
+    } else {
+      video.pause()
+    }
+  }, [isInView, showVideo])
+
+  useEffect(() => {
+    if (!slidesVisible || !isInView || slideCount <= 1) return
 
     const interval = window.setInterval(() => {
-      setActiveSlide((prev) => (prev + 1) % LOCATION_SLIDES.length)
+      setActiveSlide((prev) => (prev + 1) % slideCount)
     }, SLIDE_INTERVAL_MS)
 
     return () => window.clearInterval(interval)
-  }, [slidesVisible])
+  }, [slidesVisible, isInView, slideCount])
+
+  useEffect(() => {
+    if (!slidesVisible || slideCount <= 1) return
+    const next = (activeSlide + 1) % slideCount
+    preloadSlide(LOCATION_SLIDES[next]?.image ?? '')
+  }, [activeSlide, slidesVisible, slideCount])
 
   const videoClassName = [
     'hero__video',
@@ -77,32 +116,30 @@ export default function HeroMedia() {
     .join(' ')
 
   return (
-    <>
+    <div ref={rootRef} className="hero__media-root">
       <video
         ref={videoRef}
         className={videoClassName}
         src={appConfig.arts.introVideo}
+        poster={posterUrl}
         autoPlay
         muted
         playsInline
-        preload="auto"
+        preload="metadata"
         loop={false}
       />
 
-      <div
-        className={`hero__slides${slidesVisible ? ' hero__slides--visible' : ''}`}
-      >
-        {LOCATION_SLIDES.map((slide, index) => (
+      {slidesVisible && activeImage ? (
+        <div className="hero__slides hero__slides--visible">
           <img
-            key={slide.id}
-            src={slide.image}
+            key={activeImage}
+            src={activeImage}
             alt=""
-            className={`hero__slide${
-              slidesVisible && index === activeSlide ? ' hero__slide--active' : ''
-            }`}
+            className="hero__slide hero__slide--active"
+            decoding="async"
           />
-        ))}
-      </div>
-    </>
+        </div>
+      ) : null}
+    </div>
   )
 }

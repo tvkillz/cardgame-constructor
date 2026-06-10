@@ -1,0 +1,53 @@
+{
+  "brand": {
+    "name": "Project Two",
+    "tagline": "A demo site for the universal game engine."
+  },
+  "legal": [
+    { "id": "terms", "label": "Terms & Conditions", "href": "/terms" },
+    { "id": "privacy", "label": "Privacy Policy", "href": "/privacy" },
+    { "id": "refund", "label": "Refund Policy", "href": "/refund-policy" },
+    { "id": "disclaimer", "label": "Disclaimer", "href": "/disclaimer" },
+    { "id": "cookies", "label": "Cookie Policy", "href": "/cookie-policy" }
+  ],
+  "contact": {
+    "companyName": "Demo Company Ltd",
+    "companyNumber": "00000000",
+    "address": "1 Example Street, London, England",
+    "email": "support@example.com"
+  },
+  "copyright": "© 2026 Project Two. All rights reserved.",
+  "subCopyright": "© 2026 Project Two. All rights reserved.",
+  "crafted": "Crafted with magic and strategy",
+  "cookieSettingsLabel": "Cookie Settings",
+  "cookies": {
+    "title": "We use cookies",
+    "intro": "We use cookies and similar technologies to ensure the proper operation of our website, improve performance, enhance security, and analyse usage. Some cookies are strictly necessary for the website to function, while others are used only with your consent. You can accept all cookies, reject non-essential cookies, or manage your preferences at any time.",
+    "policyNote": "For more information, please see our Cookie Policy.",
+    "consentNote": "By clicking \"Accept All\", you consent to the use of non-essential cookies.",
+    "manageIntro": "You can control how we use cookies. Some cookies are necessary and cannot be disabled.",
+    "categories": [
+      {
+        "id": "necessary",
+        "label": "Strictly Necessary Cookies",
+        "description": "These cookies are required for the website to function properly, including login, security, and payment processing.",
+        "required": true
+      },
+      {
+        "id": "functional",
+        "label": "Functional Cookies",
+        "description": "These cookies allow us to remember your preferences and improve your experience."
+      },
+      {
+        "id": "analytics",
+        "label": "Analytics Cookies",
+        "description": "These cookies help us understand how users interact with the website and improve performance."
+      }
+    ],
+    "acceptAll": "Accept All",
+    "rejectNonEssential": "Reject Non-Essential",
+    "managePreferences": "Manage Preferences",
+    "savePreferences": "Save Preferences",
+    "closeLabel": "Close"
+  }
+}

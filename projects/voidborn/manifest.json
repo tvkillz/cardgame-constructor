@@ -43,5 +43,13 @@
     "auth": true,
     "commerce": true,
     "requireSignInForPlay": true
+  },
+  "cardSlugMigration": {
+    "realmToLegacyElement": {
+      "kronos": "terra",
+      "thalassa": "aqua",
+      "infernus": "ignis",
+      "anemos": "zephyr"
+    }
   }
 }

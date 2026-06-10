@@ -92,6 +92,15 @@ async function resolveFile(segments: string[], request?: NextRequest): Promise<s
     if (!info.isFile()) return null
     return resolved
   } catch {
+    if (/\.png$/i.test(resolved)) {
+      const webpCandidate = resolved.replace(/\.png$/i, '.webp')
+      try {
+        const webpInfo = await stat(webpCandidate)
+        if (webpInfo.isFile()) return webpCandidate
+      } catch {
+        /* fall through */
+      }
+    }
     return null
   }
 }
@@ -110,7 +119,7 @@ export async function GET(
   const body = createReadStream(file)
   const headers = new Headers({
     'Content-Type': contentType(file),
-    'Cache-Control': 'public, max-age=3600',
+    'Cache-Control': 'public, max-age=604800, stale-while-revalidate=86400',
   })
 
   return new NextResponse(body as unknown as BodyInit, { status: 200, headers })

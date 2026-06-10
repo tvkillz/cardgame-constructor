@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 /**
- * Seed every site in registry over the Supabase API (storage + Postgres via REST).
+ * Seed every site in projects/registry.json over the Supabase API (storage + Postgres).
+ * Card PNG/JPEG sources are converted to WebP in Storage; legacy raster objects are removed.
+ * Does not require imgproxy — the app serves direct /object/public URLs.
  *
  * Usage (from frontend/):
  *   npm run upload:all

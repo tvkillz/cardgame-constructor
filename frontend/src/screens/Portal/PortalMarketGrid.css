@@ -1,3 +1,9 @@
+.portal-market-grid__loading {
+  padding: 2rem 0;
+  text-align: center;
+  color: var(--color-text-muted, rgba(255, 255, 255, 0.65));
+}
+
 .portal-market-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));

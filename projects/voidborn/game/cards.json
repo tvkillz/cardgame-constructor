@@ -1,10 +1,11 @@
 {
+  "_naming": "Slugs and paths use game/domains.json ids (kronos, thalassa, infernus, anemos). upload:site migrates legacy terra/aqua/ignis/zephyr storage + DB rows without re-uploading.",
   "cards": [
     {
       "title": "Granite Warden",
-      "slug": "terra_card_01_granite_warden",
+      "slug": "kronos_card_01_granite_warden",
       "category": "cards",
-      "domain": "terra",
+      "domain": "kronos",
       "kind": "card",
       "role": "Heavy Tank / Defender",
       "stats": {
@@ -20,16 +21,16 @@
         "name": "Bedrock Aegis",
         "text": "Ward. When this unit blocks, give an allied unit Ward until end of turn."
       },
-      "path": "cards/terra/terra_card_01_granite_warden.png",
+      "path": "cards/kronos/kronos_card_01_granite_warden.png",
       "source_file": "a_dramatic_fantasy_scene_a_colossal_stone_golem_g.png",
       "format": "3:4",
       "notes": ""
     },
     {
       "title": "Rootbound Druid",
-      "slug": "terra_card_02_rootbound_druid",
+      "slug": "kronos_card_02_rootbound_druid",
       "category": "cards",
-      "domain": "terra",
+      "domain": "kronos",
       "kind": "card",
       "role": "Support / Healer",
       "stats": {
@@ -44,16 +45,16 @@
         "name": "Verdant Mending",
         "text": "Regenerate 2. Give an allied unit +2 Health and Rooted until end of turn."
       },
-      "path": "cards/terra/terra_card_02_rootbound_druid.png",
+      "path": "cards/kronos/kronos_card_02_rootbound_druid.png",
       "source_file": "a_dark_fantasy_scene_with_a_towering_ancient_drui.png",
       "format": "3:4",
       "notes": ""
     },
     {
       "title": "Quarry Stalker",
-      "slug": "terra_card_03_quarry_stalker",
+      "slug": "kronos_card_03_quarry_stalker",
       "category": "cards",
-      "domain": "terra",
+      "domain": "kronos",
       "kind": "card",
       "role": "Assassin / Scout",
       "stats": {
@@ -69,16 +70,16 @@
         "name": "Stonefang Ambush",
         "text": "Stealth until this unit attacks. Charge. Deal 3 damage to a damaged enemy unit."
       },
-      "path": "cards/terra/terra_card_03_quarry_stalker.png",
+      "path": "cards/kronos/kronos_card_03_quarry_stalker.png",
       "source_file": "a_dark_moody_fantasy_concept_art_scene_a_rocky.png",
       "format": "3:4",
       "notes": ""
     },
     {
       "title": "Petrified Colossus",
-      "slug": "terra_card_04_petrified_colossus",
+      "slug": "kronos_card_04_petrified_colossus",
       "category": "cards",
-      "domain": "terra",
+      "domain": "kronos",
       "kind": "card",
       "role": "Siege Unit / Destroyer",
       "stats": {
@@ -93,16 +94,16 @@
         "name": "Earthshatter March",
         "text": "Siege 2. When this unit attacks a player, deal 2 damage to all enemy units."
       },
-      "path": "cards/terra/terra_card_04_petrified_colossus.png",
+      "path": "cards/kronos/kronos_card_04_petrified_colossus.png",
       "source_file": "a_dramatic_fantasy_scene_a_towering_stone_colossu.png",
       "format": "3:4",
       "notes": ""
     },
     {
       "title": "Mossfang Ravager",
-      "slug": "terra_card_05_mossfang_ravager",
+      "slug": "kronos_card_05_mossfang_ravager",
       "category": "cards",
-      "domain": "terra",
+      "domain": "kronos",
       "kind": "card",
       "role": "Fast Beast / Pressure Unit",
       "stats": {
@@ -118,16 +119,16 @@
         "name": "Mossfang Rush",
         "text": "Charge. Overwhelm."
       },
-      "path": "cards/terra/terra_card_05_mossfang_ravager.png",
+      "path": "cards/kronos/kronos_card_05_mossfang_ravager.png",
       "source_file": "a_dark_fantasy_scene_overall_a_massive_monstrous.png",
       "format": "3:4",
       "notes": ""
     },
     {
       "title": "Tidebound Priestess",
-      "slug": "aqua_card_01_tidebound_priestess",
+      "slug": "thalassa_card_01_tidebound_priestess",
       "category": "cards",
-      "domain": "aqua",
+      "domain": "thalassa",
       "kind": "card",
       "role": "Mage / Control",
       "stats": {
@@ -142,16 +143,16 @@
         "name": "Tidebind",
         "text": "Freeze an enemy unit until end of turn. Draw a card if it was already damaged."
       },
-      "path": "cards/aqua/aqua_card_01_tidebound_priestess.png",
+      "path": "cards/thalassa/thalassa_card_01_tidebound_priestess.png",
       "source_file": "a_dark_fantasy_underwater_scene_in_a_gothic_ocea.png",
       "format": "3:4",
       "notes": ""
     },
     {
       "title": "Abyss Devourer",
-      "slug": "aqua_card_02_abyss_devourer",
+      "slug": "thalassa_card_02_abyss_devourer",
       "category": "cards",
-      "domain": "aqua",
+      "domain": "thalassa",
       "kind": "card",
       "role": "Heavy Monster / Frontline",
       "stats": {
@@ -167,16 +168,16 @@
         "name": "Abyssal Hunger",
         "text": "Taunt. When this unit survives combat, Devour the weakest enemy unit with 3 or less Health."
       },
-      "path": "cards/aqua/aqua_card_02_abyss_devourer.png",
+      "path": "cards/thalassa/thalassa_card_02_abyss_devourer.png",
       "source_file": "a_dark_cinematic_fantasy_illustration_scene_a_co.png",
       "format": "3:4",
       "notes": ""
     },
     {
       "title": "Coral Revenant",
-      "slug": "aqua_card_03_coral_revenant",
+      "slug": "thalassa_card_03_coral_revenant",
       "category": "cards",
-      "domain": "aqua",
+      "domain": "thalassa",
       "kind": "card",
       "role": "Undead / Debuff",
       "stats": {
@@ -191,16 +192,16 @@
         "name": "Coral Dirge",
         "text": "Reborn. Enemy units at this location get -1 Attack."
       },
-      "path": "cards/aqua/aqua_card_03_coral_revenant.png",
+      "path": "cards/thalassa/thalassa_card_03_coral_revenant.png",
       "source_file": "a_dark_fantasy_underwater_scene_overall_a_deep_b.png",
       "format": "3:4",
       "notes": ""
     },
     {
       "title": "Blackwater Siren",
-      "slug": "aqua_card_04_blackwater_siren",
+      "slug": "thalassa_card_04_blackwater_siren",
       "category": "cards",
-      "domain": "aqua",
+      "domain": "thalassa",
       "kind": "card",
       "role": "Assassin / Charm Unit",
       "stats": {
@@ -215,16 +216,16 @@
         "name": "Siren's Lure",
         "text": "Charm: redirect an enemy unit's next attack to a random valid target."
       },
-      "path": "cards/aqua/aqua_card_04_blackwater_siren.png",
+      "path": "cards/thalassa/thalassa_card_04_blackwater_siren.png",
       "source_file": "a_dark_atmospheric_fantasy_scene_an_underwater_r.png",
       "format": "3:4",
       "notes": ""
     },
     {
       "title": "Drowned Harpooner",
-      "slug": "aqua_card_05_drowned_harpooner",
+      "slug": "thalassa_card_05_drowned_harpooner",
       "category": "cards",
-      "domain": "aqua",
+      "domain": "thalassa",
       "kind": "card",
       "role": "Ranged / Hunter",
       "stats": {
@@ -239,16 +240,16 @@
         "name": "Depth Strike",
         "text": "Ranged. Deal 4 damage to the enemy unit with the lowest Health."
       },
-      "path": "cards/aqua/aqua_card_05_drowned_harpooner.png",
+      "path": "cards/thalassa/thalassa_card_05_drowned_harpooner.png",
       "source_file": "a_dark_atmospheric_fantasy_scene_in_deep_underwat.png",
       "format": "3:4",
       "notes": ""
     },
     {
       "title": "Fire-Smith Devastator",
-      "slug": "ignis_card_01_fire_smith_devastator",
+      "slug": "infernus_card_01_fire_smith_devastator",
       "category": "cards",
-      "domain": "ignis",
+      "domain": "infernus",
       "kind": "card",
       "role": "Heavy Tank / Siege Unit",
       "stats": {
@@ -264,16 +265,16 @@
         "name": "Forge Retaliation",
         "text": "Taunt. Armor 2. When damaged, deal 1 damage to all enemy units."
       },
-      "path": "cards/ignis/ignis_card_01_fire_smith_devastator.png",
+      "path": "cards/infernus/infernus_card_01_fire_smith_devastator.png",
       "source_file": "a_dramatic_fantasy_concept_art_scene_inside_a_dark.png",
       "format": "3:4",
       "notes": ""
     },
     {
       "title": "Lava-Born",
-      "slug": "ignis_card_02_lava_born",
+      "slug": "infernus_card_02_lava_born",
       "category": "cards",
-      "domain": "ignis",
+      "domain": "infernus",
       "kind": "card",
       "role": "Elemental / Destroyer",
       "stats": {
@@ -288,16 +289,16 @@
         "name": "Molten Entry",
         "text": "Charge. Deal 4 damage to all enemy units when this enters play."
       },
-      "path": "cards/ignis/ignis_card_02_lava_born.png",
+      "path": "cards/infernus/infernus_card_02_lava_born.png",
       "source_file": "a_dramatic_high_detail_fantasy_sci_fi_illustratio.png",
       "format": "3:4",
       "notes": ""
     },
     {
       "title": "Ash Herald",
-      "slug": "ignis_card_03_ash_herald",
+      "slug": "infernus_card_03_ash_herald",
       "category": "cards",
-      "domain": "ignis",
+      "domain": "infernus",
       "kind": "card",
       "role": "Mage / Fire Caster",
       "stats": {
@@ -310,16 +311,16 @@
         "name": "Ember Call",
         "text": "Deal 3 damage to an enemy unit. If it dies, summon a 1/1 Ember to your side."
       },
-      "path": "cards/ignis/ignis_card_03_ash_herald.png",
+      "path": "cards/infernus/infernus_card_03_ash_herald.png",
       "source_file": "a_dark_fantasy_high_contrast_scene_a_lone_ominou.png",
       "format": "3:4",
       "notes": ""
     },
     {
       "title": "Ash Hound",
-      "slug": "ignis_card_04_ash_hound",
+      "slug": "infernus_card_04_ash_hound",
       "category": "cards",
-      "domain": "ignis",
+      "domain": "infernus",
       "kind": "card",
       "role": "Fast Unit / Assassin",
       "stats": {
@@ -335,16 +336,16 @@
         "name": "Ash Frenzy",
         "text": "Charge. Lifesteal. Destroy this unit at end of turn."
       },
-      "path": "cards/ignis/ignis_card_04_ash_hound.png",
+      "path": "cards/infernus/infernus_card_04_ash_hound.png",
       "source_file": "a_dramatic_dark_fantasy_scene_a_massive_demonic_w.png",
       "format": "3:4",
       "notes": ""
     },
     {
       "title": "Chain Lord",
-      "slug": "ignis_card_05_chain_lord",
+      "slug": "infernus_card_05_chain_lord",
       "category": "cards",
-      "domain": "ignis",
+      "domain": "infernus",
       "kind": "card",
       "role": "Debuffer / Control",
       "stats": {
@@ -357,16 +358,16 @@
         "name": "Iron Bindings",
         "text": "Enemy units cannot Charge. Deal 2 damage to an enemy unit that attacked this turn."
       },
-      "path": "cards/ignis/ignis_card_05_chain_lord.png",
+      "path": "cards/infernus/infernus_card_05_chain_lord.png",
       "source_file": "a_dark_fantasy_high_detail_illustration_scene_a.png",
       "format": "3:4",
       "notes": ""
     },
     {
       "title": "Void Stalker",
-      "slug": "zephyr_card_01_void_stalker",
+      "slug": "anemos_card_01_void_stalker",
       "category": "cards",
-      "domain": "zephyr",
+      "domain": "anemos",
       "kind": "card",
       "role": "Assassin / Scout",
       "stats": {
@@ -382,16 +383,16 @@
         "name": "Void Ambush",
         "text": "Stealth. Charge. Ambush: +3 Attack on the turn this enters play."
       },
-      "path": "cards/zephyr/zephyr_card_01_void_stalker.png",
+      "path": "cards/anemos/anemos_card_01_void_stalker.png",
       "source_file": "a_dramatic_fantasy_scene_in_a_dark_swirling_storm.png",
       "format": "3:4",
       "notes": ""
     },
     {
       "title": "Hurricane Weaver",
-      "slug": "zephyr_card_02_hurricane_weaver",
+      "slug": "anemos_card_02_hurricane_weaver",
       "category": "cards",
-      "domain": "zephyr",
+      "domain": "anemos",
       "kind": "card",
       "role": "Mage / Field Control",
       "stats": {
@@ -404,16 +405,16 @@
         "name": "Maelstrom Weave",
         "text": "Deal 2 damage to all enemy units. Return a small enemy unit to its owner's hand."
       },
-      "path": "cards/zephyr/zephyr_card_02_hurricane_weaver.png",
+      "path": "cards/anemos/anemos_card_02_hurricane_weaver.png",
       "source_file": "dark_fantasy_epic_scene_a_dramatic_stormy_other.png",
       "format": "3:4",
       "notes": ""
     },
     {
       "title": "Cloud Colossus",
-      "slug": "zephyr_card_03_cloud_colossus",
+      "slug": "anemos_card_03_cloud_colossus",
       "category": "cards",
-      "domain": "zephyr",
+      "domain": "anemos",
       "kind": "card",
       "role": "Heavy Unit / Guardian",
       "stats": {
@@ -429,16 +430,16 @@
         "name": "Skyward Aegis",
         "text": "Flying. Ward. Give an allied unit Flying until end of turn."
       },
-      "path": "cards/zephyr/zephyr_card_03_cloud_colossus.png",
+      "path": "cards/anemos/anemos_card_03_cloud_colossus.png",
       "source_file": "a_dramatic_high_detail_fantasy_concept_art_scene.png",
       "format": "3:4",
       "notes": ""
     },
     {
       "title": "Bloodwind Harpy",
-      "slug": "zephyr_card_04_bloodwind_harpy",
+      "slug": "anemos_card_04_bloodwind_harpy",
       "category": "cards",
-      "domain": "zephyr",
+      "domain": "anemos",
       "kind": "card",
       "role": "Fast Flying Unit",
       "stats": {
@@ -454,16 +455,16 @@
         "name": "Bloodwind Dive",
         "text": "Flying. Charge. When this attacks, deal 1 damage to all other enemy units."
       },
-      "path": "cards/zephyr/zephyr_card_04_bloodwind_harpy.png",
+      "path": "cards/anemos/anemos_card_04_bloodwind_harpy.png",
       "source_file": "a_dramatic_dark_fantasy_scene_overall_a_demonic_a.png",
       "format": "3:4",
       "notes": ""
     },
     {
       "title": "Whispering Spirit",
-      "slug": "zephyr_card_05_whispering_spirit",
+      "slug": "anemos_card_05_whispering_spirit",
       "category": "cards",
-      "domain": "zephyr",
+      "domain": "anemos",
       "kind": "card",
       "role": "Support / Undead",
       "stats": {
@@ -478,7 +479,7 @@
         "name": "Final Whisper",
         "text": "Deathrattle: give an allied unit Ward and draw a card."
       },
-      "path": "cards/zephyr/zephyr_card_05_whispering_spirit.png",
+      "path": "cards/anemos/anemos_card_05_whispering_spirit.png",
       "source_file": "a_dark_fantasy_surreal_scene_a_foreboding_stormy.png",
       "format": "3:4",
       "notes": ""

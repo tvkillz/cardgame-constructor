@@ -1,14 +1,15 @@
 'use client'
 
 import type { CSSProperties } from 'react'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { appConfig, LOCATIONS } from '@/config'
 import type { DominionCitySlide, LocationConfig } from '@/config/schema'
 import './DominionsSection.css'
 
 const SLIDE_INTERVAL_MS = 5500
 const MOBILE_BREAKPOINT = 919
-const CARD_REVEAL_ROOT_MARGIN = '12% 0px 18% 0px'
+const CARD_REVEAL_THRESHOLD = 0.25
+const CARD_REVEAL_ROOT_MARGIN = '5% 0px 5% 0px'
 
 function resolveSlides(loc: LocationConfig): DominionCitySlide[] {
   if (loc.cities?.length) return loc.cities
@@ -20,10 +21,17 @@ function resolveSlides(loc: LocationConfig): DominionCitySlide[] {
   }))
 }
 
+function preloadSlide(url: string) {
+  const img = new Image()
+  img.src = url
+}
+
 function DominionCard({ loc }: { loc: LocationConfig }) {
-  const slides = resolveSlides(loc)
+  const cardRef = useRef<HTMLElement>(null)
+  const slides = useMemo(() => resolveSlides(loc), [loc])
   const slideCount = slides.length
   const [index, setIndex] = useState(0)
+  const [isInView, setIsInView] = useState(false)
   const activeCity = slides[index] ?? slides[0]
 
   const goTo = useCallback(
@@ -37,31 +45,51 @@ function DominionCard({ loc }: { loc: LocationConfig }) {
   const goNext = useCallback(() => goTo(index + 1), [goTo, index])
 
   useEffect(() => {
-    if (slideCount <= 1) return
+    const el = cardRef.current
+    if (!el) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        setIsInView(Boolean(entries[0]?.isIntersecting))
+      },
+      { threshold: 0.12 },
+    )
+
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    if (slideCount <= 1 || !isInView) return
+
     const timer = window.setInterval(() => {
       setIndex((current) => (current + 1) % slideCount)
     }, SLIDE_INTERVAL_MS)
+
     return () => window.clearInterval(timer)
-  }, [slideCount])
+  }, [slideCount, isInView])
+
+  useEffect(() => {
+    if (slideCount <= 1) return
+    const nextImage = slides[(index + 1) % slideCount]?.image ?? ''
+    if (nextImage) preloadSlide(nextImage)
+  }, [index, slideCount, slides])
 
   return (
     <article
+      ref={cardRef}
       className="dominions__card"
       style={{ '--dominion-glow': loc.glowColor } as CSSProperties}
     >
       <div className="dominions__slides" aria-hidden={slideCount <= 1}>
-        {slides.map((slide, slideIndex) => (
-          <img
-            key={slide.image}
-            src={slide.image}
-            alt=""
-            className={`dominions__slide${
-              slideIndex === index ? ' dominions__slide--active' : ''
-            }`}
-            loading={slideIndex === 0 ? 'eager' : 'lazy'}
-            decoding="async"
-          />
-        ))}
+        <img
+          key={activeCity.image}
+          src={activeCity.image}
+          alt=""
+          className="dominions__slide dominions__slide--active"
+          loading="lazy"
+          decoding="async"
+        />
       </div>
 
       <div className="dominions__card-overlay" aria-hidden="true" />
@@ -153,7 +181,7 @@ function DominionCardItem({
           const entry = entries[0]
           setInView(Boolean(entry?.isIntersecting))
         },
-        { threshold: 0.15, rootMargin: CARD_REVEAL_ROOT_MARGIN },
+        { threshold: CARD_REVEAL_THRESHOLD, rootMargin: CARD_REVEAL_ROOT_MARGIN },
       )
       observer.observe(el)
     }

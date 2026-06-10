@@ -1,8 +1,6 @@
 -- Per-site card catalog, featured landing cards, and public card art storage.
 -- Requires public.sites (96-sites.sql).
 
-create type public.card_domain as enum ('terra', 'aqua', 'ignis', 'zephyr');
-
 create type public.card_rarity as enum ('common', 'uncommon', 'rare', 'epic', 'legendary');
 
 create table public.cards (
@@ -10,7 +8,7 @@ create table public.cards (
   site_id            text not null default 'voidborn' references public.sites (id),
   slug               text not null,
   title              text not null,
-  domain             public.card_domain not null,
+  domain             text not null,
   role               text,
   rarity             public.card_rarity not null default 'common',
   mana               smallint not null check (mana >= 0),
@@ -24,6 +22,7 @@ create table public.cards (
   thumb_storage_path text not null,
   glow_color         text,
   location_id        text,
+  price_cents        integer check (price_cents is null or price_cents >= 0),
   published          boolean not null default true,
   created_at         timestamptz not null default now(),
   updated_at         timestamptz not null default now(),

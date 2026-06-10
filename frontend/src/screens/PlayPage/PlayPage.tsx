@@ -24,7 +24,7 @@ export default function PlayPage() {
   const router = useRouter()
   const { descriptions, theme } = appConfig
   const { playerName, user, openAuthModal, loading: authLoading } = useAuth()
-  const catalog = useCardCatalog()
+  const { cards: catalog } = useCardCatalog()
   const { summaries: deckSummaries, decks, loading: decksLoading } = usePlayerDecks()
   const [deckEntries, setDeckEntries] = useState<HandDeckEntry[]>([])
   const [showModes, setShowModes] = useState(false)
