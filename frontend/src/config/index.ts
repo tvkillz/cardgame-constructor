@@ -13,6 +13,7 @@ export {
   creditsToEur,
   formatCredits,
   formatEurPrice,
+  formatPriceCents,
   getArenaBackground,
   getLobbyBackground,
   getLocationImage,

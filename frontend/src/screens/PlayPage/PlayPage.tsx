@@ -24,7 +24,7 @@ export default function PlayPage() {
   const router = useRouter()
   const { descriptions, theme } = appConfig
   const { playerName, user, openAuthModal, loading: authLoading } = useAuth()
-  const { cards: catalog } = useCardCatalog()
+  const { cards: catalog, loading: catalogLoading } = useCardCatalog()
   const { summaries: deckSummaries, decks, loading: decksLoading } = usePlayerDecks()
   const [deckEntries, setDeckEntries] = useState<HandDeckEntry[]>([])
   const [showModes, setShowModes] = useState(false)
@@ -150,13 +150,16 @@ export default function PlayPage() {
   }
 
   const handleResumeMatch = () => {
-    if (!activeMatch) return
+    if (!activeMatch || catalogLoading) return
     const deck = decks.find((d) => d.id === activeMatch.deckId)
     if (!deck) return
 
+    const resolved = resolveDeckToDisplay(deck, catalog)
+    if (resolved.length === 0) return
+
     setSelectedDeckId(activeMatch.deckId)
     setResumeMatchId(activeMatch.id)
-    setDeckEntries(resolveDeckToDisplay(deck, catalog))
+    setDeckEntries(resolved)
     setActiveMatch(null)
 
     const img = new Image()
@@ -165,7 +168,7 @@ export default function PlayPage() {
   }
 
   useEffect(() => {
-    if (battlePhase !== 'loading' || deckEntries.length === 0) return
+    if (battlePhase !== 'loading' || deckEntries.length === 0 || catalogLoading) return
 
     let cancelled = false
     void preloadWithMinDelay([], loadingDurationMs).then(() => {
@@ -175,7 +178,7 @@ export default function PlayPage() {
     return () => {
       cancelled = true
     }
-  }, [battlePhase, deckEntries, loadingDurationMs])
+  }, [battlePhase, deckEntries, catalogLoading, loadingDurationMs])
 
   const inArena = battlePhase === 'arena'
   const inBattle = battlePhase !== 'idle'

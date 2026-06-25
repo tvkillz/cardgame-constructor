@@ -43,6 +43,49 @@
   animation: none;
 }
 
+.card--market {
+  position: relative;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  animation: none;
+  cursor: pointer;
+}
+
+.card--market:hover,
+.card--market.card--hovered {
+  z-index: auto;
+  transform: none;
+  filter: none;
+}
+
+.card--market .card__ability,
+.card--market .card__keywords {
+  display: none;
+}
+
+.card--market .card__title {
+  font-size: 1rem;
+}
+
+.card--preview {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  animation: none;
+  transform: none;
+  cursor: default;
+}
+
+.card--preview:hover,
+.card--preview.card--hovered {
+  z-index: auto;
+  transform: none;
+  filter: drop-shadow(0 12px 32px rgba(0, 0, 0, 0.65))
+    drop-shadow(0 0 20px color-mix(in srgb, var(--glow-color) 35%, transparent));
+}
+
 .card--game {
   width: calc(118px * var(--card-scale, 1));
 }

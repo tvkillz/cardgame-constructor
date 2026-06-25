@@ -76,3 +76,15 @@ NEXT_PUBLIC_SUPABASE_URL=https://voidborn.fun
 ```
 
 Per-site public URL stays in each content pack's `manifest.json` `siteUrl`. Site identity for auth/API is compiled as `siteId` in the bundle.
+
+## Card catalog (not deployed)
+
+`deploy-from-local.sh` does **not** sync card catalog assets to the frontend VPS:
+
+- `assets/cards/`
+- `data/card-thumbs/`, `data/card-full/`
+- `data/cards-catalog.json`, `data/landing-cards.json`
+
+Portal and play load card art from **Supabase Storage** via the API (`cards` table). Seed/upload cards separately (`npm run seed:cards:upload`, `compile:upload`, etc.) on the backend host.
+
+Landing showcase cards in the JS bundle may still reference `/data/card-*` paths from a local compile; run `npm run compile:upload` before deploy if the homepage needs storage URLs baked in.

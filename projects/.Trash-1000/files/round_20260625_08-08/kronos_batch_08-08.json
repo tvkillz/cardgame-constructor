@@ -1,0 +1,50 @@
+{
+  "meta": {
+    "project": "voidborn",
+    "domain": "kronos",
+    "round_id": "round_20260625_08-08",
+    "status": "draft",
+    "generated_at": "2026-06-25T08:57:56.114Z",
+    "model": "gemini-3.1-flash-lite",
+    "slug_range": {
+      "from": 8,
+      "to": 8,
+      "count": 1
+    },
+    "validation": {
+      "ok": true,
+      "error_count": 0,
+      "results": [
+        {
+          "slug": "kronos_card_08_monolith_architect",
+          "title": "Monolith Architect",
+          "issues": [],
+          "ok": true
+        }
+      ]
+    }
+  },
+  "cards": [
+    {
+      "title": "Monolith Architect",
+      "slug": "kronos_card_08_monolith_architect",
+      "domain": "kronos",
+      "role": "Heavy Tank / Builder",
+      "stats": {
+        "mana": 5,
+        "attack": 2,
+        "health": 7
+      },
+      "keywords": [
+        "Taunt",
+        "Armor"
+      ],
+      "ability": {
+        "name": "Geometric Reinforcement",
+        "text": "Taunt. Armor 1. When this unit enters play, grant an allied unit Armor 2 until end of turn."
+      },
+      "image_prompt": "An elderly stone golem architect with moss-covered granite skin, intricate glowing golden amber sigils etched into his chest, holding a floating crystalline hammer, standing in a crumbling mountain pass, dramatic low-angle shot, shafts of warm amber light piercing through dark clouds.",
+      "image_notes": "Cinematic dark fantasy art style, deep shadows, mossy textures, hyper-detailed granite surfaces, golden ember glow, portrait orientation 3:4."
+    }
+  ]
+}

@@ -13,6 +13,12 @@ const DEBOUNCE_MS = 400
 const projectId = resolveProjectId()
 const watchRoot = projectRoot(projectId)
 
+function shouldIgnoreWatchPath(filename) {
+  if (!filename || filename.startsWith('.')) return true
+  const normalized = filename.replace(/\\/g, '/')
+  return normalized === 'game/_staging' || normalized.startsWith(`game/_staging/`)
+}
+
 let debounceTimer = null
 let compiling = false
 let queued = false
@@ -59,7 +65,7 @@ console.log(`[compile:watch] Watching ${watchRoot}`)
 
 try {
   watch(watchRoot, { recursive: true }, (_eventType, filename) => {
-    if (!filename || filename.startsWith('.')) return
+    if (shouldIgnoreWatchPath(filename)) return
     scheduleCompile(filename)
   })
 } catch (err) {

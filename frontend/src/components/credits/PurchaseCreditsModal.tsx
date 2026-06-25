@@ -9,6 +9,7 @@ import {
 } from '@/config/selectors'
 import { invokeCommerceAction } from '@/lib/commerce/api'
 import { Button } from '@/components/ui/Button/Button'
+import '@/styles/coin-stack-icon.css'
 import './PurchaseCreditsModal.css'
 
 type PurchaseCreditsModalProps = {
@@ -16,13 +17,8 @@ type PurchaseCreditsModalProps = {
   onClose: () => void
 }
 
-function CoinIcon({ variant = 'default' }: { variant?: 'default' | 'gold' }) {
-  return (
-    <span
-      className={`credits-modal__coin${variant === 'gold' ? ' credits-modal__coin--gold' : ''}`}
-      aria-hidden="true"
-    />
-  )
+function CoinIcon() {
+  return <span className="coin-stack-icon" aria-hidden="true" />
 }
 
 export default function PurchaseCreditsModal({
@@ -121,8 +117,8 @@ export default function PurchaseCreditsModal({
         <header className="credits-modal__header">
           <div className="credits-modal__title-row">
             <span className="credits-modal__title-coins" aria-hidden="true">
-              <CoinIcon variant="gold" />
-              <CoinIcon variant="gold" />
+              <CoinIcon />
+              <CoinIcon />
             </span>
             <h2 id={titleId} className="credits-modal__title">
               {copy.title}
@@ -146,7 +142,7 @@ export default function PurchaseCreditsModal({
               )}
               <div className="credits-modal__pack-top">
                 <span className="credits-modal__pack-credits">
-                  <CoinIcon variant={pack.popular ? 'gold' : 'default'} />
+                  <CoinIcon />
                   {formatCredits(pack.credits)}
                 </span>
                 <span className="credits-modal__pack-price">

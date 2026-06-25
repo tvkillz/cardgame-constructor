@@ -35,37 +35,14 @@ export function deleteLocalDeck(deckId: string) {
   writeAll(readAll().filter((d) => d.id !== deckId))
 }
 
-export function createDefaultLocalDecks(
-  userId: string,
-  catalogSlugs: string[],
-): PlayerDeck[] {
-  const slugs = catalogSlugs.slice(0, 30)
-  const decks: PlayerDeck[] = [
-    {
-      id: `${userId}:starter-1`,
-      name: 'Voidbound Strike',
-      maxCards: 30,
-      updatedAt: new Date().toISOString(),
-      cards: slugs.map((slug, i) => ({
-        cardId: slug,
-        slug,
-        quantity: 1,
-        sortOrder: i,
-      })),
-    },
-    {
-      id: `${userId}:starter-2`,
-      name: 'Elemental Mix',
-      maxCards: 30,
-      updatedAt: new Date().toISOString(),
-      cards: [...slugs].reverse().map((slug, i) => ({
-        cardId: slug,
-        slug,
-        quantity: 1,
-        sortOrder: i,
-      })),
-    },
-  ]
-  for (const deck of decks) saveLocalDeck(userId, deck)
-  return decks
+export function createDefaultLocalDecks(userId: string): PlayerDeck[] {
+  const deck: PlayerDeck = {
+    id: `${userId}:main`,
+    name: 'Main Deck',
+    maxCards: 30,
+    cards: [],
+    updatedAt: new Date().toISOString(),
+  }
+  saveLocalDeck(userId, deck)
+  return [deck]
 }

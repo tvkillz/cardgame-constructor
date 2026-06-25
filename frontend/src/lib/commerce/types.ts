@@ -50,8 +50,9 @@ export type CommerceAction =
   | { type: 'transactions_list'; limit?: number }
   | { type: 'inventory_list' }
   | { type: 'orders_list' }
-  | { type: 'checkout_create'; packId?: string; productId?: string; customCredits?: number }
+  | { type: 'checkout_create'; packId?: string; productId?: string; customCredits?: number; cardId?: string; currency?: string }
   | { type: 'purchase_with_credits'; productId: string }
+  | { type: 'buy_card_with_credits'; cardId: string }
   | { type: 'withdrawal_create'; amountCredits: number; payoutMethod?: string }
   | { type: 'admin_transactions' }
   | { type: 'admin_products_upsert'; product: Record<string, unknown> }

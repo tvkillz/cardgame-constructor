@@ -28,7 +28,7 @@ export default function PurchaseSuccess() {
       <p>
         <Link href={appConfig.domain.routes.portalTransactions}>View transactions</Link>
         {' · '}
-        <Link href={appConfig.domain.routes.portalStore}>Back to store</Link>
+        <Link href={appConfig.domain.routes.portalMarket}>Back to market</Link>
       </p>
     </div>
   )

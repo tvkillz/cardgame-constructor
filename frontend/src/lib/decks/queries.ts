@@ -1,4 +1,3 @@
-import { CARDS_CATALOG } from '@/lib/cards'
 import { getSupabaseBrowserClient } from '@/lib/supabase/client'
 
 import {
@@ -52,10 +51,7 @@ export async function fetchPlayerDecks(userId: string): Promise<PlayerDeck[]> {
   if (!supabase) {
     let local = loadLocalDecks(userId)
     if (local.length === 0) {
-      local = createDefaultLocalDecks(
-        userId,
-        CARDS_CATALOG.map((c) => c.slug),
-      )
+      local = createDefaultLocalDecks(userId)
     }
     return local
   }
@@ -77,10 +73,7 @@ export async function fetchPlayerDecks(userId: string): Promise<PlayerDeck[]> {
   if (error || !data?.length) {
     const local = loadLocalDecks(userId)
     if (local.length > 0) return local
-    return createDefaultLocalDecks(
-      userId,
-      CARDS_CATALOG.map((c) => c.slug),
-    )
+    return createDefaultLocalDecks(userId)
   }
 
   return (data as DbDeckRow[]).map(mapDeck)

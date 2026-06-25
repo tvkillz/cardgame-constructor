@@ -17,8 +17,8 @@ export function usePlayerDecks() {
   const [summaries, setSummaries] = useState<DeckSummary[]>([])
   const [loading, setLoading] = useState(true)
 
-  const refresh = useCallback(async () => {
-    setLoading(true)
+  const refresh = useCallback(async (options?: { silent?: boolean }) => {
+    if (!options?.silent) setLoading(true)
     try {
       const [all, list] = await Promise.all([
         fetchPlayerDecks(userId),
@@ -27,13 +27,29 @@ export function usePlayerDecks() {
       setDecks(all)
       setSummaries(list)
     } finally {
-      setLoading(false)
+      if (!options?.silent) setLoading(false)
     }
   }, [userId])
+
+  const replaceDeck = useCallback((deck: PlayerDeck) => {
+    setDecks((prev) => prev.map((d) => (d.id === deck.id ? deck : d)))
+    setSummaries((prev) =>
+      prev.map((s) =>
+        s.id === deck.id
+          ? {
+              id: deck.id,
+              name: deck.name,
+              cards: deck.cards.reduce((sum, c) => sum + c.quantity, 0),
+              maxCards: deck.maxCards,
+            }
+          : s,
+      ),
+    )
+  }, [])
 
   useEffect(() => {
     void refresh()
   }, [refresh])
 
-  return { decks, summaries, loading, refresh, userId }
+  return { decks, summaries, loading, refresh, replaceDeck, userId }
 }

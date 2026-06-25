@@ -10,7 +10,7 @@ export default function PurchaseFailed() {
       <h1>Checkout cancelled</h1>
       <p>No charge was made. You can try again from the store or top-up modal.</p>
       <p>
-        <Link href={appConfig.domain.routes.portalStore}>Return to store</Link>
+        <Link href={appConfig.domain.routes.portalMarket}>Return to market</Link>
       </p>
     </div>
   )

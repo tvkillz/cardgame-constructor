@@ -250,7 +250,6 @@ function CollectionPickerItem({
           fanIndex={0}
           layoutMode="compact"
           showAbility={false}
-          showRarity
           thumbOnly
         />
       </button>

@@ -67,3 +67,18 @@ backend/volumes/storage/
 
 # TLS certs (managed on server)
 backend/volumes/proxy/**/letsencrypt/
+
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.webp
+*.svg
+*.ico
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.webp
+*.svg
+*.ico

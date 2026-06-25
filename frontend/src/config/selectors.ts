@@ -59,6 +59,11 @@ export function formatEurPrice(amount: number, symbol = appConfig.credits.curren
   return `${symbol}${amount.toFixed(2)}`
 }
 
+/** Format euro cents as a currency string (e.g. 299 → €2.99). */
+export function formatPriceCents(cents: number, symbol = appConfig.credits.currencySymbol): string {
+  return `${symbol}${(cents / 100).toFixed(2)}`
+}
+
 export function creditsToEur(credits: number): number {
   return credits / appConfig.credits.creditsPerEur
 }

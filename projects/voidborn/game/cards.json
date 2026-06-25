@@ -483,6 +483,3747 @@
       "source_file": "a_dark_fantasy_surreal_scene_a_foreboding_stormy.png",
       "format": "3:4",
       "notes": ""
+    },
+    {
+      "title": "Thunderclap Vanguard",
+      "slug": "anemos_card_06_thunderclap_vanguard",
+      "category": "cards",
+      "domain": "anemos",
+      "kind": "card",
+      "role": "Heavy Tank",
+      "stats": {
+        "mana": 5,
+        "attack": 3,
+        "health": 7
+      },
+      "keywords": [
+        "Taunt",
+        "Armor"
+      ],
+      "ability": {
+        "name": "Static Shell",
+        "text": "Taunt. Armor 1. When this unit takes damage, deal 1 damage to the attacker."
+      },
+      "path": "cards/anemos/anemos_card_06_thunderclap_vanguard.png",
+      "source_file": "anemos_card_06_thunderclap_vanguard.png",
+      "format": "3:4",
+      "notes": "Negative prompt: text, frame, border, blurry, distorted face. Palette: electric blue, storm grey, deep purple. Aspect ratio 3:4.",
+      "image_prompt": "A hulking armored knight encased in jagged, translucent blue crystal armor, standing amidst a swirling vortex of purple lightning, glowing ethereal eyes, cinematic dark fantasy style, low angle shot, dramatic lighting, high detail."
+    },
+    {
+      "title": "Zephyr Scout",
+      "slug": "anemos_card_07_zephyr_scout",
+      "category": "cards",
+      "domain": "anemos",
+      "kind": "card",
+      "role": "Assassin",
+      "stats": {
+        "mana": 3,
+        "attack": 3,
+        "health": 2
+      },
+      "keywords": [
+        "Flying",
+        "Stealth"
+      ],
+      "ability": {
+        "name": "Gale Strike",
+        "text": "Flying. Stealth. When this unit attacks, it deals 1 additional damage for each other Flying unit you control."
+      },
+      "path": "cards/anemos/anemos_card_07_zephyr_scout.png",
+      "source_file": "anemos_card_07_zephyr_scout.png",
+      "format": "3:4",
+      "notes": "Negative prompt: cartoon, watermark, borders, text, low resolution. Palette: slate blue, iridescent purple, silver. Aspect ratio 3:4.",
+      "image_prompt": "A slender rogue harpy with razor-sharp wind-forged wings, perched on a floating ruin piece above a dark cloud bank, glowing violet eyes, nimble combat stance, dark atmospheric fantasy aesthetic."
+    },
+    {
+      "title": "Cinder Wisp",
+      "slug": "infernus_card_06_cinder_wisp",
+      "category": "cards",
+      "domain": "infernus",
+      "kind": "card",
+      "role": "Scout / Assassin",
+      "stats": {
+        "mana": 2,
+        "attack": 2,
+        "health": 1
+      },
+      "keywords": [
+        "Stealth",
+        "Flying"
+      ],
+      "ability": {
+        "name": "Ember Drift",
+        "text": "Stealth. Flying. When this unit attacks, it deals 1 additional damage to the enemy player."
+      },
+      "path": "cards/infernus/infernus_card_06_cinder_wisp.png",
+      "source_file": "infernus_card_06_cinder_wisp.png",
+      "format": "3:4",
+      "notes": "Portrait 3:4 aspect ratio, avoid blurry effects, sharp focus on the wisp core, use deep crimson and obsidian palette, negative prompt: text, frame, border.",
+      "image_prompt": "A small, ephemeral creature composed of swirling embers and dark smoke, floating above a jagged volcanic crater, glowing orange core, cinematic lighting, dark fantasy art style, highly detailed."
+    },
+    {
+      "title": "Magma Tortoise",
+      "slug": "infernus_card_07_magma_tortoise",
+      "category": "cards",
+      "domain": "infernus",
+      "kind": "card",
+      "role": "Heavy Tank",
+      "stats": {
+        "mana": 5,
+        "attack": 2,
+        "health": 8
+      },
+      "keywords": [
+        "Taunt",
+        "Armor"
+      ],
+      "ability": {
+        "name": "Shell Of Molten Stone",
+        "text": "Taunt. Armor 2. At the end of your turn, this unit heals for 2 Health."
+      },
+      "path": "cards/infernus/infernus_card_07_magma_tortoise.png",
+      "source_file": "infernus_card_07_magma_tortoise.png",
+      "format": "3:4",
+      "notes": "Portrait 3:4 aspect ratio, ground-level camera angle to emphasize scale, warm lighting from the lava veins, negative prompt: humanoids, cartoon, bright colors.",
+      "image_prompt": "A massive, ancient tortoise with a shell made of cracked basalt and flowing molten lava, standing on a cooled obsidian cliffside, steam rising from its back, glowing heat, dark fantasy style, dramatic shadows."
+    },
+    {
+      "title": "Summit Sentinel",
+      "slug": "kronos_card_06_summit_sentinel",
+      "category": "cards",
+      "domain": "kronos",
+      "kind": "card",
+      "role": "Heavy Tank / Defender",
+      "stats": {
+        "mana": 5,
+        "attack": 2,
+        "health": 7
+      },
+      "keywords": [
+        "Taunt",
+        "Armor"
+      ],
+      "ability": {
+        "name": "Mountain Stance",
+        "text": "Armor 2. When this unit takes damage, it gains +1 Attack until end of turn."
+      },
+      "path": "cards/kronos/kronos_card_06_summit_sentinel.png",
+      "source_file": "kronos_card_06_summit_sentinel.png",
+      "format": "3:4",
+      "notes": "style: oil painting, sharp focus, no text, no frame, negative prompt: watermark, text, signature, low resolution.",
+      "image_prompt": "A massive hulking golem carved from jagged mountain granite, moss growing in its cracks, golden amber veins glowing within its chest, imposing posture, epic cloudy mountain peak backdrop, dramatic chiaroscuro lighting, dark fantasy trading card style, 3:4 portrait ratio."
+    },
+    {
+      "title": "Amber Druidess",
+      "slug": "kronos_card_07_amber_druidess",
+      "category": "cards",
+      "domain": "kronos",
+      "kind": "card",
+      "role": "Support / Healer",
+      "stats": {
+        "mana": 3,
+        "attack": 1,
+        "health": 3
+      },
+      "keywords": [
+        "Ward"
+      ],
+      "ability": {
+        "name": "Amber Infusion",
+        "text": "Ward. When played, give an allied unit +0/+2 and Ward."
+      },
+      "path": "cards/kronos/kronos_card_07_amber_druidess.png",
+      "source_file": "kronos_card_07_amber_druidess.png",
+      "format": "3:4",
+      "notes": "style: ethereal, high fantasy, vibrant golden light, negative prompt: blurry, modern clothes, technology.",
+      "image_prompt": "An elegant elderly druidess with staff carved from ancient petrified wood, wearing robes of woven golden thread and stone, surrounded by floating shards of glowing amber, forest cave setting with soft golden light filtering through, portrait 3:4, detailed fabric and mineral textures."
+    },
+    {
+      "title": "Bioluminescent Lurker",
+      "slug": "thalassa_card_06_bioluminescent_lurker",
+      "category": "cards",
+      "domain": "thalassa",
+      "kind": "card",
+      "role": "Assassin / Scout",
+      "stats": {
+        "mana": 3,
+        "attack": 3,
+        "health": 2
+      },
+      "keywords": [
+        "Stealth"
+      ],
+      "ability": {
+        "name": "Abyssal Shadow",
+        "text": "Stealth. While this unit is in Stealth, it gains +1 Attack and deals 2 damage to any unit that attacks your hero."
+      },
+      "path": "cards/thalassa/thalassa_card_06_bioluminescent_lurker.png",
+      "source_file": "thalassa_card_06_bioluminescent_lurker.png",
+      "format": "3:4",
+      "notes": "Deep navy and teal palette, sharp focus on the creature's glowing eyes, no text, no frame, 3:4 aspect ratio.",
+      "image_prompt": "A slender, eel-like humanoid figure with translucent skin and pulsating cyan bioluminescent patterns, lurking in the dark, murky waters of a sunken gothic cathedral, dramatic rim lighting, cinematic trading card art style."
+    },
+    {
+      "title": "Sunken Colossus",
+      "slug": "thalassa_card_07_sunken_colossus",
+      "category": "cards",
+      "domain": "thalassa",
+      "kind": "card",
+      "role": "Heavy Tank / Frontline",
+      "stats": {
+        "mana": 7,
+        "attack": 5,
+        "health": 9
+      },
+      "keywords": [
+        "Taunt",
+        "Armor"
+      ],
+      "ability": {
+        "name": "Crushing Depth",
+        "text": "Taunt. Armor 2: Reduce all incoming damage to this unit by 2. When this unit enters the field, all other units take 1 damage."
+      },
+      "path": "cards/thalassa/thalassa_card_07_sunken_colossus.png",
+      "source_file": "thalassa_card_07_sunken_colossus.png",
+      "format": "3:4",
+      "notes": "Gothic underwater aesthetic, muted colors with high contrast bioluminescent accents, portrait composition, high detail, no watermarks.",
+      "image_prompt": "A massive, hulking construct made of barnacle-encrusted ship wreckage and stone, seaweed hanging from its shoulders, towering over a drowned seafloor battlefield, intimidating stance, deep sea environment with light rays filtering from above."
+    },
+    {
+      "title": "Titan Cragbreaker",
+      "slug": "kronos_card_08_titan_cragbreaker",
+      "category": "cards",
+      "domain": "kronos",
+      "kind": "card",
+      "role": "Siege / Heavy Tank",
+      "stats": {
+        "mana": 8,
+        "attack": 6,
+        "health": 10
+      },
+      "keywords": [
+        "Taunt",
+        "Siege"
+      ],
+      "ability": {
+        "name": "Cataclysmic Slam",
+        "text": "Taunt. Siege 3. When this unit enters play, all enemy units take 2 damage."
+      },
+      "path": "cards/kronos/kronos_card_08_titan_cragbreaker.png",
+      "source_file": "kronos_card_08_titan_cragbreaker.png",
+      "format": "3:4",
+      "notes": "cinematic dark fantasy style, highly detailed texture, no text, 3:4 aspect ratio, low camera angle to emphasize scale",
+      "image_prompt": "Colossal stone golem with golden amber glowing fissures, giant slab of granite held as a shield, craggy mountain terrain, volumetric sunset lighting."
+    },
+    {
+      "title": "Amber Druid Weaver",
+      "slug": "kronos_card_09_amber_druid_weaver",
+      "category": "cards",
+      "domain": "kronos",
+      "kind": "card",
+      "role": "Support / Healer",
+      "stats": {
+        "mana": 3,
+        "attack": 1,
+        "health": 4
+      },
+      "keywords": [],
+      "ability": {
+        "name": "Resonance Pulse",
+        "text": "At the start of your turn, give an allied unit Ward and restore 2 Health."
+      },
+      "path": "cards/kronos/kronos_card_09_amber_druid_weaver.png",
+      "source_file": "kronos_card_09_amber_druid_weaver.png",
+      "format": "3:4",
+      "notes": "soft focus background, glowing highlights, intricate embroidery, dark fantasy, 3:4 aspect ratio",
+      "image_prompt": "An elderly druid draped in heavy moss-covered stone robes, clutching a staff pulsing with molten amber light, ethereal forest clearing background."
+    },
+    {
+      "title": "Granite Siegeballista",
+      "slug": "kronos_card_10_granite_siegeballista",
+      "category": "cards",
+      "domain": "kronos",
+      "kind": "card",
+      "role": "Ranged / Artillery",
+      "stats": {
+        "mana": 5,
+        "attack": 5,
+        "health": 3
+      },
+      "keywords": [
+        "Ranged"
+      ],
+      "ability": {
+        "name": "Boulder Launch",
+        "text": "Ranged. This unit cannot attack players. When this unit attacks, it deals damage to the target and all adjacent enemy units."
+      },
+      "path": "cards/kronos/kronos_card_10_granite_siegeballista.png",
+      "source_file": "kronos_card_10_granite_siegeballista.png",
+      "format": "3:4",
+      "notes": "dramatic shadow play, gritty stone texture, high contrast, 3:4 aspect ratio, no motion blur",
+      "image_prompt": "Ancient siege engine carved entirely from solid mountain rock, heavy ballista mechanism glowing with amber runes, barren quarry environment."
+    },
+    {
+      "title": "Stoneform Vanguard",
+      "slug": "kronos_card_11_stoneform_vanguard",
+      "category": "cards",
+      "domain": "kronos",
+      "kind": "card",
+      "role": "Defender",
+      "stats": {
+        "mana": 4,
+        "attack": 3,
+        "health": 5
+      },
+      "keywords": [
+        "Armor",
+        "Taunt"
+      ],
+      "ability": {
+        "name": "Earthen Shell",
+        "text": "Taunt. Armor 1 (Reduces incoming damage by 1). When this unit takes damage, it gains +1 Attack until end of turn."
+      },
+      "path": "cards/kronos/kronos_card_11_stoneform_vanguard.png",
+      "source_file": "kronos_card_11_stoneform_vanguard.png",
+      "format": "3:4",
+      "notes": "sharp focus on armor plating, golden amber light reflecting off stone, cinematic dark fantasy, 3:4 aspect ratio",
+      "image_prompt": "A knight encased in layers of living granite plate armor, a mossy kite shield held high, dynamic combat stance in a canyon."
+    },
+    {
+      "title": "Rooted Sentinel",
+      "slug": "kronos_card_12_rooted_sentinel",
+      "category": "cards",
+      "domain": "kronos",
+      "kind": "card",
+      "role": "Tank / Wall",
+      "stats": {
+        "mana": 2,
+        "attack": 2,
+        "health": 6
+      },
+      "keywords": [
+        "Taunt",
+        "Rooted"
+      ],
+      "ability": {
+        "name": "Deep Anchor",
+        "text": "Taunt. Rooted (Unit cannot be moved this turn). While Rooted, this unit cannot be destroyed by spell effects."
+      },
+      "path": "cards/kronos/kronos_card_12_rooted_sentinel.png",
+      "source_file": "kronos_card_12_rooted_sentinel.png",
+      "format": "3:4",
+      "notes": "dark moody atmosphere, moss and vine details, epic fantasy trading card art, 3:4 aspect ratio",
+      "image_prompt": "A hulking mass of stone and tangled tree roots, partially fused with a canyon wall, glowing amber eye visible in the rock face."
+    },
+    {
+      "title": "Abyssal Anchorite",
+      "slug": "thalassa_card_08_abyssal_anchorite",
+      "category": "cards",
+      "domain": "thalassa",
+      "kind": "card",
+      "role": "Tank / Defender",
+      "stats": {
+        "mana": 4,
+        "attack": 2,
+        "health": 6
+      },
+      "keywords": [
+        "Taunt",
+        "Armor"
+      ],
+      "ability": {
+        "name": "Heavy Chains",
+        "text": "Taunt. Armor 1: This unit reduces incoming damage by 1. While active, this unit cannot be moved by enemy spells."
+      },
+      "path": "cards/thalassa/thalassa_card_08_abyssal_anchorite.png",
+      "source_file": "thalassa_card_08_abyssal_anchorite.png",
+      "format": "3:4",
+      "notes": "cinematic lighting, teal and navy palette, low angle, portrait, dark fantasy style, no text, no frame",
+      "image_prompt": "A hulking drowned undead figure encased in rusted iron chains and coral growth, standing guard at an underwater gate, deep sea bioluminescence casting a sickly teal glow, highly detailed skeletal armor."
+    },
+    {
+      "title": "Abyssal Ink-Caster",
+      "slug": "thalassa_card_09_abyssal_ink_caster",
+      "category": "cards",
+      "domain": "thalassa",
+      "kind": "card",
+      "role": "Support / Debuffer",
+      "stats": {
+        "mana": 3,
+        "attack": 2,
+        "health": 3
+      },
+      "keywords": [
+        "Stealth"
+      ],
+      "ability": {
+        "name": "Cloud of Voids",
+        "text": "Stealth. When this unit attacks, apply Freeze to the target unit until the end of the turn."
+      },
+      "path": "cards/thalassa/thalassa_card_09_abyssal_ink_caster.png",
+      "source_file": "thalassa_card_09_abyssal_ink_caster.png",
+      "format": "3:4",
+      "notes": "high contrast, focus on the ink particles, ethereal lighting, portrait, no text",
+      "image_prompt": "A slender siren-like creature shrouded in dark, swirling ink clouds underwater, glowing purple eyes, pale skin, floating in an abyssal trench."
+    },
+    {
+      "title": "Deepsea Void-Ray",
+      "slug": "thalassa_card_10_deepsea_void_ray",
+      "category": "cards",
+      "domain": "thalassa",
+      "kind": "card",
+      "role": "Flying / Assassin",
+      "stats": {
+        "mana": 5,
+        "attack": 5,
+        "health": 3
+      },
+      "keywords": [
+        "Flying"
+      ],
+      "ability": {
+        "name": "Diving Strike",
+        "text": "Flying. Upon entering play, deal 2 damage to all enemy units that do not have Flying."
+      },
+      "path": "cards/thalassa/thalassa_card_10_deepsea_void_ray.png",
+      "source_file": "thalassa_card_10_deepsea_void_ray.png",
+      "format": "3:4",
+      "notes": "dynamic action shot, deep depth of field, navy and teal colors, photorealistic dark fantasy, no text",
+      "image_prompt": "A massive, bioluminescent manta ray creature gliding through a dark underwater chasm, skeletal features, jagged wings, glowing cyan patterns on skin."
+    },
+    {
+      "title": "Shipwreck Scavenger",
+      "slug": "thalassa_card_11_shipwreck_scavenger",
+      "category": "cards",
+      "domain": "thalassa",
+      "kind": "card",
+      "role": "Scout / Regenerator",
+      "stats": {
+        "mana": 3,
+        "attack": 3,
+        "health": 2
+      },
+      "keywords": [
+        "Regenerate"
+      ],
+      "ability": {
+        "name": "Corroded Repair",
+        "text": "Regenerate: This unit restores 2 Health at the end of each turn. If this unit is healed while at full health, gain +1 Attack."
+      },
+      "path": "cards/thalassa/thalassa_card_11_shipwreck_scavenger.png",
+      "source_file": "thalassa_card_11_shipwreck_scavenger.png",
+      "format": "3:4",
+      "notes": "gritty texture, high detail, teal lighting from above, portrait orientation, no text",
+      "image_prompt": "A small, weathered drowned sailor holding a rusted salvage hook, standing amidst ship debris, bioluminescent glowing barnacles on chest, dark underwater atmosphere."
+    },
+    {
+      "title": "Trench Terror",
+      "slug": "thalassa_card_12_trench_terror",
+      "category": "cards",
+      "domain": "thalassa",
+      "kind": "card",
+      "role": "Siege / Heavy Monster",
+      "stats": {
+        "mana": 7,
+        "attack": 6,
+        "health": 6
+      },
+      "keywords": [
+        "Siege",
+        "Overwhelm"
+      ],
+      "ability": {
+        "name": "Crushing Maw",
+        "text": "Siege: Deal 3 bonus damage when attacking a player. Overwhelm: Excess combat damage hits the enemy player."
+      },
+      "path": "cards/thalassa/thalassa_card_12_trench_terror.png",
+      "source_file": "thalassa_card_12_trench_terror.png",
+      "format": "3:4",
+      "notes": "menacing posture, large scale, cinematic composition, moody, dark fantasy trading card, no text",
+      "image_prompt": "A massive, multi-jawed abyssal serpent coiled around a ruined stone pillar at the ocean floor, sharp obsidian teeth, dark navy water, bioluminescent veins."
+    },
+    {
+      "title": "Obsidian Colossus",
+      "slug": "infernus_card_08_obsidian_colossus",
+      "category": "cards",
+      "domain": "infernus",
+      "kind": "card",
+      "role": "Heavy Tank / Defender",
+      "stats": {
+        "mana": 6,
+        "attack": 3,
+        "health": 8
+      },
+      "keywords": [
+        "Taunt",
+        "Armor"
+      ],
+      "ability": {
+        "name": "Granite Shell",
+        "text": "Taunt. Armor 3. While this unit has Armor, it ignores all incoming Freeze effects."
+      },
+      "path": "cards/infernus/infernus_card_08_obsidian_colossus.png",
+      "source_file": "infernus_card_08_obsidian_colossus.png",
+      "format": "3:4",
+      "notes": "Dark cinematic fantasy art, high contrast, palette of charcoal, obsidian, and burning orange, 3:4 aspect ratio.",
+      "image_prompt": "A hulking behemoth made of cracked black volcanic rock and glowing orange magma veins, standing defiantly in a scorched crater, dramatic low-angle perspective, embers floating in the air."
+    },
+    {
+      "title": "Ember Wing Skirmisher",
+      "slug": "infernus_card_09_ember_wing_skirmisher",
+      "category": "cards",
+      "domain": "infernus",
+      "kind": "card",
+      "role": "Flying / Assassin",
+      "stats": {
+        "mana": 4,
+        "attack": 4,
+        "health": 3
+      },
+      "keywords": [
+        "Flying"
+      ],
+      "ability": {
+        "name": "Ignition Dive",
+        "text": "Flying. When this unit attacks, deal 2 damage to the enemy player."
+      },
+      "path": "cards/infernus/infernus_card_09_ember_wing_skirmisher.png",
+      "source_file": "infernus_card_09_ember_wing_skirmisher.png",
+      "format": "3:4",
+      "notes": "Aggressive posture, focus on flight motion, volcanic forge background, 3:4 aspect ratio.",
+      "image_prompt": "A demonic humanoid with charred bat-like wings made of embers, diving through thick smoke, razor-sharp obsidian daggers held in clawed hands, dynamic motion blur."
+    },
+    {
+      "title": "Forge-Soul Executioner",
+      "slug": "infernus_card_10_forge_soul_executioner",
+      "category": "cards",
+      "domain": "infernus",
+      "kind": "card",
+      "role": "Executioner / Siege",
+      "stats": {
+        "mana": 5,
+        "attack": 5,
+        "health": 4
+      },
+      "keywords": [
+        "Overwhelm"
+      ],
+      "ability": {
+        "name": "Sunder Soul",
+        "text": "Overwhelm. If this unit destroys an enemy, heal your player for 3 health."
+      },
+      "path": "cards/infernus/infernus_card_10_forge_soul_executioner.png",
+      "source_file": "infernus_card_10_forge_soul_executioner.png",
+      "format": "3:4",
+      "notes": "Menacing presence, heavy shadows, embers falling like ash, 3:4 aspect ratio.",
+      "image_prompt": "A towering demon clad in heavy rusted iron armor wielding a massive two-handed greataxe glowing with white-hot heat, face obscured by a burning grill mask."
+    },
+    {
+      "title": "Magma Weaver",
+      "slug": "infernus_card_11_magma_weaver",
+      "category": "cards",
+      "domain": "infernus",
+      "kind": "card",
+      "role": "Support / Debuffer",
+      "stats": {
+        "mana": 3,
+        "attack": 2,
+        "health": 4
+      },
+      "keywords": [],
+      "ability": {
+        "name": "Molten Restraint",
+        "text": "Choose an enemy unit. It becomes Rooted and takes 1 damage every time it attempts to attack."
+      },
+      "path": "cards/infernus/infernus_card_11_magma_weaver.png",
+      "source_file": "infernus_card_11_magma_weaver.png",
+      "format": "3:4",
+      "notes": "Ethereal look, bright emission lighting on the lava, cold charcoal stone contrast, 3:4 aspect ratio.",
+      "image_prompt": "A spindly elemental entity made of swirling molten lava, weaving glowing orange chains of energy between its clawed fingers, standing in a dark forge."
+    },
+    {
+      "title": "Furnace Hound",
+      "slug": "infernus_card_12_furnace_hound",
+      "category": "cards",
+      "domain": "infernus",
+      "kind": "card",
+      "role": "Fast Unit / Scout",
+      "stats": {
+        "mana": 2,
+        "attack": 3,
+        "health": 2
+      },
+      "keywords": [
+        "Charge",
+        "Reborn"
+      ],
+      "ability": {
+        "name": "Relentless Pursuit",
+        "text": "Charge. Reborn: When destroyed, this unit returns to play with 1 Health."
+      },
+      "path": "cards/infernus/infernus_card_12_furnace_hound.png",
+      "source_file": "infernus_card_12_furnace_hound.png",
+      "format": "3:4",
+      "notes": "Vicious expression, speed lines, dark ash-covered environment, high saturation on the magma glow, 3:4 aspect ratio.",
+      "image_prompt": "A snarling three-headed canine creature with hide glowing like cooling magma, leashed by glowing iron chains, charging forward, embers trailing from its fur."
+    },
+    {
+      "title": "Gale Caller Matriarch",
+      "slug": "anemos_card_08_gale_caller_matriarch",
+      "category": "cards",
+      "domain": "anemos",
+      "kind": "card",
+      "role": "Mage / Support",
+      "stats": {
+        "mana": 4,
+        "attack": 2,
+        "health": 4
+      },
+      "keywords": [
+        "Flying"
+      ],
+      "ability": {
+        "name": "Storm Command",
+        "text": "Flying. When you play a Flying unit, give it +1 Attack and +1 Health."
+      },
+      "path": "cards/anemos/anemos_card_08_gale_caller_matriarch.png",
+      "source_file": "anemos_card_08_gale_caller_matriarch.png",
+      "format": "3:4",
+      "notes": "Avoid saturated blue, focus on deep purples and grays. Sharp focus on face and wings. Aspect ratio 3:4.",
+      "image_prompt": "An elderly harpy queen with flowing ethereal purple feathers, commanding a localized cyclone, atmospheric depth, storm clouds in the background, cinematic fantasy style, portrait 3:4."
+    },
+    {
+      "title": "Thunderhead Behemoth",
+      "slug": "anemos_card_09_thunderhead_behemoth",
+      "category": "cards",
+      "domain": "anemos",
+      "kind": "card",
+      "role": "Heavy Tank / Guardian",
+      "stats": {
+        "mana": 6,
+        "attack": 3,
+        "health": 7
+      },
+      "keywords": [
+        "Taunt",
+        "Armor"
+      ],
+      "ability": {
+        "name": "Static Shell",
+        "text": "Taunt. Armor 2. Whenever this unit takes damage, deal 1 damage to the attacker."
+      },
+      "path": "cards/anemos/anemos_card_09_thunderhead_behemoth.png",
+      "source_file": "anemos_card_09_thunderhead_behemoth.png",
+      "format": "3:4",
+      "notes": "Dramatic under-lighting, metallic textures, high contrast. Negative prompt: text, frame, watermark.",
+      "image_prompt": "A massive elemental construct made of condensed thunderheads and jagged stones, crackling with violet lightning, heavy metal armor plates, looming figure, portrait 3:4."
+    },
+    {
+      "title": "Sky-Sunder Sniper",
+      "slug": "anemos_card_10_sky_sunder_sniper",
+      "category": "cards",
+      "domain": "anemos",
+      "kind": "card",
+      "role": "Ranged / Assassin",
+      "stats": {
+        "mana": 3,
+        "attack": 3,
+        "health": 2
+      },
+      "keywords": [
+        "Ranged",
+        "Stealth"
+      ],
+      "ability": {
+        "name": "Piercing Bolt",
+        "text": "Ranged. Stealth. When this unit deals damage, it ignores Armor."
+      },
+      "path": "cards/anemos/anemos_card_10_sky_sunder_sniper.png",
+      "source_file": "anemos_card_10_sky_sunder_sniper.png",
+      "format": "3:4",
+      "notes": "Focus on lighting effects from the bow, cinematic lens flare, dark fantasy color palette. Aspect ratio 3:4.",
+      "image_prompt": "A sleek harpy ranger perched on a floating cliff edge, aiming a glowing crystalline bow, eyes glowing purple, misty storm background, hyper-detailed, portrait 3:4."
+    },
+    {
+      "title": "Vortex Reaver",
+      "slug": "anemos_card_11_vortex_reaver",
+      "category": "cards",
+      "domain": "anemos",
+      "kind": "card",
+      "role": "Fast Attack / Skirmisher",
+      "stats": {
+        "mana": 5,
+        "attack": 5,
+        "health": 3
+      },
+      "keywords": [
+        "Flying",
+        "Overwhelm"
+      ],
+      "ability": {
+        "name": "Abyssal Descent",
+        "text": "Flying. Overwhelm. When this unit attacks, it gains +1 Attack for each other Flying unit you control."
+      },
+      "path": "cards/anemos/anemos_card_11_vortex_reaver.png",
+      "source_file": "anemos_card_11_vortex_reaver.png",
+      "format": "3:4",
+      "notes": "Motion blur on the wings, high-key lighting for the aura. Dark fantasy style. Aspect ratio 3:4.",
+      "image_prompt": "A demonic-looking wind spirit diving from the clouds, wings extended like a blade, sharp jagged features, ethereal purple aura, stormy sky, intense action pose, portrait 3:4."
+    },
+    {
+      "title": "Cloud-Drifter Sentinel",
+      "slug": "anemos_card_12_cloud_drifter_sentinel",
+      "category": "cards",
+      "domain": "anemos",
+      "kind": "card",
+      "role": "Support / Defender",
+      "stats": {
+        "mana": 2,
+        "attack": 1,
+        "health": 3
+      },
+      "keywords": [
+        "Ward"
+      ],
+      "ability": {
+        "name": "Spirit Barrier",
+        "text": "Ward. Deathrattle: Give an adjacent allied unit Ward."
+      },
+      "path": "cards/anemos/anemos_card_12_cloud_drifter_sentinel.png",
+      "source_file": "anemos_card_12_cloud_drifter_sentinel.png",
+      "format": "3:4",
+      "notes": "Soft focus, ethereal glow, dark fantasy, subtle details on the wings. Negative prompt: bright colors, saturated red. Aspect ratio 3:4.",
+      "image_prompt": "A translucent, ghostly harpy figure floating within a sanctuary of clouds, peaceful yet sad expression, ethereal purple wisps, soft lighting, portrait 3:4."
+    },
+    {
+      "title": "Mountain Anchor",
+      "slug": "kronos_card_13_mountain_anchor",
+      "category": "cards",
+      "domain": "kronos",
+      "kind": "card",
+      "role": "Defender / Tank",
+      "stats": {
+        "mana": 4,
+        "attack": 1,
+        "health": 7
+      },
+      "keywords": [
+        "Taunt",
+        "Armor"
+      ],
+      "ability": {
+        "name": "Granite Lockdown",
+        "text": "Taunt. Armor 1. This unit cannot be targeted by enemy spells while it has full health."
+      },
+      "path": "cards/kronos/kronos_card_13_mountain_anchor.png",
+      "source_file": "kronos_card_13_mountain_anchor.png",
+      "format": "3:4",
+      "notes": "cinematic lighting, high detail, stony texture, 3:4 aspect ratio, negative: blurry, text, frame.",
+      "image_prompt": "A massive, immovable statue made of granite and glowing golden amber, carved into the shape of a kneeling guardian, moss-covered, dramatic low-angle lighting, dark fantasy style."
+    },
+    {
+      "title": "Amber Golem",
+      "slug": "kronos_card_14_amber_golem",
+      "category": "cards",
+      "domain": "kronos",
+      "kind": "card",
+      "role": "Heavy Tank",
+      "stats": {
+        "mana": 6,
+        "attack": 5,
+        "health": 6
+      },
+      "keywords": [
+        "Ward"
+      ],
+      "ability": {
+        "name": "Amber Core Pulse",
+        "text": "Ward. When this unit enters the field, give all adjacent friendly units Ward until your next turn."
+      },
+      "path": "cards/kronos/kronos_card_14_amber_golem.png",
+      "source_file": "kronos_card_14_amber_golem.png",
+      "format": "3:4",
+      "notes": "volumetric light, warm amber glow against dark rocks, 3:4 aspect ratio, photorealistic.",
+      "image_prompt": "A hulking construct made of solid stone with veins of liquid golden amber pulsating throughout its body, cracked earth background, cinematic composition."
+    },
+    {
+      "title": "Stonecrag Sniper",
+      "slug": "kronos_card_15_stonecrag_sniper",
+      "category": "cards",
+      "domain": "kronos",
+      "kind": "card",
+      "role": "Ranged / Assassin",
+      "stats": {
+        "mana": 3,
+        "attack": 3,
+        "health": 2
+      },
+      "keywords": [
+        "Ranged",
+        "Stealth"
+      ],
+      "ability": {
+        "name": "Mountain Precision",
+        "text": "Ranged. Stealth. If this unit attacks a target with full health, deal +2 bonus damage."
+      },
+      "path": "cards/kronos/kronos_card_15_stonecrag_sniper.png",
+      "source_file": "kronos_card_15_stonecrag_sniper.png",
+      "format": "3:4",
+      "notes": "sharp focus on the character, muted earth tones, 3:4 aspect ratio.",
+      "image_prompt": "A slender druid camouflaged against a granite cliff face, holding a stone-carved longbow, amber arrow glowing, moody atmospheric fog, dark fantasy."
+    },
+    {
+      "title": "Crag-Shell Tortoise",
+      "slug": "kronos_card_16_cragshell_tortoise",
+      "category": "cards",
+      "domain": "kronos",
+      "kind": "card",
+      "role": "Tank / Support",
+      "stats": {
+        "mana": 5,
+        "attack": 2,
+        "health": 8
+      },
+      "keywords": [
+        "Armor"
+      ],
+      "ability": {
+        "name": "Shell Bastion",
+        "text": "Armor 2. Allied units behind this creature take 1 less damage from all sources."
+      },
+      "path": "cards/kronos/kronos_card_16_cragshell_tortoise.png",
+      "source_file": "kronos_card_16_cragshell_tortoise.png",
+      "format": "3:4",
+      "notes": "hyper-detailed scales, cinematic shadows, 3:4 aspect ratio.",
+      "image_prompt": "A colossal tortoise with a shell resembling a jagged mountain peak, moss and small trees growing on its back, earthy textures, epic scale."
+    },
+    {
+      "title": "Rooted Siegebreaker",
+      "slug": "kronos_card_17_rooted_siegebreaker",
+      "category": "cards",
+      "domain": "kronos",
+      "kind": "card",
+      "role": "Siege / Tank",
+      "stats": {
+        "mana": 6,
+        "attack": 6,
+        "health": 5
+      },
+      "keywords": [
+        "Siege",
+        "Rooted"
+      ],
+      "ability": {
+        "name": "Tectonic Anchor",
+        "text": "Siege. Rooted. While Rooted, this unit ignores all incoming debuffs."
+      },
+      "path": "cards/kronos/kronos_card_17_rooted_siegebreaker.png",
+      "source_file": "kronos_card_17_rooted_siegebreaker.png",
+      "format": "3:4",
+      "notes": "high contrast, dramatic lighting, 3:4 aspect ratio.",
+      "image_prompt": "An ancient stone warrior with roots wrapping around its legs and feet, holding a massive stone hammer, dark forest cliff side background."
+    },
+    {
+      "title": "Amber-Eyed Prowler",
+      "slug": "kronos_card_18_ambereyed_prowler",
+      "category": "cards",
+      "domain": "kronos",
+      "kind": "card",
+      "role": "Assassin / Scout",
+      "stats": {
+        "mana": 2,
+        "attack": 3,
+        "health": 2
+      },
+      "keywords": [
+        "Charge"
+      ],
+      "ability": {
+        "name": "Amber Leap",
+        "text": "Charge. When this unit attacks a unit, it gains Armor 2 until the end of the turn."
+      },
+      "path": "cards/kronos/kronos_card_18_ambereyed_prowler.png",
+      "source_file": "kronos_card_18_ambereyed_prowler.png",
+      "format": "3:4",
+      "notes": "motion blur on background, sharp subject, 3:4 aspect ratio.",
+      "image_prompt": "A lithe, panther-like creature made of polished granite with glowing golden eyes, pouncing forward, dusty earth explosion under paws."
+    },
+    {
+      "title": "Elder Mountain Sage",
+      "slug": "kronos_card_19_elder_mountain_sage",
+      "category": "cards",
+      "domain": "kronos",
+      "kind": "card",
+      "role": "Support / Healer",
+      "stats": {
+        "mana": 4,
+        "attack": 1,
+        "health": 5
+      },
+      "keywords": [
+        "Regenerate"
+      ],
+      "ability": {
+        "name": "Earth Vitality",
+        "text": "Regenerate 2. Whenever you cast a spell, heal an allied unit for 2 health."
+      },
+      "path": "cards/kronos/kronos_card_19_elder_mountain_sage.png",
+      "source_file": "kronos_card_19_elder_mountain_sage.png",
+      "format": "3:4",
+      "notes": "magical atmosphere, bokeh background, 3:4 aspect ratio.",
+      "image_prompt": "An elderly druid wearing robes made of living moss and stone fragments, holding an amber staff, ethereal golden glow emitting from hands."
+    },
+    {
+      "title": "Stone-Bound Revenant",
+      "slug": "kronos_card_20_stonebound_revenant",
+      "category": "cards",
+      "domain": "kronos",
+      "kind": "card",
+      "role": "Undead / Defender",
+      "stats": {
+        "mana": 3,
+        "attack": 2,
+        "health": 3
+      },
+      "keywords": [
+        "Reborn"
+      ],
+      "ability": {
+        "name": "Eternal Granite",
+        "text": "Reborn. When this unit is reborn, it gains +1/+1."
+      },
+      "path": "cards/kronos/kronos_card_20_stonebound_revenant.png",
+      "source_file": "kronos_card_20_stonebound_revenant.png",
+      "format": "3:4",
+      "notes": "moody lighting, dramatic shadows, 3:4 aspect ratio.",
+      "image_prompt": "A crumbling stone soldier reanimating, fragments of grey rock floating around its body, ghostly golden cracks glowing, dark tomb background."
+    },
+    {
+      "title": "Fissure Cracker",
+      "slug": "kronos_card_21_fissure_cracker",
+      "category": "cards",
+      "domain": "kronos",
+      "kind": "card",
+      "role": "Siege / Damage Dealer",
+      "stats": {
+        "mana": 5,
+        "attack": 4,
+        "health": 4
+      },
+      "keywords": [
+        "Overwhelm"
+      ],
+      "ability": {
+        "name": "Ground Splitter",
+        "text": "Overwhelm. When this unit attacks, deal 2 damage to all units adjacent to the target."
+      },
+      "path": "cards/kronos/kronos_card_21_fissure_cracker.png",
+      "source_file": "kronos_card_21_fissure_cracker.png",
+      "format": "3:4",
+      "notes": "dynamic pose, high impact, dark environment, 3:4 aspect ratio.",
+      "image_prompt": "A brutal construct smashing its fists into the ground causing a massive fissure, golden light erupting from the cracks, cinematic, dark fantasy."
+    },
+    {
+      "title": "Sky-Stone Sentinel",
+      "slug": "kronos_card_22_skystone_sentinel",
+      "category": "cards",
+      "domain": "kronos",
+      "kind": "card",
+      "role": "Flying / Defender",
+      "stats": {
+        "mana": 4,
+        "attack": 3,
+        "health": 4
+      },
+      "keywords": [
+        "Flying"
+      ],
+      "ability": {
+        "name": "High Altitude Guard",
+        "text": "Flying. Taunt. When this unit blocks an attack, deal 2 damage to the attacker."
+      },
+      "path": "cards/kronos/kronos_card_22_skystone_sentinel.png",
+      "source_file": "kronos_card_22_skystone_sentinel.png",
+      "format": "3:4",
+      "notes": "dramatic perspective, lighting from below, 3:4 aspect ratio.",
+      "image_prompt": "A gargoyle-like statue with heavy stone wings flying through a stormy sky, amber veins glowing on its chest, dark clouds background."
+    },
+    {
+      "title": "Abyssal Maw Eel",
+      "slug": "thalassa_card_13_abyssal_maw_eel",
+      "category": "cards",
+      "domain": "thalassa",
+      "kind": "card",
+      "role": "Assassin / Stealth",
+      "stats": {
+        "mana": 3,
+        "attack": 3,
+        "health": 2
+      },
+      "keywords": [
+        "Stealth"
+      ],
+      "ability": {
+        "name": "Shadow Strike",
+        "text": "Stealth. When this unit attacks from Stealth, gain +2 Attack until end of turn."
+      },
+      "path": "cards/thalassa/thalassa_card_13_abyssal_maw_eel.png",
+      "source_file": "thalassa_card_13_abyssal_maw_eel.png",
+      "format": "3:4",
+      "notes": "Deep navy and glowing cyan color palette, cinematic lighting, portrait 3:4.",
+      "image_prompt": "A long, serpentine bioluminescent eel with rows of needle teeth lurking in dark blue abyssal water, shadows concealing its body, hyper-realistic, dark fantasy art."
+    },
+    {
+      "title": "Sunken Knight",
+      "slug": "thalassa_card_14_sunken_knight",
+      "category": "cards",
+      "domain": "thalassa",
+      "kind": "card",
+      "role": "Tank / Defender",
+      "stats": {
+        "mana": 5,
+        "attack": 2,
+        "health": 6
+      },
+      "keywords": [
+        "Taunt",
+        "Armor"
+      ],
+      "ability": {
+        "name": "Barnacle Guard",
+        "text": "Taunt. Armor 1. This unit takes 1 less damage from all sources."
+      },
+      "path": "cards/thalassa/thalassa_card_14_sunken_knight.png",
+      "source_file": "thalassa_card_14_sunken_knight.png",
+      "format": "3:4",
+      "notes": "Gritty textures, underwater haze, high contrast, portrait 3:4.",
+      "image_prompt": "A rusted, barnacle-encrusted suit of plate armor floating underwater, ethereal blue spirit glowing from the visor, dark coral background, dramatic lighting."
+    },
+    {
+      "title": "Trench Warden",
+      "slug": "thalassa_card_15_trench_warden",
+      "category": "cards",
+      "domain": "thalassa",
+      "kind": "card",
+      "role": "Support / Healer",
+      "stats": {
+        "mana": 4,
+        "attack": 2,
+        "health": 4
+      },
+      "keywords": [
+        "Lifesteal"
+      ],
+      "ability": {
+        "name": "Abyssal Pulse",
+        "text": "Lifesteal. At the end of your turn, restore 2 health to your hero."
+      },
+      "path": "cards/thalassa/thalassa_card_15_trench_warden.png",
+      "source_file": "thalassa_card_15_trench_warden.png",
+      "format": "3:4",
+      "notes": "Focus on the glowing relic, moody atmosphere, cool tones, portrait 3:4.",
+      "image_prompt": "An ancient, drowned hermit crab wearing a glowing ornate relic on its back, bioluminescent spores drifting, deep ocean floor, epic dark fantasy style."
+    },
+    {
+      "title": "Coral Spire Mage",
+      "slug": "thalassa_card_16_coral_spire_mage",
+      "category": "cards",
+      "domain": "thalassa",
+      "kind": "card",
+      "role": "Mage / Crowd Control",
+      "stats": {
+        "mana": 4,
+        "attack": 2,
+        "health": 3
+      },
+      "keywords": [
+        "Freeze"
+      ],
+      "ability": {
+        "name": "Frostbite Spikes",
+        "text": "Freeze an enemy unit. If the unit is already frozen, deal 3 damage to it."
+      },
+      "path": "cards/thalassa/thalassa_card_16_coral_spire_mage.png",
+      "source_file": "thalassa_card_16_coral_spire_mage.png",
+      "format": "3:4",
+      "notes": "Sharp angular features, cold bioluminescence, detailed ice particles, portrait 3:4.",
+      "image_prompt": "A tall siren with hair made of sharp white coral fragments casting frost magic, hands glowing with ice energy, dark submerged ruins in background."
+    },
+    {
+      "title": "Void-Touched Shark",
+      "slug": "thalassa_card_17_void_touched_shark",
+      "category": "cards",
+      "domain": "thalassa",
+      "kind": "card",
+      "role": "Aggressor / Overwhelm",
+      "stats": {
+        "mana": 6,
+        "attack": 6,
+        "health": 5
+      },
+      "keywords": [
+        "Overwhelm"
+      ],
+      "ability": {
+        "name": "Ravenous Surge",
+        "text": "Overwhelm. When this unit kills an enemy, it gains +1/+1 permanently."
+      },
+      "path": "cards/thalassa/thalassa_card_17_void_touched_shark.png",
+      "source_file": "thalassa_card_17_void_touched_shark.png",
+      "format": "3:4",
+      "notes": "Purple and navy contrast, high motion blur, menacing, portrait 3:4.",
+      "image_prompt": "A massive shark with corrupted, jagged shadow-matter fins and glowing purple veins, open jaws, hunting in dark water, aggressive posture."
+    },
+    {
+      "title": "Drowned Marksman",
+      "slug": "thalassa_card_18_drowned_marksman",
+      "category": "cards",
+      "domain": "thalassa",
+      "kind": "card",
+      "role": "Ranged / Assassin",
+      "stats": {
+        "mana": 3,
+        "attack": 3,
+        "health": 2
+      },
+      "keywords": [
+        "Ranged"
+      ],
+      "ability": {
+        "name": "Bone-Bolt",
+        "text": "Ranged. This unit deals double damage to units with full health."
+      },
+      "path": "cards/thalassa/thalassa_card_18_drowned_marksman.png",
+      "source_file": "thalassa_card_18_drowned_marksman.png",
+      "format": "3:4",
+      "notes": "Detailed bone texture, teal lighting, atmospheric perspective, portrait 3:4.",
+      "image_prompt": "A skeletal archer holding a crossbow fashioned from ship debris, waterlogged rags flowing, bioluminescent fungi growing on armor, eerie atmosphere."
+    },
+    {
+      "title": "Benthic Colossus",
+      "slug": "thalassa_card_19_benthic_colossus",
+      "category": "cards",
+      "domain": "thalassa",
+      "kind": "card",
+      "role": "Tank / Siege",
+      "stats": {
+        "mana": 8,
+        "attack": 7,
+        "health": 8
+      },
+      "keywords": [
+        "Siege",
+        "Taunt"
+      ],
+      "ability": {
+        "name": "Tidal Impact",
+        "text": "Taunt. Siege. This unit takes 2 less damage from all attacks while in the front row."
+      },
+      "path": "cards/thalassa/thalassa_card_19_benthic_colossus.png",
+      "source_file": "thalassa_card_19_benthic_colossus.png",
+      "format": "3:4",
+      "notes": "Dark, heavy, oppressive scale, low angle, portrait 3:4.",
+      "image_prompt": "A massive titan made of black basalt and calcified ruins, walking on the ocean floor, clouds of silt rising, monumental scale."
+    },
+    {
+      "title": "Whirlpool Spirit",
+      "slug": "thalassa_card_20_whirlpool_spirit",
+      "category": "cards",
+      "domain": "thalassa",
+      "kind": "card",
+      "role": "Flying / Disruptor",
+      "stats": {
+        "mana": 4,
+        "attack": 3,
+        "health": 3
+      },
+      "keywords": [
+        "Flying"
+      ],
+      "ability": {
+        "name": "Vortex Pull",
+        "text": "Flying. When this unit enters play, swap the positions of two enemy units."
+      },
+      "path": "cards/thalassa/thalassa_card_20_whirlpool_spirit.png",
+      "source_file": "thalassa_card_20_whirlpool_spirit.png",
+      "format": "3:4",
+      "notes": "Abstract, flowing forms, bioluminescence, soft edges, portrait 3:4.",
+      "image_prompt": "An ethereal water spirit shaped like a spinning funnel of dark water, glowing eyes, swirling debris in a dark underwater vortex."
+    },
+    {
+      "title": "Undying Scourge",
+      "slug": "thalassa_card_21_undying_scourge",
+      "category": "cards",
+      "domain": "thalassa",
+      "kind": "card",
+      "role": "Undead / Frontline",
+      "stats": {
+        "mana": 5,
+        "attack": 4,
+        "health": 3
+      },
+      "keywords": [
+        "Reborn"
+      ],
+      "ability": {
+        "name": "Ever-Drowning",
+        "text": "Reborn. When this unit returns to play, Freeze a random enemy unit."
+      },
+      "path": "cards/thalassa/thalassa_card_21_undying_scourge.png",
+      "source_file": "thalassa_card_21_undying_scourge.png",
+      "format": "3:4",
+      "notes": "Gothic style, contrast between shadows and eerie green, portrait 3:4.",
+      "image_prompt": "A decaying sea captain emerging from a cloud of ink, tattered navy uniform, spectral green glow emanating from chest wounds."
+    },
+    {
+      "title": "Deepsea Void-Weaver",
+      "slug": "thalassa_card_22_deepsea_void_weaver",
+      "category": "cards",
+      "domain": "thalassa",
+      "kind": "card",
+      "role": "Mage / Debuffer",
+      "stats": {
+        "mana": 3,
+        "attack": 2,
+        "health": 2
+      },
+      "keywords": [
+        "Rooted"
+      ],
+      "ability": {
+        "name": "Void Web",
+        "text": "Rooted. Enemy units within range have their Attack reduced by 2 as long as this unit stays alive."
+      },
+      "path": "cards/thalassa/thalassa_card_22_deepsea_void_weaver.png",
+      "source_file": "thalassa_card_22_deepsea_void_weaver.png",
+      "format": "3:4",
+      "notes": "Surreal horror, bioluminescence, dark purple and dark blue tones, portrait 3:4.",
+      "image_prompt": "A multi-limbed creature with translucent skin weaving glowing purple threads of aether, sitting atop a jagged coral throne in the deepest abyss."
+    },
+    {
+      "title": "Cinder Flame Stalker",
+      "slug": "infernus_card_13_cinder_flame_stalker",
+      "category": "cards",
+      "domain": "infernus",
+      "kind": "card",
+      "role": "Assassin / Scout",
+      "stats": {
+        "mana": 3,
+        "attack": 3,
+        "health": 2
+      },
+      "keywords": [
+        "Stealth"
+      ],
+      "ability": {
+        "name": "Shadow Ember",
+        "text": "Stealth. When this unit attacks, it deals 2 additional damage to the target."
+      },
+      "path": "cards/infernus/infernus_card_13_cinder_flame_stalker.png",
+      "source_file": "infernus_card_13_cinder_flame_stalker.png",
+      "format": "3:4",
+      "notes": "Use deep reds and charcoals. 3:4 aspect ratio. No text or frames.",
+      "image_prompt": "A slender demonic figure made of living coal and orange flame, creeping through a scorched basalt forest, glowing eyes, cinematic lighting, hyper-realistic, dark fantasy art."
+    },
+    {
+      "title": "Magma Core Goliath",
+      "slug": "infernus_card_14_magma_core_goliath",
+      "category": "cards",
+      "domain": "infernus",
+      "kind": "card",
+      "role": "Heavy Tank / Defender",
+      "stats": {
+        "mana": 6,
+        "attack": 2,
+        "health": 8
+      },
+      "keywords": [
+        "Taunt",
+        "Armor"
+      ],
+      "ability": {
+        "name": "Molten Shell",
+        "text": "Taunt. Armor 3. At the end of your turn, deal 1 damage to all adjacent enemy units."
+      },
+      "path": "cards/infernus/infernus_card_14_magma_core_goliath.png",
+      "source_file": "infernus_card_14_magma_core_goliath.png",
+      "format": "3:4",
+      "notes": "Focus on scale and weight. 3:4 aspect ratio. No text.",
+      "image_prompt": "A massive hulking beast made of solid volcanic rock with rivers of flowing lava cracks, shield-like arms, cinematic low angle, dramatic backlight from lava, dark fantasy."
+    },
+    {
+      "title": "Infernal Siege Engine",
+      "slug": "infernus_card_15_infernal_siege_engine",
+      "category": "cards",
+      "domain": "infernus",
+      "kind": "card",
+      "role": "Artillery / Siege",
+      "stats": {
+        "mana": 5,
+        "attack": 4,
+        "health": 4
+      },
+      "keywords": [
+        "Siege"
+      ],
+      "ability": {
+        "name": "Void Cannon",
+        "text": "Siege. This unit deals double damage to player structures."
+      },
+      "path": "cards/infernus/infernus_card_15_infernal_siege_engine.png",
+      "source_file": "infernus_card_15_infernal_siege_engine.png",
+      "format": "3:4",
+      "notes": "Industrial dark fantasy style. 3:4 aspect ratio.",
+      "image_prompt": "A mechanical contraption fashioned from dark iron and charred bone, firing a molten projectile, embers flying, gritty desert background, highly detailed, dark fantasy."
+    },
+    {
+      "title": "Ash Reborn Champion",
+      "slug": "infernus_card_16_ash_reborn_champion",
+      "category": "cards",
+      "domain": "infernus",
+      "kind": "card",
+      "role": "Warrior / Undead",
+      "stats": {
+        "mana": 4,
+        "attack": 3,
+        "health": 3
+      },
+      "keywords": [
+        "Reborn"
+      ],
+      "ability": {
+        "name": "Undying Ember",
+        "text": "Reborn. When this unit enters play, grant another friendly unit +1/+1."
+      },
+      "path": "cards/infernus/infernus_card_16_ash_reborn_champion.png",
+      "source_file": "infernus_card_16_ash_reborn_champion.png",
+      "format": "3:4",
+      "notes": "Ghostly but fiery. 3:4 aspect ratio.",
+      "image_prompt": "A spectral knight clad in rusted plate armor with glowing embers swirling around his body, holding a broken sword, ethereal glow, dark castle courtyard."
+    },
+    {
+      "title": "Molten Winged Terror",
+      "slug": "infernus_card_17_molten_winged_terror",
+      "category": "cards",
+      "domain": "infernus",
+      "kind": "card",
+      "role": "Flying / Predator",
+      "stats": {
+        "mana": 5,
+        "attack": 4,
+        "health": 4
+      },
+      "keywords": [
+        "Flying"
+      ],
+      "ability": {
+        "name": "Sear Sky",
+        "text": "Flying. If this unit attacks an enemy in the air, deal 2 additional damage."
+      },
+      "path": "cards/infernus/infernus_card_17_molten_winged_terror.png",
+      "source_file": "infernus_card_17_molten_winged_terror.png",
+      "format": "3:4",
+      "notes": "Dynamic action pose. 3:4 aspect ratio.",
+      "image_prompt": "A demonic creature with leathery wings dripping with molten gold, soaring above a lava lake, predatory posture, intense orange lighting, dark fantasy."
+    },
+    {
+      "title": "Furnace Blade Bladeweaver",
+      "slug": "infernus_card_18_furnace_blade_bladeweaver",
+      "category": "cards",
+      "domain": "infernus",
+      "kind": "card",
+      "role": "Assassin / Duelist",
+      "stats": {
+        "mana": 3,
+        "attack": 4,
+        "health": 2
+      },
+      "keywords": [
+        "Charge"
+      ],
+      "ability": {
+        "name": "Rapid Forge-Strike",
+        "text": "Charge. If this unit destroys an enemy, it heals for 2 health."
+      },
+      "path": "cards/infernus/infernus_card_18_furnace_blade_bladeweaver.png",
+      "source_file": "infernus_card_18_furnace_blade_bladeweaver.png",
+      "format": "3:4",
+      "notes": "Speed and lethality theme. 3:4 aspect ratio.",
+      "image_prompt": "A lithe figure with blades emerging from its forearms, sparks flying, crouched on a forge anvil, dark atmospheric lighting, high contrast."
+    },
+    {
+      "title": "Obsidian Scale Warden",
+      "slug": "infernus_card_19_obsidian_scale_warden",
+      "category": "cards",
+      "domain": "infernus",
+      "kind": "card",
+      "role": "Tank / Support",
+      "stats": {
+        "mana": 4,
+        "attack": 2,
+        "health": 5
+      },
+      "keywords": [
+        "Ward"
+      ],
+      "ability": {
+        "name": "Void Shield",
+        "text": "Ward. Friendly units adjacent to this one have +1 Armor."
+      },
+      "path": "cards/infernus/infernus_card_19_obsidian_scale_warden.png",
+      "source_file": "infernus_card_19_obsidian_scale_warden.png",
+      "format": "3:4",
+      "notes": "Focus on the magical shield effect. 3:4 aspect ratio.",
+      "image_prompt": "A stout lizard-like creature with armored obsidian scales, holding a glowing magical barrier, dark cavern background, cinematic lighting."
+    },
+    {
+      "title": "Ember-Eye Sharpshooter",
+      "slug": "infernus_card_20_ember_eye_sharpshooter",
+      "category": "cards",
+      "domain": "infernus",
+      "kind": "card",
+      "role": "Ranged / Support",
+      "stats": {
+        "mana": 3,
+        "attack": 3,
+        "health": 2
+      },
+      "keywords": [
+        "Ranged"
+      ],
+      "ability": {
+        "name": "Precision Burn",
+        "text": "Ranged. This unit ignores Taunt when attacking enemy units."
+      },
+      "path": "cards/infernus/infernus_card_20_ember_eye_sharpshooter.png",
+      "source_file": "infernus_card_20_ember_eye_sharpshooter.png",
+      "format": "3:4",
+      "notes": "Sharp focus on eyes and bow. 3:4 aspect ratio.",
+      "image_prompt": "A demonic archer with a bow made of scorched wood, aiming an arrow tipped with a white-hot ember, focused expression, dark fantasy horizon."
+    },
+    {
+      "title": "Magma-Flow Devourer",
+      "slug": "infernus_card_21_magma_flow_devourer",
+      "category": "cards",
+      "domain": "infernus",
+      "kind": "card",
+      "role": "Destroyer / Elite",
+      "stats": {
+        "mana": 8,
+        "attack": 7,
+        "health": 6
+      },
+      "keywords": [
+        "Devour"
+      ],
+      "ability": {
+        "name": "Consume Essence",
+        "text": "Devour. When this unit devours a target, it gains +2 health and +2 attack permanently."
+      },
+      "path": "cards/infernus/infernus_card_21_magma_flow_devourer.png",
+      "source_file": "infernus_card_21_magma_flow_devourer.png",
+      "format": "3:4",
+      "notes": "Dark, cosmic, intimidating. 3:4 aspect ratio.",
+      "image_prompt": "A terrifying multi-limbed demonic entity absorbing molten matter into its maw, standing amidst ruins, scale is gargantuan, dark surreal fantasy."
+    },
+    {
+      "title": "Cinder Wisp Swarm",
+      "slug": "infernus_card_22_cinder_wisp_swarm",
+      "category": "cards",
+      "domain": "infernus",
+      "kind": "card",
+      "role": "Support / Debuffer",
+      "stats": {
+        "mana": 2,
+        "attack": 1,
+        "health": 2
+      },
+      "keywords": [
+        "Flying"
+      ],
+      "ability": {
+        "name": "Ash Cloud",
+        "text": "Flying. Enemies attacking this unit have their attack reduced by 1 until end of turn."
+      },
+      "path": "cards/infernus/infernus_card_22_cinder_wisp_swarm.png",
+      "source_file": "infernus_card_22_cinder_wisp_swarm.png",
+      "format": "3:4",
+      "notes": "Particle effects focus. 3:4 aspect ratio.",
+      "image_prompt": "A swarm of small ember-like spirits swirling together in the darkness, bioluminescent orange, ethereal and ghostly, dark fantasy forest background."
+    },
+    {
+      "title": "Stormcaller Initiate",
+      "slug": "anemos_card_13_stormcaller_initiate",
+      "category": "cards",
+      "domain": "anemos",
+      "kind": "card",
+      "role": "Mage / Support",
+      "stats": {
+        "mana": 3,
+        "attack": 2,
+        "health": 3
+      },
+      "keywords": [
+        "Flying"
+      ],
+      "ability": {
+        "name": "Static Discharge",
+        "text": "Flying. When this enters play, deal 1 damage to an enemy unit and apply Freeze to it."
+      },
+      "path": "cards/anemos/anemos_card_13_stormcaller_initiate.png",
+      "source_file": "anemos_card_13_stormcaller_initiate.png",
+      "format": "3:4",
+      "notes": "Portrait orientation, 3:4 aspect ratio, avoid blurry edges, sharp digital art style.",
+      "image_prompt": "Young wizard floating above thunderclouds holding a crackling orb of purple electricity, wind-swept robes, ethereal glow, cinematic lighting."
+    },
+    {
+      "title": "Void-Scarred Harpy",
+      "slug": "anemos_card_14_void_scarred_harpy",
+      "category": "cards",
+      "domain": "anemos",
+      "kind": "card",
+      "role": "Assassin / Scout",
+      "stats": {
+        "mana": 4,
+        "attack": 4,
+        "health": 2
+      },
+      "keywords": [
+        "Flying",
+        "Stealth"
+      ],
+      "ability": {
+        "name": "Abyssal Pounce",
+        "text": "Flying. Stealth. When this unit attacks a unit with Flying, it gains +2 Attack for the duration of the combat."
+      },
+      "path": "cards/anemos/anemos_card_14_void_scarred_harpy.png",
+      "source_file": "anemos_card_14_void_scarred_harpy.png",
+      "format": "3:4",
+      "notes": "Negative prompt: text, borders. Dark fantasy aesthetic, intense contrast.",
+      "image_prompt": "Ferocious harpy with tattered wings showing purple void energy seeping through feathers, sharp talons, midnight sky background, dramatic silhouettes."
+    },
+    {
+      "title": "Gale Shield Guardian",
+      "slug": "anemos_card_15_gale_shield_guardian",
+      "category": "cards",
+      "domain": "anemos",
+      "kind": "card",
+      "role": "Defender / Tank",
+      "stats": {
+        "mana": 5,
+        "attack": 2,
+        "health": 6
+      },
+      "keywords": [
+        "Taunt",
+        "Armor"
+      ],
+      "ability": {
+        "name": "Pressure Dome",
+        "text": "Taunt. Armor 1. While this unit is on the field, allied units in adjacent positions have Ward."
+      },
+      "path": "cards/anemos/anemos_card_15_gale_shield_guardian.png",
+      "source_file": "anemos_card_15_gale_shield_guardian.png",
+      "format": "3:4",
+      "notes": "Cinematic lighting, high detail on elemental textures, 3:4.",
+      "image_prompt": "Massive golem made of compressed air and debris, glowing purple core, shield of spinning wind, imposing stance, storm background."
+    },
+    {
+      "title": "Zephyr Marksman",
+      "slug": "anemos_card_16_zephyr_marksman",
+      "category": "cards",
+      "domain": "anemos",
+      "kind": "card",
+      "role": "Ranged / Sniper",
+      "stats": {
+        "mana": 4,
+        "attack": 3,
+        "health": 3
+      },
+      "keywords": [
+        "Ranged"
+      ],
+      "ability": {
+        "name": "Wind-Shear Shot",
+        "text": "Ranged. Once per turn, you may pay 1 mana to deal 2 damage to an enemy unit ignoring Stealth."
+      },
+      "path": "cards/anemos/anemos_card_16_zephyr_marksman.png",
+      "source_file": "anemos_card_16_zephyr_marksman.png",
+      "format": "3:4",
+      "notes": "Cool tones, ethereal highlights, portrait 3:4.",
+      "image_prompt": "Elven scout drawing a bow made of solidified lightning, standing on a floating rock platform, wind spirits swirling around, sharp eyes."
+    },
+    {
+      "title": "Lightning Talon",
+      "slug": "anemos_card_17_lightning_talon",
+      "category": "cards",
+      "domain": "anemos",
+      "kind": "card",
+      "role": "Fast Attack / Flying",
+      "stats": {
+        "mana": 5,
+        "attack": 5,
+        "health": 3
+      },
+      "keywords": [
+        "Flying",
+        "Charge"
+      ],
+      "ability": {
+        "name": "Sky-Strike",
+        "text": "Flying. Charge. If this unit attacks a player, it gains Overwhelm for the rest of the turn."
+      },
+      "path": "cards/anemos/anemos_card_17_lightning_talon.png",
+      "source_file": "anemos_card_17_lightning_talon.png",
+      "format": "3:4",
+      "notes": "Sharp focus, dramatic low-angle shot, no text.",
+      "image_prompt": "Electric hawk-humanoid hybrid diving from clouds, claws wreathed in purple lightning, motion blur on wings, hyper-realistic."
+    },
+    {
+      "title": "Reborn Tempest",
+      "slug": "anemos_card_18_reborn_tempest",
+      "category": "cards",
+      "domain": "anemos",
+      "kind": "card",
+      "role": "Undead / Flying",
+      "stats": {
+        "mana": 6,
+        "attack": 4,
+        "health": 4
+      },
+      "keywords": [
+        "Flying",
+        "Reborn"
+      ],
+      "ability": {
+        "name": "Cycle of the Gale",
+        "text": "Flying. Reborn. When this unit is reborn, deal 2 damage to all enemy ground units."
+      },
+      "path": "cards/anemos/anemos_card_18_reborn_tempest.png",
+      "source_file": "anemos_card_18_reborn_tempest.png",
+      "format": "3:4",
+      "notes": "Atmospheric depth, ethereal style, dark fantasy.",
+      "image_prompt": "Spectral skeletal wind spirit, translucent wings glowing with purple energy, emerging from a storm cloud, ghost-like appearance."
+    },
+    {
+      "title": "Cloud-Sunder Behemoth",
+      "slug": "anemos_card_19_cloud_sunder_behemoth",
+      "category": "cards",
+      "domain": "anemos",
+      "kind": "card",
+      "role": "Heavy Siege",
+      "stats": {
+        "mana": 8,
+        "attack": 7,
+        "health": 7
+      },
+      "keywords": [
+        "Flying",
+        "Siege"
+      ],
+      "ability": {
+        "name": "Crushing Gale",
+        "text": "Flying. Siege. When this unit attacks a player, draw a card and Freeze the defending player's units."
+      },
+      "path": "cards/anemos/anemos_card_19_cloud_sunder_behemoth.png",
+      "source_file": "anemos_card_19_cloud_sunder_behemoth.png",
+      "format": "3:4",
+      "notes": "Epic wide-shot look but constrained to portrait, no watermarks.",
+      "image_prompt": "Colossal storm dragon with wings spanning the horizon, scales reflecting purple lightning, clouds parting before it, epic scale."
+    },
+    {
+      "title": "Whispering Cloud-Dancer",
+      "slug": "anemos_card_20_whispering_cloud_dancer",
+      "category": "cards",
+      "domain": "anemos",
+      "kind": "card",
+      "role": "Support / Scout",
+      "stats": {
+        "mana": 2,
+        "attack": 1,
+        "health": 2
+      },
+      "keywords": [
+        "Flying"
+      ],
+      "ability": {
+        "name": "Ethereal Guidance",
+        "text": "Flying. At the start of your turn, give another random allied unit +1/+1 and Stealth until your next turn."
+      },
+      "path": "cards/anemos/anemos_card_20_whispering_cloud_dancer.png",
+      "source_file": "anemos_card_20_whispering_cloud_dancer.png",
+      "format": "3:4",
+      "notes": "Soft lighting, dreamlike, high fantasy aesthetic.",
+      "image_prompt": "Graceful sprite dancing on a cloud, trailing ribbons of purple wind, soft ethereal glow, serene expression."
+    },
+    {
+      "title": "Thunderhead Vanguard",
+      "slug": "anemos_card_21_thunderhead_vanguard",
+      "category": "cards",
+      "domain": "anemos",
+      "kind": "card",
+      "role": "Heavy Tank",
+      "stats": {
+        "mana": 6,
+        "attack": 3,
+        "health": 7
+      },
+      "keywords": [
+        "Taunt",
+        "Regenerate"
+      ],
+      "ability": {
+        "name": "Storm-Iron Plating",
+        "text": "Taunt. Regenerate. When this unit takes damage, deal 1 damage to the source of the attack."
+      },
+      "path": "cards/anemos/anemos_card_21_thunderhead_vanguard.png",
+      "source_file": "anemos_card_21_thunderhead_vanguard.png",
+      "format": "3:4",
+      "notes": "Heavy texture detail, metallic sheen, dark moody background.",
+      "image_prompt": "Armored giant made of solidified thunderhead clouds and iron plates, massive hammer in hand, crackling electricity, sturdy pose."
+    },
+    {
+      "title": "Void-Blighted Harpy",
+      "slug": "anemos_card_22_void_blighted_harpy",
+      "category": "cards",
+      "domain": "anemos",
+      "kind": "card",
+      "role": "Assassin / Mage",
+      "stats": {
+        "mana": 3,
+        "attack": 3,
+        "health": 2
+      },
+      "keywords": [
+        "Flying",
+        "Lifesteal"
+      ],
+      "ability": {
+        "name": "Corrupted Siphon",
+        "text": "Flying. Lifesteal. When this unit deals damage, apply Charm to the enemy unit it attacked."
+      },
+      "path": "cards/anemos/anemos_card_22_void_blighted_harpy.png",
+      "source_file": "anemos_card_22_void_blighted_harpy.png",
+      "format": "3:4",
+      "notes": "Gothic horror influence, high contrast, portrait 3:4.",
+      "image_prompt": "Cursed harpy with glowing purple veins, eyes bleeding violet light, dark feathers, sharp talons, predatory posture."
+    },
+    {
+      "title": "Canyon Breaker",
+      "slug": "kronos_card_23_canyon_breaker",
+      "category": "cards",
+      "domain": "kronos",
+      "kind": "card",
+      "role": "Siege Unit",
+      "stats": {
+        "mana": 5,
+        "attack": 5,
+        "health": 5
+      },
+      "keywords": [
+        "Siege",
+        "Overwhelm"
+      ],
+      "ability": {
+        "name": "Tectonic Impact",
+        "text": "Siege 2. Whenever this unit deals excess damage, deal 1 damage to an adjacent enemy."
+      },
+      "path": "cards/kronos/kronos_card_23_canyon_breaker.png",
+      "source_file": "kronos_card_23_canyon_breaker.png",
+      "format": "3:4",
+      "notes": "No text, 3:4 aspect ratio, dark fantasy art style.",
+      "image_prompt": "Huge stone golem with golden cracks, colossal hammer, canyon background, dramatic sunset lighting, cinematic."
+    },
+    {
+      "title": "Amber Spire Mage",
+      "slug": "kronos_card_24_amber_spire_mage",
+      "category": "cards",
+      "domain": "kronos",
+      "kind": "card",
+      "role": "Support",
+      "stats": {
+        "mana": 4,
+        "attack": 2,
+        "health": 4
+      },
+      "keywords": [],
+      "ability": {
+        "name": "Amber Infusion",
+        "text": "Grant an allied unit +2 Attack and Armor 1 until the end of your turn."
+      },
+      "path": "cards/kronos/kronos_card_24_amber_spire_mage.png",
+      "source_file": "kronos_card_24_amber_spire_mage.png",
+      "format": "3:4",
+      "notes": "High contrast, depth of field, detailed textures.",
+      "image_prompt": "Elder druid standing before a glowing amber monolith, floating stone shards, glowing golden eyes, forest setting."
+    },
+    {
+      "title": "Crag-Shell Hermit",
+      "slug": "kronos_card_25_crag_shell_hermit",
+      "category": "cards",
+      "domain": "kronos",
+      "kind": "card",
+      "role": "Tank",
+      "stats": {
+        "mana": 3,
+        "attack": 1,
+        "health": 6
+      },
+      "keywords": [
+        "Taunt",
+        "Armor"
+      ],
+      "ability": {
+        "name": "Granite Shell",
+        "text": "Armor 2. Taunt. When this unit takes damage, restore 1 health."
+      },
+      "path": "cards/kronos/kronos_card_25_crag_shell_hermit.png",
+      "source_file": "kronos_card_25_crag_shell_hermit.png",
+      "format": "3:4",
+      "notes": "Moody atmosphere, cinematic lighting.",
+      "image_prompt": "Giant turtle with a literal granite mountain shell, mossy textures, low angle shot, imposing presence."
+    },
+    {
+      "title": "Lithic Striker",
+      "slug": "kronos_card_26_lithic_striker",
+      "category": "cards",
+      "domain": "kronos",
+      "kind": "card",
+      "role": "Assassin",
+      "stats": {
+        "mana": 3,
+        "attack": 4,
+        "health": 2
+      },
+      "keywords": [
+        "Stealth"
+      ],
+      "ability": {
+        "name": "Stone-Step Ambush",
+        "text": "Stealth. After this unit deals damage, return it to your hand."
+      },
+      "path": "cards/kronos/kronos_card_26_lithic_striker.png",
+      "source_file": "kronos_card_26_lithic_striker.png",
+      "format": "3:4",
+      "notes": "Sharp edges, dark blue and gray color palette.",
+      "image_prompt": "Shadowy figure made of jagged rock, crystalline blade, poised for strike, moonlit cavern."
+    },
+    {
+      "title": "Gravel-Shot Archer",
+      "slug": "kronos_card_28_gravel_shot_archer",
+      "category": "cards",
+      "domain": "kronos",
+      "kind": "card",
+      "role": "Ranged",
+      "stats": {
+        "mana": 4,
+        "attack": 3,
+        "health": 3
+      },
+      "keywords": [
+        "Ranged"
+      ],
+      "ability": {
+        "name": "Piercing Flint",
+        "text": "Ranged. When this unit attacks, it deals 1 damage to a secondary target."
+      },
+      "path": "cards/kronos/kronos_card_28_gravel_shot_archer.png",
+      "source_file": "kronos_card_28_gravel_shot_archer.png",
+      "format": "3:4",
+      "notes": "Windblown cape, sharp focus on bow.",
+      "image_prompt": "Stone archer, bow made of petrified wood, shards of flint as arrows, high cliffs in background."
+    },
+    {
+      "title": "Petrified Revenant",
+      "slug": "kronos_card_29_petrified_revenant",
+      "category": "cards",
+      "domain": "kronos",
+      "kind": "card",
+      "role": "Undead Tank",
+      "stats": {
+        "mana": 5,
+        "attack": 4,
+        "health": 4
+      },
+      "keywords": [
+        "Reborn"
+      ],
+      "ability": {
+        "name": "Unyielding Will",
+        "text": "Reborn. When this unit returns to play, deal 2 damage to the closest enemy."
+      },
+      "path": "cards/kronos/kronos_card_29_petrified_revenant.png",
+      "source_file": "kronos_card_29_petrified_revenant.png",
+      "format": "3:4",
+      "notes": "Eerie glow, decaying stone textures.",
+      "image_prompt": "Cracked stone warrior rising from the ground, blue ethereal light in fissures, misty graveyard."
+    },
+    {
+      "title": "Boulder Sentinel",
+      "slug": "kronos_card_30_boulder_sentinel",
+      "category": "cards",
+      "domain": "kronos",
+      "kind": "card",
+      "role": "Defender",
+      "stats": {
+        "mana": 4,
+        "attack": 2,
+        "health": 7
+      },
+      "keywords": [
+        "Taunt"
+      ],
+      "ability": {
+        "name": "Boulder Wall",
+        "text": "Taunt. When this unit blocks an attack, all allied units gain +1 Armor."
+      },
+      "path": "cards/kronos/kronos_card_30_boulder_sentinel.png",
+      "source_file": "kronos_card_30_boulder_sentinel.png",
+      "format": "3:4",
+      "notes": "Solid composition, heavy aesthetic.",
+      "image_prompt": "Round stone golem, moss-covered, wide stance, blocking a narrow mountain pass, heavy shadows."
+    },
+    {
+      "title": "Verdant Spire Druid",
+      "slug": "kronos_card_31_verdant_spire_druid",
+      "category": "cards",
+      "domain": "kronos",
+      "kind": "card",
+      "role": "Support",
+      "stats": {
+        "mana": 3,
+        "attack": 1,
+        "health": 4
+      },
+      "keywords": [
+        "Regenerate"
+      ],
+      "ability": {
+        "name": "Earth Song",
+        "text": "Regenerate 2. Whenever this unit heals, grant an adjacent unit +1 Health."
+      },
+      "path": "cards/kronos/kronos_card_31_verdant_spire_druid.png",
+      "source_file": "kronos_card_31_verdant_spire_druid.png",
+      "format": "3:4",
+      "notes": "Lush textures, warm color highlights.",
+      "image_prompt": "Druid kneeling in moss, hands touching the ground, magical amber glow surrounding them, forest ancient ruins."
+    },
+    {
+      "title": "Quake-Hammer Vanguard",
+      "slug": "kronos_card_32_quake_hammer_vanguard",
+      "category": "cards",
+      "domain": "kronos",
+      "kind": "card",
+      "role": "Heavy Tank",
+      "stats": {
+        "mana": 6,
+        "attack": 5,
+        "health": 6
+      },
+      "keywords": [
+        "Taunt",
+        "Overwhelm"
+      ],
+      "ability": {
+        "name": "Seismic Slam",
+        "text": "Overwhelm. When this unit is played, deal 1 damage to all units without Taunt."
+      },
+      "path": "cards/kronos/kronos_card_32_quake_hammer_vanguard.png",
+      "source_file": "kronos_card_32_quake_hammer_vanguard.png",
+      "format": "3:4",
+      "notes": "Impact effect, debris flying, dynamic angle.",
+      "image_prompt": "Titan wielding a hammer made of a massive boulder, dust rising, dramatic pose, high noon lighting."
+    },
+    {
+      "title": "Mossy Lancer",
+      "slug": "kronos_card_33_mossy_lancer",
+      "category": "cards",
+      "domain": "kronos",
+      "kind": "card",
+      "role": "Scout",
+      "stats": {
+        "mana": 2,
+        "attack": 3,
+        "health": 2
+      },
+      "keywords": [
+        "Charge"
+      ],
+      "ability": {
+        "name": "Swift Charge",
+        "text": "Charge. If this unit attacks an enemy with higher Health, it deals double damage."
+      },
+      "path": "cards/kronos/kronos_card_33_mossy_lancer.png",
+      "source_file": "kronos_card_33_mossy_lancer.png",
+      "format": "3:4",
+      "notes": "Fast-paced, vibrant moss colors.",
+      "image_prompt": "A slim stone construct with a long lance, charging forward, motion blur, forest path."
+    },
+    {
+      "title": "Fissure Keeper",
+      "slug": "kronos_card_34_fissure_keeper",
+      "category": "cards",
+      "domain": "kronos",
+      "kind": "card",
+      "role": "Support",
+      "stats": {
+        "mana": 4,
+        "attack": 2,
+        "health": 5
+      },
+      "keywords": [
+        "Freeze"
+      ],
+      "ability": {
+        "name": "Crystalline Trap",
+        "text": "Freeze. When an enemy enters the board, it becomes frozen for 1 turn."
+      },
+      "path": "cards/kronos/kronos_card_34_fissure_keeper.png",
+      "source_file": "kronos_card_34_fissure_keeper.png",
+      "format": "3:4",
+      "notes": "Sharp cold light, detailed stone etchings.",
+      "image_prompt": "Stone mage standing over a glowing blue fissure, crystal shards rising from the ground, mystical atmosphere."
+    },
+    {
+      "title": "Amber Golemite",
+      "slug": "kronos_card_35_amber_golemite",
+      "category": "cards",
+      "domain": "kronos",
+      "kind": "card",
+      "role": "Utility",
+      "stats": {
+        "mana": 2,
+        "attack": 2,
+        "health": 2
+      },
+      "keywords": [
+        "Deathrattle"
+      ],
+      "ability": {
+        "name": "Amber Fracture",
+        "text": "Deathrattle: Restore 3 health to your player."
+      },
+      "path": "cards/kronos/kronos_card_35_amber_golemite.png",
+      "source_file": "kronos_card_35_amber_golemite.png",
+      "format": "3:4",
+      "notes": "Warm lighting, soft bokeh effect.",
+      "image_prompt": "Small creature made of amber and stone, glowing warmly, sitting in a cave, small focal point."
+    },
+    {
+      "title": "Crag-Giant Sentinel",
+      "slug": "kronos_card_36_crag_giant_sentinel",
+      "category": "cards",
+      "domain": "kronos",
+      "kind": "card",
+      "role": "Defender",
+      "stats": {
+        "mana": 7,
+        "attack": 4,
+        "health": 10
+      },
+      "keywords": [
+        "Taunt",
+        "Armor"
+      ],
+      "ability": {
+        "name": "Mountain Fortress",
+        "text": "Taunt. Armor 3. All adjacent allies gain +1 Armor."
+      },
+      "path": "cards/kronos/kronos_card_36_crag_giant_sentinel.png",
+      "source_file": "kronos_card_36_crag_giant_sentinel.png",
+      "format": "3:4",
+      "notes": "Epic scale, dramatic grey clouds.",
+      "image_prompt": "Massive giant made of layers of cliffside, holding a tower, colossal size compared to trees, stormy mountain peak."
+    },
+    {
+      "title": "Shatter-Fang Beast",
+      "slug": "kronos_card_37_shatter_fang_beast",
+      "category": "cards",
+      "domain": "kronos",
+      "kind": "card",
+      "role": "Assassin",
+      "stats": {
+        "mana": 3,
+        "attack": 3,
+        "health": 3
+      },
+      "keywords": [
+        "Lifesteal"
+      ],
+      "ability": {
+        "name": "Vampiric Fang",
+        "text": "Lifesteal. If this unit destroys an enemy, heal the player for 2 additional health."
+      },
+      "path": "cards/kronos/kronos_card_37_shatter_fang_beast.png",
+      "source_file": "kronos_card_37_shatter_fang_beast.png",
+      "format": "3:4",
+      "notes": "Predatory pose, high texture, sharp teeth.",
+      "image_prompt": "Stone panther with jagged teeth, eyes like glowing amber, prowling on a rocky ledge."
+    },
+    {
+      "title": "Stone-Heart Monk",
+      "slug": "kronos_card_38_stone_heart_monk",
+      "category": "cards",
+      "domain": "kronos",
+      "kind": "card",
+      "role": "Combat Support",
+      "stats": {
+        "mana": 4,
+        "attack": 3,
+        "health": 4
+      },
+      "keywords": [
+        "Charm"
+      ],
+      "ability": {
+        "name": "Stasis Pulse",
+        "text": "Charm: Redirect an enemy unit's attack to another random enemy."
+      },
+      "path": "cards/kronos/kronos_card_38_stone_heart_monk.png",
+      "source_file": "kronos_card_38_stone_heart_monk.png",
+      "format": "3:4",
+      "notes": "Balanced composition, golden accents.",
+      "image_prompt": "Humanoid stone monk in meditation, golden energy flowing through hands, circular stone platform."
+    },
+    {
+      "title": "Peak-Climber Stalker",
+      "slug": "kronos_card_39_peak_climber_stalker",
+      "category": "cards",
+      "domain": "kronos",
+      "kind": "card",
+      "role": "Scout",
+      "stats": {
+        "mana": 3,
+        "attack": 3,
+        "health": 2
+      },
+      "keywords": [
+        "Stealth",
+        "Flying"
+      ],
+      "ability": {
+        "name": "High Altitude Ambush",
+        "text": "Stealth. Flying. This unit cannot be blocked by units without Flying."
+      },
+      "path": "cards/kronos/kronos_card_39_peak_climber_stalker.png",
+      "source_file": "kronos_card_39_peak_climber_stalker.png",
+      "format": "3:4",
+      "notes": "Vertigo effect, aerial perspective.",
+      "image_prompt": "Winged stone gargoyle, sharp talons, perched on a mountain spire, looking down at clouds."
+    },
+    {
+      "title": "Granite Siegebreaker",
+      "slug": "kronos_card_40_granite_siegebreaker",
+      "category": "cards",
+      "domain": "kronos",
+      "kind": "card",
+      "role": "Siege",
+      "stats": {
+        "mana": 5,
+        "attack": 4,
+        "health": 5
+      },
+      "keywords": [
+        "Siege",
+        "Armor"
+      ],
+      "ability": {
+        "name": "Wall Cracker",
+        "text": "Siege 3. Armor 1. When attacking a player, this unit ignores Armor."
+      },
+      "path": "cards/kronos/kronos_card_40_granite_siegebreaker.png",
+      "source_file": "kronos_card_40_granite_siegebreaker.png",
+      "format": "3:4",
+      "notes": "Chaotic energy, explosive details.",
+      "image_prompt": "Heavy construct with a battering ram arm, breaking through a stone wall, debris flying everywhere."
+    },
+    {
+      "title": "Ancient Moss Sage",
+      "slug": "kronos_card_41_ancient_moss_sage",
+      "category": "cards",
+      "domain": "kronos",
+      "kind": "card",
+      "role": "Support",
+      "stats": {
+        "mana": 5,
+        "attack": 2,
+        "health": 6
+      },
+      "keywords": [
+        "Regenerate"
+      ],
+      "ability": {
+        "name": "Earthen Renewal",
+        "text": "Regenerate 3. At start of turn, grant an adjacent unit +1/+1."
+      },
+      "path": "cards/kronos/kronos_card_41_ancient_moss_sage.png",
+      "source_file": "kronos_card_41_ancient_moss_sage.png",
+      "format": "3:4",
+      "notes": "Nature-themed, calm lighting.",
+      "image_prompt": "Ancient statue face covered in thick green moss, glowing runes, serene forest setting, soft light."
+    },
+    {
+      "title": "Titan Crag-Caller",
+      "slug": "kronos_card_42_titan_crag_caller",
+      "category": "cards",
+      "domain": "kronos",
+      "kind": "card",
+      "role": "Tank",
+      "stats": {
+        "mana": 8,
+        "attack": 6,
+        "health": 8
+      },
+      "keywords": [
+        "Taunt"
+      ],
+      "ability": {
+        "name": "Earth Call",
+        "text": "Taunt. When this unit is played, summon two 1/1 Stone Fragments with Taunt."
+      },
+      "path": "cards/kronos/kronos_card_42_titan_crag_caller.png",
+      "source_file": "kronos_card_42_titan_crag_caller.png",
+      "format": "3:4",
+      "notes": "Cinematic grandeur, huge scale.",
+      "image_prompt": "Massive titan standing in a canyon, calling forth boulders, epic scale, lightning in the background."
+    },
+    {
+      "title": "Basalt Bastion",
+      "slug": "kronos_card_27_basalt_bastion",
+      "category": "cards",
+      "domain": "kronos",
+      "kind": "card",
+      "role": "Defender",
+      "stats": {
+        "mana": 6,
+        "attack": 3,
+        "health": 9
+      },
+      "keywords": [
+        "Taunt",
+        "Rooted"
+      ],
+      "ability": {
+        "name": "Unshakable Foundation",
+        "text": "Taunt. Rooted. This unit cannot be moved by enemy effects."
+      },
+      "path": "cards/kronos/kronos_card_27_basalt_bastion.png",
+      "source_file": "kronos_card_27_basalt_bastion.png",
+      "format": "3:4",
+      "notes": "Extreme scale, epic perspective.",
+      "image_prompt": "A colossal ancient stone statue infused with roots, acting as an immovable guardian of the mountain realm"
+    },
+    {
+      "title": "Abyssal Jelly Horror",
+      "slug": "thalassa_card_23_abyssal_jelly_horror",
+      "category": "cards",
+      "domain": "thalassa",
+      "kind": "card",
+      "role": "Scout / Stealth",
+      "stats": {
+        "mana": 2,
+        "attack": 2,
+        "health": 1
+      },
+      "keywords": [
+        "Stealth"
+      ],
+      "ability": {
+        "name": "Bioluminescent Sting",
+        "text": "Stealth. When this unit attacks, Freeze the target unit."
+      },
+      "path": "cards/thalassa/thalassa_card_23_abyssal_jelly_horror.png",
+      "source_file": "thalassa_card_23_abyssal_jelly_horror.png",
+      "format": "3:4",
+      "notes": "Style: Dark Gothic Fantasy. Palette: Navy and teal. No text.",
+      "image_prompt": "A glowing, semi-transparent jellyfish-like humanoid creature with long flowing tentacles, dark abyssal ocean background, dramatic cyan bioluminescence, sharp focus."
+    },
+    {
+      "title": "Drowned Gatekeeper",
+      "slug": "thalassa_card_24_drowned_gatekeeper",
+      "category": "cards",
+      "domain": "thalassa",
+      "kind": "card",
+      "role": "Tank / Defender",
+      "stats": {
+        "mana": 4,
+        "attack": 1,
+        "health": 6
+      },
+      "keywords": [
+        "Taunt",
+        "Armor"
+      ],
+      "ability": {
+        "name": "Rust and Salt",
+        "text": "Taunt. Armor 1. While this unit is in play, all friendly units gain +1 Health."
+      },
+      "path": "cards/thalassa/thalassa_card_24_drowned_gatekeeper.png",
+      "source_file": "thalassa_card_24_drowned_gatekeeper.png",
+      "format": "3:4",
+      "notes": "Style: Cinematic. Palette: Deep blue and metallic. No text.",
+      "image_prompt": "An undead knight in heavy, rusted diving armor encrusted with barnacles, standing in a crumbling underwater gateway, moody lighting."
+    },
+    {
+      "title": "Abyssal Tide Mage",
+      "slug": "thalassa_card_25_abyssal_tide_mage",
+      "category": "cards",
+      "domain": "thalassa",
+      "kind": "card",
+      "role": "Support / Debuffer",
+      "stats": {
+        "mana": 3,
+        "attack": 2,
+        "health": 3
+      },
+      "keywords": [],
+      "ability": {
+        "name": "Pressure Well",
+        "text": "Target an enemy unit; it becomes Rooted and loses all keywords until your next turn."
+      },
+      "path": "cards/thalassa/thalassa_card_25_abyssal_tide_mage.png",
+      "source_file": "thalassa_card_25_abyssal_tide_mage.png",
+      "format": "3:4",
+      "notes": "Style: Dark Fantasy. Palette: Dark indigo. No text.",
+      "image_prompt": "An ethereal siren caster holding a swirling orb of pressurized water, gothic coral spires in the background, dramatic lighting from the orb."
+    },
+    {
+      "title": "Sunken War-Crab",
+      "slug": "thalassa_card_26_sunken_war_crab",
+      "category": "cards",
+      "domain": "thalassa",
+      "kind": "card",
+      "role": "Bruiser / Siege",
+      "stats": {
+        "mana": 5,
+        "attack": 4,
+        "health": 5
+      },
+      "keywords": [
+        "Siege",
+        "Armor"
+      ],
+      "ability": {
+        "name": "Pincer Slam",
+        "text": "Siege. Armor 2. When this unit attacks, it deals 1 damage to adjacent enemy units."
+      },
+      "path": "cards/thalassa/thalassa_card_26_sunken_war_crab.png",
+      "source_file": "thalassa_card_26_sunken_war_crab.png",
+      "format": "3:4",
+      "notes": "Style: Gritty. Palette: Dark charcoal and sea foam green. No text.",
+      "image_prompt": "A massive, armored crab with skeletal remains integrated into its shell, standing on the ocean floor, cinematic perspective from below."
+    },
+    {
+      "title": "Trench Serpent",
+      "slug": "thalassa_card_28_trench_serpent",
+      "category": "cards",
+      "domain": "thalassa",
+      "kind": "card",
+      "role": "Assasin / Predator",
+      "stats": {
+        "mana": 3,
+        "attack": 3,
+        "health": 2
+      },
+      "keywords": [
+        "Charge"
+      ],
+      "ability": {
+        "name": "Ambush Strike",
+        "text": "Charge. If this unit attacks an enemy with 2 or less health, destroy that unit instantly."
+      },
+      "path": "cards/thalassa/thalassa_card_28_trench_serpent.png",
+      "source_file": "thalassa_card_28_trench_serpent.png",
+      "format": "3:4",
+      "notes": "Style: Cinematic. Palette: Obsidian and neon blue. No text.",
+      "image_prompt": "A sleek, terrifying eel-like predator darting through dark water, sharp teeth, glowing eyes, fast motion blur effect."
+    },
+    {
+      "title": "Coral Spire Sentinel",
+      "slug": "thalassa_card_29_coral_spire_sentinel",
+      "category": "cards",
+      "domain": "thalassa",
+      "kind": "card",
+      "role": "Tank / Support",
+      "stats": {
+        "mana": 6,
+        "attack": 2,
+        "health": 8
+      },
+      "keywords": [
+        "Taunt",
+        "Regenerate"
+      ],
+      "ability": {
+        "name": "Living Reef",
+        "text": "Taunt. Regenerate. When this unit takes damage, deal 1 damage to the attacker."
+      },
+      "path": "cards/thalassa/thalassa_card_29_coral_spire_sentinel.png",
+      "source_file": "thalassa_card_29_coral_spire_sentinel.png",
+      "format": "3:4",
+      "notes": "Style: Dark Gothic. Palette: Teal and dark grey. No text.",
+      "image_prompt": "A massive golem made of fused coral and shipwreck wood, standing guard in a ruined city, glowing polyps."
+    },
+    {
+      "title": "Void-Bleed Siren",
+      "slug": "thalassa_card_30_void_bleed_siren",
+      "category": "cards",
+      "domain": "thalassa",
+      "kind": "card",
+      "role": "Mage / Controller",
+      "stats": {
+        "mana": 5,
+        "attack": 2,
+        "health": 4
+      },
+      "keywords": [
+        "Flying"
+      ],
+      "ability": {
+        "name": "Abyssal Chorus",
+        "text": "Flying. All enemy units with 2 or less Attack cannot attack this turn."
+      },
+      "path": "cards/thalassa/thalassa_card_30_void_bleed_siren.png",
+      "source_file": "thalassa_card_30_void_bleed_siren.png",
+      "format": "3:4",
+      "notes": "Style: Ethereal and dark. Palette: Purple and navy. No text.",
+      "image_prompt": "A female spirit with floating, tattered robes, surrounded by swirling dark shadows, ethereal underwater environment."
+    },
+    {
+      "title": "Sunken Salvager",
+      "slug": "thalassa_card_31_sunken_salvager",
+      "category": "cards",
+      "domain": "thalassa",
+      "kind": "card",
+      "role": "Utility / Scavenger",
+      "stats": {
+        "mana": 2,
+        "attack": 1,
+        "health": 2
+      },
+      "keywords": [
+        "Deathrattle"
+      ],
+      "ability": {
+        "name": "Deep-Sea Loot",
+        "text": "Deathrattle: Draw a card and heal your player for 2."
+      },
+      "path": "cards/thalassa/thalassa_card_31_sunken_salvager.png",
+      "source_file": "thalassa_card_31_sunken_salvager.png",
+      "format": "3:4",
+      "notes": "Style: Gritty. Palette: Dark brown and teal. No text.",
+      "image_prompt": "A small, hunchbacked undead creature clutching a rusted treasure chest, dark ocean floor environment."
+    },
+    {
+      "title": "Benthic Horror",
+      "slug": "thalassa_card_32_benthic_horror",
+      "category": "cards",
+      "domain": "thalassa",
+      "kind": "card",
+      "role": "Heavy Monster / Devourer",
+      "stats": {
+        "mana": 7,
+        "attack": 6,
+        "health": 6
+      },
+      "keywords": [
+        "Devour",
+        "Overwhelm"
+      ],
+      "ability": {
+        "name": "Maw of the Void",
+        "text": "Overwhelm. Devour: Destroy the weakest unit on the board. This unit gains +1/+1."
+      },
+      "path": "cards/thalassa/thalassa_card_32_benthic_horror.png",
+      "source_file": "thalassa_card_32_benthic_horror.png",
+      "format": "3:4",
+      "notes": "Style: Cinematic Horror. Palette: Black and deep blue. No text.",
+      "image_prompt": "A gargantuan, toothy creature with bioluminescent spots, emerging from a trench, terrifying scale."
+    },
+    {
+      "title": "Frozen Reef Walker",
+      "slug": "thalassa_card_33_frozen_reef_walker",
+      "category": "cards",
+      "domain": "thalassa",
+      "kind": "card",
+      "role": "Tank / Debuffer",
+      "stats": {
+        "mana": 4,
+        "attack": 2,
+        "health": 5
+      },
+      "keywords": [
+        "Freeze",
+        "Taunt"
+      ],
+      "ability": {
+        "name": "Glacial Touch",
+        "text": "Taunt. Every time an enemy unit attacks this, that unit becomes Frozen."
+      },
+      "path": "cards/thalassa/thalassa_card_33_frozen_reef_walker.png",
+      "source_file": "thalassa_card_33_frozen_reef_walker.png",
+      "format": "3:4",
+      "notes": "Style: Dark Gothic. Palette: Icy blue and white. No text.",
+      "image_prompt": "A hulking, slow-moving creature made of frozen coral and salt, icy aura, underwater ruins in background."
+    },
+    {
+      "title": "Drowned Corsair",
+      "slug": "thalassa_card_34_drowned_corsair",
+      "category": "cards",
+      "domain": "thalassa",
+      "kind": "card",
+      "role": "Assassin / Ranged",
+      "stats": {
+        "mana": 3,
+        "attack": 3,
+        "health": 3
+      },
+      "keywords": [
+        "Stealth"
+      ],
+      "ability": {
+        "name": "Harpoon Ambush",
+        "text": "Stealth. When this unit attacks, it deals 2 extra damage to the target."
+      },
+      "path": "cards/thalassa/thalassa_card_34_drowned_corsair.png",
+      "source_file": "thalassa_card_34_drowned_corsair.png",
+      "format": "3:4",
+      "notes": "Style: Moody. Palette: Navy and rust. No text.",
+      "image_prompt": "A skeletal pirate with a harpoon-gun arm, lurking in the shadows of a sunken ship's deck, dramatic lighting."
+    },
+    {
+      "title": "Abyssal Ink Cloud",
+      "slug": "thalassa_card_35_abyssal_ink_cloud",
+      "category": "cards",
+      "domain": "thalassa",
+      "kind": "card",
+      "role": "Support / Utility",
+      "stats": {
+        "mana": 2,
+        "attack": 0,
+        "health": 3
+      },
+      "keywords": [
+        "Ward"
+      ],
+      "ability": {
+        "name": "Obscuring Mist",
+        "text": "Ward. Friendly units in adjacent slots gain Stealth."
+      },
+      "path": "cards/thalassa/thalassa_card_35_abyssal_ink_cloud.png",
+      "source_file": "thalassa_card_35_abyssal_ink_cloud.png",
+      "format": "3:4",
+      "notes": "Style: Abstract, dark. Palette: Black and purple. No text.",
+      "image_prompt": "A swirling mass of dark, thick ink in the ocean, faint bioluminescent eyes visible within the cloud."
+    },
+    {
+      "title": "Coral Knight",
+      "slug": "thalassa_card_36_coral_knight",
+      "category": "cards",
+      "domain": "thalassa",
+      "kind": "card",
+      "role": "Tank / Frontline",
+      "stats": {
+        "mana": 5,
+        "attack": 3,
+        "health": 6
+      },
+      "keywords": [
+        "Taunt",
+        "Reborn"
+      ],
+      "ability": {
+        "name": "Indomitable Tide",
+        "text": "Taunt. Reborn: This unit returns with 1 health after it is destroyed."
+      },
+      "path": "cards/thalassa/thalassa_card_36_coral_knight.png",
+      "source_file": "thalassa_card_36_coral_knight.png",
+      "format": "3:4",
+      "notes": "Style: Fantasy. Palette: Teal, orange, and blue. No text.",
+      "image_prompt": "An undead knight fully encrusted in vibrant but sharp coral, holding a shield made from a shipwreck hull."
+    },
+    {
+      "title": "Sunken Cathedral Deacon",
+      "slug": "thalassa_card_38_sunken_cathedral_deacon",
+      "category": "cards",
+      "domain": "thalassa",
+      "kind": "card",
+      "role": "Support / Healer",
+      "stats": {
+        "mana": 4,
+        "attack": 1,
+        "health": 4
+      },
+      "keywords": [],
+      "ability": {
+        "name": "Benediction of the Deep",
+        "text": "At the start of your turn, heal your damaged friendly units for 2."
+      },
+      "path": "cards/thalassa/thalassa_card_38_sunken_cathedral_deacon.png",
+      "source_file": "thalassa_card_38_sunken_cathedral_deacon.png",
+      "format": "3:4",
+      "notes": "Style: Cinematic. Palette: Deep blue and gold. No text.",
+      "image_prompt": "A robed skeletal priest holding a staff made of sea glass, standing in an ornate but drowned underwater cathedral."
+    },
+    {
+      "title": "Abyssal Anchor-Weight",
+      "slug": "thalassa_card_39_abyssal_anchor_weight",
+      "category": "cards",
+      "domain": "thalassa",
+      "kind": "card",
+      "role": "Tank / Siege",
+      "stats": {
+        "mana": 6,
+        "attack": 4,
+        "health": 7
+      },
+      "keywords": [
+        "Taunt",
+        "Rooted"
+      ],
+      "ability": {
+        "name": "Heavy Anchor",
+        "text": "Taunt. Rooted: This unit cannot be moved. Gains +2 Attack while at the front of your side."
+      },
+      "path": "cards/thalassa/thalassa_card_39_abyssal_anchor_weight.png",
+      "source_file": "thalassa_card_39_abyssal_anchor_weight.png",
+      "format": "3:4",
+      "notes": "Style: Moody. Palette: Dark grey and slate. No text.",
+      "image_prompt": "A massive, heavy anchor chained to the sea floor, an undead warrior holding the chain, massive scale."
+    },
+    {
+      "title": "Benthic Witch",
+      "slug": "thalassa_card_40_benthic_witch",
+      "category": "cards",
+      "domain": "thalassa",
+      "kind": "card",
+      "role": "Mage / Debuffer",
+      "stats": {
+        "mana": 3,
+        "attack": 2,
+        "health": 2
+      },
+      "keywords": [],
+      "ability": {
+        "name": "Pressure Curse",
+        "text": "When this unit enters play, reduce an enemy unit's Attack to 0 for one turn."
+      },
+      "path": "cards/thalassa/thalassa_card_40_benthic_witch.png",
+      "source_file": "thalassa_card_40_benthic_witch.png",
+      "format": "3:4",
+      "notes": "Style: Dark Gothic. Palette: Dark green and black. No text.",
+      "image_prompt": "A hunchbacked witch with long, stringy seaweed hair and glowing eyes, gesturing with spindly hands."
+    },
+    {
+      "title": "Drowned Legionnaire",
+      "slug": "thalassa_card_42_drowned_legionnaire",
+      "category": "cards",
+      "domain": "thalassa",
+      "kind": "card",
+      "role": "Tank / Soldier",
+      "stats": {
+        "mana": 3,
+        "attack": 2,
+        "health": 4
+      },
+      "keywords": [
+        "Taunt"
+      ],
+      "ability": {
+        "name": "Phalanx of the Deep",
+        "text": "Taunt. When this unit dies, give another friendly unit +1/+1."
+      },
+      "path": "cards/thalassa/thalassa_card_42_drowned_legionnaire.png",
+      "source_file": "thalassa_card_42_drowned_legionnaire.png",
+      "format": "3:4",
+      "notes": "Style: Dark Gothic. Palette: Teal and dark grey. No text.",
+      "image_prompt": "A line of skeletal soldiers in oxidized armor standing in a defensive formation, dark ocean background, dramatic shadows."
+    },
+    {
+      "title": "Brine-Arrow Skirmisher",
+      "slug": "thalassa_card_27_brine_arrow_skirmisher",
+      "category": "cards",
+      "domain": "thalassa",
+      "kind": "card",
+      "role": "Ranged / Assassin",
+      "stats": {
+        "mana": 4,
+        "attack": 3,
+        "health": 2
+      },
+      "keywords": [
+        "Ranged"
+      ],
+      "ability": {
+        "name": "Brine-Shot Sniper",
+        "text": "Ranged. When this unit enters the field, deal 2 damage to a random enemy unit."
+      },
+      "path": "cards/thalassa/thalassa_card_27_brine_arrow_skirmisher.png",
+      "source_file": "thalassa_card_27_brine_arrow_skirmisher.png",
+      "format": "3:4",
+      "notes": "Style: Dark Gothic. Palette: Deep navy and pale bone white. No text.",
+      "image_prompt": "An undead marksman rising from the ocean floor, holding a coral-encrusted crossbow."
+    },
+    {
+      "title": "Abyssal Skimmer",
+      "slug": "thalassa_card_37_abyssal_skimmer",
+      "category": "cards",
+      "domain": "thalassa",
+      "kind": "card",
+      "role": "Flying / Scout",
+      "stats": {
+        "mana": 3,
+        "attack": 2,
+        "health": 2
+      },
+      "keywords": [
+        "Flying",
+        "Lifesteal"
+      ],
+      "ability": {
+        "name": "Sanguine Glide",
+        "text": "Flying. Lifesteal: Damage dealt by this unit restores the same amount of health to you."
+      },
+      "path": "cards/thalassa/thalassa_card_37_abyssal_skimmer.png",
+      "source_file": "thalassa_card_37_abyssal_skimmer.png",
+      "format": "3:4",
+      "notes": "Style: Dark Gothic. Palette: Deep purple and navy. No text.",
+      "image_prompt": "A manta-like creature composed of shadows and bioluminescent energy gliding through a dark underwater trench."
+    },
+    {
+      "title": "Abyssal Stalker",
+      "slug": "thalassa_card_41_abyssal_stalker",
+      "category": "cards",
+      "domain": "thalassa",
+      "kind": "card",
+      "role": "Assasin / Overwhelm",
+      "stats": {
+        "mana": 5,
+        "attack": 5,
+        "health": 3
+      },
+      "keywords": [
+        "Overwhelm",
+        "Stealth"
+      ],
+      "ability": {
+        "name": "Silent Predation",
+        "text": "Stealth. Overwhelm. This unit gains +1 Attack for every enemy unit killed by your other units this turn."
+      },
+      "path": "cards/thalassa/thalassa_card_41_abyssal_stalker.png",
+      "source_file": "thalassa_card_41_abyssal_stalker.png",
+      "format": "3:4",
+      "notes": "Style: Horror. Palette: Navy and deep black. No text.",
+      "image_prompt": "A sleek, multi-limbed predatory creature emerging from darkness in the deep sea with jagged, razor-sharp claws."
+    },
+    {
+      "title": "Molten Sentry",
+      "slug": "infernus_card_23_molten_sentry",
+      "category": "cards",
+      "domain": "infernus",
+      "kind": "card",
+      "role": "Defender / Tank",
+      "stats": {
+        "mana": 3,
+        "attack": 1,
+        "health": 5
+      },
+      "keywords": [
+        "Taunt",
+        "Armor"
+      ],
+      "ability": {
+        "name": "Hardened Shell",
+        "text": "Taunt. Armor 1. This unit reduces all incoming damage by 1."
+      },
+      "path": "cards/infernus/infernus_card_23_molten_sentry.png",
+      "source_file": "infernus_card_23_molten_sentry.png",
+      "format": "3:4",
+      "notes": "high contrast, dark fantasy style, 3:4 aspect ratio",
+      "image_prompt": "A sentient statue made of cooling volcanic basalt with glowing lava veins, standing in a defensive posture, low angle, cinematic lighting"
+    },
+    {
+      "title": "Cinder Blade Assassin",
+      "slug": "infernus_card_24_cinder_blade_assassin",
+      "category": "cards",
+      "domain": "infernus",
+      "kind": "card",
+      "role": "Assassin / Scout",
+      "stats": {
+        "mana": 4,
+        "attack": 5,
+        "health": 2
+      },
+      "keywords": [
+        "Stealth"
+      ],
+      "ability": {
+        "name": "Ember Strike",
+        "text": "Stealth. When this unit attacks, gain +2 Attack for the duration of the combat."
+      },
+      "path": "cards/infernus/infernus_card_24_cinder_blade_assassin.png",
+      "source_file": "infernus_card_24_cinder_blade_assassin.png",
+      "format": "3:4",
+      "notes": "sharp focus, ember particles, volumetric lighting, dark color palette",
+      "image_prompt": "A lithe demonic rogue wielding dual serrated obsidian blades glowing with white heat, emerging from ash smoke, close up"
+    },
+    {
+      "title": "Magma Siege Breaker",
+      "slug": "infernus_card_25_magma_siege_breaker",
+      "category": "cards",
+      "domain": "infernus",
+      "kind": "card",
+      "role": "Siege / Heavy",
+      "stats": {
+        "mana": 6,
+        "attack": 6,
+        "health": 4
+      },
+      "keywords": [
+        "Overwhelm"
+      ],
+      "ability": {
+        "name": "Crushing Impact",
+        "text": "Overwhelm. If this unit attacks an enemy unit, any excess damage is dealt to the enemy player."
+      },
+      "path": "cards/infernus/infernus_card_25_magma_siege_breaker.png",
+      "source_file": "infernus_card_25_magma_siege_breaker.png",
+      "format": "3:4",
+      "notes": "cinematic action, sparks flying, heavy depth of field",
+      "image_prompt": "A hulking behemoth with molten rock plates, swinging a massive iron pillar, standing in a lava river, epic scale"
+    },
+    {
+      "title": "Ash Reborn Zealot",
+      "slug": "infernus_card_26_ash_reborn_zealot",
+      "category": "cards",
+      "domain": "infernus",
+      "kind": "card",
+      "role": "Undead / Warrior",
+      "stats": {
+        "mana": 3,
+        "attack": 3,
+        "health": 2
+      },
+      "keywords": [
+        "Reborn"
+      ],
+      "ability": {
+        "name": "Ever-Burning Spirit",
+        "text": "Reborn. When destroyed, return this unit to play with 1 Health."
+      },
+      "path": "cards/infernus/infernus_card_26_ash_reborn_zealot.png",
+      "source_file": "infernus_card_26_ash_reborn_zealot.png",
+      "format": "3:4",
+      "notes": "gothic dark fantasy, glowing embers, dramatic rim light",
+      "image_prompt": "A charred skeleton clad in tattered crimson robes, eyes glowing with internal fire, ethereal ash swirling around him"
+    },
+    {
+      "title": "Infernal Archer",
+      "slug": "infernus_card_27_infernal_archer",
+      "category": "cards",
+      "domain": "infernus",
+      "kind": "card",
+      "role": "Ranged / Support",
+      "stats": {
+        "mana": 4,
+        "attack": 3,
+        "health": 3
+      },
+      "keywords": [
+        "Ranged"
+      ],
+      "ability": {
+        "name": "Fire-Tipped Volley",
+        "text": "Ranged. This unit can attack without being blocked in melee. When attacking, deal 1 damage to a random enemy unit."
+      },
+      "path": "cards/infernus/infernus_card_27_infernal_archer.png",
+      "source_file": "infernus_card_27_infernal_archer.png",
+      "format": "3:4",
+      "notes": "high contrast, embers, depth, focus on the arrow head",
+      "image_prompt": "A demonic archer with long, spindly arms pulling back a burning bowstring, arrow made of pure condensed fire"
+    },
+    {
+      "title": "Lava Weaver",
+      "slug": "infernus_card_28_lava_weaver",
+      "category": "cards",
+      "domain": "infernus",
+      "kind": "card",
+      "role": "Mage / Control",
+      "stats": {
+        "mana": 5,
+        "attack": 2,
+        "health": 4
+      },
+      "keywords": [],
+      "ability": {
+        "name": "Magma Web",
+        "text": "Freeze. Choose an enemy unit; it cannot attack until the end of your next turn."
+      },
+      "path": "cards/infernus/infernus_card_28_lava_weaver.png",
+      "source_file": "infernus_card_28_lava_weaver.png",
+      "format": "3:4",
+      "notes": "intricate texture, vibrant orange and charcoal black, moody lighting",
+      "image_prompt": "A spider-like elemental made of shifting magma, weaving glowing orange threads of liquid fire, cavernous background"
+    },
+    {
+      "title": "Forge-Bound Titan",
+      "slug": "infernus_card_29_forge_bound_titan",
+      "category": "cards",
+      "domain": "infernus",
+      "kind": "card",
+      "role": "Heavy Tank",
+      "stats": {
+        "mana": 8,
+        "attack": 5,
+        "health": 10
+      },
+      "keywords": [
+        "Taunt",
+        "Regenerate"
+      ],
+      "ability": {
+        "name": "Endless Heat",
+        "text": "Taunt. Regenerate: Restore 2 Health to this unit at the end of each turn."
+      },
+      "path": "cards/infernus/infernus_card_29_forge_bound_titan.png",
+      "source_file": "infernus_card_29_forge_bound_titan.png",
+      "format": "3:4",
+      "notes": "epic, wide angle, detailed metallic surfaces, embers floating in air",
+      "image_prompt": "A towering construct of iron and fire, furnace-like chest cavity glowing bright white, massive hammer in hand, colossal"
+    },
+    {
+      "title": "Ash Wing Scout",
+      "slug": "infernus_card_30_ash_wing_scout",
+      "category": "cards",
+      "domain": "infernus",
+      "kind": "card",
+      "role": "Flying / Scout",
+      "stats": {
+        "mana": 2,
+        "attack": 2,
+        "health": 1
+      },
+      "keywords": [
+        "Flying"
+      ],
+      "ability": {
+        "name": "Aerial Ember",
+        "text": "Flying. Can only be blocked by units with Flying. When this unit deals combat damage, draw a card."
+      },
+      "path": "cards/infernus/infernus_card_30_ash_wing_scout.png",
+      "source_file": "infernus_card_30_ash_wing_scout.png",
+      "format": "3:4",
+      "notes": "fast motion blur, soft focus on wings, cinematic lighting",
+      "image_prompt": "A small, bird-like elemental composed of ash and flickers of flame, mid-flight, volcanic sky background"
+    },
+    {
+      "title": "Chain-Bound Mauler",
+      "slug": "infernus_card_31_chain_bound_mauler",
+      "category": "cards",
+      "domain": "infernus",
+      "kind": "card",
+      "role": "Tank / Debuffer",
+      "stats": {
+        "mana": 4,
+        "attack": 3,
+        "health": 4
+      },
+      "keywords": [
+        "Rooted"
+      ],
+      "ability": {
+        "name": "Heavy Shackles",
+        "text": "Rooted. This unit cannot move. Any unit that attacks this unit has its Attack reduced by 2."
+      },
+      "path": "cards/infernus/infernus_card_31_chain_bound_mauler.png",
+      "source_file": "infernus_card_31_chain_bound_mauler.png",
+      "format": "3:4",
+      "notes": "dramatic shadow, intense detail on chains, dark fantasy aesthetic",
+      "image_prompt": "A hunched demonic warrior chained to a heavy stone pillar, struggling against the chains, glowing hot shackles"
+    },
+    {
+      "title": "Cinder Wisp Mother",
+      "slug": "infernus_card_32_cinder_wisp_mother",
+      "category": "cards",
+      "domain": "infernus",
+      "kind": "card",
+      "role": "Support / Summoner",
+      "stats": {
+        "mana": 5,
+        "attack": 1,
+        "health": 5
+      },
+      "keywords": [],
+      "ability": {
+        "name": "Kindle Sparks",
+        "text": "At the start of your turn, summon two 1/1 Cinder Wisps to your side."
+      },
+      "path": "cards/infernus/infernus_card_32_cinder_wisp_mother.png",
+      "source_file": "infernus_card_32_cinder_wisp_mother.png",
+      "format": "3:4",
+      "notes": "magical atmosphere, soft glow, depth of field",
+      "image_prompt": "An ethereal spirit of fire holding a cluster of floating, glowing embers, surrounded by smaller wisp flames"
+    },
+    {
+      "title": "Obsidian Slasher",
+      "slug": "infernus_card_33_obsidian_slasher",
+      "category": "cards",
+      "domain": "infernus",
+      "kind": "card",
+      "role": "Assassin",
+      "stats": {
+        "mana": 3,
+        "attack": 4,
+        "health": 2
+      },
+      "keywords": [
+        "Charge"
+      ],
+      "ability": {
+        "name": "Volcanic Dash",
+        "text": "Charge. Can attack the turn it is played. If it destroys an enemy unit, gain Stealth until your next turn."
+      },
+      "path": "cards/infernus/infernus_card_33_obsidian_slasher.png",
+      "source_file": "infernus_card_33_obsidian_slasher.png",
+      "format": "3:4",
+      "notes": "dynamic angle, high energy, dark obsidian textures",
+      "image_prompt": "A jagged obsidian creature sprinting forward, blades outstretched, motion lines, sharp volcanic environment"
+    },
+    {
+      "title": "Fire-Heart Golem",
+      "slug": "infernus_card_34_fire_heart_golem",
+      "category": "cards",
+      "domain": "infernus",
+      "kind": "card",
+      "role": "Tank",
+      "stats": {
+        "mana": 6,
+        "attack": 4,
+        "health": 6
+      },
+      "keywords": [
+        "Armor",
+        "Deathrattle"
+      ],
+      "ability": {
+        "name": "Explosive Core",
+        "text": "Armor 2. Deathrattle: When destroyed, deal 3 damage to all adjacent enemy units."
+      },
+      "path": "cards/infernus/infernus_card_34_fire_heart_golem.png",
+      "source_file": "infernus_card_34_fire_heart_golem.png",
+      "format": "3:4",
+      "notes": "cracked textures, vibrant magma glow, realistic lighting",
+      "image_prompt": "A rocky golem with a glowing molten core inside its cracked chest, standing firm, steam rising, dark fantasy forge"
+    },
+    {
+      "title": "Lava Crawler",
+      "slug": "infernus_card_35_lava_crawler",
+      "category": "cards",
+      "domain": "infernus",
+      "kind": "card",
+      "role": "Scout / Assassin",
+      "stats": {
+        "mana": 2,
+        "attack": 2,
+        "health": 2
+      },
+      "keywords": [
+        "Stealth"
+      ],
+      "ability": {
+        "name": "Lava Camouflage",
+        "text": "Stealth. While this unit is in Stealth, it cannot be targeted by enemy spells."
+      },
+      "path": "cards/infernus/infernus_card_35_lava_crawler.png",
+      "source_file": "infernus_card_35_lava_crawler.png",
+      "format": "3:4",
+      "notes": "macro photography style, camouflage, vibrant red on dark rock",
+      "image_prompt": "A small lizard-like creature with magma-patterned scales clinging to a cooling lava rock wall"
+    },
+    {
+      "title": "Ember-Clad Vanguard",
+      "slug": "infernus_card_36_ember_clad_vanguard",
+      "category": "cards",
+      "domain": "infernus",
+      "kind": "card",
+      "role": "Tank / Defender",
+      "stats": {
+        "mana": 4,
+        "attack": 2,
+        "health": 5
+      },
+      "keywords": [
+        "Taunt",
+        "Ward"
+      ],
+      "ability": {
+        "name": "Burning Shield",
+        "text": "Taunt. Ward: The next damage this unit would take is prevented."
+      },
+      "path": "cards/infernus/infernus_card_36_ember_clad_vanguard.png",
+      "source_file": "infernus_card_36_ember_clad_vanguard.png",
+      "format": "3:4",
+      "notes": "sturdy posture, glowing shield, epic detail, dark environment",
+      "image_prompt": "A knight in heavy plate armor covered in embers, holding a shield that constantly ripples like liquid fire"
+    },
+    {
+      "title": "Magma Weaver Master",
+      "slug": "infernus_card_38_magma_weaver_master",
+      "category": "cards",
+      "domain": "infernus",
+      "kind": "card",
+      "role": "Mage / Control",
+      "stats": {
+        "mana": 5,
+        "attack": 3,
+        "health": 4
+      },
+      "keywords": [
+        "Freeze"
+      ],
+      "ability": {
+        "name": "Absolute Zero-Heat",
+        "text": "Freeze: When this unit enters play, freeze all enemy units with 2 or less Health."
+      },
+      "path": "cards/infernus/infernus_card_38_magma_weaver_master.png",
+      "source_file": "infernus_card_38_magma_weaver_master.png",
+      "format": "3:4",
+      "notes": "contrast between blue fire and orange heat, arcane energy, intense stare",
+      "image_prompt": "A tall, hooded figure surrounded by icy blue flames despite the surrounding volcanic forge"
+    },
+    {
+      "title": "Ash-Cloud Titan",
+      "slug": "infernus_card_39_ash_cloud_titan",
+      "category": "cards",
+      "domain": "infernus",
+      "kind": "card",
+      "role": "Siege / Flying",
+      "stats": {
+        "mana": 7,
+        "attack": 5,
+        "health": 5
+      },
+      "keywords": [
+        "Flying",
+        "Siege"
+      ],
+      "ability": {
+        "name": "Ashfall",
+        "text": "Flying. Siege: Deals 2 bonus damage when attacking a player."
+      },
+      "path": "cards/infernus/infernus_card_39_ash_cloud_titan.png",
+      "source_file": "infernus_card_39_ash_cloud_titan.png",
+      "format": "3:4",
+      "notes": "ethereal, translucent, scale compared to tiny structures below",
+      "image_prompt": "A massive, looming titan made of swirling ash and smoke, blotting out the volcanic sun"
+    },
+    {
+      "title": "Flame-Smith Apprentice",
+      "slug": "infernus_card_40_flame_smith_apprentice",
+      "category": "cards",
+      "domain": "infernus",
+      "kind": "card",
+      "role": "Support",
+      "stats": {
+        "mana": 2,
+        "attack": 1,
+        "health": 2
+      },
+      "keywords": [],
+      "ability": {
+        "name": "Grant Armor",
+        "text": "Give an ally unit Armor 1 for the rest of the game."
+      },
+      "path": "cards/infernus/infernus_card_40_flame_smith_apprentice.png",
+      "source_file": "infernus_card_40_flame_smith_apprentice.png",
+      "format": "3:4",
+      "notes": "warm lighting, focus on the sparks from the hammer, detailed workshop",
+      "image_prompt": "A young, soot-covered imp hammering a small piece of glowing metal on a makeshift anvil"
+    },
+    {
+      "title": "Molten Devourer",
+      "slug": "infernus_card_41_molten_devourer",
+      "category": "cards",
+      "domain": "infernus",
+      "kind": "card",
+      "role": "Destroyer",
+      "stats": {
+        "mana": 6,
+        "attack": 4,
+        "health": 4
+      },
+      "keywords": [
+        "Devour"
+      ],
+      "ability": {
+        "name": "Consume Essence",
+        "text": "Devour: Destroy a target enemy unit. This unit gains +1/+1 for every 2 health the devoured unit had."
+      },
+      "path": "cards/infernus/infernus_card_41_molten_devourer.png",
+      "source_file": "infernus_card_41_molten_devourer.png",
+      "format": "3:4",
+      "notes": "macabre, abstract geometry, terrifying scale, magma textures",
+      "image_prompt": "A massive, toothy maw opening in the center of a molten lava pit, consuming metallic remnants"
+    },
+    {
+      "title": "Charred Siege Engine",
+      "slug": "infernus_card_42_charred_siege_engine",
+      "category": "cards",
+      "domain": "infernus",
+      "kind": "card",
+      "role": "Siege",
+      "stats": {
+        "mana": 5,
+        "attack": 4,
+        "health": 5
+      },
+      "keywords": [
+        "Siege",
+        "Armor"
+      ],
+      "ability": {
+        "name": "Molten Ballista",
+        "text": "Siege. Armor 1. Can only be targeted by spells if the caster pays 2 extra mana."
+      },
+      "path": "cards/infernus/infernus_card_42_charred_siege_engine.png",
+      "source_file": "infernus_card_42_charred_siege_engine.png",
+      "format": "3:4",
+      "notes": "industrial fantasy, mechanical detail, rugged, smoke and soot",
+      "image_prompt": "A heavy siege crossbow mounted on a charred metallic carriage, ready to fire a ball of molten slag"
+    },
+    {
+      "title": "Coal-Jaw Predator",
+      "slug": "infernus_card_37_coal_jaw_predator",
+      "category": "cards",
+      "domain": "infernus",
+      "kind": "card",
+      "role": "Fast Unit",
+      "stats": {
+        "mana": 3,
+        "attack": 3,
+        "health": 3
+      },
+      "keywords": [
+        "Charge",
+        "Lifesteal"
+      ],
+      "ability": {
+        "name": "Savage Hunt",
+        "text": "Charge. Lifesteal: Damage dealt by this unit heals your player for the same amount."
+      },
+      "path": "cards/infernus/infernus_card_37_coal_jaw_predator.png",
+      "source_file": "infernus_card_37_coal_jaw_predator.png",
+      "format": "3:4",
+      "notes": "aggressive movement, cinematic, embers trail, dark moody background",
+      "image_prompt": "A demonic hellhound made of smoldering coals and dark iron, snarling with embers leaking from its maw, dark fantasy style."
+    },
+    {
+      "title": "Sky Talon Striker",
+      "slug": "anemos_card_23_sky_talon_striker",
+      "category": "cards",
+      "domain": "anemos",
+      "kind": "card",
+      "role": "Assassin / Scout",
+      "stats": {
+        "mana": 3,
+        "attack": 3,
+        "health": 2
+      },
+      "keywords": [
+        "Flying",
+        "Charge"
+      ],
+      "ability": {
+        "name": "Aerial Pounce",
+        "text": "Flying, Charge. When this unit attacks a player, gain +1 Attack for this turn."
+      },
+      "path": "cards/anemos/anemos_card_23_sky_talon_striker.png",
+      "source_file": "anemos_card_23_sky_talon_striker.png",
+      "format": "3:4",
+      "notes": "No text, no frame, vibrant ethereal lighting, 3:4 aspect ratio.",
+      "image_prompt": "A lithe harpy with razor-sharp steel wings diving vertically through purple storm clouds, ethereal lightning illuminating its feathers, cinematic action shot, high contrast."
+    },
+    {
+      "title": "Gale Spire Sentinel",
+      "slug": "anemos_card_24_gale_spire_sentinel",
+      "category": "cards",
+      "domain": "anemos",
+      "kind": "card",
+      "role": "Heavy Unit / Guardian",
+      "stats": {
+        "mana": 5,
+        "attack": 2,
+        "health": 6
+      },
+      "keywords": [
+        "Taunt",
+        "Armor"
+      ],
+      "ability": {
+        "name": "Wall of Winds",
+        "text": "Taunt. Armor: This unit reduces all incoming damage by 1."
+      },
+      "path": "cards/anemos/anemos_card_24_gale_spire_sentinel.png",
+      "source_file": "anemos_card_24_gale_spire_sentinel.png",
+      "format": "3:4",
+      "notes": "Focus on scale and weight, dark fantasy aesthetic, 3:4 aspect ratio.",
+      "image_prompt": "A massive armored humanoid made of swirling wind and stone plate, standing firmly on a mountain peak, glowing violet runes on its chest, stormy sky background."
+    },
+    {
+      "title": "Stormcaller Disciple",
+      "slug": "anemos_card_25_stormcaller_disciple",
+      "category": "cards",
+      "domain": "anemos",
+      "kind": "card",
+      "role": "Mage / Support",
+      "stats": {
+        "mana": 4,
+        "attack": 2,
+        "health": 4
+      },
+      "keywords": [],
+      "ability": {
+        "name": "Static Infusion",
+        "text": "When played, give an allied unit Flying and +1 Attack."
+      },
+      "path": "cards/anemos/anemos_card_25_stormcaller_disciple.png",
+      "source_file": "anemos_card_25_stormcaller_disciple.png",
+      "format": "3:4",
+      "notes": "Dramatic lighting, low angle shot, 3:4 aspect ratio.",
+      "image_prompt": "A hooded figure standing on a floating island, summoning purple lightning between their palms, ethereal spirits circling, dark stormy atmosphere."
+    },
+    {
+      "title": "Thunderhead Prowler",
+      "slug": "anemos_card_26_thunderhead_prowler",
+      "category": "cards",
+      "domain": "anemos",
+      "kind": "card",
+      "role": "Assassin / Scout",
+      "stats": {
+        "mana": 4,
+        "attack": 4,
+        "health": 3
+      },
+      "keywords": [
+        "Stealth"
+      ],
+      "ability": {
+        "name": "Storm Cloak",
+        "text": "Stealth. After this unit kills an enemy, it gains Stealth again."
+      },
+      "path": "cards/anemos/anemos_card_26_thunderhead_prowler.png",
+      "source_file": "anemos_card_26_thunderhead_prowler.png",
+      "format": "3:4",
+      "notes": "Cinematic lighting, high detail, 3:4 aspect ratio.",
+      "image_prompt": "A feline beast with wings of crackling electricity, prowling through dense purple fog, eyes glowing with blue energy, hyper-realistic, dark fantasy."
+    },
+    {
+      "title": "Zephyr Wing Dancer",
+      "slug": "anemos_card_27_zephyr_wing_dancer",
+      "category": "cards",
+      "domain": "anemos",
+      "kind": "card",
+      "role": "Support / Scout",
+      "stats": {
+        "mana": 2,
+        "attack": 2,
+        "health": 2
+      },
+      "keywords": [
+        "Flying"
+      ],
+      "ability": {
+        "name": "Wind Grace",
+        "text": "Flying. Allied units with Flying have +1 Health."
+      },
+      "path": "cards/anemos/anemos_card_27_zephyr_wing_dancer.png",
+      "source_file": "anemos_card_27_zephyr_wing_dancer.png",
+      "format": "3:4",
+      "notes": "Fluid motion, ethereal, 3:4 aspect ratio.",
+      "image_prompt": "An elegant harpy-like creature dancing in the air, trailing ribbons of violet wind, serene facial expression, floating sanctuary background."
+    },
+    {
+      "title": "Void-Torn Tempest",
+      "slug": "anemos_card_28_void_torn_tempest",
+      "category": "cards",
+      "domain": "anemos",
+      "kind": "card",
+      "role": "Heavy Unit / Mage",
+      "stats": {
+        "mana": 8,
+        "attack": 6,
+        "health": 6
+      },
+      "keywords": [
+        "Flying",
+        "Overwhelm"
+      ],
+      "ability": {
+        "name": "Cataclysm",
+        "text": "Flying. Overwhelm. When this enters the board, deal 3 damage to all non-Flying units."
+      },
+      "path": "cards/anemos/anemos_card_28_void_torn_tempest.png",
+      "source_file": "anemos_card_28_void_torn_tempest.png",
+      "format": "3:4",
+      "notes": "Dramatic contrast, dark fantasy horror, 3:4 aspect ratio.",
+      "image_prompt": "A gigantic storm elemental tearing through the sky, dark purple tentacles emerging from the clouds into its body, apocalyptic scale."
+    },
+    {
+      "title": "Aetheric Marksman",
+      "slug": "anemos_card_29_aetheric_marksman",
+      "category": "cards",
+      "domain": "anemos",
+      "kind": "card",
+      "role": "Ranged / Scout",
+      "stats": {
+        "mana": 3,
+        "attack": 3,
+        "health": 2
+      },
+      "keywords": [
+        "Ranged"
+      ],
+      "ability": {
+        "name": "Focused Gale",
+        "text": "Ranged. Once per turn, you may deal 1 damage to a target unit."
+      },
+      "path": "cards/anemos/anemos_card_29_aetheric_marksman.png",
+      "source_file": "anemos_card_29_aetheric_marksman.png",
+      "format": "3:4",
+      "notes": "Sharp focus, epic composition, 3:4 aspect ratio.",
+      "image_prompt": "A wind-touched archer aiming a bow made of lightning, perched on a precarious cliff edge, dark sky, embers floating in the air."
+    },
+    {
+      "title": "Storm-Bound Harpy",
+      "slug": "anemos_card_30_storm_bound_harpy",
+      "category": "cards",
+      "domain": "anemos",
+      "kind": "card",
+      "role": "Undead / Flying",
+      "stats": {
+        "mana": 4,
+        "attack": 3,
+        "health": 3
+      },
+      "keywords": [
+        "Flying",
+        "Reborn"
+      ],
+      "ability": {
+        "name": "Lingering Spirit",
+        "text": "Flying. Reborn: When destroyed, return to play with 1 Health."
+      },
+      "path": "cards/anemos/anemos_card_30_storm_bound_harpy.png",
+      "source_file": "anemos_card_30_storm_bound_harpy.png",
+      "format": "3:4",
+      "notes": "Moody, dark, spectral, 3:4 aspect ratio.",
+      "image_prompt": "A skeletal harpy with torn wings still buzzing with necrotic violet energy, flying through an ancient ruin, shadowy atmosphere."
+    },
+    {
+      "title": "Hurricane Sentry",
+      "slug": "anemos_card_31_hurricane_sentry",
+      "category": "cards",
+      "domain": "anemos",
+      "kind": "card",
+      "role": "Heavy Unit / Defender",
+      "stats": {
+        "mana": 5,
+        "attack": 3,
+        "health": 5
+      },
+      "keywords": [
+        "Taunt"
+      ],
+      "ability": {
+        "name": "Gust Barrier",
+        "text": "Taunt. Whenever this unit takes damage, deal that much damage to the attacker."
+      },
+      "path": "cards/anemos/anemos_card_31_hurricane_sentry.png",
+      "source_file": "anemos_card_31_hurricane_sentry.png",
+      "format": "3:4",
+      "notes": "Dynamic wind effects, strong silhouette, 3:4 aspect ratio.",
+      "image_prompt": "A sentient vortex of air and debris taking a humanoid shape, holding a crystalline shield, metallic lightning textures, epic, 3:4."
+    },
+    {
+      "title": "Cloud Sunderer",
+      "slug": "anemos_card_32_cloud_sunderer",
+      "category": "cards",
+      "domain": "anemos",
+      "kind": "card",
+      "role": "Siege / Flying",
+      "stats": {
+        "mana": 6,
+        "attack": 5,
+        "health": 4
+      },
+      "keywords": [
+        "Flying",
+        "Siege"
+      ],
+      "ability": {
+        "name": "Sky-Piercer",
+        "text": "Flying. Siege: Deals +2 damage when attacking the enemy player."
+      },
+      "path": "cards/anemos/anemos_card_32_cloud_sunderer.png",
+      "source_file": "anemos_card_32_cloud_sunderer.png",
+      "format": "3:4",
+      "notes": "Aggressive, epic scope, 3:4 aspect ratio.",
+      "image_prompt": "A monstrous winged beast tearing through a thick cloud layer, talons dripping with purple static, low sun behind it, cinematic framing."
+    },
+    {
+      "title": "Whispering Cloudblade",
+      "slug": "anemos_card_33_whispering_cloudblade",
+      "category": "cards",
+      "domain": "anemos",
+      "kind": "card",
+      "role": "Assassin / Scout",
+      "stats": {
+        "mana": 3,
+        "attack": 2,
+        "health": 3
+      },
+      "keywords": [
+        "Stealth"
+      ],
+      "ability": {
+        "name": "Cloud Shift",
+        "text": "Stealth. When this unit attacks, give it +2 Attack until end of turn."
+      },
+      "path": "cards/anemos/anemos_card_33_whispering_cloudblade.png",
+      "source_file": "anemos_card_33_whispering_cloudblade.png",
+      "format": "3:4",
+      "notes": "Atmospheric, blurry background, sharp subject, 3:4 aspect ratio.",
+      "image_prompt": "An ethereal assassin blending into a stormy mist, holding two blades of crackling air, face hidden by a hood, mysterious and dark."
+    },
+    {
+      "title": "Lightning Keeper",
+      "slug": "anemos_card_34_lightning_keeper",
+      "category": "cards",
+      "domain": "anemos",
+      "kind": "card",
+      "role": "Mage / Support",
+      "stats": {
+        "mana": 4,
+        "attack": 2,
+        "health": 5
+      },
+      "keywords": [
+        "Ward"
+      ],
+      "ability": {
+        "name": "Static Ward",
+        "text": "Ward. At the end of your turn, give another allied unit Ward."
+      },
+      "path": "cards/anemos/anemos_card_34_lightning_keeper.png",
+      "source_file": "anemos_card_34_lightning_keeper.png",
+      "format": "3:4",
+      "notes": "Intricate patterns, magical aura, 3:4 aspect ratio.",
+      "image_prompt": "A priest of the storm sitting cross-legged, surrounded by floating lightning rods, purple energy crackling, serene but powerful."
+    },
+    {
+      "title": "Gale-Force Harpy",
+      "slug": "anemos_card_35_gale_force_harpy",
+      "category": "cards",
+      "domain": "anemos",
+      "kind": "card",
+      "role": "Fast Flying Unit",
+      "stats": {
+        "mana": 4,
+        "attack": 3,
+        "health": 3
+      },
+      "keywords": [
+        "Flying"
+      ],
+      "ability": {
+        "name": "Wind-Swept",
+        "text": "Flying. When this unit enters the board, push an enemy unit to the back row."
+      },
+      "path": "cards/anemos/anemos_card_35_gale_force_harpy.png",
+      "source_file": "anemos_card_35_gale_force_harpy.png",
+      "format": "3:4",
+      "notes": "Wide wingspan, high altitude, 3:4 aspect ratio.",
+      "image_prompt": "A harpy with wings spanned wide, wings are made of solidified gale, soaring high above a purple-tinted mountain range, extreme detail."
+    },
+    {
+      "title": "Thunderhead Colossus",
+      "slug": "anemos_card_36_thunderhead_colossus",
+      "category": "cards",
+      "domain": "anemos",
+      "kind": "card",
+      "role": "Heavy Unit / Guardian",
+      "stats": {
+        "mana": 7,
+        "attack": 5,
+        "health": 7
+      },
+      "keywords": [
+        "Taunt"
+      ],
+      "ability": {
+        "name": "Electric Aegis",
+        "text": "Taunt. Whenever this unit blocks, deal 2 damage to all enemies engaging it."
+      },
+      "path": "cards/anemos/anemos_card_36_thunderhead_colossus.png",
+      "source_file": "anemos_card_36_thunderhead_colossus.png",
+      "format": "3:4",
+      "notes": "Massive scale, heavy armor, crumbling stone, 3:4 aspect ratio.",
+      "image_prompt": "A monolithic statue of stone and lightning, standing on a shattered platform, intimidating presence, dark fantasy style, 3:4."
+    },
+    {
+      "title": "Aether-Touched Scout",
+      "slug": "anemos_card_37_aether_touched_scout",
+      "category": "cards",
+      "domain": "anemos",
+      "kind": "card",
+      "role": "Scout / Flying",
+      "stats": {
+        "mana": 2,
+        "attack": 2,
+        "health": 1
+      },
+      "keywords": [
+        "Flying",
+        "Stealth"
+      ],
+      "ability": {
+        "name": "Shadow Soar",
+        "text": "Flying. Stealth. Cannot be targeted by spells."
+      },
+      "path": "cards/anemos/anemos_card_37_aether_touched_scout.png",
+      "source_file": "anemos_card_37_aether_touched_scout.png",
+      "format": "3:4",
+      "notes": "Subtle, ethereal, minimalist dark fantasy, 3:4 aspect ratio.",
+      "image_prompt": "A small, bird-like creature with translucent wings, blending perfectly into the purple storm clouds, glowing eyes."
+    },
+    {
+      "title": "Storm Weaver Patriarch",
+      "slug": "anemos_card_38_storm_weaver_patriarch",
+      "category": "cards",
+      "domain": "anemos",
+      "kind": "card",
+      "role": "Mage / Control",
+      "stats": {
+        "mana": 6,
+        "attack": 3,
+        "health": 4
+      },
+      "keywords": [
+        "Ward"
+      ],
+      "ability": {
+        "name": "Weave Storms",
+        "text": "Ward. At the start of your turn, freeze a target enemy unit."
+      },
+      "path": "cards/anemos/anemos_card_38_storm_weaver_patriarch.png",
+      "source_file": "anemos_card_38_storm_weaver_patriarch.png",
+      "format": "3:4",
+      "notes": "Wisdom, magical intensity, cinematic, 3:4 aspect ratio.",
+      "image_prompt": "An elderly sorcerer with flowing robes of blue and purple, fingers weaving threads of lightning, stormy sanctuary background."
+    },
+    {
+      "title": "Void-Blighted Avenger",
+      "slug": "anemos_card_39_void_blighted_avenger",
+      "category": "cards",
+      "domain": "anemos",
+      "kind": "card",
+      "role": "Assassin / Undead",
+      "stats": {
+        "mana": 5,
+        "attack": 5,
+        "health": 2
+      },
+      "keywords": [
+        "Charge",
+        "Deathrattle"
+      ],
+      "ability": {
+        "name": "Last Vengeance",
+        "text": "Charge. Deathrattle: Deal 3 damage to a random enemy unit."
+      },
+      "path": "cards/anemos/anemos_card_39_void_blighted_avenger.png",
+      "source_file": "anemos_card_39_void_blighted_avenger.png",
+      "format": "3:4",
+      "notes": "Distorted, horror-influenced, dark palette, 3:4 aspect ratio.",
+      "image_prompt": "A corrupted spirit manifesting as a blade of dark energy, emerging from a tear in the sky, sharp lines, intimidating."
+    },
+    {
+      "title": "Tempest Reborn",
+      "slug": "anemos_card_42_tempest_reborn",
+      "category": "cards",
+      "domain": "anemos",
+      "kind": "card",
+      "role": "Mage / Undead",
+      "stats": {
+        "mana": 6,
+        "attack": 4,
+        "health": 4
+      },
+      "keywords": [
+        "Reborn",
+        "Ward"
+      ],
+      "ability": {
+        "name": "Storm Resurgence",
+        "text": "Ward. Reborn: Return to play with 2 Health when destroyed."
+      },
+      "path": "cards/anemos/anemos_card_42_tempest_reborn.png",
+      "source_file": "anemos_card_42_tempest_reborn.png",
+      "format": "3:4",
+      "notes": "Intense particle effects, cinematic lighting, 3:4 aspect ratio.",
+      "image_prompt": "A warrior composed of storm clouds and lightning being reconstructed by purple energy, eyes glowing, epic resurrection scene."
+    },
+    {
+      "title": "Sky-Singer Matriarch",
+      "slug": "anemos_card_40_sky_singer_matriarch",
+      "category": "cards",
+      "domain": "anemos",
+      "kind": "card",
+      "role": "Support / Flying",
+      "stats": {
+        "mana": 5,
+        "attack": 3,
+        "health": 4
+      },
+      "keywords": [
+        "Flying"
+      ],
+      "ability": {
+        "name": "Sky-Hymn",
+        "text": "Flying. Allied units gain +1/+1 while this unit is on the board."
+      },
+      "path": "cards/anemos/anemos_card_40_sky_singer_matriarch.png",
+      "source_file": "anemos_card_40_sky_singer_matriarch.png",
+      "format": "3:4",
+      "notes": "Authority, magical aura, elegant, 3:4 aspect ratio.",
+      "image_prompt": "A majestic avian matriarch surrounded by swirling storm clouds and golden lightning, ethereal feathers glowing."
+    },
+    {
+      "title": "Aero-Bolt Sniper",
+      "slug": "anemos_card_41_aero_bolt_sniper",
+      "category": "cards",
+      "domain": "anemos",
+      "kind": "card",
+      "role": "Ranged / Flying",
+      "stats": {
+        "mana": 4,
+        "attack": 3,
+        "health": 2
+      },
+      "keywords": [
+        "Flying",
+        "Ranged"
+      ],
+      "ability": {
+        "name": "Pinpoint Gale",
+        "text": "Flying. Ranged. Ignores enemy Taunt units."
+      },
+      "path": "cards/anemos/anemos_card_41_aero_bolt_sniper.png",
+      "source_file": "anemos_card_41_aero_bolt_sniper.png",
+      "format": "3:4",
+      "notes": "Focus, high speed, dynamic perspective, 3:4 aspect ratio.",
+      "image_prompt": "A slender wind-aligned archer perched on a floating cliffside, drawing back a bow made of solidified air, focus on sharp keen eyes."
     }
   ]
 }

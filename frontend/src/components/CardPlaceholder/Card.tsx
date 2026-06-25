@@ -35,7 +35,7 @@ export type CardProps = CardDisplayProps & {
 
 interface CardComponentProps extends CardDisplayProps {
   totalCards: number
-  layoutMode?: 'default' | 'game' | 'compact' | 'preview' | 'hero'
+  layoutMode?: 'default' | 'game' | 'compact' | 'preview' | 'hero' | 'market'
   showAbility?: boolean
   /** Keyword chips (Stealth, Charge, …). Independent of showAbility. */
   showKeywords?: boolean
@@ -78,7 +78,7 @@ const Card = forwardRef<HTMLElement, CardComponentProps>(function Card(
   const [isHovered, setIsHovered] = useState(false)
   const displayAbility = showAbility ?? (layoutMode !== 'game' && layoutMode !== 'hero')
   const displayKeywords = showKeywords ?? (layoutMode === 'hero' || displayAbility)
-  const displayRarity = showRarity ?? (layoutMode !== 'game' && layoutMode !== 'hero')
+  const displayRarity = showRarity === true
   const imageSrc =
     layoutMode === 'preview' || layoutMode === 'hero'
       ? artUrl

@@ -8,6 +8,7 @@
 const path = require('node:path')
 const { createRequire } = require('node:module')
 
+const frontendRoot = __dirname
 const requireFromFrontend = createRequire(__filename)
 const { loadRegistry, prodPort } =
   requireFromFrontend('./scripts/project-ports.mjs')
@@ -25,6 +26,7 @@ function siteApps(site, index) {
   return [
     {
       name: `${project}-dev`,
+      cwd: frontendRoot,
       script: 'npm',
       args: 'run dev:host',
       env: {
@@ -37,6 +39,7 @@ function siteApps(site, index) {
     },
     {
       name: `${project}-prod`,
+      cwd: frontendRoot,
       script: 'npm',
       args: 'run start:prod',
       env: {
@@ -45,6 +48,8 @@ function siteApps(site, index) {
         PORT: String(prodPort(project, index)),
         HOSTNAME: '0.0.0.0',
         SITE_HYBRID: '1',
+        NEXT_PUBLIC_SITE_HYBRID: '1',
+        SITE_AUTH_DISABLED: '1',
         ...siteAuthEnv,
       },
     },

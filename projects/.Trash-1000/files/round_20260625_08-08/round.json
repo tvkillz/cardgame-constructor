@@ -1,0 +1,51 @@
+{
+  "meta": {
+    "project": "voidborn",
+    "round_id": "round_20260625_08-08",
+    "status": "draft",
+    "per_domain": 1,
+    "domain_count": 4,
+    "total_cards": 4,
+    "created_at": "2026-06-25T08:58:01.977Z",
+    "domains": [
+      "kronos",
+      "thalassa",
+      "infernus",
+      "anemos"
+    ],
+    "batches": [
+      {
+        "domain": "kronos",
+        "file": "kronos_batch_08-08.json",
+        "from": 8,
+        "to": 8,
+        "count": 1,
+        "validation_ok": true
+      },
+      {
+        "domain": "thalassa",
+        "file": "thalassa_batch_08-08.json",
+        "from": 8,
+        "to": 8,
+        "count": 1,
+        "validation_ok": true
+      },
+      {
+        "domain": "infernus",
+        "file": "infernus_batch_08-08.json",
+        "from": 8,
+        "to": 8,
+        "count": 1,
+        "validation_ok": true
+      },
+      {
+        "domain": "anemos",
+        "file": "anemos_batch_08-08.json",
+        "from": 8,
+        "to": 8,
+        "count": 1,
+        "validation_ok": true
+      }
+    ]
+  }
+}

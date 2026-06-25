@@ -20,6 +20,7 @@ import { useAuth } from '@/components/providers/AuthProvider'
 export interface UseMatchOptions {
   deckEntries: HandDeckEntry[]
   catalog: CardRecord[]
+  catalogLoading?: boolean
   deckId: string
   mode?: string
   resumeMatchId?: string | null
@@ -47,6 +48,7 @@ function apiErrorMessage(res: { error?: string; message?: string }, fallback: st
 
 export function useMatch({
   catalog,
+  catalogLoading = false,
   deckId,
   mode = 'casual',
   resumeMatchId,
@@ -115,6 +117,12 @@ export function useMatch({
   }, [])
 
   useEffect(() => {
+    if (catalogLoading) {
+      setBooting(true)
+      setBootError(null)
+      return
+    }
+
     if (catalog.length === 0) {
       setBooting(false)
       setBootError('Card catalog not loaded.')
@@ -208,7 +216,7 @@ export function useMatch({
     return () => {
       cancelled = true
     }
-  }, [catalog, deckId, mode, resumeMatchId, user?.id, applyFromRow, preloadHeroHand])
+  }, [catalog, catalogLoading, deckId, mode, resumeMatchId, user?.id, applyFromRow, preloadHeroHand])
 
   useEffect(() => {
     const id = matchId

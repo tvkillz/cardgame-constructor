@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Deploy built frontend artifacts from local machine → VPS.
 # Does NOT ship src/, game/, or projects source packs.
+# Card catalog images + JSON are NOT synced — cards live in Postgres/Storage (seed/upload separately).
 #
 # Usage (from repo root or frontend/):
 #   bash frontend/deploy/scripts/deploy-from-local.sh
@@ -51,6 +52,33 @@ RSYNC_SSH=(rsync -avz --progress)
 
 log() { echo "[deploy] $*"; }
 
+# pm2 app names for sites in this deploy (voidborn → voidborn-prod), not the full PM2_APPS list.
+deploy_pm2_apps() {
+  local site
+  for site in "${SITES[@]}"; do
+    echo "${site}-prod"
+  done
+}
+
+deploy_pm2_dev_apps() {
+  local site
+  for site in "${SITES[@]}"; do
+    echo "${site}-dev"
+  done
+}
+
+pm2_stop_deploy_apps() {
+  local app
+  while IFS= read -r app; do
+    [[ -z "$app" ]] && continue
+    ssh "$SSH_TARGET" "pm2 stop '$app' 2>/dev/null || true"
+  done < <(deploy_pm2_dev_apps)
+  while IFS= read -r app; do
+    [[ -z "$app" ]] && continue
+    ssh "$SSH_TARGET" "pm2 stop '$app' 2>/dev/null || true"
+  done < <(deploy_pm2_apps)
+}
+
 # --- Resolve sites from registry ---
 read_registry() {
   node -e "
@@ -94,6 +122,12 @@ for site in "${SITES[@]}"; do
     echo "Missing .build/$site/.next — run build first." >&2
     exit 1
   }
+  dev_manifest="$FRONTEND_DIR/.build/$site/.next/static/development/_buildManifest.js"
+  if [[ -f "$dev_manifest" ]]; then
+    echo "[deploy] ERROR: .build/$site/.next still has dev artifacts after build." >&2
+    echo "[deploy] Stop local dev (npm run dev) and run deploy again." >&2
+    exit 1
+  fi
 done
 
 # --- Rsync runtime shell (frontend) ---
@@ -110,6 +144,8 @@ log "Syncing runtime files…"
   "$FRONTEND_DIR/scripts/project-next.mjs" \
   "$FRONTEND_DIR/scripts/project-paths.mjs" \
   "$FRONTEND_DIR/scripts/site-hybrid.mjs" \
+  "$FRONTEND_DIR/scripts/verify-next-build.mjs" \
+  "$FRONTEND_DIR/scripts/start-prod.mjs" \
   "$SSH_TARGET:$VPS_FRONTEND_DIR/scripts/"
 
 "${RSYNC_SSH[@]}" \
@@ -120,12 +156,43 @@ log "Syncing runtime files…"
 
 ssh "$SSH_TARGET" "mkdir -p '$VPS_FRONTEND_DIR/.build' '$VPS_PROJECTS_DIR'"
 
+# Stop pm2 before replacing .next chunks — avoids MODULE_NOT_FOUND if requests
+# hit the server while rsync --delete is mid-transfer.
+if [[ "$DRY_RUN" != "1" ]]; then
+  log "Stopping pm2 (dev + prod) for: ${SITES[*]}"
+  pm2_stop_deploy_apps
+fi
+
 # --- Rsync per-site build artifacts ---
 for site in "${SITES[@]}"; do
   log "  .build/$site/"
+  if [[ "$SKIP_BUILD" != "1" ]]; then
+    log "  verify .build/$site/.next"
+    PROJECT="$site" node "$FRONTEND_DIR/scripts/verify-next-build.mjs"
+  fi
   "${RSYNC_SSH[@]}" --delete \
+    --exclude '.next/types/' \
+    --exclude '.next/trace' \
+    --exclude '.next/cache/' \
+    --exclude '.next/static/development/' \
+    --exclude 'assets/cards/' \
+    --exclude 'data/card-thumbs/' \
+    --exclude 'data/card-full/' \
+    --exclude 'data/cards-catalog.json' \
+    --exclude 'data/landing-cards.json' \
     "$FRONTEND_DIR/.build/$site/" \
     "$SSH_TARGET:$VPS_FRONTEND_DIR/.build/$site/"
+  # Excluded paths are not deleted by rsync --delete; purge stale dev output on the VPS.
+  ssh "$SSH_TARGET" "rm -rf '$VPS_FRONTEND_DIR/.build/$site/.next/static/development'"
+  if [[ "$DRY_RUN" != "1" ]]; then
+    ssh "$SSH_TARGET" "rm -rf \
+      '$VPS_FRONTEND_DIR/.build/$site/assets/cards' \
+      '$VPS_FRONTEND_DIR/.build/$site/data/card-thumbs' \
+      '$VPS_FRONTEND_DIR/.build/$site/data/card-full' && \
+      rm -f \
+      '$VPS_FRONTEND_DIR/.build/$site/data/cards-catalog.json' \
+      '$VPS_FRONTEND_DIR/.build/$site/data/landing-cards.json'"
+  fi
 done
 
 # --- Rsync minimal projects/ (registry + manifests only) ---
@@ -155,18 +222,46 @@ if [[ "$DRY_RUN" == "1" ]]; then
   exit 0
 fi
 
+log "Verifying build artifacts on VPS…"
+for site in "${SITES[@]}"; do
+  ssh "$SSH_TARGET" "cd '$VPS_FRONTEND_DIR' && PROJECT='$site' node scripts/verify-next-build.mjs"
+done
+
 log "Installing production deps on VPS…"
 ssh "$SSH_TARGET" bash -s <<REMOTE
 set -euo pipefail
 cd "$VPS_FRONTEND_DIR"
 npm ci --omit=dev
+REMOTE
 
-if pm2 describe ${PM2_APPS%%,*} >/dev/null 2>&1; then
-  pm2 restart $PM2_APPS
-else
-  pm2 start ecosystem.config.cjs --only $PM2_APPS
-fi
+log "Starting pm2 for: $(deploy_pm2_apps | tr '\n' ' ')"
+# Pass VPS_FRONTEND_DIR into the remote start helper.
+ssh "$SSH_TARGET" "VPS_FRONTEND_DIR='$VPS_FRONTEND_DIR' bash -s" <<REMOTE
+set -euo pipefail
+cd "\$VPS_FRONTEND_DIR"
+$(deploy_pm2_apps | while read -r app; do
+  [[ -z "$app" ]] && continue
+  echo "if pm2 describe '$app' >/dev/null 2>&1; then pm2 restart '$app' --update-env; else pm2 start ecosystem.config.cjs --only '$app'; fi"
+done)
 pm2 save
 REMOTE
 
-log "Done. Check: pm2 logs ${PM2_APPS%%,*}"
+log "Smoke-testing deployed sites…"
+for site in "${SITES[@]}"; do
+  port="$(node -e "const {prodPort,projectIndex}=require('$FRONTEND_DIR/scripts/project-ports.mjs'); console.log(prodPort('$site', projectIndex('$site')))")"
+  status="$(ssh "$SSH_TARGET" "curl -s -o /dev/null -w '%{http_code}' --max-time 15 http://127.0.0.1:${port}/" 2>/dev/null || true)"
+  status="${status:-000}"
+  body="$(ssh "$SSH_TARGET" "curl -s --max-time 15 http://127.0.0.1:${port}/ 2>/dev/null | head -c 8000" || true)"
+  if echo "$body" | grep -qE 'react-refresh|/_next/static/development/|/_next/static/chunks/webpack\.js'; then
+    echo "[deploy] ERROR: $site on port $port is serving DEV mode (stop ${site}-dev on VPS)." >&2
+    exit 1
+  fi
+  if [[ "$status" != "200" ]]; then
+    echo "[deploy] ERROR: $site on port $port returned HTTP $status (expected 200)." >&2
+    echo "[deploy] On VPS: pm2 logs ${site}-prod --lines 40" >&2
+    exit 1
+  fi
+  log "  $site HTTP $status on port $port (production)"
+done
+
+log "Done."

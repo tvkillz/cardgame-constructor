@@ -16,7 +16,10 @@ const corsHeaders = {
 }
 
 function json(body: unknown, status = 200) {
-  return new Response(JSON.stringify(body), { status, headers: corsHeaders })
+  return new Response(
+    JSON.stringify(body, (_key, value) => (typeof value === 'bigint' ? Number(value) : value)),
+    { status, headers: corsHeaders },
+  )
 }
 
 function siteIdFromRequest(req: Request): string | null {
@@ -102,8 +105,16 @@ type CheckoutBody = {
   productId?: string
   packId?: string
   customCredits?: number
+  cardId?: string
+  currency?: string
   successUrl?: string
   cancelUrl?: string
+}
+
+const RATE_FROM_EUR: Record<string, number> = {
+  eur: 1,
+  gbp: 0.86,
+  usd: 1.08,
 }
 
 Deno.serve(async (req) => {
@@ -220,6 +231,28 @@ Deno.serve(async (req) => {
       unitCents = credits
       title = `${credits} Credits`
       productId = null
+    } else if (body.cardId) {
+      const cardIdStr = String(body.cardId)
+      const { data: card } = await admin
+        .from('cards')
+        .select('id, title, price_cents, site_id, published')
+        .eq('id', cardIdStr)
+        .eq('site_id', siteId)
+        .eq('published', true)
+        .maybeSingle()
+
+      if (!card || !card.price_cents || card.price_cents <= 0) {
+        return json({ error: 'card_not_found' }, 404)
+      }
+
+      const displayCurrency = String(body.currency ?? 'eur').toLowerCase()
+      const rate = RATE_FROM_EUR[displayCurrency] ?? 1
+      cardId = card.id
+      credits = 0
+      title = card.title
+      unitCents = Math.round(Number(card.price_cents) * rate)
+      currency = displayCurrency
+      productId = null
     } else {
       return json({ error: 'invalid_checkout' }, 400)
     }
@@ -282,22 +315,84 @@ Deno.serve(async (req) => {
       })
       .eq('id', order.id)
 
-    await admin.from('wallet_transactions').insert({
-      user_id: userId,
-      type: 'top_up',
-      status: 'pending',
-      amount_credits: credits,
-      description: `Checkout: ${title}`,
-      reference_type: 'order',
-      reference_id: order.id,
-      stripe_checkout_session_id: session.id,
-    })
+    if (credits > 0) {
+      await admin.from('wallet_transactions').insert({
+        user_id: userId,
+        type: 'top_up',
+        status: 'pending',
+        amount_credits: credits,
+        description: `Checkout: ${title}`,
+        reference_type: 'order',
+        reference_id: order.id,
+        stripe_checkout_session_id: session.id,
+      })
+    }
 
     return json({
       orderId: order.id,
       checkoutUrl: session.url,
       sessionId: session.id,
     })
+  }
+
+  if (action === 'buy_card_with_credits') {
+    const cardId = String(body.cardId ?? '')
+    if (!cardId) return json({ error: 'missing_card_id' }, 400)
+
+    const { data: card } = await admin
+      .from('cards')
+      .select('id, title, price_cents, site_id, published')
+      .eq('id', cardId)
+      .eq('site_id', siteId)
+      .eq('published', true)
+      .maybeSingle()
+
+    if (!card) {
+      return json({ error: 'card_not_found' }, 404)
+    }
+
+    const priceCredits = card.price_cents
+    if (!priceCredits || priceCredits <= 0) {
+      return json({ error: 'card_not_for_sale' }, 400)
+    }
+
+    try {
+      await admin.rpc('wallet_apply_credits', {
+        p_user_id: userId,
+        p_amount: -Number(priceCredits),
+        p_type: 'purchase',
+        p_status: 'completed',
+        p_description: `Purchased card: ${card.title}`,
+        p_reference_type: 'card',
+        p_reference_id: card.id,
+      })
+    } catch (e) {
+      return json({ error: 'insufficient_credits', message: String(e) }, 400)
+    }
+
+    const { data: existing } = await admin
+      .from('player_inventory')
+      .select('quantity')
+      .eq('user_id', userId)
+      .eq('card_id', card.id)
+      .maybeSingle()
+
+    if (existing) {
+      await admin
+        .from('player_inventory')
+        .update({ quantity: existing.quantity + 1 })
+        .eq('user_id', userId)
+        .eq('card_id', card.id)
+    } else {
+      await admin.from('player_inventory').insert({
+        user_id: userId,
+        card_id: card.id,
+        quantity: 1,
+        source: 'purchase',
+      })
+    }
+
+    return json({ ok: true })
   }
 
   if (action === 'purchase_with_credits') {
@@ -317,7 +412,7 @@ Deno.serve(async (req) => {
     try {
       await admin.rpc('wallet_apply_credits', {
         p_user_id: userId,
-        p_amount: -BigInt(priceCredits),
+        p_amount: -Number(priceCredits),
         p_type: 'purchase',
         p_status: 'completed',
         p_description: `Purchased: ${product.title}`,

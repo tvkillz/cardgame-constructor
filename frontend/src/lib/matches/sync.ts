@@ -1,6 +1,8 @@
 import type { CardRecord } from '@/lib/cards/types'
-import { toCardDisplayProps } from '@/lib/cards'
+import { getCardBySlug, toCardDisplayProps } from '@/lib/cards'
+import { DOMAIN_GLOW } from '@/lib/cards/domains'
 import { STARTING_MAX_MANA } from '@/lib/game/match/constants'
+import type { MatchCardInstance } from '@/lib/game/match/types'
 import type { CombatRoundResult, MatchState, VillainPlay } from '@/lib/game/match/types'
 
 import { hydrateMatchState, type PersistedMatchState } from './serialize'
@@ -16,12 +18,43 @@ export type MatchDbRow = {
   status?: string
 }
 
-function attachDisplay(instance: { slug: string; display?: unknown }, catalog: CardRecord[]) {
+function domainFromSlug(slug: string): string {
+  const match = /^([a-z0-9]+)_card_/i.exec(slug)
+  return match?.[1]?.toLowerCase() ?? 'unknown'
+}
+
+function attachDisplay(instance: MatchCardInstance, catalog: CardRecord[]) {
   if (instance.display) return
-  const record = catalog.find((c) => c.slug === instance.slug)
+
+  const record = catalog.find((c) => c.slug === instance.slug) ?? getCardBySlug(instance.slug)
   if (record) {
-    ;(instance as { display: ReturnType<typeof toCardDisplayProps> }).display =
-      toCardDisplayProps(record)
+    instance.display = {
+      ...toCardDisplayProps(record),
+      id: instance.instanceId,
+      stats: {
+        mana: instance.mana,
+        attack: instance.attack,
+        health: instance.health,
+      },
+    }
+    return
+  }
+
+  const domain = domainFromSlug(instance.slug)
+  instance.display = {
+    id: instance.instanceId,
+    slug: instance.slug,
+    title: instance.slug.replace(/_/g, ' '),
+    thumbUrl: '',
+    artUrl: '',
+    stats: {
+      mana: instance.mana,
+      attack: instance.attack,
+      health: instance.health,
+    },
+    domain,
+    glowColor: DOMAIN_GLOW[domain] ?? '#6b7280',
+    fanIndex: 0,
   }
 }
 
@@ -30,8 +63,12 @@ export function attachDisplayToState(state: MatchState, catalog: CardRecord[]) {
     ...state.hero.hand,
     ...state.hero.board.filter(Boolean),
     ...state.hero.deck,
+    ...state.hero.graveyard,
+    ...state.villain.hand,
     ...state.villain.board.filter(Boolean),
-  ] as { slug: string; display?: unknown }[]
+    ...state.villain.deck,
+    ...state.villain.graveyard,
+  ] as MatchCardInstance[]
   all.forEach((c) => attachDisplay(c, catalog))
 }
 

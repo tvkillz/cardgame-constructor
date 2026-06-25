@@ -3,8 +3,8 @@
  * Compile a content pack (projects/{id}/) into engine artifacts:
  *   - .build/{PROJECT}/generated/project-bundle.json
  *   - .build/{PROJECT}/generated/game-config.json
- *   - .build/{PROJECT}/data/cards-catalog.json
- *   - .build/{PROJECT}/assets/**
+ *   - .build/{PROJECT}/assets/** (brand, domains, cities — not card catalog PNGs)
+ *   - .build/{PROJECT}/data/cards-catalog.json (+ optional local showcase thumbs)
  *
  * Usage:
  *   node scripts/compile-project.mjs
@@ -262,6 +262,7 @@ async function copyProjectAssets(paths, manifest, out, sharp) {
   for (const entry of assetEntries) {
     const rel = entry.path
     if (!rel) continue
+    if (entry.kind === 'card') continue
     const source = await resolveAssetFile(paths, rel)
     if (!source) {
       skipped++
@@ -1138,7 +1139,6 @@ function validateProject(manifest, domainsJson, locationsJson, categories, porta
   if (!manifest.routes?.home) throw new Error('manifest.json: missing routes')
 
   const requiredPortalSections = [
-    'store',
     'market',
     'vaults',
     'collection',

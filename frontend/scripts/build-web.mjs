@@ -100,6 +100,16 @@ try {
     stdio: 'inherit',
     env: hybridBuildEnv({ ...process.env, PROJECT: projectId }),
   })
+  execSync('node scripts/verify-next-build.mjs', {
+    cwd: root,
+    stdio: 'inherit',
+    env: { ...process.env, PROJECT: projectId },
+  })
+  const devStaticDir = path.join(root, out.next, 'static/development')
+  if (fs.existsSync(devStaticDir)) {
+    fs.rmSync(devStaticDir, { recursive: true, force: true })
+    console.log(`[build:web] Removed stray ${projectDistDir(projectId)}/static/development`)
+  }
   markHybridProduction()
   verifyPortalRoutes()
   verifyPlayBundle()

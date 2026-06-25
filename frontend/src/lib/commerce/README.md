@@ -33,6 +33,7 @@ Webhook (Stripe only): `POST /functions/v1/stripe-webhook`
 | `POST /wallet/top-up` | `{ type: 'checkout_create', ... }` |
 | `GET /wallet/transactions` | `{ type: 'transactions_list' }` |
 | `POST /store/purchase` | `{ type: 'purchase_with_credits', productId }` |
+| `POST /market/buy` | `{ type: 'buy_card_with_credits', cardId }` — charges `cards.price_cents` credits |
 | `GET /inventory` | `{ type: 'inventory_list' }` |
 | `POST /withdrawals/create` | `{ type: 'withdrawal_create' }` |
 | Admin endpoints | `admin_transactions`, `admin_products_upsert` |

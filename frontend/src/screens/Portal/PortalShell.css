@@ -80,11 +80,8 @@
 }
 
 .portal__credit-icon {
-  width: 0.85rem;
-  height: 0.85rem;
-  border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, #fff7ed 0%, #f3c74f 55%, #b8860b 100%);
-  box-shadow: 0 0 8px rgba(243, 199, 79, 0.45);
+  /* legacy alias — use .coin-stack-icon */
+  display: none;
 }
 
 .portal__menu-toggle {
@@ -249,10 +246,60 @@
 }
 
 .portal__toolbar-balance {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
   padding: 0.35rem 0.65rem;
   border-radius: 6px;
   border: 1px solid rgba(243, 199, 79, 0.25);
   background: rgba(243, 199, 79, 0.06);
+}
+
+.portal__buy-credits-btn {
+  color: #fde68a !important;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, #3d2a10 92%, transparent),
+    color-mix(in srgb, #1a1208 95%, transparent)
+  ) !important;
+  border-color: color-mix(in srgb, var(--gold) 75%, var(--purple-glow)) !important;
+  box-shadow:
+    0 0 20px color-mix(in srgb, var(--gold) 28%, transparent),
+    0 0 36px color-mix(in srgb, var(--purple-glow) 18%, transparent),
+    inset 0 0 18px color-mix(in srgb, var(--gold) 10%, transparent) !important;
+  animation: portal-buy-credits-glow 3.5s ease-in-out infinite;
+}
+
+.portal__buy-credits-btn:hover:not(:disabled) {
+  color: #fff7d6 !important;
+  border-color: color-mix(in srgb, var(--gold) 92%, #fff) !important;
+  box-shadow:
+    0 0 28px color-mix(in srgb, var(--gold) 45%, transparent),
+    0 0 44px color-mix(in srgb, var(--purple-glow) 28%, transparent),
+    inset 0 0 22px color-mix(in srgb, var(--gold) 16%, transparent) !important;
+  transform: none;
+}
+
+@keyframes portal-buy-credits-glow {
+  0%,
+  100% {
+    box-shadow:
+      0 0 18px color-mix(in srgb, var(--gold) 22%, transparent),
+      0 0 30px color-mix(in srgb, var(--purple-glow) 14%, transparent),
+      inset 0 0 16px color-mix(in srgb, var(--gold) 8%, transparent);
+  }
+  50% {
+    box-shadow:
+      0 0 26px color-mix(in srgb, var(--gold) 38%, transparent),
+      0 0 42px color-mix(in srgb, var(--purple-glow) 22%, transparent),
+      inset 0 0 20px color-mix(in srgb, var(--gold) 14%, transparent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portal__buy-credits-btn {
+    animation: none;
+  }
 }
 
 .portal__currency select {
@@ -263,10 +310,43 @@
   color: rgba(232, 220, 200, 0.75);
   font-family: var(--font-ui);
   font-size: 0.75rem;
+  cursor: pointer;
+}
+
+.portal__cart-btn {
+  position: relative;
+  gap: 0.4rem;
+}
+
+.portal__cart-label {
+  letter-spacing: 0.08em;
+}
+
+.portal__cart-badge {
+  position: absolute;
+  top: -0.35rem;
+  right: -0.35rem;
+  min-width: 1.1rem;
+  height: 1.1rem;
+  padding: 0 0.25rem;
+  border-radius: 999px;
+  font-family: var(--font-ui);
+  font-size: 0.62rem;
+  font-weight: 700;
+  line-height: 1.1rem;
+  text-align: center;
+  color: #1a1408;
+  background: #f3d878;
+  box-shadow: 0 0 8px rgba(243, 216, 120, 0.45);
 }
 
 .portal__main {
   padding: 0 1.5rem 2rem;
+}
+
+.portal__footer .site-footer__inner {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 
 .visually-hidden {
@@ -286,9 +366,10 @@
   .portal__tabs,
   .portal__toolbar,
   .portal__main,
-  .portal__account-menu {
-    padding-left: 2rem;
-    padding-right: 2rem;
+  .portal__account-menu,
+  .portal__footer .site-footer__inner {
+    padding-left: 9rem;
+    padding-right: 9rem;
   }
 }
 

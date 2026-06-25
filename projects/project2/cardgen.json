@@ -1,0 +1,34 @@
+{
+  "gameTitle": "Project2 Demo",
+  "gamePitch": "a demo collectible TCG site with earth and water dominions for multi-site testing",
+  "world": {
+    "title": "The Dominions",
+    "description": "Each realm maps to a city in the content pack — same art paths, unique names, and an independent compile output."
+  },
+  "domains": {
+    "terra": {
+      "visualIdentity": "ancient stone, granite, moss, earthy greens and amber",
+      "flavorNotes": "stone wardens, druids, earth beasts"
+    },
+    "aqua": {
+      "visualIdentity": "deep underwater, bioluminescence, teal and navy gothic ocean",
+      "flavorNotes": "tide priests, abyss creatures, drowned hunters"
+    }
+  },
+  "designRules": [
+    "Mana 1–8 (most cards 3–6). attack + health should roughly scale with mana.",
+    "Ability text must spell out keyword effects.",
+    "Use 0–2 keywords per card from the project glossary only."
+  ],
+  "image": {
+    "aspectRatio": "3:4",
+    "promptGuidelines": "single focal creature or character, fantasy trading card art, dramatic lighting, NO text, NO card frame, portrait 3:4",
+    "promptSuffix": "Fantasy trading card art, detailed concept art, single focal subject, no text, no border, portrait 3:4 aspect ratio.",
+    "notesGuidelines": "negative prompts and palette hints"
+  },
+  "generation": {
+    "maxKeywordsPerCard": 2,
+    "exampleCardsPerDomain": 5,
+    "maxBatchPerDomain": 50
+  }
+}

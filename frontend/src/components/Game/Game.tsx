@@ -39,7 +39,7 @@ export const Game: React.FC<Props> = ({
 }) => {
   const { playerName } = useAuth();
   const opponentName = appConfig.theme.player.opponentName;
-  const { cards: catalog } = useCardCatalog();
+  const { cards: catalog, loading: catalogLoading } = useCardCatalog();
   const {
     state: match,
     booting,
@@ -57,7 +57,7 @@ export const Game: React.FC<Props> = ({
     completeEndTurnVisual,
     clearEndTurnVisual,
     matchEnded,
-  } = useMatch({ deckEntries, catalog, deckId, mode, resumeMatchId });
+  } = useMatch({ deckEntries, catalog, catalogLoading, deckId, mode, resumeMatchId });
 
   const [isFullscreen, setIsFullscreen] = useState(Boolean(document.fullscreenElement));
   const [hoveredCard, setHoveredCard] = useState<CardDisplayProps | null>(null);
@@ -114,12 +114,17 @@ export const Game: React.FC<Props> = ({
 
   const heroHand = useMemo(() => {
     if (!match) return [];
-    return match.hero.hand.map((card, index) => ({
-      ...card.display!,
-      instanceId: card.instanceId,
-      fanIndex: index,
-      id: card.instanceId,
-    }));
+    return match.hero.hand.flatMap((card, index) => {
+      if (!card.display) return [];
+      return [
+        {
+          ...card.display,
+          instanceId: card.instanceId,
+          fanIndex: index,
+          id: card.instanceId,
+        },
+      ];
+    });
   }, [match]);
 
   const handleHeroPlayCard = async (instanceId: string) => {

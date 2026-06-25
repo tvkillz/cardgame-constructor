@@ -1,0 +1,44 @@
+{
+  "gameTitle": "VOIDBORN",
+  "gamePitch": "a dark fantasy collectible TCG where four elemental realms fight cosmic corruption (the Void / Aether Bleed)",
+  "world": {
+    "title": "The Elemental Quadrant",
+    "description": "At the precipice of the Void, four elemental realms fight a losing battle against oblivion. These shattered worlds of stone, wave, flame, and wind are home to remnants of civilization, powerful decks, and ancient devastation."
+  },
+  "domains": {
+    "kronos": {
+      "visualIdentity": "ancient stone, granite, moss, earth magic, golden amber accents, titanic golems and druids",
+      "flavorNotes": "tanks, siege units, stone golems, rootbound druids, mountain fortresses"
+    },
+    "thalassa": {
+      "visualIdentity": "deep underwater gothic, abyssal bioluminescence, coral ruins, drowned undead, teal and navy",
+      "flavorNotes": "sirens, drowned undead, freeze magic, abyssal predators, coral revenants"
+    },
+    "infernus": {
+      "visualIdentity": "volcanic forge, ember-lit hellscape, demonic smiths, lava rivers, crimson and charcoal",
+      "flavorNotes": "forge demons, lava elementals, armor, burn, chain lords, ash hounds"
+    },
+    "anemos": {
+      "visualIdentity": "storm-wracked sky, wind spirits, ethereal purple lightning, harpies and cloud sanctuaries",
+      "flavorNotes": "flying units, storm magic, harpies, whispering spirits, hurricane weavers"
+    }
+  },
+  "designRules": [
+    "Mana 1–8 (most cards 3–6). attack + health should roughly scale with mana.",
+    "Roles vary: tanks, assassins, support, siege, ranged, undead, flying, etc.",
+    "Ability text must spell out keyword effects like the examples (do not assume the player knows keywords).",
+    "ability.name should be evocative and unique within the batch.",
+    "Use 0–2 keywords per card from the project glossary only."
+  ],
+  "image": {
+    "aspectRatio": "3:4",
+    "promptGuidelines": "single focal creature or character, dark cinematic fantasy trading card art, highly detailed, dramatic lighting, NO text, NO card frame, NO watermark, portrait 3:4 composition",
+    "promptSuffix": "Dark cinematic fantasy trading card art, highly detailed concept art, single focal subject, dramatic lighting, no text, no border, no watermark, portrait 3:4 aspect ratio.",
+    "notesGuidelines": "negative prompts, palette, camera angle, and platform hints for the image generator"
+  },
+  "generation": {
+    "maxKeywordsPerCard": 2,
+    "exampleCardsPerDomain": 5,
+    "maxBatchPerDomain": 50
+  }
+}

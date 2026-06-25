@@ -10,21 +10,43 @@ import {
 } from '@/config'
 import type { PortalSectionConfig } from '@/config/schema'
 import PortalAuthGate from '@/components/auth/PortalAuthGate'
+import Footer from '@/components/Footer/Footer'
 import PurchaseCreditsModal from '@/components/credits/PurchaseCreditsModal'
+import MarketCartDrawer from '@/components/market/MarketCartDrawer'
 import { useAuth } from '@/components/providers/AuthProvider'
 import { prefetchCardCatalog } from '@/hooks/useCardCatalog'
-import { useWallet } from '@/hooks/useWallet'
+import { MarketCartProvider, useMarketCart } from '@/hooks/useMarketCart'
+import { MarketCurrencyProvider, useMarketCurrency } from '@/hooks/useMarketCurrency'
+import { prefetchPlayerInventory } from '@/hooks/usePlayerInventory'
+import { prefetchWallet, useWallet, WalletProvider } from '@/hooks/useWallet'
+import { MARKET_CURRENCIES } from '@/lib/market/currency'
 import { Button } from '@/components/ui/Button/Button'
 import './PortalShell.css'
+import '@/styles/coin-stack-icon.css'
+import '@/styles/cart-icon.css'
 
 function resolveSectionHref(section: PortalSectionConfig): string {
   return appConfig.domain.routes[section.route]
 }
 
 export default function PortalShell({ children }: { children: React.ReactNode }) {
+  return (
+    <PortalAuthGate>
+      <WalletProvider>
+        <MarketCartProvider>
+          <MarketCurrencyProvider>
+            <PortalShellInner>{children}</PortalShellInner>
+          </MarketCurrencyProvider>
+        </MarketCartProvider>
+      </WalletProvider>
+    </PortalAuthGate>
+  )
+}
+
+function PortalShellInner({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
   const { name, theme } = appConfig
-  const { playerName: username, signOut } = useAuth()
+  const { playerName: username, signOut, user, session } = useAuth()
   const portalCopy = appConfig.descriptions.portal
   const [menuOpen, setMenuOpen] = useState(false)
   const [creditsOpen, setCreditsOpen] = useState(false)
@@ -38,14 +60,19 @@ export default function PortalShell({ children }: { children: React.ReactNode })
   )
 
   const { balanceCredits, loading: walletLoading, refresh: refreshWallet } = useWallet()
-  const credits = walletLoading ? theme.player.defaultCredits : balanceCredits
+  const creditsLabel = walletLoading ? '…' : formatCredits(balanceCredits)
+  const { currency, setCurrency } = useMarketCurrency()
+  const { itemCount, openDrawer } = useMarketCart()
+  const userId = user?.id ?? session?.user?.id ?? 'guest'
 
   useEffect(() => {
     void prefetchCardCatalog()
-  }, [])
+    void prefetchPlayerInventory(userId)
+    void prefetchWallet(userId)
+  }, [userId])
 
   return (
-    <PortalAuthGate>
+    <>
       <div className="portal">
         <header className="portal__header">
           <Link href={appConfig.domain.routes.home} className="portal__brand">
@@ -61,8 +88,8 @@ export default function PortalShell({ children }: { children: React.ReactNode })
             <div className="portal__account-info">
               <span className="portal__account-name">{username}</span>
               <span className="portal__account-credits">
-                <span className="portal__credit-icon" aria-hidden="true" />
-                {formatCredits(credits)}
+                <span className="coin-stack-icon coin-stack-icon--sm" aria-hidden="true" />
+                {creditsLabel}
               </span>
             </div>
             <button
@@ -155,14 +182,15 @@ export default function PortalShell({ children }: { children: React.ReactNode })
           </div>
           <div className="portal__toolbar-actions">
             <span className="portal__toolbar-balance">
-              <span className="portal__credit-icon" aria-hidden="true" />
-              {formatCredits(credits)}
+              <span className="coin-stack-icon coin-stack-icon--sm" aria-hidden="true" />
+              {creditsLabel}
             </span>
             <Button
               type="button"
               variant="primary"
               size="sm"
               fantasy
+              className="portal__buy-credits-btn"
               onClick={() => setCreditsOpen(true)}
             >
               {portalCopy.buyCredits}
@@ -170,19 +198,36 @@ export default function PortalShell({ children }: { children: React.ReactNode })
             <Button type="button" variant="secondary" size="sm" disabled>
               {portalCopy.withdraw}
             </Button>
-            <Button type="button" variant="ghost" size="sm" disabled>
-              {portalCopy.cart}
+            <Button type="button" variant="ghost" size="sm" onClick={openDrawer} className="portal__cart-btn">
+              <span className="cart-icon cart-icon--toolbar" aria-hidden="true" />
+              <span className="portal__cart-label">{portalCopy.cart}</span>
+              {itemCount > 0 ? (
+                <span className="portal__cart-badge" aria-label={`${itemCount} items in cart`}>
+                  {itemCount}
+                </span>
+              ) : null}
             </Button>
             <label className="portal__currency">
               <span className="visually-hidden">Currency</span>
-              <select disabled defaultValue="AUD">
-                <option value="AUD">{portalCopy.currencyLabel}</option>
+              <select
+                value={currency}
+                onChange={(e) => setCurrency(e.target.value as typeof currency)}
+                aria-label="Display currency"
+              >
+                {MARKET_CURRENCIES.map((code) => (
+                  <option key={code} value={code}>
+                    {code}
+                  </option>
+                ))}
               </select>
             </label>
           </div>
         </div>
 
         <main className="portal__main">{children}</main>
+        <div className="portal__footer">
+          <Footer />
+        </div>
       </div>
 
       <PurchaseCreditsModal
@@ -192,6 +237,7 @@ export default function PortalShell({ children }: { children: React.ReactNode })
           void refreshWallet()
         }}
       />
-    </PortalAuthGate>
+      <MarketCartDrawer />
+    </>
   )
 }

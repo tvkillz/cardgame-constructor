@@ -1,13 +1,6 @@
 {
   "sections": [
     {
-      "id": "store",
-      "label": "Store",
-      "route": "portalStore",
-      "title": "STORE",
-      "subtitle": "Buy credit packs and items. Secure checkout via Stripe."
-    },
-    {
       "id": "market",
       "label": "Market",
       "route": "portalMarket",

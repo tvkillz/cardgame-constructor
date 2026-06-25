@@ -24,6 +24,7 @@ export function applyTheme(): void {
     '--trigger-orange': colors.triggerOrange,
     '--trigger-green': colors.triggerGreen,
     '--trigger-blue': colors.triggerBlue,
+    '--headline-gradient': `linear-gradient(105deg, ${colors.accentPink} 0%, ${colors.ember} 22%, ${colors.accentPurple} 48%, ${colors.violetAccent} 72%, ${colors.purpleGlow} 100%)`,
     '--play-lobby-bg': `url(${lobbyBg})`,
     '--play-arena-bg': `url(${arenaBg})`,
     '--game-lobby-bg': `url(${lobbyBg})`,
