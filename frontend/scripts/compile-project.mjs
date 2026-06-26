@@ -1234,6 +1234,7 @@ async function main() {
   const locationsJson = await readJson(paths.locations, 'game/locations')
   const scenesJson = await readJson(paths.gameScenes, 'game/scenes')
   const citiesJson = await readJsonOptional(paths.gameCities)
+  const botNicknamesJson = await readJsonOptional(path.join(paths.root, 'game/bot-nicknames.json'))
 
   const out = buildPaths(projectId)
 
@@ -1311,6 +1312,7 @@ async function main() {
     featuredByLocation,
     keywords: metadata.keywords_glossary ?? {},
     locationOrder: locationsJson.locations.map((l) => l.id),
+    botNicknames: Array.isArray(botNicknamesJson) ? botNicknamesJson : [],
   }
 
   await mkdir(out.generated, { recursive: true })

@@ -1,7 +1,7 @@
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
-import { buildPaths, resolveProjectId } from './project-paths.mjs'
+import { buildPaths, projectRoot, resolveProjectId } from './project-paths.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 export const FRONTEND_ROOT = path.resolve(__dirname, '..')
@@ -21,6 +21,7 @@ export function projectWebpackAliases(projectId = getProjectId(), root = FRONTEN
     '@project/game-config': path.join(out.generated, 'game-config.json'),
     '@project/cards-catalog': path.join(out.data, 'cards-catalog.json'),
     '@project/landing-cards': path.join(out.data, 'landing-cards.json'),
+    '@project/bot-nicknames': path.join(projectRoot(projectId), 'game/bot-nicknames.json'),
   }
 }
 

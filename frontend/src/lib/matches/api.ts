@@ -19,6 +19,7 @@ export interface MatchApiResponse {
   matchId?: string
   revision?: number
   state?: PersistedMatchState
+  opponentName?: string | null
   combat?: CombatRoundResult | null
   villainPlays?: { instanceId: string; slotIndex: number }[]
   endTurn?: {
@@ -35,6 +36,7 @@ export interface MatchApiResponse {
     phase: string
     state: PersistedMatchState
     revision: number
+    opponent_name?: string | null
   } | null
   error?: string
   message?: string
@@ -172,7 +174,7 @@ export async function fetchMatchRow(matchId: string) {
   const { data, error } = await supabase
     .from('matches')
     .select(
-      'id, player_deck_id, mode, status, turn, phase, winner, state, revision, last_combat, villain_plays',
+      'id, player_deck_id, mode, status, turn, phase, winner, state, revision, last_combat, villain_plays, opponent_name',
     )
     .eq('id', matchId)
     .maybeSingle()
@@ -198,7 +200,7 @@ export async function fetchActiveMatchRow(userId: string) {
   const { data, error } = await supabase
     .from('matches')
     .select(
-      'id, player_deck_id, mode, status, turn, phase, winner, state, revision, last_combat, villain_plays',
+      'id, player_deck_id, mode, status, turn, phase, winner, state, revision, last_combat, villain_plays, opponent_name',
     )
     .eq('user_id', userId)
     .eq('status', 'active')

@@ -38,7 +38,6 @@ export const Game: React.FC<Props> = ({
   onMenu,
 }) => {
   const { playerName } = useAuth();
-  const opponentName = appConfig.theme.player.opponentName;
   const { cards: catalog, loading: catalogLoading } = useCardCatalog();
   const {
     state: match,
@@ -47,6 +46,7 @@ export const Game: React.FC<Props> = ({
     actionError,
     processing,
     matchId,
+    opponentName,
     combatResult,
     combatBoardSnapshot,
     endTurnVisual,

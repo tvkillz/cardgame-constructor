@@ -16,6 +16,7 @@ export type MatchDbRow = {
   last_combat: CombatRoundResult | null
   phase?: string
   status?: string
+  opponent_name?: string | null
 }
 
 function domainFromSlug(slug: string): string {

@@ -8,6 +8,7 @@ import type { HandDeckEntry } from '@/lib/decks/buildHand'
 import { checkWinner, firstEmptySlot } from '@/lib/game/match'
 import type { BoardUnit, CombatRoundResult, MatchState } from '@/lib/game/match/types'
 import { fetchMatchRow, invokeMatchAction } from '@/lib/matches/api'
+import { pickBotNickname } from '@/lib/game/bot-nicknames'
 import {
   endTurnFromApi,
   MATCH_SYNC_INTERVAL_MS,
@@ -36,6 +37,14 @@ function captureBoardSnapshot(state: MatchState): BoardSnapshot {
     hero: state.hero.board.map((u) => (u ? { ...u } : null)),
     villain: state.villain.board.map((u) => (u ? { ...u } : null)),
   }
+}
+
+function resolveOpponentName(...candidates: Array<string | null | undefined>): string {
+  for (const value of candidates) {
+    const trimmed = value?.trim()
+    if (trimmed) return trimmed
+  }
+  return pickBotNickname()
 }
 
 function apiErrorMessage(res: { error?: string; message?: string }, fallback: string): string {
@@ -68,6 +77,7 @@ export function useMatch({
   const [lastSyncedAt, setLastSyncedAt] = useState<number | null>(null)
   /** Попап победы/поражения — не сбрасывается автоматически после VFX. */
   const [matchEnded, setMatchEnded] = useState(false)
+  const [opponentName, setOpponentName] = useState(() => pickBotNickname())
 
   const revisionRef = useRef(0)
   const matchIdRef = useRef<string | null>(null)
@@ -167,6 +177,7 @@ export function useMatch({
           const hydrated = rowToMatchState(row, catalog)
           await preloadHeroHand(hydrated)
           setMatchId(resumeMatchId)
+          setOpponentName(resolveOpponentName(res.opponentName, row.opponent_name))
           setMatchEnded(Boolean(hydrated.winner))
           applyFromRow(row)
           setBooting(false)
@@ -192,6 +203,7 @@ export function useMatch({
         )
         await preloadHeroHand(hydrated)
         setMatchId(created.matchId)
+        setOpponentName(resolveOpponentName(created.opponentName))
         setMatchEnded(false)
         applyFromRow({
           id: created.matchId,
@@ -239,9 +251,14 @@ export function useMatch({
         revision: row.revision,
         state: row.state as MatchDbRow['state'],
         last_combat: row.last_combat as CombatRoundResult | null,
+        opponent_name: (row as { opponent_name?: string | null }).opponent_name ?? null,
       }
 
       if (dbRow.revision < revisionRef.current) return
+
+      if (dbRow.opponent_name) {
+        setOpponentName(resolveOpponentName(dbRow.opponent_name))
+      }
 
       applyFromRow(dbRow)
     }
@@ -459,6 +476,7 @@ export function useMatch({
     serverOnline,
     lastSyncedAt,
     matchEnded,
+    opponentName,
     combatResult,
     combatBoardSnapshot,
     endTurnVisual,

@@ -11,6 +11,8 @@ import {
   type MatchCardInstance,
   type MatchState,
 } from './engine.ts'
+import { applyRankedMatchResult } from './ranking.ts'
+import { pickBotNickname } from './bot-nicknames.ts'
 
 const SUPABASE_URL = Deno.env.get('SUPABASE_URL')!
 const SERVICE_ROLE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
@@ -100,6 +102,39 @@ async function saveMatch(
     .single()
   if (error) throw error
   return data
+}
+
+type MatchRow = {
+  id: string
+  user_id: string
+  site_id: string | null
+  mode: string
+  rank_applied?: boolean
+}
+
+async function maybeApplyRankedResult(
+  admin: ReturnType<typeof createClient>,
+  row: MatchRow,
+  winner: string | null | undefined,
+  status: string,
+) {
+  if (status !== 'completed' || !winner) return
+  if (row.mode !== 'ranked' || row.rank_applied) return
+  if (!row.site_id) return
+
+  const result = await applyRankedMatchResult(admin, {
+    userId: row.user_id,
+    siteId: row.site_id,
+    won: winner === 'hero',
+  })
+
+  const { error } = await admin
+    .from('matches')
+    .update({ rank_applied: true, updated_at: new Date().toISOString() })
+    .eq('id', row.id)
+
+  if (error) throw error
+  return result
 }
 
 type CardRow = { slug: string; mana: number; attack: number; health: number }
@@ -311,7 +346,7 @@ Deno.serve(async (req: Request) => {
     if (action === 'get_active') {
       const { data } = await admin
         .from('matches')
-        .select('id, player_deck_id, mode, status, turn, phase, winner, state, revision, last_combat, villain_plays')
+        .select('id, player_deck_id, mode, status, turn, phase, winner, state, revision, last_combat, villain_plays, opponent_name')
         .eq('user_id', userId)
         .eq('site_id', siteId)
         .eq('status', 'active')
@@ -331,6 +366,7 @@ Deno.serve(async (req: Request) => {
         state: row.state,
         last_combat: row.last_combat,
         villain_plays: row.villain_plays,
+        opponentName: row.opponent_name ?? null,
         match: row,
       })
     }
@@ -345,6 +381,7 @@ Deno.serve(async (req: Request) => {
       const villainInstances = await buildVillainDeck(admin, siteId)
       const matchState = createMatch(shuffleDeck(heroInstances), shuffleDeck(villainInstances))
       const persisted = stripState(matchState)
+      const opponentName = pickBotNickname()
 
       const { data, error } = await admin
         .from('matches')
@@ -353,18 +390,24 @@ Deno.serve(async (req: Request) => {
           site_id: siteId,
           player_deck_id: body.deckId,
           mode: body.mode ?? 'casual',
+          opponent_name: opponentName,
           state: persisted,
           turn: matchState.turn,
           phase: matchState.phase,
         })
-        .select('id, revision, state')
+        .select('id, revision, state, opponent_name')
         .single()
 
       if (error) return jsonResponse({ error: error.message }, 500)
 
       await admin.rpc('match_abandon_others', { p_user_id: userId, p_keep_id: data.id })
 
-      return jsonResponse({ matchId: data.id, revision: data.revision, state: data.state })
+      return jsonResponse({
+        matchId: data.id,
+        revision: data.revision,
+        state: data.state,
+        opponentName: data.opponent_name ?? opponentName,
+      })
     }
 
     const matchId = body.matchId as string
@@ -412,12 +455,17 @@ Deno.serve(async (req: Request) => {
         completed_at: winner ? new Date().toISOString() : null,
       })
 
+      const rankedUpdate = winner
+        ? await maybeApplyRankedResult(admin, row as MatchRow, finalState.winner, 'completed')
+        : null
+
       return jsonResponse({
         matchId,
         revision: saved.revision,
         state: saved.state,
         combat: result.combat,
         villainPlays: result.villainPlays,
+        rankedUpdate: rankedUpdate ?? undefined,
         endTurn: {
           afterMana: stripState(result.afterMana),
           afterVillain: stripState(result.afterVillain),
@@ -449,11 +497,16 @@ Deno.serve(async (req: Request) => {
         completed_at: winner ? new Date().toISOString() : null,
       })
 
+      const rankedUpdate = winner
+        ? await maybeApplyRankedResult(admin, row as MatchRow, finalState.winner, 'completed')
+        : null
+
       return jsonResponse({
         matchId,
         revision: saved.revision,
         state: saved.state,
         combat: result.combat,
+        rankedUpdate: rankedUpdate ?? undefined,
       })
     }
 

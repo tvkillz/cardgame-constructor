@@ -1,11 +1,12 @@
-import { appConfig } from '@/config'
-import StubPage from '@/screens/StubPage/StubPage'
+'use client'
 
-export default function LeaderboardPage() {
+import AuthGate from '@/components/auth/AuthGate'
+import LeaderboardPage from '@/screens/LeaderboardPage/LeaderboardPage'
+
+export default function LeaderboardRoute() {
   return (
-    <StubPage
-      title="Leaderboard"
-      description={appConfig.descriptions.leaderboard}
-    />
+    <AuthGate>
+      <LeaderboardPage />
+    </AuthGate>
   )
 }
