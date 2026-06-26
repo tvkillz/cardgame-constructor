@@ -16,8 +16,13 @@ import Card from '../CardPlaceholder/Card';
 import type { CardDisplayProps } from '../CardPlaceholder/Card';
 import CardHoverPreview from './CardHoverPreview';
 import MatchResultOverlay from './MatchResultOverlay';
+import TutorialOverlay from './TutorialOverlay';
+import TutorialHighlight from './TutorialHighlight';
 import { useGameMatchFx } from './useGameMatchFx';
 import { useTurnBanners } from './useTurnBanners';
+import { useTutorial } from '@/hooks/useTutorial';
+import './TutorialOverlay.css';
+import './TutorialHighlight.css';
 import '../CardPlaceholder/styles.css';
 
 type Props = {
@@ -62,6 +67,30 @@ export const Game: React.FC<Props> = ({
   const [isFullscreen, setIsFullscreen] = useState(Boolean(document.fullscreenElement));
   const [hoveredCard, setHoveredCard] = useState<CardDisplayProps | null>(null);
 
+  const isTutorial = mode === 'tutorial';
+
+  const {
+    step: tutorialStep,
+    stepNumber: tutorialStepNumber,
+    stepTotal: tutorialStepTotal,
+    continueTutorial,
+    dismissTutorial,
+    isActive: tutorialActive,
+  } = useTutorial({
+    enabled: isTutorial,
+    match,
+    processing,
+    endTurnVisual,
+    combatResult,
+    matchEnded,
+  });
+
+  const tutorialTarget = tutorialActive ? (tutorialStep?.target ?? null) : null;
+  const tutorialShowSpotlight =
+    tutorialStep?.id === 'mana' ||
+    tutorialStep?.id === 'hand' ||
+    tutorialStep?.id === 'play_card';
+
   const { enemyTurnPhase, yourTurnPhase } = useTurnBanners(
     match,
     endTurnVisual,
@@ -71,8 +100,14 @@ export const Game: React.FC<Props> = ({
 
   const stageRef = useRef<HTMLDivElement | null>(null);
   const fxLayerRef = useRef<HTMLDivElement | null>(null);
+  const heroAvatarContainerRef = useRef<HTMLDivElement | null>(null);
   const heroAvatarRef = useRef<HTMLDivElement | null>(null);
   const villainAvatarRef = useRef<HTMLDivElement | null>(null);
+  const heroHandRef = useRef<HTMLDivElement | null>(null);
+  const heroBoardLaneRef = useRef<HTMLDivElement | null>(null);
+  const battleBtnRef = useRef<HTMLButtonElement | null>(null);
+  const endTurnBtnRef = useRef<HTMLButtonElement | null>(null);
+  const controlsRef = useRef<HTMLDivElement | null>(null);
   const heroManaRef = useRef<HTMLDivElement | null>(null);
   const villainManaRef = useRef<HTMLDivElement | null>(null);
   const heroDeckRef = useRef<HTMLDivElement | null>(null);
@@ -156,6 +191,13 @@ export const Game: React.FC<Props> = ({
 
   const showBattleButton =
     match?.phase === 'hero_main' && !processing && !match.winner && !match.heroCombatDone;
+
+  const tutorialHighlightLayoutKey = [
+    tutorialTarget,
+    match?.hero.board.map((u) => u?.instanceId ?? '').join(','),
+    match?.hero.hand.length,
+    showBattleButton,
+  ].join('|');
 
   const toggleFullscreen = async () => {
     try {
@@ -274,6 +316,7 @@ export const Game: React.FC<Props> = ({
             health={boardMatch.hero.hp}
             currentMana={boardMatch.hero.mana}
             maxMana={boardMatch.hero.maxMana}
+            containerRef={heroAvatarContainerRef}
             manaRef={heroManaRef}
           />
         </div>
@@ -300,7 +343,7 @@ export const Game: React.FC<Props> = ({
           </div>
         )}
 
-        <div className="game-zone-controls" aria-label="Turn controls">
+        <div className="game-zone-controls" ref={controlsRef} aria-label="Turn controls">
           <div className="game-turn-box">
             <span>Turn {match.turn}</span>
             <span>{match.phase === 'hero_main' ? 'Main Phase' : 'Resolution'}</span>
@@ -312,6 +355,7 @@ export const Game: React.FC<Props> = ({
               variant="secondary"
               size="md"
               className="game-zone-controls__btn"
+              ref={battleBtnRef}
               onClick={handleBattle}
             >
               BATTLE [B]
@@ -322,6 +366,7 @@ export const Game: React.FC<Props> = ({
             variant="primary"
             size="md"
             className="game-zone-controls__btn"
+            ref={endTurnBtnRef}
             disabled={match.phase !== 'hero_main' || processing || Boolean(match.winner)}
             onClick={handleEndTurn}
           >
@@ -367,7 +412,7 @@ export const Game: React.FC<Props> = ({
               </div>
             ))}
           </div>
-          <div className="game-board-lane game-board-lane--hero">
+          <div className="game-board-lane game-board-lane--hero" ref={heroBoardLaneRef}>
             {boardMatch.hero.board.map((unit, slot) => (
               <div
                 key={`h-board-${slot}`}
@@ -406,7 +451,7 @@ export const Game: React.FC<Props> = ({
           </div>
         </div>
 
-        <div className="game-zone-hero-hand" aria-label="Hero hand">
+        <div className="game-zone-hero-hand" ref={heroHandRef} aria-label="Hero hand">
           <div className="game-hero-card-fan">
             {heroHand.map((card) => {
               const instance = match.hero.hand.find((c) => c.instanceId === card.id);
@@ -484,6 +529,33 @@ export const Game: React.FC<Props> = ({
             <div className="game-your-turn-text">{gameAnimationsConfig.turnBanner.your.label}</div>
           </div>
         )}
+
+        {tutorialActive && tutorialTarget ? (
+          <TutorialHighlight
+            stageRef={stageRef}
+            target={tutorialTarget}
+            layoutKey={tutorialHighlightLayoutKey}
+            showSpotlight={tutorialShowSpotlight}
+            refs={{
+              avatar: heroAvatarContainerRef,
+              hand: heroHandRef,
+              heroBoard: heroBoardLaneRef,
+              battle: battleBtnRef,
+              endTurn: endTurnBtnRef,
+              controls: controlsRef,
+            }}
+          />
+        ) : null}
+
+        {tutorialStep && tutorialActive ? (
+          <TutorialOverlay
+            step={tutorialStep}
+            stepNumber={tutorialStepNumber}
+            stepTotal={tutorialStepTotal}
+            onContinue={continueTutorial}
+            onSkip={dismissTutorial}
+          />
+        ) : null}
 
         {/* Попап после VFX; matchEnded не сбрасывается, пока игрок не нажмёт кнопку */}
         {matchEnded && match.winner && !combatResult && (

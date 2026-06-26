@@ -2,18 +2,20 @@
 
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import { appConfig, gameAnimationsConfig, getArenaBackground } from '@/config'
+import { appConfig, formatCredits, gameAnimationsConfig, getArenaBackground } from '@/config'
 import { useAuth } from '@/components/providers/AuthProvider'
 import { Button } from '@/components/ui/Button/Button'
 import { useCardCatalog } from '@/hooks/useCardCatalog'
 import { usePlayerDecks } from '@/hooks/usePlayerDecks'
-import { deckCardCount, resolveDeckToDisplay, savePlayerDeck } from '@/lib/decks'
+import { useWallet } from '@/hooks/useWallet'
+import { resolveDeckToDisplay, buildTutorialDeck } from '@/lib/decks'
 import { preloadWithMinDelay } from '@/lib/cards'
 import { invokeMatchAction } from '@/lib/matches'
 import type { HandDeckEntry } from '@/lib/decks/buildHand'
 import BattleTransition from './BattleTransition'
 import DeckSelectModal from './DeckSelectModal'
 import './styles.css'
+import '@/styles/coin-stack-icon.css'
 
 const { loadingDurationMs } = gameAnimationsConfig.battleTransition
 
@@ -24,6 +26,8 @@ export default function PlayPage() {
   const router = useRouter()
   const { descriptions, theme } = appConfig
   const { playerName, user, openAuthModal, loading: authLoading } = useAuth()
+  const { balanceCredits, loading: walletLoading } = useWallet()
+  const creditsLabel = walletLoading ? '…' : formatCredits(balanceCredits)
   const { cards: catalog, loading: catalogLoading } = useCardCatalog()
   const { summaries: deckSummaries, decks, loading: decksLoading } = usePlayerDecks()
   const [deckEntries, setDeckEntries] = useState<HandDeckEntry[]>([])
@@ -36,6 +40,8 @@ export default function PlayPage() {
   const [arenaDeckId, setArenaDeckId] = useState('')
   const [enteringBattle, setEnteringBattle] = useState(false)
   const [enterBattleError, setEnterBattleError] = useState<string | null>(null)
+  const [tutorialError, setTutorialError] = useState<string | null>(null)
+  const [startingTutorial, setStartingTutorial] = useState(false)
   const [resumeMatchId, setResumeMatchId] = useState<string | null>(null)
   const [activeMatch, setActiveMatch] = useState<{
     id: string
@@ -78,10 +84,54 @@ export default function PlayPage() {
   }
 
   const openDeckModal = (mode: GameModeId) => {
-    if (mode === 'tutorial') return
     setActiveMode(mode)
     setSelectedDeckId('')
     setDeckModalOpen(true)
+  }
+
+  const handleStartTutorial = async () => {
+    if (startingTutorial || authLoading || catalogLoading) return
+
+    if (!user?.id) {
+      setTutorialError('Sign in to start the tutorial.')
+      openAuthModal('signIn')
+      return
+    }
+
+    if (catalog.length === 0) {
+      setTutorialError('Card catalog not loaded. Try again in a moment.')
+      return
+    }
+
+    setStartingTutorial(true)
+    setTutorialError(null)
+    setEnterBattleError(null)
+
+    try {
+      const tutorialDeck = buildTutorialDeck(catalog)
+      setActiveMode('tutorial')
+      setResumeMatchId(null)
+      setArenaDeckId('tutorial')
+      setDeckEntries(resolveDeckToDisplay(tutorialDeck, catalog))
+      setDeckModalOpen(false)
+      setShowModes(false)
+
+      const img = new Image()
+      img.src = getArenaBackground()
+      setBattlePhase('loading')
+    } catch {
+      setTutorialError('Could not start the tutorial. Please try again.')
+    } finally {
+      setStartingTutorial(false)
+    }
+  }
+
+  const handleModeSelect = (mode: GameModeId) => {
+    if (mode === 'tutorial') {
+      void handleStartTutorial()
+      return
+    }
+    openDeckModal(mode)
   }
 
   const closeDeckModal = () => {
@@ -193,10 +243,13 @@ export default function PlayPage() {
           <div className="play-page__overlay" />
 
           <div className="play-page__top">
-            <button type="button" className="play-page__player" onClick={() => {}}>
+            <div className="play-page__player">
               <span>{playerName}</span>
-              <strong> ⭐ {theme.player.defaultCredits}</strong>
-            </button>
+              <strong className="play-page__credits">
+                <span className="coin-stack-icon coin-stack-icon--sm" aria-hidden="true" />
+                {creditsLabel}
+              </strong>
+            </div>
 
             <button
               type="button"
@@ -252,7 +305,8 @@ export default function PlayPage() {
                       size="md"
                       fantasy
                       className="play-page__mode"
-                      onClick={() => openDeckModal(option.id)}
+                      disabled={option.id === 'tutorial' && startingTutorial}
+                      onClick={() => handleModeSelect(option.id)}
                     >
                       <span className="play-page__mode-icon" aria-hidden="true">
                         {option.icon}
@@ -276,13 +330,16 @@ export default function PlayPage() {
                   Back
                 </Button>
               </div>
+
+              {tutorialError ? (
+                <p className="play-page__tutorial-error" role="alert">
+                  {tutorialError}
+                </p>
+              ) : null}
             </div>
           </div>
 
           <div className="play-page__bottom">
-            <button type="button" className="play-page__action" onClick={() => {}}>
-              Music
-            </button>
             <button
               type="button"
               className="play-page__action"

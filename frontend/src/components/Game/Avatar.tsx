@@ -8,6 +8,7 @@ interface AvatarProps {
   maxMana: number;
   colorPalette?: 'default' | 'darkRed';
   manaRef?: Ref<HTMLDivElement>;
+  containerRef?: Ref<HTMLDivElement>;
 }
 
 export const Avatar = ({
@@ -17,6 +18,7 @@ export const Avatar = ({
   maxMana,
   colorPalette = 'default',
   manaRef,
+  containerRef,
 }: AvatarProps) => {
   const manaScale =
     maxMana > 6
@@ -24,7 +26,7 @@ export const Avatar = ({
       : 1;
 
   return (
-    <div className={`avatar-container palette-${colorPalette}`}>
+    <div className={`avatar-container palette-${colorPalette}`} ref={containerRef}>
       
       {/* Стек маны слева (Выровнен вертикально, как на скрине) */}
       <div className="mana-wrapper" ref={manaRef}>

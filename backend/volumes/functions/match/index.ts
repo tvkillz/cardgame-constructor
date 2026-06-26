@@ -290,14 +290,7 @@ async function buildVillainDeck(admin: ReturnType<typeof createClient>, siteId: 
 
   if (!cards?.length) return []
 
-  const pool: {
-    instanceId: string
-    slug: string
-    mana: number
-    attack: number
-    health: number
-    maxHealth: number
-  }[] = []
+  const pool: MatchCardInstance[] = []
 
   let n = 0
   while (pool.length < VILLAIN_DECK_SIZE) {
@@ -313,6 +306,27 @@ async function buildVillainDeck(admin: ReturnType<typeof createClient>, siteId: 
     n += 1
   }
   return pool
+}
+
+async function buildTutorialHeroDeck(
+  admin: ReturnType<typeof createClient>,
+  siteId: string,
+): Promise<DeckBuildResult> {
+  const instances = await buildVillainDeck(admin, siteId)
+  if (!instances.length) {
+    return {
+      ok: false,
+      code: 'deck_empty',
+      message: 'No published cards available for the tutorial deck.',
+    }
+  }
+
+  const heroInstances = instances.map((card, index) => ({
+    ...card,
+    instanceId: `${card.slug}-${index}`,
+  }))
+
+  return { ok: true, instances: heroInstances }
 }
 
 Deno.serve(async (req: Request) => {
@@ -372,7 +386,11 @@ Deno.serve(async (req: Request) => {
     }
 
     if (action === 'create') {
-      const built = await buildHeroDeck(admin, body.deckId, userId)
+      const mode = (body.mode as string) ?? 'casual'
+      const built =
+        mode === 'tutorial'
+          ? await buildTutorialHeroDeck(admin, siteId)
+          : await buildHeroDeck(admin, body.deckId, userId)
       if (!built.ok) {
         return jsonResponse({ error: built.code, message: built.message }, 400)
       }
@@ -383,13 +401,18 @@ Deno.serve(async (req: Request) => {
       const persisted = stripState(matchState)
       const opponentName = pickBotNickname()
 
+      const deckId =
+        typeof body.deckId === 'string' && body.deckId.trim() && body.deckId !== 'tutorial'
+          ? body.deckId
+          : null
+
       const { data, error } = await admin
         .from('matches')
         .insert({
           user_id: userId,
           site_id: siteId,
-          player_deck_id: body.deckId,
-          mode: body.mode ?? 'casual',
+          player_deck_id: mode === 'tutorial' ? null : deckId,
+          mode,
           opponent_name: opponentName,
           state: persisted,
           turn: matchState.turn,

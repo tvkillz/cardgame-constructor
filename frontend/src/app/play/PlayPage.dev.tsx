@@ -6,11 +6,14 @@
  */
 import AuthGate from '@/components/auth/AuthGate'
 import PlayPage from '@/screens/PlayPage/PlayPage'
+import { WalletProvider } from '@/hooks/useWallet'
 
 export default function PlayPageDev() {
   return (
     <AuthGate>
-      <PlayPage />
+      <WalletProvider>
+        <PlayPage />
+      </WalletProvider>
     </AuthGate>
   )
 }

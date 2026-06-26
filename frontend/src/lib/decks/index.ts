@@ -8,6 +8,7 @@ export {
   savePlayerDeck,
 } from './queries'
 export { resolveDeckToDisplay, deckCardCount } from './resolveDeckCards'
+export { buildTutorialDeck } from './buildTutorialDeck'
 export {
   ARENA_HAND_SIZE,
   DEFAULT_MAX_DECK_CARDS,

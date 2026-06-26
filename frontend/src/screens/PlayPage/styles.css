@@ -31,8 +31,15 @@
   position: relative;
   z-index: 2;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+}
+
+.play-page__top {
+  justify-content: space-between;
+}
+
+.play-page__bottom {
+  justify-content: flex-end;
 }
 
 .play-page__player,
@@ -62,6 +69,12 @@
 
 .play-page__player strong {
   color: #e2c058;
+}
+
+.play-page__credits {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
 }
 
 .play-page__player:hover,
@@ -214,5 +227,14 @@
 .play-page__back-btn {
   padding: 0.35rem 1rem;
   font-size: 0.7rem;
+}
+
+.play-page__tutorial-error {
+  margin: 0.85rem 0 0;
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: var(--ember, #e85d5d);
+  text-align: center;
 }
 

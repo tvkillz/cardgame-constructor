@@ -5,6 +5,7 @@ import { loadFonts } from '@/config/loadFonts'
 import { prefetchCardCatalog } from '@/hooks/useCardCatalog'
 import AuthGate from '@/components/auth/AuthGate'
 import { AuthProvider } from '@/components/providers/AuthProvider'
+import { WalletProvider } from '@/hooks/useWallet'
 import PlayPage from '@/screens/PlayPage/PlayPage'
 import '@/index.css'
 import '@/components/ui/Button/Button.css'
@@ -22,7 +23,9 @@ createRoot(root).render(
   <StrictMode>
     <AuthProvider>
       <AuthGate>
-        <PlayPage />
+        <WalletProvider>
+          <PlayPage />
+        </WalletProvider>
       </AuthGate>
     </AuthProvider>
   </StrictMode>,

@@ -145,7 +145,7 @@ export function useMatch({
       return
     }
 
-    if (!resumeMatchId && !deckId) {
+    if (!resumeMatchId && !deckId && mode !== 'tutorial') {
       setBooting(false)
       setBootError('No deck selected.')
       return
