@@ -1,7 +1,5 @@
-import PortalComingSoon from '@/screens/Portal/PortalComingSoon'
-import { appConfig } from '@/config'
+import PortalProfile from '@/screens/Portal/PortalProfile'
 
 export default function PortalProfilePage() {
-  const section = appConfig.portal.sections.find((s) => s.id === 'profile')!
-  return <PortalComingSoon sectionTitle={section.title} />
+  return <PortalProfile />
 }

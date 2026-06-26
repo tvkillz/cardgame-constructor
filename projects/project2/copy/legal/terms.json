@@ -1,0 +1,19 @@
+{
+  "eyebrow": "Legal",
+  "title": "Terms and Conditions",
+  "lastUpdated": "02 February 2026",
+  "blocks": [
+    {
+      "type": "paragraph",
+      "text": "These Terms and Conditions govern your use of the Project Two demo website and related services."
+    },
+    {
+      "type": "paragraph",
+      "text": "This is placeholder legal content for Project Two. Replace this document with project-specific terms before production use."
+    },
+    {
+      "type": "paragraph",
+      "text": "For questions, contact support@example.com."
+    }
+  ]
+}

@@ -1,0 +1,143 @@
+{
+  "eyebrow": "Legal",
+  "title": "Refund Policy",
+  "lastUpdated": "02 February 2026",
+  "blocks": [
+    {
+      "type": "paragraph",
+      "text": "This Refund Policy explains how refunds are handled for purchases made on https://voidborn.fun (the \"Website\") and the Voidborn platform (the \"Platform\"), operated by PRODEC LTD."
+    },
+    {
+      "type": "company",
+      "name": "PRODEC LTD",
+      "companyNumber": "12936248",
+      "address": "196 High Road, Wood Green, London, England, N22 8HH",
+      "email": "support@kingdomofarcane.com"
+    },
+    {
+      "type": "paragraph",
+      "text": "This policy should be read together with our Terms and Conditions. Where there is a conflict between this policy and mandatory consumer protection law, applicable law will prevail."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "1. Digital Content and Final Sales"
+    },
+    {
+      "type": "paragraph",
+      "text": "Voidborn provides digital content and digital gameplay-related services, including virtual cards, credit packs, boxes, packs, and other in-platform purchases. Because delivery is immediate once content is credited to your Account, all purchases are generally final and non-refundable after delivery."
+    },
+    {
+      "type": "paragraph",
+      "text": "By completing a purchase and receiving digital content in your Account, you acknowledge that delivery has begun and that statutory cancellation rights may be limited where permitted by law."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "2. When Refunds May Be Considered"
+    },
+    {
+      "type": "paragraph",
+      "text": "We may consider a refund only in limited circumstances, including where:"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "items": [
+        "applicable law requires a refund;",
+        "a verified technical issue prevented delivery of the purchased content;",
+        "you were charged twice for the same transaction;",
+        "an unauthorised payment is confirmed after our review;",
+        "we determine, at our discretion, that a refund is necessary to correct a genuine billing or delivery error."
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Refund requests must be submitted promptly with sufficient information to investigate the issue, including your Account email, transaction date, and order details."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "3. What Is Not Refundable"
+    },
+    {
+      "type": "paragraph",
+      "text": "Refunds are generally not available for:"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "items": [
+        "virtual items, cards, or credits already delivered and visible in your Account;",
+        "purchases made in error after successful delivery;",
+        "dissatisfaction with randomised pack or box contents, where contents were delivered as described;",
+        "gameplay outcomes, rankings, or in-game progress;",
+        "internal shop transactions completed between users, except where required by law or where we reverse a transaction for fraud or technical error;",
+        "withdrawal fees or third-party bank or card charges."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "4. How to Request a Refund"
+    },
+    {
+      "type": "paragraph",
+      "text": "To request a refund, contact us at support@kingdomofarcane.com with your Account details, transaction information, and a clear description of the issue. We will review your request and respond within a reasonable time."
+    },
+    {
+      "type": "paragraph",
+      "text": "Approved refunds, where issued, will be returned to the original payment method where possible. Processing times depend on your bank, card issuer, or payment provider."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "5. Chargebacks and Payment Disputes"
+    },
+    {
+      "type": "paragraph",
+      "text": "If you believe a charge is incorrect, please contact us before initiating a chargeback or payment dispute. We will work with you to resolve legitimate issues."
+    },
+    {
+      "type": "paragraph",
+      "text": "You agree not to initiate unjustified chargebacks for valid, authorised transactions where digital content was delivered. Where a chargeback or dispute is filed in bad faith, we may:"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "items": [
+        "suspend or terminate your Account;",
+        "reverse or remove associated Balance or Virtual Items;",
+        "restrict future purchases or withdrawals;",
+        "recover losses, fees, and administrative costs to the extent permitted by law."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "6. Consumer Rights"
+    },
+    {
+      "type": "paragraph",
+      "text": "If you are a consumer in a jurisdiction that grants mandatory withdrawal or refund rights for digital content, those rights apply only to the extent required by law and subject to lawful exceptions — including where digital delivery has begun with your prior express consent and acknowledgment that cancellation rights may be lost."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "7. Changes to This Policy"
+    },
+    {
+      "type": "paragraph",
+      "text": "We may update this Refund Policy from time to time. The current version will always be published on the Website with an updated \"Last Updated\" date."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "8. Contact"
+    },
+    {
+      "type": "paragraph",
+      "text": "For refund enquiries or billing questions, contact support@kingdomofarcane.com or use the company details above."
+    }
+  ]
+}

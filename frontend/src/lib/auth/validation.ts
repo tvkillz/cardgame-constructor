@@ -23,3 +23,13 @@ export function isValidPassword(password: string): boolean {
   if (!/[^A-Za-z0-9]/.test(password)) return false
   return true
 }
+
+const MIN_PHONE_LENGTH = 8
+const MIN_PHONE_DIGITS = 7
+
+export function isValidPhone(phone: string): boolean {
+  const trimmed = phone.trim()
+  if (trimmed.length < MIN_PHONE_LENGTH) return false
+  const digits = trimmed.replace(/\D/g, '')
+  return digits.length >= MIN_PHONE_DIGITS
+}

@@ -246,6 +246,32 @@ export interface AppConfig {
 
   /** Theme tokens, lore, navigation, game modes, VFX presets. */
   theme: ThemeConfig
+
+  /** Policy pages from projects/{id}/copy/legal/*.json */
+  legal: {
+    terms?: LegalDocumentConfig
+    privacy?: LegalDocumentConfig
+    refund?: LegalDocumentConfig
+  }
+}
+
+export type LegalBlock =
+  | { type: 'paragraph'; text: string }
+  | { type: 'heading'; level: 2 | 3; text: string }
+  | { type: 'list'; ordered?: boolean; items: string[] }
+  | {
+      type: 'company'
+      name: string
+      companyNumber: string
+      address: string
+      email: string
+    }
+
+export interface LegalDocumentConfig {
+  eyebrow?: string
+  title: string
+  lastUpdated?: string
+  blocks: LegalBlock[]
 }
 
 export interface PortalSectionConfig {

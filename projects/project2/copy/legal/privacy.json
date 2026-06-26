@@ -1,0 +1,19 @@
+{
+  "eyebrow": "Legal",
+  "title": "Privacy Policy",
+  "lastUpdated": "02 February 2026",
+  "blocks": [
+    {
+      "type": "paragraph",
+      "text": "This Privacy Policy describes how personal data may be collected and used on the Project Two demo site."
+    },
+    {
+      "type": "paragraph",
+      "text": "This is placeholder legal content for Project Two. Replace this document with project-specific terms before production use."
+    },
+    {
+      "type": "paragraph",
+      "text": "For questions, contact support@example.com."
+    }
+  ]
+}

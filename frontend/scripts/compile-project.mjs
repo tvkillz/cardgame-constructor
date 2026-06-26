@@ -496,6 +496,17 @@ async function copyFinalCtaAssets(paths, finalctaJson, out, sharp) {
   console.log('Final CTA: background asset copied')
 }
 
+async function buildLegalCopy(legalDir) {
+  const docs = {}
+  for (const id of ['terms', 'privacy', 'refund']) {
+    const filePath = path.join(legalDir, `${id}.json`)
+    if (await pathExists(filePath)) {
+      docs[id] = await readJson(filePath, `copy/legal/${id}`)
+    }
+  }
+  return docs
+}
+
 function buildFooterCopy(footerJson) {
   const fallback = {
     brand: { name: '', tagline: '' },
@@ -708,6 +719,7 @@ function buildAppConfig({
   faqJson,
   finalctaJson,
   footerJson,
+  legalJson,
   seoJson,
   portal,
   credits,
@@ -856,6 +868,7 @@ function buildAppConfig({
       },
       locations: themeLocations,
     },
+    legal: legalJson ?? {},
   }
 }
 
@@ -1244,6 +1257,7 @@ async function main() {
   const faqJson = await readJsonOptional(paths.faq)
   const finalctaJson = await readJsonOptional(paths.finalcta)
   const footerJson = await readJsonOptional(paths.footer)
+  const legalJson = await buildLegalCopy(paths.legal)
   const seoJson = await readJsonOptional(paths.seo)
   const portal = await readJson(paths.portal, 'portal/sections')
   const credits = await readJson(paths.credits, 'credits')
@@ -1290,6 +1304,7 @@ async function main() {
     faqJson,
     finalctaJson,
     footerJson,
+    legalJson,
     seoJson,
     portal,
     credits,

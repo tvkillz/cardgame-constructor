@@ -1,0 +1,922 @@
+{
+  "eyebrow": "Legal",
+  "title": "Terms and Conditions",
+  "lastUpdated": "02 February 2026",
+  "blocks": [
+    {
+      "type": "paragraph",
+      "text": "Thank you for your interest in https://voidborn.fun (the \"Website\"). These Terms and Conditions (the \"Terms\", \"Agreement\") govern the contractual relationship between you and:"
+    },
+    {
+      "type": "company",
+      "name": "PRODEC LTD",
+      "companyNumber": "12936248",
+      "address": "196 High Road, Wood Green, London, England, N22 8HH",
+      "email": "support@kingdomofarcane.com"
+    },
+    {
+      "type": "paragraph",
+      "text": "PRODEC LTD is hereinafter referred to as \"Company\", \"we\", \"us\", or \"our\"."
+    },
+    {
+      "type": "paragraph",
+      "text": "By accessing the Website, registering an account, purchasing any digital content, topping up your account balance, listing or purchasing virtual cards through the internal shop, or otherwise using any part of the Website or services, you confirm that you have read, understood, and agreed to be bound by these Terms. If you do not agree to these Terms, you must immediately stop using the Website."
+    },
+    {
+      "type": "paragraph",
+      "text": "These Terms apply only to the Website, the game made available through it, and the services operated by the Company. These Terms do not apply to websites, products, or services provided by third parties that are not owned or controlled by the Company."
+    },
+    {
+      "type": "paragraph",
+      "text": "By accepting these Terms, you also agree to comply with any other policies, notices, or guidelines published on the Website and incorporated into these Terms by reference, including our Privacy Policy, Refund Policy, and Cookie Policy."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "1. Definitions"
+    },
+    {
+      "type": "paragraph",
+      "text": "In these Terms, unless the context requires otherwise, the following words and expressions shall have the following meanings:"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "items": [
+        "\"Account\" means the personal user account registered on the Website.",
+        "\"Balance\" means the internal account balance displayed in the user's Account and used solely within the Website.",
+        "\"Business Day\" means any day other than a Saturday, Sunday, or public holiday in England when banks in England are open for business.",
+        "\"Card\" means a virtual in-game card made available through the Game, having specific rarity, faction, type, and gameplay characteristics.",
+        "\"Game\" means the digital card game made available on the Website under the name Voidborn.",
+        "\"Internal Shop\" means the part of the Website where eligible users may list certain Cards for sale to other users within the platform environment.",
+        "\"Personal Data\" means information relating to an identified or identifiable natural person.",
+        "\"Platform\" means the Website, the Game, the Account environment, the Internal Shop, the Balance system, and all related services collectively.",
+        "\"Privacy Policy\" means the privacy and personal data processing notice published on the Website.",
+        "\"Services\" means all services and functionality made available by the Company through the Platform, including gameplay access, purchases, top-ups, internal listings, internal transfers of eligible virtual items, and balance withdrawal functionality.",
+        "\"Virtual Items\" means all digital game elements made available on the Platform, including but not limited to Cards, boxes, packs, rewards, enhancements, achievements, gameplay-related unlocks, and other digital content.",
+        "\"Website\" means https://voidborn.fun.",
+        "\"You\", \"your\", \"user\", or \"customer\" means any person accessing or using the Platform."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "2. Our Services"
+    },
+    {
+      "type": "paragraph",
+      "text": "The Platform is an online digital card game environment in which registered users may, subject to these Terms:"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "items": [
+        "create and maintain an Account;",
+        "top up their Balance using supported payment methods and currencies;",
+        "purchase digital boxes or packs containing Cards;",
+        "purchase certain Cards directly where offered on the Platform;",
+        "build decks and use Cards in gameplay;",
+        "list eligible Cards for sale through the Internal Shop;",
+        "purchase listed Cards from other users through the Internal Shop;",
+        "request withdrawal of eligible Balance subject to these Terms."
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The Services are provided solely for personal, private, non-commercial entertainment use."
+    },
+    {
+      "type": "paragraph",
+      "text": "The Company may, at its sole discretion and at any time, modify, suspend, restrict, or discontinue any part of the Platform, Game, Services, Virtual Items, features, pricing logic, gameplay mechanics, or technical functionality without prior notice where reasonably necessary for business, technical, legal, security, or compliance reasons."
+    },
+    {
+      "type": "paragraph",
+      "text": "Your use of the Platform is licensed, not sold, to you. No title or ownership in the Platform, the Game, the Balance, or any Virtual Items is transferred to you. Your right to use the Platform is limited by these Terms and applicable law."
+    },
+    {
+      "type": "paragraph",
+      "text": "You are solely responsible for obtaining and maintaining the devices, hardware, software, internet connection, and other technical resources required to access and use the Platform."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "3. Privacy and Data Protection"
+    },
+    {
+      "type": "paragraph",
+      "text": "We collect, store, use, and otherwise process your Personal Data in accordance with our Privacy Policy published on the Website."
+    },
+    {
+      "type": "paragraph",
+      "text": "The Company takes appropriate technical and organisational measures to protect Personal Data and account-related information. Payment card data is processed by third-party payment service providers and not stored by the Company in full card form. Payment transactions may be subject to security protocols required by the relevant provider or card schemes, including authentication tools such as 3D Secure where applicable."
+    },
+    {
+      "type": "paragraph",
+      "text": "You should review our Privacy Policy before using the Platform."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "4. Eligibility"
+    },
+    {
+      "type": "paragraph",
+      "text": "The Platform is available only to individuals who are at least 18 years old and legally capable of entering into binding contracts under applicable law."
+    },
+    {
+      "type": "paragraph",
+      "text": "By using the Platform, you represent and warrant that:"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "items": [
+        "you are at least 18 years old;",
+        "you have the legal capacity to accept these Terms;",
+        "you are using the Platform only for lawful purposes;",
+        "all information provided by you is true, accurate, and complete."
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The Company does not provide Services in jurisdictions where the use of the Platform, the purchase of digital goods, or payout functionality would be unlawful, restricted, or contrary to card scheme requirements, sanctions rules, fraud prevention rules, or other regulatory standards applicable to the Company or its service providers."
+    },
+    {
+      "type": "paragraph",
+      "text": "We reserve the right to restrict access to the Platform from certain jurisdictions or to refuse Services where necessary for legal, regulatory, fraud prevention, sanctions, card network, or business risk reasons."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "5. Changes to These Terms"
+    },
+    {
+      "type": "paragraph",
+      "text": "The Company reserves the right to amend, update, or replace these Terms at any time."
+    },
+    {
+      "type": "paragraph",
+      "text": "Where changes are made, the updated version will be published on the Website with a revised \"Last Updated\" date. Your continued use of the Platform after updated Terms become effective constitutes your acceptance of those updated Terms."
+    },
+    {
+      "type": "paragraph",
+      "text": "If you do not agree to any updated Terms, you must stop using the Platform."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "6. User Account"
+    },
+    {
+      "type": "paragraph",
+      "text": "To access the main features of the Platform, you must register an Account."
+    },
+    {
+      "type": "paragraph",
+      "text": "When registering an Account, you agree to:"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "items": [
+        "provide current, accurate, and complete information;",
+        "keep your login credentials secure and confidential;",
+        "update your information if it changes;",
+        "accept responsibility for all actions performed through your Account."
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Your Account is personal to you. You may not sell, transfer, share, lend, or otherwise allow another person to access or use your Account."
+    },
+    {
+      "type": "paragraph",
+      "text": "You must notify us immediately if you become aware of or reasonably suspect:"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "items": [
+        "unauthorised use of your Account;",
+        "compromise of your login credentials;",
+        "any security breach affecting your Account."
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The Company reserves the right to reject registrations, restrict Accounts, suspend access, or terminate Accounts where reasonably justified, including in cases involving:"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "items": [
+        "breach of these Terms;",
+        "fraudulent or suspicious activity;",
+        "payment abuse or chargeback risk;",
+        "false or misleading registration information;",
+        "abuse of promotions or system mechanics;",
+        "use of the Platform from restricted jurisdictions;",
+        "technical, compliance, or security concerns."
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Termination or suspension of an Account may result in restriction or loss of access to the Platform, Balance, Virtual Items, listings, and other Account-related functionality, subject to applicable law and these Terms."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "7. Virtual Items and Digital Content"
+    },
+    {
+      "type": "paragraph",
+      "text": "The Platform may allow you to obtain Virtual Items, including Cards, through:"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "items": [
+        "purchase of boxes or packs;",
+        "direct purchase where available;",
+        "internal acquisition through the Internal Shop;",
+        "gameplay-related or promotional mechanics where applicable."
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "All Virtual Items are internal digital game assets made available solely for use within the Platform. They are not:"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "items": [
+        "legal tender;",
+        "bank deposits;",
+        "electronic money;",
+        "securities;",
+        "financial instruments;",
+        "cryptocurrencies;",
+        "NFTs;",
+        "property rights capable of ownership outside the Platform."
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "You receive only a limited, revocable, non-exclusive, non-transferable licence to use Virtual Items within the Platform in accordance with these Terms."
+    },
+    {
+      "type": "paragraph",
+      "text": "Except where functionality is expressly provided by the Company within the Internal Shop, Virtual Items may not be sold, assigned, transferred, sublicensed, exchanged, pledged, or otherwise dealt with outside the Platform."
+    },
+    {
+      "type": "paragraph",
+      "text": "The Company may at any time manage, modify, rebalance, replace, limit, remove, suspend, or discontinue any Virtual Items, categories, attributes, rarity logic, factions, types, or related functionality as part of ordinary game operation, balancing, technical maintenance, abuse prevention, or business development."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "8. Boxes, Packs, Direct Purchases, and Balance"
+    },
+    {
+      "type": "paragraph",
+      "text": "The Platform may offer:"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "items": [
+        "top-up of internal Balance;",
+        "direct purchase of digital boxes or packs;",
+        "direct purchase of certain Virtual Items;",
+        "use of Balance to acquire eligible Virtual Items or other platform functionality."
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "All prices displayed on the Website are shown in the applicable currency available at checkout. Supported currencies may include, without limitation: EUR; USD; GBP."
+    },
+    {
+      "type": "paragraph",
+      "text": "The Company may change supported currencies, prices, product structure, or payment methods at any time."
+    },
+    {
+      "type": "paragraph",
+      "text": "Your Balance:"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "items": [
+        "is an internal record maintained within your Account;",
+        "does not constitute a bank account, deposit, payment account, savings product, or stored e-money account;",
+        "does not bear interest;",
+        "may only be used in accordance with the functionality expressly made available by the Company."
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Funds added to Balance are intended solely for use within the Platform, subject to these Terms and applicable law."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "9. Internal Shop and User Listings"
+    },
+    {
+      "type": "paragraph",
+      "text": "The Platform may permit users to list certain eligible Cards for sale through the Internal Shop."
+    },
+    {
+      "type": "paragraph",
+      "text": "The Internal Shop is an internal platform feature. The Company provides the technical environment for such listings and transactions but does not guarantee:"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "items": [
+        "that any listed Card will be sold;",
+        "that any listing will remain available;",
+        "any minimum value, resale value, or future demand for any Card;",
+        "uninterrupted Internal Shop functionality."
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The Company reserves the right to impose conditions, restrictions, fees, listing requirements, transaction rules, quantity limits, cooldowns, or other controls on use of the Internal Shop."
+    },
+    {
+      "type": "paragraph",
+      "text": "The Company may remove, suspend, reject, reverse, cancel, or restrict any listing or internal transaction where reasonably necessary, including in cases involving:"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "items": [
+        "pricing manipulation;",
+        "fraud or collusion;",
+        "exploit abuse;",
+        "technical error;",
+        "suspicious trading patterns;",
+        "violation of these Terms;",
+        "security or compliance concerns."
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The Internal Shop is part of the licensed Platform environment and does not create property rights or regulated financial rights in favour of users."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "10. Payments and Payment Methods"
+    },
+    {
+      "type": "paragraph",
+      "text": "Payments on the Website are processed by third-party payment service providers selected by the Company from time to time."
+    },
+    {
+      "type": "paragraph",
+      "text": "The Company does not store full payment card details. Payment processing is handled by external payment providers using their own systems, security procedures, and compliance measures."
+    },
+    {
+      "type": "paragraph",
+      "text": "You may only use a payment method if:"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "items": [
+        "you are the authorised holder of that payment method; and",
+        "the payment method is lawfully available for your use."
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "You must not use:"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "items": [
+        "a payment card belonging to another person without express authorisation;",
+        "stolen, forged, unauthorised, or fraudulently obtained payment credentials;",
+        "any payment method in a way that breaches applicable law, card scheme requirements, or these Terms."
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "We reserve the right to refuse, reverse, hold, or cancel any payment transaction where there are reasonable grounds related to fraud prevention, security, technical error, misuse, sanctions screening, processor requirements, or legal compliance."
+    },
+    {
+      "type": "paragraph",
+      "text": "Your bank or card issuer may apply additional charges, exchange fees, conversion costs, or other fees. Such fees are outside the Company's control and remain your responsibility."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "11. Withdrawals and Payout Conditions"
+    },
+    {
+      "type": "paragraph",
+      "text": "The Platform may permit eligible users to request withdrawal of available Balance, subject strictly to these Terms."
+    },
+    {
+      "type": "paragraph",
+      "text": "Withdrawal functionality is limited and controlled. A withdrawal request may be accepted only where all applicable conditions are met."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "11.1 Closed-loop withdrawal rule"
+    },
+    {
+      "type": "paragraph",
+      "text": "Withdrawals are processed only to the same bank card previously used for deposit, and only where that card belongs to the same person who is the registered holder of the Account."
+    },
+    {
+      "type": "paragraph",
+      "text": "The Company may refuse any withdrawal request where:"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "items": [
+        "the payout destination does not match a previously used deposit card;",
+        "the name of the payment instrument holder does not reasonably match the Account holder;",
+        "the requested payout method is not supported;",
+        "processor, bank, technical, or card scheme restrictions apply."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "11.2 Withdrawal fee"
+    },
+    {
+      "type": "paragraph",
+      "text": "A 5% commission applies to withdrawals unless otherwise stated on the Website."
+    },
+    {
+      "type": "paragraph",
+      "text": "The applicable fee will be disclosed before confirmation of the withdrawal request or within the relevant user dashboard area."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "11.3 Security and anti-fraud checks"
+    },
+    {
+      "type": "paragraph",
+      "text": "Although the Company does not operate a formal KYC onboarding process as part of standard gameplay access, all withdrawals remain subject to internal security and fraud-prevention review."
+    },
+    {
+      "type": "paragraph",
+      "text": "The Company may request reasonable supporting information strictly for transaction security, fraud prevention, payment method ownership verification, or processor compliance purposes, including for example:"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "items": [
+        "confirmation that the payment card belongs to the Account holder;",
+        "confirmation of prior deposit method details;",
+        "confirmation of specific transaction information."
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Failure to provide reasonably requested payment-security information may result in delay, refusal, cancellation, or reversal of the requested withdrawal."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "11.4 Processing time and third-party dependencies"
+    },
+    {
+      "type": "paragraph",
+      "text": "The Company may initiate approved withdrawals within a reasonable time. However, actual receipt of funds depends on third-party payment processors, banks, card issuers, and card networks."
+    },
+    {
+      "type": "paragraph",
+      "text": "The Company does not guarantee that any withdrawal will be completed within a specific period and is not responsible for delays, holds, reversals, or failures caused by third parties."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "11.5 Right to refuse or delay"
+    },
+    {
+      "type": "paragraph",
+      "text": "The Company reserves the right to delay, limit, reverse, suspend, or refuse any withdrawal request where reasonably necessary for:"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "items": [
+        "fraud prevention;",
+        "payment abuse prevention;",
+        "chargeback mitigation;",
+        "technical or processor limitations;",
+        "suspected misuse of the Platform;",
+        "compliance with card scheme rules;",
+        "legal or regulatory reasons;",
+        "protection of the Platform, other users, or the Company."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "12. Acceptable Use"
+    },
+    {
+      "type": "paragraph",
+      "text": "You may use the Platform only in accordance with these Terms and all applicable laws and regulations."
+    },
+    {
+      "type": "paragraph",
+      "text": "You are solely responsible for ensuring that your use of the Platform does not violate any law, regulation, or third-party right."
+    },
+    {
+      "type": "paragraph",
+      "text": "We reserve the right to take any action we consider reasonably necessary to protect the Platform, our business, payment relationships, users, and third parties, including suspension, transaction restriction, listing removal, or Account termination."
+    },
+    {
+      "type": "paragraph",
+      "text": "You must not use any automated means to access, scrape, extract, harvest, index, monitor, copy, or interact with the Platform without our prior written consent."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "13. Prohibited Conduct"
+    },
+    {
+      "type": "paragraph",
+      "text": "You must not, directly or indirectly:"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "items": [
+        "access or use the Platform if you are under 18;",
+        "provide false, incomplete, or misleading registration or payment information;",
+        "use another person's Account or payment instrument without authorisation;",
+        "copy, reproduce, distribute, modify, reverse engineer, decompile, disassemble, adapt, or create derivative works from the Platform except to the extent expressly permitted by law;",
+        "use bots, scripts, automation tools, macros, scraping software, or other unauthorised tools;",
+        "exploit bugs, errors, loopholes, design flaws, or unintended mechanics;",
+        "manipulate prices, listings, demand, supply, or transaction flows in the Internal Shop;",
+        "create multiple Accounts for abusive, deceptive, or manipulative purposes;",
+        "engage in collusive trading, wash trading, sham transactions, or artificial activity;",
+        "use the Platform for money laundering, payment abuse, fraud, or any unlawful purpose;",
+        "upload malware, harmful code, or disruptive content;",
+        "interfere with Platform operation, security, availability, or infrastructure;",
+        "infringe our intellectual property rights or the rights of others;",
+        "use the Platform in connection with restricted goods, unlawful content, gambling services, adult services, sanctions violations, terrorist financing, or any other prohibited activity."
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "We may investigate any suspected breach of this section and may take any action permitted by law and these Terms."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "14. Fraud Prevention, Security, and Compliance"
+    },
+    {
+      "type": "paragraph",
+      "text": "The Company takes fraud prevention, card misuse prevention, processor compliance, and transaction security seriously."
+    },
+    {
+      "type": "paragraph",
+      "text": "All transactions, listings, top-ups, gameplay-related acquisitions, and withdrawal requests may be reviewed for legitimacy, abuse patterns, processor risk, and security concerns."
+    },
+    {
+      "type": "paragraph",
+      "text": "The Company reserves the right to:"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "items": [
+        "refuse or cancel transactions;",
+        "hold or reverse Balance adjustments;",
+        "remove listings or restrict shop functionality;",
+        "suspend or terminate Accounts;",
+        "cooperate with payment providers, banks, card issuers, and competent authorities where required by law or reasonably necessary for fraud prevention."
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The Platform may not be used in connection with illegal, fraudulent, deceptive, or prohibited activities, including activities prohibited by applicable law, payment processors, or card network rules."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "15. Pricing, Fees, and Currency Conversion"
+    },
+    {
+      "type": "paragraph",
+      "text": "The price of boxes, packs, direct purchases, and other paid digital content will be displayed on the Website or at checkout."
+    },
+    {
+      "type": "paragraph",
+      "text": "The Company may change prices, fees, product structures, and promotional terms at any time, provided that such changes will not retroactively affect already completed purchases unless correction is required due to clear technical or pricing error."
+    },
+    {
+      "type": "paragraph",
+      "text": "Where currency conversion applies, the exchange rate and any conversion fee may be determined by your bank, card issuer, or payment provider. The Company is not responsible for external conversion costs."
+    },
+    {
+      "type": "paragraph",
+      "text": "Withdrawal fees, listing-related fees, or other service charges, where applicable, will be disclosed on the Website, in the dashboard, or at the relevant transaction stage."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "16. Delivery of Digital Content"
+    },
+    {
+      "type": "paragraph",
+      "text": "Digital content purchased on the Platform is deemed delivered when it is successfully credited or made accessible to your Account, dashboard, Balance, inventory, or other relevant in-platform environment."
+    },
+    {
+      "type": "paragraph",
+      "text": "You are responsible for reviewing your Account activity and notifying us promptly if you believe purchased content was not correctly delivered."
+    },
+    {
+      "type": "paragraph",
+      "text": "The Company may cancel or reverse a transaction where delivery is impossible due to technical failure, pricing error, fraud risk, processor refusal, legal reasons, or other valid operational grounds."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "17. Refunds and Chargebacks"
+    },
+    {
+      "type": "paragraph",
+      "text": "Because the Platform provides digital content and digital gameplay-related services, all purchases are generally final and non-refundable once the purchased content has been delivered to your Account."
+    },
+    {
+      "type": "paragraph",
+      "text": "A refund may be considered only where:"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "items": [
+        "applicable law requires it;",
+        "a verified technical issue prevented delivery;",
+        "duplicate charging occurred;",
+        "unauthorised payment is confirmed after review;",
+        "the Company determines, in its discretion, that a refund is appropriate to correct a genuine error."
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "If you are a consumer in a jurisdiction granting mandatory withdrawal rights for digital content, such rights will apply only to the extent required by law and subject to any lawful exception, including where digital content delivery has begun with your prior express consent and acknowledgment that cancellation rights may thereby be lost."
+    },
+    {
+      "type": "paragraph",
+      "text": "You agree not to initiate unjustified chargebacks or payment disputes. Where a chargeback, payment reversal, or dispute is initiated in bad faith, or in circumstances where the transaction was validly authorised and delivered, the Company reserves the right to:"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "items": [
+        "suspend or terminate your Account;",
+        "reverse or remove associated Balance or Virtual Items;",
+        "restrict future transactions;",
+        "recover losses, fees, and administrative costs to the extent permitted by law."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "18. Inactive Accounts"
+    },
+    {
+      "type": "paragraph",
+      "text": "The Company may apply account housekeeping, archival, or deactivation procedures to Accounts that remain inactive for an extended period."
+    },
+    {
+      "type": "paragraph",
+      "text": "Where legally permitted and operationally necessary, the Company may suspend, archive, or delete inactive Accounts and associated data after prolonged inactivity, subject to applicable retention, consumer protection, accounting, fraud-prevention, and legal obligations."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "19. Intellectual Property"
+    },
+    {
+      "type": "paragraph",
+      "text": "The Platform, the Game, and all content made available through them, including software, systems, code, design, interfaces, artwork, Card illustrations, text, graphics, logos, audio, video, metadata, gameplay mechanics, and digital assets, are owned by or licensed to the Company and are protected by intellectual property laws."
+    },
+    {
+      "type": "paragraph",
+      "text": "Except as expressly permitted in these Terms, you may not:"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "items": [
+        "copy;",
+        "reproduce;",
+        "distribute;",
+        "publish;",
+        "display;",
+        "modify;",
+        "create derivative works from;",
+        "commercially exploit;",
+        "train AI or machine learning systems on;",
+        "transmit or otherwise use any part of the Platform without prior written consent from the Company."
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "All trademarks, logos, service marks, and trade names displayed on the Platform are the property of the Company or their respective owners. Their appearance does not grant you any right or licence to use them."
+    },
+    {
+      "type": "paragraph",
+      "text": "If you believe content on the Platform infringes your intellectual property rights, you may contact us at support@kingdomofarcane.com with sufficient details to review the claim."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "20. Third-Party Services and Links"
+    },
+    {
+      "type": "paragraph",
+      "text": "The Platform may contain links to third-party websites or may rely on third-party services, including payment processors, hosting providers, communication tools, or analytics providers."
+    },
+    {
+      "type": "paragraph",
+      "text": "The Company does not control and is not responsible for third-party websites, services, policies, content, or practices."
+    },
+    {
+      "type": "paragraph",
+      "text": "Your use of any third-party product or service is governed by that third party's own terms and policies."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "21. Disclaimers"
+    },
+    {
+      "type": "paragraph",
+      "text": "The Platform, Game, Services, Balance system, internal shop, and all related content are provided on an \"as is\" and \"as available\" basis."
+    },
+    {
+      "type": "paragraph",
+      "text": "To the maximum extent permitted by law, the Company disclaims all warranties, representations, and conditions, whether express, implied, or statutory, including any implied warranties of merchantability, fitness for a particular purpose, title, non-infringement, continuous availability, or error-free operation."
+    },
+    {
+      "type": "paragraph",
+      "text": "The Company does not warrant that:"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "items": [
+        "The Platform will always be available, secure, or uninterrupted;",
+        "The Game will be free from bugs, errors, or exploits;",
+        "Any Card, Box, Pack, listing, or virtual item will retain any particular function, value, or availability;",
+        "Any internal shop listing will result in a sale;",
+        "Any withdrawal request will be approved or completed;",
+        "Third-party payment services will be uninterrupted or error-free."
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Your use of the Platform is at your sole risk."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "22. Limitation of Liability"
+    },
+    {
+      "type": "paragraph",
+      "text": "To the maximum extent permitted by law, the Company, its directors, officers, employees, affiliates, contractors, licensors, and agents shall not be liable for any indirect, incidental, special, exemplary, punitive, or consequential damages, including loss of profits, loss of data, loss of business, loss of opportunity, loss of virtual items, loss of Balance access, or reputational harm, arising out of or in connection with the Platform or these Terms."
+    },
+    {
+      "type": "paragraph",
+      "text": "Without prejudice to the foregoing, the total aggregate liability of the Company arising out of or related to these Terms, the Platform, or any transaction shall not exceed the total amount paid by you to the Company through the Platform during the six (6) months immediately preceding the event giving rise to the claim."
+    },
+    {
+      "type": "paragraph",
+      "text": "Nothing in these Terms excludes or limits liability to the extent such liability cannot be excluded or limited under applicable law."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "23. Indemnity"
+    },
+    {
+      "type": "paragraph",
+      "text": "You agree to defend, indemnify, and hold harmless the Company and its officers, directors, employees, affiliates, contractors, licensors, and agents from and against any claims, actions, losses, liabilities, damages, costs, and expenses, including reasonable legal fees, arising out of or related to:"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "items": [
+        "your use of the Platform;",
+        "your breach of these Terms;",
+        "your violation of applicable law;",
+        "your infringement of any third-party rights;",
+        "your fraudulent, abusive, or unlawful conduct."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "24. Termination"
+    },
+    {
+      "type": "paragraph",
+      "text": "This Agreement remains in force until terminated by you or the Company."
+    },
+    {
+      "type": "paragraph",
+      "text": "You may terminate this Agreement at any time by ceasing all use of the Platform."
+    },
+    {
+      "type": "paragraph",
+      "text": "The Company may suspend, restrict, or terminate this Agreement, your Account, or your access to any part of the Platform at any time where reasonably justified, including for breach of these Terms, fraud risk, technical reasons, processor requirements, legal obligations, or business protection reasons."
+    },
+    {
+      "type": "paragraph",
+      "text": "Upon termination:"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "items": [
+        "your right to access and use the Platform ceases immediately;",
+        "your access to Virtual Items, listings, and Account functionality may be disabled;",
+        "the Company may take such follow-up action as permitted by these Terms and applicable law."
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Any provisions which by their nature should survive termination shall survive, including provisions relating to liability, intellectual property, indemnity, dispute resolution, and payment-related rights."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "25. Governing Law and Jurisdiction"
+    },
+    {
+      "type": "paragraph",
+      "text": "These Terms and any dispute or claim arising out of or in connection with them shall be governed by the laws of England and Wales, without regard to conflict of law rules."
+    },
+    {
+      "type": "paragraph",
+      "text": "The courts of England and Wales shall have exclusive jurisdiction over any dispute arising out of or in connection with these Terms, except where mandatory consumer protection law provides otherwise."
+    },
+    {
+      "type": "paragraph",
+      "text": "Nothing in these Terms deprives a consumer of mandatory protections granted by the law of the country in which that consumer resides, where such protections legally apply."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "26. General Provisions"
+    },
+    {
+      "type": "paragraph",
+      "text": "If any provision of these Terms is found to be invalid, unlawful, or unenforceable, the remaining provisions shall remain in full force and effect."
+    },
+    {
+      "type": "paragraph",
+      "text": "The Company's failure to enforce any right or provision under these Terms shall not constitute a waiver of that right or provision."
+    },
+    {
+      "type": "paragraph",
+      "text": "You may not assign, transfer, or otherwise dispose of your rights or obligations under these Terms without the Company's prior written consent."
+    },
+    {
+      "type": "paragraph",
+      "text": "The Company may assign or transfer its rights and obligations under these Terms where reasonably necessary as part of business restructuring, transfer, outsourcing, or sale."
+    },
+    {
+      "type": "paragraph",
+      "text": "These Terms, together with the policies expressly incorporated by reference, constitute the entire agreement between you and the Company regarding your use of the Platform."
+    },
+    {
+      "type": "paragraph",
+      "text": "No partnership, agency, employment, fiduciary, or joint venture relationship is created between you and the Company by these Terms or your use of the Platform."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "27. Contact and Customer Support"
+    },
+    {
+      "type": "paragraph",
+      "text": "If you have questions regarding these Terms or the Platform, you may contact us at:"
+    },
+    {
+      "type": "paragraph",
+      "text": "support@kingdomofarcane.com"
+    }
+  ]
+}

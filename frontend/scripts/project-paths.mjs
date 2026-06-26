@@ -58,6 +58,7 @@ export function projectPaths(projectId) {
     faq: path.join(root, 'copy/faq.json'),
     finalcta: path.join(root, 'copy/finalcta.json'),
     footer: path.join(root, 'copy/footer.json'),
+    legal: path.join(root, 'copy/legal'),
     seo: path.join(root, 'copy/seo.json'),
     portal: path.join(root, 'portal/sections.json'),
     credits: path.join(root, 'credits.json'),
