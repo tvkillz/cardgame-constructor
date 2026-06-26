@@ -276,6 +276,8 @@ async function copyProjectAssets(paths, manifest, out, sharp) {
   const brandFiles = [
     manifest.brand?.logo,
     manifest.brand?.introVideo,
+    manifest.brand?.playLogo,
+    manifest.brand?.playLobby,
   ].filter(Boolean)
 
   for (const rel of brandFiles) {
@@ -790,6 +792,15 @@ function buildAppConfig({
       src: assetUrl(publicBase, toWebpRelativePath(manifest.brand.logo)),
       alt: manifest.brand.logoAlt ?? manifest.name.short,
       favicon: '/favicon.png',
+      ...(manifest.brand?.playLogo
+        ? {
+            playLogo: assetUrl(publicBase, toWebpRelativePath(manifest.brand.playLogo)),
+            playLogoAlt:
+              manifest.brand.playLogoAlt ??
+              descriptions.play?.titleLine ??
+              manifest.name.short,
+          }
+        : {}),
     },
     seo: buildSeoConfig(seoJson, manifest, descriptions),
     colors,
@@ -797,6 +808,14 @@ function buildAppConfig({
       introVideo: assetUrl(publicBase, manifest.brand.introVideo),
       defaultArenaLocationId: locationsJson.defaults.arenaLocationId,
       defaultLobbyLocationId: locationsJson.defaults.lobbyLocationId,
+      ...(manifest.brand?.playLobby
+        ? {
+            playLobbyBackground: assetUrl(
+              publicBase,
+              toWebpRelativePath(manifest.brand.playLobby),
+            ),
+          }
+        : {}),
       cardsDir: `${publicBase}/cards`,
       locationsDir: `${publicBase}/locations`,
       cdnBase: cdnBase ?? null,

@@ -107,7 +107,7 @@ export default function DeckSelectModal({
           </Button>
           <Button
             type="button"
-            variant="primary"
+            variant="secondary"
             size="md"
             fantasy
             disabled={!canEnter || enteringBattle}

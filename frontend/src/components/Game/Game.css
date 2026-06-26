@@ -266,6 +266,7 @@
 }
 
 .game-enemy-card-back {
+  position: relative;
   width: 120px;
   height: 168px;
   margin-left: -66px;
@@ -275,6 +276,16 @@
     radial-gradient(circle at 50% 30%, rgba(129, 140, 248, 0.5), transparent 46%),
     linear-gradient(180deg, #111827 0%, #0b1021 100%);
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.45);
+}
+
+.game-enemy-card-back::after,
+.game-deck-card::after {
+  content: '';
+  position: absolute;
+  inset: 10% 14%;
+  background: var(--card-back-logo, none) center / contain no-repeat;
+  mix-blend-mode: screen;
+  pointer-events: none;
 }
 
 .game-zone-controls {
@@ -620,6 +631,7 @@
 }
 
 .game-deck-card {
+  position: relative;
   width: 88px;
   height: 122px;
   border-radius: 10px;

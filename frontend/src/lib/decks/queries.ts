@@ -6,6 +6,7 @@ import {
   loadLocalDecks,
   saveLocalDeck,
 } from './localStorage'
+import { isTutorialDeck } from './buildTutorialDeck'
 import type { DeckCardEntry, DeckSummary, PlayerDeck } from './types'
 import { DEFAULT_MAX_DECK_CARDS } from './types'
 
@@ -46,6 +47,10 @@ function toSummary(deck: PlayerDeck): DeckSummary {
   return { id: deck.id, name: deck.name, cards, maxCards: deck.maxCards }
 }
 
+function filterPlayerDecks(decks: PlayerDeck[]): PlayerDeck[] {
+  return decks.filter((deck) => !isTutorialDeck(deck))
+}
+
 export async function fetchPlayerDecks(userId: string): Promise<PlayerDeck[]> {
   const supabase = getSupabaseBrowserClient()
   if (!supabase) {
@@ -53,7 +58,7 @@ export async function fetchPlayerDecks(userId: string): Promise<PlayerDeck[]> {
     if (local.length === 0) {
       local = createDefaultLocalDecks(userId)
     }
-    return local
+    return filterPlayerDecks(local)
   }
 
   const { data, error } = await supabase
@@ -72,11 +77,11 @@ export async function fetchPlayerDecks(userId: string): Promise<PlayerDeck[]> {
 
   if (error || !data?.length) {
     const local = loadLocalDecks(userId)
-    if (local.length > 0) return local
-    return createDefaultLocalDecks(userId)
+    if (local.length > 0) return filterPlayerDecks(local)
+    return filterPlayerDecks(createDefaultLocalDecks(userId))
   }
 
-  return (data as DbDeckRow[]).map(mapDeck)
+  return filterPlayerDecks((data as DbDeckRow[]).map(mapDeck))
 }
 
 export async function fetchDeckSummaries(userId: string): Promise<DeckSummary[]> {
@@ -90,6 +95,10 @@ export async function savePlayerDeck(
   userId: string,
   deck: PlayerDeck,
 ): Promise<PlayerDeck> {
+  if (isTutorialDeck(deck)) {
+    return deck
+  }
+
   const supabase = getSupabaseBrowserClient()
   if (!supabase) {
     return saveLocalDeck(userId, deck)

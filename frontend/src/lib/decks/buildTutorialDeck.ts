@@ -3,7 +3,14 @@ import type { CardRecord } from '@/lib/cards/types'
 import type { PlayerDeck } from './types'
 import { DEFAULT_MAX_DECK_CARDS, MAX_COPIES_PER_CARD } from './types'
 
+export const TUTORIAL_DECK_ID = 'tutorial'
+export const TUTORIAL_DECK_NAME = 'Tutorial Deck'
+
 const TUTORIAL_DECK_SIZE = 20
+
+export function isTutorialDeck(deck: { id: string; name?: string }): boolean {
+  return deck.id === TUTORIAL_DECK_ID || deck.name === TUTORIAL_DECK_NAME
+}
 
 function shuffle<T>(items: T[]): T[] {
   const next = [...items]
@@ -56,8 +63,8 @@ export function buildTutorialDeck(catalog: CardRecord[]): PlayerDeck {
   }
 
   return {
-    id: crypto.randomUUID(),
-    name: 'Tutorial Deck',
+    id: TUTORIAL_DECK_ID,
+    name: TUTORIAL_DECK_NAME,
     maxCards: DEFAULT_MAX_DECK_CARDS,
     cards,
     updatedAt: new Date().toISOString(),

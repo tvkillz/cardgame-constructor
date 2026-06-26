@@ -23,6 +23,9 @@ export function getArenaBackground(): string {
 }
 
 export function getLobbyBackground(): string {
+  if (appConfig.arts.playLobbyBackground) {
+    return appConfig.arts.playLobbyBackground
+  }
   return getLocationImage(appConfig.arts.defaultLobbyLocationId)
 }
 

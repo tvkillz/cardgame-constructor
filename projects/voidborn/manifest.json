@@ -12,6 +12,9 @@
   },
   "brand": {
     "logo": "brand/logo.jpg",
+    "playLogo": "brand/gamelogo.png",
+    "playLogoAlt": "Voidborn",
+    "playLobby": "brand/play-lobby.png",
     "introVideo": "brand/main.mp4",
     "logoAlt": "Voidborn logo"
   },

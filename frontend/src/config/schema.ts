@@ -46,6 +46,9 @@ export interface AppConfig {
     src: string
     alt: string
     favicon: string
+    /** Optional play lobby title image (replaces title text on /play). */
+    playLogo?: string
+    playLogoAlt?: string
   }
 
   /** Page + social metadata from projects/{id}/copy/seo.json. */
@@ -85,6 +88,8 @@ export interface AppConfig {
     locationsDir: string
     /** Optional CDN base for production card art (Supabase Storage). */
     cdnBase?: string | null
+    /** Optional dedicated /play lobby background (overrides defaultLobbyLocationId). */
+    playLobbyBackground?: string
   }
 
   /** UI copy keyed by surface. */

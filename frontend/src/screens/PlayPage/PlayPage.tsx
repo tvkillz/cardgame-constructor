@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/Button/Button'
 import { useCardCatalog } from '@/hooks/useCardCatalog'
 import { usePlayerDecks } from '@/hooks/usePlayerDecks'
 import { useWallet } from '@/hooks/useWallet'
-import { resolveDeckToDisplay, buildTutorialDeck } from '@/lib/decks'
+import { resolveDeckToDisplay, buildTutorialDeck, deckCardCount, savePlayerDeck } from '@/lib/decks'
 import { preloadWithMinDelay } from '@/lib/cards'
 import { invokeMatchAction } from '@/lib/matches'
 import type { HandDeckEntry } from '@/lib/decks/buildHand'
@@ -24,7 +24,7 @@ type BattlePhase = 'idle' | 'loading' | 'arena'
 
 export default function PlayPage() {
   const router = useRouter()
-  const { descriptions, theme } = appConfig
+  const { descriptions, theme, logo } = appConfig
   const { playerName, user, openAuthModal, loading: authLoading } = useAuth()
   const { balanceCredits, loading: walletLoading } = useWallet()
   const creditsLabel = walletLoading ? '…' : formatCredits(balanceCredits)
@@ -261,12 +261,25 @@ export default function PlayPage() {
           </div>
 
           <div className="play-page__center">
-            <h1 className="play-page__title">
-              {descriptions.play.titleLine}
-              {descriptions.play.titleAccent ? (
-                <span>{descriptions.play.titleAccent}</span>
-              ) : null}
-            </h1>
+            {logo.playLogo ? (
+              <h1 className="play-page__logo-wrap">
+                <img
+                  src={logo.playLogo}
+                  alt={logo.playLogoAlt ?? descriptions.play.titleLine}
+                  className="play-page__logo"
+                  width={520}
+                  height={160}
+                  decoding="async"
+                />
+              </h1>
+            ) : (
+              <h1 className="play-page__title">
+                {descriptions.play.titleLine}
+                {descriptions.play.titleAccent ? (
+                  <span>{descriptions.play.titleAccent}</span>
+                ) : null}
+              </h1>
+            )}
 
             <div className="play-page__panel">
               {activeMatch && !showModes && (
@@ -284,7 +297,7 @@ export default function PlayPage() {
 
               <Button
                 type="button"
-                variant="primary"
+                variant="secondary"
                 size="lg"
                 fantasy
                 className={`play-page__play-btn${showModes ? ' play-page__play-btn--hidden' : ''}`}
@@ -301,7 +314,7 @@ export default function PlayPage() {
                     <Button
                       key={option.id}
                       type="button"
-                      variant="primary"
+                      variant="secondary"
                       size="md"
                       fantasy
                       className="play-page__mode"

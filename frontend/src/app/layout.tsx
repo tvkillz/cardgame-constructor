@@ -11,6 +11,7 @@ import '@/components/ui/Button/Button.css'
 
 const lobbyBg = getLobbyBackground()
 const arenaBg = getArenaBackground()
+const playLogo = appConfig.logo.playLogo
 
 export const metadata = buildSiteMetadata(appConfig)
 
@@ -29,6 +30,7 @@ export default function RootLayout({
           '--play-arena-bg': `url(${arenaBg})`,
           '--game-lobby-bg': `url(${lobbyBg})`,
           '--game-arena-bg': `url(${arenaBg})`,
+          ...(playLogo ? { '--card-back-logo': `url(${playLogo})` } : {}),
         } as CSSProperties
       }
       suppressHydrationWarning

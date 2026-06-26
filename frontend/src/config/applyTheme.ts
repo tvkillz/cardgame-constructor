@@ -6,6 +6,7 @@ export function applyTheme(): void {
   const { colors } = appConfig
   const lobbyBg = getLobbyBackground()
   const arenaBg = getArenaBackground()
+  const playLogo = appConfig.logo.playLogo
   const root = document.documentElement
 
   const vars: Record<string, string> = {
@@ -29,6 +30,7 @@ export function applyTheme(): void {
     '--play-arena-bg': `url(${arenaBg})`,
     '--game-lobby-bg': `url(${lobbyBg})`,
     '--game-arena-bg': `url(${arenaBg})`,
+    ...(playLogo ? { '--card-back-logo': `url(${playLogo})` } : {}),
   }
 
   for (const [key, value] of Object.entries(vars)) {
