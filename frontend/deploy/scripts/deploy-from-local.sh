@@ -102,6 +102,7 @@ log "Sites: ${SITES[*]}"
 if [[ "$SKIP_BUILD" != "1" ]]; then
   log "Building locally (DEPLOY_TARGET=staging)…"
   export DEPLOY_TARGET=staging
+  export FRONTEND_SHOWCASE_ONLY=1
   cd "$FRONTEND_DIR"
   for site in "${SITES[@]}"; do
     if [[ "$SKIP_GAME" == "1" ]]; then
@@ -178,8 +179,6 @@ for site in "${SITES[@]}"; do
     --exclude '.next/cache/' \
     --exclude '.next/static/development/' \
     --exclude 'assets/cards/' \
-    --exclude 'data/card-thumbs/' \
-    --exclude 'data/card-full/' \
     --exclude 'data/cards-catalog.json' \
     --exclude 'data/landing-cards.json' \
     "$FRONTEND_DIR/.build/$site/" \
@@ -187,10 +186,7 @@ for site in "${SITES[@]}"; do
   # Excluded paths are not deleted by rsync --delete; purge stale dev output on the VPS.
   ssh "$SSH_TARGET" "rm -rf '$VPS_FRONTEND_DIR/.build/$site/.next/static/development'"
   if [[ "$DRY_RUN" != "1" ]]; then
-    ssh "$SSH_TARGET" "rm -rf \
-      '$VPS_FRONTEND_DIR/.build/$site/assets/cards' \
-      '$VPS_FRONTEND_DIR/.build/$site/data/card-thumbs' \
-      '$VPS_FRONTEND_DIR/.build/$site/data/card-full' && \
+    ssh "$SSH_TARGET" "rm -rf '$VPS_FRONTEND_DIR/.build/$site/assets/cards' && \
       rm -f \
       '$VPS_FRONTEND_DIR/.build/$site/data/cards-catalog.json' \
       '$VPS_FRONTEND_DIR/.build/$site/data/landing-cards.json'"

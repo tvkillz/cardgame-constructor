@@ -12,9 +12,11 @@ server {
 
     client_max_body_size 50m;
 
+{{#STAGING_AUTH}}
     auth_basic "Restricted";
     auth_basic_user_file /etc/nginx/constructor-htpasswd;
 
+{{/STAGING_AUTH}}
     location / {
         proxy_pass http://127.0.0.1:{{PORT}};
         proxy_http_version 1.1;

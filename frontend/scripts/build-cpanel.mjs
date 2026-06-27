@@ -59,6 +59,7 @@ process.env.NODE_ENV = 'production';
 process.env.PROJECT = process.env.PROJECT || '${id}';
 process.env.SITE_HYBRID = '1';
 process.env.NEXT_PUBLIC_SITE_HYBRID = '1';
+process.env.SITE_AUTH_DISABLED = '1';
 process.env.HOSTNAME = process.env.HOSTNAME || '0.0.0.0';
 require('./_next-server.js');
 `

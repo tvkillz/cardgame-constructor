@@ -50,7 +50,11 @@ Then on cPanel: **Restart** (and **Run NPM Install** if prompted).
 | `npm run deploy:cpanel` | Build + FTP sync |
 | `npm run upload:cpanel -- --dry-run` | Preview changes |
 
-## Staging → production workflow
+## Auth
+
+- **Staging** (`staging.*`): nginx basic auth (`dev` / `dev` by default). Set `SITE_AUTH_USERNAME` / `SITE_AUTH_PASSWORD` when running `setup-vps.sh`.
+- **Production cPanel**: no auth (`SITE_AUTH_DISABLED=1` in `server.js`).
+- **Production VPS** (`test.sportsydeals.com`): no nginx auth.
 
 ```
 1. bash deploy/scripts/deploy-from-local.sh --site voidborn

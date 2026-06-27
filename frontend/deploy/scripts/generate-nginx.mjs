@@ -62,6 +62,7 @@ function renderBlock(template, { site, domain, port, role }) {
     ROLE: role,
     PORT: port,
     WWW: role === 'production' && includeWww ? '1' : '',
+    STAGING_AUTH: role === 'staging' ? '1' : '',
   })
 }
 
