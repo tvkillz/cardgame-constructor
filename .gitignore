@@ -52,6 +52,7 @@ frontend/public/data/
 frontend/public/play/
 frontend/public/_play_dist_backup/
 frontend/deploy/output/
+frontend/dist-cpanel/
 
 # --- Optional local asset fallback (prefer projects/{id}/assets/) ---
 cursor_assets/

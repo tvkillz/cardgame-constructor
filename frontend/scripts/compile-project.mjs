@@ -4,7 +4,7 @@
  *   - .build/{PROJECT}/generated/project-bundle.json
  *   - .build/{PROJECT}/generated/game-config.json
  *   - .build/{PROJECT}/assets/** (brand, domains, cities — not card catalog PNGs)
- *   - .build/{PROJECT}/data/cards-catalog.json (+ optional local showcase thumbs)
+ *   - .build/{PROJECT}/data/cards-catalog.json (showcase slugs only — hero + collection)
  *
  * Usage:
  *   node scripts/compile-project.mjs
@@ -937,13 +937,36 @@ async function compileCards({
   const cardSlugMigration = manifest?.cardSlugMigration ?? null
   const locationByDomain = buildLocationByDomain(locationsJson)
   const showcaseSlugs = buildFrontendShowcaseSlugs(featuredByLocation, collectionJson)
-  const cardAssets = (metadata.assets ?? []).filter(
+  const allCardAssets = (metadata.assets ?? []).filter(
     (a) => a.kind === 'card' && a.stats && a.ability,
   )
+  const skipLocalCardArt = process.env.SKIP_LOCAL_CARD_ART === '1'
+  /** cPanel / slim deploy: only hero + collection cards in the bundle; full catalog stays in Supabase. */
+  const frontendShowcaseOnly =
+    !shouldUpload &&
+    (process.env.CPANEL_BUILD === '1' || process.env.FRONTEND_SHOWCASE_ONLY === '1')
+  const cardAssets = frontendShowcaseOnly
+    ? allCardAssets.filter((a) => showcaseSlugs.has(a.slug))
+    : allCardAssets
+
+  if (frontendShowcaseOnly) {
+    for (const slug of showcaseSlugs) {
+      if (!cardAssets.some((a) => a.slug === slug)) {
+        throw new Error(
+          `Showcase card "${slug}" missing from card metadata — check locations.json featuredCardSlug and copy/collection.json cardSlugs`,
+        )
+      }
+    }
+    console.log(
+      `Cards: frontend showcase only (${cardAssets.length} slugs — hero + landing collection; full catalog in Supabase)`,
+    )
+  }
 
   const sharp = await loadSharp()
-  await mkdir(out.dataThumbs, { recursive: true })
-  await mkdir(out.dataFull, { recursive: true })
+  if (!skipLocalCardArt) {
+    await mkdir(out.dataThumbs, { recursive: true })
+    await mkdir(out.dataFull, { recursive: true })
+  }
   await mkdir(out.data, { recursive: true })
 
   const catalog = []
@@ -980,7 +1003,7 @@ async function compileCards({
     const fullExt = useWebp ? 'webp' : 'png'
     const fullDest = path.join(out.dataFull, `${slug}.${fullExt}`)
 
-    if (localPath && isShowcase) {
+    if (localPath && isShowcase && !skipLocalCardArt) {
       await buildThumb(sharp, localPath, thumbDest)
       if (useWebp) {
         await buildFullArt(sharp, localPath, fullDest)
@@ -1011,8 +1034,8 @@ async function compileCards({
       storage_bucket: BUCKET,
       storage_path: storagePath,
       thumb_storage_path: thumbStoragePath,
-      thumbUrl: isShowcase ? thumbLocalRel : '',
-      artUrl: isShowcase ? fullLocalRel : '',
+      thumbUrl: isShowcase && !skipLocalCardArt ? thumbLocalRel : '',
+      artUrl: isShowcase && !skipLocalCardArt ? fullLocalRel : '',
     }
 
     catalog.push(record)
@@ -1026,11 +1049,15 @@ async function compileCards({
   })
 
   const generatedAt = new Date().toISOString()
-  const frontendCatalog = catalog.filter((card) => showcaseSlugs.has(card.slug))
+  const frontendCatalog = frontendShowcaseOnly
+    ? catalog
+    : catalog.filter((card) => showcaseSlugs.has(card.slug))
 
   await writeFrontendCardCatalog(out, generatedAt, catalog.length, frontendCatalog)
   await writeLandingCardsJson(out, { generatedAt, cards: landingCards })
-  await pruneLocalCardArt(out, showcaseSlugs)
+  if (!skipLocalCardArt) {
+    await pruneLocalCardArt(out, showcaseSlugs)
+  }
 
   console.log(
     `Cards: ${catalog.length} total, ${frontendCatalog.length} frontend showcase, ${landingCards.length} landing featured`,

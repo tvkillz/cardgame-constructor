@@ -18,6 +18,7 @@
     "start": "next start",
     "start:prod": "node scripts/start-prod.mjs",
     "build:site": "node scripts/build-prod.mjs",
+    "build:cpanel": "node scripts/build-cpanel.mjs",
     "lint": "eslint .",
     "compile": "node scripts/compile-project.mjs",
     "compile:all": "node scripts/compile-all.mjs",

@@ -55,10 +55,12 @@ const hybridPlayRewrites = [
 function createNextConfig(): NextConfig {
   const projectId = readProjectId()
   const hybridActive = isHybridProduction(projectId)
+  const cpanelBuild = process.env.CPANEL_BUILD === '1'
 
   return {
     reactStrictMode: true,
     distDir: projectDistDir(projectId),
+    ...(cpanelBuild ? { output: 'standalone' as const } : {}),
     eslint: {
       ignoreDuringBuilds: true,
     },
