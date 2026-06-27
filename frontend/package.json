@@ -19,6 +19,8 @@
     "start:prod": "node scripts/start-prod.mjs",
     "build:site": "node scripts/build-prod.mjs",
     "build:cpanel": "node scripts/build-cpanel.mjs",
+    "upload:cpanel": "node scripts/upload-cpanel.mjs",
+    "deploy:cpanel": "node scripts/build-cpanel.mjs --upload",
     "lint": "eslint .",
     "compile": "node scripts/compile-project.mjs",
     "compile:all": "node scripts/compile-all.mjs",

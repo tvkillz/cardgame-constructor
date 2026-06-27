@@ -1,12 +1,11 @@
 #!/usr/bin/env bash
-# Frontend VPS bootstrap — nginx (systemd) + Let's Encrypt + pm2 site map.
-# Run on a fresh Ubuntu/Debian VPS as root (or with sudo).
+# Frontend VPS bootstrap — nginx (systemd) + pm2 site map.
+# TLS is manual via certbot --nginx (not managed by generate-nginx.mjs).
 #
 #   cd /path/to/constructor-files/frontend
 #   sudo bash deploy/scripts/setup-vps.sh install
 #   sudo bash deploy/scripts/setup-vps.sh configure
-#   # point DNS A records to this VPS, then:
-#   sudo bash deploy/scripts/setup-vps.sh ssl
+#   # point DNS A records to this VPS, then certbot manually (see deploy/README.md)
 #   sudo bash deploy/scripts/setup-vps.sh reload
 set -euo pipefail
 
@@ -14,12 +13,11 @@ FRONTEND_DIR="$(cd "$(dirname "$0")/../.." && pwd)"
 NGINX_AVAILABLE="/etc/nginx/sites-available/constructor-frontend.conf"
 NGINX_ENABLED="/etc/nginx/sites-enabled/constructor-frontend.conf"
 NGINX_HTPASSWD="/etc/nginx/constructor-htpasswd"
-CERTBOT_EMAIL="${CERTBOT_EMAIL:-}"
-CERTBOT_STAGING="${CERTBOT_STAGING:-0}"
 SITE_AUTH_USERNAME="${SITE_AUTH_USERNAME:-dev}"
 SITE_AUTH_PASSWORD="${SITE_AUTH_PASSWORD:-dev}"
 
 log() { echo "[setup-vps] $*"; }
+warn() { echo "[setup-vps] WARNING: $*" >&2; }
 die() { echo "[setup-vps] ERROR: $*" >&2; exit 1; }
 
 require_root() {
@@ -49,75 +47,35 @@ cmd_install() {
 cmd_configure() {
   require_root
   write_htpasswd
-  log "Generating nginx config from registry…"
-  node "$FRONTEND_DIR/deploy/scripts/generate-nginx.mjs" --http-only --install
+  log "Generating HTTP nginx config from registry…"
+  node "$FRONTEND_DIR/deploy/scripts/generate-nginx.mjs" --install
   ln -sf "$NGINX_AVAILABLE" "$NGINX_ENABLED"
   rm -f /etc/nginx/sites-enabled/default
   nginx -t
   systemctl reload nginx
   log "Configured. Sites → pm2 prod ports (see deploy/output/cors-origins.txt for backend CORS)."
-  log "Next: point DNS here, then: sudo CERTBOT_EMAIL=you@domain.com bash $0 ssl"
-}
-
-cmd_ssl() {
-  require_root
-  [[ -n "$CERTBOT_EMAIL" ]] || die "Set CERTBOT_EMAIL=you@domain.com"
-
-  log "Collecting domains from registry…"
-  DOMAINS=()
-  while IFS= read -r line; do
-    [[ -n "$line" ]] && DOMAINS+=("$line")
-  done < <(
-    node -e "
-      const { loadRegistry } = require('$FRONTEND_DIR/scripts/project-ports.mjs');
-      const fs = require('fs');
-      const path = require('path');
-      const root = path.join('$FRONTEND_DIR', '../projects');
-      for (const s of loadRegistry()) {
-        let d = s.domain;
-        if (!d) {
-          const m = JSON.parse(fs.readFileSync(path.join(root, s.id, 'manifest.json'), 'utf8'));
-          d = new URL(m.siteUrl).hostname;
-        }
-        d = d.replace(/^https?:\\/\\//,'').replace(/\\/.*\$/, '');
-        console.log(d);
-        console.log('www.' + d);
-      }
-    "
-  )
-
-  STAGING_ARG=()
-  [[ "$CERTBOT_STAGING" == "1" ]] && STAGING_ARG=(--staging)
-
-  log "Requesting certificates for: ${DOMAINS[*]}"
-  certbot --nginx "${STAGING_ARG[@]}" --non-interactive --agree-tos -m "$CERTBOT_EMAIL" \
-    $(printf ' -d %s' "${DOMAINS[@]}")
-
-  node "$FRONTEND_DIR/deploy/scripts/generate-nginx.mjs" --install
-  nginx -t
-  systemctl reload nginx
-  log "SSL active. Cert renewal: certbot renew (systemd timer usually installed with certbot)."
+  log "Next: point DNS here, then run certbot --nginx manually (see deploy/README.md)."
 }
 
 cmd_reload() {
   require_root
+  warn "Regenerating nginx removes certbot SSL blocks — re-run certbot --nginx after reload if you use HTTPS."
   write_htpasswd
   node "$FRONTEND_DIR/deploy/scripts/generate-nginx.mjs" --install
   nginx -t
   systemctl reload nginx
-  log "nginx reloaded."
+  log "nginx reloaded (HTTP only until you run certbot again)."
 }
 
 cmd_all() {
   cmd_install
   cmd_configure
-  log "Skipping ssl in 'all' — run ssl after DNS: CERTBOT_EMAIL=… bash $0 ssl"
+  log "Run certbot --nginx manually after DNS is live (see deploy/README.md)."
 }
 
 case "${1:-}" in
   install)   cmd_install ;;
   configure) cmd_configure ;;
-  ssl)       cmd_ssl ;;
   reload)    cmd_reload ;;
   all)       cmd_all ;;
   *)
@@ -125,16 +83,15 @@ case "${1:-}" in
 Usage: sudo bash deploy/scripts/setup-vps.sh <command>
 
   install    apt install nginx + certbot, enable systemd service
-  configure  generate site blocks (HTTP), enable constructor-frontend.conf
-  ssl        certbot --nginx for all registry domains (needs DNS + CERTBOT_EMAIL)
-  reload     regenerate config (picks up new certs / registry sites) and reload
+  configure  generate HTTP site blocks, enable constructor-frontend.conf
+  reload     regenerate HTTP config and reload (re-run certbot after if using HTTPS)
   all        install + configure
 
-Env:
-  CERTBOT_EMAIL   required for ssl
-  CERTBOT_STAGING=1   use Let's Encrypt staging (testing)
+TLS (manual, after DNS points here):
+  sudo certbot --nginx --expand -m you@example.com \\
+    -d staging.voidborn.fun -d test.sportsydeals.com
 
-Before ssl:
+Before first deploy:
   1. npm run compile:all && build each site
   2. pm2 start ecosystem.config.cjs --only voidborn-prod,project2-prod
   3. Copy deploy/env.production.example → .env.production (set BACKEND API URL)

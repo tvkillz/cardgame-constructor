@@ -1,4 +1,5 @@
-# {{DOMAIN}} — {{PROJECT}} (pm2 prod port {{PORT}})
+# {{DOMAIN}} — {{PROJECT}} ({{ROLE}}, pm2 port {{PORT}})
+# TLS: add manually with certbot --nginx (not generated here).
 
 server {
     listen 80;
@@ -8,27 +9,6 @@ server {
     location /.well-known/acme-challenge/ {
         root /var/www/certbot;
     }
-
-{{#SSL}}
-    location / {
-        return 301 https://$host$request_uri;
-    }
-}
-
-server {
-    listen 443 ssl;
-    listen [::]:443 ssl;
-    server_name {{DOMAIN}}{{#WWW}} www.{{DOMAIN}}{{/WWW}};
-
-    ssl_certificate {{SSL_CERT}};
-    ssl_certificate_key {{SSL_KEY}};
-    include /etc/letsencrypt/options-ssl-nginx.conf;
-    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
-
-{{/SSL}}
-{{^SSL}}
-    # HTTP-only (run setup-vps.sh ssl after DNS points here)
-{{/SSL}}
 
     client_max_body_size 50m;
 

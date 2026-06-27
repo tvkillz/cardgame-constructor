@@ -98,9 +98,10 @@ done < <(read_registry)
 [[ ${#SITES[@]} -gt 0 ]] || { echo "No sites matched." >&2; exit 1; }
 log "Sites: ${SITES[*]}"
 
-# --- Build locally ---
+# --- Build locally (staging siteUrl baked into bundle) ---
 if [[ "$SKIP_BUILD" != "1" ]]; then
-  log "Building locally…"
+  log "Building locally (DEPLOY_TARGET=staging)…"
+  export DEPLOY_TARGET=staging
   cd "$FRONTEND_DIR"
   for site in "${SITES[@]}"; do
     if [[ "$SKIP_GAME" == "1" ]]; then
@@ -141,6 +142,7 @@ log "Syncing runtime files…"
 
 "${RSYNC_SSH[@]}" \
   "$FRONTEND_DIR/scripts/project-ports.mjs" \
+  "$FRONTEND_DIR/scripts/registry-sites.mjs" \
   "$FRONTEND_DIR/scripts/project-next.mjs" \
   "$FRONTEND_DIR/scripts/project-paths.mjs" \
   "$FRONTEND_DIR/scripts/site-hybrid.mjs" \

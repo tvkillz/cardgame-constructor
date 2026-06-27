@@ -1,110 +1,89 @@
-# cPanel shared hosting deploy (no SSH)
+# cPanel production deploy (FTP via rclone)
 
-Upload-ready Node.js app for **Setup Node.js App** in cPanel. No pm2 — `server.js` is the startup file.
+Production for **voidborn.fun** lives on cPanel (no SSH). Staging is on the VPS at **staging.voidborn.fun**.
 
-## 1. Build locally
+## One-time setup
 
-From `frontend/` on your machine (needs Node 20+):
+### 1. FTP account (cPanel)
+
+Create an FTP account jailed to `voidborn-cpanel/` (you did: `sync@voidborn.fun`).
+
+### 2. Local config
 
 ```bash
-npm install
+cp deploy/cpanel.local.env.example deploy/cpanel.local.env
+# edit deploy/cpanel.local.env — FTP host, user, password
+```
+
+`cpanel.local.env` is gitignored.
+
+### 3. rclone
+
+Install rclone on your PC (`apt install rclone` / brew). No remote config file needed — the upload script passes FTP flags inline.
+
+### 4. cPanel Node.js app
+
+Application root: `voidborn-cpanel`, startup: `server.js`, Node 20, env vars (`NEXT_PUBLIC_SUPABASE_URL`, etc.).
+
+## Deploy production (after staging approved)
+
+```bash
+cd frontend
 cp deploy/env.production.example .env.production   # first time
-PROJECT=voidborn npm run build:cpanel
+PROJECT=voidborn npm run deploy:cpanel
 ```
 
-Output:
+This runs `build:cpanel` then **rclone sync** to FTP.
 
-- `frontend/dist-cpanel/voidborn-cpanel/` — full folder (`server.js`, `package.json`, `_next-server.js`, `.build/`)
-- `frontend/dist-cpanel/voidborn-cpanel-build.zip` — **only `.build/`** (extract into app root)
+- Uploads `dist-cpanel/voidborn-cpanel/` (no `node_modules`)
+- Creates `voidborn-cpanel-build.zip` (`.build` only, optional manual extract)
+- Prints **Run NPM Install** if `package.json` dependencies changed
 
-Landing showcase webp: `.build/voidborn/data/card-thumbs/` + `card-full/` (12 cards).
+Then on cPanel: **Restart** (and **Run NPM Install** if prompted).
 
-## 2. Create the app folder in cPanel File Manager
+### Commands
 
-Create `voidborn-cpanel` (or `voidborn-app`) in your home directory — not inside `public_html`.
+| Command | What |
+|---------|------|
+| `npm run build:cpanel` | Build only |
+| `npm run upload:cpanel` | FTP sync existing build |
+| `npm run deploy:cpanel` | Build + FTP sync |
+| `npm run upload:cpanel -- --dry-run` | Preview changes |
 
-## 3. Upload files
-
-**Step 1 — app entry files** (upload via File Manager, no zip)
-
-From `dist-cpanel/voidborn-cpanel/` upload into your app root (`voidborn-cpanel/` or `voidborn-app/`):
-
-- `server.js`
-- `package.json`
-- `_next-server.js`
-
-**Step 2 — `.build` zip**
-
-1. Upload `voidborn-cpanel-build.zip` into the **same app root**
-2. Extract — you should get `.build/voidborn/...` (not nested twice)
-3. Confirm `.build/voidborn/.next/BUILD_ID` and `.build/voidborn/data/card-thumbs/` exist
-
-**FTP alternative** — upload the whole `voidborn-cpanel/` folder without zips.
-
-Disable zip: `CPANEL_NO_ZIP=1 PROJECT=voidborn npm run build:cpanel`
-
-Final layout:
+## Staging → production workflow
 
 ```
-/home/voidborn/voidborn-app/
+1. bash deploy/scripts/deploy-from-local.sh --site voidborn
+   → https://staging.voidborn.fun (VPS, basic auth)
+
+2. QA / approve
+
+3. PROJECT=voidborn npm run deploy:cpanel
+   → https://voidborn.fun (cPanel)
+```
+
+## Upload layout on server
+
+```
+/home/voidborn/voidborn-cpanel/
   server.js
   package.json
   _next-server.js
   .build/voidborn/
     .next/
-    data/card-thumbs/    ← 12 showcase thumbs
-    data/card-full/      ← 12 showcase full art
+    data/card-thumbs/
+    data/card-full/
     assets/
     play/
     generated/
 ```
 
-There is no `node_modules/` yet — install on the server (step 6).
-
-## 4. Create the Node.js application
-
-**Setup Node.js App → CREATE APPLICATION**
-
-| Field | Value |
-|-------|--------|
-| Node.js version | **20.x** |
-| Application mode | **Production** |
-| Application root | `voidborn-app` |
-| Application URL | `voidborn.fun` |
-| Application startup file | `server.js` |
-
-## 5. Environment variables
-
-| Name | Value |
-|------|--------|
-| `NEXT_PUBLIC_SUPABASE_URL` | Platform API URL |
-| `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | Supabase publishable key |
-| `PROJECT` | `voidborn` (optional) |
-
-## 6. Install dependencies and start
-
-1. **CREATE** / **SAVE**
-2. **Run NPM Install**
-3. **Restart**
-
-## 7. Verify
-
-- `/` — landing (4 hero + 8 collection cards with local webp)
-- `/play` — game
-- `/portal` — cards from API / Storage
-
-## What's omitted from the upload
-
-- `node_modules/` — **Run NPM Install** on cPanel
-- `assets/cards/` — source PNGs (not needed on server)
-- Full catalog card art — Supabase Storage only
-
 ## Troubleshooting
 
-| Symptom | Fix |
-|---------|-----|
-| Zip blocked as virus | Don’t use zip — FTP upload the folder |
-| 503 | Check `.build/voidborn/.next/BUILD_ID`; restart app |
-| `Cannot find module` | Run **NPM Install** |
-| Missing landing cards | Rebuild locally; confirm `data/card-thumbs/` uploaded |
-| Missing portal cards | Supabase Storage / API — not the landing webp set |
+| Issue | Fix |
+|-------|-----|
+| `rclone: command not found` | Install rclone |
+| FTP login failed | Check host (may be server hostname, not domain), user, FTPS toggle |
+| Zip blocked by AV | Use `deploy:cpanel` FTP sync instead |
+| Landing cards black | Full `.build` uploaded; paths under `data/card-thumbs/` |
+| `Cannot find module` | Run NPM Install on cPanel |

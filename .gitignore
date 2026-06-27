@@ -29,6 +29,7 @@ lerna-debug.log*
 **/.env.*.local
 **/.env.admin
 frontend/deploy/deploy.local.env
+frontend/deploy/cpanel.local.env
 !**/.env.example
 !**/.env.*.example
 

@@ -43,6 +43,7 @@ import {
   projectPaths,
   resolveProjectId,
 } from './project-paths.mjs'
+import { registrySite, resolveCompileSiteUrl } from './registry-sites.mjs'
 
 const THUMB_WIDTH = 320
 const WEBP_QUALITY = 82
@@ -1274,6 +1275,12 @@ async function main() {
   }
 
   const manifest = await readJson(paths.manifest, 'manifest')
+  const siteEntry = registrySite(projectId)
+  const compileSiteUrl = resolveCompileSiteUrl(manifest, siteEntry)
+  const manifestForBundle = { ...manifest, siteUrl: compileSiteUrl }
+  if (compileSiteUrl !== manifest.siteUrl) {
+    console.log(`[compile] siteUrl override: ${compileSiteUrl}`)
+  }
   const colors = await readJson(paths.colors, 'theme/colors')
   const ui = await readJson(paths.ui, 'theme/ui')
   const descriptions = await readJson(paths.descriptions, 'copy/descriptions')
@@ -1298,19 +1305,19 @@ async function main() {
 
   const out = buildPaths(projectId)
 
-  validateProject(manifest, domainsJson, locationsJson, categories, portal)
+  validateProject(manifestForBundle, domainsJson, locationsJson, categories, portal)
 
   const featuredByLocation = buildFeaturedByLocation(locationsJson)
 
   const { domainToCategory, domainGlow, domainLabels } = buildDomainMaps(domainsJson)
   const domainIds = new Set(domainsJson.domains.map((d) => d.id))
   const sharp = await loadSharp()
-  const { publicBase, metadata } = await copyProjectAssets(paths, manifest, out, sharp)
+  const { publicBase, metadata } = await copyProjectAssets(paths, manifestForBundle, out, sharp)
   await copyGamemodelAssets(paths, gamemodelJson, out, sharp)
   await copyCollectionAssets(paths, collectionJson, out, sharp)
   await copyPathwaysAssets(paths, pathwaysJson, out, sharp)
   await copyFinalCtaAssets(paths, finalctaJson, out, sharp)
-  await buildBrandSeoAssets({ sharp, paths, manifest, seoJson, out })
+  await buildBrandSeoAssets({ sharp, paths, manifest: manifestForBundle, seoJson, out })
   if (metadata.source === 'split') {
     console.log('Metadata: split (game/cards.json + game/scenes.json + game/keywords.json)')
   } else {
@@ -1321,7 +1328,7 @@ async function main() {
   const { supabaseUrl } = shouldUpload ? resolveSupabaseAdminEnv() : { supabaseUrl: '' }
 
   const appConfig = buildAppConfig({
-    manifest,
+    manifest: manifestForBundle,
     colors,
     ui,
     descriptions,
@@ -1350,7 +1357,7 @@ async function main() {
     paths,
     out,
     projectId,
-    manifest,
+    manifest: manifestForBundle,
     locationsJson,
     featuredByLocation,
     collectionJson,

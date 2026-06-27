@@ -87,9 +87,10 @@ function writeCpanelPackage(targetRoot, id, standaloneDir) {
 }
 
 function copyNextBuild(srcDir, destDir) {
+  const skip = new Set(['standalone', 'cache', 'diagnostics', 'types', 'trace'])
   fs.mkdirSync(destDir, { recursive: true })
   for (const entry of fs.readdirSync(srcDir, { withFileTypes: true })) {
-    if (entry.name === 'standalone') continue
+    if (skip.has(entry.name)) continue
     copyTree(path.join(srcDir, entry.name), path.join(destDir, entry.name))
   }
 }
@@ -199,3 +200,11 @@ console.log('  Upload separately: server.js, package.json, _next-server.js')
 console.log(`  Then extract ${distName}-build.zip into the app root (merges .build/)`)
 console.log('  node_modules not included — run NPM Install on cPanel after upload.')
 console.log('  See SETUP.md in the output folder for cPanel upload steps.')
+
+if (process.argv.includes('--upload')) {
+  execSync('node scripts/upload-cpanel.mjs', {
+    cwd: frontendRoot,
+    stdio: 'inherit',
+    env: { ...process.env, PROJECT: projectId },
+  })
+}

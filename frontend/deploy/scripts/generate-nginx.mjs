@@ -1,24 +1,31 @@
 #!/usr/bin/env node
 /**
- * Generate nginx config for frontend VPS from projects/registry.json + manifest siteUrl.
+ * Generate HTTP-only nginx config for frontend VPS from projects/registry.json.
+ * TLS is manual: certbot --nginx (do not re-run --install after certbot without re-running certbot).
+ *
+ * Per site:
+ *   - stagingDomain → staging vhost (always on VPS when set)
+ *   - vpsProd !== false → production manifest domain on VPS
+ *   - vpsProd: false → production lives elsewhere (e.g. cPanel); only staging on VPS
  *
  * Usage (from frontend/):
  *   node deploy/scripts/generate-nginx.mjs
- *   node deploy/scripts/generate-nginx.mjs --http-only
  *   node deploy/scripts/generate-nginx.mjs --install
  *   node deploy/scripts/generate-nginx.mjs --cors-origins
  */
 import { mkdir, readFile, writeFile } from 'node:fs/promises'
-import { existsSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 import { loadRegistry, prodPort } from '../../scripts/project-ports.mjs'
+import {
+  productionDomainForSite,
+  stagingDomainForSite,
+  vpsHostsProduction,
+} from '../../scripts/registry-sites.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const DEPLOY_ROOT = path.resolve(__dirname, '..')
-const FRONTEND_ROOT = path.resolve(DEPLOY_ROOT, '..')
-const PROJECTS_ROOT = path.resolve(FRONTEND_ROOT, '../projects')
 const TEMPLATE_PATH = path.join(DEPLOY_ROOT, 'nginx/site.conf.tpl')
 const OUTPUT_DIR = path.join(DEPLOY_ROOT, 'output')
 const OUTPUT_FILE = path.join(OUTPUT_DIR, 'frontend-sites.conf')
@@ -26,7 +33,6 @@ const CORS_FILE = path.join(OUTPUT_DIR, 'cors-origins.txt')
 const INSTALL_PATH = '/etc/nginx/sites-available/constructor-frontend.conf'
 const ENABLED_LINK = '/etc/nginx/sites-enabled/constructor-frontend.conf'
 
-const httpOnly = process.argv.includes('--http-only')
 const install = process.argv.includes('--install')
 const corsOnly = process.argv.includes('--cors-origins')
 const includeWww = !process.argv.includes('--no-www')
@@ -36,78 +42,77 @@ function render(template, vars) {
   for (const [key, val] of Object.entries(vars)) {
     out = out.replaceAll(`{{${key}}}`, String(val))
   }
-  // simple conditional blocks {{#FLAG}}...{{/FLAG}} and {{^FLAG}}...{{/FLAG}}
-  out = out.replace(/\{\{#(\w+)\}\}([\s\S]*?)\{\{\/\1\}\}/g, (_, flag, body) =>
-    vars[flag] ? body : '',
-  )
-  out = out.replace(/\{\{\^(\w+)\}\}([\s\S]*?)\{\{\/\1\}\}/g, (_, flag, body) =>
-    vars[flag] ? '' : body,
-  )
+  let prev
+  do {
+    prev = out
+    out = out.replace(/\{\{#(\w+)\}\}([\s\S]*?)\{\{\/\1\}\}/g, (_, flag, body) =>
+      vars[flag] ? body : '',
+    )
+    out = out.replace(/\{\{\^(\w+)\}\}([\s\S]*?)\{\{\/\1\}\}/g, (_, flag, body) =>
+      vars[flag] ? '' : body,
+    )
+  } while (out !== prev)
   return out
 }
 
-async function siteDomain(site, index) {
-  if (site.domain) return site.domain.replace(/^https?:\/\//, '').replace(/\/.*$/, '')
-
-  const manifestPath = path.join(PROJECTS_ROOT, site.id, 'manifest.json')
-  const manifest = JSON.parse(await readFile(manifestPath, 'utf8'))
-  if (!manifest.siteUrl) {
-    throw new Error(`projects/${site.id}/manifest.json: missing siteUrl (or set domain in registry)`)
-  }
-  return new URL(manifest.siteUrl).hostname
-}
-
-function sslPaths(domain) {
-  const live = `/etc/letsencrypt/live/${domain}`
-  return {
-    cert: `${live}/fullchain.pem`,
-    key: `${live}/privkey.pem`,
-  }
-}
-
-function certsExist(domain) {
-  const { cert, key } = sslPaths(domain)
-  return existsSync(cert) && existsSync(key)
+function renderBlock(template, { site, domain, port, role }) {
+  return render(template, {
+    PROJECT: site.id,
+    DOMAIN: domain,
+    ROLE: role,
+    PORT: port,
+    WWW: role === 'production' && includeWww ? '1' : '',
+  })
 }
 
 async function buildSiteBlocks(template) {
   const registry = loadRegistry()
   const blocks = []
+  const routes = []
 
   for (let index = 0; index < registry.length; index++) {
     const site = registry[index]
-    const domain = await siteDomain(site, index)
     const port = prodPort(site.id, index)
-    const hasSsl = !httpOnly && certsExist(domain)
-    const ssl = hasSsl ? sslPaths(domain) : null
+    const staging = stagingDomainForSite(site)
 
-    blocks.push(
-      render(template, {
-        PROJECT: site.id,
-        DOMAIN: domain,
-        PORT: port,
-        WWW: includeWww ? '1' : '',
-        SSL: hasSsl ? '1' : '',
-        SSL_CERT: ssl?.cert ?? '',
-        SSL_KEY: ssl?.key ?? '',
-      }),
-    )
+    if (staging) {
+      blocks.push(renderBlock(template, { site, domain: staging, port, role: 'staging' }))
+      routes.push({ siteId: site.id, domain: staging, port, role: 'staging' })
+    }
+
+    if (vpsHostsProduction(site)) {
+      const prod = await productionDomainForSite(site)
+      blocks.push(renderBlock(template, { site, domain: prod, port, role: 'production' }))
+      routes.push({ siteId: site.id, domain: prod, port, role: 'production' })
+    }
+
+    const prodCors = await productionDomainForSite(site)
+    if (!routes.some((r) => r.domain === prodCors && r.role === 'production')) {
+      routes.push({ siteId: site.id, domain: prodCors, port, role: 'cors-prod' })
+    }
   }
 
-  return { blocks, registry }
+  return { blocks, registry, routes }
 }
 
-async function writeCorsOrigins(registry, domains) {
+async function writeCorsOrigins(routes) {
   const lines = [
     '# Allowed browser origins for platform backend CORS (Supabase/Kong).',
     '# Configure these on the backend API — not on the frontend VPS nginx.',
-    '# One origin per site (https only in production):',
+    '# Includes staging VPS + production domains (including cPanel-only sites):',
     '',
   ]
-  for (let i = 0; i < registry.length; i++) {
-    const site = registry[i]
-    lines.push(`https://${domains[i]}  # ${site.id}`)
-    if (includeWww) lines.push(`https://www.${domains[i]}  # ${site.id} (www)`)
+  const seen = new Set()
+  for (const route of routes) {
+    if (seen.has(route.domain)) continue
+    seen.add(route.domain)
+    const label =
+      route.role === 'cors-prod' ? `${route.siteId} (production / cPanel)`
+      : `${route.siteId} (${route.role})`
+    lines.push(`https://${route.domain}  # ${label}`)
+    if (route.role === 'production' && includeWww) {
+      lines.push(`https://www.${route.domain}  # ${route.siteId} (www)`)
+    }
   }
   lines.push('')
   await mkdir(OUTPUT_DIR, { recursive: true })
@@ -117,15 +122,11 @@ async function writeCorsOrigins(registry, domains) {
 
 async function main() {
   const template = await readFile(TEMPLATE_PATH, 'utf8')
-  const { blocks, registry } = await buildSiteBlocks(template)
-  const domains = []
+  const { blocks, routes } = await buildSiteBlocks(template)
 
-  for (let index = 0; index < registry.length; index++) {
-    domains.push(await siteDomain(registry[index], index))
-  }
-
-  const header = `# Generated by deploy/scripts/generate-nginx.mjs — do not edit by hand
-# Regenerate: cd frontend && node deploy/scripts/generate-nginx.mjs${httpOnly ? ' --http-only' : ''}
+  const header = `# Generated by deploy/scripts/generate-nginx.mjs — HTTP only (TLS via certbot --nginx)
+# Regenerate: cd frontend && node deploy/scripts/generate-nginx.mjs
+# WARNING: --install overwrites /etc/nginx/... and removes certbot SSL blocks — re-run certbot after.
 
 map $http_upgrade $connection_upgrade {
     default upgrade;
@@ -136,30 +137,30 @@ map $http_upgrade $connection_upgrade {
   const body = header + blocks.join('\n')
 
   if (corsOnly) {
-    const corsPath = await writeCorsOrigins(registry, domains)
+    const corsPath = await writeCorsOrigins(routes)
     console.log(`[nginx] Wrote ${corsPath}`)
     return
   }
 
   await mkdir(OUTPUT_DIR, { recursive: true })
   await writeFile(OUTPUT_FILE, body)
-  await writeCorsOrigins(registry, domains)
+  await writeCorsOrigins(routes)
 
   console.log(`[nginx] Wrote ${OUTPUT_FILE}`)
   console.log(`[nginx] Wrote ${CORS_FILE}`)
-  console.log('[nginx] Site map:')
-  for (let i = 0; i < registry.length; i++) {
-    console.log(`  https://${domains[i]} → 127.0.0.1:${prodPort(registry[i].id, i)} (${registry[i].id}-prod)`)
-  }
-
-  if (httpOnly) {
-    console.log('[nginx] HTTP-only mode — run setup-vps.sh ssl after DNS is live')
+  console.log('[nginx] VPS site map (HTTP; TLS = manual certbot):')
+  for (const route of routes) {
+    if (route.role === 'cors-prod') continue
+    console.log(
+      `  http://${route.domain} → 127.0.0.1:${route.port} (${route.siteId}-prod, ${route.role})`,
+    )
   }
 
   if (install) {
     await writeFile(INSTALL_PATH, body)
     console.log(`[nginx] Installed ${INSTALL_PATH}`)
     console.log(`[nginx] Enable: ln -sf ${INSTALL_PATH} ${ENABLED_LINK}`)
+    console.log('[nginx] If certbot already configured TLS, re-run certbot --nginx for affected domains.')
   }
 }
 

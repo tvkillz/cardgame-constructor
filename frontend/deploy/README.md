@@ -5,11 +5,25 @@ nginx runs as a **systemd service** (`systemctl enable nginx`). This folder gene
 ## Architecture
 
 ```
-Browser → https://voidborn.fun     ─nginx:443─→ pm2 voidborn-prod  :3100
-Browser → https://project2.example ─nginx:443─→ pm2 project2-prod  :3101
+Browser → https://staging.voidborn.fun  ─nginx:443─→ pm2 voidborn-prod  :3100  (staging VPS)
+Browser → https://voidborn.fun          ─cPanel Node──→ production (FTP deploy)
 
-Browser → https://api.your-platform.com  (Supabase/Kong on backend VPS — typically https://voidborn.fun)
+Browser → https://staging.sportsydeals.com     ─nginx─→ pm2 project2-prod :3101
+Browser → https://test.sportsydeals.com         ─nginx─→ pm2 project2-prod :3101
+
+Browser → https://api.your-platform.com  (Supabase/Kong on backend VPS)
 ```
+
+Per-site routing is defined in `projects/registry.json`:
+
+| Field | Purpose |
+|-------|---------|
+| `stagingDomain` | VPS nginx staging vhost (`staging.{domain}`) |
+| `vpsProd` | `false` = production not on this VPS (e.g. voidborn → cPanel only) |
+
+`deploy-from-local.sh` builds with `DEPLOY_TARGET=staging` so auth redirects use the staging URL.
+
+Production cPanel: `npm run deploy:cpanel` (build + rclone FTP). See `deploy/cpanel/README.md`.
 
 Frontend nginx only proxies to local pm2 ports. **CORS is configured on the backend**, not here. After `generate-nginx.mjs`, see `deploy/output/cors-origins.txt` for the origin list to allow.
 
@@ -36,26 +50,28 @@ sudo bash deploy/scripts/setup-vps.sh configure
 
 # 4. DNS: A record each site domain → VPS IP
 
-# 5. TLS
-sudo CERTBOT_EMAIL=you@example.com bash deploy/scripts/setup-vps.sh ssl
+# 5. TLS (manual — certbot edits nginx; do not run generate-nginx --install after without re-running certbot)
+sudo certbot --nginx --expand -m you@example.com \\
+  -d staging.voidborn.fun \\
+  -d test.sportsydeals.com
 ```
+
+**Important:** `generate-nginx.mjs` writes **HTTP-only** vhosts. After `certbot --nginx`, do not run `setup-vps.sh reload` or `generate-nginx.mjs --install` unless you plan to run certbot again — it overwrites certbot's SSL blocks.
 
 ## Regenerate after adding a site
 
 1. `npm run site:add -- --id=newsite --url=https://newsite.example.com` (or edit `registry.json` + manifest manually)
 2. `npm run compile:all` + `PROJECT=newsite npm run build`
 3. `pm2 start ecosystem.config.cjs --only newsite-prod`
-4. `sudo bash deploy/scripts/setup-vps.sh reload`
-5. `sudo CERTBOT_EMAIL=… bash deploy/scripts/setup-vps.sh ssl` (adds cert for new domain)
-6. `npm run site:sync` — update backend redirects + `sites.sql`
+4. `sudo bash deploy/scripts/setup-vps.sh reload` then re-run `certbot --nginx` for the new domain
+5. `npm run site:sync` — update backend redirects + `sites.sql`
 
 See `projects/README.md` for site URL changes, metadata split, and per-site card uploads.
 
 ## Manual / preview
 
 ```bash
-node deploy/scripts/generate-nginx.mjs              # writes deploy/output/frontend-sites.conf
-node deploy/scripts/generate-nginx.mjs --http-only  # before certs exist
+node deploy/scripts/generate-nginx.mjs              # writes deploy/output/frontend-sites.conf (HTTP only)
 node deploy/scripts/generate-nginx.mjs --cors-origins # only cors-origins.txt
 ```
 

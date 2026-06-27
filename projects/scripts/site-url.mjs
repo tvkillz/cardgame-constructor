@@ -63,7 +63,7 @@ async function main() {
     })
     if (result.status !== 0) process.exit(result.status ?? 1)
     steps.unshift('sudo bash deploy/scripts/setup-vps.sh reload')
-    steps.push(`sudo CERTBOT_EMAIL=you@example.com bash deploy/scripts/setup-vps.sh ssl  (if domain is new)`)
+    steps.push('sudo certbot --nginx --expand -m you@example.com -d <new-domain>  (if domain is new)')
   } else {
     steps.push('npm run deploy:nginx  (from frontend/) then reload nginx on VPS')
   }

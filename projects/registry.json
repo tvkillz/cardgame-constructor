@@ -2,11 +2,15 @@
   {
     "id": "voidborn",
     "path": "./voidborn",
-    "status": "live"
+    "status": "live",
+    "stagingDomain": "staging.voidborn.fun",
+    "vpsProd": false
   },
   {
     "id": "project2",
     "path": "./project2",
-    "status": "demo"
+    "status": "demo",
+    "stagingDomain": "staging.sportsydeals.com",
+    "vpsProd": true
   }
 ]

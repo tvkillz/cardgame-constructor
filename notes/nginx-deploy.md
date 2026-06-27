@@ -23,14 +23,18 @@ cd /root/constructor-files/frontend
 sudo bash deploy/scripts/setup-vps.sh install
 sudo bash deploy/scripts/setup-vps.sh configure
 
-# DNS A records for voidborn.fun + test.sportsydeals.com → frontend VPS IP, then:
-sudo CERTBOT_EMAIL=you@example.com bash deploy/scripts/setup-vps.sh ssl
+# DNS A records for staging/production VPS domains → frontend VPS IP, then TLS manually:
+sudo certbot --nginx --expand -m you@example.com \\
+  -d staging.voidborn.fun -d test.sportsydeals.com
 ```
+
+**Do not** run `generate-nginx.mjs --install` after certbot without re-running certbot — it overwrites SSL blocks.
 
 ## After domain changes
 
 ```bash
 sudo bash deploy/scripts/setup-vps.sh reload
+sudo certbot --nginx --expand -m you@example.com -d <domains...>
 ```
 
 Sync backend redirects:
