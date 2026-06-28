@@ -56,11 +56,19 @@ function createNextConfig(): NextConfig {
   const projectId = readProjectId()
   const hybridActive = isHybridProduction(projectId)
   const cpanelBuild = process.env.CPANEL_BUILD === '1'
+  const cpanelStatic = process.env.CPANEL_STATIC === '1'
 
   return {
     reactStrictMode: true,
     distDir: projectDistDir(projectId),
-    ...(cpanelBuild ? { output: 'standalone' as const } : {}),
+    ...(cpanelStatic
+      ? {
+          output: 'export' as const,
+          trailingSlash: true,
+          images: { unoptimized: true },
+        }
+      : {}),
+    ...(cpanelBuild && !cpanelStatic ? { output: 'standalone' as const } : {}),
     eslint: {
       ignoreDuringBuilds: true,
     },
@@ -90,6 +98,7 @@ function createNextConfig(): NextConfig {
       return config
     },
     async rewrites() {
+      if (cpanelStatic) return []
       const rules = [...staticRewrites]
       if (isHybridProduction(projectId)) {
         rules.push(...hybridPlayRewrites)

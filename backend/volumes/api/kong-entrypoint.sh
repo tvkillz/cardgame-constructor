@@ -46,4 +46,50 @@ awk '{
 # Remove empty key-auth credentials (unconfigured opaque keys)
 sed -i '/^[[:space:]]*- key:[[:space:]]*$/d' "$KONG_DECLARATIVE_CONFIG"
 
+# Global CORS for browser frontends on other domains (voidborn.fun → API host).
+sed -i '/^[[:space:]]*- name: cors$/d' "$KONG_DECLARATIVE_CONFIG"
+
+CORS_ORIGINS_FILE="${KONG_CORS_ORIGINS_FILE:-/home/kong/cors-origins.txt}"
+if [ -f "$CORS_ORIGINS_FILE" ]; then
+  {
+    echo ""
+    echo "### Global CORS — browser frontends (volumes/api/cors-origins.txt)"
+    echo "plugins:"
+    echo "  - name: cors"
+    echo "    config:"
+    echo "      credentials: true"
+    echo "      max_age: 3600"
+    echo "      origins:"
+    while IFS= read -r line || [ -n "$line" ]; do
+      origin="${line%%#*}"
+      origin="$(echo "$origin" | xargs)"
+      [ -z "$origin" ] && continue
+      echo "        - $origin"
+    done < "$CORS_ORIGINS_FILE"
+    echo "      headers:"
+    echo "        - Accept"
+    echo "        - Accept-Profile"
+    echo "        - Authorization"
+    echo "        - Content-Profile"
+    echo "        - Content-Type"
+    echo "        - X-Client-Info"
+    echo "        - apikey"
+    echo "        - X-Site-Id"
+    echo "        - x-supabase-api-version"
+    echo "        - Prefer"
+    echo "        - Range"
+    echo "        - x-upsert"
+    echo "      methods:"
+    echo "        - GET"
+    echo "        - HEAD"
+    echo "        - PUT"
+    echo "        - PATCH"
+    echo "        - POST"
+    echo "        - DELETE"
+    echo "        - OPTIONS"
+    echo "      exposed_headers:"
+    echo "        - Content-Range"
+  } >> "$KONG_DECLARATIVE_CONFIG"
+fi
+
 exec /entrypoint.sh kong docker-start

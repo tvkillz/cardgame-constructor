@@ -196,6 +196,22 @@ export interface AppConfig {
       registerSubmit: string
       switchToRegister: string
       switchToSignIn: string
+      forgotPasswordLink: string
+      forgotPasswordTitle: string
+      forgotPasswordSubtitle: string
+      forgotPasswordSubmit: string
+      resetEmailSent: string
+      registerEmailSent?: string
+      resetFailed: string
+      callbackLoading: string
+      callbackRecoveryTitle: string
+      callbackRecoverySubtitle: string
+      callbackNewPasswordLabel: string
+      callbackConfirmPasswordLabel: string
+      callbackUpdatePasswordSubmit: string
+      callbackPasswordUpdated: string
+      callbackFailed: string
+      switchBackToSignIn: string
       closeLabel: string
       passwordHint: string
       playGateTitle: string

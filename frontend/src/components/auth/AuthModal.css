@@ -172,6 +172,18 @@
   color: #b7e9ff;
 }
 
+.auth-modal__message--success {
+  background: rgba(201, 162, 39, 0.12);
+  border: 1px solid rgba(201, 162, 39, 0.4);
+  color: #f1e6c8;
+}
+
+.auth-modal__pending {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
 .auth-modal__actions {
   margin-top: 0.35rem;
 }

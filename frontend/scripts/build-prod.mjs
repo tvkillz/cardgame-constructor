@@ -28,9 +28,11 @@ if (!skipGame) {
     env: { ...process.env, PROJECT: projectId },
   })
 }
-execSync('node scripts/build-web.mjs', {
-  cwd: root,
-  stdio: 'inherit',
-  env: { ...process.env, PROJECT: projectId },
-})
+if (!process.argv.includes('--skip-web')) {
+  execSync('node scripts/build-web.mjs', {
+    cwd: root,
+    stdio: 'inherit',
+    env: { ...process.env, PROJECT: projectId },
+  })
+}
 console.log('[build] Complete.')

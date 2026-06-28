@@ -8,13 +8,14 @@ map $http_upgrade $connection_upgrade {
     ''      close;
 }
 
-# Platform API only — frontends live on separate VPS(s). TLS on ${PROXY_DOMAIN} (e.g. voidborn.fun).
+# Platform API only — frontends live on separate VPS(s).
+# PROXY_DOMAIN = primary TLS cert name; PROXY_DOMAIN_EXTRA = legacy/extra API hostname (optional).
 server {
     listen 443 ssl;
     listen [::]:443 ssl;
     http2 on;
 
-    server_name ${PROXY_DOMAIN};
+    server_name ${PROXY_DOMAIN} ${PROXY_DOMAIN_EXTRA};
     server_tokens off;
 
     proxy_http_version 1.1;
@@ -41,6 +42,9 @@ server {
 
     location /auth {
         proxy_pass http://kong_upstream;
+        proxy_connect_timeout 120s;
+        proxy_send_timeout 120s;
+        proxy_read_timeout 120s;
     }
 
     location /rest {

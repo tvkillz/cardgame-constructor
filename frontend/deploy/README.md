@@ -23,7 +23,7 @@ Per-site routing is defined in `projects/registry.json`:
 
 `deploy-from-local.sh` builds with `DEPLOY_TARGET=staging` so auth redirects use the staging URL.
 
-Production cPanel: `npm run deploy:cpanel` (build + rclone FTP). See `deploy/cpanel/README.md`.
+Production cPanel: `npm run deploy:cpanel-static` (static `public_html`, recommended) or `npm run deploy:cpanel` (Node.js app). See `deploy/cpanel/STATIC.md` and `deploy/cpanel/README.md`.
 
 Frontend nginx only proxies to local pm2 ports. **CORS is configured on the backend**, not here. After `generate-nginx.mjs`, see `deploy/output/cors-origins.txt` for the origin list to allow.
 
@@ -35,7 +35,7 @@ cd frontend
 npm install
 npm run compile:all
 cp deploy/env.production.example .env.production
-# edit .env.production — NEXT_PUBLIC_SUPABASE_URL must be the platform API (e.g. https://voidborn.fun), not the frontend domain
+# edit .env.production — NEXT_PUBLIC_SUPABASE_URL must be the API host (e.g. https://api.voidborn.fun), not voidborn.fun
 
 PROJECT=voidborn npm run build
 PROJECT=project2 npm run build
@@ -85,10 +85,10 @@ Optional registry override:
 
 ## Backend URL
 
-All sites share one API URL in `.env.production`:
+All sites share one API URL in `.env.production` (voidborn uses `api.voidborn.fun`; project2 may still use `sportsydeals.com` until migrated):
 
 ```env
-NEXT_PUBLIC_SUPABASE_URL=https://voidborn.fun
+NEXT_PUBLIC_SUPABASE_URL=https://api.voidborn.fun
 ```
 
 Per-site public URL stays in each content pack's `manifest.json` `siteUrl`. Site identity for auth/API is compiled as `siteId` in the bundle.

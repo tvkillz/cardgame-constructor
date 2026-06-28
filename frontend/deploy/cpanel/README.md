@@ -2,6 +2,14 @@
 
 Production for **voidborn.fun** lives on cPanel (no SSH). Staging is on the VPS at **staging.voidborn.fun**.
 
+**Recommended:** static deploy to `public_html` (no Node.js app) — see [STATIC.md](./STATIC.md).
+
+```bash
+PROJECT=voidborn npm run deploy:cpanel-static
+```
+
+Legacy Node.js deploy (`deploy:cpanel`) is still available below.
+
 ## One-time setup
 
 ### 1. FTP account (cPanel)

@@ -1,0 +1,9 @@
+# Browser origins allowed by Kong global CORS plugin (one per line, no trailing slash).
+# Sync with frontend/deploy/output/cors-origins.txt
+
+https://voidborn.fun
+https://www.voidborn.fun
+https://staging.voidborn.fun
+https://test.sportsydeals.com
+https://www.test.sportsydeals.com
+https://staging.sportsydeals.com

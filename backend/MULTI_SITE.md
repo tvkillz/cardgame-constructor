@@ -24,7 +24,7 @@ PROXY_DOMAIN=voidborn.fun
 ADDITIONAL_REDIRECT_URLS=https://voidborn.fun/**,https://www.voidborn.fun/**,https://project2.example.com/**
 ```
 
-CORS: configure Kong / GoTrue to allow frontend origins (see `frontend/deploy/output/cors-origins.txt`).
+CORS: Kong global plugin — `volumes/api/cors-origins.txt` (sync with `frontend/deploy/output/cors-origins.txt`).
 
 ## SQL
 

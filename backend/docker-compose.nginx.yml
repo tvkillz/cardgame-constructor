@@ -37,6 +37,7 @@ services:
       #   condition: service_healthy
     environment:
       PROXY_DOMAIN: ${PROXY_DOMAIN}
+      PROXY_DOMAIN_EXTRA: ${PROXY_DOMAIN_EXTRA:-}
       CERTBOT_EMAIL: ${CERTBOT_EMAIL}
       PROXY_AUTH_USERNAME: ${DASHBOARD_USERNAME}
       PROXY_AUTH_PASSWORD: ${DASHBOARD_PASSWORD}
@@ -45,7 +46,7 @@ services:
       - -c
       - |
         printf '%s:%s\n' "$${PROXY_AUTH_USERNAME}" "$$(openssl passwd -apr1 "$${PROXY_AUTH_PASSWORD}")" > /etc/nginx/user_conf.d/dashboard-passwd && \
-        envsubst '$$PROXY_DOMAIN' < /etc/nginx/supabase-nginx.conf.tpl > /etc/nginx/user_conf.d/nginx.conf && \
+        envsubst '$$PROXY_DOMAIN $$PROXY_DOMAIN_EXTRA' < /etc/nginx/supabase-nginx.conf.tpl > /etc/nginx/user_conf.d/nginx.conf && \
         /scripts/start_nginx_certbot.sh
     volumes:
       - ./volumes/proxy/nginx/supabase-nginx.conf.tpl:/etc/nginx/supabase-nginx.conf.tpl:ro

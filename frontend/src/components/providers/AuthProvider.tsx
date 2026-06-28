@@ -19,7 +19,7 @@ import { getSupabaseBrowserClient, isSupabaseConfigured } from '@/lib/supabase'
 
 const AuthModal = dynamic(() => import('@/components/auth/AuthModal'), { ssr: false })
 
-export type AuthModalMode = 'signIn' | 'register'
+export type AuthModalMode = 'signIn' | 'register' | 'forgotPassword'
 
 type AuthContextValue = {
   session: Session | null

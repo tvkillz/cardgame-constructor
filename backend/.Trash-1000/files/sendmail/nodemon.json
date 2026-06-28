@@ -1,0 +1,11 @@
+{
+	"restartable": "rs",
+	"ignore": [".git", "node_modules/**/node_modules", "combined.log", "error.log"],
+	"verbose": true,
+	"watch": ["src/**/*"],
+	"ext": "js,json",
+	"env": {
+		"NODE_ENV": "development",
+		"SENDMAIL_PORT": "6001"
+	}
+}

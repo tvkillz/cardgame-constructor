@@ -14,6 +14,11 @@ export function projectDistDir(projectId = getProjectId()) {
   return `.build/${projectId}/.next`
 }
 
+/** Static export output when distDir is customized (output: 'export' writes into distDir). */
+export function staticExportDir(projectId = getProjectId(), root = FRONTEND_ROOT) {
+  return path.join(root, projectDistDir(projectId))
+}
+
 export function projectWebpackAliases(projectId = getProjectId(), root = FRONTEND_ROOT) {
   const out = buildPaths(projectId)
   return {

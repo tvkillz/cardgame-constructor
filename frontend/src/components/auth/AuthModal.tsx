@@ -4,6 +4,7 @@ import { useEffect, useId, useState, type FormEvent } from 'react'
 import { appConfig } from '@/config'
 import { Button } from '@/components/ui/Button/Button'
 import { useAuth, type AuthModalMode } from '@/components/providers/AuthProvider'
+import { getAuthCallbackUrl } from '@/lib/auth/callback-url'
 import { getSupabaseBrowserClient, isSupabaseConfigured } from '@/lib/supabase'
 import { mapSignInError } from '@/lib/auth/errors'
 import { toSiteAuthEmail } from '@/lib/auth/site-email'
@@ -29,19 +30,31 @@ export default function AuthModal() {
   const [error, setError] = useState<string | null>(null)
   const [info, setInfo] = useState<string | null>(null)
   const [submitting, setSubmitting] = useState(false)
+  const [pendingEmailConfirmation, setPendingEmailConfirmation] = useState(false)
 
   const isRegister = modalMode === 'register'
+  const isForgotPassword = modalMode === 'forgotPassword'
+
+  const registerSentMessage =
+    copy.registerEmailSent ??
+    copy.errors.emailConfirmation ??
+    'We sent a confirmation link to your email. Please confirm your account before signing in.'
 
   useEffect(() => {
-    if (!modalOpen) return
+    if (!modalOpen) {
+      setPendingEmailConfirmation(false)
+      return
+    }
     setError(null)
     setInfo(null)
     setSubmitting(false)
+    setPendingEmailConfirmation(false)
   }, [modalOpen, modalMode])
 
   const switchMode = (mode: AuthModalMode) => {
     setError(null)
     setInfo(null)
+    setPendingEmailConfirmation(false)
     openAuthModal(mode)
   }
 
@@ -58,6 +71,33 @@ export default function AuthModal() {
     const trimmedEmail = email.trim()
     if (!isValidEmail(trimmedEmail)) {
       setError(copy.errors.invalidEmail)
+      return
+    }
+
+    const supabase = getSupabaseBrowserClient()
+    if (!supabase) {
+      setError(copy.errors.supabaseUnavailable)
+      return
+    }
+
+    const siteId = getSiteId()
+    const authEmail = toSiteAuthEmail(siteId, trimmedEmail)
+    const redirectTo = getAuthCallbackUrl()
+
+    if (isForgotPassword) {
+      setSubmitting(true)
+      try {
+        const { error: resetError } = await supabase.auth.resetPasswordForEmail(authEmail, {
+          redirectTo,
+        })
+        if (resetError) {
+          setError(copy.resetFailed)
+          return
+        }
+        setInfo(copy.resetEmailSent)
+      } finally {
+        setSubmitting(false)
+      }
       return
     }
 
@@ -79,15 +119,6 @@ export default function AuthModal() {
       return
     }
 
-    const supabase = getSupabaseBrowserClient()
-    if (!supabase) {
-      setError(copy.errors.supabaseUnavailable)
-      return
-    }
-
-    const siteId = getSiteId()
-    const authEmail = toSiteAuthEmail(siteId, trimmedEmail)
-
     setSubmitting(true)
 
     try {
@@ -96,6 +127,7 @@ export default function AuthModal() {
           email: authEmail,
           password,
           options: {
+            emailRedirectTo: redirectTo,
             data: {
               username: username.trim(),
               site_id: siteId,
@@ -114,8 +146,10 @@ export default function AuthModal() {
           return
         }
 
-        setInfo(copy.errors.emailConfirmation)
-        switchMode('signIn')
+        setPassword('')
+        setConfirmPassword('')
+        setPendingEmailConfirmation(true)
+        setInfo(registerSentMessage)
         return
       }
 
@@ -134,6 +168,22 @@ export default function AuthModal() {
       setSubmitting(false)
     }
   }
+
+  const title = isForgotPassword
+    ? copy.forgotPasswordTitle
+    : isRegister
+      ? copy.registerTitle
+      : copy.signInTitle
+  const subtitle = isForgotPassword
+    ? copy.forgotPasswordSubtitle
+    : isRegister
+      ? copy.registerSubtitle
+      : copy.signInSubtitle
+  const submitLabel = isForgotPassword
+    ? copy.forgotPasswordSubmit
+    : isRegister
+      ? copy.registerSubmit
+      : copy.signInSubmit
 
   return (
     <div
@@ -161,12 +211,31 @@ export default function AuthModal() {
         </button>
 
         <h2 id={titleId} className="auth-modal__title">
-          {isRegister ? copy.registerTitle : copy.signInTitle}
+          {title}
         </h2>
         <p className="auth-modal__subtitle">
-          {isRegister ? copy.registerSubtitle : copy.signInSubtitle}
+          {pendingEmailConfirmation && isRegister ? '' : subtitle}
         </p>
 
+        {pendingEmailConfirmation && isRegister ? (
+          <div className="auth-modal__pending">
+            <p className="auth-modal__message auth-modal__message--success" role="status">
+              {info}
+            </p>
+            <div className="auth-modal__actions">
+              <Button
+                type="button"
+                variant="primary"
+                size="md"
+                fantasy
+                className="auth-modal__submit"
+                onClick={() => switchMode('signIn')}
+              >
+                {copy.switchToSignIn}
+              </Button>
+            </div>
+          </div>
+        ) : (
         <form className="auth-modal__form" onSubmit={handleSubmit} noValidate>
           {isRegister && (
             <label className="auth-modal__field">
@@ -198,22 +267,24 @@ export default function AuthModal() {
             />
           </label>
 
-          <label className="auth-modal__field">
-            <span className="auth-modal__label">{copy.passwordLabel}</span>
-            <input
-              className="auth-modal__input"
-              type="password"
-              name="password"
-              autoComplete={isRegister ? 'new-password' : 'current-password'}
-              value={password}
-              onChange={(ev) => setPassword(ev.target.value)}
-              disabled={submitting}
-              required
-            />
-            {isRegister && (
-              <span className="auth-modal__hint">{copy.passwordHint}</span>
-            )}
-          </label>
+          {!isForgotPassword && (
+            <label className="auth-modal__field">
+              <span className="auth-modal__label">{copy.passwordLabel}</span>
+              <input
+                className="auth-modal__input"
+                type="password"
+                name="password"
+                autoComplete={isRegister ? 'new-password' : 'current-password'}
+                value={password}
+                onChange={(ev) => setPassword(ev.target.value)}
+                disabled={submitting}
+                required
+              />
+              {isRegister && (
+                <span className="auth-modal__hint">{copy.passwordHint}</span>
+              )}
+            </label>
+          )}
 
           {isRegister && (
             <label className="auth-modal__field">
@@ -251,36 +322,70 @@ export default function AuthModal() {
               disabled={submitting}
               className="auth-modal__submit"
             >
-              {submitting
-                ? copy.loading
-                : isRegister
-                  ? copy.registerSubmit
-                  : copy.signInSubmit}
+              {submitting ? copy.loading : submitLabel}
             </Button>
           </div>
         </form>
+        )}
 
+        {!pendingEmailConfirmation && (
         <p className="auth-modal__switch">
-          {isRegister ? (
+          {isForgotPassword ? (
             <button
               type="button"
               className="auth-modal__switch-btn"
               onClick={() => switchMode('signIn')}
               disabled={submitting}
             >
-              {copy.switchToSignIn}
+              {copy.switchBackToSignIn}
             </button>
+          ) : isRegister ? (
+            <>
+              <button
+                type="button"
+                className="auth-modal__switch-btn"
+                onClick={() => switchMode('forgotPassword')}
+                disabled={submitting}
+              >
+                {copy.forgotPasswordLink}
+              </button>
+              <span className="auth-modal__switch-sep" aria-hidden="true">
+                {' · '}
+              </span>
+              <button
+                type="button"
+                className="auth-modal__switch-btn"
+                onClick={() => switchMode('signIn')}
+                disabled={submitting}
+              >
+                {copy.switchToSignIn}
+              </button>
+            </>
           ) : (
-            <button
-              type="button"
-              className="auth-modal__switch-btn"
-              onClick={() => switchMode('register')}
-              disabled={submitting}
-            >
-              {copy.switchToRegister}
-            </button>
+            <>
+              <button
+                type="button"
+                className="auth-modal__switch-btn"
+                onClick={() => switchMode('forgotPassword')}
+                disabled={submitting}
+              >
+                {copy.forgotPasswordLink}
+              </button>
+              <span className="auth-modal__switch-sep" aria-hidden="true">
+                {' · '}
+              </span>
+              <button
+                type="button"
+                className="auth-modal__switch-btn"
+                onClick={() => switchMode('register')}
+                disabled={submitting}
+              >
+                {copy.switchToRegister}
+              </button>
+            </>
           )}
         </p>
+        )}
       </div>
     </div>
   )
