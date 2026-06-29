@@ -2,12 +2,10 @@
 
 import { useEffect, useId, useMemo, useState } from 'react'
 import { appConfig } from '@/config'
-import {
-  creditsToEur,
-  formatCredits,
-  formatEurPrice,
-} from '@/config/selectors'
+import { creditsToEur, formatCredits } from '@/config/selectors'
+import { useSyncedMarketCurrency } from '@/hooks/useMarketCurrency'
 import { invokeCommerceAction } from '@/lib/commerce/api'
+import { formatEurAmount, MARKET_CURRENCIES } from '@/lib/market/currency'
 import { Button } from '@/components/ui/Button/Button'
 import '@/styles/coin-stack-icon.css'
 import './PurchaseCreditsModal.css'
@@ -26,8 +24,9 @@ export default function PurchaseCreditsModal({
   onClose,
 }: PurchaseCreditsModalProps) {
   const copy = appConfig.descriptions.credits
-  const { packages, creditsPerEur, currencySymbol } = appConfig.credits
+  const { packages, creditsPerEur } = appConfig.credits
   const titleId = useId()
+  const { currency, setCurrency } = useSyncedMarketCurrency()
 
   const [selectedPackId, setSelectedPackId] = useState<string | null>(null)
   const [customCredits, setCustomCredits] = useState('')
@@ -72,8 +71,12 @@ export default function PurchaseCreditsModal({
     try {
       const res = await invokeCommerceAction(
         selectedPack
-          ? { type: 'checkout_create', packId: selectedPack.id }
-          : { type: 'checkout_create', customCredits: customAmount },
+          ? { type: 'checkout_create', packId: selectedPack.id, currency: currency.toLowerCase() }
+          : {
+              type: 'checkout_create',
+              customCredits: customAmount,
+              currency: currency.toLowerCase(),
+            },
       )
 
       if (res.error || !res.checkoutUrl) {
@@ -124,7 +127,23 @@ export default function PurchaseCreditsModal({
               {copy.title}
             </h2>
           </div>
-          <p className="credits-modal__subtitle">{copy.subtitle}</p>
+          <p className="credits-modal__subtitle">
+            {creditsPerEur} credits = {formatEurAmount(1, currency)}
+          </p>
+          <label className="credits-modal__currency">
+            <span className="credits-modal__currency-label">Currency</span>
+            <select
+              value={currency}
+              onChange={(e) => setCurrency(e.target.value as typeof currency)}
+              aria-label="Display currency"
+            >
+              {MARKET_CURRENCIES.map((code) => (
+                <option key={code} value={code}>
+                  {code}
+                </option>
+              ))}
+            </select>
+          </label>
         </header>
 
         <div className="credits-modal__grid">
@@ -146,7 +165,7 @@ export default function PurchaseCreditsModal({
                   {formatCredits(pack.credits)}
                 </span>
                 <span className="credits-modal__pack-price">
-                  {formatEurPrice(pack.priceEur, currencySymbol)}
+                  {formatEurAmount(pack.priceEur, currency)}
                 </span>
               </div>
               <span className="credits-modal__pack-rate">{copy.standardRate}</span>
@@ -175,7 +194,7 @@ export default function PurchaseCreditsModal({
             <div className="credits-modal__total">
               <span className="credits-modal__total-label">{copy.totalLabel}</span>
               <strong className="credits-modal__total-value">
-                {formatEurPrice(totalEur, currencySymbol)}
+                {formatEurAmount(totalEur, currency)}
               </strong>
             </div>
             <Button
@@ -192,7 +211,7 @@ export default function PurchaseCreditsModal({
           </div>
           {customAmount > 0 && (
             <p className="credits-modal__custom-hint">
-              {formatCredits(customAmount)} credits @ {creditsPerEur} / {currencySymbol}1
+              {formatCredits(customAmount)} credits @ {creditsPerEur} / {formatEurAmount(1, currency)}
             </p>
           )}
         </div>
@@ -206,15 +225,15 @@ export default function PurchaseCreditsModal({
         <p className="credits-modal__legal">
           By purchasing you agree to our{' '}
           <a href={legal.termsUrl} target="_blank" rel="noopener noreferrer">
-            Terms
+            Terms of Service
           </a>
           ,{' '}
           <a href={legal.refundPolicyUrl} target="_blank" rel="noopener noreferrer">
-            Refund Policy
+            Cancellation & Refund Policy
           </a>{' '}
           and{' '}
           <a href={legal.privacyUrl} target="_blank" rel="noopener noreferrer">
-            Privacy Policy
+            Privacy Notice
           </a>
           . Payments are processed securely via Stripe (cards, Link; Apple Pay / Google Pay when
           enabled in your Stripe dashboard).

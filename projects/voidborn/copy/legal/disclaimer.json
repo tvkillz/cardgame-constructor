@@ -1,11 +1,11 @@
 {
   "eyebrow": "Legal",
-  "title": "Legal Disclaimer",
-  "lastUpdated": "02 February 2026",
+  "title": "Legal Disclaimer & Scope of Use",
+  "lastUpdated": "29 June 2026",
   "blocks": [
     {
       "type": "paragraph",
-      "text": "The information, services, and digital content available on https://voidborn.fun (the \"Website\") are provided by:"
+      "text": "The features, services, and digital media hosted on https://voidborn.fun (the \"Website\") and its associated gaming software (the \"Platform\") are operated by Test LTD (\"we\", \"us\", or \"our\")."
     },
     {
       "type": "company",
@@ -16,282 +16,175 @@
     },
     {
       "type": "paragraph",
-      "text": "(\"Company\", \"we\", \"us\", or \"our\")."
-    },
-    {
-      "type": "paragraph",
-      "text": "By accessing or using the Website and related services (the \"Platform\"), you acknowledge and agree to the following:"
+      "text": "By visiting this Website, registering an account, or interacting with any of our services, you expressly acknowledge and agree to the terms outlined in this Disclaimer."
     },
     {
       "type": "heading",
       "level": 2,
-      "text": "1. Entertainment Purpose Only"
+      "text": "1. Purely for Entertainment Purposes"
     },
     {
       "type": "paragraph",
-      "text": "The Platform provides access to a digital card-based game and related features for entertainment purposes only."
-    },
-    {
-      "type": "paragraph",
-      "text": "Nothing on the Platform constitutes:"
+      "text": "Our Platform delivers a digital card game experience. Nothing displayed on the Website or within the game software should be interpreted as:"
     },
     {
       "type": "list",
       "ordered": false,
       "items": [
-        "financial advice",
-        "investment advice",
-        "gambling services",
-        "betting services",
-        "professional advice of any kind"
+        "Investment or financial guidance",
+        "Legal or professional consultation",
+        "Regulated gambling, sports betting, or wagering services"
       ]
     },
     {
       "type": "paragraph",
-      "text": "All gameplay outcomes, digital items, and in-platform features are part of an entertainment environment and should not be interpreted otherwise."
+      "text": "All virtual match outcomes, rank adjustments, and card drop mechanics exist strictly for personal amusement within an isolated entertainment environment."
     },
     {
       "type": "heading",
       "level": 2,
-      "text": "2. No Real-World Value or Financial Product"
+      "text": "2. No Real-World Economic Value"
     },
     {
       "type": "paragraph",
-      "text": "All virtual cards, boxes, packs, balance, credits, and other digital elements available on the Platform:"
+      "text": "All digital card packs, internal virtual cards, gift drops, and profile wallet balances used on this Platform:"
     },
     {
       "type": "list",
       "ordered": false,
       "items": [
-        "are internal virtual assets used within the game;",
-        "do not represent real-world currency or monetary value;",
-        "are not financial instruments, securities, or investment products;",
-        "are not cryptocurrencies or NFTs;",
-        "do not create ownership or property rights outside the Platform."
+        "Are purely simulated utility assets confined to our ecosystem.",
+        "Possess zero real-world currency value, fiat equivalent, or monetary value.",
+        "Do not constitute financial instruments, tradeable securities, commodities, or investment assets.",
+        "Are not cryptocurrencies, tokens, or digital collectibles (NFTs).",
+        "Do not establish any transferable property or ownership rights outside of our specific Platform interface."
       ]
     },
     {
       "type": "paragraph",
-      "text": "Any value assigned to virtual items exists only within the Platform environment and may change at any time."
+      "text": "Any virtual asset values or marketplace prices are determined purely within the local game ecosystem and are subject to immediate adjustment or rebalancing by our team at any time."
     },
     {
       "type": "heading",
       "level": 2,
-      "text": "3. No Guarantees"
+      "text": "3. Exclusion of Guarantees"
     },
     {
       "type": "paragraph",
-      "text": "The Company makes no guarantees regarding:"
+      "text": "We provide no warranties, promises, or assurances regarding:"
     },
     {
       "type": "list",
       "ordered": false,
       "items": [
-        "the outcome of gameplay",
-        "the contents of digital boxes or packs",
-        "rarity, type, or characteristics of virtual cards",
-        "success of any in-game strategy or deck",
-        "ability to resell items through the Platform",
-        "demand, liquidity, or perceived value of any virtual item"
+        "Gameplay Outcomes: Your win/loss ratios, competitive placements, or strategy effectiveness.",
+        "Randomized Content: The exact card rarities, foil variants, or specific attributes found within opened digital card packs or reward crates.",
+        "Secondary Liquidity: Your ability to flip, trade, or offload digital cards through our internal systems, or any future player demand for those specific items."
       ]
     },
     {
       "type": "paragraph",
-      "text": "All purchases and gameplay decisions are made at your own discretion and risk."
+      "text": "You assume full personal and financial risk for every purchase, pack opening, and gameplay choice you make."
     },
     {
       "type": "heading",
       "level": 2,
-      "text": "4. Internal Shop Disclaimer"
+      "text": "4. Internal Marketplace Limitations"
     },
     {
       "type": "paragraph",
-      "text": "The Platform may allow users to list and acquire virtual cards through an internal shop or market system."
-    },
-    {
-      "type": "paragraph",
-      "text": "The Company:"
+      "text": "If the Platform enables a peer-to-peer virtual card trading hub or internal shop:"
     },
     {
       "type": "list",
       "ordered": false,
       "items": [
-        "does not guarantee that any item will be sold;",
-        "does not guarantee pricing, demand, or resale outcomes;",
-        "does not provide any assurance of value retention;",
-        "may modify, restrict, suspend, or remove listings at its discretion."
-      ]
-    },
-    {
-      "type": "paragraph",
-      "text": "All transactions within the Platform occur within a controlled environment and do not create external commercial or financial rights."
-    },
-    {
-      "type": "heading",
-      "level": 2,
-      "text": "5. Payments and Withdrawals"
-    },
-    {
-      "type": "paragraph",
-      "text": "All payments are processed by third-party payment service providers."
-    },
-    {
-      "type": "paragraph",
-      "text": "The Company:"
-    },
-    {
-      "type": "list",
-      "ordered": false,
-      "items": [
-        "does not control banking systems, card issuers, or payment networks;",
-        "does not guarantee uninterrupted payment processing;",
-        "does not guarantee that withdrawal requests will always be approved;",
-        "may delay, limit, or refuse transactions for security, fraud prevention, or compliance reasons."
-      ]
-    },
-    {
-      "type": "paragraph",
-      "text": "Withdrawals, where available, are subject to strict conditions and are not equivalent to refunds."
-    },
-    {
-      "type": "heading",
-      "level": 2,
-      "text": "6. No Liability for User Decisions"
-    },
-    {
-      "type": "paragraph",
-      "text": "You are solely responsible for:"
-    },
-    {
-      "type": "list",
-      "ordered": false,
-      "items": [
-        "your use of the Platform;",
-        "your purchasing decisions;",
-        "your gameplay strategies;",
-        "your use of virtual items;",
-        "any transactions made through your account."
-      ]
-    },
-    {
-      "type": "paragraph",
-      "text": "The Company shall not be liable for:"
-    },
-    {
-      "type": "list",
-      "ordered": false,
-      "items": [
-        "losses related to gameplay outcomes;",
-        "dissatisfaction with virtual items;",
-        "perceived loss of value of digital content;",
-        "inability to resell items;",
-        "decisions made based on Platform content."
+        "We act solely as the technical provider of the digital environment.",
+        "We do not guarantee that your listed items will find a buyer.",
+        "We do not guarantee asset value retention or stable secondary pricing.",
+        "We reserve the total right to freeze, cancel, alter, or remove listings to preserve market health."
       ]
     },
     {
       "type": "heading",
       "level": 2,
-      "text": "7. Technical and Service Limitations"
+      "text": "5. Transaction & Payout Processing"
     },
     {
       "type": "paragraph",
-      "text": "The Platform is provided on an \"as is\" and \"as available\" basis."
-    },
-    {
-      "type": "paragraph",
-      "text": "The Company does not guarantee that:"
+      "text": "All checkout payments and balance withdrawals are processed and managed by third-party financial institutions and payment gateways."
     },
     {
       "type": "list",
       "ordered": false,
       "items": [
-        "the Website or Game will be uninterrupted or error-free;",
-        "the Platform will always be available;",
-        "bugs, errors, or exploits will not occur;",
-        "technical issues will not affect gameplay or transactions."
+        "We are not liable for core banking network blackouts, processing delays, or external network failures.",
+        "We make no promise of 100% uninterrupted checkout availability.",
+        "A withdrawal request is never guaranteed to go through automatically. We reserve the right to audit, delay, or deny payouts to comply with anti-fraud screenings, risk metrics, or payment processor rules."
       ]
     },
     {
       "type": "heading",
       "level": 2,
-      "text": "8. Third-Party Services"
+      "text": "6. Allocation of Risk & Technical Boundaries"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "6.1 User Accountability"
     },
     {
       "type": "paragraph",
-      "text": "The Platform may rely on third-party providers, including:"
+      "text": "You are exclusively responsible for your account actions. We will not be held liable for internal inventory dissatisfaction, perceived loss of virtual value, user-to-user trading mistakes, or psychological dissatisfaction stemming from game outcomes."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "6.2 \"As-Is\" Service Standard"
+    },
+    {
+      "type": "paragraph",
+      "text": "The Platform is provided on an \"as-is\" and \"as-available\" framework. We explicitly disclaim any guarantee that:"
     },
     {
       "type": "list",
       "ordered": false,
       "items": [
-        "payment processors",
-        "hosting providers",
-        "analytics services"
-      ]
-    },
-    {
-      "type": "paragraph",
-      "text": "The Company is not responsible for:"
-    },
-    {
-      "type": "list",
-      "ordered": false,
-      "items": [
-        "actions or failures of third-party providers;",
-        "delays caused by banks or payment networks;",
-        "external service disruptions."
+        "The servers will remain uninterrupted, operational, or online at all times.",
+        "The software code will be totally free of bugs, server latency, glitches, or exploits.",
+        "Technical errors will not accidentally impact active matches, player inventories, or transaction updates."
       ]
     },
     {
       "type": "heading",
       "level": 2,
-      "text": "9. Regulatory and Legal Compliance"
+      "text": "7. Third-Party Vendor Dependency"
     },
     {
       "type": "paragraph",
-      "text": "The Company operates in accordance with applicable laws and payment industry requirements."
-    },
-    {
-      "type": "paragraph",
-      "text": "Users are responsible for ensuring that:"
-    },
-    {
-      "type": "list",
-      "ordered": false,
-      "items": [
-        "use of the Platform is lawful in their jurisdiction;",
-        "they comply with all applicable local laws and regulations."
-      ]
-    },
-    {
-      "type": "paragraph",
-      "text": "The Company reserves the right to restrict or deny access to the Platform where required for legal, regulatory, or compliance reasons."
+      "text": "Our infrastructure depends on external networks (including web hosting firms, server databases, and payment processors). We do not assume responsibility or liability for third-party server outages, data delays, or service cancellations outside of our immediate corporate control."
     },
     {
       "type": "heading",
       "level": 2,
-      "text": "10. Changes to This Disclaimer"
+      "text": "8. Compliance & Jurisdiction Boundaries"
     },
     {
       "type": "paragraph",
-      "text": "The Company may update this Disclaimer at any time. Updated versions will be published on the Website."
+      "text": "We manage this Platform in accordance with our regional legal regulations and payment industry guidelines."
     },
     {
       "type": "paragraph",
-      "text": "Continued use of the Platform constitutes acceptance of the updated Disclaimer."
+      "text": "User Compliance Responsibility: It is your sole responsibility to verify that accessing an online digital card game and interacting with a peer-to-peer virtual marketplace is fully legal under the laws of your local jurisdiction. We reserve the absolute right to terminate access or block connections from specific geographical regions to maintain legal compliance."
     },
     {
       "type": "heading",
       "level": 2,
-      "text": "11. Contact"
+      "text": "9. Revisions & Updates"
     },
     {
       "type": "paragraph",
-      "text": "If you have any questions regarding this Disclaimer, please contact:"
-    },
-    {
-      "type": "paragraph",
-      "text": "support@voidborn.fun"
+      "text": "We may update this Legal Disclaimer periodically to adjust for platform modifications or legislative updates. Your continued interaction with the game or platform after a revision implies full acceptance of the updated terms."
     }
   ]
 }

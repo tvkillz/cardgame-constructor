@@ -147,6 +147,7 @@
 }
 
 .portal__account-menu-list {
+  align-items: center;
   list-style: none;
   margin: 0;
   padding: 0.5rem 0 0;
@@ -163,7 +164,7 @@
   border: none;
   border-radius: 4px;
   background: transparent;
-  color: #c4b8e0;
+  color: #ffffffc4;
   font-family: var(--font-ui);
   font-size: 0.75rem;
   font-weight: 600;
@@ -181,9 +182,9 @@
 }
 
 .portal__account-menu-item--sign-out {
-  margin-top: 0.35rem;
-  padding-top: 0.45rem;
-  border-top: 1px solid rgba(201, 162, 39, 0.2);
+  /* margin-top: 0.35rem; */
+  /* padding-top: 0.45rem; */
+  /* border-top: 1px solid rgba(201, 162, 39, 0.2); */
 }
 
 .portal__tabs {
@@ -213,7 +214,7 @@
 }
 
 .portal__tab--active {
-  color: #7fd8ff;
+  color: #f5f5f5;
 }
 
 .portal__tab--active::after {
@@ -223,7 +224,7 @@
   right: 0;
   bottom: 0;
   height: 2px;
-  background: linear-gradient(90deg, #4ec8ff 0%, #7b4dff 100%);
+  /* background: linear-gradient(90deg, #4ec8ff 0%, #7b4dff 100%); */
   box-shadow: 0 0 12px rgba(78, 200, 255, 0.45);
 }
 
@@ -247,6 +248,7 @@
 }
 
 .portal__section-subtitle {
+  display: none;
   margin: 0;
   max-width: 36rem;
   font-family: var(--font-ui);

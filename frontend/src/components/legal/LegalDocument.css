@@ -1,11 +1,12 @@
 .legal-doc {
-  max-width: 146rem;
+  max-width: 175rem;
   margin: 0 auto;
   padding: 3.5rem 0 1rem;
   color: color-mix(in srgb, var(--text-primary) 92%, #d4c8e8);
 }
 
 .legal-doc__eyebrow {
+  display: none;
   margin: 0 0 0.35rem;
   font-family: var(--font-ui);
   font-size: 0.72rem;

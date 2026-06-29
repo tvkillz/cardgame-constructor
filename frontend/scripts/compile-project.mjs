@@ -545,7 +545,7 @@ async function copyFinalCtaAssets(paths, finalctaJson, out, sharp) {
 
 async function buildLegalCopy(legalDir) {
   const docs = {}
-  for (const id of ['terms', 'privacy', 'refund', 'disclaimer']) {
+  for (const id of ['terms', 'privacy', 'refund', 'disclaimer', 'cookies']) {
     const filePath = path.join(legalDir, `${id}.json`)
     if (await pathExists(filePath)) {
       docs[id] = await readJson(filePath, `copy/legal/${id}`)

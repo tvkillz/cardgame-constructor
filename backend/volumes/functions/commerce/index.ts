@@ -476,6 +476,7 @@ Deno.serve(async (req) => {
     let unitCents = 0
     let currency = 'eur'
     let cardId: string | null = null
+    let checkoutCurrencyApplied = false
 
     if (payload.packId || productId) {
       const slugOrId = payload.packId ?? productId!
@@ -520,8 +521,18 @@ Deno.serve(async (req) => {
       unitCents = Math.round(Number(card.price_cents) * rate)
       currency = displayCurrency
       productId = null
+      checkoutCurrencyApplied = true
     } else {
       return json({ error: 'invalid_checkout' }, 400)
+    }
+
+    if (!checkoutCurrencyApplied && payload.currency) {
+      const displayCurrency = String(payload.currency).toLowerCase()
+      const rate = RATE_FROM_EUR[displayCurrency]
+      if (rate) {
+        unitCents = Math.round(unitCents * rate)
+        currency = displayCurrency
+      }
     }
 
     const { data: userData } = await admin.auth.admin.getUserById(userId)

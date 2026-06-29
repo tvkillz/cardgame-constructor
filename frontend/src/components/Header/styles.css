@@ -266,6 +266,7 @@
   .header__wordmark {
     height: 4.25rem;
     max-width: 260px;
+    transform: translateX(-9px);
   }
 }
 

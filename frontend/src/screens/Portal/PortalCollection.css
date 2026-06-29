@@ -233,7 +233,7 @@
 .portal-collection__deck-panel {
   grid-area: deck;
   position: sticky;
-  top: 14rem;
+  top: 9rem;
   display: flex;
   flex-direction: column;
   max-height: calc(100vh - 2rem);

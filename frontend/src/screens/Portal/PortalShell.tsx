@@ -101,8 +101,9 @@ function PortalShellInner({ children }: { children: React.ReactNode }) {
               )
             })}
           </nav>
+        </div>
 
-          <div className="portal__toolbar">
+        <div className="portal__toolbar">
             <div className="portal__toolbar-copy">
               <h1 className="portal__section-title">{activeSection.title}</h1>
               <p className="portal__section-subtitle">{activeSection.subtitle}</p>
@@ -170,7 +171,6 @@ function PortalShellInner({ children }: { children: React.ReactNode }) {
               </label>
             </div>
           </div>
-        </div>
 
         <main className="portal__main">{children}</main>
         <div className="portal__footer">

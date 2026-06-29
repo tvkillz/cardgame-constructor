@@ -19,6 +19,12 @@ export function formatMarketMoney(eurCents: number, currency: MarketCurrency): s
   return new Intl.NumberFormat('en', { style: 'currency', currency }).format(amount)
 }
 
+/** Convert a EUR decimal amount (e.g. 10.00) to display currency using the same rates as the market. */
+export function formatEurAmount(eurAmount: number, currency: MarketCurrency): string {
+  const eurCents = Math.round(eurAmount * 100)
+  return formatMarketMoney(eurCents, currency)
+}
+
 export function isMarketCurrency(value: string): value is MarketCurrency {
   return MARKET_CURRENCIES.includes(value as MarketCurrency)
 }

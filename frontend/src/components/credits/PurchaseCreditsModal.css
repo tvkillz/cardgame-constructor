@@ -88,7 +88,7 @@
 }
 
 .credits-modal__title-coins {
-  display: flex;
+  display: none;
   gap: 0.15rem;
 }
 
@@ -98,17 +98,43 @@
   font-size: clamp(1.1rem, 3vw, 1.45rem);
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  background: linear-gradient(90deg, #c4b5fd 0%, #f0abfc 45%, #e8dcc8 100%);
+  background: linear-gradient( 105deg, #ff4d6d 0%, #e63946 22%, #c42d78 48%, #9b2dff 72%, #7b4dff 100% );
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
 .credits-modal__subtitle {
-  margin: 0;
+  margin: 0 0 0.75rem;
   font-family: var(--font-ui);
   font-size: 0.78rem;
   color: rgba(232, 220, 200, 0.55);
+}
+
+.credits-modal__currency {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.credits-modal__currency-label {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(196, 184, 224, 0.65);
+}
+
+.credits-modal__currency select {
+  padding: 0.4rem 0.6rem;
+  border-radius: 6px;
+  border: 1px solid rgba(123, 77, 255, 0.35);
+  background: rgba(10, 10, 12, 0.8);
+  color: rgba(232, 220, 200, 0.85);
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  cursor: pointer;
 }
 
 .credits-modal__coin {
@@ -172,7 +198,7 @@
 
 .credits-modal__popular {
   position: absolute;
-  top: 0.45rem;
+  top: -1.6rem;
   right: 0.45rem;
   padding: 0.15rem 0.45rem;
   border-radius: 4px;
@@ -214,6 +240,7 @@
   font-size: 0.62rem;
   letter-spacing: 0.1em;
   color: rgba(232, 220, 200, 0.4);
+  display: none;
 }
 
 .credits-modal__custom {
@@ -222,6 +249,7 @@
 }
 
 .credits-modal__custom-label {
+  display: none;
   margin: 0 0 0.75rem;
   font-family: var(--font-ui);
   font-size: 0.65rem;
@@ -242,7 +270,7 @@
 }
 
 .credits-modal__custom-field-label {
-  display: block;
+  display: none;
   margin-bottom: 0.35rem;
   font-family: var(--font-ui);
   font-size: 0.62rem;

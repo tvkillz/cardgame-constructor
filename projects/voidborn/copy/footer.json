@@ -4,9 +4,9 @@
     "tagline": "Forge your deck. Rule the realm."
   },
   "legal": [
-    { "id": "terms", "label": "Terms & Conditions", "href": "/terms" },
-    { "id": "privacy", "label": "Privacy Policy", "href": "/privacy" },
-    { "id": "refund", "label": "Refund Policy", "href": "/refund-policy" },
+    { "id": "terms", "label": "Terms of Service", "href": "/terms" },
+    { "id": "privacy", "label": "Privacy Notice", "href": "/privacy" },
+    { "id": "refund", "label": "Cancellation & Refund Policy", "href": "/refund-policy" },
     { "id": "disclaimer", "label": "Disclaimer", "href": "/disclaimer" },
     { "id": "cookies", "label": "Cookie Policy", "href": "/cookie-policy" }
   ],

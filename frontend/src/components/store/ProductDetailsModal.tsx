@@ -106,15 +106,15 @@ export default function ProductDetailsModal({
 
         <p className="credits-modal__legal" style={{ marginTop: '1rem' }}>
           <a href={legal.termsUrl} target="_blank" rel="noopener noreferrer">
-            Terms
+            Terms of Service
           </a>
           {' · '}
           <a href={legal.refundPolicyUrl} target="_blank" rel="noopener noreferrer">
-            Refund Policy
+            Cancellation & Refund Policy
           </a>
           {' · '}
           <a href={legal.privacyUrl} target="_blank" rel="noopener noreferrer">
-            Privacy
+            Privacy Notice
           </a>
         </p>
       </div>

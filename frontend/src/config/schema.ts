@@ -274,6 +274,7 @@ export interface AppConfig {
     privacy?: LegalDocumentConfig
     refund?: LegalDocumentConfig
     disclaimer?: LegalDocumentConfig
+    cookies?: LegalDocumentConfig
   }
 }
 

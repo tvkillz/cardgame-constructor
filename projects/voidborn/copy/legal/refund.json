@@ -1,11 +1,11 @@
 {
   "eyebrow": "Legal",
-  "title": "Refund Policy",
-  "lastUpdated": "02 February 2026",
+  "title": "Cancellation & Refund Policy",
+  "lastUpdated": "29 June 2026",
   "blocks": [
     {
       "type": "paragraph",
-      "text": "This Refund Policy explains how refunds are handled for purchases made on https://voidborn.fun (the \"Website\") and the Voidborn platform (the \"Platform\"), operated by Test LTD."
+      "text": "This Cancellation & Refund Policy outlines the terms governing purchases made through https://voidborn.fun (the \"Website\") and our connected gaming infrastructure (the \"Platform\"), operated by Test LTD (\"we\", \"us\", or \"our\")."
     },
     {
       "type": "company",
@@ -16,128 +16,131 @@
     },
     {
       "type": "paragraph",
-      "text": "This policy should be read together with our Terms and Conditions. Where there is a conflict between this policy and mandatory consumer protection law, applicable law will prevail."
+      "text": "This document operates in tandem with our Terms of Service. In the event that any part of this policy conflicts with the mandatory consumer defense laws of your home country, those regional laws will take precedence."
     },
     {
       "type": "heading",
       "level": 2,
-      "text": "1. Digital Content and Final Sales"
+      "text": "1. The Instant-Delivery Principle (All Sales Final)"
     },
     {
       "type": "paragraph",
-      "text": "Voidborn provides digital content and digital gameplay-related services, including virtual cards, credit packs, boxes, packs, and other in-platform purchases. Because delivery is immediate once content is credited to your Account, all purchases are generally final and non-refundable after delivery."
+      "text": "Our Platform provides immediate digital goods, in-game assets, and virtual entertainment services—including digital booster packs, individual cards, reward containers, and wallet currency top-ups."
     },
     {
       "type": "paragraph",
-      "text": "By completing a purchase and receiving digital content in your Account, you acknowledge that delivery has begun and that statutory cancellation rights may be limited where permitted by law."
+      "text": "Important Disclosure: Because digital assets are instantly credited and made accessible within your Account dashboard immediately after a successful transaction, all purchases are permanent, final, and non-refundable."
+    },
+    {
+      "type": "paragraph",
+      "text": "By completing an order on our Platform, you explicitly acknowledge and agree that the digital performance has commenced immediately upon delivery to your profile. Consequently, any statutory right to cool-off or cancel the purchase is waived to the maximum extent permitted under local regulations."
     },
     {
       "type": "heading",
       "level": 2,
-      "text": "2. When Refunds May Be Considered"
+      "text": "2. Conditional Exceptions & Reimbursements"
     },
     {
       "type": "paragraph",
-      "text": "We may consider a refund only in limited circumstances, including where:"
+      "text": "While sales are generally final, our billing team may evaluate and approve a discretionary refund under the following strict conditions:"
     },
     {
       "type": "list",
       "ordered": false,
       "items": [
-        "applicable law requires a refund;",
-        "a verified technical issue prevented delivery of the purchased content;",
-        "you were charged twice for the same transaction;",
-        "an unauthorised payment is confirmed after our review;",
-        "we determine, at our discretion, that a refund is necessary to correct a genuine billing or delivery error."
+        "System Failures: A verified technical glitch entirely blocked the digital item from reaching your Account inventory.",
+        "Duplicate Charging: Our payment system mistakenly processed a single order multiple times.",
+        "Fraudulent Activity: A thorough internal audit proves that a transaction was completed using unauthorized or stolen payment credentials.",
+        "Statutory Mandate: A regional consumer protection law definitively requires a refund under the specific circumstances."
       ]
     },
     {
       "type": "paragraph",
-      "text": "Refund requests must be submitted promptly with sufficient information to investigate the issue, including your Account email, transaction date, and order details."
+      "text": "To have a claim reviewed, you must submit your request promptly with your registered email, exact transaction timestamp, and order confirmation token."
     },
     {
       "type": "heading",
       "level": 2,
-      "text": "3. What Is Not Refundable"
+      "text": "3. Explicitly Non-Refundable Items"
     },
     {
       "type": "paragraph",
-      "text": "Refunds are generally not available for:"
+      "text": "Under no circumstances will refunds, credits, or rollbacks be granted for:"
     },
     {
       "type": "list",
       "ordered": false,
       "items": [
-        "virtual items, cards, or credits already delivered and visible in your Account;",
-        "purchases made in error after successful delivery;",
-        "dissatisfaction with randomised pack or box contents, where contents were delivered as described;",
-        "gameplay outcomes, rankings, or in-game progress;",
-        "internal shop transactions completed between users, except where required by law or where we reverse a transaction for fraud or technical error;",
-        "withdrawal fees or third-party bank or card charges."
+        "Virtual inventory items or balances that have been successfully deployed and are visible in your user profile.",
+        "Accidental purchases or instances of buyer's remorse after a product is delivered.",
+        "Dissatisfaction with the randomized outcomes or contents of virtual card packs, drops, or mystery crates, provided the probabilities operated as advertised.",
+        "In-game performance outcomes, leaderboard rank drops, or match progressions.",
+        "Peer-to-peer transactions conducted between players inside our internal Marketplace.",
+        "External currency conversion fees, bank processing handling costs, or international credit card transaction fees."
       ]
     },
     {
       "type": "heading",
       "level": 2,
-      "text": "4. How to Request a Refund"
+      "text": "4. Submission & Evaluation Process"
     },
     {
       "type": "paragraph",
-      "text": "To request a refund, contact us at support@voidborn.fun with your Account details, transaction information, and a clear description of the issue. We will review your request and respond within a reasonable time."
-    },
-    {
-      "type": "paragraph",
-      "text": "Approved refunds, where issued, will be returned to the original payment method where possible. Processing times depend on your bank, card issuer, or payment provider."
-    },
-    {
-      "type": "heading",
-      "level": 2,
-      "text": "5. Chargebacks and Payment Disputes"
-    },
-    {
-      "type": "paragraph",
-      "text": "If you believe a charge is incorrect, please contact us before initiating a chargeback or payment dispute. We will work with you to resolve legitimate issues."
-    },
-    {
-      "type": "paragraph",
-      "text": "You agree not to initiate unjustified chargebacks for valid, authorised transactions where digital content was delivered. Where a chargeback or dispute is filed in bad faith, we may:"
+      "text": "To request a transaction review:"
     },
     {
       "type": "list",
       "ordered": false,
       "items": [
-        "suspend or terminate your Account;",
-        "reverse or remove associated Balance or Virtual Items;",
-        "restrict future purchases or withdrawals;",
-        "recover losses, fees, and administrative costs to the extent permitted by law."
+        "Send an email to support@voidborn.fun.",
+        "Provide your specific Account username, transaction ID, and a clear explanation of the issue.",
+        "Our team will investigate the billing log and respond within a reasonable timeframe."
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "If a refund is authorized, it will be automatically routed back to the original payment method used during checkout. Please note that exact processing windows are governed entirely by your banking institution or card scheme network."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "5. Chargeback Enforcement & Dispute Resolution"
+    },
+    {
+      "type": "paragraph",
+      "text": "We ask that you contact our support desk directly before initiating an official payment dispute or chargeback with your bank. We are always willing to resolve legitimate billing errors amicably."
+    },
+    {
+      "type": "paragraph",
+      "text": "If a user initiates an unjustified chargeback or payment reversal for a fully delivered, validly authorized digital order, it will be categorized as payment abuse. In these instances, we reserve the immediate right to:"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "items": [
+        "Permanently freeze or terminate the associated Account.",
+        "Revoke, remove, or zero-out any digital balances, cards, or assets linked to the account.",
+        "Blacklist the user's details from completing future transactions or processing payouts.",
+        "Pursue recovery of the original transaction amount along with linked administrative penalties and chargeback fees to the full extent of the law."
       ]
     },
     {
       "type": "heading",
       "level": 2,
-      "text": "6. Consumer Rights"
+      "text": "6. Global Consumer Protections"
     },
     {
       "type": "paragraph",
-      "text": "If you are a consumer in a jurisdiction that grants mandatory withdrawal or refund rights for digital content, those rights apply only to the extent required by law and subject to lawful exceptions — including where digital delivery has begun with your prior express consent and acknowledgment that cancellation rights may be lost."
+      "text": "If you reside within a jurisdiction (such as the UK or European Union) that guarantees mandatory statutory withdrawal windows for online digital content, those rules apply strictly under their legal limits. However, those rights evaporate once you provide your express consent to begin the immediate download or digital provisioning of the game assets, losing your right to cancel."
     },
     {
       "type": "heading",
       "level": 2,
-      "text": "7. Changes to This Policy"
+      "text": "7. Revisions"
     },
     {
       "type": "paragraph",
-      "text": "We may update this Refund Policy from time to time. The current version will always be published on the Website with an updated \"Last Updated\" date."
-    },
-    {
-      "type": "heading",
-      "level": 2,
-      "text": "8. Contact"
-    },
-    {
-      "type": "paragraph",
-      "text": "For refund enquiries or billing questions, contact support@voidborn.fun or use the company details above."
+      "text": "We reserve the right to modify or adjust this Cancellation & Refund Policy dynamically. Any updates will be pushed directly to this URL with a modified \"Last Updated\" date."
     }
   ]
 }
