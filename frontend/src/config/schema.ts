@@ -535,5 +535,8 @@ export interface PlayModeConfig {
   id: 'casual' | 'ranked' | 'tutorial'
   title: string
   subtitle: string
-  icon: string
+  /** Visual accent — colored sigil and glow (replaces emoji icons). */
+  accent: 'purple' | 'cyan' | 'ember'
+  /** Short label inside the mode sigil (e.g. roman numeral). */
+  mark?: string
 }

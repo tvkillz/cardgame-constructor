@@ -23,9 +23,27 @@
     { "label": "Leaderboard", "id": "leaderboard", "route": "leaderboard", "accent": "ember" }
   ],
   "playModes": [
-    { "id": "casual", "title": "Casual Battle", "subtitle": "Play a relaxed match", "icon": "⚔️" },
-    { "id": "ranked", "title": "Ranked Match", "subtitle": "Play a competitive match", "icon": "🏆" },
-    { "id": "tutorial", "title": "Tutorial", "subtitle": "Learn cards with a random deck", "icon": "📖" }
+    {
+      "id": "casual",
+      "title": "Unranked Skirmish",
+      "subtitle": "Practice freely — no rating on the line",
+      "accent": "cyan",
+      "mark": "I"
+    },
+    {
+      "id": "ranked",
+      "title": "Ranked Ladder",
+      "subtitle": "Fight for standing — wins and losses count",
+      "accent": "ember",
+      "mark": "II"
+    },
+    {
+      "id": "tutorial",
+      "title": "Void Primer",
+      "subtitle": "Learn the rules with a guided trial deck",
+      "accent": "purple",
+      "mark": "III"
+    }
   ],
   "player": {
     "fallbackName": "Player",

@@ -23,9 +23,9 @@
     { "label": "Leaderboard", "id": "leaderboard", "route": "leaderboard", "accent": "ember" }
   ],
   "playModes": [
-    { "id": "casual", "title": "Casual Match", "subtitle": "Try the demo deck", "icon": "🎮" },
-    { "id": "ranked", "title": "Ranked", "subtitle": "Coming soon", "icon": "🏆" },
-    { "id": "tutorial", "title": "Tutorial", "subtitle": "Learn the basics", "icon": "📖" }
+    { "id": "casual", "title": "Practice Match", "subtitle": "Try the demo deck at your pace", "accent": "cyan", "mark": "I" },
+    { "id": "ranked", "title": "Ranked", "subtitle": "Coming soon", "accent": "ember", "mark": "II" },
+    { "id": "tutorial", "title": "Quick Start", "subtitle": "Learn the basics", "accent": "purple", "mark": "III" }
   ],
   "player": {
     "fallbackName": "Demo Player",

@@ -84,8 +84,9 @@ function PortalShellInner({ children }: { children: React.ReactNode }) {
       <div className="portal">
         <div className="portal__sticky-top">
           <PortalHeader onPurchaseCredits={() => setCreditsOpen(true)} />
+        </div>
 
-          <nav className="portal__tabs" aria-label="Player portal">
+        <nav className="portal__tabs" aria-label="Player portal">
             {appConfig.portal.sections.map((section) => {
               const href = resolveSectionHref(section)
               const isActive = pathname === href
@@ -101,7 +102,6 @@ function PortalShellInner({ children }: { children: React.ReactNode }) {
               )
             })}
           </nav>
-        </div>
 
         <div className="portal__toolbar">
             <div className="portal__toolbar-copy">

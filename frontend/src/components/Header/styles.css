@@ -37,7 +37,7 @@
 
 .header__wordmark {
   display: block;
-  height: 2rem;
+  height: 4.25rem;
   width: auto;
   max-width: min(52vw, 220px);
   object-fit: contain;
@@ -263,11 +263,11 @@
     font-size: 1.25rem;
   }
 
-  .header__wordmark {
+  /* .header__wordmark {
     height: 4.25rem;
     max-width: 260px;
     transform: translateX(-9px);
-  }
+  } */
 }
 
 @media (max-width: 403px) {

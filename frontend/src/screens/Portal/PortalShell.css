@@ -7,8 +7,16 @@
 .portal__sticky-top {
   position: sticky;
   top: 0;
-  z-index: 60;
+  z-index: 61;
   background: #0a0a0c;
+}
+
+@media (min-width: 547px) {
+  .portal__tabs {
+    position: sticky;
+    top: calc(2rem + 3.85rem);
+    z-index: 60;
+  }
 }
 
 .portal__header {
@@ -413,6 +421,23 @@
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+@media (max-width: 546px) {
+  .portal__tabs {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 0;
+  }
+
+  .portal__tab {
+    padding: 0.7rem 0;
+    border-bottom: 1px solid rgba(123, 77, 255, 0.1);
+  }
+
+  .portal__tab:last-child {
+    border-bottom: none;
+  }
 }
 
 @media (min-width: 768px) {

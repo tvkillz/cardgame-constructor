@@ -11,7 +11,7 @@ const PORTAL = {
   text: '#e8dcc8',
   title: '#f1e6c8',
   muted: 'rgba(232, 220, 200, 0.55)',
-  body: 'rgba(232, 220, 200, 0.88)',
+  body: '#ffffff',
   gold: '#c9a227',
   goldBright: '#f3d878',
   purpleBorder: 'rgba(123, 77, 255, 0.2)',
@@ -167,7 +167,7 @@ function renderPortalEmail({
 function renderOtpBlock(token) {
   if (!token) return '';
   return `
-    <p style="margin:24px 0 0;font-size:14px;line-height:1.6;color:${PORTAL.body};">
+    <p style="margin:24px 0 0;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.6;color:#ffffff;">
       Prefer a code? Enter this one-time passcode:
     </p>
     <p style="margin:10px 0 0;font-family:'Courier New',Courier,monospace;font-size:22px;font-weight:700;letter-spacing:0.28em;color:${PORTAL.gold};">

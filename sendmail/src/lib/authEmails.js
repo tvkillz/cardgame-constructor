@@ -162,7 +162,7 @@ function buildAuthEmail({ user, emailData, token, tokenHash, redirectTo, emailAc
         title: subject,
         headline: security.headline,
         greeting: greetingFor(name),
-        bodyHtml: `<p style="margin:0;">${escapeHtml(security.body)}</p>`,
+        bodyHtml: `<p style="margin:0;color:#ffffff;">${escapeHtml(security.body)}</p>`,
       }),
       text,
     };
@@ -185,7 +185,7 @@ function buildAuthEmail({ user, emailData, token, tokenHash, redirectTo, emailAc
     title: subject,
     headline: copy.headline,
     greeting: greetingFor(name),
-    bodyHtml: `<p style="margin:0;">${escapeHtml(copy.body)}</p>${renderOtpBlock(token)}`,
+        bodyHtml: `<p style="margin:0;color:#ffffff;">${escapeHtml(copy.body)}</p>${renderOtpBlock(token)}`,
     ctaLabel: copy.cta,
     ctaUrl: confirmUrl,
   });
@@ -277,7 +277,7 @@ function buildSignupPreviewEmail({ recipientName = 'Traveler', confirmUrl } = {}
       title: subject,
       headline: copy.headline,
       greeting: greetingFor(recipientName),
-      bodyHtml: `<p style="margin:0;">${escapeHtml(copy.body)}</p>`,
+      bodyHtml: `<p style="margin:0;color:#ffffff;">${escapeHtml(copy.body)}</p>`,
       ctaLabel: copy.cta,
       ctaUrl: sampleUrl,
       footerNote: 'This is a preview of the VOIDBORN activation email template.',

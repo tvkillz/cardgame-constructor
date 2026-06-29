@@ -317,12 +317,17 @@ export default function PlayPage() {
                       variant="secondary"
                       size="md"
                       fantasy
-                      className="play-page__mode"
+                      className={`play-page__mode play-page__mode--accent-${option.accent}`}
                       disabled={option.id === 'tutorial' && startingTutorial}
                       onClick={() => handleModeSelect(option.id)}
                     >
-                      <span className="play-page__mode-icon" aria-hidden="true">
-                        {option.icon}
+                      <span
+                        className={`play-page__mode-sigil play-page__mode-sigil--${option.accent}`}
+                        aria-hidden="true"
+                      >
+                        {option.mark ? (
+                          <span className="play-page__mode-mark">{option.mark}</span>
+                        ) : null}
                       </span>
                       <span className="play-page__mode-text">
                         <strong>{option.title}</strong>
@@ -340,7 +345,7 @@ export default function PlayPage() {
                   className="play-page__back-btn"
                   onClick={() => setShowModes(false)}
                 >
-                  Back
+                  Return
                 </Button>
               </div>
 
