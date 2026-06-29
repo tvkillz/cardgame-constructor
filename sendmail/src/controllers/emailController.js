@@ -1,4 +1,5 @@
 const { sendMail, verifySmtp, fromAddress } = require('../config/email');
+const { buildSignupPreviewEmail } = require('../lib/authEmails');
 
 function normalizeRecipients(value) {
   if (!value) return [];
@@ -77,11 +78,12 @@ async function sendTestEmail(req, res) {
     }
 
     const stamp = new Date().toISOString();
+    const preview = buildSignupPreviewEmail();
     const info = await sendMail({
       to: to.join(', '),
-      subject: `VOIDBORN sendmail test ${stamp}`,
-      html: `<p>SMTP relay test from <strong>voidborn sendmail</strong>.</p><p>Time: ${stamp}</p>`,
-      text: `VOIDBORN sendmail SMTP test at ${stamp}`,
+      subject: preview.subject,
+      html: preview.html,
+      text: preview.text,
     });
 
     return res.json({

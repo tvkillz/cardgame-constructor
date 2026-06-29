@@ -19,6 +19,13 @@
   align-items: start;
 }
 
+.portal-collection__layout--sell {
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    'header'
+    'main';
+}
+
 .portal-collection__header {
   grid-area: header;
   min-width: 0;
@@ -90,6 +97,10 @@
   aspect-ratio: 2 / 3;
   border-radius: 6px;
   overflow: hidden;
+}
+
+.collection-owned-card--hovered .collection-owned-card__frame {
+  box-shadow: 0 0 0 2px rgba(201, 162, 39, 0.55);
 }
 
 .collection-owned-card__frame > .card {
@@ -201,6 +212,10 @@
   color: #c9a227;
 }
 
+.collection-owned-card__sell-btn {
+  width: 100%;
+}
+
 .portal-collection__pagination {
   display: flex;
   align-items: center;
@@ -218,7 +233,7 @@
 .portal-collection__deck-panel {
   grid-area: deck;
   position: sticky;
-  top: 1rem;
+  top: 14rem;
   display: flex;
   flex-direction: column;
   max-height: calc(100vh - 2rem);
@@ -329,11 +344,18 @@
 }
 
 @media (max-width: 1521px) {
-  .portal-collection__layout {
+  .portal-collection__layout:not(.portal-collection__layout--sell) {
     grid-template-columns: 1fr;
     grid-template-areas:
       'header'
       'deck'
+      'main';
+  }
+
+  .portal-collection__layout--sell {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      'header'
       'main';
   }
 

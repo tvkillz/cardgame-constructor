@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, type CSSProperties } from 'react'
 import Card, { type CardDisplayProps } from '@/components/CardPlaceholder/Card'
-import CardHoverPreview from '@/components/Game/CardHoverPreview'
+import CardPreviewPanel from '@/components/cards/CardPreviewPanel'
 import '@/components/CardPlaceholder/styles.css'
 import { appConfig } from '@/config'
 import { DOMAIN_LABEL, type CardDomain } from '@/lib/cards/domains'
@@ -132,13 +132,13 @@ function CollectionPreviewCrossfade({ card }: { card: CardDisplayProps }) {
         <div
           className={`collection__preview-layer${showA ? ' collection__preview-layer--active' : ''}`}
         >
-          <CardHoverPreview card={layerA} />
+          <CardPreviewPanel card={layerA} />
         </div>
         {layerB ? (
           <div
             className={`collection__preview-layer${showA ? '' : ' collection__preview-layer--active'}`}
           >
-            <CardHoverPreview card={layerB} />
+            <CardPreviewPanel card={layerB} />
           </div>
         ) : null}
       </div>

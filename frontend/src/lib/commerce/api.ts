@@ -1,5 +1,5 @@
 import { getSupabaseBrowserClient } from '@/lib/supabase/client'
-import { supabaseAnonKey, supabaseUrl } from '@/lib/supabase/env'
+import { getSupabaseBrowserUrl, supabaseAnonKey, supabaseUrl } from '@/lib/supabase/env'
 import { getSiteId } from '@/lib/site'
 
 import type { CommerceAction, CommerceResponse } from './types'
@@ -31,7 +31,7 @@ export async function invokeCommerceAction(action: CommerceAction): Promise<Comm
   const headers = await authHeaders()
   if (!headers) return { error: 'offline' }
 
-  const res = await fetch(`${supabaseUrl}/functions/v1/commerce`, {
+  const res = await fetch(`${getSupabaseBrowserUrl()}/functions/v1/commerce`, {
     method: 'POST',
     headers,
     body: JSON.stringify(action),

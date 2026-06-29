@@ -1,5 +1,9 @@
 import { getSupabaseBrowserClient } from '@/lib/supabase/client'
-import { isSupabaseConfigured, supabaseAnonKey, supabaseUrl } from '@/lib/supabase/env'
+import {
+  getSupabaseBrowserUrl,
+  isSupabaseConfigured,
+  supabaseAnonKey,
+} from '@/lib/supabase/env'
 import { getSiteId } from '@/lib/site'
 
 import type { LeaderboardAction, LeaderboardResponse } from './types'
@@ -30,7 +34,7 @@ export async function fetchLeaderboard(): Promise<LeaderboardResponse> {
   const headers = await authHeaders()
   if (!headers) return { top: [], viewer: null, nearby: null, totalRanked: 0, error: 'offline' }
 
-  const res = await fetch(`${supabaseUrl}/functions/v1/leaderboard`, {
+  const res = await fetch(`${getSupabaseBrowserUrl()}/functions/v1/leaderboard`, {
     method: 'POST',
     headers,
     body: JSON.stringify({ type: 'get' } satisfies LeaderboardAction),

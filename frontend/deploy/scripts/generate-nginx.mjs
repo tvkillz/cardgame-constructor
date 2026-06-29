@@ -17,7 +17,7 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
-import { loadRegistry, prodPort } from '../../scripts/project-ports.mjs'
+import { loadRegistry, prodPort, DEV_PORT_BASE } from '../../scripts/project-ports.mjs'
 import {
   productionDomainForSite,
   stagingDomainForSite,
@@ -114,6 +114,11 @@ async function writeCorsOrigins(routes) {
     if (route.role === 'production' && includeWww) {
       lines.push(`https://www.${route.domain}  # ${route.siteId} (www)`)
     }
+  }
+  lines.push('')
+  lines.push('# Local pm2 (optional — frontend proxies API on localhost by default)')
+  for (let port = DEV_PORT_BASE; port < DEV_PORT_BASE + 8; port++) {
+    lines.push(`http://localhost:${port}`)
   }
   lines.push('')
   await mkdir(OUTPUT_DIR, { recursive: true })

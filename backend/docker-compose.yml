@@ -507,6 +507,8 @@ services:
       - ./volumes/db/matches.sql:/docker-entrypoint-initdb.d/init-scripts/97c-matches.sql:Z
       - ./volumes/db/matches-villain-rename.sql:/docker-entrypoint-initdb.d/init-scripts/97c2-matches-villain-rename.sql:Z
       - ./volumes/db/commerce.sql:/docker-entrypoint-initdb.d/init-scripts/97d-commerce.sql:Z
+      - ./volumes/db/player-market-listings.sql:/docker-entrypoint-initdb.d/init-scripts/97e-player-market-listings.sql:Z
+      - ./volumes/db/profiles-auth-trigger.sql:/docker-entrypoint-initdb.d/migrations/97f-profiles-auth-trigger.sql:Z
       - ./volumes/db/sites-multitenant.sql:/docker-entrypoint-initdb.d/migrations/98-sites-multitenant.sql:Z
       - ./volumes/db/webhooks.sql:/docker-entrypoint-initdb.d/init-scripts/98-webhooks.sql:Z
       # Must be superuser to alter reserved role

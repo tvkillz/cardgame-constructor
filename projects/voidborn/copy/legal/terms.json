@@ -9,14 +9,14 @@
     },
     {
       "type": "company",
-      "name": "PRODEC LTD",
-      "companyNumber": "12936248",
-      "address": "196 High Road, Wood Green, London, England, N22 8HH",
-      "email": "support@kingdomofarcane.com"
+      "name": "Test LTD",
+      "companyNumber": "00000000",
+      "address": "123 Example Street, Testville, TE1 1ST, United Kingdom",
+      "email": "support@voidborn.fun"
     },
     {
       "type": "paragraph",
-      "text": "PRODEC LTD is hereinafter referred to as \"Company\", \"we\", \"us\", or \"our\"."
+      "text": "Test LTD is hereinafter referred to as \"Company\", \"we\", \"us\", or \"our\"."
     },
     {
       "type": "paragraph",
@@ -736,7 +736,7 @@
     },
     {
       "type": "paragraph",
-      "text": "If you believe content on the Platform infringes your intellectual property rights, you may contact us at support@kingdomofarcane.com with sufficient details to review the claim."
+      "text": "If you believe content on the Platform infringes your intellectual property rights, you may contact us at support@voidborn.fun with sufficient details to review the claim."
     },
     {
       "type": "heading",
@@ -916,7 +916,7 @@
     },
     {
       "type": "paragraph",
-      "text": "support@kingdomofarcane.com"
+      "text": "support@voidborn.fun"
     }
   ]
 }

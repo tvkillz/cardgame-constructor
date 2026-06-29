@@ -1,4 +1,4 @@
-import { supabaseUrl } from '@/lib/supabase/env'
+import { getSupabaseBrowserUrl } from '@/lib/supabase/env'
 import { getSiteId } from '@/lib/site'
 
 /** Legacy rows omit site id prefix — prepend `{siteId}/` for per-site storage layout. */
@@ -10,7 +10,7 @@ export function normalizeStorageObjectPath(path: string, siteId: string): string
 }
 
 export function storagePublicUrl(bucket: string, path: string): string {
-  const base = supabaseUrl.replace(/\/$/, '')
+  const base = getSupabaseBrowserUrl().replace(/\/$/, '')
   if (!base) return ''
   const encoded = path
     .split('/')

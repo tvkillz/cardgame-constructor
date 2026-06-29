@@ -42,6 +42,17 @@ const staticRewrites = [
   { source: '/og-image.jpg', destination: '/api/site-static/__og-image__' },
 ]
 
+/** Proxy Supabase API paths through Next (avoids CORS when developing on localhost). */
+function supabaseProxyRewrites(upstream: string) {
+  const base = upstream.replace(/\/$/, '')
+  if (!base.startsWith('http')) return []
+
+  return ['auth', 'rest', 'functions', 'storage', 'realtime'].map((segment) => ({
+    source: `/${segment}/v1/:path*`,
+    destination: `${base}/${segment}/v1/:path*`,
+  }))
+}
+
 const hybridPlayRewrites = [
   { source: '/play/assets/:path*', destination: '/api/site-static/play/assets/:path*' },
   { source: '/play', destination: '/api/site-static/play/index.html' },
@@ -100,6 +111,8 @@ function createNextConfig(): NextConfig {
     async rewrites() {
       if (cpanelStatic) return []
       const rules = [...staticRewrites]
+      const upstream = process.env.NEXT_PUBLIC_SUPABASE_URL ?? ''
+      rules.push(...supabaseProxyRewrites(upstream))
       if (isHybridProduction(projectId)) {
         rules.push(...hybridPlayRewrites)
       }

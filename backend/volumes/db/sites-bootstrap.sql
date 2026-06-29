@@ -96,6 +96,53 @@ as $$
   end
 $$;
 
+-- Auto-create profiles + site_members on signup (see volumes/db/profiles-auth-trigger.sql).
+create or replace function public.handle_new_site_user()
+returns trigger
+language plpgsql
+security definer
+set search_path = public
+as $$
+declare
+  v_site_id text;
+  v_display_email text;
+  v_username text;
+begin
+  v_site_id := public.auth_email_site_id(new.email);
+  if v_site_id is null or not exists (select 1 from public.sites s where s.id = v_site_id) then
+    raise exception 'invalid_site_auth_email';
+  end if;
+
+  v_display_email := coalesce(
+    nullif(trim(new.raw_user_meta_data ->> 'display_email'), ''),
+    public.auth_email_display(new.email)
+  );
+  v_username := coalesce(
+    nullif(trim(new.raw_user_meta_data ->> 'username'), ''),
+    split_part(v_display_email, '@', 1)
+  );
+
+  insert into public.site_members (user_id, site_id)
+  values (new.id, v_site_id)
+  on conflict do nothing;
+
+  insert into public.profiles (id, site_id, display_email, username, updated_at)
+  values (new.id, v_site_id, v_display_email, v_username, now())
+  on conflict (id) do update set
+    site_id = excluded.site_id,
+    display_email = excluded.display_email,
+    username = coalesce(public.profiles.username, excluded.username),
+    updated_at = now();
+
+  return new;
+end;
+$$;
+
+drop trigger if exists on_auth_user_created_site on auth.users;
+create trigger on_auth_user_created_site
+  after insert on auth.users
+  for each row execute function public.handle_new_site_user();
+
 -- Per-site scoping on play data (match edge function requires matches.site_id).
 alter table public.matches add column if not exists site_id text references public.sites (id);
 update public.matches m
@@ -203,5 +250,33 @@ where u.email ~ '\+[^+]+@'
     where s.id = (regexp_match(lower(split_part(u.email, '@', 1)), '\+([^+]+)$'))[1]
   )
 on conflict do nothing;
+
+-- Backfill profiles for users created before handle_new_site_user trigger existed.
+insert into public.profiles (id, site_id, display_email, username, updated_at)
+select
+  u.id,
+  public.auth_email_site_id(u.email),
+  coalesce(
+    nullif(trim(u.raw_user_meta_data ->> 'display_email'), ''),
+    public.auth_email_display(u.email)
+  ),
+  coalesce(
+    nullif(trim(u.raw_user_meta_data ->> 'username'), ''),
+    split_part(
+      coalesce(
+        nullif(trim(u.raw_user_meta_data ->> 'display_email'), ''),
+        public.auth_email_display(u.email)
+      ),
+      '@',
+      1
+    )
+  ),
+  coalesce(u.created_at, now())
+from auth.users u
+left join public.profiles p on p.id = u.id
+where p.id is null
+  and public.auth_email_site_id(u.email) is not null
+  and exists (select 1 from public.sites s where s.id = public.auth_email_site_id(u.email))
+on conflict (id) do nothing;
 
 notify pgrst, 'reload schema';

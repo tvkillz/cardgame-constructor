@@ -48,9 +48,9 @@ export async function buyCardWithCredits(
   return { ok: true }
 }
 
-export function ownedQuantityMap(lines: OwnedCardLine[]): Map<string, number> {
+export function ownedQuantityMap(lines: OwnedCardLine[] | undefined | null): Map<string, number> {
   const map = new Map<string, number>()
-  for (const line of lines) {
+  for (const line of lines ?? []) {
     map.set(line.slug, (map.get(line.slug) ?? 0) + line.quantity)
   }
   return map

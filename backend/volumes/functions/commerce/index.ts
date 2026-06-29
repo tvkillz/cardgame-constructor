@@ -117,6 +117,59 @@ const RATE_FROM_EUR: Record<string, number> = {
   usd: 1.08,
 }
 
+const LISTING_COMMISSION_RATE = 0.2
+const LISTING_MIN_PRICE_RATIO = 0.75
+
+async function countCardInUserDecks(
+  admin: ReturnType<typeof createClient>,
+  userId: string,
+  cardId: string,
+): Promise<number> {
+  const { data: decks } = await admin.from('player_decks').select('id').eq('user_id', userId)
+  if (!decks?.length) return 0
+  const deckIds = decks.map((d: { id: string }) => d.id)
+  const { data: rows } = await admin
+    .from('player_deck_cards')
+    .select('quantity')
+    .eq('card_id', cardId)
+    .in('deck_id', deckIds)
+  return (rows ?? []).reduce((sum: number, row: { quantity: number }) => sum + row.quantity, 0)
+}
+
+/** Remove one copy of a card from the user's decks (first deck that contains it). */
+async function removeOneCardFromUserDecks(
+  admin: ReturnType<typeof createClient>,
+  userId: string,
+  cardId: string,
+): Promise<boolean> {
+  const { data: decks } = await admin.from('player_decks').select('id').eq('user_id', userId)
+  if (!decks?.length) return false
+
+  for (const deck of decks) {
+    const { data: row } = await admin
+      .from('player_deck_cards')
+      .select('quantity')
+      .eq('deck_id', deck.id)
+      .eq('card_id', cardId)
+      .maybeSingle()
+
+    if (!row || row.quantity <= 0) continue
+
+    if (row.quantity <= 1) {
+      await admin.from('player_deck_cards').delete().eq('deck_id', deck.id).eq('card_id', cardId)
+    } else {
+      await admin
+        .from('player_deck_cards')
+        .update({ quantity: row.quantity - 1 })
+        .eq('deck_id', deck.id)
+        .eq('card_id', cardId)
+    }
+    return true
+  }
+
+  return false
+}
+
 Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') {
     return new Response(null, { status: 204, headers: corsHeaders })
@@ -184,6 +237,220 @@ Deno.serve(async (req) => {
       .order('acquired_at', { ascending: false })
     if (error) return json({ error: error.message }, 500)
     return json({ inventory: data })
+  }
+
+  if (action === 'market_listings_list') {
+    const scope = String(body.scope ?? 'all')
+    let query = admin
+      .from('player_market_listings')
+      .select(
+        'id, site_id, seller_id, card_id, price_credits, status, created_at, cards ( id, slug, title, price_cents, thumb_storage_path )',
+      )
+      .eq('site_id', siteId)
+      .eq('status', 'active')
+      .order('created_at', { ascending: false })
+      .limit(Math.min(Number(body.limit ?? 200), 500))
+
+    if (scope === 'mine') {
+      query = query.eq('seller_id', userId)
+    }
+
+    const { data, error } = await query
+    if (error) return json({ error: error.message }, 500)
+    return json({ listings: data })
+  }
+
+  if (action === 'market_listing_create') {
+    const cardId = String(body.cardId ?? '')
+    const priceCredits = Math.floor(Number(body.priceCredits ?? 0))
+    if (!cardId || priceCredits <= 0) return json({ error: 'invalid_listing' }, 400)
+
+    const { data: card } = await admin
+      .from('cards')
+      .select('id, title, price_cents, site_id, published')
+      .eq('id', cardId)
+      .eq('site_id', siteId)
+      .eq('published', true)
+      .maybeSingle()
+
+    if (!card) return json({ error: 'card_not_found' }, 404)
+
+    const marketPrice = Number(card.price_cents ?? 0)
+    if (marketPrice <= 0) return json({ error: 'card_not_for_sale' }, 400)
+
+    const minPrice = Math.ceil(marketPrice * LISTING_MIN_PRICE_RATIO)
+    if (priceCredits < minPrice) {
+      return json({
+        error: 'price_too_low',
+        minPriceCredits: minPrice,
+        marketPriceCredits: marketPrice,
+      }, 400)
+    }
+
+    const inDecks = await countCardInUserDecks(admin, userId, cardId)
+    const { data: inv } = await admin
+      .from('player_inventory')
+      .select('quantity')
+      .eq('user_id', userId)
+      .eq('card_id', cardId)
+      .maybeSingle()
+
+    const owned = inv?.quantity ?? 0
+    if (owned < 1) {
+      return json({ error: 'no_available_copy', message: 'You do not own a copy of this card.' }, 400)
+    }
+
+    if (inDecks > 0) {
+      await removeOneCardFromUserDecks(admin, userId, cardId)
+    }
+
+    const { data: listing, error: insertError } = await admin
+      .from('player_market_listings')
+      .insert({
+        site_id: siteId,
+        seller_id: userId,
+        card_id: cardId,
+        price_credits: priceCredits,
+        status: 'active',
+      })
+      .select('*')
+      .single()
+
+    if (insertError) return json({ error: insertError.message }, 500)
+
+    if (owned <= 1) {
+      await admin.from('player_inventory').delete().eq('user_id', userId).eq('card_id', cardId)
+    } else {
+      await admin
+        .from('player_inventory')
+        .update({ quantity: owned - 1 })
+        .eq('user_id', userId)
+        .eq('card_id', cardId)
+    }
+
+    return json({ ok: true, listing })
+  }
+
+  if (action === 'market_listing_cancel') {
+    const listingId = String(body.listingId ?? '')
+    if (!listingId) return json({ error: 'missing_listing_id' }, 400)
+
+    const { data: listing } = await admin
+      .from('player_market_listings')
+      .select('*')
+      .eq('id', listingId)
+      .eq('seller_id', userId)
+      .eq('status', 'active')
+      .maybeSingle()
+
+    if (!listing) return json({ error: 'listing_not_found' }, 404)
+
+    await admin
+      .from('player_market_listings')
+      .update({ status: 'cancelled' })
+      .eq('id', listingId)
+
+    const { data: existing } = await admin
+      .from('player_inventory')
+      .select('quantity')
+      .eq('user_id', userId)
+      .eq('card_id', listing.card_id)
+      .maybeSingle()
+
+    if (existing) {
+      await admin
+        .from('player_inventory')
+        .update({ quantity: existing.quantity + 1 })
+        .eq('user_id', userId)
+        .eq('card_id', listing.card_id)
+    } else {
+      await admin.from('player_inventory').insert({
+        user_id: userId,
+        card_id: listing.card_id,
+        quantity: 1,
+        source: 'listing_cancelled',
+      })
+    }
+
+    return json({ ok: true })
+  }
+
+  if (action === 'buy_market_listing') {
+    const listingId = String(body.listingId ?? '')
+    if (!listingId) return json({ error: 'missing_listing_id' }, 400)
+
+    const { data: listing } = await admin
+      .from('player_market_listings')
+      .select('*, cards ( id, title )')
+      .eq('id', listingId)
+      .eq('site_id', siteId)
+      .eq('status', 'active')
+      .maybeSingle()
+
+    if (!listing) return json({ error: 'listing_not_found' }, 404)
+    if (listing.seller_id === userId) return json({ error: 'cannot_buy_own_listing' }, 400)
+
+    const price = Number(listing.price_credits)
+    const sellerProceeds = Math.floor(price * (1 - LISTING_COMMISSION_RATE))
+
+    try {
+      await admin.rpc('wallet_apply_credits', {
+        p_user_id: userId,
+        p_amount: -price,
+        p_type: 'purchase',
+        p_status: 'completed',
+        p_description: `Bought listing: ${listing.cards?.title ?? 'card'}`,
+        p_reference_type: 'market_listing',
+        p_reference_id: listing.id,
+      })
+    } catch (e) {
+      return json({ error: 'insufficient_credits', message: String(e) }, 400)
+    }
+
+    await admin.rpc('ensure_wallet', { p_user_id: listing.seller_id })
+
+    await admin.rpc('wallet_apply_credits', {
+      p_user_id: listing.seller_id,
+      p_amount: sellerProceeds,
+      p_type: 'adjustment',
+      p_status: 'completed',
+      p_description: `Card sold: ${listing.cards?.title ?? 'card'} (+${sellerProceeds} credits after ${Math.round(LISTING_COMMISSION_RATE * 100)}% commission)`,
+      p_reference_type: 'market_listing',
+      p_reference_id: listing.id,
+    })
+
+    await admin
+      .from('player_market_listings')
+      .update({
+        status: 'sold',
+        sold_at: new Date().toISOString(),
+        buyer_id: userId,
+      })
+      .eq('id', listingId)
+
+    const { data: buyerInv } = await admin
+      .from('player_inventory')
+      .select('quantity')
+      .eq('user_id', userId)
+      .eq('card_id', listing.card_id)
+      .maybeSingle()
+
+    if (buyerInv) {
+      await admin
+        .from('player_inventory')
+        .update({ quantity: buyerInv.quantity + 1 })
+        .eq('user_id', userId)
+        .eq('card_id', listing.card_id)
+    } else {
+      await admin.from('player_inventory').insert({
+        user_id: userId,
+        card_id: listing.card_id,
+        quantity: 1,
+        source: 'player_market',
+      })
+    }
+
+    return json({ ok: true })
   }
 
   if (action === 'orders_list') {

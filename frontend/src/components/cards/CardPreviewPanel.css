@@ -1,0 +1,83 @@
+.card-preview-panel {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.card-preview-panel .card {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  transform: none;
+  animation: none;
+  filter: none;
+}
+
+.card-preview-panel .card:hover,
+.card-preview-panel .card.card--hovered {
+  transform: none;
+  filter: none;
+}
+
+.card-preview-panel--ready .card__art {
+  transition: opacity 0.12s ease;
+}
+
+.card-preview-panel .card--preview .card__stat--mana {
+  top: 10px;
+  left: 10px;
+  width: 40px;
+  height: 44px;
+  font-size: 0.95rem;
+}
+
+.card-preview-panel .card--preview .card__domain {
+  top: 12px;
+  right: 12px;
+  width: 30px;
+  height: 30px;
+}
+
+.card-preview-panel .card--preview .card__stat--attack {
+  bottom: 144px;
+  left: 10px;
+  min-width: 40px;
+  height: 34px;
+  font-size: 0.85rem;
+}
+
+.card-preview-panel .card--preview .card__stat--health {
+  bottom: 144px;
+  right: 10px;
+  width: 36px;
+  height: 42px;
+  font-size: 0.9rem;
+}
+
+.card-preview-panel .card--preview .card__footer {
+  padding: 8px 10px 12px;
+  gap: 4px;
+}
+
+.card-preview-panel .card--preview .card__title {
+  font-size: 1rem;
+}
+
+.card-preview-panel .card--preview .card__ability-name {
+  font-size: 0.8rem;
+}
+
+.card-preview-panel .card--preview .card__ability-text {
+  font-size: 0.9rem;
+  line-height: 1.35;
+}
+
+.card-preview-panel .card--preview .card__keywords {
+  gap: 3px;
+}
+
+.card-preview-panel .card--preview .card__keywords li {
+  font-size: 0.8rem;
+}

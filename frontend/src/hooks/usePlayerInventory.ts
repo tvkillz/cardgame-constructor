@@ -9,20 +9,70 @@ import {
   type OwnedCardLine,
 } from '@/lib/inventory/queries'
 
+let cachedUserId: string | null = null
 let cache: OwnedCardLine[] | null = null
 let inflight: Promise<OwnedCardLine[]> | null = null
+let inflightUserId: string | null = null
+
+function loadPlayerInventory(userId: string): Promise<OwnedCardLine[]> {
+  if (cachedUserId === userId && cache) return Promise.resolve(cache)
+
+  if (inflight && inflightUserId === userId) return inflight
+
+  inflightUserId = userId
+  const promise = fetchPlayerInventory(userId)
+    .then((next) => {
+      const lines = next ?? []
+      if (inflightUserId === userId) {
+        cachedUserId = userId
+        cache = lines
+      }
+      return lines
+    })
+    .finally(() => {
+      if (inflightUserId === userId) {
+        inflight = null
+        inflightUserId = null
+      }
+    })
+
+  inflight = promise
+  return promise
+}
 
 export function usePlayerInventory() {
   const { user, session } = useAuth()
   const userId = user?.id ?? session?.user?.id ?? 'guest'
-  const [lines, setLines] = useState<OwnedCardLine[]>(() => cache ?? [])
-  const [loading, setLoading] = useState(() => cache === null)
+  const [lines, setLines] = useState<OwnedCardLine[]>(() =>
+    cachedUserId === userId && cache ? cache : [],
+  )
+  const [loading, setLoading] = useState(() => cachedUserId !== userId || cache === null)
+  const [trackedUserId, setTrackedUserId] = useState(userId)
+
+  if (userId !== trackedUserId) {
+    setTrackedUserId(userId)
+    if (cachedUserId === userId && cache) {
+      setLines(cache)
+      setLoading(false)
+    } else {
+      setLines([])
+      setLoading(true)
+    }
+  }
 
   const refresh = useCallback(
     async (options?: { silent?: boolean }) => {
       if (!options?.silent) setLoading(true)
       try {
-        const next = await fetchPlayerInventory(userId)
+        if (cachedUserId === userId) {
+          cache = null
+        }
+        if (inflightUserId === userId) {
+          inflight = null
+          inflightUserId = null
+        }
+        const next = await fetchPlayerInventory(userId).then((rows) => rows ?? [])
+        cachedUserId = userId
         cache = next
         setLines(next)
       } finally {
@@ -33,23 +83,27 @@ export function usePlayerInventory() {
   )
 
   useEffect(() => {
-    if (cache) {
+    if (cachedUserId === userId && cache) {
       setLines(cache)
       setLoading(false)
       return
     }
-    if (inflight) {
-      void inflight.then((next) => {
+
+    setLines([])
+    setLoading(true)
+    let cancelled = false
+
+    void loadPlayerInventory(userId).then((next) => {
+      if (!cancelled && cachedUserId === userId) {
         setLines(next)
         setLoading(false)
-      })
-      return
-    }
-    inflight = refresh()
-    void inflight.finally(() => {
-      inflight = null
+      }
     })
-  }, [refresh])
+
+    return () => {
+      cancelled = true
+    }
+  }, [userId])
 
   const ownedBySlug = ownedQuantityMap(lines)
 
@@ -59,13 +113,12 @@ export function usePlayerInventory() {
 }
 
 export function prefetchPlayerInventory(userId: string): Promise<OwnedCardLine[]> {
-  if (cache) return Promise.resolve(cache)
-  if (inflight) return inflight
-  inflight = fetchPlayerInventory(userId).then((next) => {
-    cache = next
-    return next
-  })
-  return inflight.finally(() => {
-    inflight = null
-  })
+  return loadPlayerInventory(userId)
+}
+
+export function invalidatePlayerInventoryCache() {
+  cachedUserId = null
+  cache = null
+  inflight = null
+  inflightUserId = null
 }

@@ -1,7 +1,7 @@
 {
   "brand": {
     "name": "VOIDBORN",
-    "tagline": "A world of strategy, magic, and legendary conquest."
+    "tagline": "Forge your deck. Rule the realm."
   },
   "legal": [
     { "id": "terms", "label": "Terms & Conditions", "href": "/terms" },
@@ -11,14 +11,37 @@
     { "id": "cookies", "label": "Cookie Policy", "href": "/cookie-policy" }
   ],
   "contact": {
-    "companyName": "PRODEC LTD",
-    "companyNumber": "12936248",
-    "address": "196 High Road, Wood Green, London, England, N22 8HH",
-    "email": "support@kingdomofarcane.com"
+    "companyName": "Test LTD",
+    "companyNumber": "00000000",
+    "address": "123 Example Street, Testville, TE1 1ST, United Kingdom",
+    "email": "support@voidborn.fun"
   },
-  "copyright": "© 2026 Kingdom of Arcane. All rights reserved.",
-  "subCopyright": "© 2026 Kingdom of Arcane. All rights reserved.",
-  "crafted": "Crafted with magic and strategy",
+  "social": [
+    {
+      "id": "facebook",
+      "label": "Facebook",
+      "href": "",
+      "icon": "shared/facebook.svg"
+    },
+    {
+      "id": "discord",
+      "label": "Discord",
+      "href": "",
+      "icon": "shared/discord.svg"
+    },
+    {
+      "id": "instagram",
+      "label": "Instagram",
+      "href": "",
+      "icon": "shared/instagram.png"
+    }
+  ],
+  "payments": [
+    { "id": "visa", "label": "Visa", "icon": "shared/visa.svg" },
+    { "id": "mastercard", "label": "Mastercard", "icon": "shared/mastercard.svg" }
+  ],
+  "copyright": "© 2026 Voidborn. All rights reserved.",
+  "subCopyright": "© 2026 Voidborn. All rights reserved.",
   "cookieSettingsLabel": "Cookie Settings",
   "cookies": {
     "title": "We use cookies",

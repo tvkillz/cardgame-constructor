@@ -14,6 +14,9 @@ export function buildSiteMetadata(config: AppConfig): Metadata {
     applicationName: seo.siteName,
     icons: {
       icon: [
+        ...(logo.faviconSvg
+          ? [{ url: logo.faviconSvg, type: 'image/svg+xml' }]
+          : []),
         { url: logo.favicon, sizes: '32x32', type: 'image/png' },
         { url: '/favicon.ico', sizes: 'any' },
       ],

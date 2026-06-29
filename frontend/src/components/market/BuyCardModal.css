@@ -74,3 +74,76 @@
   justify-content: flex-end;
   gap: 0.65rem;
 }
+
+.buy-card-modal__warning {
+  padding: 0.65rem 0.75rem;
+  border-radius: 8px;
+  border: 1px solid rgba(251, 191, 36, 0.35);
+  background: rgba(251, 191, 36, 0.08);
+  color: #fde68a;
+}
+
+.buy-card-modal__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 0.85rem;
+}
+
+.buy-card-modal__field-label {
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(232, 220, 200, 0.65);
+}
+
+.buy-card-modal__input {
+  padding: 0.55rem 0.7rem;
+  border-radius: 6px;
+  border: 1px solid rgba(123, 77, 255, 0.35);
+  background: rgba(10, 10, 12, 0.85);
+  color: #f0e8d8;
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+}
+
+.buy-card-modal__input:focus {
+  outline: 2px solid rgba(201, 162, 39, 0.5);
+  outline-offset: 1px;
+}
+
+.buy-card-modal__warning {
+  padding: 0.65rem 0.75rem;
+  border-radius: 6px;
+  border: 1px solid rgba(232, 140, 90, 0.45);
+  background: rgba(232, 140, 90, 0.08);
+  color: #f0d4b8;
+}
+
+.buy-card-modal__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 0.85rem;
+}
+
+.buy-card-modal__field-label {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(232, 220, 200, 0.65);
+}
+
+.buy-card-modal__input {
+  width: 100%;
+  padding: 0.55rem 0.65rem;
+  border-radius: 6px;
+  border: 1px solid rgba(201, 162, 39, 0.35);
+  background: rgba(10, 10, 12, 0.85);
+  color: #e8dcc8;
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+}

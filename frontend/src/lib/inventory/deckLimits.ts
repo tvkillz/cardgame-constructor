@@ -46,6 +46,13 @@ export function canAddToDraftDeck(
   return true
 }
 
+export function quantityInAllDecks(slug: string, decks: PlayerDeck[]): number {
+  return decks.reduce((sum, deck) => {
+    const entry = deck.cards.find((c) => c.slug === slug)
+    return sum + (entry?.quantity ?? 0)
+  }, 0)
+}
+
 export function canRemoveFromDraftDeck(inDeckQty: number): boolean {
   return inDeckQty > 0
 }

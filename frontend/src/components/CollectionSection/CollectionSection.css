@@ -314,96 +314,11 @@
   opacity: 1;
 }
 
-.collection__preview-stage .game-card-preview-wrap {
+.collection__preview-stack .card-preview-panel {
   width: 100%;
   height: 100%;
-  max-width: none;
-  margin: 0;
-  position: relative;
-  pointer-events: none;
-}
-
-.collection__preview-stage .game-card-preview-wrap .card {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  max-width: none;
-  margin: 0;
-  transform: none;
-  animation: none;
-  filter: drop-shadow(0 16px 48px rgba(0, 0, 0, 0.75))
-    drop-shadow(0 0 28px color-mix(in srgb, var(--glow-color) 45%, transparent));
-}
-
-.collection__preview-stage .game-card-preview-wrap .card:hover {
-  transform: none;
-}
-
-.collection__preview-stage .game-card-preview-wrap--ready .card__art {
-  transition: opacity 0.35s ease;
-}
-
-.collection__preview-stage .game-card-preview-wrap .card--preview .card__stat--mana {
-  top: 14px;
-  left: 14px;
-  width: 52px;
-  height: 58px;
-  font-size: 1.25rem;
-}
-
-.collection__preview-stage .game-card-preview-wrap .card--preview .card__domain {
-  top: 16px;
-  right: 16px;
-  width: 40px;
-  height: 40px;
-}
-
-.collection__preview-stage .game-card-preview-wrap .card--preview .card__stat--attack {
-  bottom: 102px;
-  left: 14px;
-  min-width: 52px;
-  height: 44px;
-  font-size: 1.15rem;
-}
-
-.collection__preview-stage .game-card-preview-wrap .card--preview .card__stat--health {
-  bottom: 102px;
-  right: 14px;
-  width: 48px;
-  height: 56px;
-  font-size: 1.25rem;
-}
-
-.collection__preview-stage .game-card-preview-wrap .card--preview .card__rarity {
-  top: 58px;
-  right: 14px;
-  font-size: 0.62rem;
-  padding: 3px 8px;
-}
-
-.collection__preview-stage .game-card-preview-wrap .card--preview .card__footer {
-  padding: 12px 20px 20px;
-  gap: 8px;
-}
-
-.collection__preview-stage .game-card-preview-wrap .card--preview .card__title {
-  font-size: 0.95rem;
-  padding: 6px 8px;
-}
-
-.collection__preview-stage .game-card-preview-wrap .card--preview .card__ability-name {
-  font-size: 0.72rem;
-}
-
-.collection__preview-stage .game-card-preview-wrap .card--preview .card__ability-text {
-  font-size: 0.68rem;
-  line-height: 1.4;
-}
-
-.collection__preview-stage .game-card-preview-wrap .card--preview .card__keywords li {
-  font-size: 0.58rem;
-  padding: 2px 6px;
+  filter: drop-shadow(0 16px 40px rgba(0, 0, 0, 0.7))
+    drop-shadow(0 0 24px color-mix(in srgb, var(--glow-color, #c9a227) 40%, transparent));
 }
 
 .collection__preview-caption {

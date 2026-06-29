@@ -44,11 +44,32 @@ export interface InventoryItem {
   cards?: { slug: string; title: string; thumb_storage_path: string | null } | null
 }
 
+export interface PlayerMarketListing {
+  id: string
+  site_id: string
+  seller_id: string
+  card_id: string
+  price_credits: number
+  status: string
+  created_at: string
+  cards?: {
+    id: string
+    slug: string
+    title: string
+    price_cents: number | null
+    thumb_storage_path: string | null
+  } | null
+}
+
 export type CommerceAction =
   | { type: 'products_list' }
   | { type: 'wallet_get' }
   | { type: 'transactions_list'; limit?: number }
   | { type: 'inventory_list' }
+  | { type: 'market_listings_list'; scope?: 'all' | 'mine'; limit?: number }
+  | { type: 'market_listing_create'; cardId: string; priceCredits: number }
+  | { type: 'market_listing_cancel'; listingId: string }
+  | { type: 'buy_market_listing'; listingId: string }
   | { type: 'orders_list' }
   | { type: 'checkout_create'; packId?: string; productId?: string; customCredits?: number; cardId?: string; currency?: string }
   | { type: 'purchase_with_credits'; productId: string }
@@ -62,6 +83,10 @@ export interface CommerceResponse {
   wallet?: Wallet
   transactions?: WalletTransaction[]
   inventory?: InventoryItem[]
+  listings?: PlayerMarketListing[]
+  listing?: PlayerMarketListing
+  minPriceCredits?: number
+  marketPriceCredits?: number
   orders?: unknown[]
   checkoutUrl?: string
   orderId?: string

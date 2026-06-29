@@ -1,5 +1,9 @@
 import { getSupabaseBrowserClient } from '@/lib/supabase/client'
-import { isSupabaseConfigured, supabaseAnonKey, supabaseUrl } from '@/lib/supabase/env'
+import {
+  getSupabaseBrowserUrl,
+  isSupabaseConfigured,
+  supabaseAnonKey,
+} from '@/lib/supabase/env'
 import { getSiteId } from '@/lib/site'
 
 import type { PersistedMatchState } from './serialize'
@@ -118,7 +122,7 @@ export async function invokeMatchAction(action: MatchAction): Promise<MatchApiRe
   }
 
   try {
-    const res = await fetch(`${supabaseUrl}/functions/v1/match`, {
+    const res = await fetch(`${getSupabaseBrowserUrl()}/functions/v1/match`, {
       method: 'POST',
       headers,
       body: JSON.stringify(action),
@@ -213,5 +217,5 @@ export async function fetchActiveMatchRow(userId: string) {
 }
 
 export function getMatchApiBaseUrl(): string {
-  return isSupabaseConfigured() ? supabaseUrl : ''
+  return isSupabaseConfigured() ? getSupabaseBrowserUrl() : ''
 }

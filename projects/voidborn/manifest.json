@@ -11,12 +11,15 @@
     "cdnBase": null
   },
   "brand": {
-    "logo": "brand/logo.jpg",
+    "logo": "brand/gamelogo.png",
+    "headerLogo": "brand/header.png",
+    "headerLogoAlt": "Voidborn",
+    "favicon": "brand/favicon.svg",
     "playLogo": "brand/gamelogo.png",
     "playLogoAlt": "Voidborn",
     "playLobby": "brand/play-lobby.png",
     "introVideo": "brand/main.mp4",
-    "logoAlt": "Voidborn logo"
+    "logoAlt": "Voidborn"
   },
   "routes": {
     "home": "/",

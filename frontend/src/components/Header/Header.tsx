@@ -114,8 +114,14 @@ export default function Header() {
     <>
       <header className="header">
         <Link href={appConfig.domain.routes.home} className="header__brand">
-          <img src={logo.src} alt={logo.alt} className="header__logo" />
-          <span className="header__title">{name.display}</span>
+          <img
+            src={logo.headerLogo ?? logo.src}
+            alt={logo.headerLogoAlt ?? logo.alt}
+            className={logo.headerLogo ? 'header__wordmark' : 'header__logo'}
+          />
+          {!logo.headerLogo ? (
+            <span className="header__title">{name.display}</span>
+          ) : null}
         </Link>
 
         <div className="header__actions">

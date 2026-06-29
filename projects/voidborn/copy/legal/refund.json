@@ -5,14 +5,14 @@
   "blocks": [
     {
       "type": "paragraph",
-      "text": "This Refund Policy explains how refunds are handled for purchases made on https://voidborn.fun (the \"Website\") and the Voidborn platform (the \"Platform\"), operated by PRODEC LTD."
+      "text": "This Refund Policy explains how refunds are handled for purchases made on https://voidborn.fun (the \"Website\") and the Voidborn platform (the \"Platform\"), operated by Test LTD."
     },
     {
       "type": "company",
-      "name": "PRODEC LTD",
-      "companyNumber": "12936248",
-      "address": "196 High Road, Wood Green, London, England, N22 8HH",
-      "email": "support@kingdomofarcane.com"
+      "name": "Test LTD",
+      "companyNumber": "00000000",
+      "address": "123 Example Street, Testville, TE1 1ST, United Kingdom",
+      "email": "support@voidborn.fun"
     },
     {
       "type": "paragraph",
@@ -83,7 +83,7 @@
     },
     {
       "type": "paragraph",
-      "text": "To request a refund, contact us at support@kingdomofarcane.com with your Account details, transaction information, and a clear description of the issue. We will review your request and respond within a reasonable time."
+      "text": "To request a refund, contact us at support@voidborn.fun with your Account details, transaction information, and a clear description of the issue. We will review your request and respond within a reasonable time."
     },
     {
       "type": "paragraph",
@@ -137,7 +137,7 @@
     },
     {
       "type": "paragraph",
-      "text": "For refund enquiries or billing questions, contact support@kingdomofarcane.com or use the company details above."
+      "text": "For refund enquiries or billing questions, contact support@voidborn.fun or use the company details above."
     }
   ]
 }

@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState, type CSSProperties } from 'react'
 import { createPortal } from 'react-dom'
 
 import Card from '@/components/CardPlaceholder/Card'
+import CardPreviewPanel from '@/components/cards/CardPreviewPanel'
 import '@/components/CardPlaceholder/styles.css'
 import { formatCredits } from '@/config'
 import { useMarketCurrency } from '@/hooks/useMarketCurrency'
@@ -31,21 +32,6 @@ type PreviewPosition = {
 }
 
 function MarketCardHoverPreview({ card, position }: { card: CardRecord; position: PreviewPosition }) {
-  const [artReady, setArtReady] = useState(false)
-
-  useEffect(() => {
-    let cancelled = false
-    setArtReady(false)
-    void preloadImage(card.artUrl).then(() => {
-      if (!cancelled) setArtReady(true)
-    })
-    return () => {
-      cancelled = true
-    }
-  }, [card.id, card.artUrl])
-
-  const display = artReady ? card : { ...card, artUrl: card.thumbUrl }
-
   return (
     <div
       className="market-card-popover"
@@ -59,16 +45,7 @@ function MarketCardHoverPreview({ card, position }: { card: CardRecord; position
         } as CSSProperties
       }
     >
-      <div className="market-card-preview">
-        <Card
-          {...toCardDisplayProps(display, 0)}
-          totalCards={1}
-          fanIndex={0}
-          layoutMode="preview"
-          showAbility
-          showRarity={false}
-        />
-      </div>
+      <CardPreviewPanel card={toCardDisplayProps(card, 0)} />
     </div>
   )
 }

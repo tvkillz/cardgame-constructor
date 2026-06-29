@@ -9,6 +9,10 @@ import {
 } from '@/config'
 import type { PortalSectionConfig } from '@/config/schema'
 import PortalAuthGate from '@/components/auth/PortalAuthGate'
+import {
+  CollectionModeProvider,
+  useCollectionMode,
+} from '@/components/collection/CollectionModeContext'
 import Footer from '@/components/Footer/Footer'
 import PurchaseCreditsModal from '@/components/credits/PurchaseCreditsModal'
 import MarketCartDrawer from '@/components/market/MarketCartDrawer'
@@ -16,6 +20,7 @@ import { useAuth } from '@/components/providers/AuthProvider'
 import { prefetchCardCatalog } from '@/hooks/useCardCatalog'
 import { MarketCartProvider, useMarketCart } from '@/hooks/useMarketCart'
 import { MarketCurrencyProvider, useMarketCurrency } from '@/hooks/useMarketCurrency'
+import { prefetchMarketListings } from '@/hooks/useMarketListings'
 import { prefetchPlayerInventory } from '@/hooks/usePlayerInventory'
 import { prefetchWallet, useWallet, WalletProvider } from '@/hooks/useWallet'
 import { MARKET_CURRENCIES } from '@/lib/market/currency'
@@ -32,13 +37,15 @@ function resolveSectionHref(section: PortalSectionConfig): string {
 export default function PortalShell({ children }: { children: React.ReactNode }) {
   return (
     <PortalAuthGate>
-      <WalletProvider>
-        <MarketCartProvider>
-          <MarketCurrencyProvider>
-            <PortalShellInner>{children}</PortalShellInner>
-          </MarketCurrencyProvider>
-        </MarketCartProvider>
-      </WalletProvider>
+      <CollectionModeProvider>
+        <WalletProvider>
+          <MarketCartProvider>
+            <MarketCurrencyProvider>
+              <PortalShellInner>{children}</PortalShellInner>
+            </MarketCurrencyProvider>
+          </MarketCartProvider>
+        </WalletProvider>
+      </CollectionModeProvider>
     </PortalAuthGate>
   )
 }
@@ -48,6 +55,8 @@ function PortalShellInner({ children }: { children: React.ReactNode }) {
   const portalCopy = appConfig.descriptions.portal
   const { user, session } = useAuth()
   const [creditsOpen, setCreditsOpen] = useState(false)
+  const { mode: collectionMode, setMode: setCollectionMode } = useCollectionMode()
+  const isCollectionPage = pathname === appConfig.domain.routes.portalCollection
 
   const activeSection = useMemo(
     () =>
@@ -67,76 +76,99 @@ function PortalShellInner({ children }: { children: React.ReactNode }) {
     void prefetchCardCatalog()
     void prefetchPlayerInventory(userId)
     void prefetchWallet(userId)
+    void prefetchMarketListings('all')
   }, [userId])
 
   return (
     <>
       <div className="portal">
-        <PortalHeader onPurchaseCredits={() => setCreditsOpen(true)} />
+        <div className="portal__sticky-top">
+          <PortalHeader onPurchaseCredits={() => setCreditsOpen(true)} />
 
-        <nav className="portal__tabs" aria-label="Player portal">
-          {appConfig.portal.sections.map((section) => {
-            const href = resolveSectionHref(section)
-            const isActive = pathname === href
-            return (
-              <Link
-                key={section.id}
-                href={href}
-                className={`portal__tab${isActive ? ' portal__tab--active' : ''}`}
-                aria-current={isActive ? 'page' : undefined}
-              >
-                {section.label}
-              </Link>
-            )
-          })}
-        </nav>
+          <nav className="portal__tabs" aria-label="Player portal">
+            {appConfig.portal.sections.map((section) => {
+              const href = resolveSectionHref(section)
+              const isActive = pathname === href
+              return (
+                <Link
+                  key={section.id}
+                  href={href}
+                  className={`portal__tab${isActive ? ' portal__tab--active' : ''}`}
+                  aria-current={isActive ? 'page' : undefined}
+                >
+                  {section.label}
+                </Link>
+              )
+            })}
+          </nav>
 
-        <div className="portal__toolbar">
-          <div className="portal__toolbar-copy">
-            <h1 className="portal__section-title">{activeSection.title}</h1>
-            <p className="portal__section-subtitle">{activeSection.subtitle}</p>
-          </div>
-          <div className="portal__toolbar-actions">
-            <span className="portal__toolbar-balance">
-              <span className="coin-stack-icon coin-stack-icon--sm" aria-hidden="true" />
-              {creditsLabel}
-            </span>
-            <Button
-              type="button"
-              variant="primary"
-              size="sm"
-              fantasy
-              className="portal__buy-credits-btn"
-              onClick={() => setCreditsOpen(true)}
-            >
-              {portalCopy.buyCredits}
-            </Button>
-            <Button type="button" variant="secondary" size="sm" disabled>
-              {portalCopy.withdraw}
-            </Button>
-            <Button type="button" variant="ghost" size="sm" onClick={openDrawer} className="portal__cart-btn">
-              <span className="cart-icon cart-icon--toolbar" aria-hidden="true" />
-              <span className="portal__cart-label">{portalCopy.cart}</span>
-              {itemCount > 0 ? (
-                <span className="portal__cart-badge" aria-label={`${itemCount} items in cart`}>
-                  {itemCount}
-                </span>
+          <div className="portal__toolbar">
+            <div className="portal__toolbar-copy">
+              <h1 className="portal__section-title">{activeSection.title}</h1>
+              <p className="portal__section-subtitle">{activeSection.subtitle}</p>
+            </div>
+            <div className="portal__toolbar-actions">
+              {isCollectionPage ? (
+                <div className="portal__mode-switch" role="group" aria-label="Collection mode">
+                  <button
+                    type="button"
+                    className={`portal__mode-btn${collectionMode === 'forge' ? ' portal__mode-btn--active' : ''}`}
+                    aria-pressed={collectionMode === 'forge'}
+                    onClick={() => setCollectionMode('forge')}
+                  >
+                    Forge
+                  </button>
+                  <button
+                    type="button"
+                    className={`portal__mode-btn${collectionMode === 'sell' ? ' portal__mode-btn--active' : ''}`}
+                    aria-pressed={collectionMode === 'sell'}
+                    onClick={() => setCollectionMode('sell')}
+                  >
+                    Sell
+                  </button>
+                </div>
               ) : null}
-            </Button>
-            <label className="portal__currency">
-              <span className="visually-hidden">Currency</span>
-              <select
-                value={currency}
-                onChange={(e) => setCurrency(e.target.value as typeof currency)}
-                aria-label="Display currency"
+              <span className="portal__toolbar-balance">
+                <span className="coin-stack-icon coin-stack-icon--sm" aria-hidden="true" />
+                {creditsLabel}
+              </span>
+              <Button
+                type="button"
+                variant="primary"
+                size="sm"
+                fantasy
+                className="portal__buy-credits-btn"
+                onClick={() => setCreditsOpen(true)}
               >
-                {MARKET_CURRENCIES.map((code) => (
-                  <option key={code} value={code}>
-                    {code}
-                  </option>
-                ))}
-              </select>
-            </label>
+                {portalCopy.buyCredits}
+              </Button>
+              <Button type="button" variant="secondary" size="sm" disabled>
+                {portalCopy.withdraw}
+              </Button>
+              <Button type="button" variant="ghost" size="sm" onClick={openDrawer} className="portal__cart-btn">
+                <span className="cart-icon cart-icon--toolbar" aria-hidden="true" />
+                <span className="portal__cart-label">{portalCopy.cart}</span>
+                {itemCount > 0 ? (
+                  <span className="portal__cart-badge" aria-label={`${itemCount} items in cart`}>
+                    {itemCount}
+                  </span>
+                ) : null}
+              </Button>
+              <label className="portal__currency">
+                <span className="visually-hidden">Currency</span>
+                <select
+                  value={currency}
+                  onChange={(e) => setCurrency(e.target.value as typeof currency)}
+                  aria-label="Display currency"
+                >
+                  {MARKET_CURRENCIES.map((code) => (
+                    <option key={code} value={code}>
+                      {code}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            </div>
           </div>
         </div>
 

@@ -35,6 +35,7 @@ export function buildPaths(projectId = resolveProjectId()) {
     dataFull: path.join(root, 'data', 'card-full'),
     play: path.join(root, 'play'),
     faviconPng: path.join(root, 'favicon.png'),
+    faviconSvg: path.join(root, 'favicon.svg'),
     favicon: path.join(root, 'favicon.png'),
     appleTouchIcon: path.join(root, 'apple-touch-icon.png'),
     ogImage: path.join(root, 'og-image.jpg'),

@@ -4,6 +4,13 @@
   color: #e8dcc8;
 }
 
+.portal__sticky-top {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  background: #0a0a0c;
+}
+
 .portal__header {
   display: flex;
   align-items: center;
@@ -32,6 +39,17 @@
   border-radius: 50%;
   object-fit: cover;
   border: 1px solid rgba(201, 162, 39, 0.45);
+}
+
+/* Portal header wordmark (brand/header.png via appConfig.logo.headerLogo).
+   Do not change these dimensions unless explicitly requested — tune here locally. */
+.portal__wordmark {
+  display: block;
+  height: 3.85rem;
+  width: auto;
+  max-width: min(48vw, 200px);
+  object-fit: contain;
+  transform: translateX(-7px);
 }
 
 .portal__brand-name {
@@ -243,6 +261,40 @@
   align-items: center;
   justify-content: flex-end;
   gap: 0.5rem;
+}
+
+.portal__mode-switch {
+  display: inline-flex;
+  border-radius: 6px;
+  border: 1px solid rgba(201, 162, 39, 0.35);
+  overflow: hidden;
+  background: rgba(10, 10, 12, 0.75);
+}
+
+.portal__mode-btn {
+  padding: 0.4rem 0.85rem;
+  border: none;
+  background: transparent;
+  color: rgba(232, 220, 200, 0.55);
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.portal__mode-btn--active {
+  color: #f3d878;
+  background: rgba(201, 162, 39, 0.15);
+}
+
+.portal__mode-btn:hover:not(.portal__mode-btn--active) {
+  color: #e8dcc8;
+  background: rgba(123, 77, 255, 0.1);
 }
 
 .portal__toolbar-balance {

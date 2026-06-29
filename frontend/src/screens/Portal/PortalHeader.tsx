@@ -34,9 +34,16 @@ export default function PortalHeader({ onPurchaseCredits }: PortalHeaderProps) {
   return (
     <>
       <header className="portal__header">
+        {/* Uses brand/header.png (headerLogo) when set in project manifest — see .portal__wordmark in PortalShell.css for size */}
         <Link href={appConfig.domain.routes.home} className="portal__brand">
-          <img src={appConfig.logo.src} alt={appConfig.logo.alt} className="portal__logo" />
-          <span className="portal__brand-name">{name.display}</span>
+          <img
+            src={appConfig.logo.headerLogo ?? appConfig.logo.src}
+            alt={appConfig.logo.headerLogoAlt ?? appConfig.logo.alt}
+            className={appConfig.logo.headerLogo ? 'portal__wordmark' : 'portal__logo'}
+          />
+          {!appConfig.logo.headerLogo ? (
+            <span className="portal__brand-name">{name.display}</span>
+          ) : null}
         </Link>
 
         <div className="portal__account">

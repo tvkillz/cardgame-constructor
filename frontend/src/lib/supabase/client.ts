@@ -1,6 +1,6 @@
 import { createClient, type SupabaseClient } from '@supabase/supabase-js'
 
-import { isSupabaseConfigured, supabaseAnonKey, supabaseUrl } from './env'
+import { getSupabaseBrowserUrl, isSupabaseConfigured, supabaseAnonKey } from './env'
 
 let browserClient: SupabaseClient | null = null
 
@@ -8,7 +8,8 @@ let browserClient: SupabaseClient | null = null
 export function getSupabaseBrowserClient(): SupabaseClient | null {
   if (!isSupabaseConfigured()) return null
 
-  browserClient ??= createClient(supabaseUrl, supabaseAnonKey, {
+  const url = getSupabaseBrowserUrl()
+  browserClient ??= createClient(url, supabaseAnonKey, {
     auth: {
       flowType: 'pkce',
       detectSessionInUrl: true,

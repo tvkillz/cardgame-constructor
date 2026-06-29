@@ -46,6 +46,11 @@ export interface AppConfig {
     src: string
     alt: string
     favicon: string
+    /** Optional SVG favicon copied at compile time (e.g. brand/favicon.svg). */
+    faviconSvg?: string
+    /** Optional wide wordmark for site header (hides title text when set). */
+    headerLogo?: string
+    headerLogoAlt?: string
     /** Optional play lobby title image (replaces title text on /play). */
     playLogo?: string
     playLogoAlt?: string
@@ -268,6 +273,7 @@ export interface AppConfig {
     terms?: LegalDocumentConfig
     privacy?: LegalDocumentConfig
     refund?: LegalDocumentConfig
+    disclaimer?: LegalDocumentConfig
   }
 }
 
@@ -390,6 +396,19 @@ export interface CookieConsentCopyConfig {
   closeLabel: string
 }
 
+export interface FooterSocialLinkConfig {
+  id: string
+  label: string
+  href: string
+  icon: string
+}
+
+export interface FooterPaymentIconConfig {
+  id: string
+  label: string
+  icon: string
+}
+
 export interface FooterConfig {
   brand: {
     name: string
@@ -402,9 +421,11 @@ export interface FooterConfig {
     address: string
     email: string
   }
+  social: FooterSocialLinkConfig[]
+  payments: FooterPaymentIconConfig[]
   copyright: string
   subCopyright: string
-  crafted: string
+  crafted?: string
   cookieSettingsLabel: string
   cookies: CookieConsentCopyConfig | null
 }

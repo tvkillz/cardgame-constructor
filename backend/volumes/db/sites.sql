@@ -120,8 +120,14 @@ begin
     raise exception 'invalid_site_auth_email';
   end if;
 
-  v_display_email := public.auth_email_display(new.email);
-  v_username := coalesce(new.raw_user_meta_data ->> 'username', split_part(v_display_email, '@', 1));
+  v_display_email := coalesce(
+    nullif(trim(new.raw_user_meta_data ->> 'display_email'), ''),
+    public.auth_email_display(new.email)
+  );
+  v_username := coalesce(
+    nullif(trim(new.raw_user_meta_data ->> 'username'), ''),
+    split_part(v_display_email, '@', 1)
+  );
 
   insert into public.site_members (user_id, site_id)
   values (new.id, v_site_id)

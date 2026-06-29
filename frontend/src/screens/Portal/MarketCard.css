@@ -25,78 +25,6 @@
   margin: 0;
 }
 
-.market-card-preview {
-  width: 100%;
-  height: 100%;
-  position: relative;
-}
-
-.market-card-preview .card {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  max-width: none;
-  transform: none;
-  animation: none;
-  filter: none;
-}
-
-.market-card-preview .card:hover,
-.market-card-preview .card.card--hovered {
-  transform: none;
-  filter: none;
-}
-
-.market-card-preview .card--preview .card__stat--mana {
-  top: 10px;
-  left: 10px;
-  width: 40px;
-  height: 44px;
-  font-size: 0.95rem;
-}
-
-.market-card-preview .card--preview .card__domain {
-  top: 12px;
-  right: 12px;
-  width: 30px;
-  height: 30px;
-}
-
-.market-card-preview .card--preview .card__stat--attack {
-  bottom: 120px;
-  left: 10px;
-  min-width: 40px;
-  height: 34px;
-  font-size: 0.85rem;
-}
-
-.market-card-preview .card--preview .card__stat--health {
-  bottom: 120px;
-  right: 10px;
-  width: 36px;
-  height: 42px;
-  font-size: 0.9rem;
-}
-
-.market-card-preview .card--preview .card__footer {
-  padding: 8px 10px 12px;
-  gap: 4px;
-}
-
-.market-card-preview .card--preview .card__title {
-  font-size: 1rem;
-}
-
-.market-card-preview .card--preview .card__ability-name {
-  font-size: 0.8rem;
-}
-
-.market-card-preview .card--preview .card__ability-text {
-  font-size: 0.9rem;
-  line-height: 1.35;
-}
-
 .market-card--hovered .market-card__frame {
   box-shadow: 0 0 0 2px rgba(201, 162, 39, 0.55);
 }
@@ -231,18 +159,20 @@
   cursor: not-allowed;
 }
 
+.market-card__price--cancel {
+  color: #fca5a5;
+  border-color: rgba(248, 113, 113, 0.45);
+  cursor: pointer;
+}
+
+.market-card__price--cancel:hover:not(:disabled) {
+  border-color: rgba(248, 113, 113, 0.75);
+  background: rgba(248, 113, 113, 0.08);
+}
+
 .market-card__price-icon {
   width: 16px;
   height: 16px;
   flex-shrink: 0;
   position: relative;
-}
-
-/* Market hover preview — keyword chips (edit font-size here) */
-.market-card-preview .card--preview .card__keywords {
-  gap: 3px;
-}
-
-.market-card-preview .card--preview .card__keywords li {
-  font-size: 0.8rem;
 }

@@ -40,6 +40,7 @@ import { loadProjectMetadata, siteStoragePaths } from './load-project-metadata.m
 import {
   buildPaths,
   FRONTEND_ROOT,
+  PROJECTS_ROOT,
   projectPaths,
   resolveProjectId,
 } from './project-paths.mjs'
@@ -206,7 +207,16 @@ async function buildBrandSeoAssets({ sharp, paths, manifest, seoJson, out }) {
       .toFile(out.appleTouchIcon)
     console.log('Brand: favicon + apple-touch-icon generated from logo')
   } else if (logoPath) {
-    console.warn('Brand: skipped favicon (install sharp to generate from logo.jpg)')
+    console.warn('Brand: skipped favicon (install sharp to generate from logo)')
+  }
+
+  const faviconRel = manifest.brand?.favicon
+  if (faviconRel && !faviconRel.startsWith('http') && !faviconRel.startsWith('/')) {
+    const faviconPath = await resolveAssetFile(paths, faviconRel)
+    if (faviconPath) {
+      await copyFile(faviconPath, out.faviconSvg)
+      console.log('Brand: favicon.svg copied from project assets')
+    }
   }
 }
 
@@ -276,6 +286,7 @@ async function copyProjectAssets(paths, manifest, out, sharp) {
 
   const brandFiles = [
     manifest.brand?.logo,
+    manifest.brand?.headerLogo,
     manifest.brand?.introVideo,
     manifest.brand?.playLogo,
     manifest.brand?.playLobby,
@@ -297,6 +308,41 @@ async function copyProjectAssets(paths, manifest, out, sharp) {
   const sharpNote = sharp ? '' : ' (sharp missing — rasters copied as-is)'
   console.log(`Assets: copied ${copied}, skipped ${skipped}${convertNote}${sharpNote}`)
   return { publicBase, metadata }
+}
+
+/** Shared footer icons from projects/shared/ → .build/{id}/assets/shared/ */
+const SHARED_FOOTER_ASSETS = {
+  'facebook-fill.svg': 'shared/facebook.svg',
+  'discord-outline.svg': 'shared/discord.svg',
+  'instagram-glyph-logo-png_seeklogo-286192.png': 'shared/instagram.png',
+  'Visa_Inc.-Logo.wine.svg': 'shared/visa.svg',
+  'mastercard-logo-vector-1.svg': 'shared/mastercard.svg',
+}
+
+async function copySharedFooterAssets(out, sharp) {
+  let copied = 0
+  let skipped = 0
+
+  for (const [sourceName, destRel] of Object.entries(SHARED_FOOTER_ASSETS)) {
+    const source = path.join(PROJECTS_ROOT, 'shared', sourceName)
+    if (!(await pathExists(source))) {
+      skipped++
+      continue
+    }
+    await writeCompiledAsset(sharp, source, destRel, out.assets)
+    copied++
+  }
+
+  if (copied || skipped) {
+    console.log(`Shared footer assets: copied ${copied}, skipped ${skipped}`)
+  }
+}
+
+function resolveFooterAssetUrl(publicBase, iconPath) {
+  if (!iconPath) return ''
+  if (iconPath.startsWith('http')) return iconPath
+  const rel = isConvertibleRaster(iconPath) ? toWebpRelativePath(iconPath) : iconPath
+  return assetUrl(publicBase, rel)
 }
 
 async function copyPathwaysAssets(paths, pathwaysJson, out, sharp) {
@@ -499,7 +545,7 @@ async function copyFinalCtaAssets(paths, finalctaJson, out, sharp) {
 
 async function buildLegalCopy(legalDir) {
   const docs = {}
-  for (const id of ['terms', 'privacy', 'refund']) {
+  for (const id of ['terms', 'privacy', 'refund', 'disclaimer']) {
     const filePath = path.join(legalDir, `${id}.json`)
     if (await pathExists(filePath)) {
       docs[id] = await readJson(filePath, `copy/legal/${id}`)
@@ -508,7 +554,7 @@ async function buildLegalCopy(legalDir) {
   return docs
 }
 
-function buildFooterCopy(footerJson) {
+function buildFooterCopy(footerJson, publicBase) {
   const fallback = {
     brand: { name: '', tagline: '' },
     legal: [],
@@ -518,6 +564,8 @@ function buildFooterCopy(footerJson) {
     crafted: '',
     cookieSettingsLabel: 'Cookie Settings',
     cookies: null,
+    social: [],
+    payments: [],
   }
   const source = footerJson ?? fallback
 
@@ -541,6 +589,17 @@ function buildFooterCopy(footerJson) {
     subCopyright: source.subCopyright ?? fallback.subCopyright,
     crafted: source.crafted ?? fallback.crafted,
     cookieSettingsLabel: source.cookieSettingsLabel ?? fallback.cookieSettingsLabel,
+    social: (source.social ?? []).map((item) => ({
+      id: item.id,
+      label: item.label,
+      href: item.href ?? '',
+      icon: resolveFooterAssetUrl(publicBase, item.icon),
+    })),
+    payments: (source.payments ?? []).map((item) => ({
+      id: item.id,
+      label: item.label,
+      icon: resolveFooterAssetUrl(publicBase, item.icon),
+    })),
     cookies: source.cookies
       ? {
           title: source.cookies.title,
@@ -790,7 +849,7 @@ function buildAppConfig({
   const pathwaysCopy = buildPathwaysCopy(pathwaysJson, publicBase)
   const faqCopy = buildFaqCopy(faqJson)
   const finalCtaCopy = buildFinalCtaCopy(finalctaJson, publicBase)
-  const footerCopy = buildFooterCopy(footerJson)
+  const footerCopy = buildFooterCopy(footerJson, publicBase)
 
   return {
     siteId: manifest.id,
@@ -805,6 +864,18 @@ function buildAppConfig({
       src: assetUrl(publicBase, toWebpRelativePath(manifest.brand.logo)),
       alt: manifest.brand.logoAlt ?? manifest.name.short,
       favicon: '/favicon.png',
+      ...(manifest.brand?.favicon?.endsWith('.svg')
+        ? { faviconSvg: '/favicon.svg' }
+        : {}),
+      ...(manifest.brand?.headerLogo
+        ? {
+            headerLogo: assetUrl(publicBase, toWebpRelativePath(manifest.brand.headerLogo)),
+            headerLogoAlt:
+              manifest.brand.headerLogoAlt ??
+              manifest.brand.logoAlt ??
+              manifest.name.short,
+          }
+        : {}),
       ...(manifest.brand?.playLogo
         ? {
             playLogo: assetUrl(publicBase, toWebpRelativePath(manifest.brand.playLogo)),
@@ -1313,6 +1384,7 @@ async function main() {
   const domainIds = new Set(domainsJson.domains.map((d) => d.id))
   const sharp = await loadSharp()
   const { publicBase, metadata } = await copyProjectAssets(paths, manifestForBundle, out, sharp)
+  await copySharedFooterAssets(out, sharp)
   await copyGamemodelAssets(paths, gamemodelJson, out, sharp)
   await copyCollectionAssets(paths, collectionJson, out, sharp)
   await copyPathwaysAssets(paths, pathwaysJson, out, sharp)

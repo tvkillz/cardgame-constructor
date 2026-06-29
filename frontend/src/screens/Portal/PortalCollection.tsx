@@ -1,10 +1,14 @@
 'use client'
 
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from 'react'
+import { createPortal } from 'react-dom'
 
 import gameConfig from '@project/game-config'
 import ClearDeckModal from '@/components/collection/ClearDeckModal'
+import { useCollectionMode } from '@/components/collection/CollectionModeContext'
+import SellCardModal from '@/components/collection/SellCardModal'
 import Card from '@/components/CardPlaceholder/Card'
+import CardPreviewPanel from '@/components/cards/CardPreviewPanel'
 import '@/components/CardPlaceholder/styles.css'
 import MarketToast from '@/components/market/MarketToast'
 import { Button } from '@/components/ui/Button/Button'
@@ -12,6 +16,7 @@ import { usePlayerDecks } from '@/hooks/usePlayerDecks'
 import { useCardCatalog } from '@/hooks/useCardCatalog'
 import { usePlayerInventory } from '@/hooks/usePlayerInventory'
 import { toCardDisplayProps } from '@/lib/cards'
+import { preloadImage } from '@/lib/cards/preload'
 import { DOMAIN_GLOW, domainLabel } from '@/lib/cards/domains'
 import type { CardRarity, CardRecord } from '@/lib/cards/types'
 import {
@@ -30,10 +35,20 @@ import {
 } from '@/lib/decks'
 import './PortalCollection.css'
 import './PortalMarketGrid.css'
+import './MarketCard.css'
 
 const GRID_COLUMNS = 6
 const ROWS_PER_PAGE = 4
 const PAGE_SIZE = GRID_COLUMNS * ROWS_PER_PAGE
+const PREVIEW_SCALE = 1.25
+const PREVIEW_GAP_PX = 12
+
+type PreviewPosition = {
+  top: number
+  left: number
+  width: number
+  height: number
+}
 
 const RARITIES: CardRarity[] = ['common', 'uncommon', 'rare', 'epic', 'legendary']
 
@@ -43,7 +58,7 @@ function rarityLabel(rarity: CardRarity): string {
 
 export default function PortalCollection() {
   const { cards: catalog } = useCardCatalog()
-  const { ownedBySlug, loading: inventoryLoading } = usePlayerInventory()
+  const { ownedBySlug, loading: inventoryLoading, refresh: refreshInventory } = usePlayerInventory()
   const { decks, loading: decksLoading, refresh, replaceDeck, userId } = usePlayerDecks()
 
   const [activeDeckId, setActiveDeckId] = useState<string>('')
@@ -53,6 +68,9 @@ export default function PortalCollection() {
   const [clearOpen, setClearOpen] = useState(false)
   const [clearing, setClearing] = useState(false)
   const [toastMessage, setToastMessage] = useState<string | null>(null)
+  const { mode: collectionMode } = useCollectionMode()
+  const isSellMode = collectionMode === 'sell'
+  const [sellCard, setSellCard] = useState<CardRecord | null>(null)
 
   const [search, setSearch] = useState('')
   const [domainFilter, setDomainFilter] = useState('all')
@@ -268,7 +286,7 @@ export default function PortalCollection() {
     <div className="portal-collection">
       <MarketToast message={toastMessage} onDismiss={() => setToastMessage(null)} />
 
-      <div className="portal-collection__layout">
+      <div className={`portal-collection__layout${isSellMode ? ' portal-collection__layout--sell' : ''}`}>
         <header className="portal-collection__header">
           <div className="portal-market__toolbar" role="search">
             <label className="portal-market__search">
@@ -331,28 +349,31 @@ export default function PortalCollection() {
             </label>
           </div>
 
-          <div className="portal-collection__deck-tabs" role="tablist" aria-label="Your decks">
-            {decks.map((deck) => {
-              const isActive = deck.id === activeDeck.id
-              return (
-                <button
-                  key={deck.id}
-                  type="button"
-                  role="tab"
-                  aria-selected={isActive}
-                  className={`portal-collection__deck-tab${isActive ? ' portal-collection__deck-tab--active' : ''}`}
-                  onClick={() => setActiveDeckId(deck.id)}
-                >
-                  {deck.name}
-                </button>
-              )
-            })}
-            <Button type="button" variant="secondary" size="sm" onClick={() => void handleCreateDeck()}>
-              + Add deck
-            </Button>
-          </div>
+          {!isSellMode ? (
+            <div className="portal-collection__deck-tabs" role="tablist" aria-label="Your decks">
+              {decks.map((deck) => {
+                const isActive = deck.id === activeDeck.id
+                return (
+                  <button
+                    key={deck.id}
+                    type="button"
+                    role="tab"
+                    aria-selected={isActive}
+                    className={`portal-collection__deck-tab${isActive ? ' portal-collection__deck-tab--active' : ''}`}
+                    onClick={() => setActiveDeckId(deck.id)}
+                  >
+                    {deck.name}
+                  </button>
+                )
+              })}
+              <Button type="button" variant="secondary" size="sm" onClick={() => void handleCreateDeck()}>
+                + Add deck
+              </Button>
+            </div>
+          ) : null}
         </header>
 
+        {!isSellMode ? (
         <aside className="portal-collection__deck-panel" aria-label="Deck builder">
           <header className="portal-collection__deck-panel-head">
             <span className="portal-collection__deck-count">
@@ -416,6 +437,7 @@ export default function PortalCollection() {
             </ul>
           )}
         </aside>
+        ) : null}
 
         <div className="portal-collection__main">
           <p className="portal-market__count" aria-live="polite">
@@ -434,19 +456,24 @@ export default function PortalCollection() {
           ) : (
             <>
               <div className="portal-collection__grid" aria-label="Owned cards">
-                {pageCards.map((card, index) => (
-                  <CollectionOwnedCard
-                    key={card.id}
-                    card={card}
-                    index={index}
-                    ownedQty={ownedBySlug.get(card.slug) ?? 0}
-                    draftQty={draftCards.find((c) => c.slug === card.slug)?.quantity ?? 0}
-                    deckTotal={draftCount}
-                    maxDeckCards={activeDeck.maxCards}
-                    onAdd={() => addToDraft(card.slug, card.id)}
-                    onRemove={() => removeFromDraft(card.slug)}
-                  />
-                ))}
+                {pageCards.map((card, index) => {
+                  const ownedQty = ownedBySlug.get(card.slug) ?? 0
+                  return (
+                    <CollectionOwnedCard
+                      key={card.id}
+                      card={card}
+                      index={index}
+                      ownedQty={ownedQty}
+                      draftQty={draftCards.find((c) => c.slug === card.slug)?.quantity ?? 0}
+                      deckTotal={draftCount}
+                      maxDeckCards={activeDeck.maxCards}
+                      sellMode={isSellMode}
+                      onAdd={() => addToDraft(card.slug, card.id)}
+                      onRemove={() => removeFromDraft(card.slug)}
+                      onSell={() => setSellCard(card)}
+                    />
+                  )
+                })}
               </div>
 
               {pageCount > 1 ? (
@@ -479,6 +506,20 @@ export default function PortalCollection() {
         </div>
       </div>
 
+      <SellCardModal
+        card={sellCard}
+        onClose={() => setSellCard(null)}
+        onListed={() => {
+          if (sellCard) {
+            setToastMessage(`${sellCard.title} listed on the market`)
+            void Promise.all([
+              refreshInventory({ silent: true }),
+              refresh({ silent: true }),
+            ])
+          }
+        }}
+      />
+
       <ClearDeckModal
         deckName={clearOpen ? activeDeck.name : null}
         onClose={() => setClearOpen(false)}
@@ -496,8 +537,10 @@ type CollectionOwnedCardProps = {
   draftQty: number
   deckTotal: number
   maxDeckCards: number
+  sellMode: boolean
   onAdd: () => void
   onRemove: () => void
+  onSell: () => void
 }
 
 function CollectionOwnedCard({
@@ -507,9 +550,16 @@ function CollectionOwnedCard({
   draftQty,
   deckTotal,
   maxDeckCards,
+  sellMode,
   onAdd,
   onRemove,
+  onSell,
 }: CollectionOwnedCardProps) {
+  const frameRef = useRef<HTMLDivElement>(null)
+  const [hovered, setHovered] = useState(false)
+  const [previewPos, setPreviewPos] = useState<PreviewPosition | null>(null)
+  const [mounted, setMounted] = useState(false)
+
   const canAdd = canAddToDraftDeck(
     ownedQty,
     draftQty,
@@ -519,9 +569,50 @@ function CollectionOwnedCard({
   )
   const canRemove = canRemoveFromDraftDeck(draftQty)
 
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  const updatePreviewPosition = () => {
+    const rect = frameRef.current?.getBoundingClientRect()
+    if (!rect) return
+
+    const width = rect.width * PREVIEW_SCALE
+    const height = rect.height * PREVIEW_SCALE
+    const top = rect.top + (rect.height - height) / 2
+    let left = rect.left - width - PREVIEW_GAP_PX
+
+    if (left < 8) {
+      left = rect.right + PREVIEW_GAP_PX
+    }
+
+    const maxLeft = window.innerWidth - width - 8
+    if (left > maxLeft) left = maxLeft
+
+    setPreviewPos({ top, left, width, height })
+  }
+
+  const showPreview = () => {
+    updatePreviewPosition()
+    setHovered(true)
+    void preloadImage(card.artUrl)
+  }
+
+  const hidePreview = () => {
+    setHovered(false)
+    setPreviewPos(null)
+  }
+
   return (
-    <article className="collection-owned-card" aria-label={card.title}>
-      <div className="collection-owned-card__frame">
+    <article
+      className={`collection-owned-card${hovered ? ' collection-owned-card--hovered' : ''}`}
+      aria-label={card.title}
+      onMouseEnter={showPreview}
+      onMouseLeave={hidePreview}
+      onFocus={showPreview}
+      onBlur={hidePreview}
+    >
+      <div className="collection-owned-card__frame" ref={frameRef}>
         <Card
           {...toCardDisplayProps(card, index)}
           totalCards={1}
@@ -533,27 +624,59 @@ function CollectionOwnedCard({
           thumbOnly
         />
       </div>
-      <div className="collection-owned-card__qty" aria-label={`${draftQty} in deck`}>
-        <button
+      {sellMode ? (
+        <Button
           type="button"
-          className="collection-owned-card__qty-btn"
-          disabled={!canRemove}
-          aria-label={`Remove one ${card.title} from deck`}
-          onClick={onRemove}
+          variant="secondary"
+          size="sm"
+          className="collection-owned-card__sell-btn"
+          disabled={ownedQty < 1 || (card.priceCents ?? 0) <= 0}
+          onClick={onSell}
         >
-          −
-        </button>
-        <span className="collection-owned-card__qty-value">{draftQty}</span>
-        <button
-          type="button"
-          className="collection-owned-card__qty-btn"
-          disabled={!canAdd}
-          aria-label={`Add one ${card.title} to deck`}
-          onClick={onAdd}
-        >
-          +
-        </button>
-      </div>
+          Sell card
+        </Button>
+      ) : (
+        <div className="collection-owned-card__qty" aria-label={`${draftQty} in deck`}>
+          <button
+            type="button"
+            className="collection-owned-card__qty-btn"
+            disabled={!canRemove}
+            aria-label={`Remove one ${card.title} from deck`}
+            onClick={onRemove}
+          >
+            −
+          </button>
+          <span className="collection-owned-card__qty-value">{draftQty}</span>
+          <button
+            type="button"
+            className="collection-owned-card__qty-btn"
+            disabled={!canAdd}
+            aria-label={`Add one ${card.title} to deck`}
+            onClick={onAdd}
+          >
+            +
+          </button>
+        </div>
+      )}
+      {mounted && hovered && previewPos
+        ? createPortal(
+            <div
+              className="market-card-popover"
+              style={
+                {
+                  '--glow-color': card.glowColor,
+                  top: previewPos.top,
+                  left: previewPos.left,
+                  width: previewPos.width,
+                  height: previewPos.height,
+                } as CSSProperties
+              }
+            >
+              <CardPreviewPanel card={toCardDisplayProps(card, 0)} />
+            </div>,
+            document.body,
+          )
+        : null}
     </article>
   )
 }

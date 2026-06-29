@@ -41,6 +41,7 @@ services:
       - ../volumes/db/decks.sql:/docker-entrypoint-initdb.d/init-scripts/97b-decks.sql:Z
       - ../volumes/db/matches.sql:/docker-entrypoint-initdb.d/init-scripts/97c-matches.sql:Z
       - ../volumes/db/commerce.sql:/docker-entrypoint-initdb.d/init-scripts/97d-commerce.sql:Z
+      - ../volumes/db/player-market-listings.sql:/docker-entrypoint-initdb.d/init-scripts/97e-player-market-listings.sql:Z
       # Seed data should be inserted last (alphabetical order)
       - ./dev/data.sql:/docker-entrypoint-initdb.d/seed.sql
   storage:

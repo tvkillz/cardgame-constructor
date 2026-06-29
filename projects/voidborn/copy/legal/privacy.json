@@ -5,14 +5,14 @@
   "blocks": [
     {
       "type": "paragraph",
-      "text": "This Privacy Policy explains how PRODEC LTD (\"Company\", \"we\", \"us\", or \"our\") collects, uses, stores, and protects personal data when you use https://voidborn.fun (the \"Website\") and the Voidborn game and related services (collectively, the \"Platform\")."
+      "text": "This Privacy Policy explains how Test LTD (\"Company\", \"we\", \"us\", or \"our\") collects, uses, stores, and protects personal data when you use https://voidborn.fun (the \"Website\") and the Voidborn game and related services (collectively, the \"Platform\")."
     },
     {
       "type": "company",
-      "name": "PRODEC LTD",
-      "companyNumber": "12936248",
-      "address": "196 High Road, Wood Green, London, England, N22 8HH",
-      "email": "support@kingdomofarcane.com"
+      "name": "Test LTD",
+      "companyNumber": "00000000",
+      "address": "123 Example Street, Testville, TE1 1ST, United Kingdom",
+      "email": "support@voidborn.fun"
     },
     {
       "type": "paragraph",
@@ -25,7 +25,7 @@
     },
     {
       "type": "paragraph",
-      "text": "PRODEC LTD is the data controller responsible for personal data processed through the Platform. Our contact details are set out above."
+      "text": "Test LTD is the data controller responsible for personal data processed through the Platform. Our contact details are set out above."
     },
     {
       "type": "heading",
@@ -191,7 +191,7 @@
     },
     {
       "type": "paragraph",
-      "text": "To exercise these rights, contact us at support@kingdomofarcane.com. We may need to verify your identity before responding."
+      "text": "To exercise these rights, contact us at support@voidborn.fun. We may need to verify your identity before responding."
     },
     {
       "type": "heading",
@@ -227,7 +227,7 @@
     },
     {
       "type": "paragraph",
-      "text": "If you have questions about this Privacy Policy or how we handle your personal data, contact us at support@kingdomofarcane.com or using the company details above."
+      "text": "If you have questions about this Privacy Policy or how we handle your personal data, contact us at support@voidborn.fun or using the company details above."
     }
   ]
 }

@@ -1,32 +1,32 @@
 {
-  "title": "Game Model",
-  "description": "Experience strategic depth through deck-building mastery, turn-based tactical warfare, and competitive progression.",
+  "title": "How Voidborn Plays",
+  "description": "Four elemental dominions, one fractured battlefield—assemble a warband, outmaneuver rivals in tense turn duels, and chase standing on the seasonal ladder.",
   "pillars": [
     {
       "id": "tactical-battles",
-      "title": "Tactical Battles",
-      "description": "Plan every move carefully in turn-based duels where timing, positioning, and spell synergy decide victory.",
+      "title": "Field Command",
+      "description": "Trade blows on a living board where lane pressure, bait lines, and burst windows matter more than raw stats. Win the turn before you win the match.",
       "image": "gamemodel/tactical-battles.webp",
       "glowColor": "#4ec8ff"
     },
     {
       "id": "collectible-cards",
-      "title": "Collectible Cards",
-      "description": "Unlock, collect, and build with rare cards, powerful abilities, and unique combinations across multiple playstyles.",
+      "title": "Relic Hunting",
+      "description": "Pull signatures from Kronos, Thalassa, Infernus, and Anemos—then stitch keywords, curves, and finishers into a list that punishes predictable play.",
       "image": "gamemodel/collectible-cards.webp",
       "glowColor": "#a855f7"
     },
     {
       "id": "ranked-climb",
-      "title": "Ranked Climb",
-      "description": "Rise through competitive ladders, refine your strategy, and prove your mastery in the Kingdom of Arcane.",
+      "title": "Void Ladder",
+      "description": "Climb seasonal tiers, absorb losses into sharper lines, and leave a trail of wrecked meta decks. The summit rewards pilots who adapt mid-series.",
       "image": "gamemodel/ranked-climb.webp",
       "glowColor": "#f3c74f"
     }
   ],
   "tags": [
-    { "id": "deck-building", "label": "Deck-Building Strategy" },
-    { "id": "class-champions", "label": "Class-Based Champions" },
-    { "id": "replayable-depth", "label": "Replayable Depth" }
+    { "id": "deck-building", "label": "Warband Tuning" },
+    { "id": "class-champions", "label": "Dominion Affinities" },
+    { "id": "replayable-depth", "label": "Shifting Metas" }
   ]
 }

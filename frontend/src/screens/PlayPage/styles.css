@@ -117,14 +117,14 @@
 
 .play-page__logo {
   display: block;
-  width: clamp(220px, 58vw, 290px);
+  /* width: clamp(220px, 58vw, 290px); */
   max-width: 100%;
-  height: auto;
+  height: 17vw;
   margin: 0;
   object-fit: contain;
   mix-blend-mode: screen;
   
-  filter: drop-shadow(0 0 18px rgb(0, 0, 0));
+  /* filter: drop-shadow(0 0 18px rgb(0, 0, 0)); */
   pointer-events: none;
   user-select: none;
 }
