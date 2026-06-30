@@ -13,25 +13,16 @@ import { preloadImage } from '@/lib/cards/preload'
 import { toCardDisplayProps } from '@/lib/cards'
 import type { CardRecord } from '@/lib/cards/types'
 import { formatMarketMoney } from '@/lib/market/currency'
+import { computeCardHoverPreviewPosition, type CardHoverPreviewPosition } from '@/lib/cards/hoverPreview'
 import '@/styles/coin-stack-icon.css'
 import '@/styles/cart-icon.css'
 import './MarketCard.css'
-
-const PREVIEW_SCALE = 1.25
-const PREVIEW_GAP_PX = 12
 
 function rarityLabel(rarity: string): string {
   return rarity.charAt(0).toUpperCase() + rarity.slice(1)
 }
 
-type PreviewPosition = {
-  top: number
-  left: number
-  width: number
-  height: number
-}
-
-function MarketCardHoverPreview({ card, position }: { card: CardRecord; position: PreviewPosition }) {
+function MarketCardHoverPreview({ card, position }: { card: CardRecord; position: CardHoverPreviewPosition }) {
   return (
     <div
       className="market-card-popover"
@@ -61,7 +52,7 @@ export default function MarketCard({ card, index, onBuyCredits, onAddToCart }: M
   const frameRef = useRef<HTMLDivElement>(null)
   const { currency } = useMarketCurrency()
   const [hovered, setHovered] = useState(false)
-  const [previewPos, setPreviewPos] = useState<PreviewPosition | null>(null)
+  const [previewPos, setPreviewPos] = useState<CardHoverPreviewPosition | null>(null)
   const [mounted, setMounted] = useState(false)
 
   const priceCents = card.priceCents ?? 0
@@ -76,20 +67,7 @@ export default function MarketCard({ card, index, onBuyCredits, onAddToCart }: M
   const updatePreviewPosition = () => {
     const rect = frameRef.current?.getBoundingClientRect()
     if (!rect) return
-
-    const width = rect.width * PREVIEW_SCALE
-    const height = rect.height * PREVIEW_SCALE
-    const top = rect.top + (rect.height - height) / 2
-    let left = rect.left - width - PREVIEW_GAP_PX
-
-    if (left < 8) {
-      left = rect.right + PREVIEW_GAP_PX
-    }
-
-    const maxLeft = window.innerWidth - width - 8
-    if (left > maxLeft) left = maxLeft
-
-    setPreviewPos({ top, left, width, height })
+    setPreviewPos(computeCardHoverPreviewPosition(rect))
   }
 
   const showPreview = () => {

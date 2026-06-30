@@ -207,6 +207,27 @@
   word-break: break-word;
 }
 
+.portal-tx-row__reject-reason {
+  margin: 0 0 0.35rem;
+  padding: 0.45rem 0.55rem;
+  border-radius: 4px;
+  border: 1px solid rgba(252, 165, 165, 0.25);
+  background: rgba(252, 165, 165, 0.06);
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: rgba(252, 165, 165, 0.92);
+  word-break: break-word;
+}
+
+.portal-tx-row__reject-label {
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 0.68rem;
+  color: rgba(252, 165, 165, 0.75);
+}
+
 .portal-tx-row__date {
   font-family: var(--font-ui);
   font-size: 0.72rem;
@@ -232,7 +253,8 @@
 }
 
 .portal-tx-row__status--completed,
-.portal-tx-row__status--paid {
+.portal-tx-row__status--paid,
+.portal-tx-row__status--successful {
   color: #86efac;
 }
 
@@ -243,7 +265,8 @@
 
 .portal-tx-row__status--failed,
 .portal-tx-row__status--refunded,
-.portal-tx-row__status--cancelled {
+.portal-tx-row__status--cancelled,
+.portal-tx-row__status--rejected {
   color: #fca5a5;
 }
 

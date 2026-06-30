@@ -3,13 +3,17 @@
 import { useEffect, useId, useState, type FormEvent } from 'react'
 import { appConfig } from '@/config'
 import BillingProfileForm from '@/components/profile/BillingProfileForm'
+import PaymentCardsSection from '@/components/profile/PaymentCardsSection'
 import { Button } from '@/components/ui/Button/Button'
 import { useAuth } from '@/components/providers/AuthProvider'
-import { isValidPassword, isValidPhone } from '@/lib/auth/validation'
+import { invokeCommerceAction } from '@/lib/commerce/api'
+import { isValidPassword } from '@/lib/auth/validation'
 import {
+  CHECKOUT_REQUIRED_BILLING_FIELDS,
   EMPTY_BILLING_PROFILE,
   fetchBillingProfile,
   saveBillingProfile,
+  validateBillingProfileForCheckout,
   type BillingProfile,
 } from '@/lib/profile/billing'
 import { getSupabaseBrowserClient, isSupabaseConfigured } from '@/lib/supabase'
@@ -25,6 +29,7 @@ export default function PortalProfile() {
   const [billingSaving, setBillingSaving] = useState(false)
   const [billingError, setBillingError] = useState<string | null>(null)
   const [billingSuccess, setBillingSuccess] = useState<string | null>(null)
+  const [isAdmin, setIsAdmin] = useState(false)
 
   const [currentPassword, setCurrentPassword] = useState('')
   const [newPassword, setNewPassword] = useState('')
@@ -40,9 +45,13 @@ export default function PortalProfile() {
     }
 
     let cancelled = false
-    void fetchBillingProfile(user.id).then((saved) => {
+    void Promise.all([
+      fetchBillingProfile(user.id),
+      invokeCommerceAction({ type: 'profile_get' }),
+    ]).then(([saved, profileRes]) => {
       if (cancelled) return
       if (saved) setBilling(saved)
+      setIsAdmin(Boolean(profileRes.isAdmin))
       setBillingLoading(false)
     })
 
@@ -66,8 +75,9 @@ export default function PortalProfile() {
       return
     }
 
-    if (!isValidPhone(billing.phone)) {
-      setBillingError('Enter a valid phone number (at least 8 characters).')
+    const validation = validateBillingProfileForCheckout(billing)
+    if (!validation.ok) {
+      setBillingError(validation.message)
       return
     }
 
@@ -156,6 +166,7 @@ export default function PortalProfile() {
           <BillingProfileForm
             formId={formId}
             billing={billing}
+            requiredFields={CHECKOUT_REQUIRED_BILLING_FIELDS}
             onChange={setBillingField}
             footer={
               <>
@@ -187,17 +198,7 @@ export default function PortalProfile() {
       </form>
 
       <div className="portal-profile__side">
-        <section className="portal-profile__card portal-profile__card--compact portal-profile__card--payment">
-          <div className="portal-profile__card-header">
-            <h2 className="portal-profile__card-title">Payment Cards</h2>
-            <Button type="button" variant="secondary" size="sm" fantasy>
-              Add Card
-            </Button>
-          </div>
-          <p className="portal-profile__empty">
-            No cards found. Use Add Card to open processor stub.
-          </p>
-        </section>
+        <PaymentCardsSection userId={user?.id} isAdmin={isAdmin} />
 
         <form
           className="portal-profile__card portal-profile__card--compact portal-profile__card--password"

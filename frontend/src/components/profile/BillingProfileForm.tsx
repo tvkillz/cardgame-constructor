@@ -13,6 +13,8 @@ type BillingProfileFormProps = {
   onSubmit?: (event: FormEvent) => void
   footer?: ReactNode
   disabled?: boolean
+  /** Fields that show a required marker (e.g. checkout). */
+  requiredFields?: readonly BillingField[]
 }
 
 function ProfileField({
@@ -22,6 +24,7 @@ function ProfileField({
   onChange,
   autoComplete,
   disabled,
+  required = false,
 }: {
   id: string
   label: string
@@ -29,10 +32,14 @@ function ProfileField({
   onChange: (value: string) => void
   autoComplete?: string
   disabled?: boolean
+  required?: boolean
 }) {
   return (
     <label className="billing-form__field" htmlFor={id}>
-      <span className="billing-form__label">{label}</span>
+      <span className="billing-form__label">
+        {label}
+        {required ? <span className="billing-form__required" aria-hidden="true"> *</span> : null}
+      </span>
       <input
         id={id}
         className="billing-form__input"
@@ -40,6 +47,8 @@ function ProfileField({
         value={value}
         autoComplete={autoComplete}
         disabled={disabled}
+        required={required}
+        aria-required={required}
         onChange={(e) => onChange(e.target.value)}
       />
     </label>
@@ -53,7 +62,10 @@ export default function BillingProfileForm({
   onSubmit,
   footer,
   disabled = false,
+  requiredFields = [],
 }: BillingProfileFormProps) {
+  const isRequired = (field: BillingField) => requiredFields.includes(field)
+
   const fields = (
   <>
     <div className="billing-form__grid billing-form__grid--pair">
@@ -63,6 +75,7 @@ export default function BillingProfileForm({
         value={billing.firstName}
         autoComplete="given-name"
         disabled={disabled}
+        required={isRequired('firstName')}
         onChange={(value) => onChange('firstName', value)}
       />
       <ProfileField
@@ -71,6 +84,7 @@ export default function BillingProfileForm({
         value={billing.lastName}
         autoComplete="family-name"
         disabled={disabled}
+        required={isRequired('lastName')}
         onChange={(value) => onChange('lastName', value)}
       />
     </div>
@@ -99,6 +113,7 @@ export default function BillingProfileForm({
         value={billing.city}
         autoComplete="address-level2"
         disabled={disabled}
+        required={isRequired('city')}
         onChange={(value) => onChange('city', value)}
       />
       <ProfileField
@@ -118,6 +133,7 @@ export default function BillingProfileForm({
         value={billing.postalCode}
         autoComplete="postal-code"
         disabled={disabled}
+        required={isRequired('postalCode')}
         onChange={(value) => onChange('postalCode', value)}
       />
       <ProfileField
@@ -126,6 +142,7 @@ export default function BillingProfileForm({
         value={billing.country}
         autoComplete="country-name"
         disabled={disabled}
+        required={isRequired('country')}
         onChange={(value) => onChange('country', value)}
       />
     </div>

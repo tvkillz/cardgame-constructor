@@ -1,6 +1,8 @@
-# VOIDBORN sendmail — cPanel relay
+# VOIDBORN sendmail — HTTP mail relay (VPS)
 
-HTTP mail relay on **voidborn.fun** so GoTrue on the Utah API VPS never opens SMTP port 587/465 to cPanel. The relay sends via local cPanel mail (`mail.voidborn.fun`).
+HTTP mail relay so GoTrue on the API VPS never opens SMTP directly. Runs on the **frontend VPS** (pm2); source is in `sendmail/` and is rclone-mounted in this repo via `mount-voidborn.sh`.
+
+**Not a cPanel deploy.** Legacy `CPANEL.md` / `build:cpanel` scripts are historical reference only unless you explicitly use them elsewhere.
 
 ## Routes (BASE_PATH=/api/sendmail)
 
@@ -10,6 +12,7 @@ HTTP mail relay on **voidborn.fun** so GoTrue on the Utah API VPS never opens SM
 | GET | `/smtp-health` | Bearer `MAIL_API_KEY` | Verify SMTP login |
 | POST | `/test` | Bearer | Send test email |
 | POST | `/send` | Bearer | Generic HTML email |
+| POST | `/invoice` | Bearer | Order invoice — portal HTML + PDF attachment |
 | POST | `/hook` | Standard Webhooks signature | **GoTrue send-email hook** |
 
 Public URL: `https://voidborn.fun/api/sendmail/...`
@@ -93,7 +96,30 @@ Confirm/reset links in emails use that host (`/auth/v1/verify?...`), not the fro
 ## POST /test body (optional)
 
 ```json
-{ "recipients": ["you@example.com"] }
+{ "recipients": ["you@example.com"], "template": "signup" }
 ```
 
-If omitted, uses `TEST_EMAIL_RECIPIENTS` from env.
+`template` values:
+
+| Value | Sends |
+|-------|--------|
+| `signup` (default) | Registration / activation preview |
+| `recovery` | Password reset preview |
+| `invoice` | Invoice email + PDF preview (Test LTD seller data) |
+
+## POST /invoice body
+
+Called by the commerce edge function after a successful payment. See `frontend/src/lib/commerce/INVOICE.md`.
+
+```json
+{
+  "recipient": "player@example.com",
+  "paymentMethod": "Test payment",
+  "order": { "id": "uuid", "paidAt": "ISO", "totalCents": 1000, "currency": "eur" },
+  "lineItems": [{ "title": "VOIDBORN Credits", "quantity": 1000, "unitPriceCents": 1000 }],
+  "buyer": { "firstName": "Ada", "lastName": "Lovelace", "city": "London", "postalCode": "SW1A 1AA", "country": "UK" },
+  "seller": { "companyName": "Test LTD", "companyNumber": "00000000", "address": "...", "email": "support@voidborn.fun" }
+}
+```
+
+If `recipients` is omitted on `/test`, uses `TEST_EMAIL_RECIPIENTS` from env.

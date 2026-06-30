@@ -128,9 +128,12 @@ create table public.withdrawal_requests (
   status          text not null default 'pending',
   payout_method   text,
   payout_details  jsonb not null default '{}',
+  reject_reason   text,
   created_at      timestamptz not null default now(),
   updated_at      timestamptz not null default now()
 );
+
+alter table public.withdrawal_requests add column if not exists reject_reason text;
 
 -- Admin flag (profiles may exist from dev seed)
 do $$

@@ -29,6 +29,7 @@ export interface AppConfig {
       checkout: string
       checkoutSuccess: string
       checkoutCancel: string
+      withdrawalSuccess: string
     }
     legal: {
       termsUrl: string

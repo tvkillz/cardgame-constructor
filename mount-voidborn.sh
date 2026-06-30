@@ -12,11 +12,13 @@ BASE_VOIDBORN="/home/any/Desktop/constructor-mount"
 LOCAL_BACKEND="$BASE_VOIDBORN/backend"
 # LOCAL_FRONTEND="$BASE_VOIDBORN/frontend"
 LOCAL_PROJECTS="$BASE_VOIDBORN/projects"
+LOCAL_SENDMAIL="$BASE_VOIDBORN/sendmail"
 PERSISTENT_CACHE="/home/any/.rclone_cache"
 
 REMOTE_BACKEND="/root/constructor-files/backend"
 # REMOTE_FRONTEND="/root/constructor-files/frontend"
 REMOTE_PROJECTS="/root/constructor-files/projects"
+REMOTE_SENDMAIL="/root/constructor-files/sendmail"
 
 # --- 2. Cleanup Ghost Mounts ---
 echo "Cleaning up existing mounts..."
@@ -27,6 +29,7 @@ pkill -f "rclone mount sportsy:" || true
 fusermount -uz "$LOCAL_BACKEND" 2>/dev/null || true
 # fusermount -uz "$LOCAL_FRONTEND" 2>/dev/null || true
 fusermount -uz "$LOCAL_PROJECTS" 2>/dev/null || true
+fusermount -uz "$LOCAL_SENDMAIL" 2>/dev/null || true
 
 set -e
 
@@ -58,15 +61,15 @@ rclone mount "sportsy:$REMOTE_BACKEND" "$LOCAL_BACKEND" \
 rclone mount "sportsy:$REMOTE_PROJECTS" "$LOCAL_PROJECTS" \
     $RCLONE_OPTS --cache-dir "$PERSISTENT_CACHE/voidborn/constructor-projects" &
 
-# rclone mount "voidborn:$REMOTE_FRONTEND" "$LOCAL_FRONTEND" \
-#     $RCLONE_OPTS --cache-dir "$PERSISTENT_CACHE/voidborn/constructor-frontend" &
+rclone mount "voidborn:$REMOTE_SENDMAIL" "$LOCAL_SENDMAIL" \
+     $RCLONE_OPTS --cache-dir "$PERSISTENT_CACHE/voidborn/constructor-sendmail" &
 
 # --- 6. Status ---
 echo "------------------------------------------"
 echo "All mounts active with isolated caches."
 echo "  Backend:  $LOCAL_BACKEND  (sportsy)"
 echo "  Projects: $LOCAL_PROJECTS  (sportsy)"
-# echo "  Frontend: $LOCAL_FRONTEND  (voidborn)"
+echo "  SENDMAIL: $LOCAL_SENDMAIL  (voidborn)"
 echo "------------------------------------------"
 
 # --- 7. Keep script running ---

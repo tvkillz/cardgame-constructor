@@ -4,15 +4,15 @@ import { formatCredits } from '@/config'
 import { Button } from '@/components/ui/Button/Button'
 import { useWallet } from '@/hooks/useWallet'
 
-export default function PurchaseSuccess() {
+export default function WithdrawalSuccess() {
   const { balanceCredits, refresh, loading } = useWallet()
 
   return (
     <div className="checkout-result">
-      <h1>Payment received</h1>
+      <h1>Withdrawal confirmed</h1>
       <span className="checkout-result__icon" aria-hidden="true" />
       <p className="checkout-result__lead">
-        An invoice has been sent to your email.
+        A confirmation email has been sent with your withdrawal details.
       </p>
       {!loading && (
         <p className="checkout-result__balance">

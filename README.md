@@ -24,7 +24,22 @@ pm2 start ecosystem.config.cjs --only voidborn-prod
 
 **Multi-site:** see [frontend/VERIFICATION.md](frontend/VERIFICATION.md). Demo second site: `project2` (ports 3001 / 3101).
 
-**Production VPS:** [frontend/deploy/README.md](frontend/deploy/README.md) — nginx, TLS, backend API URL.
+**Production VPS:** [frontend/deploy/README.md](frontend/deploy/README.md) — nginx, TLS, pm2, backend API URL.
+
+## How this repo relates to the server
+
+Edited locally via **rclone mount** (`mount-voidborn.sh`):
+
+| Path | Remote | Runs on |
+|------|--------|---------|
+| `backend/` | `/root/constructor-files/backend` | API VPS — Supabase Docker, edge functions |
+| `sendmail/` | `/root/constructor-files/sendmail` | Frontend VPS — pm2 mail relay |
+| `projects/` | `/root/constructor-files/projects` | Content packs (compiled into frontend) |
+
+`frontend/` is built and served on the **frontend VPS** (pm2 + nginx), not cPanel.
+
+- **Payments:** no Stripe. Admins demo checkout with **Payment success (test)** → paid order + invoice email (PDF).
+- See `backend/MAIL-SETUP.md` (auth mail) and `frontend/src/lib/commerce/INVOICE.md` (invoices).
 
 ## Add a new game/site
 

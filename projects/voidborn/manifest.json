@@ -34,7 +34,8 @@
     "portalStore": "/portal/store",
     "checkout": "/checkout",
     "checkoutSuccess": "/portal/checkout/success",
-    "checkoutCancel": "/portal/checkout/cancel"
+    "checkoutCancel": "/portal/checkout/cancel",
+    "withdrawalSuccess": "/portal/withdrawal/success"
   },
   "legal": {
     "termsUrl": "/terms",

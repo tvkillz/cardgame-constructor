@@ -354,6 +354,14 @@
   color: rgba(127, 216, 255, 0.75);
 }
 
+.credits-modal__warning {
+  margin: 0.65rem 0 0;
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: #fcd34d;
+}
+
 @media (max-width: 640px) {
   .credits-modal__grid {
     grid-template-columns: 1fr;

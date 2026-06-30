@@ -492,19 +492,21 @@
   height: 40px;
 }
 
+.game-card-preview-wrap .card--preview .card__combat-stats {
+  padding: 0 14px;
+}
+
 .game-card-preview-wrap .card--preview .card__stat--attack {
-  bottom: 102px;
-  left: 14px;
   min-width: 52px;
-  height: 44px;
+  min-height: 44px;
+  padding: 6px 10px 6px 8px;
   font-size: 1.15rem;
 }
 
 .game-card-preview-wrap .card--preview .card__stat--health {
-  bottom: 102px;
-  right: 14px;
-  width: 48px;
-  height: 56px;
+  min-width: 48px;
+  min-height: 56px;
+  padding: 6px 8px;
   font-size: 1.25rem;
 }
 

@@ -140,6 +140,41 @@ const Card = forwardRef<HTMLElement, CardComponentProps>(function Card(
           ? 1
           : 1
 
+  const attackStat = (
+    <div className="card__stat card__stat--attack" aria-label={`Attack ${stats.attack}`}>
+      <span className="card__stat-icon card__stat-icon--attack" aria-hidden="true" />
+      <span className="card__stat-value">{stats.attack}</span>
+    </div>
+  )
+
+  const healthStat = (
+    <div
+      className="card__stat card__stat--health"
+      aria-label={`Health ${Math.max(0, stats.health)}`}
+    >
+      <span className="card__stat-value">{Math.max(0, stats.health)}</span>
+    </div>
+  )
+
+  const cardFooter = (
+    <div className="card__footer">
+      <h3 className="card__title">{title}</h3>
+      {displayAbility && ability && (
+        <div className="card__ability">
+          <strong className="card__ability-name">{ability.name}</strong>
+          <p className="card__ability-text">{ability.text}</p>
+        </div>
+      )}
+      {keywords.length > 0 && displayKeywords && (
+        <ul className="card__keywords" aria-label="Keywords">
+          {keywords.map((kw) => (
+            <li key={kw}>{kw}</li>
+          ))}
+        </ul>
+      )}
+    </div>
+  )
+
   return (
     <article
       ref={setRef}
@@ -189,35 +224,24 @@ const Card = forwardRef<HTMLElement, CardComponentProps>(function Card(
           aria-label={`${DOMAIN_LABEL[domain]} domain`}
           title={DOMAIN_LABEL[domain]}
         />
-        <div className="card__stat card__stat--attack" aria-label={`Attack ${stats.attack}`}>
-          <span className="card__stat-icon card__stat-icon--attack" aria-hidden="true" />
-          <span className="card__stat-value">{stats.attack}</span>
-        </div>
-        <div
-          className="card__stat card__stat--health"
-          aria-label={`Health ${Math.max(0, stats.health)}`}
-        >
-          <span className="card__stat-value">{Math.max(0, stats.health)}</span>
-        </div>
         {rarity && displayRarity && (
           <span className={`card__rarity card__rarity--${rarity}`}>{rarity}</span>
         )}
-        <div className="card__footer">
-          <h3 className="card__title">{title}</h3>
-          {displayAbility && ability && (
-            <div className="card__ability">
-              <strong className="card__ability-name">{ability.name}</strong>
-              <p className="card__ability-text">{ability.text}</p>
+        {layoutMode === 'preview' ? (
+          <div className="card__bottom">
+            <div className="card__combat-stats">
+              {attackStat}
+              {healthStat}
             </div>
-          )}
-          {keywords.length > 0 && displayKeywords && (
-            <ul className="card__keywords" aria-label="Keywords">
-              {keywords.map((kw) => (
-                <li key={kw}>{kw}</li>
-              ))}
-            </ul>
-          )}
-        </div>
+            {cardFooter}
+          </div>
+        ) : (
+          <>
+            {attackStat}
+            {healthStat}
+            {cardFooter}
+          </>
+        )}
       </div>
     </article>
   )

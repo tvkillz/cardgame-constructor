@@ -176,10 +176,12 @@ function renderOtpBlock(token) {
 }
 
 module.exports = {
+  PORTAL,
   escapeHtml,
   siteUrl,
   logoUrl,
   brandName,
+  bundledLogoFile,
   renderPortalEmail,
   renderOtpBlock,
 };

@@ -265,6 +265,34 @@ function buildEmailChangeMessages({ user, emailData }) {
   ];
 }
 
+function buildRecoveryPreviewEmail({ recipientName = 'Traveler', confirmUrl } = {}) {
+  const subject = SUBJECTS.recovery;
+  const copy = ACTION_COPY.recovery;
+  const sampleUrl =
+    confirmUrl || `${authVerifyBaseUrl({})}/auth/v1/verify?token=preview&type=recovery`;
+
+  return {
+    subject: `[Preview] ${subject}`,
+    html: renderPortalEmail({
+      title: subject,
+      headline: copy.headline,
+      greeting: greetingFor(recipientName),
+      bodyHtml: `<p style="margin:0;color:#ffffff;">${escapeHtml(copy.body)}</p>`,
+      ctaLabel: copy.cta,
+      ctaUrl: sampleUrl,
+      footerNote: 'This is a preview of the VOIDBORN password reset email template.',
+    }),
+    text: [
+      greetingFor(recipientName),
+      '',
+      copy.headline,
+      copy.body,
+      '',
+      `${copy.cta}: ${sampleUrl}`,
+    ].join('\n'),
+  };
+}
+
 function buildSignupPreviewEmail({ recipientName = 'Traveler', confirmUrl } = {}) {
   const subject = SUBJECTS.signup;
   const copy = ACTION_COPY.signup;
@@ -299,4 +327,5 @@ module.exports = {
   buildAuthEmail,
   buildEmailChangeMessages,
   buildSignupPreviewEmail,
+  buildRecoveryPreviewEmail,
 };

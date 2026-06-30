@@ -2,11 +2,14 @@
 
 Payments run on **Supabase Edge Functions**, not Next.js API routes.
 
+**There is no Stripe in this project.** Checkout is internal (`checkout_init` → `checkout_pay`) with admin test buttons until an external payment gateway is connected.
+
 ## Flow
 
 ```
-User → checkout_create → Stripe Checkout → stripe-webhook
-  → wallet_apply_credits → order paid → player_inventory → receipt_sent_at
+User → checkout_init → billing form → checkout_pay (gateway TBD)
+  OR admin checkout_test (success) → fulfillInternalOrder
+  → wallet_apply_credits → order paid → receipt_sent_at → (invoice email — see INVOICE.md)
 ```
 
 ## Client
@@ -14,33 +17,43 @@ User → checkout_create → Stripe Checkout → stripe-webhook
 ```ts
 import { invokeCommerceAction } from '@/lib/commerce/api'
 
-await invokeCommerceAction({ type: 'checkout_create', packId: 'pack-1000' })
+await invokeCommerceAction({ type: 'checkout_init', customCredits: 1000, currency: 'eur' })
 ```
 
 Base URL: `POST ${NEXT_PUBLIC_SUPABASE_URL}/functions/v1/commerce`
 
-Webhook (Stripe only): `POST /functions/v1/stripe-webhook`
+## Actions (checkout)
 
-## REST mapping (conceptual)
+| Action | Purpose |
+|--------|---------|
+| `checkout_init` | Create pending order from pack / custom credits |
+| `checkout_get` | Load existing order |
+| `checkout_pay` | Start payment (gateway placeholder) |
+| `checkout_test` | Admin only — simulate success or failure |
+
+## Other actions
 
 | Spec | Implementation |
 |------|----------------|
 | `GET /products` | `{ type: 'products_list' }` |
-| `GET /products/:id` | filter client-side or extend commerce |
-| `POST /checkout/create` | `{ type: 'checkout_create', packId \| productId \| customCredits }` |
-| `POST /payments/webhook` | `stripe-webhook` function |
 | `GET /wallet` | `{ type: 'wallet_get' }` |
-| `POST /wallet/top-up` | `{ type: 'checkout_create', ... }` |
 | `GET /wallet/transactions` | `{ type: 'transactions_list' }` |
 | `POST /store/purchase` | `{ type: 'purchase_with_credits', productId }` |
-| `POST /market/buy` | `{ type: 'buy_card_with_credits', cardId }` — charges `cards.price_cents` credits |
-| `GET /inventory` | `{ type: 'inventory_list' }` |
+| `POST /market/buy` | `{ type: 'buy_card_with_credits', cardId }` |
 | `POST /withdrawals/create` | `{ type: 'withdrawal_create' }` |
-| Admin endpoints | `admin_transactions`, `admin_products_upsert` |
+| Admin | `admin_transactions`, `admin_products_upsert` |
 
-## VPS deploy
+## Testing checkout (before payment supplier)
 
-1. Apply `voidborn-backend/docker/volumes/db/commerce.sql` on existing DB (init mount only on fresh volumes).
-2. Set env on `functions` service: `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `SITE_URL`.
-3. Stripe Dashboard → webhook URL: `https://<supabase>/functions/v1/stripe-webhook`, events: `checkout.session.completed`, `charge.refunded`.
-4. Test cards: `4242 4242 4242 4242`. Apple Pay / Google Pay: enable in Stripe Checkout settings.
+1. Sign in as admin.
+2. Open checkout (e.g. purchase credits → checkout).
+3. Fill required billing fields (first name, last name, city, country, postal code).
+4. Use **Payment success (test)** — fulfills order and sends invoice email (PDF) when `SENDMAIL_URL` + `MAIL_API_KEY` are set on the API VPS.
+
+## Deploy
+
+1. Apply commerce SQL on the API VPS database if not already applied.
+2. Set `SITE_URL` on the `functions` service.
+3. Redeploy the `commerce` edge function after backend changes.
+
+See [INVOICE.md](./INVOICE.md) for planned PDF invoice + email architecture.

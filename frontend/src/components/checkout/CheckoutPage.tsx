@@ -7,6 +7,10 @@ import { appConfig, formatCredits } from '@/config'
 import BillingProfileForm from '@/components/profile/BillingProfileForm'
 import { Button } from '@/components/ui/Button/Button'
 import { useAuth } from '@/components/providers/AuthProvider'
+import {
+  MAX_CUSTOM_CREDITS,
+  MIN_CUSTOM_CREDITS,
+} from '@/lib/commerce/creditCheckoutLimits'
 import { invokeCommerceAction } from '@/lib/commerce/api'
 import {
   formatEurAmount,
@@ -15,11 +19,12 @@ import {
 } from '@/lib/market/currency'
 import {
   EMPTY_BILLING_PROFILE,
+  CHECKOUT_REQUIRED_BILLING_FIELDS,
   fetchBillingProfile,
   saveBillingProfile,
+  validateBillingProfileForCheckout,
   type BillingProfile,
 } from '@/lib/profile/billing'
-import { isValidPhone } from '@/lib/auth/validation'
 import './CheckoutPage.css'
 
 function CheckoutPageWrap({ children }: { children: React.ReactNode }) {
@@ -143,7 +148,6 @@ export default function CheckoutPage() {
   const [testing, setTesting] = useState<'success' | 'failure' | null>(null)
   const [isAdmin, setIsAdmin] = useState(false)
   const [error, setError] = useState<string | null>(null)
-  const [payMessage, setPayMessage] = useState<string | null>(null)
   const [billingMessage, setBillingMessage] = useState<string | null>(null)
 
   const initParams = useMemo(() => {
@@ -175,7 +179,20 @@ export default function CheckoutPage() {
       setIsAdmin(Boolean(profileRes.isAdmin))
 
       if (orderRes.error || !orderRes.orderId) {
-        setError(orderRes.message ?? orderRes.error ?? 'Could not start checkout.')
+        const err = orderRes.error
+        if (err === 'credits_below_minimum') {
+          setError(
+            `Minimum purchase is ${formatCredits(orderRes.minCredits ?? MIN_CUSTOM_CREDITS)} credits.`,
+          )
+        } else if (err === 'credits_above_maximum') {
+          setError(
+            `Maximum custom purchase is ${formatCredits(orderRes.maxCredits ?? MAX_CUSTOM_CREDITS)} credits.`,
+          )
+        } else if (err === 'http_500') {
+          setError('Checkout is temporarily unavailable. Please try again in a moment.')
+        } else {
+          setError(orderRes.message ?? err ?? 'Could not start checkout.')
+        }
         setOrder(null)
         return
       }
@@ -226,8 +243,9 @@ export default function CheckoutPage() {
       return false
     }
 
-    if (!isValidPhone(billing.phone)) {
-      setError('Enter a valid phone number (at least 8 characters).')
+    const validation = validateBillingProfileForCheckout(billing)
+    if (!validation.ok) {
+      setError(validation.message)
       return false
     }
 
@@ -252,7 +270,6 @@ export default function CheckoutPage() {
   const handlePay = async () => {
     if (!order || paying) return
     setPaying(true)
-    setPayMessage(null)
     setError(null)
 
     try {
@@ -269,11 +286,6 @@ export default function CheckoutPage() {
         window.location.href = res.gatewayUrl
         return
       }
-
-      setPayMessage(
-        res.message ??
-          'You will be redirected to a secure payment page to complete your purchase.',
-      )
     } catch {
       setError('Payment could not be started.')
     } finally {
@@ -287,6 +299,11 @@ export default function CheckoutPage() {
     setError(null)
 
     try {
+      if (outcome === 'success') {
+        const saved = await saveBilling()
+        if (!saved) return
+      }
+
       const res = await invokeCommerceAction({
         type: 'checkout_test',
         orderId: order.orderId,
@@ -299,6 +316,19 @@ export default function CheckoutPage() {
       }
 
       if (outcome === 'success') {
+        if (res.invoiceSent === false) {
+          const reason = res.invoiceReason ?? 'unknown'
+          const hint =
+            reason === 'mail_not_configured'
+              ? 'Order paid, but invoice email is not configured on the API server (SENDMAIL_URL / MAIL_API_KEY).'
+              : reason === 'no_email'
+                ? 'Order paid, but no receipt email is on file for this account.'
+                : reason === 'send_failed' || reason === 'request_error'
+                  ? 'Order paid, but the invoice email could not be sent. Check sendmail logs.'
+                  : 'Order paid. Invoice was not sent (may already have been sent).'
+          setError(hint)
+          return
+        }
         router.push(appConfig.domain.routes.checkoutSuccess)
         return
       }
@@ -406,6 +436,7 @@ export default function CheckoutPage() {
           <BillingProfileForm
             formId={formId}
             billing={billing}
+            requiredFields={CHECKOUT_REQUIRED_BILLING_FIELDS}
             onChange={(field, value) => {
               setBilling((prev) => ({ ...prev, [field]: value }))
               setBillingMessage(null)
@@ -441,14 +472,15 @@ export default function CheckoutPage() {
             >
               {isPaid ? 'Paid' : paying ? 'Processing…' : 'Pay'}
             </Button>
-            <p className="checkout-page__secure-note">
-              You will be redirected to a secure payment page to complete your purchase.
-            </p>
-            {payMessage ? (
-              <p className="checkout-page__pay-message" role="status">
-                {payMessage}
+            {paying ? (
+              <p className="checkout-page__pay-message" role="status" aria-live="polite">
+                You will be redirected to a secure payment page to complete your purchase.
               </p>
-            ) : null}
+            ) : (
+              <p className="checkout-page__secure-note">
+                You will be redirected to a secure payment page to complete your purchase.
+              </p>
+            )}
           </div>
 
           {isAdmin ? (

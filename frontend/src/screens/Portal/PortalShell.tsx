@@ -15,6 +15,7 @@ import {
 } from '@/components/collection/CollectionModeContext'
 import Footer from '@/components/Footer/Footer'
 import PurchaseCreditsModal from '@/components/credits/PurchaseCreditsModal'
+import WithdrawalModal from '@/components/credits/WithdrawalModal'
 import MarketCartDrawer from '@/components/market/MarketCartDrawer'
 import { useAuth } from '@/components/providers/AuthProvider'
 import { prefetchCardCatalog } from '@/hooks/useCardCatalog'
@@ -55,6 +56,7 @@ function PortalShellInner({ children }: { children: React.ReactNode }) {
   const portalCopy = appConfig.descriptions.portal
   const { user, session } = useAuth()
   const [creditsOpen, setCreditsOpen] = useState(false)
+  const [withdrawOpen, setWithdrawOpen] = useState(false)
   const { mode: collectionMode, setMode: setCollectionMode } = useCollectionMode()
   const isCollectionPage = pathname === appConfig.domain.routes.portalCollection
 
@@ -69,10 +71,13 @@ function PortalShellInner({ children }: { children: React.ReactNode }) {
   const checkoutPath = appConfig.domain.routes.checkout ?? '/checkout'
   const checkoutSuccessPath = appConfig.domain.routes.checkoutSuccess ?? '/portal/checkout/success'
   const checkoutCancelPath = appConfig.domain.routes.checkoutCancel ?? '/portal/checkout/cancel'
+  const withdrawalSuccessPath =
+    appConfig.domain.routes.withdrawalSuccess ?? '/portal/withdrawal/success'
   const isCheckoutFlowPage =
     pathname === checkoutPath ||
     pathname === checkoutSuccessPath ||
-    pathname === checkoutCancelPath
+    pathname === checkoutCancelPath ||
+    pathname === withdrawalSuccessPath
 
   const { balanceCredits, loading: walletLoading, refresh: refreshWallet } = useWallet()
   const creditsLabel = walletLoading ? '…' : formatCredits(balanceCredits)
@@ -153,7 +158,12 @@ function PortalShellInner({ children }: { children: React.ReactNode }) {
               >
                 {portalCopy.buyCredits}
               </Button>
-              <Button type="button" variant="secondary" size="sm" disabled>
+              <Button
+                type="button"
+                variant="secondary"
+                size="sm"
+                onClick={() => setWithdrawOpen(true)}
+              >
                 {portalCopy.withdraw}
               </Button>
               <Button type="button" variant="ghost" size="sm" onClick={openDrawer} className="portal__cart-btn">
@@ -192,6 +202,13 @@ function PortalShellInner({ children }: { children: React.ReactNode }) {
         isOpen={creditsOpen}
         onClose={() => {
           setCreditsOpen(false)
+          void refreshWallet()
+        }}
+      />
+      <WithdrawalModal
+        isOpen={withdrawOpen}
+        onClose={() => {
+          setWithdrawOpen(false)
           void refreshWallet()
         }}
       />

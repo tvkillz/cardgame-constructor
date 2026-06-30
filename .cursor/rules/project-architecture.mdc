@@ -1,0 +1,43 @@
+---
+description: Deployment model, payments, mail, and rclone mount layout
+alwaysApply: true
+---
+
+# Project architecture (authoritative)
+
+## Local workspace = rclone mounts (not the live servers)
+
+This repo at `constructor-mount/` is for **editing** code synced from remote VPS hosts via `mount-voidborn.sh`. Do not assume the local path is where services run.
+
+| Local path | Remote (typical) | Host | Runs |
+|------------|------------------|------|------|
+| `backend/` | `/root/constructor-files/backend` | API VPS (sportsy) | Supabase Docker (`docker compose`) |
+| `sendmail/` | `/root/constructor-files/sendmail` | Frontend VPS (voidborn) | pm2 sendmail relay |
+| `projects/` | `/root/constructor-files/projects` | API VPS | Content packs (compiled into frontend) |
+| `frontend/` | *(often local clone or separate sync)* | Frontend VPS | pm2 + nginx |
+
+Mounts can lag behind the server after edits — user syncs via rclone and restarts on the **remote** host.
+
+After code changes, tell the user what to run **on the correct VPS** — see `terminal-via-user.mdc`.
+
+## Deployment — VPS only, no cPanel
+
+- **Frontend** and **sendmail** run on the **frontend VPS** (pm2 + nginx).
+- **Backend** (Supabase stack) runs on the **API VPS**; edge functions read from `backend/volumes/functions/`.
+- There is **no cPanel production deploy**. Ignore `deploy:cpanel*` unless the user asks about legacy docs.
+
+## Payments — no Stripe
+
+- **No Stripe.** Checkout: `checkout_init` → billing → `checkout_pay` (gateway TBD) or admin **`checkout_test` success** for demos.
+- On test success: `fulfillInternalOrder` → credits granted → **`sendOrderInvoice`** → sendmail `POST /invoice` (HTML + PDF).
+- Legacy `stripe-webhook` is unused.
+
+## Mail
+
+- Auth email: GoTrue hook → sendmail `POST /hook`.
+- Invoices: commerce edge function → sendmail `POST /invoice` with `MAIL_API_KEY`.
+- Required on API VPS `backend/.env` (passed to `functions` service): `SENDMAIL_URL`, `MAIL_API_KEY`, optional `INVOICE_COMPANY_*`.
+
+## Company / legal test data
+
+- Seller on invoices: `INVOICE_COMPANY_*` env (mirror `projects/{id}/copy/footer.json` contact block).

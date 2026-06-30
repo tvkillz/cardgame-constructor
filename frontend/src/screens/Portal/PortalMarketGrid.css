@@ -121,6 +121,22 @@
   width: 100%;
 }
 
+/* Wide viewports: add columns (up to 10) instead of growing card cells. */
+@media (min-width: 1814px) {
+  .portal-market-grid {
+    --market-card-min: 240px;
+    --market-card-max: 280px;
+    /* grid-template-columns: repeat(
+      auto-fill,
+      minmax(var(--market-card-min), var(--market-card-max))
+    ); */
+    justify-content: center;
+    max-width: calc(10 * var(--market-card-max) + 9 * 1rem);
+    margin-inline: auto;
+  }
+}
+
+
 .portal-market__load-more {
   display: flex;
   justify-content: center;

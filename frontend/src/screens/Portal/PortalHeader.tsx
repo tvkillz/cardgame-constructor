@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { useState } from 'react'
 import {
   appConfig,
@@ -18,10 +19,19 @@ type PortalHeaderProps = {
 }
 
 export default function PortalHeader({ onPurchaseCredits }: PortalHeaderProps) {
+  const pathname = usePathname()
   const { name, theme } = appConfig
-  const { playerName: username, signOut } = useAuth()
+  const { playerName: username, signOut, session } = useAuth()
   const [menuOpen, setMenuOpen] = useState(false)
   const [localCreditsOpen, setLocalCreditsOpen] = useState(false)
+
+  const portalRoot = appConfig.domain.routes.portal
+  const isPortalSection =
+    pathname === portalRoot || pathname.startsWith(`${portalRoot}/`)
+  const brandHref =
+    session && isPortalSection
+      ? appConfig.domain.routes.portalMarket
+      : appConfig.domain.routes.home
 
   const { balanceCredits, loading: walletLoading, refresh: refreshWallet } = useWallet()
   const creditsLabel = walletLoading ? '…' : formatCredits(balanceCredits)
@@ -35,7 +45,7 @@ export default function PortalHeader({ onPurchaseCredits }: PortalHeaderProps) {
     <>
       <header className="portal__header">
         {/* Uses brand/header.png (headerLogo) when set in project manifest — see .portal__wordmark in PortalShell.css for size */}
-        <Link href={appConfig.domain.routes.home} className="portal__brand">
+        <Link href={brandHref} className="portal__brand">
           <img
             src={appConfig.logo.headerLogo ?? appConfig.logo.src}
             alt={appConfig.logo.headerLogoAlt ?? appConfig.logo.alt}

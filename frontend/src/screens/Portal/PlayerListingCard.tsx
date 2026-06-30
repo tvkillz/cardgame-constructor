@@ -24,18 +24,10 @@ import '@/styles/cart-icon.css'
 import './MarketCard.css'
 import './PlayerListingCard.css'
 
-const PREVIEW_SCALE = 1.25
-const PREVIEW_GAP_PX = 12
+import { computeCardHoverPreviewPosition, type CardHoverPreviewPosition } from '@/lib/cards/hoverPreview'
 
 function rarityLabel(rarity: string): string {
   return rarity.charAt(0).toUpperCase() + rarity.slice(1)
-}
-
-type PreviewPosition = {
-  top: number
-  left: number
-  width: number
-  height: number
 }
 
 type PlayerListingCardProps = {
@@ -61,7 +53,7 @@ export default function PlayerListingCard({
   const userId = user?.id ?? session?.user?.id
   const { refresh: refreshInventory } = usePlayerInventory()
   const [hovered, setHovered] = useState(false)
-  const [previewPos, setPreviewPos] = useState<PreviewPosition | null>(null)
+  const [previewPos, setPreviewPos] = useState<CardHoverPreviewPosition | null>(null)
   const [mounted, setMounted] = useState(false)
   const [cancelling, setCancelling] = useState(false)
 
@@ -77,14 +69,7 @@ export default function PlayerListingCard({
   const updatePreviewPosition = () => {
     const rect = frameRef.current?.getBoundingClientRect()
     if (!rect) return
-    const width = rect.width * PREVIEW_SCALE
-    const height = rect.height * PREVIEW_SCALE
-    const top = rect.top + (rect.height - height) / 2
-    let left = rect.left - width - PREVIEW_GAP_PX
-    if (left < 8) left = rect.right + PREVIEW_GAP_PX
-    const maxLeft = window.innerWidth - width - 8
-    if (left > maxLeft) left = maxLeft
-    setPreviewPos({ top, left, width, height })
+    setPreviewPos(computeCardHoverPreviewPosition(rect))
   }
 
   const showPreview = () => {

@@ -44,6 +44,10 @@
   color: rgba(232, 220, 200, 0.55);
 }
 
+.billing-form__required {
+  color: #f3d878;
+}
+
 .billing-form__input {
   width: 100%;
   padding: 0.55rem 0.65rem;

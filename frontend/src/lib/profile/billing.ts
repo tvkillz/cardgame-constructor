@@ -25,6 +25,34 @@ export const EMPTY_BILLING_PROFILE: BillingProfile = {
   phone: '',
 }
 
+/** Required on checkout before pay / test payment. */
+export const CHECKOUT_REQUIRED_BILLING_FIELDS = [
+  'firstName',
+  'lastName',
+  'city',
+  'country',
+  'postalCode',
+] as const satisfies readonly (keyof BillingProfile)[]
+
+const CHECKOUT_FIELD_LABELS: Record<(typeof CHECKOUT_REQUIRED_BILLING_FIELDS)[number], string> = {
+  firstName: 'First name',
+  lastName: 'Last name',
+  city: 'City',
+  country: 'Country',
+  postalCode: 'Postal code',
+}
+
+export function validateBillingProfileForCheckout(
+  profile: BillingProfile,
+): { ok: true } | { ok: false; message: string } {
+  for (const field of CHECKOUT_REQUIRED_BILLING_FIELDS) {
+    if (!profile[field].trim()) {
+      return { ok: false, message: `${CHECKOUT_FIELD_LABELS[field]} is required.` }
+    }
+  }
+  return { ok: true }
+}
+
 type BillingRow = {
   first_name: string
   last_name: string

@@ -40,19 +40,21 @@
   height: 30px;
 }
 
+.card-preview-panel .card--preview .card__combat-stats {
+  padding: 0 10px;
+}
+
 .card-preview-panel .card--preview .card__stat--attack {
-  bottom: 144px;
-  left: 10px;
   min-width: 40px;
-  height: 34px;
+  min-height: 34px;
+  padding: 4px 8px 4px 6px;
   font-size: 0.85rem;
 }
 
 .card-preview-panel .card--preview .card__stat--health {
-  bottom: 144px;
-  right: 10px;
-  width: 36px;
-  height: 42px;
+  min-width: 36px;
+  min-height: 42px;
+  padding: 4px 6px;
   font-size: 0.9rem;
 }
 

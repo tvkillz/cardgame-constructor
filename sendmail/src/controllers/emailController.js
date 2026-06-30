@@ -1,5 +1,8 @@
 const { sendMail, verifySmtp, fromAddress } = require('../config/email');
-const { buildSignupPreviewEmail } = require('../lib/authEmails');
+const { buildSignupPreviewEmail, buildRecoveryPreviewEmail } = require('../lib/authEmails');
+const { defaultSeller, normalizeInvoicePayload } = require('../lib/invoicePayload');
+const { buildInvoiceEmail } = require('../lib/invoiceEmail');
+const { buildInvoicePdf } = require('../lib/invoicePdf');
 
 function normalizeRecipients(value) {
   if (!value) return [];
@@ -77,8 +80,62 @@ async function sendTestEmail(req, res) {
       });
     }
 
-    const stamp = new Date().toISOString();
-    const preview = buildSignupPreviewEmail();
+    const template = String(req.body?.template || 'signup').toLowerCase();
+    let preview;
+
+    if (template === 'recovery') {
+      preview = buildRecoveryPreviewEmail();
+    } else if (template === 'invoice') {
+      const stamp = new Date().toISOString();
+      const payload = normalizeInvoicePayload({
+        recipient: to[0],
+        order: {
+          id: '00000000-0000-4000-8000-000000preview',
+          paidAt: stamp,
+          totalCents: 1000,
+          currency: 'eur',
+          creditsGranted: 1000,
+        },
+        lineItems: [
+          { title: 'Credits', quantity: 1000, unitPriceCents: 1, lineTotalCents: 1000 },
+        ],
+        buyer: {
+          firstName: 'Ada',
+          lastName: 'Lovelace',
+          addressLine1: '1 Analytical Engine Way',
+          city: 'London',
+          postalCode: 'SW1A 1AA',
+          country: 'United Kingdom',
+        },
+        seller: defaultSeller(),
+        paymentMethod: 'Test payment',
+      });
+      const email = buildInvoiceEmail(payload);
+      const pdfBuffer = await buildInvoicePdf(payload);
+      const info = await sendMail({
+        to: to.join(', '),
+        subject: `[Preview] ${email.subject}`,
+        html: email.html,
+        text: email.text,
+        attachments: [
+          {
+            filename: 'VOIDBORN-invoice-PREVIEW.pdf',
+            content: pdfBuffer,
+            contentType: 'application/pdf',
+          },
+        ],
+      });
+      return res.json({
+        success: true,
+        messageId: info.messageId,
+        accepted: info.accepted,
+        recipients: to,
+        template,
+      });
+    } else {
+      preview = buildSignupPreviewEmail();
+    }
+
     const info = await sendMail({
       to: to.join(', '),
       subject: preview.subject,
@@ -91,6 +148,7 @@ async function sendTestEmail(req, res) {
       messageId: info.messageId,
       accepted: info.accepted,
       recipients: to,
+      template,
     });
   } catch (err) {
     console.error('[sendmail] test send failed:', err.message);

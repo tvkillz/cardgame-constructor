@@ -2,6 +2,8 @@ const express = require('express');
 const { mailAuth } = require('./middleware/mailAuth');
 const emailController = require('./controllers/emailController');
 const hookController = require('./controllers/hookController');
+const invoiceController = require('./controllers/invoiceController');
+const withdrawalController = require('./controllers/withdrawalController');
 
 function normalizeBasePath(basePath) {
   if (!basePath || basePath === '/') return '';
@@ -24,6 +26,8 @@ function createApp({ basePath = process.env.BASE_PATH || '' } = {}) {
         smtpHealth: `${base}/smtp-health`,
         test: `POST ${base}/test`,
         send: `POST ${base}/send`,
+        invoice: `POST ${base}/invoice`,
+        withdrawal: `POST ${base}/withdrawal`,
         hook: `POST ${base}/hook`,
       },
     });
@@ -45,6 +49,8 @@ function createApp({ basePath = process.env.BASE_PATH || '' } = {}) {
   app.get(`${base}/smtp-health`, mailAuth, emailController.smtpHealth);
   app.post(`${base}/test`, mailAuth, emailController.sendTestEmail);
   app.post(`${base}/send`, mailAuth, emailController.sendEmail);
+  app.post(`${base}/invoice`, mailAuth, invoiceController.sendInvoice);
+  app.post(`${base}/withdrawal`, mailAuth, withdrawalController.sendWithdrawalConfirmation);
 
   app.use((err, _req, res, _next) => {
     console.error('[sendmail] unhandled:', err.message);

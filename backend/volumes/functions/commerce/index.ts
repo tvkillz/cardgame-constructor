@@ -7,6 +7,322 @@ const SITE_URL = (Deno.env.get('SITE_URL') ?? Deno.env.get('PUBLIC_SITE_URL') ??
   /\/$/,
   '',
 )
+const SENDMAIL_URL = (Deno.env.get('SENDMAIL_URL') ?? '').replace(/\/$/, '')
+const MAIL_API_KEY = Deno.env.get('MAIL_API_KEY') ?? ''
+
+function invoiceSellerBlock() {
+  return {
+    companyName: Deno.env.get('INVOICE_COMPANY_NAME') ?? 'Test LTD',
+    companyNumber: Deno.env.get('INVOICE_COMPANY_NUMBER') ?? '00000000',
+    address:
+      Deno.env.get('INVOICE_COMPANY_ADDRESS') ??
+      '123 Example Street, Testville, TE1 1ST, United Kingdom',
+    email: Deno.env.get('INVOICE_COMPANY_EMAIL') ?? 'support@voidborn.fun',
+  }
+}
+
+type BillingProfileRow = {
+  first_name: string
+  last_name: string
+  address_line1: string
+  address_line2: string
+  city: string
+  state_province: string
+  postal_code: string
+  country: string
+  phone: string
+}
+
+function mapBillingProfile(row: BillingProfileRow | null | undefined) {
+  return {
+    firstName: row?.first_name ?? '',
+    lastName: row?.last_name ?? '',
+    addressLine1: row?.address_line1 ?? '',
+    addressLine2: row?.address_line2 ?? '',
+    city: row?.city ?? '',
+    stateProvince: row?.state_province ?? '',
+    postalCode: row?.postal_code ?? '',
+    country: row?.country ?? '',
+    phone: row?.phone ?? '',
+  }
+}
+
+type InvoiceLineItem = {
+  title: string
+  quantity: number
+  unitPriceCents: number
+  lineTotalCents: number
+}
+
+function buildInvoiceLineItems(
+  order: { total_cents?: number; credits_granted?: number },
+  items: Array<{
+    title_snapshot?: string
+    quantity?: number
+    unit_price_cents?: number
+    credits_amount?: number
+  }>,
+): InvoiceLineItem[] {
+  const orderTotalCents = order.total_cents ?? 0
+
+  if (items.length) {
+    return items.map((item) => {
+      const credits = item.credits_amount ?? 0
+      if (credits > 0) {
+        const lineTotal = orderTotalCents
+        return {
+          title: 'Credits',
+          quantity: credits,
+          unitPriceCents: Math.max(1, Math.round(lineTotal / credits)),
+          lineTotalCents: lineTotal,
+        }
+      }
+      const qty = item.quantity ?? 1
+      const unit = item.unit_price_cents ?? 0
+      return {
+        title: item.title_snapshot ?? 'Item',
+        quantity: qty,
+        unitPriceCents: unit,
+        lineTotalCents: unit * qty,
+      }
+    })
+  }
+
+  const credits = order.credits_granted ?? 0
+  if (credits > 0) {
+    return [
+      {
+        title: 'Credits',
+        quantity: credits,
+        unitPriceCents: Math.max(1, Math.round(orderTotalCents / credits)),
+        lineTotalCents: orderTotalCents,
+      },
+    ]
+  }
+
+  return [
+    {
+      title: 'VOIDBORN Purchase',
+      quantity: 1,
+      unitPriceCents: orderTotalCents,
+      lineTotalCents: orderTotalCents,
+    },
+  ]
+}
+
+type InvoiceSendResult = {
+  sent: boolean
+  reason?: string
+}
+
+async function sendOrderInvoice(
+  admin: ReturnType<typeof createClient>,
+  orderId: string,
+  paymentMethod = 'Test payment',
+): Promise<InvoiceSendResult> {
+  if (!SENDMAIL_URL || !MAIL_API_KEY) {
+    console.warn('[commerce] invoice skipped: SENDMAIL_URL or MAIL_API_KEY not configured')
+    return { sent: false, reason: 'mail_not_configured' }
+  }
+
+  const { data: order } = await admin
+    .from('orders')
+    .select('*, order_items (*)')
+    .eq('id', orderId)
+    .maybeSingle()
+
+  if (!order || order.status !== 'paid' || order.receipt_sent_at) {
+    if (order?.receipt_sent_at) return { sent: false, reason: 'already_sent' }
+    return { sent: false, reason: 'order_not_paid' }
+  }
+
+  const { data: userData } = await admin.auth.admin.getUserById(order.user_id)
+  let recipient = order.receipt_email as string | null
+  if (!recipient && userData?.user) recipient = displayEmailFromUser(userData.user)
+  if (!recipient) {
+    console.warn(`[commerce] invoice skipped for order ${orderId}: no recipient email`)
+    return { sent: false, reason: 'no_email' }
+  }
+
+  const siteId = userData?.user ? siteIdFromAuthEmail(userData.user.email) : null
+  let billing = mapBillingProfile(null)
+  if (siteId) {
+    const { data: profile } = await admin
+      .from('user_billing_profiles')
+      .select(
+        'first_name, last_name, address_line1, address_line2, city, state_province, postal_code, country, phone',
+      )
+      .eq('user_id', order.user_id)
+      .eq('site_id', siteId)
+      .maybeSingle()
+    billing = mapBillingProfile(profile as BillingProfileRow | null)
+  }
+
+  const items = Array.isArray(order.order_items) ? order.order_items : []
+  const lineItems = buildInvoiceLineItems(order, items)
+
+  const payload = {
+    recipient,
+    order: {
+      id: order.id,
+      paidAt: order.updated_at ?? new Date().toISOString(),
+      totalCents: order.total_cents ?? 0,
+      currency: order.currency ?? 'eur',
+      creditsGranted: order.credits_granted ?? 0,
+    },
+    lineItems,
+    buyer: billing,
+    seller: invoiceSellerBlock(),
+    paymentMethod,
+  }
+
+  try {
+    const res = await fetch(`${SENDMAIL_URL}/invoice`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${MAIL_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    })
+
+    if (!res.ok) {
+      const errText = await res.text()
+      console.error(`[commerce] invoice send failed for order ${orderId}:`, errText)
+      await admin
+        .from('orders')
+        .update({
+          metadata: { ...(order.metadata ?? {}), invoice_error: errText.slice(0, 500) },
+          updated_at: new Date().toISOString(),
+        })
+        .eq('id', orderId)
+      return { sent: false, reason: 'send_failed' }
+    }
+
+    await admin
+      .from('orders')
+      .update({
+        receipt_sent_at: new Date().toISOString(),
+        metadata: { ...(order.metadata ?? {}), invoice_error: null },
+        updated_at: new Date().toISOString(),
+      })
+      .eq('id', orderId)
+      .is('receipt_sent_at', null)
+
+    return { sent: true }
+  } catch (err) {
+    console.error(`[commerce] invoice request error for order ${orderId}:`, err)
+    return { sent: false, reason: 'request_error' }
+  }
+}
+
+type WithdrawalEmailSendResult = {
+  sent: boolean
+  reason?: string
+}
+
+async function sendWithdrawalConfirmation(
+  admin: ReturnType<typeof createClient>,
+  withdrawalId: string,
+  userId: string,
+  amountCredits: number,
+  completedAt: string,
+): Promise<WithdrawalEmailSendResult> {
+  if (!SENDMAIL_URL || !MAIL_API_KEY) {
+    console.warn('[commerce] withdrawal email skipped: SENDMAIL_URL or MAIL_API_KEY not configured')
+    return { sent: false, reason: 'mail_not_configured' }
+  }
+
+  const { data: userData } = await admin.auth.admin.getUserById(userId)
+  let recipient = userData?.user ? displayEmailFromUser(userData.user) : null
+  if (!recipient) {
+    console.warn(`[commerce] withdrawal email skipped for ${withdrawalId}: no recipient email`)
+    return { sent: false, reason: 'no_email' }
+  }
+
+  const siteId = userData?.user ? siteIdFromAuthEmail(userData.user.email) : null
+  let recipientName = ''
+  if (siteId) {
+    const { data: profile } = await admin
+      .from('user_billing_profiles')
+      .select('first_name, last_name')
+      .eq('user_id', userId)
+      .eq('site_id', siteId)
+      .maybeSingle()
+    recipientName = [profile?.first_name, profile?.last_name].filter(Boolean).join(' ')
+  }
+
+  const payload = {
+    recipient,
+    recipientName,
+    withdrawal: {
+      id: withdrawalId,
+      amountCredits,
+      completedAt,
+    },
+  }
+
+  try {
+    const res = await fetch(`${SENDMAIL_URL}/withdrawal`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${MAIL_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    })
+
+    if (!res.ok) {
+      const errText = await res.text()
+      console.error(`[commerce] withdrawal email failed for ${withdrawalId}:`, errText)
+      return { sent: false, reason: 'send_failed' }
+    }
+
+    return { sent: true }
+  } catch (err) {
+    console.error(`[commerce] withdrawal email request error for ${withdrawalId}:`, err)
+    return { sent: false, reason: 'request_error' }
+  }
+}
+
+async function findPendingWithdrawalTx(
+  admin: ReturnType<typeof createClient>,
+  userId: string,
+  withdrawalId: string,
+) {
+  const { data } = await admin
+    .from('wallet_transactions')
+    .select('id')
+    .eq('user_id', userId)
+    .eq('type', 'withdrawal')
+    .eq('status', 'pending')
+    .eq('reference_type', 'withdrawal')
+    .eq('reference_id', withdrawalId)
+    .maybeSingle()
+  return data
+}
+
+function walletTxWithdrawalRefIds(transactions: Array<{ reference_type?: string | null; reference_id?: string | null }>) {
+  return new Set(
+    transactions
+      .filter((tx) => tx.reference_type === 'withdrawal' && tx.reference_id)
+      .map((tx) => String(tx.reference_id)),
+  )
+}
+
+function generateDemoPaymentCard() {
+  const useVisa = Math.random() < 0.5
+  const brand = useVisa ? 'visa' : 'mastercard'
+  const first4 = useVisa
+    ? String(4000 + Math.floor(Math.random() * 1000)).padStart(4, '0')
+    : String(5100 + Math.floor(Math.random() * 1000)).padStart(4, '0')
+  const last4 = String(Math.floor(Math.random() * 10000)).padStart(4, '0')
+  const expMonth = 1 + Math.floor(Math.random() * 12)
+  const expYear = new Date().getFullYear() + 1 + Math.floor(Math.random() * 5)
+  return { brand, first4, last4, expMonth, expYear }
+}
+
+const MAX_PAYMENT_CARDS = 16
 
 const corsHeaders = {
   'Content-Type': 'application/json',
@@ -117,6 +433,11 @@ const RATE_FROM_EUR: Record<string, number> = {
   usd: 1.08,
 }
 
+// 100 credits = 1 EUR. Keep CREDITS_PER_EUR in sync with credits.json creditsPerEur.
+const CREDITS_PER_EUR = Number(Deno.env.get('CREDITS_PER_EUR') ?? '100')
+const MIN_CUSTOM_CREDITS = Number(Deno.env.get('MIN_CUSTOM_CREDITS') ?? '500')
+const MAX_CUSTOM_CREDITS = Number(Deno.env.get('MAX_CUSTOM_CREDITS') ?? '1000000')
+
 const LISTING_COMMISSION_RATE = 0.2
 const LISTING_MIN_PRICE_RATIO = 0.75
 
@@ -127,6 +448,26 @@ type ResolvedCheckout = {
   unitCents: number
   currency: string
   cardId: string | null
+}
+
+function eurCentsForCredits(credits: number): number {
+  return Math.round((credits / CREDITS_PER_EUR) * 100)
+}
+
+function validateCustomCredits(
+  raw: number,
+): { ok: true; credits: number; unitCentsEur: number } | { ok: false; error: string; minCredits?: number; maxCredits?: number } {
+  if (!Number.isFinite(raw)) return { ok: false, error: 'invalid_credits' }
+  const credits = Math.floor(raw)
+  if (credits < MIN_CUSTOM_CREDITS) {
+    return { ok: false, error: 'credits_below_minimum', minCredits: MIN_CUSTOM_CREDITS }
+  }
+  if (credits > MAX_CUSTOM_CREDITS) {
+    return { ok: false, error: 'credits_above_maximum', maxCredits: MAX_CUSTOM_CREDITS }
+  }
+  const unitCentsEur = eurCentsForCredits(credits)
+  if (unitCentsEur <= 0) return { ok: false, error: 'invalid_credits' }
+  return { ok: true, credits, unitCentsEur }
 }
 
 function formatCreditsPurchaseDescription(credits: number, totalCents: number, currency: string): string {
@@ -146,7 +487,10 @@ async function resolveCheckoutPayload(
     cardId?: string
     currency?: string
   },
-): Promise<{ ok: true; resolved: ResolvedCheckout } | { ok: false; error: string; status: number }> {
+): Promise<
+  | { ok: true; resolved: ResolvedCheckout }
+  | { ok: false; error: string; status: number; minCredits?: number; maxCredits?: number }
+> {
   let productId = payload.productId ?? null
   let credits = 0
   let title = 'VOIDBORN Credits'
@@ -172,8 +516,18 @@ async function resolveCheckoutPayload(
     currency = product.currency ?? 'eur'
     cardId = product.card_id
   } else if (payload.customCredits && payload.customCredits > 0) {
-    credits = Math.floor(payload.customCredits)
-    unitCents = credits
+    const validated = validateCustomCredits(payload.customCredits)
+    if (!validated.ok) {
+      return {
+        ok: false,
+        error: validated.error,
+        status: 400,
+        minCredits: validated.minCredits,
+        maxCredits: validated.maxCredits,
+      }
+    }
+    credits = validated.credits
+    unitCents = validated.unitCentsEur
     title = `${credits} Credits`
     productId = null
   } else if (payload.cardId) {
@@ -242,7 +596,7 @@ async function createPendingOrder(
 
   if (orderErr || !order) return { error: orderErr?.message ?? 'order_create_failed' }
 
-  await admin.from('order_items').insert({
+  const { error: itemErr } = await admin.from('order_items').insert({
     order_id: order.id,
     product_id: productId,
     quantity: 1,
@@ -252,6 +606,11 @@ async function createPendingOrder(
     title_snapshot: title,
   })
 
+  if (itemErr) {
+    await admin.from('orders').delete().eq('id', order.id)
+    return { error: itemErr.message ?? 'order_item_create_failed' }
+  }
+
   return { orderId: order.id }
 }
 
@@ -259,10 +618,15 @@ async function fulfillInternalOrder(
   admin: ReturnType<typeof createClient>,
   orderId: string,
   userId: string,
-): Promise<{ ok: true } | { error: string; status: number }> {
+  paymentMethod = 'Test payment',
+): Promise<{ ok: true; invoice: InvoiceSendResult } | { error: string; status: number }> {
   const { data: order } = await admin.from('orders').select('*').eq('id', orderId).maybeSingle()
   if (!order || order.user_id !== userId) return { error: 'order_not_found', status: 404 }
-  if (order.status === 'paid') return { ok: true }
+
+  if (order.status === 'paid') {
+    const invoice = await sendOrderInvoice(admin, orderId, paymentMethod)
+    return { ok: true, invoice }
+  }
 
   const credits = order.credits_granted ?? 0
   const description = formatCreditsPurchaseDescription(
@@ -321,12 +685,13 @@ async function fulfillInternalOrder(
     .from('orders')
     .update({
       status: 'paid',
-      receipt_sent_at: new Date().toISOString(),
       updated_at: new Date().toISOString(),
     })
     .eq('id', orderId)
 
-  return { ok: true }
+  const invoice = await sendOrderInvoice(admin, orderId, paymentMethod)
+
+  return { ok: true, invoice }
 }
 
 async function countCardInUserDecks(
@@ -440,11 +805,52 @@ Deno.serve(async (req) => {
       const desc = String(tx.description ?? '')
       if (tx.status === 'failed' && desc.includes('Replaced by completed checkout')) return false
       if (tx.status === 'pending' && desc.startsWith('Checkout:')) return false
+      if (tx.type === 'withdrawal') return true
       if (tx.status === 'pending' && !desc.startsWith('Payment processing:')) return false
       return true
     })
 
-    return json({ transactions: filtered.slice(0, limit) })
+    const { data: withdrawals } = await admin
+      .from('withdrawal_requests')
+      .select('*')
+      .eq('user_id', userId)
+      .order('created_at', { ascending: false })
+      .limit(limit)
+
+    const coveredIds = walletTxWithdrawalRefIds(filtered)
+    const synthetic = (withdrawals ?? [])
+      .filter((w) => !coveredIds.has(String(w.id)))
+      .map((w) => {
+        const status =
+          w.status === 'completed' ? 'completed' : w.status === 'rejected' ? 'failed' : 'pending'
+        const metadata =
+          w.reject_reason && String(w.reject_reason).trim()
+            ? { reject_reason: String(w.reject_reason).trim() }
+            : {}
+        return {
+          id: String(w.id),
+          user_id: userId,
+          type: 'withdrawal',
+          status,
+          amount_credits: -Number(w.amount_credits),
+          balance_after: null,
+          description:
+            w.status === 'rejected' ? 'Withdrawal rejected' : 'Withdrawal request',
+          reference_type: 'withdrawal',
+          reference_id: w.id,
+          metadata,
+          created_at: w.created_at,
+        }
+      })
+
+    const merged = [...filtered, ...synthetic]
+      .sort(
+        (a, b) =>
+          new Date(String(b.created_at)).getTime() - new Date(String(a.created_at)).getTime(),
+      )
+      .slice(0, limit)
+
+    return json({ transactions: merged })
   }
 
   if (action === 'inventory_list') {
@@ -597,19 +1003,41 @@ Deno.serve(async (req) => {
     const listingId = String(body.listingId ?? '')
     if (!listingId) return json({ error: 'missing_listing_id' }, 400)
 
-    const { data: listing } = await admin
+    const { data: listing, error: claimError } = await admin
       .from('player_market_listings')
-      .select('*, cards ( id, title )')
+      .update({
+        status: 'sold',
+        sold_at: new Date().toISOString(),
+        buyer_id: userId,
+      })
       .eq('id', listingId)
       .eq('site_id', siteId)
       .eq('status', 'active')
+      .neq('seller_id', userId)
+      .select('*, cards ( id, title )')
       .maybeSingle()
 
-    if (!listing) return json({ error: 'listing_not_found' }, 404)
-    if (listing.seller_id === userId) return json({ error: 'cannot_buy_own_listing' }, 400)
+    if (claimError || !listing) {
+      return json(
+        {
+          error: 'listing_not_available',
+          message: 'This listing was already sold or is no longer available.',
+        },
+        409,
+      )
+    }
 
     const price = Number(listing.price_credits)
     const sellerProceeds = Math.floor(price * (1 - LISTING_COMMISSION_RATE))
+
+    const revertListing = async () => {
+      await admin
+        .from('player_market_listings')
+        .update({ status: 'active', sold_at: null, buyer_id: null })
+        .eq('id', listingId)
+        .eq('status', 'sold')
+        .eq('buyer_id', userId)
+    }
 
     try {
       await admin.rpc('wallet_apply_credits', {
@@ -622,29 +1050,39 @@ Deno.serve(async (req) => {
         p_reference_id: listing.id,
       })
     } catch (e) {
+      await revertListing()
       return json({ error: 'insufficient_credits', message: String(e) }, 400)
     }
 
-    await admin.rpc('ensure_wallet', { p_user_id: listing.seller_id })
+    try {
+      await admin.rpc('ensure_wallet', { p_user_id: listing.seller_id })
 
-    await admin.rpc('wallet_apply_credits', {
-      p_user_id: listing.seller_id,
-      p_amount: sellerProceeds,
-      p_type: 'adjustment',
-      p_status: 'completed',
-      p_description: `Card sold: ${listing.cards?.title ?? 'card'} (+${sellerProceeds} credits after ${Math.round(LISTING_COMMISSION_RATE * 100)}% commission)`,
-      p_reference_type: 'market_listing',
-      p_reference_id: listing.id,
-    })
-
-    await admin
-      .from('player_market_listings')
-      .update({
-        status: 'sold',
-        sold_at: new Date().toISOString(),
-        buyer_id: userId,
+      await admin.rpc('wallet_apply_credits', {
+        p_user_id: listing.seller_id,
+        p_amount: sellerProceeds,
+        p_type: 'adjustment',
+        p_status: 'completed',
+        p_description: `Card sold: ${listing.cards?.title ?? 'card'} (+${sellerProceeds} credits after ${Math.round(LISTING_COMMISSION_RATE * 100)}% commission)`,
+        p_reference_type: 'market_listing',
+        p_reference_id: listing.id,
       })
-      .eq('id', listingId)
+    } catch (e) {
+      try {
+        await admin.rpc('wallet_apply_credits', {
+          p_user_id: userId,
+          p_amount: price,
+          p_type: 'refund',
+          p_status: 'completed',
+          p_description: `Market purchase rollback: ${listing.cards?.title ?? 'card'}`,
+          p_reference_type: 'market_listing',
+          p_reference_id: listing.id,
+        })
+      } catch {
+        /* manual reconciliation if refund fails */
+      }
+      await revertListing()
+      return json({ error: 'purchase_failed', message: String(e) }, 500)
+    }
 
     const { data: buyerInv } = await admin
       .from('player_inventory')
@@ -689,70 +1127,25 @@ Deno.serve(async (req) => {
     }
 
     const payload = body as CheckoutBody
-    let productId = payload.productId ?? null
-    let credits = 0
-    let title = 'VOIDBORN Credits'
-    let unitCents = 0
-    let currency = 'eur'
-    let cardId: string | null = null
-    let checkoutCurrencyApplied = false
-
-    if (payload.packId || productId) {
-      const slugOrId = payload.packId ?? productId!
-      const uuidRe = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
-      let productQuery = admin.from('store_products').select('*').eq('active', true).eq('site_id', siteId)
-      productQuery = uuidRe.test(slugOrId)
-        ? productQuery.eq('id', slugOrId)
-        : productQuery.eq('slug', slugOrId)
-      const { data: product } = await productQuery.maybeSingle()
-
-      if (!product) return json({ error: 'product_not_found' }, 404)
-      productId = product.id
-      credits = product.credits_amount ?? 0
-      title = product.title
-      unitCents = product.price_cents
-      currency = product.currency ?? 'eur'
-      cardId = product.card_id
-    } else if (payload.customCredits && payload.customCredits > 0) {
-      credits = Math.floor(payload.customCredits)
-      unitCents = credits
-      title = `${credits} Credits`
-      productId = null
-    } else if (body.cardId) {
-      const cardIdStr = String(body.cardId)
-      const { data: card } = await admin
-        .from('cards')
-        .select('id, title, price_cents, site_id, published')
-        .eq('id', cardIdStr)
-        .eq('site_id', siteId)
-        .eq('published', true)
-        .maybeSingle()
-
-      if (!card || !card.price_cents || card.price_cents <= 0) {
-        return json({ error: 'card_not_found' }, 404)
-      }
-
-      const displayCurrency = String(body.currency ?? 'eur').toLowerCase()
-      const rate = RATE_FROM_EUR[displayCurrency] ?? 1
-      cardId = card.id
-      credits = 0
-      title = card.title
-      unitCents = Math.round(Number(card.price_cents) * rate)
-      currency = displayCurrency
-      productId = null
-      checkoutCurrencyApplied = true
-    } else {
-      return json({ error: 'invalid_checkout' }, 400)
+    const resolvedResult = await resolveCheckoutPayload(admin, siteId, {
+      packId: payload.packId ? String(payload.packId) : undefined,
+      productId: payload.productId ? String(payload.productId) : undefined,
+      customCredits: payload.customCredits ? Number(payload.customCredits) : undefined,
+      cardId: body.cardId ? String(body.cardId) : undefined,
+      currency: payload.currency ? String(payload.currency) : undefined,
+    })
+    if (!resolvedResult.ok) {
+      return json(
+        {
+          error: resolvedResult.error,
+          ...(resolvedResult.minCredits !== undefined ? { minCredits: resolvedResult.minCredits } : {}),
+          ...(resolvedResult.maxCredits !== undefined ? { maxCredits: resolvedResult.maxCredits } : {}),
+        },
+        resolvedResult.status,
+      )
     }
 
-    if (!checkoutCurrencyApplied && payload.currency) {
-      const displayCurrency = String(payload.currency).toLowerCase()
-      const rate = RATE_FROM_EUR[displayCurrency]
-      if (rate) {
-        unitCents = Math.round(unitCents * rate)
-        currency = displayCurrency
-      }
-    }
+    const { productId, credits, title, unitCents, currency, cardId } = resolvedResult.resolved
 
     const { data: userData } = await admin.auth.admin.getUserById(userId)
     const receiptEmail = userData.user ? displayEmailFromUser(userData.user) : null
@@ -949,6 +1342,42 @@ Deno.serve(async (req) => {
     const amount = Math.floor(Number(body.amountCredits ?? 0))
     if (amount <= 0) return json({ error: 'invalid_amount' }, 400)
 
+    const { data: wallet } = await admin
+      .from('wallets')
+      .select('balance_credits')
+      .eq('user_id', userId)
+      .maybeSingle()
+
+    const balance = Number(wallet?.balance_credits ?? 0)
+
+    const { data: pendingRows } = await admin
+      .from('withdrawal_requests')
+      .select('amount_credits')
+      .eq('user_id', userId)
+      .eq('status', 'pending')
+
+    const pendingTotal = (pendingRows ?? []).reduce(
+      (sum, row) => sum + Number(row.amount_credits ?? 0),
+      0,
+    )
+    const available = balance - pendingTotal
+
+    if (amount > available) {
+      return json(
+        {
+          error: 'insufficient_credits',
+          message:
+            pendingTotal > 0
+              ? `You can withdraw up to ${available} credits (${pendingTotal} already pending).`
+              : `You only have ${balance} credits available.`,
+          availableCredits: available,
+          balanceCredits: balance,
+          pendingCredits: pendingTotal,
+        },
+        400,
+      )
+    }
+
     const { data: row, error } = await admin
       .from('withdrawal_requests')
       .insert({
@@ -961,6 +1390,19 @@ Deno.serve(async (req) => {
       .select('*')
       .single()
     if (error) return json({ error: error.message }, 500)
+
+    const { error: txError } = await admin.from('wallet_transactions').insert({
+      user_id: userId,
+      type: 'withdrawal',
+      status: 'pending',
+      amount_credits: -amount,
+      balance_after: balance,
+      description: 'Withdrawal request',
+      reference_type: 'withdrawal',
+      reference_id: row.id,
+    })
+    if (txError) return json({ error: txError.message }, 500)
+
     return json({ withdrawal: row })
   }
 
@@ -989,6 +1431,84 @@ Deno.serve(async (req) => {
     return json({ isAdmin: adminFlag })
   }
 
+  if (action === 'payment_card_add_demo') {
+    if (!(await isAdmin(admin, userId))) return json({ error: 'forbidden' }, 403)
+    if (!siteId) return json({ error: 'missing_site_id' }, 400)
+
+    const { count, error: countError } = await admin
+      .from('user_payment_cards')
+      .select('id', { count: 'exact', head: true })
+      .eq('user_id', userId)
+      .eq('site_id', siteId)
+
+    if (countError) return json({ error: countError.message }, 500)
+    if ((count ?? 0) >= MAX_PAYMENT_CARDS) {
+      return json(
+        { error: 'card_limit_reached', message: `Maximum of ${MAX_PAYMENT_CARDS} cards.` },
+        400,
+      )
+    }
+
+    const generated = generateDemoPaymentCard()
+    const { data, error } = await admin
+      .from('user_payment_cards')
+      .insert({
+        user_id: userId,
+        site_id: siteId,
+        brand: generated.brand,
+        first4: generated.first4,
+        last4: generated.last4,
+        exp_month: generated.expMonth,
+        exp_year: generated.expYear,
+        is_demo: true,
+      })
+      .select('id, brand, first4, last4, exp_month, exp_year, is_demo, created_at')
+      .single()
+
+    if (error || !data) return json({ error: error?.message ?? 'card_create_failed' }, 500)
+
+    return json({
+      ok: true,
+      card: {
+        id: data.id,
+        brand: data.brand,
+        first4: data.first4,
+        last4: data.last4,
+        expMonth: data.exp_month,
+        expYear: data.exp_year,
+        isDemo: data.is_demo,
+        createdAt: data.created_at,
+      },
+    })
+  }
+
+  if (action === 'payment_card_remove') {
+    const cardId = String(body.cardId ?? '')
+    if (!cardId) return json({ error: 'missing_card_id' }, 400)
+    if (!siteId) return json({ error: 'missing_site_id' }, 400)
+
+    const { data: card } = await admin
+      .from('user_payment_cards')
+      .select('id')
+      .eq('id', cardId)
+      .eq('user_id', userId)
+      .eq('site_id', siteId)
+      .maybeSingle()
+
+    if (!card) return json({ error: 'card_not_found', message: 'Card not found.' }, 404)
+
+    // Payment processor detach — wire when gateway is integrated.
+    const { error } = await admin
+      .from('user_payment_cards')
+      .delete()
+      .eq('id', cardId)
+      .eq('user_id', userId)
+      .eq('site_id', siteId)
+
+    if (error) return json({ error: error.message }, 500)
+    return json({ ok: true })
+  }
+
   if (action === 'checkout_init') {
     const resolvedResult = await resolveCheckoutPayload(admin, siteId, {
       packId: body.packId ? String(body.packId) : undefined,
@@ -997,7 +1517,16 @@ Deno.serve(async (req) => {
       cardId: body.cardId ? String(body.cardId) : undefined,
       currency: body.currency ? String(body.currency) : undefined,
     })
-    if (!resolvedResult.ok) return json({ error: resolvedResult.error }, resolvedResult.status)
+    if (!resolvedResult.ok) {
+      return json(
+        {
+          error: resolvedResult.error,
+          ...(resolvedResult.minCredits !== undefined ? { minCredits: resolvedResult.minCredits } : {}),
+          ...(resolvedResult.maxCredits !== undefined ? { maxCredits: resolvedResult.maxCredits } : {}),
+        },
+        resolvedResult.status,
+      )
+    }
 
     const { data: userData } = await admin.auth.admin.getUserById(userId)
     const receiptEmail = userData.user ? displayEmailFromUser(userData.user) : null
@@ -1118,9 +1647,14 @@ Deno.serve(async (req) => {
 
     if (outcome === 'success') {
       try {
-        const result = await fulfillInternalOrder(admin, orderId, order.user_id)
+        const result = await fulfillInternalOrder(admin, orderId, order.user_id, 'Test payment')
         if ('error' in result) return json({ error: result.error, message: result.error }, result.status)
-        return json({ ok: true, status: 'paid' })
+        return json({
+          ok: true,
+          status: 'paid',
+          invoiceSent: result.invoice.sent,
+          invoiceReason: result.invoice.reason ?? null,
+        })
       } catch (e) {
         return json({ error: 'fulfillment_failed', message: String(e) }, 500)
       }
@@ -1139,6 +1673,127 @@ Deno.serve(async (req) => {
       .eq('id', orderId)
 
     return json({ ok: true, status: 'failed' })
+  }
+
+  if (action === 'withdrawal_test') {
+    if (!(await isAdmin(admin, userId))) return json({ error: 'forbidden' }, 403)
+
+    const withdrawalId = String(body.withdrawalId ?? '')
+    const outcome = String(body.outcome ?? '')
+    if (!withdrawalId) return json({ error: 'missing_withdrawal_id' }, 400)
+    if (outcome !== 'success' && outcome !== 'failure') {
+      return json({ error: 'invalid_outcome' }, 400)
+    }
+
+    const { data: withdrawal } = await admin
+      .from('withdrawal_requests')
+      .select('*')
+      .eq('id', withdrawalId)
+      .maybeSingle()
+
+    if (!withdrawal) return json({ error: 'withdrawal_not_found' }, 404)
+    if (withdrawal.user_id !== userId) return json({ error: 'forbidden' }, 403)
+    if (withdrawal.status !== 'pending') return json({ error: 'withdrawal_not_pending' }, 400)
+
+    const amount = Number(withdrawal.amount_credits)
+
+    if (outcome === 'success') {
+      const pendingTx = await findPendingWithdrawalTx(admin, userId, withdrawalId)
+
+      try {
+        await admin.rpc('wallet_apply_credits', {
+          p_user_id: userId,
+          p_amount: -amount,
+          p_type: 'withdrawal',
+          p_status: 'completed',
+          p_description: `Withdrawal: ${amount} credits`,
+          p_reference_type: 'withdrawal',
+          p_reference_id: withdrawalId,
+        })
+      } catch (e) {
+        return json({ error: 'insufficient_credits', message: String(e) }, 400)
+      }
+
+      if (pendingTx?.id) {
+        await admin.from('wallet_transactions').delete().eq('id', pendingTx.id)
+      }
+
+      const completedAt = new Date().toISOString()
+      await admin
+        .from('withdrawal_requests')
+        .update({ status: 'completed', updated_at: completedAt })
+        .eq('id', withdrawalId)
+
+      const email = await sendWithdrawalConfirmation(
+        admin,
+        withdrawalId,
+        userId,
+        amount,
+        completedAt,
+      )
+
+      return json({
+        ok: true,
+        status: 'completed',
+        emailSent: email.sent,
+        emailReason: email.reason ?? null,
+      })
+    }
+
+    const rejectReason =
+      String(body.rejectReason ?? 'Withdrawal rejected by processor').trim() ||
+      'Withdrawal rejected by processor'
+
+    const pendingTx = await findPendingWithdrawalTx(admin, userId, withdrawalId)
+
+    if (pendingTx?.id) {
+      const { data: wallet } = await admin
+        .from('wallets')
+        .select('balance_credits')
+        .eq('user_id', userId)
+        .maybeSingle()
+
+      await admin
+        .from('wallet_transactions')
+        .update({
+          status: 'failed',
+          description: 'Withdrawal rejected',
+          balance_after: Number(wallet?.balance_credits ?? 0),
+          metadata: { reject_reason: rejectReason },
+        })
+        .eq('id', pendingTx.id)
+    } else {
+      const { data: wallet } = await admin
+        .from('wallets')
+        .select('balance_credits')
+        .eq('user_id', userId)
+        .maybeSingle()
+
+      const balance = Number(wallet?.balance_credits ?? 0)
+
+      await admin.from('wallet_transactions').insert({
+        user_id: userId,
+        type: 'withdrawal',
+        status: 'failed',
+        amount_credits: -amount,
+        balance_after: balance,
+        description: 'Withdrawal rejected',
+        reference_type: 'withdrawal',
+        reference_id: withdrawalId,
+        metadata: { reject_reason: rejectReason },
+      })
+    }
+
+    await admin
+      .from('withdrawal_requests')
+      .update({
+        status: 'rejected',
+        reject_reason: rejectReason,
+        updated_at: new Date().toISOString(),
+      })
+      .eq('id', withdrawalId)
+
+    return json({ ok: true, status: 'rejected' })
   }
 
   return json({ error: 'unknown_action', action }, 400)

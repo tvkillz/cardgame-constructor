@@ -71,6 +71,44 @@ Sync `sendmail/` after code changes and `pm2 restart voidborn-sendmail`.
 
 Password reset uses the same hook (`email_action_type: recovery`).
 
+## Checkout invoice email (admin test payment)
+
+After **Payment success (test)** on checkout, the `commerce` edge function calls sendmail `POST /invoice` (portal HTML + PDF).
+
+Add to **`backend/.env`** (injected into the `functions` service via `docker-compose.yml`):
+
+```env
+# Public URL of sendmail on the frontend VPS (no trailing slash)
+SENDMAIL_URL=https://staging.voidborn.fun/api/sendmail
+MAIL_API_KEY=<same as sendmail MAIL_API_KEY>
+
+INVOICE_COMPANY_NAME=Test LTD
+INVOICE_COMPANY_NUMBER=00000000
+INVOICE_COMPANY_ADDRESS=123 Example Street, Testville, TE1 1ST, United Kingdom
+INVOICE_COMPANY_EMAIL=support@voidborn.fun
+```
+
+On the **API VPS**, after syncing `backend/`:
+
+```bash
+cd ~/constructor-files/backend
+docker compose up -d functions --force-recreate
+docker compose logs functions --tail 50
+```
+
+On the **frontend VPS**, ensure sendmail has `pdfkit` installed (`npm install` in `sendmail/`) and is running.
+
+**Demo flow:** sign in as admin → checkout → fill required billing fields → **Payment success (test)** → success page + invoice in the account email.
+
+Preview invoice without checkout:
+
+```bash
+curl -X POST "$SENDMAIL_URL/test" \
+  -H "Authorization: Bearer $MAIL_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"template":"invoice"}'
+```
+
 ## Production (later)
 
 When cPanel limits allow, deploy `sendmail/` to `https://voidborn.fun/api/sendmail` and update:

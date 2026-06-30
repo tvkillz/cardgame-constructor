@@ -6,6 +6,11 @@ import { appConfig } from '@/config'
 import { creditsToEur, formatCredits } from '@/config/selectors'
 import { useSyncedMarketCurrency } from '@/hooks/useMarketCurrency'
 import { formatEurAmount, MARKET_CURRENCIES } from '@/lib/market/currency'
+import {
+  MAX_CUSTOM_CREDITS,
+  MIN_CUSTOM_CREDITS,
+  validateCustomCreditAmount,
+} from '@/lib/commerce/creditCheckoutLimits'
 import { Button } from '@/components/ui/Button/Button'
 import '@/styles/coin-stack-icon.css'
 import './PurchaseCreditsModal.css'
@@ -53,8 +58,27 @@ export default function PurchaseCreditsModal({
     return 0
   }, [selectedPack, customAmount])
 
+  const customValidation = useMemo(() => {
+    if (selectedPack) return { ok: true as const }
+    if (customAmount <= 0) return { ok: false as const, reason: 'empty' as const }
+    return validateCustomCreditAmount(customAmount)
+  }, [selectedPack, customAmount])
+
+  const canBuy =
+    totalEur > 0 &&
+    (Boolean(selectedPack) || (customAmount > 0 && validateCustomCreditAmount(customAmount).ok))
+
   const goToCheckout = (creditAmount: number) => {
     if (!creditAmount || creditAmount <= 0) return
+    const check = validateCustomCreditAmount(creditAmount)
+    if (!check.ok) {
+      setCheckoutError(
+        check.reason === 'min'
+          ? `Minimum purchase is ${formatCredits(MIN_CUSTOM_CREDITS)} credits.`
+          : `Maximum custom purchase is ${formatCredits(MAX_CUSTOM_CREDITS)} credits.`,
+      )
+      return
+    }
     setCheckoutError(null)
 
     const params = new URLSearchParams()
@@ -78,10 +102,11 @@ export default function PurchaseCreditsModal({
   const handleCustomChange = (value: string) => {
     setCustomCredits(value)
     setSelectedPackId(null)
+    setCheckoutError(null)
   }
 
   const handleBuy = () => {
-    if (totalEur <= 0) return
+    if (!canBuy) return
     if (selectedPack) {
       goToCheckout(selectedPack.credits)
     } else if (customAmount > 0) {
@@ -179,12 +204,19 @@ export default function PurchaseCreditsModal({
                 <CoinIcon />
                 <input
                   type="number"
-                  min={1}
+                  min={MIN_CUSTOM_CREDITS}
+                  max={MAX_CUSTOM_CREDITS}
                   step={1}
                   className="credits-modal__custom-input"
                   placeholder={copy.amountPlaceholder}
                   value={customCredits}
                   onChange={(e) => handleCustomChange(e.target.value)}
+                  aria-invalid={customAmount > 0 && !selectedPack && !validateCustomCreditAmount(customAmount).ok}
+                  aria-describedby={
+                    customAmount > 0 && !selectedPack && !validateCustomCreditAmount(customAmount).ok
+                      ? 'credits-custom-limit-hint'
+                      : undefined
+                  }
                 />
               </div>
             </label>
@@ -200,13 +232,24 @@ export default function PurchaseCreditsModal({
               size="md"
               fantasy
               className="credits-modal__buy"
-              disabled={totalEur <= 0}
+              disabled={!canBuy}
               onClick={handleBuy}
             >
               {copy.buy}
             </Button>
           </div>
-          {customAmount > 0 && (
+          {customAmount > 0 && !selectedPack && !validateCustomCreditAmount(customAmount).ok ? (
+            <p
+              id="credits-custom-limit-hint"
+              className="credits-modal__warning"
+              role="alert"
+            >
+              {customValidation.reason === 'min'
+                ? `Minimum custom purchase is ${formatCredits(MIN_CUSTOM_CREDITS)} credits. Choose a pack above or enter at least ${formatCredits(MIN_CUSTOM_CREDITS)}.`
+                : `Maximum custom purchase is ${formatCredits(MAX_CUSTOM_CREDITS)} credits.`}
+            </p>
+          ) : null}
+          {customAmount > 0 && (selectedPack || validateCustomCreditAmount(customAmount).ok) && (
             <p className="credits-modal__custom-hint">
               {formatCredits(customAmount)} credits @ {creditsPerEur} / {formatEurAmount(1, currency)}
             </p>

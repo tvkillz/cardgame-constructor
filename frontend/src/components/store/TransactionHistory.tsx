@@ -29,7 +29,7 @@ type OrderRow = {
 type TagFilter = 'all' | TransactionTag
 
 const ORDER_STATUS_OPTIONS = ['all', 'paid', 'failed', 'refunded', 'cancelled'] as const
-const WALLET_STATUS_OPTIONS = ['all', 'completed', 'pending', 'failed', 'refunded'] as const
+const WALLET_STATUS_OPTIONS = ['all', 'pending', 'successful', 'rejected', 'completed', 'failed', 'refunded'] as const
 const WALLET_TYPE_OPTIONS = [
   'all',
   'Store purchase',
@@ -43,6 +43,36 @@ const WALLET_TYPE_OPTIONS = [
 ] as const
 
 type WalletTypeFilter = (typeof WALLET_TYPE_OPTIONS)[number]
+
+function rejectReasonFromTx(tx: WalletTransaction): string | null {
+  const reason = tx.metadata?.reject_reason
+  return typeof reason === 'string' && reason.trim() ? reason.trim() : null
+}
+
+function formatTxStatus(tx: WalletTransaction): string {
+  if (tx.type === 'withdrawal') {
+    if (tx.status === 'failed') return 'rejected'
+    if (tx.status === 'completed') return 'successful'
+    if (tx.status === 'pending') return 'pending'
+  }
+  return tx.status
+}
+
+function txStatusClass(tx: WalletTransaction): string {
+  if (tx.type === 'withdrawal') {
+    if (tx.status === 'failed') return 'rejected'
+    if (tx.status === 'completed') return 'successful'
+    return tx.status
+  }
+  return tx.status
+}
+
+function walletStatusMatchesFilter(tx: WalletTransaction, filter: string): boolean {
+  if (filter === 'all') return true
+  if (filter === 'rejected') return tx.type === 'withdrawal' && tx.status === 'failed'
+  if (filter === 'successful') return tx.status === 'completed'
+  return tx.status === filter
+}
 
 function formatTxType(type: string, description: string | null): string {
   if (description?.startsWith('Card sold:')) return 'Store sale'
@@ -245,7 +275,7 @@ export default function TransactionHistory() {
     return transactions.filter((tx) => {
       const tags = resolveWalletTxTags(tx.type, tx.description)
       if (!matchesTagFilter(tags, walletTagFilter)) return false
-      if (walletStatusFilter !== 'all' && tx.status !== walletStatusFilter) return false
+      if (walletStatusFilter !== 'all' && !walletStatusMatchesFilter(tx, walletStatusFilter)) return false
       const typeLabel = formatTxType(tx.type, tx.description)
       if (walletTypeFilter !== 'all' && typeLabel !== walletTypeFilter) return false
       return true
@@ -396,6 +426,9 @@ export default function TransactionHistory() {
                 const tags = resolveWalletTxTags(tx.type, tx.description)
                 const isCredit = tx.amount_credits > 0
                 const amountLabel = `${isCredit ? '+' : '−'}${formatCredits(Math.abs(tx.amount_credits))} credits`
+                const displayStatus = formatTxStatus(tx)
+                const statusClass = txStatusClass(tx)
+                const rejectReason = rejectReasonFromTx(tx)
 
                 return (
                   <li key={tx.id}>
@@ -408,13 +441,19 @@ export default function TransactionHistory() {
                           <TxTags tags={tags} />
                         </div>
                         <p className="portal-tx-row__desc">{tx.description ?? '—'}</p>
+                        {rejectReason ? (
+                          <p className="portal-tx-row__reject-reason">
+                            <span className="portal-tx-row__reject-label">Reject reason:</span>{' '}
+                            {rejectReason}
+                          </p>
+                        ) : null}
                         <time className="portal-tx-row__date" dateTime={tx.created_at}>
                           {formatWhen(tx.created_at)}
                         </time>
                       </div>
                       <div className="portal-tx-row__meta">
-                        <span className={`portal-tx-row__status portal-tx-row__status--${tx.status}`}>
-                          {tx.status}
+                        <span className={`portal-tx-row__status portal-tx-row__status--${statusClass}`}>
+                          {displayStatus}
                         </span>
                         <span
                           className={`portal-tx-row__amount${isCredit ? '' : ' portal-tx-row__amount--debit'}`}

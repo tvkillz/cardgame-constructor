@@ -5,8 +5,8 @@ nginx runs as a **systemd service** (`systemctl enable nginx`). This folder gene
 ## Architecture
 
 ```
-Browser → https://staging.voidborn.fun  ─nginx:443─→ pm2 voidborn-prod  :3100  (staging VPS)
-Browser → https://voidborn.fun          ─cPanel Node──→ production (FTP deploy)
+Browser → https://staging.voidborn.fun  ─nginx:443─→ pm2 voidborn-prod  :3100  (VPS)
+Browser → https://voidborn.fun          ─nginx:443─→ pm2 voidborn-prod  :3100  (VPS, production)
 
 Browser → https://staging.sportsydeals.com     ─nginx─→ pm2 project2-prod :3101
 Browser → https://test.sportsydeals.com         ─nginx─→ pm2 project2-prod :3101
@@ -19,11 +19,11 @@ Per-site routing is defined in `projects/registry.json`:
 | Field | Purpose |
 |-------|---------|
 | `stagingDomain` | VPS nginx staging vhost (`staging.{domain}`) |
-| `vpsProd` | `false` = production not on this VPS (e.g. voidborn → cPanel only) |
+| `vpsProd` | When true, production domain is served from this VPS via pm2 |
 
 `deploy-from-local.sh` builds with `DEPLOY_TARGET=staging` so auth redirects use the staging URL.
 
-Production cPanel: `npm run deploy:cpanel-static` (static `public_html`, recommended) or `npm run deploy:cpanel` (Node.js app). See `deploy/cpanel/STATIC.md` and `deploy/cpanel/README.md`.
+**This project does not use cPanel for frontend deploy.** Legacy `deploy/cpanel*` scripts in this folder are historical; production is pm2 on the VPS. The repo is often rclone-mounted locally via `mount-voidborn.sh` for editing only.
 
 Frontend nginx only proxies to local pm2 ports. **CORS is configured on the backend**, not here. After `generate-nginx.mjs`, see `deploy/output/cors-origins.txt` for the origin list to allow.
 

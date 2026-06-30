@@ -5,7 +5,17 @@ alwaysApply: true
 
 # Terminal commands — only the user runs VPS commands
 
-This repo is often **rclone-mounted** from the production VPS (`mount-voidborn.sh`). The mount is for editing code locally, not for running server workloads.
+This repo is often **rclone-mounted** from remote VPS hosts (`mount-voidborn.sh`). The mount is for editing code locally, not for running server workloads.
+
+**Mounted directories** (see `mount-voidborn.sh`):
+
+| Local | Remote | Host |
+|-------|--------|------|
+| `backend/` | `/root/constructor-files/backend` | API VPS — Docker / edge functions |
+| `sendmail/` | `/root/constructor-files/sendmail` | Frontend VPS — pm2 mail relay |
+| `projects/` | `/root/constructor-files/projects` | API VPS — content packs |
+
+`frontend/` may be a local clone or synced separately on the frontend VPS.
 
 ## Hard rule: do not run VPS or production commands
 
@@ -42,10 +52,11 @@ Include cwd, what success looks like, and never paste secrets from `.env` files.
 
 ## After code changes that need deploy
 
-Tell the user clearly:
+Tell the user clearly which host and cwd:
 
-1. Sync files to the VPS (if using rclone)
-2. Run `npm run build` on the VPS
-3. Run `pm2 restart voidborn-frontend` (or their process name)
+1. **Sync** via rclone (if using mounts)
+2. **Frontend VPS:** `npm run build` + `pm2 restart …`
+3. **API VPS:** `docker compose up -d functions --force-recreate` (after `backend/` or `.env` changes)
+4. **Frontend VPS:** `npm install` + `pm2 restart` in `sendmail/` when invoice/mail code changes
 
 Do not run those steps yourself unless the user overrides this rule for that message.

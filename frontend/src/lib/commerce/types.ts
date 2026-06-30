@@ -31,6 +31,7 @@ export interface WalletTransaction {
   balance_after: number | null
   description: string | null
   created_at: string
+  metadata?: Record<string, unknown> | null
   stripe_checkout_session_id?: string | null
 }
 
@@ -77,9 +78,12 @@ export type CommerceAction =
   | { type: 'checkout_pay'; orderId: string }
   | { type: 'checkout_test'; orderId: string; outcome: 'success' | 'failure' }
   | { type: 'profile_get' }
+  | { type: 'payment_card_add_demo' }
+  | { type: 'payment_card_remove'; cardId: string }
   | { type: 'purchase_with_credits'; productId: string }
   | { type: 'buy_card_with_credits'; cardId: string }
   | { type: 'withdrawal_create'; amountCredits: number; payoutMethod?: string }
+  | { type: 'withdrawal_test'; withdrawalId: string; outcome: 'success' | 'failure'; rejectReason?: string }
   | { type: 'admin_transactions' }
   | { type: 'admin_products_upsert'; product: Record<string, unknown> }
 
@@ -105,7 +109,13 @@ export interface CommerceResponse {
   gatewayUrl?: string | null
   isAdmin?: boolean
   ok?: boolean
+  invoiceSent?: boolean
+  invoiceReason?: string | null
+  emailSent?: boolean
+  emailReason?: string | null
   withdrawal?: unknown
   error?: string
   message?: string
+  minCredits?: number
+  maxCredits?: number
 }

@@ -14,7 +14,6 @@ const PurchaseCreditsModal = dynamic(
   { ssr: false },
 )
 import { routeRequiresAuth } from '@/lib/auth/guards'
-import { Button } from '../ui/Button/Button'
 import './styles.css'
 
 export default function Header() {
@@ -131,10 +130,8 @@ export default function Header() {
               <strong>{playerName}</strong>
             </span>
           ) : (
-            <Button
+            <button
               type="button"
-              variant="ghost"
-              size="sm"
               className="header__sign-in"
               disabled={loading}
               onClick={() => openAuthModal('signIn')}
@@ -145,7 +142,7 @@ export default function Header() {
                 </svg>
               </span>
               {descriptions.header.signIn}
-            </Button>
+            </button>
           )}
 
           <button
