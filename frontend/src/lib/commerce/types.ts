@@ -72,6 +72,11 @@ export type CommerceAction =
   | { type: 'buy_market_listing'; listingId: string }
   | { type: 'orders_list' }
   | { type: 'checkout_create'; packId?: string; productId?: string; customCredits?: number; cardId?: string; currency?: string }
+  | { type: 'checkout_init'; packId?: string; productId?: string; customCredits?: number; cardId?: string; currency?: string }
+  | { type: 'checkout_get'; orderId: string }
+  | { type: 'checkout_pay'; orderId: string }
+  | { type: 'checkout_test'; orderId: string; outcome: 'success' | 'failure' }
+  | { type: 'profile_get' }
   | { type: 'purchase_with_credits'; productId: string }
   | { type: 'buy_card_with_credits'; cardId: string }
   | { type: 'withdrawal_create'; amountCredits: number; payoutMethod?: string }
@@ -91,6 +96,14 @@ export interface CommerceResponse {
   checkoutUrl?: string
   orderId?: string
   sessionId?: string
+  credits?: number
+  title?: string
+  totalCents?: number
+  vatCents?: number
+  currency?: string
+  status?: string
+  gatewayUrl?: string | null
+  isAdmin?: boolean
   ok?: boolean
   withdrawal?: unknown
   error?: string

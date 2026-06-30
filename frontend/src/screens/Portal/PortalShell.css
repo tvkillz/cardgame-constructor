@@ -245,6 +245,14 @@
   padding: 1.25rem 1.5rem 1rem;
 }
 
+.portal__toolbar--checkout {
+  justify-content: flex-end;
+}
+
+.portal__toolbar--checkout .portal__toolbar-actions {
+  margin-left: auto;
+}
+
 .portal__section-title {
   margin: 0 0 0.35rem;
   font-family: var(--font-fantasy);
@@ -308,7 +316,7 @@
 }
 
 .portal__toolbar-balance {
-  display: inline-flex;
+  display: none;
   align-items: center;
   gap: 0.4rem;
   padding: 0.35rem 0.65rem;
@@ -425,9 +433,10 @@
 
 @media (max-width: 546px) {
   .portal__tabs {
-    flex-direction: column;
+    /* flex-direction: column; */
     flex-wrap: nowrap;
-    gap: 0;
+    gap: 20px;
+    overflow-y: hidden;
   }
 
   .portal__tab {

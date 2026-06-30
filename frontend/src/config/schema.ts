@@ -26,6 +26,7 @@ export interface AppConfig {
       portalTransactions: string
       portalProfile: string
       portalStore: string
+      checkout: string
       checkoutSuccess: string
       checkoutCancel: string
     }

@@ -66,6 +66,14 @@ function PortalShellInner({ children }: { children: React.ReactNode }) {
     [pathname],
   )
 
+  const checkoutPath = appConfig.domain.routes.checkout ?? '/checkout'
+  const checkoutSuccessPath = appConfig.domain.routes.checkoutSuccess ?? '/portal/checkout/success'
+  const checkoutCancelPath = appConfig.domain.routes.checkoutCancel ?? '/portal/checkout/cancel'
+  const isCheckoutFlowPage =
+    pathname === checkoutPath ||
+    pathname === checkoutSuccessPath ||
+    pathname === checkoutCancelPath
+
   const { balanceCredits, loading: walletLoading, refresh: refreshWallet } = useWallet()
   const creditsLabel = walletLoading ? '…' : formatCredits(balanceCredits)
   const { currency, setCurrency } = useMarketCurrency()
@@ -103,11 +111,13 @@ function PortalShellInner({ children }: { children: React.ReactNode }) {
             })}
           </nav>
 
-        <div className="portal__toolbar">
+        <div className={`portal__toolbar${isCheckoutFlowPage ? ' portal__toolbar--checkout' : ''}`}>
+            {!isCheckoutFlowPage ? (
             <div className="portal__toolbar-copy">
               <h1 className="portal__section-title">{activeSection.title}</h1>
               <p className="portal__section-subtitle">{activeSection.subtitle}</p>
             </div>
+            ) : null}
             <div className="portal__toolbar-actions">
               {isCollectionPage ? (
                 <div className="portal__mode-switch" role="group" aria-label="Collection mode">
@@ -172,7 +182,7 @@ function PortalShellInner({ children }: { children: React.ReactNode }) {
             </div>
           </div>
 
-        <main className="portal__main">{children}</main>
+        <main className={`portal__main${isCheckoutFlowPage ? ' portal__main--checkout' : ''}`}>{children}</main>
         <div className="portal__footer">
           <Footer />
         </div>

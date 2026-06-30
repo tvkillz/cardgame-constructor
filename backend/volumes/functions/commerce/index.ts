@@ -120,6 +120,215 @@ const RATE_FROM_EUR: Record<string, number> = {
 const LISTING_COMMISSION_RATE = 0.2
 const LISTING_MIN_PRICE_RATIO = 0.75
 
+type ResolvedCheckout = {
+  productId: string | null
+  credits: number
+  title: string
+  unitCents: number
+  currency: string
+  cardId: string | null
+}
+
+function formatCreditsPurchaseDescription(credits: number, totalCents: number, currency: string): string {
+  const upper = currency.toUpperCase()
+  const amount = (totalCents / 100).toFixed(2)
+  const sym = upper === 'EUR' ? '€' : upper === 'GBP' ? '£' : upper === 'USD' ? '$' : ''
+  return `Purchased ${credits} credits for ${sym}${amount} ${upper}`
+}
+
+async function resolveCheckoutPayload(
+  admin: ReturnType<typeof createClient>,
+  siteId: string,
+  payload: {
+    packId?: string
+    productId?: string
+    customCredits?: number
+    cardId?: string
+    currency?: string
+  },
+): Promise<{ ok: true; resolved: ResolvedCheckout } | { ok: false; error: string; status: number }> {
+  let productId = payload.productId ?? null
+  let credits = 0
+  let title = 'VOIDBORN Credits'
+  let unitCents = 0
+  let currency = 'eur'
+  let cardId: string | null = null
+  let checkoutCurrencyApplied = false
+
+  if (payload.packId || productId) {
+    const slugOrId = payload.packId ?? productId!
+    const uuidRe = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
+    let productQuery = admin.from('store_products').select('*').eq('active', true).eq('site_id', siteId)
+    productQuery = uuidRe.test(slugOrId)
+      ? productQuery.eq('id', slugOrId)
+      : productQuery.eq('slug', slugOrId)
+    const { data: product } = await productQuery.maybeSingle()
+
+    if (!product) return { ok: false, error: 'product_not_found', status: 404 }
+    productId = product.id
+    credits = product.credits_amount ?? 0
+    title = product.title
+    unitCents = product.price_cents
+    currency = product.currency ?? 'eur'
+    cardId = product.card_id
+  } else if (payload.customCredits && payload.customCredits > 0) {
+    credits = Math.floor(payload.customCredits)
+    unitCents = credits
+    title = `${credits} Credits`
+    productId = null
+  } else if (payload.cardId) {
+    const cardIdStr = String(payload.cardId)
+    const { data: card } = await admin
+      .from('cards')
+      .select('id, title, price_cents, site_id, published')
+      .eq('id', cardIdStr)
+      .eq('site_id', siteId)
+      .eq('published', true)
+      .maybeSingle()
+
+    if (!card || !card.price_cents || card.price_cents <= 0) {
+      return { ok: false, error: 'card_not_found', status: 404 }
+    }
+
+    const displayCurrency = String(payload.currency ?? 'eur').toLowerCase()
+    const rate = RATE_FROM_EUR[displayCurrency] ?? 1
+    cardId = card.id
+    credits = 0
+    title = card.title
+    unitCents = Math.round(Number(card.price_cents) * rate)
+    currency = displayCurrency
+    productId = null
+    checkoutCurrencyApplied = true
+  } else {
+    return { ok: false, error: 'invalid_checkout', status: 400 }
+  }
+
+  if (!checkoutCurrencyApplied && payload.currency) {
+    const displayCurrency = String(payload.currency).toLowerCase()
+    const rate = RATE_FROM_EUR[displayCurrency]
+    if (rate) {
+      unitCents = Math.round(unitCents * rate)
+      currency = displayCurrency
+    }
+  }
+
+  return {
+    ok: true,
+    resolved: { productId, credits, title, unitCents, currency, cardId },
+  }
+}
+
+async function createPendingOrder(
+  admin: ReturnType<typeof createClient>,
+  userId: string,
+  resolved: ResolvedCheckout,
+  receiptEmail: string | null,
+): Promise<{ orderId: string } | { error: string }> {
+  const { productId, credits, title, unitCents, currency, cardId } = resolved
+
+  const { data: order, error: orderErr } = await admin
+    .from('orders')
+    .insert({
+      user_id: userId,
+      status: 'pending_payment',
+      total_cents: unitCents,
+      currency,
+      credits_granted: credits,
+      receipt_email: receiptEmail,
+      metadata: { product_id: productId, card_id: cardId, checkout_flow: 'internal' },
+    })
+    .select('id')
+    .single()
+
+  if (orderErr || !order) return { error: orderErr?.message ?? 'order_create_failed' }
+
+  await admin.from('order_items').insert({
+    order_id: order.id,
+    product_id: productId,
+    quantity: 1,
+    unit_price_cents: unitCents,
+    credits_amount: credits,
+    card_id: cardId,
+    title_snapshot: title,
+  })
+
+  return { orderId: order.id }
+}
+
+async function fulfillInternalOrder(
+  admin: ReturnType<typeof createClient>,
+  orderId: string,
+  userId: string,
+): Promise<{ ok: true } | { error: string; status: number }> {
+  const { data: order } = await admin.from('orders').select('*').eq('id', orderId).maybeSingle()
+  if (!order || order.user_id !== userId) return { error: 'order_not_found', status: 404 }
+  if (order.status === 'paid') return { ok: true }
+
+  const credits = order.credits_granted ?? 0
+  const description = formatCreditsPurchaseDescription(
+    credits,
+    order.total_cents,
+    order.currency ?? 'eur',
+  )
+
+  if (credits > 0) {
+    const { error: rpcError } = await admin.rpc('wallet_apply_credits', {
+      p_user_id: userId,
+      p_amount: Number(credits),
+      p_type: 'top_up',
+      p_status: 'completed',
+      p_description: description,
+      p_reference_type: 'order',
+      p_reference_id: orderId,
+    })
+    if (rpcError) return { error: rpcError.message, status: 500 }
+  }
+
+  await admin
+    .from('wallet_transactions')
+    .update({ status: 'failed', description: 'Replaced by completed checkout' })
+    .eq('reference_type', 'order')
+    .eq('reference_id', orderId)
+    .eq('status', 'pending')
+
+  const { data: items } = await admin.from('order_items').select('*').eq('order_id', orderId)
+  for (const item of items ?? []) {
+    if (item.card_id) {
+      const { data: existing } = await admin
+        .from('player_inventory')
+        .select('quantity')
+        .eq('user_id', userId)
+        .eq('card_id', item.card_id)
+        .maybeSingle()
+      if (existing) {
+        await admin
+          .from('player_inventory')
+          .update({ quantity: existing.quantity + (item.quantity ?? 1) })
+          .eq('user_id', userId)
+          .eq('card_id', item.card_id)
+      } else {
+        await admin.from('player_inventory').insert({
+          user_id: userId,
+          card_id: item.card_id,
+          quantity: item.quantity ?? 1,
+          source: 'purchase',
+        })
+      }
+    }
+  }
+
+  await admin
+    .from('orders')
+    .update({
+      status: 'paid',
+      receipt_sent_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+    })
+    .eq('id', orderId)
+
+  return { ok: true }
+}
+
 async function countCardInUserDecks(
   admin: ReturnType<typeof createClient>,
   userId: string,
@@ -224,9 +433,18 @@ Deno.serve(async (req) => {
       .select('*')
       .eq('user_id', userId)
       .order('created_at', { ascending: false })
-      .limit(limit)
+      .limit(limit * 3)
     if (error) return json({ error: error.message }, 500)
-    return json({ transactions: data })
+
+    const filtered = (data ?? []).filter((tx) => {
+      const desc = String(tx.description ?? '')
+      if (tx.status === 'failed' && desc.includes('Replaced by completed checkout')) return false
+      if (tx.status === 'pending' && desc.startsWith('Checkout:')) return false
+      if (tx.status === 'pending' && !desc.startsWith('Payment processing:')) return false
+      return true
+    })
+
+    return json({ transactions: filtered.slice(0, limit) })
   }
 
   if (action === 'inventory_list') {
@@ -458,6 +676,7 @@ Deno.serve(async (req) => {
       .from('orders')
       .select('*, order_items (*)')
       .eq('user_id', userId)
+      .neq('status', 'pending_payment')
       .order('created_at', { ascending: false })
       .limit(50)
     if (error) return json({ error: error.message }, 500)
@@ -763,6 +982,163 @@ Deno.serve(async (req) => {
     const { data, error } = await admin.from('store_products').upsert(product).select('*').single()
     if (error) return json({ error: error.message }, 500)
     return json({ product: data })
+  }
+
+  if (action === 'profile_get') {
+    const adminFlag = await isAdmin(admin, userId)
+    return json({ isAdmin: adminFlag })
+  }
+
+  if (action === 'checkout_init') {
+    const resolvedResult = await resolveCheckoutPayload(admin, siteId, {
+      packId: body.packId ? String(body.packId) : undefined,
+      productId: body.productId ? String(body.productId) : undefined,
+      customCredits: body.customCredits ? Number(body.customCredits) : undefined,
+      cardId: body.cardId ? String(body.cardId) : undefined,
+      currency: body.currency ? String(body.currency) : undefined,
+    })
+    if (!resolvedResult.ok) return json({ error: resolvedResult.error }, resolvedResult.status)
+
+    const { data: userData } = await admin.auth.admin.getUserById(userId)
+    const receiptEmail = userData.user ? displayEmailFromUser(userData.user) : null
+
+    const orderResult = await createPendingOrder(admin, userId, resolvedResult.resolved, receiptEmail)
+    if ('error' in orderResult) return json({ error: orderResult.error }, 500)
+
+    const { resolved } = resolvedResult
+    return json({
+      orderId: orderResult.orderId,
+      credits: resolved.credits,
+      title: resolved.title,
+      totalCents: resolved.unitCents,
+      currency: resolved.currency,
+      vatCents: resolved.unitCents,
+    })
+  }
+
+  if (action === 'checkout_get') {
+    const orderId = String(body.orderId ?? '')
+    if (!orderId) return json({ error: 'missing_order_id' }, 400)
+
+    const { data: order } = await admin
+      .from('orders')
+      .select('*, order_items (*)')
+      .eq('id', orderId)
+      .eq('user_id', userId)
+      .maybeSingle()
+
+    if (!order) return json({ error: 'order_not_found' }, 404)
+
+    const item = Array.isArray(order.order_items) ? order.order_items[0] : null
+    return json({
+      orderId: order.id,
+      status: order.status,
+      credits: order.credits_granted ?? 0,
+      title: item?.title_snapshot ?? 'VOIDBORN Credits',
+      totalCents: order.total_cents,
+      currency: order.currency,
+      vatCents: order.total_cents,
+    })
+  }
+
+  if (action === 'checkout_pay') {
+    const orderId = String(body.orderId ?? '')
+    if (!orderId) return json({ error: 'missing_order_id' }, 400)
+
+    const { data: order } = await admin
+      .from('orders')
+      .select('id, status, user_id, credits_granted, total_cents, currency, metadata')
+      .eq('id', orderId)
+      .eq('user_id', userId)
+      .maybeSingle()
+
+    if (!order) return json({ error: 'order_not_found' }, 404)
+    if (order.status !== 'pending_payment') {
+      return json({ error: 'order_not_payable', message: 'This order is no longer awaiting payment.' }, 400)
+    }
+
+    const credits = order.credits_granted ?? 0
+    const processingDescription = `Payment processing: ${formatCreditsPurchaseDescription(
+      credits,
+      order.total_cents,
+      order.currency ?? 'eur',
+    )}`
+
+    const { data: existingPending } = await admin
+      .from('wallet_transactions')
+      .select('id')
+      .eq('user_id', userId)
+      .eq('reference_type', 'order')
+      .eq('reference_id', orderId)
+      .eq('status', 'pending')
+      .maybeSingle()
+
+    if (!existingPending && credits > 0) {
+      await admin.from('wallet_transactions').insert({
+        user_id: userId,
+        type: 'top_up',
+        status: 'pending',
+        amount_credits: credits,
+        description: processingDescription,
+        reference_type: 'order',
+        reference_id: orderId,
+      })
+    }
+
+    await admin
+      .from('orders')
+      .update({
+        metadata: { ...(order.metadata ?? {}), payment_processing: true },
+        updated_at: new Date().toISOString(),
+      })
+      .eq('id', orderId)
+
+    // Placeholder for external payment gateway integration.
+    return json({
+      status: 'awaiting_gateway',
+      orderId,
+      message: 'You will be redirected to a secure payment page to complete your purchase.',
+      gatewayUrl: null,
+    })
+  }
+
+  if (action === 'checkout_test') {
+    if (!(await isAdmin(admin, userId))) return json({ error: 'forbidden' }, 403)
+
+    const orderId = String(body.orderId ?? '')
+    const outcome = String(body.outcome ?? '')
+    if (!orderId) return json({ error: 'missing_order_id' }, 400)
+    if (outcome !== 'success' && outcome !== 'failure') {
+      return json({ error: 'invalid_outcome' }, 400)
+    }
+
+    const { data: order } = await admin.from('orders').select('*').eq('id', orderId).maybeSingle()
+    if (!order) return json({ error: 'order_not_found' }, 404)
+    if (order.user_id !== userId) return json({ error: 'forbidden' }, 403)
+
+    if (outcome === 'success') {
+      try {
+        const result = await fulfillInternalOrder(admin, orderId, order.user_id)
+        if ('error' in result) return json({ error: result.error, message: result.error }, result.status)
+        return json({ ok: true, status: 'paid' })
+      } catch (e) {
+        return json({ error: 'fulfillment_failed', message: String(e) }, 500)
+      }
+    }
+
+    await admin
+      .from('wallet_transactions')
+      .update({ status: 'failed' })
+      .eq('reference_type', 'order')
+      .eq('reference_id', orderId)
+      .eq('status', 'pending')
+
+    await admin
+      .from('orders')
+      .update({ status: 'failed', updated_at: new Date().toISOString() })
+      .eq('id', orderId)
+
+    return json({ ok: true, status: 'failed' })
   }
 
   return json({ error: 'unknown_action', action }, 400)

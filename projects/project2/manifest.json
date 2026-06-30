@@ -26,6 +26,7 @@
     "portalTransactions": "/portal/transactions",
     "portalProfile": "/portal/profile",
     "portalStore": "/portal/store",
+    "checkout": "/checkout",
     "checkoutSuccess": "/portal/checkout/success",
     "checkoutCancel": "/portal/checkout/cancel"
   },

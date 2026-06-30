@@ -143,7 +143,7 @@ export default function Footer() {
           </button>
         </div>
 
-        <p className="site-footer__sub-copy">{footer.subCopyright}</p>
+        {/* <p className="site-footer__sub-copy">{footer.subCopyright}</p> */}
       </div>
     </footer>
   )

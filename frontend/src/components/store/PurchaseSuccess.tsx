@@ -1,8 +1,7 @@
 'use client'
 
-import Link from 'next/link'
-
-import { appConfig } from '@/config'
+import { formatCredits } from '@/config'
+import { Button } from '@/components/ui/Button/Button'
 import { useWallet } from '@/hooks/useWallet'
 
 export default function PurchaseSuccess() {
@@ -11,25 +10,26 @@ export default function PurchaseSuccess() {
   return (
     <div className="checkout-result">
       <h1>Payment received</h1>
-      <p>
-        Your order is being confirmed. Credits and inventory update when Stripe sends the
-        webhook (usually within seconds).
+      <span className="checkout-result__icon" aria-hidden="true" />
+      <p className="checkout-result__lead">
+        An invoice has been sent to your email (we will configure this shortly).
       </p>
       {!loading && (
-        <p>
-          Current balance: <strong>{balanceCredits.toLocaleString()}</strong> credits
+        <p className="checkout-result__balance">
+          Current balance: <strong>{formatCredits(balanceCredits)}</strong> credits
         </p>
       )}
-      <p>
-        <button type="button" onClick={() => void refresh()}>
-          Refresh balance
-        </button>
-      </p>
-      <p>
-        <Link href={appConfig.domain.routes.portalTransactions}>View transactions</Link>
-        {' · '}
-        <Link href={appConfig.domain.routes.portalMarket}>Back to market</Link>
-      </p>
+      <Button
+        type="button"
+        variant="secondary"
+        size="md"
+        fantasy
+        className="checkout-result__refresh"
+        disabled={loading}
+        onClick={() => void refresh()}
+      >
+        Refresh balance
+      </Button>
     </div>
   )
 }

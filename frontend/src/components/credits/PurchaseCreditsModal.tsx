@@ -1,10 +1,10 @@
 'use client'
 
 import { useEffect, useId, useMemo, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { appConfig } from '@/config'
 import { creditsToEur, formatCredits } from '@/config/selectors'
 import { useSyncedMarketCurrency } from '@/hooks/useMarketCurrency'
-import { invokeCommerceAction } from '@/lib/commerce/api'
 import { formatEurAmount, MARKET_CURRENCIES } from '@/lib/market/currency'
 import { Button } from '@/components/ui/Button/Button'
 import '@/styles/coin-stack-icon.css'
@@ -26,12 +26,12 @@ export default function PurchaseCreditsModal({
   const copy = appConfig.descriptions.credits
   const { packages, creditsPerEur } = appConfig.credits
   const titleId = useId()
+  const router = useRouter()
   const { currency, setCurrency } = useSyncedMarketCurrency()
 
   const [selectedPackId, setSelectedPackId] = useState<string | null>(null)
   const [customCredits, setCustomCredits] = useState('')
   const [checkoutError, setCheckoutError] = useState<string | null>(null)
-  const [checkingOut, setCheckingOut] = useState(false)
   const { legal } = appConfig.domain
 
   useEffect(() => {
@@ -53,9 +53,26 @@ export default function PurchaseCreditsModal({
     return 0
   }, [selectedPack, customAmount])
 
+  const goToCheckout = (creditAmount: number) => {
+    if (!creditAmount || creditAmount <= 0) return
+    setCheckoutError(null)
+
+    const params = new URLSearchParams()
+    params.set('currency', currency)
+    params.set('credits', String(creditAmount))
+
+    onClose()
+    const checkoutPath = appConfig.domain.routes.checkout ?? '/checkout'
+    router.push(`${checkoutPath}?${params.toString()}`)
+  }
+
   const handleSelectPack = (packId: string) => {
-    setSelectedPackId(packId)
-    setCustomCredits('')
+    const pack = packages.find((p) => p.id === packId)
+    if (!pack) {
+      setCheckoutError('This pack is unavailable. Try again or enter a custom amount.')
+      return
+    }
+    goToCheckout(pack.credits)
   }
 
   const handleCustomChange = (value: string) => {
@@ -63,32 +80,12 @@ export default function PurchaseCreditsModal({
     setSelectedPackId(null)
   }
 
-  const handleBuy = async () => {
-    if (totalEur <= 0 || checkingOut) return
-    setCheckoutError(null)
-    setCheckingOut(true)
-
-    try {
-      const res = await invokeCommerceAction(
-        selectedPack
-          ? { type: 'checkout_create', packId: selectedPack.id, currency: currency.toLowerCase() }
-          : {
-              type: 'checkout_create',
-              customCredits: customAmount,
-              currency: currency.toLowerCase(),
-            },
-      )
-
-      if (res.error || !res.checkoutUrl) {
-        setCheckoutError(res.message ?? res.error ?? 'Checkout unavailable. Try again later.')
-        return
-      }
-
-      window.location.href = res.checkoutUrl
-    } catch {
-      setCheckoutError('Could not start checkout.')
-    } finally {
-      setCheckingOut(false)
+  const handleBuy = () => {
+    if (totalEur <= 0) return
+    if (selectedPack) {
+      goToCheckout(selectedPack.credits)
+    } else if (customAmount > 0) {
+      goToCheckout(customAmount)
     }
   }
 
@@ -203,10 +200,10 @@ export default function PurchaseCreditsModal({
               size="md"
               fantasy
               className="credits-modal__buy"
-              disabled={totalEur <= 0 || checkingOut}
-              onClick={() => void handleBuy()}
+              disabled={totalEur <= 0}
+              onClick={handleBuy}
             >
-              {checkingOut ? 'Redirecting…' : copy.buy}
+              {copy.buy}
             </Button>
           </div>
           {customAmount > 0 && (
@@ -235,8 +232,7 @@ export default function PurchaseCreditsModal({
           <a href={legal.privacyUrl} target="_blank" rel="noopener noreferrer">
             Privacy Notice
           </a>
-          . Payments are processed securely via Stripe (cards, Link; Apple Pay / Google Pay when
-          enabled in your Stripe dashboard).
+          .
         </p>
       </div>
     </div>

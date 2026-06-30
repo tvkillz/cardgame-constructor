@@ -2,6 +2,7 @@
 
 import { useEffect, useId, useState, type FormEvent } from 'react'
 import { appConfig } from '@/config'
+import BillingProfileForm from '@/components/profile/BillingProfileForm'
 import { Button } from '@/components/ui/Button/Button'
 import { useAuth } from '@/components/providers/AuthProvider'
 import { isValidPassword, isValidPhone } from '@/lib/auth/validation'
@@ -13,36 +14,6 @@ import {
 } from '@/lib/profile/billing'
 import { getSupabaseBrowserClient, isSupabaseConfigured } from '@/lib/supabase'
 import './PortalProfile.css'
-
-type BillingField = keyof BillingProfile
-
-function ProfileField({
-  id,
-  label,
-  value,
-  onChange,
-  autoComplete,
-}: {
-  id: string
-  label: string
-  value: string
-  onChange: (value: string) => void
-  autoComplete?: string
-}) {
-  return (
-    <label className="portal-profile__field" htmlFor={id}>
-      <span className="portal-profile__label">{label}</span>
-      <input
-        id={id}
-        className="portal-profile__input"
-        type="text"
-        value={value}
-        autoComplete={autoComplete}
-        onChange={(e) => onChange(e.target.value)}
-      />
-    </label>
-  )
-}
 
 export default function PortalProfile() {
   const formId = useId()
@@ -80,7 +51,7 @@ export default function PortalProfile() {
     }
   }, [user?.id])
 
-  const setBillingField = (field: BillingField, value: string) => {
+  const setBillingField = (field: keyof BillingProfile, value: string) => {
     setBilling((prev) => ({ ...prev, [field]: value }))
     setBillingSuccess(null)
   }
@@ -91,7 +62,7 @@ export default function PortalProfile() {
     setBillingSuccess(null)
 
     if (!user?.id) {
-      setBillingError('Sign in to save billing info.')
+      setBillingError('Sign in to save your information.')
       return
     }
 
@@ -107,7 +78,7 @@ export default function PortalProfile() {
         setBillingError(result.message)
         return
       }
-      setBillingSuccess('Billing info saved.')
+      setBillingSuccess('Information saved.')
     } finally {
       setBillingSaving(false)
     }
@@ -182,108 +153,36 @@ export default function PortalProfile() {
         {billingLoading ? (
           <p className="portal-profile__status">{authCopy.loading}</p>
         ) : (
-          <>
-            <div className="portal-profile__card-body">
-              <div className="portal-profile__grid portal-profile__grid--pair">
-              <ProfileField
-                id={`${formId}-first-name`}
-                label="First Name"
-                value={billing.firstName}
-                autoComplete="given-name"
-                onChange={(value) => setBillingField('firstName', value)}
-              />
-              <ProfileField
-                id={`${formId}-last-name`}
-                label="Last Name"
-                value={billing.lastName}
-                autoComplete="family-name"
-                onChange={(value) => setBillingField('lastName', value)}
-              />
-            </div>
-
-            <ProfileField
-              id={`${formId}-address-1`}
-              label="Address Line 1"
-              value={billing.addressLine1}
-              autoComplete="address-line1"
-              onChange={(value) => setBillingField('addressLine1', value)}
-            />
-            <ProfileField
-              id={`${formId}-address-2`}
-              label="Address Line 2"
-              value={billing.addressLine2}
-              autoComplete="address-line2"
-              onChange={(value) => setBillingField('addressLine2', value)}
-            />
-
-            <div className="portal-profile__grid portal-profile__grid--pair">
-              <ProfileField
-                id={`${formId}-city`}
-                label="City"
-                value={billing.city}
-                autoComplete="address-level2"
-                onChange={(value) => setBillingField('city', value)}
-              />
-              <ProfileField
-                id={`${formId}-state`}
-                label="State / Province"
-                value={billing.stateProvince}
-                autoComplete="address-level1"
-                onChange={(value) => setBillingField('stateProvince', value)}
-              />
-            </div>
-
-            <div className="portal-profile__grid portal-profile__grid--pair">
-              <ProfileField
-                id={`${formId}-postal`}
-                label="Postal Code"
-                value={billing.postalCode}
-                autoComplete="postal-code"
-                onChange={(value) => setBillingField('postalCode', value)}
-              />
-              <ProfileField
-                id={`${formId}-country`}
-                label="Country"
-                value={billing.country}
-                autoComplete="country-name"
-                onChange={(value) => setBillingField('country', value)}
-              />
-            </div>
-
-            <ProfileField
-              id={`${formId}-phone`}
-              label="Phone"
-              value={billing.phone}
-              autoComplete="tel"
-              onChange={(value) => setBillingField('phone', value)}
-            />
-            </div>
-
-            <div className="portal-profile__card-footer">
-            {billingError ? (
-              <p className="portal-profile__message portal-profile__message--error" role="alert">
-                {billingError}
-              </p>
-            ) : null}
-            {billingSuccess ? (
-              <p className="portal-profile__message portal-profile__message--success" role="status">
-                {billingSuccess}
-              </p>
-            ) : null}
-
-            <div className="portal-profile__actions">
-              <Button
-                type="submit"
-                variant="secondary"
-                size="md"
-                fantasy
-                disabled={billingSaving || billingLoading}
-              >
-                {billingSaving ? 'Saving…' : 'Save Billing Info'}
-              </Button>
-            </div>
-            </div>
-          </>
+          <BillingProfileForm
+            formId={formId}
+            billing={billing}
+            onChange={setBillingField}
+            footer={
+              <>
+                {billingError ? (
+                  <p className="portal-profile__message portal-profile__message--error" role="alert">
+                    {billingError}
+                  </p>
+                ) : null}
+                {billingSuccess ? (
+                  <p className="portal-profile__message portal-profile__message--success" role="status">
+                    {billingSuccess}
+                  </p>
+                ) : null}
+                <div className="portal-profile__actions">
+                  <Button
+                    type="submit"
+                    variant="secondary"
+                    size="md"
+                    fantasy
+                    disabled={billingSaving || billingLoading}
+                  >
+                    {billingSaving ? 'Saving…' : 'Save information'}
+                  </Button>
+                </div>
+              </>
+            }
+          />
         )}
       </form>
 
