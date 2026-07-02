@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { useCallback, useEffect, useId, useMemo, useState } from 'react'
 import { appConfig, formatCredits } from '@/config'
 import BillingProfileForm from '@/components/profile/BillingProfileForm'
+import PaymentMethodModal from '@/components/checkout/PaymentMethodModal'
 import { Button } from '@/components/ui/Button/Button'
 import { useAuth } from '@/components/providers/AuthProvider'
 import {
@@ -12,6 +13,7 @@ import {
   MIN_CUSTOM_CREDITS,
 } from '@/lib/commerce/creditCheckoutLimits'
 import { invokeCommerceAction } from '@/lib/commerce/api'
+import type { CheckoutPaymentMethodId } from '@/lib/commerce/checkoutPaymentMethods'
 import type { CheckoutLineItem } from '@/lib/commerce/types'
 import { invalidatePlayerInventoryCache } from '@/hooks/usePlayerInventory'
 import {
@@ -150,6 +152,10 @@ export default function CheckoutPage() {
   const [loading, setLoading] = useState(true)
   const [billingSaving, setBillingSaving] = useState(false)
   const [paying, setPaying] = useState(false)
+  const [paymentMethodOpen, setPaymentMethodOpen] = useState(false)
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<CheckoutPaymentMethodId | null>(
+    null,
+  )
   const [testing, setTesting] = useState<'success' | 'failure' | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [billingMessage, setBillingMessage] = useState<string | null>(null)
@@ -292,7 +298,7 @@ export default function CheckoutPage() {
     void saveBilling()
   }
 
-  const handlePay = async () => {
+  const handlePay = async (_methodId: CheckoutPaymentMethodId) => {
     if (!order || paying) return
     setPaying(true)
     setError(null)
@@ -315,7 +321,19 @@ export default function CheckoutPage() {
       setError('Payment could not be started.')
     } finally {
       setPaying(false)
+      setPaymentMethodOpen(false)
     }
+  }
+
+  const handleOpenPaymentMethods = () => {
+    if (!order || paying || order.status === 'paid') return
+    setSelectedPaymentMethod(null)
+    setPaymentMethodOpen(true)
+  }
+
+  const handleConfirmPaymentMethod = () => {
+    if (!selectedPaymentMethod) return
+    void handlePay(selectedPaymentMethod)
   }
 
   const handleTest = async (outcome: 'success' | 'failure') => {
@@ -545,7 +563,7 @@ export default function CheckoutPage() {
               fantasy
               className="checkout-page__pay-btn"
               disabled={paying || isPaid}
-              onClick={() => void handlePay()}
+              onClick={handleOpenPaymentMethods}
             >
               {isPaid ? 'Paid' : paying ? 'Processing…' : 'Pay'}
             </Button>
@@ -593,6 +611,18 @@ export default function CheckoutPage() {
       ) : null}
 
       <CheckoutDisclaimer />
+
+      <PaymentMethodModal
+        isOpen={paymentMethodOpen}
+        selectedId={selectedPaymentMethod}
+        onSelect={setSelectedPaymentMethod}
+        onConfirm={handleConfirmPaymentMethod}
+        onClose={() => {
+          if (paying) return
+          setPaymentMethodOpen(false)
+        }}
+        confirming={paying}
+      />
     </div>
     </CheckoutPageWrap>
   )

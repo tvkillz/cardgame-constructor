@@ -18,6 +18,9 @@ server {
     server_name ${PROXY_DOMAIN} ${PROXY_DOMAIN_EXTRA};
     server_tokens off;
 
+    deny 204.76.203.18;
+    allow all;
+
     proxy_http_version 1.1;
 
     proxy_set_header Host $host;

@@ -317,6 +317,11 @@ const SHARED_FOOTER_ASSETS = {
   'instagram-glyph-logo-png_seeklogo-286192.png': 'shared/instagram.png',
   'Visa_Inc.-Logo.wine.svg': 'shared/visa.svg',
   'mastercard-logo-vector-1.svg': 'shared/mastercard.svg',
+  'Apple_Pay-White-Dark-Background-Logo.wine.svg': 'shared/apple-pay.svg',
+  'google-pay.svg': 'shared/google-pay.svg',
+  'bank-transfer-logo.svg': 'shared/bank-transfer.svg',
+  'logo-google-playstore.svg': 'shared/google-play.svg',
+  'apple-logo.svg': 'shared/app-store.svg',
 }
 
 async function copySharedFooterAssets(out, sharp) {

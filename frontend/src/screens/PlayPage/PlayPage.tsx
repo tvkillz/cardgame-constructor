@@ -357,6 +357,28 @@ export default function PlayPage() {
             </div>
           </div>
 
+          <div className="play-page__store-badge" aria-label="Mobile apps in development">
+            <p className="play-page__store-label">In development for:</p>
+            <div className="play-page__store-icons">
+              <img
+                src="/assets/shared/google-play.svg"
+                alt="Google Play"
+                className="play-page__store-icon play-page__store-icon--google"
+                width={28}
+                height={28}
+                decoding="async"
+              />
+              <img
+                src="/assets/shared/app-store.svg"
+                alt="App Store"
+                className="play-page__store-icon play-page__store-icon--apple"
+                width={28}
+                height={28}
+                decoding="async"
+              />
+            </div>
+          </div>
+
           <div className="play-page__bottom">
             <button
               type="button"

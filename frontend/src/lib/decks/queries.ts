@@ -11,12 +11,38 @@ import { isTutorialDeck } from './buildTutorialDeck'
 import type { DeckCardEntry, DeckSummary, PlayerDeck } from './types'
 import { DEFAULT_MAX_DECK_CARDS } from './types'
 
-async function ensureTestDeckProvisioned(): Promise<void> {
-  try {
-    await invokeCommerceAction({ type: 'ensure_test_deck' })
-  } catch {
-    /* offline or API unavailable */
-  }
+let ensuredTestDeckUserId: string | null = null
+let ensureTestDeckInflight: Promise<void> | null = null
+
+/** Idempotent per signed-in user — dedupes parallel callers (auth, deck fetch, etc.). */
+export async function ensureTestDeckProvisioned(): Promise<void> {
+  const supabase = getSupabaseBrowserClient()
+  if (!supabase) return
+
+  const { data } = await supabase.auth.getSession()
+  const userId = data.session?.user?.id
+  if (!userId) return
+
+  if (ensuredTestDeckUserId === userId) return
+  if (ensureTestDeckInflight) return ensureTestDeckInflight
+
+  ensureTestDeckInflight = (async () => {
+    try {
+      const res = await invokeCommerceAction({ type: 'ensure_test_deck' })
+      if (!res.error) ensuredTestDeckUserId = userId
+    } catch {
+      /* offline or API unavailable */
+    }
+  })().finally(() => {
+    ensureTestDeckInflight = null
+  })
+
+  return ensureTestDeckInflight
+}
+
+export function resetTestDeckProvisionCache(): void {
+  ensuredTestDeckUserId = null
+  ensureTestDeckInflight = null
 }
 
 interface DbDeckRow {

@@ -2,9 +2,11 @@ export { buildHandFromDeck } from './buildHand'
 export type { HandDeckEntry } from './buildHand'
 export {
   createPlayerDeck,
+  ensureTestDeckProvisioned,
   fetchDeckSummaries,
   fetchPlayerDecks,
   removePlayerDeck,
+  resetTestDeckProvisionCache,
   savePlayerDeck,
 } from './queries'
 export { resolveDeckToDisplay, deckCardCount } from './resolveDeckCards'

@@ -15,7 +15,7 @@ import { useRouter } from 'next/navigation'
 import type { Session, User } from '@supabase/supabase-js'
 import { appConfig } from '@/config'
 import { resolvePlayerName } from '@/lib/auth/player'
-import { invokeCommerceAction } from '@/lib/commerce/api'
+import { ensureTestDeckProvisioned, resetTestDeckProvisionCache } from '@/lib/decks'
 import { getSupabaseBrowserClient, isSupabaseConfigured } from '@/lib/supabase'
 
 const AuthModal = dynamic(() => import('@/components/auth/AuthModal'), { ssr: false })
@@ -78,7 +78,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setSession(nextSession)
         setLoading(false)
         if (nextSession?.user && (event === 'SIGNED_IN' || event === 'INITIAL_SESSION')) {
-          void invokeCommerceAction({ type: 'ensure_test_deck' })
+          void ensureTestDeckProvisioned()
         }
         if (nextSession) {
           setModalOpen(false)
@@ -124,6 +124,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const supabase = getSupabaseBrowserClient()
     if (!supabase) return
     pendingPathRef.current = null
+    resetTestDeckProvisionCache()
     await supabase.auth.signOut()
     setSession(null)
   }, [])
