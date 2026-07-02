@@ -1,4 +1,5 @@
 import { getSupabaseBrowserClient } from '@/lib/supabase/client'
+import { invokeCommerceAction } from '@/lib/commerce/api'
 
 import {
   createDefaultLocalDecks,
@@ -9,6 +10,14 @@ import {
 import { isTutorialDeck } from './buildTutorialDeck'
 import type { DeckCardEntry, DeckSummary, PlayerDeck } from './types'
 import { DEFAULT_MAX_DECK_CARDS } from './types'
+
+async function ensureTestDeckProvisioned(): Promise<void> {
+  try {
+    await invokeCommerceAction({ type: 'ensure_test_deck' })
+  } catch {
+    /* offline or API unavailable */
+  }
+}
 
 interface DbDeckRow {
   id: string
@@ -60,6 +69,8 @@ export async function fetchPlayerDecks(userId: string): Promise<PlayerDeck[]> {
     }
     return filterPlayerDecks(local)
   }
+
+  await ensureTestDeckProvisioned()
 
   const { data, error } = await supabase
     .from('player_decks')

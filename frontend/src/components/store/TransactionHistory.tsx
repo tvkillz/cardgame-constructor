@@ -24,6 +24,11 @@ type OrderRow = {
   credits_granted: number
   created_at: string
   refund_status?: string | null
+  order_items?: Array<{
+    title_snapshot?: string | null
+    quantity?: number | null
+    unit_price_cents?: number | null
+  }>
 }
 
 type TagFilter = 'all' | TransactionTag
@@ -104,6 +109,23 @@ function formatWhen(iso: string): string {
     dateStyle: 'medium',
     timeStyle: 'short',
   })
+}
+
+function orderItemsSummary(order: OrderRow): string | null {
+  const items = Array.isArray(order.order_items) ? order.order_items : []
+  const normalized = items
+    .map((item) => ({
+      title: String(item.title_snapshot ?? 'Item'),
+      quantity: Number(item.quantity ?? 0),
+    }))
+    .filter((item) => item.quantity > 0)
+  if (!normalized.length) return null
+  return normalized.map((item) => `${item.title} x${item.quantity}`).join(', ')
+}
+
+function cardsPurchasedCount(order: OrderRow): number {
+  const items = Array.isArray(order.order_items) ? order.order_items : []
+  return items.reduce((sum, item) => sum + Math.max(0, Number(item.quantity ?? 0)), 0)
 }
 
 function matchesTagFilter(tags: TransactionTag[], filter: TagFilter): boolean {
@@ -337,6 +359,9 @@ export default function TransactionHistory() {
                   order.credits_granted > 0
                     ? `+${formatCredits(order.credits_granted)} credits`
                     : null
+                const cardsCount = order.credits_granted > 0 ? 0 : cardsPurchasedCount(order)
+                const cardsLine = cardsCount > 0 ? `${cardsCount} card${cardsCount === 1 ? '' : 's'} bought` : null
+                const detailsLine = orderItemsSummary(order)
 
                 return (
                   <li key={order.id}>
@@ -347,8 +372,13 @@ export default function TransactionHistory() {
                           <TxTags tags={tags} />
                         </div>
                         <p className="portal-tx-row__desc">
-                          {creditsLine ? `Paid ${money} · ${creditsLine}` : `Paid ${money}`}
+                          {creditsLine
+                            ? `Paid ${money} · ${creditsLine}`
+                            : cardsLine
+                              ? `Paid ${money} · ${cardsLine}`
+                              : `Paid ${money}`}
                         </p>
+                        {detailsLine ? <p className="portal-tx-row__desc">{detailsLine}</p> : null}
                         <time className="portal-tx-row__date" dateTime={order.created_at}>
                           {formatWhen(order.created_at)}
                         </time>
@@ -362,6 +392,8 @@ export default function TransactionHistory() {
                         <span className="portal-tx-row__amount">{money}</span>
                         {creditsLine ? (
                           <span className="portal-tx-row__balance">{creditsLine}</span>
+                        ) : cardsLine ? (
+                          <span className="portal-tx-row__balance">{cardsLine}</span>
                         ) : null}
                       </div>
                     </article>

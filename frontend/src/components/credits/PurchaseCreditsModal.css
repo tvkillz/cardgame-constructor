@@ -181,7 +181,7 @@
     transform 0.2s ease;
 }
 
-.credits-modal__pack:hover {
+.credits-modal__pack:hover:not(:disabled) {
   border-color: rgba(123, 77, 255, 0.55);
   box-shadow: 0 0 20px rgba(123, 77, 255, 0.15);
 }
@@ -194,6 +194,13 @@
 
 .credits-modal__pack--selected {
   transform: scale(1.02);
+}
+
+.credits-modal__pack:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
 
 .credits-modal__popular {
@@ -335,8 +342,12 @@
   font-size: 0.85rem;
 }
 
-.credits-modal__legal {
+.credits-modal__terms {
   margin: 1rem 0 0;
+}
+
+.credits-modal__legal {
+  margin: 0.75rem 0 0;
   font-size: 0.72rem;
   line-height: 1.45;
   opacity: 0.75;

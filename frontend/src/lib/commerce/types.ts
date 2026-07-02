@@ -35,6 +35,13 @@ export interface WalletTransaction {
   stripe_checkout_session_id?: string | null
 }
 
+export interface CheckoutLineItem {
+  title: string
+  quantity: number
+  unitPriceCents: number
+  lineTotalCents: number
+}
+
 export interface InventoryItem {
   id: string
   user_id: string
@@ -72,11 +79,28 @@ export type CommerceAction =
   | { type: 'market_listing_cancel'; listingId: string }
   | { type: 'buy_market_listing'; listingId: string }
   | { type: 'orders_list' }
-  | { type: 'checkout_create'; packId?: string; productId?: string; customCredits?: number; cardId?: string; currency?: string }
-  | { type: 'checkout_init'; packId?: string; productId?: string; customCredits?: number; cardId?: string; currency?: string }
+  | {
+      type: 'checkout_create'
+      packId?: string
+      productId?: string
+      customCredits?: number
+      cardId?: string
+      cartItems?: Array<{ cardId: string; quantity: number }>
+      currency?: string
+    }
+  | {
+      type: 'checkout_init'
+      packId?: string
+      productId?: string
+      customCredits?: number
+      cardId?: string
+      cartItems?: Array<{ cardId: string; quantity: number }>
+      currency?: string
+    }
   | { type: 'checkout_get'; orderId: string }
   | { type: 'checkout_pay'; orderId: string }
   | { type: 'checkout_test'; orderId: string; outcome: 'success' | 'failure' }
+  | { type: 'ensure_test_deck' }
   | { type: 'profile_get' }
   | { type: 'payment_card_add_demo' }
   | { type: 'payment_card_remove'; cardId: string }
@@ -106,6 +130,7 @@ export interface CommerceResponse {
   vatCents?: number
   currency?: string
   status?: string
+  lineItems?: CheckoutLineItem[]
   gatewayUrl?: string | null
   isAdmin?: boolean
   ok?: boolean

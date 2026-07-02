@@ -6,7 +6,6 @@ import BillingProfileForm from '@/components/profile/BillingProfileForm'
 import PaymentCardsSection from '@/components/profile/PaymentCardsSection'
 import { Button } from '@/components/ui/Button/Button'
 import { useAuth } from '@/components/providers/AuthProvider'
-import { invokeCommerceAction } from '@/lib/commerce/api'
 import { isValidPassword } from '@/lib/auth/validation'
 import {
   CHECKOUT_REQUIRED_BILLING_FIELDS,
@@ -29,7 +28,6 @@ export default function PortalProfile() {
   const [billingSaving, setBillingSaving] = useState(false)
   const [billingError, setBillingError] = useState<string | null>(null)
   const [billingSuccess, setBillingSuccess] = useState<string | null>(null)
-  const [isAdmin, setIsAdmin] = useState(false)
 
   const [currentPassword, setCurrentPassword] = useState('')
   const [newPassword, setNewPassword] = useState('')
@@ -45,13 +43,9 @@ export default function PortalProfile() {
     }
 
     let cancelled = false
-    void Promise.all([
-      fetchBillingProfile(user.id),
-      invokeCommerceAction({ type: 'profile_get' }),
-    ]).then(([saved, profileRes]) => {
+    void fetchBillingProfile(user.id).then((saved) => {
       if (cancelled) return
       if (saved) setBilling(saved)
-      setIsAdmin(Boolean(profileRes.isAdmin))
       setBillingLoading(false)
     })
 
@@ -198,7 +192,7 @@ export default function PortalProfile() {
       </form>
 
       <div className="portal-profile__side">
-        <PaymentCardsSection userId={user?.id} isAdmin={isAdmin} />
+        <PaymentCardsSection userId={user?.id} />
 
         <form
           className="portal-profile__card portal-profile__card--compact portal-profile__card--password"

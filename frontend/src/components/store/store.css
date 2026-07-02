@@ -179,6 +179,15 @@
   font-weight: 600;
 }
 
+.checkout-result__warning {
+  margin: 0;
+  max-width: 28rem;
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  line-height: 1.45;
+  color: #fcd34d;
+}
+
 .checkout-result__refresh {
   margin-top: 0.35rem;
 }

@@ -19,7 +19,6 @@ const GATEWAY_REDIRECT_MESSAGE =
 
 type PaymentCardsSectionProps = {
   userId: string | undefined
-  isAdmin: boolean
 }
 
 function cardBrandIcon(brand: string): string | null {
@@ -30,12 +29,12 @@ function cardBrandIcon(brand: string): string | null {
   return match?.icon ?? null
 }
 
-export default function PaymentCardsSection({ userId, isAdmin }: PaymentCardsSectionProps) {
+export default function PaymentCardsSection({ userId }: PaymentCardsSectionProps) {
   const [cards, setCards] = useState<PaymentCard[]>([])
   const [loading, setLoading] = useState(true)
   const [page, setPage] = useState(1)
   const [addingCard, setAddingCard] = useState(false)
-  const [addingDemo, setAddingDemo] = useState(false)
+  const [addingTestCard, setAddingTestCard] = useState(false)
   const [removingCardId, setRemovingCardId] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
 
@@ -78,10 +77,10 @@ export default function PaymentCardsSection({ userId, isAdmin }: PaymentCardsSec
     setAddingCard(false)
   }
 
-  const handleAddDemoCard = async () => {
-    if (addingDemo || cards.length >= MAX_PAYMENT_CARDS) return
+  const handleAddTestCard = async () => {
+    if (addingTestCard || cards.length >= MAX_PAYMENT_CARDS) return
     setError(null)
-    setAddingDemo(true)
+    setAddingTestCard(true)
     try {
       const res = await invokeCommerceAction({ type: 'payment_card_add_demo' })
       if (res.error) {
@@ -89,11 +88,10 @@ export default function PaymentCardsSection({ userId, isAdmin }: PaymentCardsSec
         return
       }
       await loadCards()
-      setPage(1)
     } catch {
-      setError('Could not add demo card.')
+      setError('Could not add test card.')
     } finally {
-      setAddingDemo(false)
+      setAddingTestCard(false)
     }
   }
 
@@ -107,9 +105,6 @@ export default function PaymentCardsSection({ userId, isAdmin }: PaymentCardsSec
         setError(res.message ?? res.error)
         return
       }
-      const nextCount = cards.length - 1
-      const nextTotalPages = Math.max(1, Math.ceil(nextCount / PAYMENT_CARDS_PER_PAGE))
-      if (page > nextTotalPages) setPage(nextTotalPages)
       await loadCards()
     } catch {
       setError('Could not remove card.')
@@ -119,7 +114,7 @@ export default function PaymentCardsSection({ userId, isAdmin }: PaymentCardsSec
   }
 
   const atCardLimit = cards.length >= MAX_PAYMENT_CARDS
-  const cardActionsBusy = addingCard || addingDemo || Boolean(removingCardId)
+  const cardActionsBusy = addingCard || addingTestCard || Boolean(removingCardId)
 
   return (
     <section className="portal-profile__card portal-profile__card--compact portal-profile__card--payment payment-cards">
@@ -136,26 +131,21 @@ export default function PaymentCardsSection({ userId, isAdmin }: PaymentCardsSec
           >
             {addingCard ? 'Processing…' : 'Add Card'}
           </Button>
-          {isAdmin ? (
-            <Button
-              type="button"
-              variant="trigger-green"
-              size="sm"
-              disabled={cardActionsBusy || atCardLimit}
-              onClick={() => void handleAddDemoCard()}
-            >
-              {addingDemo ? 'Adding…' : 'Add demo card'}
-            </Button>
-          ) : null}
+          <Button
+            type="button"
+            variant="trigger-green"
+            size="sm"
+            disabled={cardActionsBusy || atCardLimit}
+            onClick={() => void handleAddTestCard()}
+          >
+            {addingTestCard ? 'Adding…' : 'Add test card'}
+          </Button>
         </div>
       </div>
 
-      {isAdmin ? (
-        <p className="payment-cards__admin-note" role="note">
-          Admin test action: demo cards are for testing the saved-card UI until the payment gateway is
-          connected.
-        </p>
-      ) : null}
+      <p className="payment-cards__test-note" role="note">
+        Test cards are for trying saved-card checkout until the payment gateway is connected.
+      </p>
 
       {addingCard ? (
         <p className="payment-cards__redirect-message" role="status" aria-live="polite">
@@ -203,7 +193,7 @@ export default function PaymentCardsSection({ userId, isAdmin }: PaymentCardsSec
                     <span className="payment-cards__pan">{formatMaskedPan(card.first4, card.last4)}</span>
                     <span className="payment-cards__meta">
                       Expires {formatCardExpiry(card.expMonth, card.expYear)}
-                      {card.isDemo ? ' · Demo' : ''}
+                      {card.isDemo ? ' · Test' : ''}
                     </span>
                   </div>
                   <Button

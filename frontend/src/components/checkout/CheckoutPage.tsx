@@ -12,6 +12,8 @@ import {
   MIN_CUSTOM_CREDITS,
 } from '@/lib/commerce/creditCheckoutLimits'
 import { invokeCommerceAction } from '@/lib/commerce/api'
+import type { CheckoutLineItem } from '@/lib/commerce/types'
+import { invalidatePlayerInventoryCache } from '@/hooks/usePlayerInventory'
 import {
   formatEurAmount,
   isMarketCurrency,
@@ -38,6 +40,7 @@ type CheckoutOrder = {
   totalCents: number
   vatCents: number
   currency: string
+  lineItems: CheckoutLineItem[]
   status?: string
 }
 
@@ -136,6 +139,8 @@ export default function CheckoutPage() {
 
   const packId = searchParams.get('packId')
   const creditsParam = searchParams.get('credits')
+  const cardId = searchParams.get('cardId')
+  const cartParam = searchParams.get('cart')
   const orderIdParam = searchParams.get('orderId')
   const currencyParam = searchParams.get('currency')?.toUpperCase() ?? 'EUR'
   const currency: MarketCurrency = isMarketCurrency(currencyParam) ? currencyParam : 'EUR'
@@ -146,12 +151,34 @@ export default function CheckoutPage() {
   const [billingSaving, setBillingSaving] = useState(false)
   const [paying, setPaying] = useState(false)
   const [testing, setTesting] = useState<'success' | 'failure' | null>(null)
-  const [isAdmin, setIsAdmin] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [billingMessage, setBillingMessage] = useState<string | null>(null)
 
+  const cartItems = useMemo(() => {
+    if (!cartParam) return null
+    try {
+      const parsed = JSON.parse(cartParam) as Array<{ cardId?: string; quantity?: number }>
+      if (!Array.isArray(parsed)) return null
+      const normalized = parsed
+        .map((item) => ({
+          cardId: String(item.cardId ?? '').trim(),
+          quantity: Number(item.quantity ?? 0),
+        }))
+        .filter((item) => item.cardId && Number.isFinite(item.quantity) && item.quantity > 0)
+      return normalized.length ? normalized : null
+    } catch {
+      return null
+    }
+  }, [cartParam])
+
   const initParams = useMemo(() => {
     if (orderIdParam) return null
+    if (cartItems) {
+      return { cartItems, currency: currency.toLowerCase() } as const
+    }
+    if (cardId) {
+      return { cardId, currency: currency.toLowerCase() } as const
+    }
     if (packId) {
       return { packId, currency: currency.toLowerCase() } as const
     }
@@ -160,23 +187,20 @@ export default function CheckoutPage() {
       return { customCredits: credits, currency: currency.toLowerCase() } as const
     }
     return null
-  }, [orderIdParam, packId, creditsParam, currency])
+  }, [orderIdParam, cartItems, cardId, packId, creditsParam, currency])
 
   const loadOrder = useCallback(async () => {
     setError(null)
     setLoading(true)
 
     try {
-      const [profileRes, orderRes] = await Promise.all([
-        invokeCommerceAction({ type: 'profile_get' }),
+      const orderRes = await (
         orderIdParam
           ? invokeCommerceAction({ type: 'checkout_get', orderId: orderIdParam })
           : initParams
             ? invokeCommerceAction({ type: 'checkout_init', ...initParams })
-            : Promise.resolve({ error: 'invalid_checkout' as const }),
-      ])
-
-      setIsAdmin(Boolean(profileRes.isAdmin))
+            : Promise.resolve({ error: 'invalid_checkout' as const })
+      )
 
       if (orderRes.error || !orderRes.orderId) {
         const err = orderRes.error
@@ -204,6 +228,7 @@ export default function CheckoutPage() {
         totalCents: orderRes.totalCents ?? 0,
         vatCents: orderRes.vatCents ?? orderRes.totalCents ?? 0,
         currency: orderRes.currency ?? currency.toLowerCase(),
+        lineItems: orderRes.lineItems ?? [],
         status: orderRes.status,
       })
     } catch {
@@ -316,18 +341,33 @@ export default function CheckoutPage() {
       }
 
       if (outcome === 'success') {
+        invalidatePlayerInventoryCache()
+        if (typeof window !== 'undefined') {
+          const isCardOrder = order.credits <= 0
+          sessionStorage.setItem('checkout_success_kind', isCardOrder ? 'cards' : 'credits')
+          if (isCardOrder) {
+            const cardCopies = order.lineItems.reduce(
+              (sum, line) => sum + Number(line.quantity ?? 0),
+              0,
+            )
+            if (cardCopies > 0) {
+              sessionStorage.setItem('checkout_success_card_copies', String(cardCopies))
+            }
+          }
+        }
         if (res.invoiceSent === false) {
           const reason = res.invoiceReason ?? 'unknown'
           const hint =
             reason === 'mail_not_configured'
-              ? 'Order paid, but invoice email is not configured on the API server (SENDMAIL_URL / MAIL_API_KEY).'
+              ? 'Payment succeeded. Invoice email is not configured on the API server (SENDMAIL_URL / MAIL_API_KEY).'
               : reason === 'no_email'
-                ? 'Order paid, but no receipt email is on file for this account.'
+                ? 'Payment succeeded. No receipt email is on file for this account.'
                 : reason === 'send_failed' || reason === 'request_error'
-                  ? 'Order paid, but the invoice email could not be sent. Check sendmail logs.'
-                  : 'Order paid. Invoice was not sent (may already have been sent).'
-          setError(hint)
-          return
+                  ? 'Payment succeeded, but the invoice email could not be sent. Check sendmail logs.'
+                  : 'Payment succeeded. Invoice was not sent (may already have been sent).'
+          if (typeof window !== 'undefined') {
+            sessionStorage.setItem('checkout_invoice_warning', hint)
+          }
         }
         router.push(appConfig.domain.routes.checkoutSuccess)
         return
@@ -356,7 +396,7 @@ export default function CheckoutPage() {
       <CheckoutPageWrap>
         <div className="checkout-page">
           <h1>Checkout</h1>
-          <p>No credits package selected.</p>
+          <p>No checkout items selected.</p>
           <Link href={appConfig.domain.routes.portal} className="checkout-page__link">
             Back to portal
           </Link>
@@ -393,6 +433,8 @@ export default function CheckoutPage() {
 
   const money = formatOrderMoney(order.totalCents, order.currency)
   const isPaid = order.status === 'paid'
+  const isCreditsOrder = order.credits > 0
+  const showLineItemsTable = !isCreditsOrder && order.lineItems.length > 0
 
   return (
     <CheckoutPageWrap>
@@ -405,24 +447,59 @@ export default function CheckoutPage() {
       <div className="checkout-page__layout">
         <section className="checkout-page__card checkout-page__card--order" aria-label="Order information">
           <h2 className="checkout-page__card-title">Order information</h2>
-          <dl className="checkout-page__summary">
-            <div>
-              <dt>Item</dt>
-              <dd>Credits</dd>
-            </div>
-            <div>
-              <dt>Quantity</dt>
-              <dd>{formatCredits(order.credits)}</dd>
-            </div>
-            <div>
-              <dt>Amount</dt>
-              <dd>{money}</dd>
-            </div>
-            <div>
-              <dt>Total incl. VAT</dt>
-              <dd>{money}</dd>
-            </div>
-          </dl>
+          {showLineItemsTable ? (
+            <>
+              <table className="checkout-page__line-items">
+                <thead>
+                  <tr>
+                    <th scope="col">Item</th>
+                    <th scope="col">Qty</th>
+                    <th scope="col">Unit</th>
+                    <th scope="col">Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {order.lineItems.map((line, index) => (
+                    <tr key={`${line.title}-${index}`}>
+                      <td>{line.title}</td>
+                      <td>{line.quantity}</td>
+                      <td>{formatOrderMoney(line.unitPriceCents, order.currency)}</td>
+                      <td>{formatOrderMoney(line.lineTotalCents, order.currency)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              <dl className="checkout-page__summary checkout-page__summary--totals">
+                <div>
+                  <dt>Total incl. VAT</dt>
+                  <dd>{money}</dd>
+                </div>
+              </dl>
+            </>
+          ) : (
+            <dl className="checkout-page__summary">
+              <div>
+                <dt>Item</dt>
+                <dd>{isCreditsOrder ? 'Credits' : (order.lineItems[0]?.title ?? order.title)}</dd>
+              </div>
+              <div>
+                <dt>Quantity</dt>
+                <dd>
+                  {isCreditsOrder
+                    ? formatCredits(order.credits)
+                    : String(order.lineItems[0]?.quantity ?? 1)}
+                </dd>
+              </div>
+              <div>
+                <dt>Amount</dt>
+                <dd>{money}</dd>
+              </div>
+              <div>
+                <dt>Total incl. VAT</dt>
+                <dd>{money}</dd>
+              </div>
+            </dl>
+          )}
         </section>
 
         <section className="checkout-page__card checkout-page__card--billing" aria-label="Payment information">
@@ -483,15 +560,14 @@ export default function CheckoutPage() {
             )}
           </div>
 
-          {isAdmin ? (
-            <div className="checkout-page__admin-tests" aria-label="Admin payment tests">
-              <p className="checkout-page__admin-label">Admin test payments</p>
+          <div className="checkout-page__admin-tests" aria-label="Payment tests">
+              <p className="checkout-page__admin-label">Test payments</p>
               <div className="checkout-page__admin-actions">
                 <Button
                   type="button"
                   variant="trigger-green"
                   size="sm"
-                  disabled={Boolean(testing) || isPaid}
+                  disabled={Boolean(testing)}
                   onClick={() => void handleTest('success')}
                 >
                   {testing === 'success' ? 'Processing…' : 'Payment success (test)'}
@@ -507,7 +583,6 @@ export default function CheckoutPage() {
                 </Button>
               </div>
             </div>
-          ) : null}
         </section>
       </div>
 

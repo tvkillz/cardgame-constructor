@@ -134,6 +134,9 @@ begin
     username = coalesce(public.profiles.username, excluded.username),
     updated_at = now();
 
+  perform public.ensure_wallet(new.id);
+  perform public.ensure_test_deck(new.id, v_site_id);
+
   return new;
 end;
 $$;

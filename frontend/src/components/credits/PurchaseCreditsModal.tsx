@@ -12,6 +12,7 @@ import {
   validateCustomCreditAmount,
 } from '@/lib/commerce/creditCheckoutLimits'
 import { Button } from '@/components/ui/Button/Button'
+import TermsOfSaleAgreement from '@/components/checkout/TermsOfSaleAgreement'
 import '@/styles/coin-stack-icon.css'
 import './PurchaseCreditsModal.css'
 
@@ -30,6 +31,7 @@ export default function PurchaseCreditsModal({
 }: PurchaseCreditsModalProps) {
   const copy = appConfig.descriptions.credits
   const { packages, creditsPerEur } = appConfig.credits
+  const { legal } = appConfig.domain
   const titleId = useId()
   const router = useRouter()
   const { currency, setCurrency } = useSyncedMarketCurrency()
@@ -37,12 +39,15 @@ export default function PurchaseCreditsModal({
   const [selectedPackId, setSelectedPackId] = useState<string | null>(null)
   const [customCredits, setCustomCredits] = useState('')
   const [checkoutError, setCheckoutError] = useState<string | null>(null)
-  const { legal } = appConfig.domain
+  const [agreedToTerms, setAgreedToTerms] = useState(false)
+  const termsCheckboxId = useId()
 
   useEffect(() => {
     if (!isOpen) return
     setSelectedPackId(null)
     setCustomCredits('')
+    setAgreedToTerms(false)
+    setCheckoutError(null)
   }, [isOpen])
 
   const customAmount = useMemo(() => {
@@ -65,10 +70,15 @@ export default function PurchaseCreditsModal({
   }, [selectedPack, customAmount])
 
   const canBuy =
+    agreedToTerms &&
     totalEur > 0 &&
     (Boolean(selectedPack) || (customAmount > 0 && validateCustomCreditAmount(customAmount).ok))
 
   const goToCheckout = (creditAmount: number) => {
+    if (!agreedToTerms) {
+      setCheckoutError('Please agree to the Terms of Sale & Digital Purchase Policy to continue.')
+      return
+    }
     if (!creditAmount || creditAmount <= 0) return
     const check = validateCustomCreditAmount(creditAmount)
     if (!check.ok) {
@@ -176,6 +186,7 @@ export default function PurchaseCreditsModal({
               className={`credits-modal__pack${
                 selectedPackId === pack.id ? ' credits-modal__pack--selected' : ''
               }${pack.popular ? ' credits-modal__pack--popular' : ''}`}
+              disabled={!agreedToTerms}
               onClick={() => handleSelectPack(pack.id)}
             >
               {pack.popular && (
@@ -256,11 +267,15 @@ export default function PurchaseCreditsModal({
           )}
         </div>
 
-        {checkoutError && (
-          <p className="credits-modal__error" role="alert">
-            {checkoutError}
-          </p>
-        )}
+        <TermsOfSaleAgreement
+          agreed={agreedToTerms}
+          onAgreedChange={(next) => {
+            setAgreedToTerms(next)
+            if (next) setCheckoutError(null)
+          }}
+          className="credits-modal__terms"
+          checkboxId={termsCheckboxId}
+        />
 
         <p className="credits-modal__legal">
           By purchasing you agree to our{' '}
@@ -269,7 +284,7 @@ export default function PurchaseCreditsModal({
           </a>
           ,{' '}
           <a href={legal.refundPolicyUrl} target="_blank" rel="noopener noreferrer">
-            Cancellation & Refund Policy
+            Cancellation &amp; Refund Policy
           </a>{' '}
           and{' '}
           <a href={legal.privacyUrl} target="_blank" rel="noopener noreferrer">
@@ -277,6 +292,12 @@ export default function PurchaseCreditsModal({
           </a>
           .
         </p>
+
+        {checkoutError && (
+          <p className="credits-modal__error" role="alert">
+            {checkoutError}
+          </p>
+        )}
       </div>
     </div>
   )

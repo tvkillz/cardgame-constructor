@@ -2,7 +2,7 @@ import { getSiteId } from '@/lib/site'
 import { getSupabaseBrowserClient } from '@/lib/supabase/client'
 
 export const MAX_PAYMENT_CARDS = 16
-export const PAYMENT_CARDS_PER_PAGE = 6
+export const PAYMENT_CARDS_PER_PAGE = 4
 
 export type PaymentCard = {
   id: string

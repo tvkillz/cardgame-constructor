@@ -1,8 +1,10 @@
 'use client'
 
 import { useEffect, useId } from 'react'
+import { useRouter } from 'next/navigation'
 
 import { Button } from '@/components/ui/Button/Button'
+import { appConfig } from '@/config'
 import { formatCredits } from '@/config'
 import { useMarketCart } from '@/hooks/useMarketCart'
 import { useMarketCurrency } from '@/hooks/useMarketCurrency'
@@ -10,6 +12,7 @@ import { formatMarketMoney } from '@/lib/market/currency'
 import './MarketCartDrawer.css'
 
 export default function MarketCartDrawer() {
+  const router = useRouter()
   const titleId = useId()
   const {
     items,
@@ -22,6 +25,20 @@ export default function MarketCartDrawer() {
     subtotalEurCents,
   } = useMarketCart()
   const { currency } = useMarketCurrency()
+
+  const handleCheckout = () => {
+    if (!items.length) return
+    const payload = items.map((line) => ({
+      cardId: line.cardId,
+      quantity: line.quantity,
+    }))
+    const params = new URLSearchParams()
+    params.set('currency', currency)
+    params.set('cart', JSON.stringify(payload))
+    closeDrawer()
+    const checkoutPath = appConfig.domain.routes.checkout ?? '/checkout'
+    router.push(`${checkoutPath}?${params.toString()}`)
+  }
 
   useEffect(() => {
     if (!drawerOpen) return
@@ -122,13 +139,13 @@ export default function MarketCartDrawer() {
             <strong>{formatMarketMoney(subtotalEurCents, currency)}</strong>
           </div>
           <p className="market-cart__note">
-            Prices shown in {currency}. Checkout coming soon.
+            Prices shown in {currency}.
           </p>
           <div className="market-cart__actions">
             <Button type="button" variant="ghost" size="sm" onClick={clearCart} disabled={!items.length}>
               Clear
             </Button>
-            <Button type="button" variant="primary" size="md" disabled>
+            <Button type="button" variant="primary" size="md" disabled={!items.length} onClick={handleCheckout}>
               Checkout
             </Button>
           </div>

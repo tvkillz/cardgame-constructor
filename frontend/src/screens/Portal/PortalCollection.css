@@ -75,6 +75,44 @@
   font-family: var(--font-ui);
 }
 
+.portal-collection__stats {
+  margin-bottom: 0.75rem;
+  padding: 0.65rem 0.85rem;
+  border: 1px solid rgba(123, 77, 255, 0.22);
+  border-radius: 8px;
+  background: linear-gradient(
+    180deg,
+    rgba(18, 22, 38, 0.55) 0%,
+    rgba(10, 10, 12, 0.75) 100%
+  );
+}
+
+.portal-collection__stats-summary,
+.portal-collection__stats-filtered {
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: rgba(232, 220, 200, 0.72);
+}
+
+.portal-collection__stats-filtered {
+  margin-top: 0.25rem;
+  font-size: 0.78rem;
+  color: rgba(232, 220, 200, 0.55);
+}
+
+.portal-collection__stats-item strong,
+.portal-collection__stats-filtered strong {
+  color: #f3d878;
+  font-weight: 700;
+}
+
+.portal-collection__stats-sep {
+  margin: 0 0.35rem;
+  color: rgba(232, 220, 200, 0.35);
+}
+
 .portal-collection__grid {
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
@@ -97,6 +135,25 @@
   aspect-ratio: 2 / 3;
   border-radius: 6px;
   overflow: hidden;
+}
+
+.collection-owned-card__owned-badge {
+  position: absolute;
+  left: 50%;
+  top: 0.4rem;
+  bottom: auto;
+  z-index: 3;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  border: 1px solid rgba(201, 162, 39, 0.55);
+  background: rgba(10, 10, 12, 0.88);
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #f3d878;
+  pointer-events: none;
+  transform: translateX(-50%);
 }
 
 .collection-owned-card--hovered .collection-owned-card__frame {

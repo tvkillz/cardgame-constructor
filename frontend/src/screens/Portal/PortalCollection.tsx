@@ -112,6 +112,18 @@ export default function PortalCollection() {
     return filtered.slice(start, start + PAGE_SIZE)
   }, [filtered, safePage])
 
+  const collectionStats = useMemo(() => {
+    const sumCopies = (cards: CardRecord[]) =>
+      cards.reduce((sum, card) => sum + (ownedBySlug.get(card.slug) ?? 0), 0)
+
+    return {
+      uniqueOwned: ownedCards.length,
+      totalCopies: sumCopies(ownedCards),
+      filteredUnique: filtered.length,
+      filteredCopies: sumCopies(filtered),
+    }
+  }, [ownedCards, filtered, ownedBySlug])
+
   const draftCount = useMemo(
     () => (activeDeck ? deckCardCount({ ...activeDeck, cards: draftCards }) : 0),
     [activeDeck, draftCards],
@@ -120,6 +132,10 @@ export default function PortalCollection() {
   const deckSaving = activeDeck ? savingDeckId === activeDeck.id : false
   const saveLabel =
     activeDeck && savedOnceByDeck[activeDeck.id] ? 'Update Deck' : 'Save Deck'
+
+  useEffect(() => {
+    void refreshInventory({ silent: true })
+  }, [refreshInventory])
 
   useEffect(() => {
     if (!activeDeckId && decks.length > 0) {
@@ -435,6 +451,33 @@ export default function PortalCollection() {
         ) : null}
 
         <div className="portal-collection__main">
+          {ownedCards.length > 0 ? (
+            <div className="portal-collection__stats" aria-live="polite">
+              <p className="portal-collection__stats-summary">
+                <span className="portal-collection__stats-item">
+                  <strong>{collectionStats.uniqueOwned}</strong> unique card
+                  {collectionStats.uniqueOwned === 1 ? '' : 's'}
+                </span>
+                <span className="portal-collection__stats-sep" aria-hidden="true">
+                  ·
+                </span>
+                <span className="portal-collection__stats-item">
+                  <strong>{collectionStats.totalCopies}</strong> total cop
+                  {collectionStats.totalCopies === 1 ? 'y' : 'ies'} owned
+                </span>
+              </p>
+              {collectionStats.filteredUnique !== collectionStats.uniqueOwned ||
+              collectionStats.filteredCopies !== collectionStats.totalCopies ? (
+                <p className="portal-collection__stats-filtered">
+                  Showing <strong>{collectionStats.filteredUnique}</strong> card
+                  {collectionStats.filteredUnique === 1 ? '' : 's'} ·{' '}
+                  <strong>{collectionStats.filteredCopies}</strong> cop
+                  {collectionStats.filteredCopies === 1 ? 'y' : 'ies'} in view
+                </p>
+              ) : null}
+            </div>
+          ) : null}
+
           <p className="portal-market__count" aria-live="polite">
             {filtered.length} owned card{filtered.length === 1 ? '' : 's'}
             {filtered.length > PAGE_SIZE
@@ -588,13 +631,16 @@ function CollectionOwnedCard({
   return (
     <article
       className={`collection-owned-card${hovered ? ' collection-owned-card--hovered' : ''}`}
-      aria-label={card.title}
+      aria-label={`${card.title}, ${ownedQty} owned`}
       onMouseEnter={showPreview}
       onMouseLeave={hidePreview}
       onFocus={showPreview}
       onBlur={hidePreview}
     >
       <div className="collection-owned-card__frame" ref={frameRef}>
+        <span className="collection-owned-card__owned-badge" aria-hidden="true">
+          ×{ownedQty}
+        </span>
         <Card
           {...toCardDisplayProps(card, index)}
           totalCards={1}

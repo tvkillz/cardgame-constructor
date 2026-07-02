@@ -1,4 +1,5 @@
 -- Creates profile + site_members rows when a user signs up (auth.users insert).
+-- Also provisions wallet + Test Deck (requires ensure_test_deck from volumes/db/decks.sql).
 -- Safe to re-run on existing DBs (installs trigger + backfills missing rows).
 --
 -- VPS:
@@ -65,6 +66,9 @@ begin
     username = coalesce(public.profiles.username, excluded.username),
     updated_at = now();
 
+  perform public.ensure_wallet(new.id);
+  perform public.ensure_test_deck(new.id, v_site_id);
+
   return new;
 end;
 $$;
@@ -115,5 +119,18 @@ where p.id is null
   and public.auth_email_site_id(u.email) is not null
   and exists (select 1 from public.sites s where s.id = public.auth_email_site_id(u.email))
 on conflict (id) do nothing;
+
+-- Wallet + test deck for users who registered before signup provisioning.
+do $$
+declare
+  r record;
+begin
+  for r in select user_id, site_id from public.site_members
+  loop
+    perform public.ensure_wallet(r.user_id);
+    perform public.ensure_test_deck(r.user_id, r.site_id);
+  end loop;
+end;
+$$;
 
 notify pgrst, 'reload schema';

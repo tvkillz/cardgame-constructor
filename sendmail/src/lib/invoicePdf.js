@@ -1,7 +1,15 @@
 const PDFDocument = require('pdfkit');
 const path = require('path');
 const { PORTAL, bundledLogoFile, brandName } = require('./emailTemplate');
-const { formatMoney, formatQuantity, formatInvoiceDate, buyerDisplayName, buyerAddressLines, lineTotalCents } = require('./invoiceFormat');
+const {
+  formatMoney,
+  formatQuantity,
+  formatInvoiceDate,
+  buyerDisplayName,
+  buyerAddressLines,
+  lineTotalCents,
+  shortOrderId,
+} = require('./invoiceFormat');
 
 /** PDF palette — portal header band + readable light body for print. */
 const PDF_THEME = {

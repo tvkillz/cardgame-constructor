@@ -122,6 +122,48 @@
   color: #ffffff;
 }
 
+.checkout-page__summary--totals {
+  margin-top: 0.85rem;
+}
+
+.checkout-page__line-items {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+}
+
+.checkout-page__line-items th {
+  padding: 0.5rem 0.4rem;
+  border-bottom: 1px solid rgba(123, 77, 255, 0.28);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-align: left;
+  color: rgba(232, 220, 200, 0.5);
+}
+
+.checkout-page__line-items th:nth-child(n + 2) {
+  text-align: right;
+}
+
+.checkout-page__line-items td {
+  padding: 0.55rem 0.4rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  color: #e8dcc8;
+  vertical-align: top;
+}
+
+.checkout-page__line-items td:nth-child(n + 2) {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.checkout-page__line-items tbody tr:last-child td {
+  border-bottom: none;
+}
+
 .checkout-page .billing-form__label {
   font-family: var(--font-ui);
   color: rgba(232, 220, 200, 0.55);

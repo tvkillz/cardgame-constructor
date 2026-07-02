@@ -422,6 +422,7 @@ type CheckoutBody = {
   packId?: string
   customCredits?: number
   cardId?: string
+  cartItems?: Array<{ cardId?: string; quantity?: number }>
   currency?: string
   successUrl?: string
   cancelUrl?: string
@@ -441,13 +442,21 @@ const MAX_CUSTOM_CREDITS = Number(Deno.env.get('MAX_CUSTOM_CREDITS') ?? '1000000
 const LISTING_COMMISSION_RATE = 0.2
 const LISTING_MIN_PRICE_RATIO = 0.75
 
-type ResolvedCheckout = {
+type ResolvedOrderItem = {
   productId: string | null
+  cardId: string | null
+  title: string
+  quantity: number
+  unitCents: number
+  creditsAmount: number
+}
+
+type ResolvedCheckout = {
   credits: number
   title: string
-  unitCents: number
+  totalCents: number
   currency: string
-  cardId: string | null
+  orderItems: ResolvedOrderItem[]
 }
 
 function eurCentsForCredits(credits: number): number {
@@ -485,6 +494,7 @@ async function resolveCheckoutPayload(
     productId?: string
     customCredits?: number
     cardId?: string
+    cartItems?: Array<{ cardId?: string; quantity?: number }>
     currency?: string
   },
 ): Promise<
@@ -494,12 +504,60 @@ async function resolveCheckoutPayload(
   let productId = payload.productId ?? null
   let credits = 0
   let title = 'VOIDBORN Credits'
-  let unitCents = 0
+  let totalCents = 0
   let currency = 'eur'
-  let cardId: string | null = null
+  let orderItems: ResolvedOrderItem[] = []
   let checkoutCurrencyApplied = false
 
-  if (payload.packId || productId) {
+  if (Array.isArray(payload.cartItems) && payload.cartItems.length > 0) {
+    const qtyByCardId = new Map<string, number>()
+    for (const item of payload.cartItems) {
+      const cardId = String(item?.cardId ?? '').trim()
+      const quantity = Math.floor(Number(item?.quantity ?? 0))
+      if (!cardId || quantity <= 0) continue
+      qtyByCardId.set(cardId, (qtyByCardId.get(cardId) ?? 0) + quantity)
+    }
+
+    const cardIds = [...qtyByCardId.keys()]
+    if (!cardIds.length) return { ok: false, error: 'invalid_checkout', status: 400 }
+
+    const { data: cards } = await admin
+      .from('cards')
+      .select('id, title, price_cents')
+      .eq('site_id', siteId)
+      .eq('published', true)
+      .in('id', cardIds)
+
+    if (!cards || cards.length !== cardIds.length) {
+      return { ok: false, error: 'card_not_found', status: 404 }
+    }
+
+    const displayCurrency = String(payload.currency ?? 'eur').toLowerCase()
+    const rate = RATE_FROM_EUR[displayCurrency] ?? 1
+    credits = 0
+    currency = displayCurrency
+    checkoutCurrencyApplied = true
+
+    orderItems = cards
+      .map((card) => {
+        const quantity = qtyByCardId.get(String(card.id)) ?? 0
+        const unitCents = Math.round(Number(card.price_cents ?? 0) * rate)
+        return {
+          productId: null,
+          cardId: String(card.id),
+          title: String(card.title ?? 'Card'),
+          quantity,
+          unitCents,
+          creditsAmount: 0,
+        }
+      })
+      .filter((item) => item.quantity > 0 && item.unitCents > 0)
+
+    if (!orderItems.length) return { ok: false, error: 'card_not_found', status: 404 }
+    totalCents = orderItems.reduce((sum, item) => sum + item.unitCents * item.quantity, 0)
+    const totalQty = orderItems.reduce((sum, item) => sum + item.quantity, 0)
+    title = totalQty === 1 ? orderItems[0].title : `${totalQty} cards`
+  } else if (payload.packId || productId) {
     const slugOrId = payload.packId ?? productId!
     const uuidRe = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
     let productQuery = admin.from('store_products').select('*').eq('active', true).eq('site_id', siteId)
@@ -512,9 +570,18 @@ async function resolveCheckoutPayload(
     productId = product.id
     credits = product.credits_amount ?? 0
     title = product.title
-    unitCents = product.price_cents
+    totalCents = product.price_cents
     currency = product.currency ?? 'eur'
-    cardId = product.card_id
+    orderItems = [
+      {
+        productId,
+        cardId: product.card_id,
+        title,
+        quantity: 1,
+        unitCents: totalCents,
+        creditsAmount: credits,
+      },
+    ]
   } else if (payload.customCredits && payload.customCredits > 0) {
     const validated = validateCustomCredits(payload.customCredits)
     if (!validated.ok) {
@@ -527,9 +594,19 @@ async function resolveCheckoutPayload(
       }
     }
     credits = validated.credits
-    unitCents = validated.unitCentsEur
+    totalCents = validated.unitCentsEur
     title = `${credits} Credits`
     productId = null
+    orderItems = [
+      {
+        productId: null,
+        cardId: null,
+        title,
+        quantity: 1,
+        unitCents: totalCents,
+        creditsAmount: credits,
+      },
+    ]
   } else if (payload.cardId) {
     const cardIdStr = String(payload.cardId)
     const { data: card } = await admin
@@ -546,13 +623,22 @@ async function resolveCheckoutPayload(
 
     const displayCurrency = String(payload.currency ?? 'eur').toLowerCase()
     const rate = RATE_FROM_EUR[displayCurrency] ?? 1
-    cardId = card.id
     credits = 0
     title = card.title
-    unitCents = Math.round(Number(card.price_cents) * rate)
+    totalCents = Math.round(Number(card.price_cents) * rate)
     currency = displayCurrency
     productId = null
     checkoutCurrencyApplied = true
+    orderItems = [
+      {
+        productId: null,
+        cardId: card.id,
+        title,
+        quantity: 1,
+        unitCents: totalCents,
+        creditsAmount: 0,
+      },
+    ]
   } else {
     return { ok: false, error: 'invalid_checkout', status: 400 }
   }
@@ -561,14 +647,18 @@ async function resolveCheckoutPayload(
     const displayCurrency = String(payload.currency).toLowerCase()
     const rate = RATE_FROM_EUR[displayCurrency]
     if (rate) {
-      unitCents = Math.round(unitCents * rate)
+      totalCents = Math.round(totalCents * rate)
+      orderItems = orderItems.map((item) => ({
+        ...item,
+        unitCents: Math.round(item.unitCents * rate),
+      }))
       currency = displayCurrency
     }
   }
 
   return {
     ok: true,
-    resolved: { productId, credits, title, unitCents, currency, cardId },
+    resolved: { credits, title, totalCents, currency, orderItems },
   }
 }
 
@@ -578,33 +668,39 @@ async function createPendingOrder(
   resolved: ResolvedCheckout,
   receiptEmail: string | null,
 ): Promise<{ orderId: string } | { error: string }> {
-  const { productId, credits, title, unitCents, currency, cardId } = resolved
+  const { credits, totalCents, currency, orderItems } = resolved
 
   const { data: order, error: orderErr } = await admin
     .from('orders')
     .insert({
       user_id: userId,
       status: 'pending_payment',
-      total_cents: unitCents,
+      total_cents: totalCents,
       currency,
       credits_granted: credits,
       receipt_email: receiptEmail,
-      metadata: { product_id: productId, card_id: cardId, checkout_flow: 'internal' },
+      metadata: {
+        product_id: orderItems[0]?.productId ?? null,
+        card_id: orderItems[0]?.cardId ?? null,
+        checkout_flow: 'internal',
+      },
     })
     .select('id')
     .single()
 
   if (orderErr || !order) return { error: orderErr?.message ?? 'order_create_failed' }
 
-  const { error: itemErr } = await admin.from('order_items').insert({
-    order_id: order.id,
-    product_id: productId,
-    quantity: 1,
-    unit_price_cents: unitCents,
-    credits_amount: credits,
-    card_id: cardId,
-    title_snapshot: title,
-  })
+  const { error: itemErr } = await admin.from('order_items').insert(
+    orderItems.map((item) => ({
+      order_id: order.id,
+      product_id: item.productId,
+      quantity: item.quantity,
+      unit_price_cents: item.unitCents,
+      credits_amount: item.creditsAmount,
+      card_id: item.cardId,
+      title_snapshot: item.title,
+    })),
+  )
 
   if (itemErr) {
     await admin.from('orders').delete().eq('id', order.id)
@@ -612,6 +708,52 @@ async function createPendingOrder(
   }
 
   return { orderId: order.id }
+}
+
+async function grantOrderCardsToInventory(
+  admin: ReturnType<typeof createClient>,
+  orderId: string,
+  userId: string,
+): Promise<{ error?: string }> {
+  const { data: items, error: itemsError } = await admin
+    .from('order_items')
+    .select('card_id, quantity')
+    .eq('order_id', orderId)
+
+  if (itemsError) return { error: itemsError.message }
+
+  for (const item of items ?? []) {
+    if (!item.card_id) continue
+    const quantity = Math.max(1, Number(item.quantity ?? 1))
+
+    const { data: existing, error: fetchError } = await admin
+      .from('player_inventory')
+      .select('quantity')
+      .eq('user_id', userId)
+      .eq('card_id', item.card_id)
+      .maybeSingle()
+
+    if (fetchError) return { error: fetchError.message }
+
+    if (existing) {
+      const { error: updateError } = await admin
+        .from('player_inventory')
+        .update({ quantity: existing.quantity + quantity })
+        .eq('user_id', userId)
+        .eq('card_id', item.card_id)
+      if (updateError) return { error: updateError.message }
+    } else {
+      const { error: insertError } = await admin.from('player_inventory').insert({
+        user_id: userId,
+        card_id: item.card_id,
+        quantity,
+        source: 'purchase',
+      })
+      if (insertError) return { error: insertError.message }
+    }
+  }
+
+  return {}
 }
 
 async function fulfillInternalOrder(
@@ -623,7 +765,21 @@ async function fulfillInternalOrder(
   const { data: order } = await admin.from('orders').select('*').eq('id', orderId).maybeSingle()
   if (!order || order.user_id !== userId) return { error: 'order_not_found', status: 404 }
 
+  const metadata = (order.metadata ?? {}) as Record<string, unknown>
+  const inventoryFulfilled = metadata.inventory_fulfilled === true
+
   if (order.status === 'paid') {
+    if (!inventoryFulfilled) {
+      const grant = await grantOrderCardsToInventory(admin, orderId, userId)
+      if (grant.error) return { error: grant.error, status: 500 }
+      await admin
+        .from('orders')
+        .update({
+          metadata: { ...metadata, inventory_fulfilled: true },
+          updated_at: new Date().toISOString(),
+        })
+        .eq('id', orderId)
+    }
     const invoice = await sendOrderInvoice(admin, orderId, paymentMethod)
     return { ok: true, invoice }
   }
@@ -655,36 +811,16 @@ async function fulfillInternalOrder(
     .eq('reference_id', orderId)
     .eq('status', 'pending')
 
-  const { data: items } = await admin.from('order_items').select('*').eq('order_id', orderId)
-  for (const item of items ?? []) {
-    if (item.card_id) {
-      const { data: existing } = await admin
-        .from('player_inventory')
-        .select('quantity')
-        .eq('user_id', userId)
-        .eq('card_id', item.card_id)
-        .maybeSingle()
-      if (existing) {
-        await admin
-          .from('player_inventory')
-          .update({ quantity: existing.quantity + (item.quantity ?? 1) })
-          .eq('user_id', userId)
-          .eq('card_id', item.card_id)
-      } else {
-        await admin.from('player_inventory').insert({
-          user_id: userId,
-          card_id: item.card_id,
-          quantity: item.quantity ?? 1,
-          source: 'purchase',
-        })
-      }
-    }
+  if (!inventoryFulfilled) {
+    const grant = await grantOrderCardsToInventory(admin, orderId, userId)
+    if (grant.error) return { error: grant.error, status: 500 }
   }
 
   await admin
     .from('orders')
     .update({
       status: 'paid',
+      metadata: { ...metadata, inventory_fulfilled: true },
       updated_at: new Date().toISOString(),
     })
     .eq('id', orderId)
@@ -785,6 +921,15 @@ Deno.serve(async (req) => {
   }
 
   await admin.rpc('ensure_wallet', { p_user_id: userId })
+
+  if (action === 'ensure_test_deck') {
+    const { data: deckId, error } = await admin.rpc('ensure_test_deck', {
+      p_user_id: userId,
+      p_site_id: siteId,
+    })
+    if (error) return json({ error: error.message }, 500)
+    return json({ ok: true, deckId })
+  }
 
   if (action === 'wallet_get') {
     const { data: wallet } = await admin.from('wallets').select('*').eq('user_id', userId).single()
@@ -1132,6 +1277,9 @@ Deno.serve(async (req) => {
       productId: payload.productId ? String(payload.productId) : undefined,
       customCredits: payload.customCredits ? Number(payload.customCredits) : undefined,
       cardId: body.cardId ? String(body.cardId) : undefined,
+      cartItems: Array.isArray(body.cartItems)
+        ? (body.cartItems as Array<{ cardId?: string; quantity?: number }>)
+        : undefined,
       currency: payload.currency ? String(payload.currency) : undefined,
     })
     if (!resolvedResult.ok) {
@@ -1145,7 +1293,7 @@ Deno.serve(async (req) => {
       )
     }
 
-    const { productId, credits, title, unitCents, currency, cardId } = resolvedResult.resolved
+    const { credits, title, totalCents, currency, orderItems } = resolvedResult.resolved
 
     const { data: userData } = await admin.auth.admin.getUserById(userId)
     const receiptEmail = userData.user ? displayEmailFromUser(userData.user) : null
@@ -1155,26 +1303,31 @@ Deno.serve(async (req) => {
       .insert({
         user_id: userId,
         status: 'pending_payment',
-        total_cents: unitCents,
+        total_cents: totalCents,
         currency,
         credits_granted: credits,
         receipt_email: receiptEmail,
-        metadata: { product_id: productId, card_id: cardId },
+        metadata: {
+          product_id: orderItems[0]?.productId ?? null,
+          card_id: orderItems[0]?.cardId ?? null,
+        },
       })
       .select('id')
       .single()
 
     if (orderErr || !order) return json({ error: orderErr?.message ?? 'order_create_failed' }, 500)
 
-    await admin.from('order_items').insert({
-      order_id: order.id,
-      product_id: productId,
-      quantity: 1,
-      unit_price_cents: unitCents,
-      credits_amount: credits,
-      card_id: cardId,
-      title_snapshot: title,
-    })
+    await admin.from('order_items').insert(
+      orderItems.map((item) => ({
+        order_id: order.id,
+        product_id: item.productId,
+        quantity: item.quantity,
+        unit_price_cents: item.unitCents,
+        credits_amount: item.creditsAmount,
+        card_id: item.cardId,
+        title_snapshot: item.title,
+      })),
+    )
 
     const successUrl =
       payload.successUrl ?? `${SITE_URL}/portal/checkout/success?session_id={CHECKOUT_SESSION_ID}`
@@ -1190,7 +1343,7 @@ Deno.serve(async (req) => {
     if (receiptEmail) params.set('customer_email', receiptEmail)
     params.set('line_items[0][quantity]', '1')
     params.set('line_items[0][price_data][currency]', currency)
-    params.set('line_items[0][price_data][unit_amount]', String(unitCents))
+    params.set('line_items[0][price_data][unit_amount]', String(totalCents))
     params.set('line_items[0][price_data][product_data][name]', title)
     params.set('payment_method_types[0]', 'card')
     params.append('payment_method_types[]', 'link')
@@ -1432,7 +1585,6 @@ Deno.serve(async (req) => {
   }
 
   if (action === 'payment_card_add_demo') {
-    if (!(await isAdmin(admin, userId))) return json({ error: 'forbidden' }, 403)
     if (!siteId) return json({ error: 'missing_site_id' }, 400)
 
     const { count, error: countError } = await admin
@@ -1515,6 +1667,9 @@ Deno.serve(async (req) => {
       productId: body.productId ? String(body.productId) : undefined,
       customCredits: body.customCredits ? Number(body.customCredits) : undefined,
       cardId: body.cardId ? String(body.cardId) : undefined,
+      cartItems: Array.isArray(body.cartItems)
+        ? (body.cartItems as Array<{ cardId?: string; quantity?: number }>)
+        : undefined,
       currency: body.currency ? String(body.currency) : undefined,
     })
     if (!resolvedResult.ok) {
@@ -1539,9 +1694,15 @@ Deno.serve(async (req) => {
       orderId: orderResult.orderId,
       credits: resolved.credits,
       title: resolved.title,
-      totalCents: resolved.unitCents,
+      totalCents: resolved.totalCents,
       currency: resolved.currency,
-      vatCents: resolved.unitCents,
+      vatCents: resolved.totalCents,
+      lineItems: resolved.orderItems.map((item) => ({
+        title: item.title,
+        quantity: item.quantity,
+        unitPriceCents: item.unitCents,
+        lineTotalCents: item.unitCents * item.quantity,
+      })),
     })
   }
 
@@ -1567,6 +1728,14 @@ Deno.serve(async (req) => {
       totalCents: order.total_cents,
       currency: order.currency,
       vatCents: order.total_cents,
+      lineItems: Array.isArray(order.order_items)
+        ? order.order_items.map((line) => ({
+            title: line.title_snapshot ?? 'Item',
+            quantity: Number(line.quantity ?? 1),
+            unitPriceCents: Number(line.unit_price_cents ?? 0),
+            lineTotalCents: Number(line.unit_price_cents ?? 0) * Number(line.quantity ?? 1),
+          }))
+        : [],
     })
   }
 
@@ -1632,8 +1801,6 @@ Deno.serve(async (req) => {
   }
 
   if (action === 'checkout_test') {
-    if (!(await isAdmin(admin, userId))) return json({ error: 'forbidden' }, 403)
-
     const orderId = String(body.orderId ?? '')
     const outcome = String(body.outcome ?? '')
     if (!orderId) return json({ error: 'missing_order_id' }, 400)

@@ -15,6 +15,7 @@ import { useRouter } from 'next/navigation'
 import type { Session, User } from '@supabase/supabase-js'
 import { appConfig } from '@/config'
 import { resolvePlayerName } from '@/lib/auth/player'
+import { invokeCommerceAction } from '@/lib/commerce/api'
 import { getSupabaseBrowserClient, isSupabaseConfigured } from '@/lib/supabase'
 
 const AuthModal = dynamic(() => import('@/components/auth/AuthModal'), { ssr: false })
@@ -73,9 +74,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
       const {
         data: { subscription: authSubscription },
-      } = supabase.auth.onAuthStateChange((_event, nextSession) => {
+      } = supabase.auth.onAuthStateChange((event, nextSession) => {
         setSession(nextSession)
         setLoading(false)
+        if (nextSession?.user && (event === 'SIGNED_IN' || event === 'INITIAL_SESSION')) {
+          void invokeCommerceAction({ type: 'ensure_test_deck' })
+        }
         if (nextSession) {
           setModalOpen(false)
           const target = pendingPathRef.current

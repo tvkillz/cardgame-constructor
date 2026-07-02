@@ -296,3 +296,9 @@
     border-top: 1px solid rgba(255, 255, 255, 0.06);
   }
 }
+
+@media (max-width: 403px){
+  .portal-transactions__filter{
+    width: 100%
+  }
+}
