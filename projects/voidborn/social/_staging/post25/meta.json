@@ -1,0 +1,38 @@
+{
+  "id": "post25",
+  "status": "rendered",
+  "created_at": "2026-07-05T12:05:21.317Z",
+  "brief": "Spotlight Void-Blighted Avenger — Assassin / Undead from the Anemos realm. Highlight ability: Last Vengeance.",
+  "template": "card-spotlight",
+  "subject": {
+    "card": "anemos_card_39_void_blighted_avenger",
+    "domain": "anemos"
+  },
+  "image": {
+    "mode": "composite",
+    "prompt": "A close-up, cinematic 1:1 shot of a decaying undead assassin cloaked in tattered, wind-blown fabric, glowing ethereal purple void veins pulsing across its armor, dark fantasy atmosphere, dramatic lighting, sharp focus on the character face, high detail.",
+    "reference_assets": [
+      "cards/anemos/anemos_card_39_void_blighted_avenger.png"
+    ],
+    "subject_line": "VOID-BLIGHTED AVENGER",
+    "background_asset": "cities/zephyr/zephyr_city_03_cloud_sanctuary.png",
+    "background_title": "The Cloud Sanctuary",
+    "use_brand_reference": false,
+    "size": 1080,
+    "rendered_at": "2026-07-05T12:05:23.061Z",
+    "render_mode_used": "composite"
+  },
+  "validation": {
+    "ok": true,
+    "issues": [],
+    "validated_at": "2026-07-05T12:05:21.317Z"
+  },
+  "approved_at": "2026-07-05T12:05:21.317Z",
+  "model": "gemini-3.1-flash-lite",
+  "campaign": {
+    "kind": "card",
+    "angle": null,
+    "domain": "anemos",
+    "card": "anemos_card_39_void_blighted_avenger"
+  }
+}

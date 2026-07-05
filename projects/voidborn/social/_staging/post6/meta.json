@@ -1,0 +1,38 @@
+{
+  "id": "post6",
+  "status": "rendered",
+  "created_at": "2026-07-05T11:58:13.943Z",
+  "brief": "Domain spotlight (lore intro) for the Kronos realm in VOIDBORN. Visual identity: ancient stone, granite, moss, earth magic, golden amber accents, titanic golems and druids. Lore themes: tanks, siege units, stone golems, rootbound druids, mountain fortresses. Describe the realm's culture, bastions, and role in the war against the Aether Bleed / Void corruption. Tease iconic units and the feeling of playing Kronos decks. City backdrop sets the mood. Instagram punchy + hashtags including #Kronos; Facebook epic lore story + community question; Discord markdown realm guide + play link https://voidborn.fun.",
+  "template": "domain-spotlight",
+  "subject": {
+    "card": null,
+    "domain": "kronos"
+  },
+  "image": {
+    "mode": "gemini",
+    "prompt": "1:1 cinematic shot of a massive, ancient granite golem covered in glowing golden amber runes and thick green moss, standing before a towering stone fortress gate, epic dark fantasy, soft golden hour lighting, hyper-detailed, atmospheric, volumetric fog, no text.",
+    "reference_assets": [
+      "domains/terra_domain.png",
+      "cities/terra/terra_city_01_great_bastion.png"
+    ],
+    "subject_line": "KRONOS — REALM OF THE VOID",
+    "background_asset": "cities/terra/terra_city_01_great_bastion.png",
+    "background_title": "The Great Bastion",
+    "use_brand_reference": false,
+    "size": 1080,
+    "rendered_at": "2026-07-05T11:58:39.896Z",
+    "render_mode_used": "gemini"
+  },
+  "validation": {
+    "ok": true,
+    "issues": [],
+    "validated_at": "2026-07-05T11:58:13.943Z"
+  },
+  "approved_at": "2026-07-05T11:58:13.943Z",
+  "model": "gemini-3.1-flash-lite",
+  "campaign": {
+    "kind": "domain",
+    "angle": "lore",
+    "domain": "kronos"
+  }
+}

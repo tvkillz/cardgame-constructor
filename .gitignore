@@ -58,6 +58,7 @@ frontend/dist-cpanel-static/
 sendmail/node_modules/
 sendmail/dist-cpanel/
 sendmail/deploy/cpanel.local.env
+sendmail/socgen/.env
 
 # --- Optional local asset fallback (prefer projects/{id}/assets/) ---
 cursor_assets/

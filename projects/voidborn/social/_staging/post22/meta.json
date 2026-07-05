@@ -1,0 +1,38 @@
+{
+  "id": "post22",
+  "status": "rendered",
+  "created_at": "2026-07-05T12:04:46.511Z",
+  "brief": "Spotlight Shipwreck Scavenger — Scout / Regenerator from the Thalassa realm. Highlight ability: Corroded Repair.",
+  "template": "card-spotlight",
+  "subject": {
+    "card": "thalassa_card_11_shipwreck_scavenger",
+    "domain": "thalassa"
+  },
+  "image": {
+    "mode": "composite",
+    "prompt": "Cinematic dark fantasy illustration of a rugged scout scavenger in tattered nautical gear, standing amidst misty coastal shipwrecks and bioluminescent sea flora, moody atmosphere, sharp focus on the character, digital art style, high contrast, 1:1 aspect ratio.",
+    "reference_assets": [
+      "cards/thalassa/thalassa_card_11_shipwreck_scavenger.png"
+    ],
+    "subject_line": "Shipwreck Scavenger",
+    "background_asset": "cities/aqua/aqua_city_01_sunken_oakhaven.png",
+    "background_title": "Sunken Oakhaven",
+    "use_brand_reference": false,
+    "size": 1080,
+    "rendered_at": "2026-07-05T12:04:47.679Z",
+    "render_mode_used": "composite"
+  },
+  "validation": {
+    "ok": true,
+    "issues": [],
+    "validated_at": "2026-07-05T12:04:46.511Z"
+  },
+  "approved_at": "2026-07-05T12:04:46.511Z",
+  "model": "gemini-3.1-flash-lite",
+  "campaign": {
+    "kind": "card",
+    "angle": null,
+    "domain": "thalassa",
+    "card": "thalassa_card_11_shipwreck_scavenger"
+  }
+}

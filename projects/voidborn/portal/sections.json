@@ -7,13 +7,7 @@
       "title": "MARKET",
       "subtitle": "Buy, sell, and manage your market listings."
     },
-    {
-      "id": "vaults",
-      "label": "Vaults",
-      "route": "portalVaults",
-      "title": "VAULTS",
-      "subtitle": "Unpack sealed arcane vaults and discover new cards."
-    },
+
     {
       "id": "collection",
       "label": "Collection",

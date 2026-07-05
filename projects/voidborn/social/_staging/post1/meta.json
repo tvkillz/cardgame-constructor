@@ -1,0 +1,37 @@
+{
+  "id": "post1",
+  "status": "rendered",
+  "created_at": "2026-07-05T11:56:09.386Z",
+  "brief": "Welcome post for VOIDBORN dark fantasy online TCG. Hook headline: \"Wielders of the Realms\". Realm atmosphere: The Great Bastion (kronos). Introduce four elemental realms, deck building, tactical battles, ranked play. Free to start at https://voidborn.fun. Instagram punchy + hashtags; Facebook longer story; Discord markdown feature list + play link.",
+  "template": "welcome",
+  "subject": {
+    "card": null,
+    "domain": "thalassa"
+  },
+  "image": {
+    "mode": "gemini",
+    "prompt": "1:1 cinematic square crop, dark fantasy digital art, deep underwater gothic abyss, bioluminescent cyan coral ruins, drowned spectral undead knights, eerie atmosphere, highly detailed textures, moody lighting, professional TCG card art style.",
+    "reference_assets": [
+      "cities/aqua/aqua_city_02_abyssal_citadel.png"
+    ],
+    "subject_line": "WIELDERS OF THE REALMS",
+    "background_asset": "cities/aqua/aqua_city_02_abyssal_citadel.png",
+    "background_title": "The Abyssal Citadel",
+    "use_brand_reference": false,
+    "size": 1080,
+    "rendered_at": "2026-07-05T11:56:30.598Z",
+    "render_mode_used": "gemini"
+  },
+  "validation": {
+    "ok": true,
+    "issues": [],
+    "validated_at": "2026-07-05T11:56:09.388Z"
+  },
+  "approved_at": "2026-07-05T11:56:09.386Z",
+  "model": "gemini-3.1-flash-lite",
+  "campaign": {
+    "kind": "welcome",
+    "angle": null,
+    "domain": null
+  }
+}

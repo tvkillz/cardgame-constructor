@@ -1,0 +1,38 @@
+{
+  "id": "post8",
+  "status": "rendered",
+  "created_at": "2026-07-05T11:59:13.113Z",
+  "brief": "Domain spotlight (lore intro) for the Thalassa realm in VOIDBORN. Visual identity: deep underwater gothic, abyssal bioluminescence, coral ruins, drowned undead, teal and navy. Lore themes: sirens, drowned undead, freeze magic, abyssal predators, coral revenants. Describe the realm's culture, bastions, and role in the war against the Aether Bleed / Void corruption. Tease iconic units and the feeling of playing Thalassa decks. City backdrop sets the mood. Instagram punchy + hashtags including #Thalassa; Facebook epic lore story + community question; Discord markdown realm guide + play link https://voidborn.fun.",
+  "template": "domain-spotlight",
+  "subject": {
+    "card": null,
+    "domain": "thalassa"
+  },
+  "image": {
+    "mode": "gemini",
+    "prompt": "1:1 square cinematic digital art, underwater gothic city ruins in the abyss, bioluminescent teal and navy lighting, spectral undead figures swimming through coral towers, dark fantasy style, high detail, volumetric lighting, moody atmosphere, no text.",
+    "reference_assets": [
+      "domains/aqua_domain.png",
+      "cities/aqua/aqua_city_01_sunken_oakhaven.png"
+    ],
+    "subject_line": "THALASSA — REALM OF THE VOID",
+    "background_asset": "cities/aqua/aqua_city_01_sunken_oakhaven.png",
+    "background_title": "Sunken Oakhaven",
+    "use_brand_reference": false,
+    "size": 1080,
+    "rendered_at": "2026-07-05T11:59:41.518Z",
+    "render_mode_used": "gemini"
+  },
+  "validation": {
+    "ok": true,
+    "issues": [],
+    "validated_at": "2026-07-05T11:59:13.113Z"
+  },
+  "approved_at": "2026-07-05T11:59:13.113Z",
+  "model": "gemini-3.1-flash-lite",
+  "campaign": {
+    "kind": "domain",
+    "angle": "lore",
+    "domain": "thalassa"
+  }
+}

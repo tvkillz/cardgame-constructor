@@ -1,0 +1,37 @@
+{
+  "id": "post16",
+  "status": "rendered",
+  "created_at": "2026-07-05T12:03:27.447Z",
+  "brief": "Market / Portal feature post for VOIDBORN — \"Grow Your Arsenal\". Stack depth across releases and seasonal drops. Every new pull widens the lines you can run when the meta tilts overnight. Explain growing your collection through packs, market buys, and seasonal drops to widen deck options. In-game credits economy (no real-money P2P). Instagram hype + link in bio; Facebook walkthrough; Discord steps + https://voidborn.fun.",
+  "template": "market-portal",
+  "subject": {
+    "card": null,
+    "domain": null
+  },
+  "image": {
+    "mode": "gemini",
+    "prompt": "1:1 square ratio, cinematic dark fantasy art, a glowing swirling magical portal floating in a ruined stone temple, floating ethereal crystalline cards surrounding the portal, ominous purple cosmic energy leaking from the edges, high contrast, moody lighting.",
+    "reference_assets": [
+      "cta1/expand-collection.webp"
+    ],
+    "subject_line": "GROW YOUR ARSENAL",
+    "background_asset": "cta1/expand-collection.webp",
+    "background_title": null,
+    "use_brand_reference": false,
+    "size": 1080,
+    "rendered_at": "2026-07-05T12:03:38.327Z",
+    "render_mode_used": "gemini"
+  },
+  "validation": {
+    "ok": true,
+    "issues": [],
+    "validated_at": "2026-07-05T12:03:27.447Z"
+  },
+  "approved_at": "2026-07-05T12:03:27.447Z",
+  "model": "gemini-3.1-flash-lite",
+  "campaign": {
+    "kind": "market",
+    "angle": "expand_collection",
+    "domain": null
+  }
+}

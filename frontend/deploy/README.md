@@ -6,13 +6,15 @@ nginx runs as a **systemd service** (`systemctl enable nginx`). This folder gene
 
 ```
 Browser → https://staging.voidborn.fun  ─nginx:443─→ pm2 voidborn-prod  :3100  (VPS)
-Browser → https://voidborn.fun          ─nginx:443─→ pm2 voidborn-prod  :3100  (VPS, production)
+Browser → https://voidborn.fun          ─nginx:443─→ pm2 voidborn-prod  :3100  (VPS)
 
 Browser → https://staging.sportsydeals.com     ─nginx─→ pm2 project2-prod :3101
 Browser → https://test.sportsydeals.com         ─nginx─→ pm2 project2-prod :3101
 
 Browser → https://api.your-platform.com  (Supabase/Kong on backend VPS)
 ```
+
+Both `staging.voidborn.fun` and `voidborn.fun` hit the **same pm2 app** (`voidborn-prod` on port 3100). nginx differs only in basic auth: staging vhost has it, production vhost does not.
 
 Per-site routing is defined in `projects/registry.json`:
 
@@ -21,46 +23,157 @@ Per-site routing is defined in `projects/registry.json`:
 | `stagingDomain` | VPS nginx staging vhost (`staging.{domain}`) |
 | `vpsProd` | When true, production domain is served from this VPS via pm2 |
 
-`deploy-from-local.sh` builds with `DEPLOY_TARGET=staging` so auth redirects use the staging URL.
-
-**This project does not use cPanel for frontend deploy.** Legacy `deploy/cpanel*` scripts in this folder are historical; production is pm2 on the VPS. The repo is often rclone-mounted locally via `mount-voidborn.sh` for editing only.
-
 Frontend nginx only proxies to local pm2 ports. **CORS is configured on the backend**, not here. After `generate-nginx.mjs`, see `deploy/output/cors-origins.txt` for the origin list to allow.
+
+The repo is often rclone-mounted locally via `mount-voidborn.sh` for editing only — builds and pm2 run on the **frontend VPS**.
+
+---
+
+## Regular deploy (voidborn)
+
+Use this after you've tested on the VPS and DNS for both domains points at the frontend VPS.
+
+### Option A — from your local machine (recommended)
+
+Requires `frontend/deploy/deploy.local.env` (copy from `deploy.local.env.example`).
+
+```bash
+cd frontend
+bash deploy/scripts/deploy-from-local.sh --site voidborn
+```
+
+This script:
+
+1. Builds locally with `DEPLOY_TARGET=staging` (auth redirects use `https://staging.voidborn.fun`)
+2. rsyncs `.build/voidborn/` + runtime files to the VPS
+3. Runs `npm ci --omit=dev` on the VPS
+4. Restarts `voidborn-prod` and smoke-tests port 3100
+
+**Faster landing-only deploy** (skips Vite play bundle):
+
+```bash
+bash deploy/scripts/deploy-from-local.sh --site voidborn --skip-game
+```
+
+**Push an existing build** (no local rebuild):
+
+```bash
+bash deploy/scripts/deploy-from-local.sh --site voidborn --skip-build
+```
+
+**Dry run** (see what would sync):
+
+```bash
+bash deploy/scripts/deploy-from-local.sh --site voidborn --dry-run
+```
+
+Stop local `npm run dev` before deploying — dev artifacts in `.build/voidborn/.next` cause the script to fail.
+
+### Option B — build directly on the frontend VPS
+
+On the **frontend VPS**, from `/root/constructor-files/frontend`:
+
+```bash
+cd /root/constructor-files/frontend
+
+npm run compile:all          # if projects/ content changed
+PROJECT=voidborn npm run build
+pm2 restart voidborn-prod --update-env
+pm2 save
+```
+
+Verify:
+
+```bash
+pm2 list
+curl -s -o /dev/null -w '%{http_code}\n' http://127.0.0.1:3100/
+```
+
+### After deploy — check in browser
+
+- `https://staging.voidborn.fun` — basic auth (`dev` / `dev` by default), then site loads
+- `https://voidborn.fun` — no basic auth, same app
+
+### Backend auth redirects (when adding/changing domains)
+
+Not needed on every deploy — only when site URLs change:
+
+```bash
+cd frontend && npm run site:sync
+```
+
+Paste suggested `ADDITIONAL_REDIRECT_URLS` into `backend/.env` on the **API VPS**, then:
+
+```bash
+cd ~/constructor-files/backend
+docker compose up -d auth --force-recreate
+```
+
+---
+
+## Environment
+
+Copy once on the frontend VPS:
+
+```bash
+cp deploy/env.production.example .env.production
+```
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=https://api.voidborn.fun
+```
+
+API URL is the backend host — **not** `voidborn.fun`. Per-site public URL stays in `projects/voidborn/manifest.json` `siteUrl`.
+
+`deploy-from-local.sh` does not overwrite `.env.production` unless `SYNC_ENV=1` in `deploy.local.env`.
+
+---
+
+## Card catalog (not deployed with frontend)
+
+`deploy-from-local.sh` does **not** sync card catalog assets:
+
+- `assets/cards/`
+- `data/card-thumbs/`, `data/card-full/`
+- `data/cards-catalog.json`, `data/landing-cards.json`
+
+Portal and play load card art from **Supabase Storage** via the API. Seed/upload cards separately on the backend host (`npm run seed:cards:upload`, `compile:upload`, etc.).
+
+Run `npm run compile:upload` before deploy if the homepage needs storage URLs baked into the bundle.
+
+---
 
 ## Fresh VPS setup
 
 ```bash
-# 1. Clone repo, install deps, build sites
 cd frontend
 npm install
 npm run compile:all
 cp deploy/env.production.example .env.production
-# edit .env.production — NEXT_PUBLIC_SUPABASE_URL must be the API host (e.g. https://api.voidborn.fun), not voidborn.fun
 
 PROJECT=voidborn npm run build
 PROJECT=project2 npm run build
 
-# 2. pm2 prod apps (bind localhost only — nginx is public)
 pm2 start ecosystem.config.cjs --only voidborn-prod,project2-prod
 pm2 save && pm2 startup
 
-# 3. nginx + HTTP (as root)
 sudo bash deploy/scripts/setup-vps.sh install
 sudo bash deploy/scripts/setup-vps.sh configure
 
-# 4. DNS: A record each site domain → VPS IP
-
-# 5. TLS (manual — certbot edits nginx; do not run generate-nginx --install after without re-running certbot)
-sudo certbot --nginx --expand -m you@example.com \\
-  -d staging.voidborn.fun \\
+# DNS: A record each site domain → VPS IP, then TLS:
+sudo certbot --nginx --expand -m you@example.com \
+  -d staging.voidborn.fun \
+  -d voidborn.fun \
   -d test.sportsydeals.com
 ```
 
 **Important:** `generate-nginx.mjs` writes **HTTP-only** vhosts. After `certbot --nginx`, do not run `setup-vps.sh reload` or `generate-nginx.mjs --install` unless you plan to run certbot again — it overwrites certbot's SSL blocks.
 
+---
+
 ## Regenerate after adding a site
 
-1. `npm run site:add -- --id=newsite --url=https://newsite.example.com` (or edit `registry.json` + manifest manually)
+1. `npm run site:add -- --id=newsite --url=https://newsite.example.com`
 2. `npm run compile:all` + `PROJECT=newsite npm run build`
 3. `pm2 start ecosystem.config.cjs --only newsite-prod`
 4. `sudo bash deploy/scripts/setup-vps.sh reload` then re-run `certbot --nginx` for the new domain
@@ -76,31 +189,3 @@ node deploy/scripts/generate-nginx.mjs --cors-origins # only cors-origins.txt
 ```
 
 Port formula: prod `3100 + registry index` (override with `PM2_PROD_PORT_BASE`).
-
-Optional registry override:
-
-```json
-{ "id": "voidborn", "domain": "voidborn.fun", "path": "./voidborn" }
-```
-
-## Backend URL
-
-All sites share one API URL in `.env.production` (voidborn uses `api.voidborn.fun`; project2 may still use `sportsydeals.com` until migrated):
-
-```env
-NEXT_PUBLIC_SUPABASE_URL=https://api.voidborn.fun
-```
-
-Per-site public URL stays in each content pack's `manifest.json` `siteUrl`. Site identity for auth/API is compiled as `siteId` in the bundle.
-
-## Card catalog (not deployed)
-
-`deploy-from-local.sh` does **not** sync card catalog assets to the frontend VPS:
-
-- `assets/cards/`
-- `data/card-thumbs/`, `data/card-full/`
-- `data/cards-catalog.json`, `data/landing-cards.json`
-
-Portal and play load card art from **Supabase Storage** via the API (`cards` table). Seed/upload cards separately (`npm run seed:cards:upload`, `compile:upload`, etc.) on the backend host.
-
-Landing showcase cards in the JS bundle may still reference `/data/card-*` paths from a local compile; run `npm run compile:upload` before deploy if the homepage needs storage URLs baked in.

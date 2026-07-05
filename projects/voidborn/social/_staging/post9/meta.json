@@ -1,0 +1,38 @@
+{
+  "id": "post9",
+  "status": "rendered",
+  "created_at": "2026-07-05T11:59:45.349Z",
+  "brief": "Domain spotlight (playstyle / strategy) for the Thalassa realm in VOIDBORN. Explain how Thalassa decks win: unit roles (sirens, drowned undead, freeze magic, abyssal predators, coral revenants), curve tips, synergies, and when to pick this realm for ranked. Visual identity: deep underwater gothic, abyssal bioluminescence, coral ruins, drowned undead, teal and navy. Practical TCG advice without inventing fake card names — speak in archetypes (tanks, burn, flying, etc.). Instagram hooks players who main Thalassa; Facebook longer strategy discussion; Discord bullet tips + [Play VOIDBORN](https://voidborn.fun).",
+  "template": "domain-spotlight",
+  "subject": {
+    "card": null,
+    "domain": "thalassa"
+  },
+  "image": {
+    "mode": "gemini",
+    "prompt": "1:1 square aspect ratio, cinematic dark fantasy underwater scene, deep navy and teal color palette, glowing bioluminescent coral reefs, a skeletal revenant emerging from the dark abyss, gothic ruins covered in sea moss, ethereal atmosphere, high contrast lighting.",
+    "reference_assets": [
+      "domains/aqua_domain.png",
+      "cities/aqua/aqua_city_02_abyssal_citadel.png"
+    ],
+    "subject_line": "THALASSA — DECK IDENTITY",
+    "background_asset": "cities/aqua/aqua_city_02_abyssal_citadel.png",
+    "background_title": "The Abyssal Citadel",
+    "use_brand_reference": false,
+    "size": 1080,
+    "rendered_at": "2026-07-05T12:00:10.392Z",
+    "render_mode_used": "gemini"
+  },
+  "validation": {
+    "ok": true,
+    "issues": [],
+    "validated_at": "2026-07-05T11:59:45.350Z"
+  },
+  "approved_at": "2026-07-05T11:59:45.350Z",
+  "model": "gemini-3.1-flash-lite",
+  "campaign": {
+    "kind": "domain",
+    "angle": "playstyle",
+    "domain": "thalassa"
+  }
+}

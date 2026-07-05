@@ -1,0 +1,38 @@
+{
+  "id": "post28",
+  "status": "rendered",
+  "created_at": "2026-07-05T12:05:55.076Z",
+  "brief": "Spotlight Ash Reborn Zealot — Undead / Warrior from the Infernus realm. Highlight ability: Ever-Burning Spirit.",
+  "template": "card-spotlight",
+  "subject": {
+    "card": "infernus_card_26_ash_reborn_zealot",
+    "domain": "infernus"
+  },
+  "image": {
+    "mode": "composite",
+    "prompt": "Cinematic dark fantasy illustration of a charred, undead warrior knight wreathed in ethereal flickering orange and black flames, standing amidst a volcanic landscape of obsidian rock and glowing embers, 1:1 aspect ratio, high detail, moody lighting, epic scale.",
+    "reference_assets": [
+      "cards/infernus/infernus_card_26_ash_reborn_zealot.png"
+    ],
+    "subject_line": "Ash Reborn Zealot",
+    "background_asset": "cities/ignis/ignis_city_03_iron_foundry.png",
+    "background_title": "The Iron Foundry",
+    "use_brand_reference": false,
+    "size": 1080,
+    "rendered_at": "2026-07-05T12:05:56.208Z",
+    "render_mode_used": "composite"
+  },
+  "validation": {
+    "ok": true,
+    "issues": [],
+    "validated_at": "2026-07-05T12:05:55.076Z"
+  },
+  "approved_at": "2026-07-05T12:05:55.076Z",
+  "model": "gemini-3.1-flash-lite",
+  "campaign": {
+    "kind": "card",
+    "angle": null,
+    "domain": "infernus",
+    "card": "infernus_card_26_ash_reborn_zealot"
+  }
+}

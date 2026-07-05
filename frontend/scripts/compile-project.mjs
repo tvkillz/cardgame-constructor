@@ -1018,10 +1018,10 @@ async function compileCards({
     (a) => a.kind === 'card' && a.stats && a.ability,
   )
   const skipLocalCardArt = process.env.SKIP_LOCAL_CARD_ART === '1'
-  /** cPanel / slim deploy: only hero + collection cards in the bundle; full catalog stays in Supabase. */
+  /** Slim deploy: only hero + collection cards in the bundle; full catalog stays in Supabase. */
   const frontendShowcaseOnly =
     !shouldUpload &&
-    (process.env.CPANEL_BUILD === '1' || process.env.FRONTEND_SHOWCASE_ONLY === '1')
+    process.env.FRONTEND_SHOWCASE_ONLY === '1'
   const cardAssets = frontendShowcaseOnly
     ? allCardAssets.filter((a) => showcaseSlugs.has(a.slug))
     : allCardAssets

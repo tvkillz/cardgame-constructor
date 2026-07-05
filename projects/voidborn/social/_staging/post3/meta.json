@@ -1,0 +1,37 @@
+{
+  "id": "post3",
+  "status": "rendered",
+  "created_at": "2026-07-05T11:57:00.283Z",
+  "brief": "Welcome post for VOIDBORN dark fantasy online TCG. Hook headline: \"Born of the Void\". Realm atmosphere: The Cloud Sanctuary (anemos). Introduce four elemental realms, deck building, tactical battles, ranked play. Free to start at https://voidborn.fun. Instagram punchy + hashtags; Facebook longer story; Discord markdown feature list + play link.",
+  "template": "welcome",
+  "subject": {
+    "card": null,
+    "domain": "kronos"
+  },
+  "image": {
+    "mode": "gemini",
+    "prompt": "Cinematic 1:1 shot of a massive, ancient stone golem standing in a ruined, moss-covered granite courtyard, mountain fortress architecture, crumbling stone pillars, floating golden amber light particles, dark fantasy atmosphere, misty background with shadowy void corruption, highly detailed, photorealistic, 8k resolution.",
+    "reference_assets": [
+      "cities/terra/terra_city_03_weeping_grove.png"
+    ],
+    "subject_line": "BORN OF THE VOID",
+    "background_asset": "cities/terra/terra_city_03_weeping_grove.png",
+    "background_title": "The Weeping Grove",
+    "use_brand_reference": false,
+    "size": 1080,
+    "rendered_at": "2026-07-05T11:57:23.560Z",
+    "render_mode_used": "gemini"
+  },
+  "validation": {
+    "ok": true,
+    "issues": [],
+    "validated_at": "2026-07-05T11:57:00.283Z"
+  },
+  "approved_at": "2026-07-05T11:57:00.283Z",
+  "model": "gemini-3.1-flash-lite",
+  "campaign": {
+    "kind": "welcome",
+    "angle": null,
+    "domain": null
+  }
+}

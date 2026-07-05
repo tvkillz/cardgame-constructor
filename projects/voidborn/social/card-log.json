@@ -1,0 +1,14 @@
+{
+  "approved": [
+    {
+      "slug": "kronos_card_04_petrified_colossus",
+      "title": "Petrified Colossus",
+      "domain": "kronos",
+      "staging_id": "post2",
+      "published_id": null,
+      "background_asset": "cities/terra/terra_city_03_weeping_grove.png",
+      "approved_at": "2026-07-05T11:11:29.633Z",
+      "published_at": null
+    }
+  ]
+}

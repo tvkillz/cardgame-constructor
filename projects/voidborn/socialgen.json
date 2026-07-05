@@ -1,0 +1,43 @@
+{
+  "brandVoice": "Epic, cinematic, confident. Dark fantasy TCG tone. Short punchy hooks; lore depth on Facebook. Emojis on Instagram; minimal on Facebook.",
+  "audience": "TCG players, fantasy fans, deck builders, collectors",
+  "siteUrl": "https://voidborn.fun",
+  "platforms": {
+    "instagram": {
+      "minHashtags": 8,
+      "maxHashtags": 15,
+      "defaultHashtags": [
+        "#VOIDBORN",
+        "#TCG",
+        "#TradingCardGame",
+        "#FantasyArt",
+        "#CardGame",
+        "#IndieGame",
+        "#DeckBuilding",
+        "#DigitalCards"
+      ],
+      "linkInBioTemplate": "🔗 Link in bio → {siteUrl}"
+    },
+    "facebook": {
+      "minBodyLength": 200
+    },
+    "discord": {
+      "allowMentionEveryone": false
+    }
+  },
+  "image": {
+    "defaultMode": "auto",
+    "size": 1080,
+    "promptSuffix": "Square 1:1 social promo art for a dark fantasy TCG, cinematic lighting, high contrast, no text, no watermark, atmospheric depth, leave corner space for logo overlay.",
+    "composite": {
+      "logoAsset": "brand/gamelogo.png",
+      "logoScale": 0.18,
+      "cardLogoScale": 0.16,
+      "cardLogoLeft": 24,
+      "cardLogoTop": 24,
+      "cityOverlay": 0.55,
+      "cardFrameGlow": 0.35,
+      "vignetteStrength": 0.45
+    }
+  }
+}

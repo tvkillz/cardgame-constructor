@@ -1,0 +1,38 @@
+{
+  "id": "post21",
+  "status": "rendered",
+  "created_at": "2026-07-05T12:04:36.534Z",
+  "brief": "Spotlight Trench Terror — Siege / Heavy Monster from the Thalassa realm. Highlight ability: Crushing Maw.",
+  "template": "card-spotlight",
+  "subject": {
+    "card": "thalassa_card_12_trench_terror",
+    "domain": "thalassa"
+  },
+  "image": {
+    "mode": "composite",
+    "prompt": "Cinematic 1:1 close up of a terrifying abyssal sea monster with glowing bioluminescent eyes and rows of needle-like teeth, dark underwater environment with bubbles and murky depths, high detail dark fantasy art style.",
+    "reference_assets": [
+      "cards/thalassa/thalassa_card_12_trench_terror.png"
+    ],
+    "subject_line": "Trench Terror",
+    "background_asset": "cities/aqua/aqua_city_03_sirens_hollow.png",
+    "background_title": "Siren's Hollow",
+    "use_brand_reference": false,
+    "size": 1080,
+    "rendered_at": "2026-07-05T12:04:37.660Z",
+    "render_mode_used": "composite"
+  },
+  "validation": {
+    "ok": true,
+    "issues": [],
+    "validated_at": "2026-07-05T12:04:36.534Z"
+  },
+  "approved_at": "2026-07-05T12:04:36.534Z",
+  "model": "gemini-3.1-flash-lite",
+  "campaign": {
+    "kind": "card",
+    "angle": null,
+    "domain": "thalassa",
+    "card": "thalassa_card_12_trench_terror"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "id": "post7",
+  "status": "rendered",
+  "created_at": "2026-07-05T11:58:43.989Z",
+  "brief": "Domain spotlight (playstyle / strategy) for the Kronos realm in VOIDBORN. Explain how Kronos decks win: unit roles (tanks, siege units, stone golems, rootbound druids, mountain fortresses), curve tips, synergies, and when to pick this realm for ranked. Visual identity: ancient stone, granite, moss, earth magic, golden amber accents, titanic golems and druids. Practical TCG advice without inventing fake card names — speak in archetypes (tanks, burn, flying, etc.). Instagram hooks players who main Kronos; Facebook longer strategy discussion; Discord bullet tips + [Play VOIDBORN](https://voidborn.fun).",
+  "template": "domain-spotlight",
+  "subject": {
+    "card": null,
+    "domain": "kronos"
+  },
+  "image": {
+    "mode": "gemini",
+    "prompt": "An epic cinematic square shot of a towering ancient stone golem covered in moss and golden amber glowing cracks, standing in a mountain pass with ancient architecture, dramatic lighting, volumetric fog, high fantasy art style, 8k resolution.",
+    "reference_assets": [
+      "domains/terra_domain.png",
+      "cities/terra/terra_city_02_obsidian_deep.png"
+    ],
+    "subject_line": "KRONOS — DECK IDENTITY",
+    "background_asset": "cities/terra/terra_city_02_obsidian_deep.png",
+    "background_title": "Obsidian Deep",
+    "use_brand_reference": false,
+    "size": 1080,
+    "rendered_at": "2026-07-05T11:59:09.166Z",
+    "render_mode_used": "gemini"
+  },
+  "validation": {
+    "ok": true,
+    "issues": [],
+    "validated_at": "2026-07-05T11:58:43.989Z"
+  },
+  "approved_at": "2026-07-05T11:58:43.989Z",
+  "model": "gemini-3.1-flash-lite",
+  "campaign": {
+    "kind": "domain",
+    "angle": "playstyle",
+    "domain": "kronos"
+  }
+}

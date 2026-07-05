@@ -1,0 +1,38 @@
+{
+  "id": "post30",
+  "status": "rendered",
+  "created_at": "2026-07-05T12:06:16.169Z",
+  "brief": "Spotlight Storm Weaver Patriarch — Mage / Control from the Anemos realm. Highlight ability: Weave Storms.",
+  "template": "card-spotlight",
+  "subject": {
+    "card": "anemos_card_38_storm_weaver_patriarch",
+    "domain": "anemos"
+  },
+  "image": {
+    "mode": "composite",
+    "prompt": "Cinematic square portrait of an elderly Storm Weaver Patriarch mage standing on a jagged mountain peak, glowing blue arcane energy swirling around his staff, storm clouds gathering, dramatic lightning strikes in the distance, dark fantasy art style, hyper-detailed textures.",
+    "reference_assets": [
+      "cards/anemos/anemos_card_38_storm_weaver_patriarch.png"
+    ],
+    "subject_line": "STORM WEAVER PATRIARCH",
+    "background_asset": "cities/zephyr/zephyr_city_03_cloud_sanctuary.png",
+    "background_title": "The Cloud Sanctuary",
+    "use_brand_reference": false,
+    "size": 1080,
+    "rendered_at": "2026-07-05T12:06:17.292Z",
+    "render_mode_used": "composite"
+  },
+  "validation": {
+    "ok": true,
+    "issues": [],
+    "validated_at": "2026-07-05T12:06:16.169Z"
+  },
+  "approved_at": "2026-07-05T12:06:16.169Z",
+  "model": "gemini-3.1-flash-lite",
+  "campaign": {
+    "kind": "card",
+    "angle": null,
+    "domain": "anemos",
+    "card": "anemos_card_38_storm_weaver_patriarch"
+  }
+}

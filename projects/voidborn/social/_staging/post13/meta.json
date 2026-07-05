@@ -1,0 +1,38 @@
+{
+  "id": "post13",
+  "status": "rendered",
+  "created_at": "2026-07-05T12:02:20.164Z",
+  "brief": "Domain spotlight (playstyle / strategy) for the Anemos realm in VOIDBORN. Explain how Anemos decks win: unit roles (flying units, storm magic, harpies, whispering spirits, hurricane weavers), curve tips, synergies, and when to pick this realm for ranked. Visual identity: storm-wracked sky, wind spirits, ethereal purple lightning, harpies and cloud sanctuaries. Practical TCG advice without inventing fake card names — speak in archetypes (tanks, burn, flying, etc.). Instagram hooks players who main Anemos; Facebook longer strategy discussion; Discord bullet tips + [Play VOIDBORN](https://voidborn.fun).",
+  "template": "domain-spotlight",
+  "subject": {
+    "card": null,
+    "domain": "anemos"
+  },
+  "image": {
+    "mode": "gemini",
+    "prompt": "Cinematic square 1:1 shot of a crumbling floating citadel amidst a violent purple thunderstorm, ethereal lightning striking stone towers, harpy silhouettes soaring through turbulent wind currents, hyper-detailed dark fantasy art style.",
+    "reference_assets": [
+      "domains/zephyr_domain.png",
+      "cities/zephyr/zephyr_city_02_zephyrs_end.png"
+    ],
+    "subject_line": "ANEMOS — DECK IDENTITY",
+    "background_asset": "cities/zephyr/zephyr_city_02_zephyrs_end.png",
+    "background_title": "Zephyr's End",
+    "use_brand_reference": false,
+    "size": 1080,
+    "rendered_at": "2026-07-05T12:02:52.648Z",
+    "render_mode_used": "gemini"
+  },
+  "validation": {
+    "ok": true,
+    "issues": [],
+    "validated_at": "2026-07-05T12:02:20.164Z"
+  },
+  "approved_at": "2026-07-05T12:02:20.164Z",
+  "model": "gemini-3.1-flash-lite",
+  "campaign": {
+    "kind": "domain",
+    "angle": "playstyle",
+    "domain": "anemos"
+  }
+}

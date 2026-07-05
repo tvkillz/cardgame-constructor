@@ -1,0 +1,37 @@
+{
+  "id": "post15",
+  "status": "rendered",
+  "created_at": "2026-07-05T12:03:13.154Z",
+  "brief": "Market / Portal feature post for VOIDBORN — \"Cash the Excess\". Duplicates and dead slots still have value. List them, fund the next upgrade, and keep your binder lean for the decks you actually play. Explain: open Collection → pick a card → create listing at min price (based on market value), earn credits when another player buys, cancel anytime. In-game credits economy (no real-money P2P). Instagram hype + link in bio; Facebook walkthrough; Discord steps + https://voidborn.fun.",
+  "template": "market-portal",
+  "subject": {
+    "card": null,
+    "domain": null
+  },
+  "image": {
+    "mode": "gemini",
+    "prompt": "A close-up shot of a glowing ethereal marketplace portal made of shifting light and floating runes, surrounded by hovering holographic elemental card icons in a dark, atmospheric, cinematic fantasy setting.",
+    "reference_assets": [
+      "cta1/sell-cards.webp"
+    ],
+    "subject_line": "CASH THE EXCESS",
+    "background_asset": "cta1/sell-cards.webp",
+    "background_title": null,
+    "use_brand_reference": false,
+    "size": 1080,
+    "rendered_at": "2026-07-05T12:03:23.583Z",
+    "render_mode_used": "gemini"
+  },
+  "validation": {
+    "ok": true,
+    "issues": [],
+    "validated_at": "2026-07-05T12:03:13.154Z"
+  },
+  "approved_at": "2026-07-05T12:03:13.154Z",
+  "model": "gemini-3.1-flash-lite",
+  "campaign": {
+    "kind": "market",
+    "angle": "sell",
+    "domain": null
+  }
+}
