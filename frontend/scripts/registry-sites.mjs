@@ -39,16 +39,12 @@ export function vpsHostsProduction(site) {
 }
 
 /**
- * siteUrl baked into project-bundle.json.
- * Staging VPS deploy: DEPLOY_TARGET=staging → https://{stagingDomain}
+ * siteUrl baked into project-bundle.json (sitemap, robots, metadata, auth redirects).
+ * Override only via COMPILE_SITE_URL when you need a non-manifest hostname.
  */
-export function resolveCompileSiteUrl(manifest, site = registrySite(manifest.id)) {
+export function resolveCompileSiteUrl(manifest, _site = registrySite(manifest.id)) {
   if (process.env.COMPILE_SITE_URL) {
     return process.env.COMPILE_SITE_URL.replace(/\/$/, '')
-  }
-  if (process.env.DEPLOY_TARGET === 'staging') {
-    const staging = stagingDomainForSite(site)
-    if (staging) return `https://${staging}`
   }
   return manifest.siteUrl
 }

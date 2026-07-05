@@ -15,11 +15,10 @@ export function buildSiteMetadata(config: AppConfig): Metadata {
     icons: {
       icon: [
         { url: '/icon', type: 'image/png', sizes: '32x32' },
+        { url: '/favicon.ico', sizes: 'any' },
         ...(logo.faviconSvg
           ? [{ url: logo.faviconSvg, type: 'image/svg+xml' }]
           : []),
-        { url: logo.favicon, sizes: '32x32', type: 'image/png' },
-        { url: '/favicon.ico', sizes: 'any' },
       ],
       apple: [{ url: '/apple-icon', sizes: '180x180', type: 'image/png' }],
     },

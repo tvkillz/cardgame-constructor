@@ -47,7 +47,7 @@ export default function AuthCallbackClient() {
     const showSignedIn = () => {
       if (recoveryModeRef.current) return
       setView('success')
-      router.replace('/')
+      router.replace(appConfig.domain.routes.portalMarket)
     }
 
     const { data: listener } = supabase.auth.onAuthStateChange((event, session) => {
@@ -143,7 +143,7 @@ export default function AuthCallbackClient() {
       }
       recoveryModeRef.current = false
       setView('success')
-      router.replace('/')
+      router.replace(appConfig.domain.routes.portalMarket)
     } finally {
       setSubmitting(false)
     }

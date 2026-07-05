@@ -94,7 +94,7 @@ export default function PlayPage() {
 
     if (!user?.id) {
       setTutorialError('Sign in to start the tutorial.')
-      openAuthModal('signIn')
+      openAuthModal('signIn', appConfig.domain.routes.play)
       return
     }
 
@@ -158,7 +158,7 @@ export default function PlayPage() {
 
     if (!user?.id) {
       setEnterBattleError('Sign in to enter battle.')
-      openAuthModal('signIn')
+      openAuthModal('signIn', appConfig.domain.routes.play)
       return
     }
 

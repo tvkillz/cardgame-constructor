@@ -38,14 +38,14 @@ export default function AuthGate({ children }: AuthGateProps) {
             variant="primary"
             size="lg"
             fantasy
-            onClick={() => openAuthModal('signIn')}
+            onClick={() => openAuthModal('signIn', appConfig.domain.routes.play)}
           >
             {copy.playGateCta}
           </Button>
           <button
             type="button"
             className="auth-gate__register"
-            onClick={() => openAuthModal('register')}
+            onClick={() => openAuthModal('register', appConfig.domain.routes.play)}
           >
             {appConfig.descriptions.auth.switchToRegister}
           </button>

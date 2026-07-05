@@ -82,8 +82,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         }
         if (nextSession) {
           setModalOpen(false)
-          const target = pendingPathRef.current
-          if (target) {
+          if (event === 'SIGNED_IN') {
+            const target = pendingPathRef.current ?? appConfig.domain.routes.portalMarket
             pendingPathRef.current = null
             router.push(target)
           }
@@ -109,8 +109,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [router])
 
   const openAuthModal = useCallback((mode: AuthModalMode = 'signIn', redirectPath?: string) => {
-    if (redirectPath) {
+    if (redirectPath !== undefined) {
       pendingPathRef.current = redirectPath
+    } else if (pendingPathRef.current === null) {
+      pendingPathRef.current = appConfig.domain.routes.portalMarket
     }
     setModalMode(mode)
     setModalOpen(true)
@@ -118,6 +120,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const closeAuthModal = useCallback(() => {
     setModalOpen(false)
+    pendingPathRef.current = null
   }, [])
 
   const signOut = useCallback(async () => {

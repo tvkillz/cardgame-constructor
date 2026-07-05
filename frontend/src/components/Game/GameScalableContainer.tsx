@@ -61,7 +61,7 @@ export default function GameScalableContainer({ children }: GameScalableContaine
         <div className="game-scalable-orientation-overlay" role="status" aria-live="polite">
           <div className="game-scalable-orientation-card">
             <h2>Landscape Recommended</h2>
-            <p>Поверни устройство в горизонтальный режим для комфортной игры.</p>
+            <p>Rotate your device to landscape for the best play experience.</p>
           </div>
         </div>
       )}

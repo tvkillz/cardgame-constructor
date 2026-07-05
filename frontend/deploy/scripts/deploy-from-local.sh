@@ -98,10 +98,9 @@ done < <(read_registry)
 [[ ${#SITES[@]} -gt 0 ]] || { echo "No sites matched." >&2; exit 1; }
 log "Sites: ${SITES[*]}"
 
-# --- Build locally (staging siteUrl baked into bundle) ---
+# --- Build locally (manifest siteUrl → sitemap, robots, auth redirects) ---
 if [[ "$SKIP_BUILD" != "1" ]]; then
-  log "Building locally (DEPLOY_TARGET=staging)…"
-  export DEPLOY_TARGET=staging
+  log "Building locally…"
   export FRONTEND_SHOWCASE_ONLY=1
   cd "$FRONTEND_DIR"
   for site in "${SITES[@]}"; do

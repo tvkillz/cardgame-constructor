@@ -228,7 +228,21 @@ async function buildBrandSeoAssets({ sharp, paths, manifest, seoJson, out }) {
   }
 
   const rasterSource = faviconPath ?? logoPath
-  if (faviconPath && faviconRel?.endsWith('.svg')) {
+  /** Sharp cannot decode .ico — use logo for PNG / apple-touch derivatives. */
+  const pngSource = faviconRel?.endsWith('.ico') ? logoPath : rasterSource
+
+  if (faviconPath && faviconRel?.endsWith('.ico')) {
+    await copyFile(faviconPath, out.faviconIco)
+    console.log('Brand: favicon.ico copied from project assets')
+    if (sharp && pngSource) {
+      const png32 = await sharp(pngSource)
+        .resize(FAVICON_SIZE, FAVICON_SIZE, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } })
+        .png()
+        .toBuffer()
+      await writeFile(out.faviconPng, png32)
+      console.log('Brand: favicon.png generated from logo (companion to favicon.ico)')
+    }
+  } else if (faviconPath && faviconRel?.endsWith('.svg')) {
     await copyFile(faviconPath, out.faviconSvg)
     console.log('Brand: favicon.svg copied from project assets')
     if (sharp) {
@@ -253,9 +267,9 @@ async function buildBrandSeoAssets({ sharp, paths, manifest, seoJson, out }) {
     console.warn('Brand: skipped favicon raster (install sharp to generate from logo/favicon)')
   }
 
-  if (sharp && rasterSource) {
+  if (sharp && pngSource) {
     const appleInput =
-      faviconPath && faviconRel?.endsWith('.svg') ? await readFile(faviconPath) : rasterSource
+      faviconPath && faviconRel?.endsWith('.svg') ? await readFile(faviconPath) : pngSource
     await sharp(appleInput, faviconRel?.endsWith('.svg') ? { density: 192 } : undefined)
       .resize(APPLE_TOUCH_SIZE, APPLE_TOUCH_SIZE, {
         fit: 'contain',
@@ -930,7 +944,7 @@ function buildAppConfig({
     logo: {
       src: assetUrl(publicBase, toWebpRelativePath(manifest.brand.logo)),
       alt: manifest.brand.logoAlt ?? manifest.name.short,
-      favicon: '/favicon.png',
+      favicon: '/favicon.ico',
       ...(manifest.brand?.favicon?.endsWith('.svg')
         ? { faviconSvg: '/favicon.svg' }
         : {}),
