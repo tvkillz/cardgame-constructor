@@ -18,6 +18,7 @@ const PAGE_SIZE = 10
 
 type OrderRow = {
   id: string
+  order_number: string
   status: string
   total_cents: number
   currency: string
@@ -368,7 +369,9 @@ export default function TransactionHistory() {
                     <article className="portal-tx-row">
                       <div className="portal-tx-row__main">
                         <div className="portal-tx-row__head">
-                          <span className="portal-tx-row__type">Order</span>
+                          <span className="portal-tx-row__type">
+                            Order {order.order_number}
+                          </span>
                           <TxTags tags={tags} />
                         </div>
                         <p className="portal-tx-row__desc">

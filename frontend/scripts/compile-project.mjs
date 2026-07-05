@@ -149,6 +149,31 @@ function buildSeoConfig(seoJson, manifest, descriptions) {
   }
 }
 
+function buildSitemapConfig(sitemapJson, manifest) {
+  if (sitemapJson?.entries?.length) {
+    return {
+      entries: sitemapJson.entries.map(({ comment: _c, ...entry }) => entry),
+      robots: sitemapJson.robots
+        ? { disallow: sitemapJson.robots.disallow ?? [] }
+        : undefined,
+    }
+  }
+
+  const { routes, legal } = manifest
+  return {
+    entries: [
+      { path: routes.home, changeFrequency: 'weekly', priority: 1 },
+      { path: routes.play, changeFrequency: 'weekly', priority: 0.9 },
+      { path: legal.termsUrl, changeFrequency: 'yearly', priority: 0.3 },
+      { path: legal.privacyUrl, changeFrequency: 'yearly', priority: 0.3 },
+      { path: legal.refundPolicyUrl, changeFrequency: 'yearly', priority: 0.3 },
+    ],
+    robots: {
+      disallow: ['/portal/', '/checkout', '/auth/', '/profile', '/market'],
+    },
+  }
+}
+
 async function generateOgFromLogo(sharp, logoPath, destPath) {
   const logoBuf = await sharp(logoPath)
     .resize(480, 480, { fit: 'inside', withoutEnlargement: false })
@@ -173,6 +198,12 @@ async function buildBrandSeoAssets({ sharp, paths, manifest, seoJson, out }) {
     ? await resolveAssetFile(paths, logoRel)
     : null
 
+  const faviconRel = manifest.brand?.favicon
+  const faviconPath =
+    faviconRel && !faviconRel.startsWith('http') && !faviconRel.startsWith('/')
+      ? await resolveAssetFile(paths, faviconRel)
+      : null
+
   const customOgRel =
     seoJson.image &&
     !seoJson.image.startsWith('http') &&
@@ -196,26 +227,56 @@ async function buildBrandSeoAssets({ sharp, paths, manifest, seoJson, out }) {
     console.warn('Brand: skipped og-image (install sharp or add copy/seo.json image path)')
   }
 
-  if (sharp && logoPath) {
-    await sharp(logoPath)
-      .resize(FAVICON_SIZE, FAVICON_SIZE, { fit: 'cover' })
+  const rasterSource = faviconPath ?? logoPath
+  if (faviconPath && faviconRel?.endsWith('.svg')) {
+    await copyFile(faviconPath, out.faviconSvg)
+    console.log('Brand: favicon.svg copied from project assets')
+    if (sharp) {
+      const svgBuf = await readFile(faviconPath)
+      const png32 = await sharp(svgBuf, { density: 192 })
+        .resize(FAVICON_SIZE, FAVICON_SIZE, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } })
+        .png()
+        .toBuffer()
+      await writeFile(out.faviconPng, png32)
+      await writeFile(out.faviconIco, png32)
+      console.log('Brand: favicon.png + favicon.ico rasterized from favicon.svg')
+    }
+  } else if (sharp && rasterSource) {
+    const png32 = await sharp(rasterSource)
+      .resize(FAVICON_SIZE, FAVICON_SIZE, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } })
       .png()
-      .toFile(out.faviconPng)
-    await sharp(logoPath)
-      .resize(APPLE_TOUCH_SIZE, APPLE_TOUCH_SIZE, { fit: 'cover' })
-      .png()
-      .toFile(out.appleTouchIcon)
-    console.log('Brand: favicon + apple-touch-icon generated from logo')
-  } else if (logoPath) {
-    console.warn('Brand: skipped favicon (install sharp to generate from logo)')
+      .toBuffer()
+    await writeFile(out.faviconPng, png32)
+    await writeFile(out.faviconIco, png32)
+    console.log('Brand: favicon.png + favicon.ico generated from brand asset')
+  } else if (rasterSource) {
+    console.warn('Brand: skipped favicon raster (install sharp to generate from logo/favicon)')
   }
 
-  const faviconRel = manifest.brand?.favicon
-  if (faviconRel && !faviconRel.startsWith('http') && !faviconRel.startsWith('/')) {
-    const faviconPath = await resolveAssetFile(paths, faviconRel)
-    if (faviconPath) {
-      await copyFile(faviconPath, out.faviconSvg)
-      console.log('Brand: favicon.svg copied from project assets')
+  if (sharp && rasterSource) {
+    const appleInput =
+      faviconPath && faviconRel?.endsWith('.svg') ? await readFile(faviconPath) : rasterSource
+    await sharp(appleInput, faviconRel?.endsWith('.svg') ? { density: 192 } : undefined)
+      .resize(APPLE_TOUCH_SIZE, APPLE_TOUCH_SIZE, {
+        fit: 'contain',
+        background: { r: 10, g: 10, b: 12, alpha: 1 },
+      })
+      .png()
+      .toFile(out.appleTouchIcon)
+    console.log('Brand: apple-touch-icon generated')
+  }
+}
+
+/** Vite game dev server (port 5173) serves from game/public/ — sync compiled favicons. */
+async function syncGamePublicFavicons(out) {
+  const gamePublic = path.join(FRONTEND_ROOT, 'game', 'public')
+  await mkdir(gamePublic, { recursive: true })
+  for (const name of ['favicon.ico', 'favicon.png', 'favicon.svg']) {
+    const src = path.join(out.root, name)
+    try {
+      await copyFile(src, path.join(gamePublic, name))
+    } catch {
+      /* optional */
     }
   }
 }
@@ -786,6 +847,7 @@ function buildAppConfig({
   footerJson,
   legalJson,
   seoJson,
+  sitemapJson,
   portal,
   credits,
   auth,
@@ -892,6 +954,7 @@ function buildAppConfig({
         : {}),
     },
     seo: buildSeoConfig(seoJson, manifest, descriptions),
+    sitemap: buildSitemapConfig(sitemapJson, manifest),
     colors,
     arts: {
       introVideo: assetUrl(publicBase, manifest.brand.introVideo),
@@ -1276,7 +1339,6 @@ function validateProject(manifest, domainsJson, locationsJson, categories, porta
 
   const requiredPortalSections = [
     'market',
-    'vaults',
     'collection',
     'transactions',
     'profile',
@@ -1369,6 +1431,7 @@ async function main() {
   const footerJson = await readJsonOptional(paths.footer)
   const legalJson = await buildLegalCopy(paths.legal)
   const seoJson = await readJsonOptional(paths.seo)
+  const sitemapJson = await readJsonOptional(paths.sitemap)
   const portal = await readJson(paths.portal, 'portal/sections')
   const credits = await readJson(paths.credits, 'credits')
   const auth = await readJson(paths.auth, 'auth')
@@ -1395,6 +1458,7 @@ async function main() {
   await copyPathwaysAssets(paths, pathwaysJson, out, sharp)
   await copyFinalCtaAssets(paths, finalctaJson, out, sharp)
   await buildBrandSeoAssets({ sharp, paths, manifest: manifestForBundle, seoJson, out })
+  await syncGamePublicFavicons(out)
   if (metadata.source === 'split') {
     console.log('Metadata: split (game/cards.json + game/scenes.json + game/keywords.json)')
   } else {
@@ -1417,6 +1481,7 @@ async function main() {
     footerJson,
     legalJson,
     seoJson,
+    sitemapJson,
     portal,
     credits,
     auth,

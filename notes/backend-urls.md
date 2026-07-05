@@ -51,10 +51,19 @@ cd frontend && npm run site:sync
 
 Paste output into `ADDITIONAL_REDIRECT_URLS`, then recreate auth on the backend VPS.
 
-## Sendmail confirm links
+## Sendmail confirm links + relay
 
 ```env
 AUTH_VERIFY_BASE_URL=https://api.voidborn.fun
+GOTRUE_HOOK_SEND_EMAIL_URI=https://voidborn.fun/api/sendmail/hook
+SENDMAIL_URL=https://voidborn.fun/api/sendmail
 ```
 
-On staging sendmail VPS: `pm2 restart voidborn-sendmail --update-env`
+**sendmail** (frontend VPS `.env`):
+
+```env
+SITE_URL=https://voidborn.fun
+```
+
+On frontend VPS: `pm2 restart voidborn-sendmail --update-env`  
+On API VPS: `docker compose up -d auth functions --force-recreate`

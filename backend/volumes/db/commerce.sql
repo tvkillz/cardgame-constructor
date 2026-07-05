@@ -74,6 +74,7 @@ create table public.store_products (
 
 create table public.orders (
   id                         uuid primary key default gen_random_uuid(),
+  order_number               text not null unique,
   user_id                    uuid not null references auth.users (id) on delete cascade,
   status                     public.order_status not null default 'pending_payment',
   total_cents                integer not null default 0,

@@ -181,6 +181,17 @@ sudo certbot --nginx --expand -m you@example.com \
 
 See `projects/README.md` for site URL changes, metadata split, and per-site card uploads.
 
+## SEO — sitemap & robots
+
+Public URLs are defined in `projects/{id}/copy/sitemap.json`. Next.js serves `/sitemap.xml` and `/robots.txt` after compile + build.
+
+Full guide: [`frontend/docs/SITEMAP.md`](../docs/SITEMAP.md)
+
+```bash
+curl -s https://voidborn.fun/sitemap.xml | head
+curl -s https://voidborn.fun/robots.txt
+```
+
 ## Manual / preview
 
 ```bash

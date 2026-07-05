@@ -29,6 +29,7 @@ function normalizeInvoicePayload(body) {
     recipient,
     order: {
       id: String(order.id),
+      orderNumber: order.orderNumber ? String(order.orderNumber) : null,
       paidAt: order.paidAt || new Date().toISOString(),
       totalCents: Number(order.totalCents) || 0,
       currency: String(order.currency || 'eur').toLowerCase(),

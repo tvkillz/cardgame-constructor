@@ -188,7 +188,7 @@ cd sendmail && npm run dev
 # POST fixture to http://127.0.0.1:6001/invoice with MAIL_API_KEY
 ```
 
-Point commerce `SENDMAIL_URL` at staging relay during integration.
+Point commerce `SENDMAIL_URL` at `https://voidborn.fun/api/sendmail`.
 
 ---
 

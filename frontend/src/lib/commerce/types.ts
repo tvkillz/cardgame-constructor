@@ -123,6 +123,7 @@ export interface CommerceResponse {
   orders?: unknown[]
   checkoutUrl?: string
   orderId?: string
+  orderNumber?: string
   sessionId?: string
   credits?: number
   title?: string

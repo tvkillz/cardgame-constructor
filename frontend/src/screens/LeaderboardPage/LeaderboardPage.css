@@ -9,6 +9,7 @@
   width: min(100%, 920px);
   margin: 0 auto;
   padding: 6.5rem 1.25rem 3rem;
+  margin-top: 3rem;
 }
 
 .leaderboard-page__hero {

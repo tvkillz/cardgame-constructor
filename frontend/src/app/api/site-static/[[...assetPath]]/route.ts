@@ -9,6 +9,7 @@ export const runtime = 'nodejs'
 const MIME: Record<string, string> = {
   '.svg': 'image/svg+xml',
   '.png': 'image/png',
+  '.ico': 'image/x-icon',
   '.jpg': 'image/jpeg',
   '.jpeg': 'image/jpeg',
   '.webp': 'image/webp',
@@ -92,7 +93,7 @@ async function resolveFile(segments: string[], request?: NextRequest): Promise<s
 
   let filePath: string
   if (segments.length === 1 && segments[0] === '__favicon__') {
-    for (const name of ['favicon.png', 'favicon.ico', 'favicon.svg']) {
+    for (const name of ['favicon.ico', 'favicon.png', 'favicon.svg']) {
       const candidate = path.join(root, name)
       try {
         const info = await stat(candidate)

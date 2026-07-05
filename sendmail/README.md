@@ -54,12 +54,13 @@ npm run deploy:cpanel
 
 ## Wire GoTrue (registration / reset / magic link)
 
-On the **API VPS** `backend/.env` (staging relay today):
+On the **API VPS** `backend/.env`:
 
 ```env
 GOTRUE_HOOK_SEND_EMAIL_ENABLED=true
-GOTRUE_HOOK_SEND_EMAIL_URI=https://staging.voidborn.fun/api/sendmail/hook
+GOTRUE_HOOK_SEND_EMAIL_URI=https://voidborn.fun/api/sendmail/hook
 GOTRUE_HOOK_SEND_EMAIL_SECRETS=v1,whsec_<same as SEND_EMAIL_HOOK_SECRET>
+SENDMAIL_URL=https://voidborn.fun/api/sendmail
 ```
 
 `docker-compose.yml` passes these into the `auth` service. Then on the API VPS:
@@ -73,9 +74,10 @@ When the hook is enabled, GoTrue **does not** use `SMTP_*` for auth emails.
 
 See `backend/MAIL-SETUP.md` for the full test flow.
 
-Set on the relay (staging or cPanel):
+Set on the relay (frontend VPS pm2):
 
 ```env
+SITE_URL=https://voidborn.fun
 AUTH_VERIFY_BASE_URL=https://api.voidborn.fun
 ```
 

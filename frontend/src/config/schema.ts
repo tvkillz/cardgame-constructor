@@ -1,6 +1,29 @@
 /** Elemental realm category (domain grouping for locations / cards). */
 export type ElementCategory = 'earth' | 'water' | 'fire' | 'air'
 
+export type SitemapChangeFrequency =
+  | 'always'
+  | 'hourly'
+  | 'daily'
+  | 'weekly'
+  | 'monthly'
+  | 'yearly'
+  | 'never'
+
+export interface SitemapEntryConfig {
+  path: string
+  changeFrequency?: SitemapChangeFrequency
+  priority?: number
+  lastModified?: string
+}
+
+export interface SitemapConfig {
+  entries: SitemapEntryConfig[]
+  robots?: {
+    disallow?: string[]
+  }
+}
+
 export interface AppConfig {
   /** Registry / content pack id — scopes auth and backend data to this site. */
   siteId: string
@@ -66,6 +89,9 @@ export interface AppConfig {
     image: string
     imageAlt: string
   }
+
+  /** Sitemap + robots rules from projects/{id}/copy/sitemap.json. */
+  sitemap?: SitemapConfig
 
   /** Palette — drives CSS custom properties via applyTheme(). */
   colors: {

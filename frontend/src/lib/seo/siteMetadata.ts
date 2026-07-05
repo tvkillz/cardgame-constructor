@@ -14,13 +14,14 @@ export function buildSiteMetadata(config: AppConfig): Metadata {
     applicationName: seo.siteName,
     icons: {
       icon: [
+        { url: '/icon', type: 'image/png', sizes: '32x32' },
         ...(logo.faviconSvg
           ? [{ url: logo.faviconSvg, type: 'image/svg+xml' }]
           : []),
         { url: logo.favicon, sizes: '32x32', type: 'image/png' },
         { url: '/favicon.ico', sizes: 'any' },
       ],
-      apple: [{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
+      apple: [{ url: '/apple-icon', sizes: '180x180', type: 'image/png' }],
     },
     openGraph: {
       type: 'website',

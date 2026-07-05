@@ -8,7 +8,7 @@ const {
   buyerDisplayName,
   buyerAddressLines,
   lineTotalCents,
-  shortOrderId,
+  displayOrderRef,
 } = require('./invoiceFormat');
 
 /** PDF palette — portal header band + readable light body for print. */
@@ -62,7 +62,7 @@ function drawHeaderBand(doc, seller) {
 }
 
 function drawMetaRow(doc, order, paymentMethod) {
-  const ref = shortOrderId(order.id);
+  const ref = displayOrderRef(order);
   const leftX = 40;
   const rightX = 310;
   const y = doc.y;

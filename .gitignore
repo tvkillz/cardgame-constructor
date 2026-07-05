@@ -49,6 +49,9 @@ frontend/deploy/cpanel.local.env
 frontend/src/generated/
 frontend/public/assets/
 frontend/public/favicon.svg
+frontend/game/public/favicon.ico
+frontend/game/public/favicon.png
+frontend/game/public/favicon.svg
 frontend/public/data/
 frontend/public/play/
 frontend/public/_play_dist_backup/

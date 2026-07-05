@@ -1,6 +1,6 @@
 const { escapeHtml, renderPortalEmail, siteUrl, brandName } = require('./emailTemplate');
 const {
-  shortOrderId,
+  displayOrderRef,
   formatMoney,
   formatQuantity,
   formatInvoiceDate,
@@ -12,7 +12,7 @@ const {
 
 function buildInvoiceEmail(payload) {
   const { recipient, order, lineItems, buyer, seller, paymentMethod } = payload;
-  const ref = shortOrderId(order.id);
+  const ref = displayOrderRef(order);
   const name = buyerDisplayName(buyer);
   const addressLines = buyerAddressLines(buyer);
   const paidAt = formatInvoiceDate(order.paidAt);

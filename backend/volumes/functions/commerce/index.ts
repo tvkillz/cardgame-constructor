@@ -10,6 +10,25 @@ const SITE_URL = (Deno.env.get('SITE_URL') ?? Deno.env.get('PUBLIC_SITE_URL') ??
 const SENDMAIL_URL = (Deno.env.get('SENDMAIL_URL') ?? '').replace(/\/$/, '')
 const MAIL_API_KEY = Deno.env.get('MAIL_API_KEY') ?? ''
 
+const ORDER_NUMBER_PREFIX = 'VB-'
+const ORDER_NUMBER_ALPHABET = '0123456789ABCDEFGHJKMNPQRSTUVWXYZ'
+
+function generateOrderNumber(): string {
+  const bytes = new Uint8Array(8)
+  crypto.getRandomValues(bytes)
+  let suffix = ''
+  for (let i = 0; i < 8; i++) {
+    suffix += ORDER_NUMBER_ALPHABET[bytes[i]! % ORDER_NUMBER_ALPHABET.length]
+  }
+  return `${ORDER_NUMBER_PREFIX}${suffix}`
+}
+
+function isOrderNumberConflict(error: { code?: string; message?: string } | null): boolean {
+  if (!error) return false
+  if (error.code === '23505') return true
+  return (error.message ?? '').toLowerCase().includes('order_number')
+}
+
 function invoiceSellerBlock() {
   return {
     companyName: Deno.env.get('INVOICE_COMPANY_NAME') ?? 'Test LTD',
@@ -165,6 +184,7 @@ async function sendOrderInvoice(
     recipient,
     order: {
       id: order.id,
+      orderNumber: order.order_number ?? null,
       paidAt: order.updated_at ?? new Date().toISOString(),
       totalCents: order.total_cents ?? 0,
       currency: order.currency ?? 'eur',
@@ -667,47 +687,54 @@ async function createPendingOrder(
   userId: string,
   resolved: ResolvedCheckout,
   receiptEmail: string | null,
-): Promise<{ orderId: string } | { error: string }> {
+): Promise<{ orderId: string; orderNumber: string } | { error: string }> {
   const { credits, totalCents, currency, orderItems } = resolved
 
-  const { data: order, error: orderErr } = await admin
-    .from('orders')
-    .insert({
-      user_id: userId,
-      status: 'pending_payment',
-      total_cents: totalCents,
-      currency,
-      credits_granted: credits,
-      receipt_email: receiptEmail,
-      metadata: {
-        product_id: orderItems[0]?.productId ?? null,
-        card_id: orderItems[0]?.cardId ?? null,
-        checkout_flow: 'internal',
-      },
-    })
-    .select('id')
-    .single()
+  for (let attempt = 0; attempt < 5; attempt++) {
+    const orderNumber = generateOrderNumber()
+    const { data: order, error: orderErr } = await admin
+      .from('orders')
+      .insert({
+        order_number: orderNumber,
+        user_id: userId,
+        status: 'pending_payment',
+        total_cents: totalCents,
+        currency,
+        credits_granted: credits,
+        receipt_email: receiptEmail,
+        metadata: {
+          product_id: orderItems[0]?.productId ?? null,
+          card_id: orderItems[0]?.cardId ?? null,
+          checkout_flow: 'internal',
+        },
+      })
+      .select('id, order_number')
+      .single()
 
-  if (orderErr || !order) return { error: orderErr?.message ?? 'order_create_failed' }
+    if (orderErr && isOrderNumberConflict(orderErr)) continue
+    if (orderErr || !order) return { error: orderErr?.message ?? 'order_create_failed' }
 
-  const { error: itemErr } = await admin.from('order_items').insert(
-    orderItems.map((item) => ({
-      order_id: order.id,
-      product_id: item.productId,
-      quantity: item.quantity,
-      unit_price_cents: item.unitCents,
-      credits_amount: item.creditsAmount,
-      card_id: item.cardId,
-      title_snapshot: item.title,
-    })),
-  )
+    const { error: itemErr } = await admin.from('order_items').insert(
+      orderItems.map((item) => ({
+        order_id: order.id,
+        product_id: item.productId,
+        quantity: item.quantity,
+        unit_price_cents: item.unitCents,
+        credits_amount: item.creditsAmount,
+        card_id: item.cardId,
+        title_snapshot: item.title,
+      })),
+    )
 
-  if (itemErr) {
-    await admin.from('orders').delete().eq('id', order.id)
-    return { error: itemErr.message ?? 'order_item_create_failed' }
+    if (itemErr) {
+      await admin.from('orders').delete().eq('id', order.id)
+      return { error: itemErr.message ?? 'order_item_create_failed' }
+    }
+
+    return { orderId: order.id, orderNumber: order.order_number }
   }
 
-  return { orderId: order.id }
+  return { error: 'order_create_failed' }
 }
 
 async function grantOrderCardsToInventory(
@@ -1298,24 +1325,34 @@ Deno.serve(async (req) => {
     const { data: userData } = await admin.auth.admin.getUserById(userId)
     const receiptEmail = userData.user ? displayEmailFromUser(userData.user) : null
 
-    const { data: order, error: orderErr } = await admin
-      .from('orders')
-      .insert({
-        user_id: userId,
-        status: 'pending_payment',
-        total_cents: totalCents,
-        currency,
-        credits_granted: credits,
-        receipt_email: receiptEmail,
-        metadata: {
-          product_id: orderItems[0]?.productId ?? null,
-          card_id: orderItems[0]?.cardId ?? null,
-        },
-      })
-      .select('id')
-      .single()
+    let order: { id: string; order_number: string } | null = null
+    for (let attempt = 0; attempt < 5; attempt++) {
+      const orderNumber = generateOrderNumber()
+      const { data, error: orderErr } = await admin
+        .from('orders')
+        .insert({
+          order_number: orderNumber,
+          user_id: userId,
+          status: 'pending_payment',
+          total_cents: totalCents,
+          currency,
+          credits_granted: credits,
+          receipt_email: receiptEmail,
+          metadata: {
+            product_id: orderItems[0]?.productId ?? null,
+            card_id: orderItems[0]?.cardId ?? null,
+          },
+        })
+        .select('id, order_number')
+        .single()
 
-    if (orderErr || !order) return json({ error: orderErr?.message ?? 'order_create_failed' }, 500)
+      if (orderErr && isOrderNumberConflict(orderErr)) continue
+      if (orderErr || !data) return json({ error: orderErr?.message ?? 'order_create_failed' }, 500)
+      order = data
+      break
+    }
+
+    if (!order) return json({ error: 'order_create_failed' }, 500)
 
     await admin.from('order_items').insert(
       orderItems.map((item) => ({
@@ -1692,6 +1729,7 @@ Deno.serve(async (req) => {
     const { resolved } = resolvedResult
     return json({
       orderId: orderResult.orderId,
+      orderNumber: orderResult.orderNumber,
       credits: resolved.credits,
       title: resolved.title,
       totalCents: resolved.totalCents,
@@ -1722,6 +1760,7 @@ Deno.serve(async (req) => {
     const item = Array.isArray(order.order_items) ? order.order_items[0] : null
     return json({
       orderId: order.id,
+      orderNumber: order.order_number ?? null,
       status: order.status,
       credits: order.credits_granted ?? 0,
       title: item?.title_snapshot ?? 'VOIDBORN Credits',

@@ -91,6 +91,7 @@ async function sendTestEmail(req, res) {
         recipient: to[0],
         order: {
           id: '00000000-0000-4000-8000-000000preview',
+          orderNumber: 'VB-PREVIEW',
           paidAt: stamp,
           totalCents: 1000,
           currency: 'eur',

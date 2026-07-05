@@ -1,7 +1,7 @@
 const { sendMail } = require('../config/email');
 const { buildInvoiceEmail } = require('../lib/invoiceEmail');
 const { buildInvoicePdf } = require('../lib/invoicePdf');
-const { shortOrderId } = require('../lib/invoiceFormat');
+const { displayOrderRef } = require('../lib/invoiceFormat');
 const { normalizeInvoicePayload } = require('../lib/invoicePayload');
 
 async function sendInvoice(req, res) {
@@ -9,7 +9,7 @@ async function sendInvoice(req, res) {
     const payload = normalizeInvoicePayload(req.body || {});
     const email = buildInvoiceEmail(payload);
     const pdfBuffer = await buildInvoicePdf(payload);
-    const ref = shortOrderId(payload.order.id);
+    const ref = displayOrderRef(payload.order);
 
     const info = await sendMail({
       to: email.to,

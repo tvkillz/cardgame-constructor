@@ -4,6 +4,13 @@ function shortOrderId(orderId) {
   return String(orderId ?? '').replace(/-/g, '').slice(0, 8).toUpperCase();
 }
 
+/** Public order reference — prefer stored order_number (VB-XXXXXXXX). */
+function displayOrderRef(order) {
+  const orderNumber = order?.orderNumber ?? order?.order_number;
+  if (typeof orderNumber === 'string' && orderNumber.trim()) return orderNumber.trim();
+  return shortOrderId(order?.id);
+}
+
 function formatMoney(cents, currency = 'eur') {
   const amount = (Number(cents) || 0) / 100;
   const code = String(currency).toUpperCase();
@@ -96,6 +103,7 @@ function renderInvoiceSummaryTable({ lineItems, order, paymentMethod }) {
 
 module.exports = {
   shortOrderId,
+  displayOrderRef,
   formatMoney,
   formatQuantity,
   formatInvoiceDate,
