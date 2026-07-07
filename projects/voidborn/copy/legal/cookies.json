@@ -5,7 +5,14 @@
   "blocks": [
     {
       "type": "paragraph",
-      "text": "This Tracker & Cookie Policy describes how Test LTD (\"we\", \"us\", or \"our\") utilizes cookies, web beacons, pixels, and equivalent tracking technologies on https://voidborn.fun (the \"Website\") and all connected gaming features (the \"Platform\")."
+      "text": "This Tracker & Cookie Policy describes how Baltius, UAB (\"we\", \"us\", or \"our\") utilizes cookies, web beacons, pixels, and equivalent tracking technologies on https://voidborn.fun (the \"Website\") and all connected gaming features (the \"Platform\")."
+    },
+    {
+      "type": "company",
+      "name": "Baltius, UAB",
+      "companyNumber": "307485071",
+      "address": "Klaipėdos g. 4A, Jokūbavo k., LT-97210 Kretingos r., LITHUANIA",
+      "email": "support@voidborn.fun"
     },
     {
       "type": "paragraph",

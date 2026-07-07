@@ -1,0 +1,38 @@
+{
+  "id": "post20",
+  "status": "rendered",
+  "created_at": "2026-07-05T12:04:26.637Z",
+  "brief": "Spotlight Fissure Keeper — Support from the Kronos realm. Highlight ability: Crystalline Trap.",
+  "template": "card-spotlight",
+  "subject": {
+    "card": "kronos_card_34_fissure_keeper",
+    "domain": "kronos"
+  },
+  "image": {
+    "mode": "composite",
+    "prompt": "1:1 square aspect ratio, dark fantasy digital painting of a crystalline sentinel creature made of jagged obsidian and glowing blue ice, standing in a desolate rocky chasm, freezing fog swirling around its feet, cinematic lighting, dramatic shadows, highly detailed, TCG card art style, sharp focus.",
+    "reference_assets": [
+      "cards/kronos/kronos_card_34_fissure_keeper.png"
+    ],
+    "subject_line": "Fissure Keeper",
+    "background_asset": "cities/terra/terra_city_01_great_bastion.png",
+    "background_title": "The Great Bastion",
+    "use_brand_reference": false,
+    "size": 1080,
+    "rendered_at": "2026-07-05T12:04:27.820Z",
+    "render_mode_used": "composite"
+  },
+  "validation": {
+    "ok": true,
+    "issues": [],
+    "validated_at": "2026-07-05T12:04:26.637Z"
+  },
+  "approved_at": "2026-07-05T12:04:26.637Z",
+  "model": "gemini-3.1-flash-lite",
+  "campaign": {
+    "kind": "card",
+    "angle": null,
+    "domain": "kronos",
+    "card": "kronos_card_34_fissure_keeper"
+  }
+}

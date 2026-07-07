@@ -1,0 +1,37 @@
+{
+  "id": "post17",
+  "status": "rendered",
+  "created_at": "2026-07-05T12:03:42.829Z",
+  "brief": "Market / Portal feature post for VOIDBORN — \"Crack the Vaults\". Rip sealed products and chase the spike. Each unopened cache is a dice roll toward a chase card or a bulk haul you can trade away. Explain sealed products / vault pulls — rip packs, chase spikes, trade surplus on the market. In-game credits economy (no real-money P2P). Instagram hype + link in bio; Facebook walkthrough; Discord steps + https://voidborn.fun.",
+  "template": "market-portal",
+  "subject": {
+    "card": null,
+    "domain": null
+  },
+  "image": {
+    "mode": "gemini",
+    "prompt": "Cinematic 1:1 shot of a glowing, ornate crystalline chest resting on cracked obsidian ground, emitting a vibrant purple and blue ethereal mist against a backdrop of a dying elemental storm, high contrast, dark fantasy aesthetic, intricate textures.",
+    "reference_assets": [
+      "cta1/sealed-vaults.webp"
+    ],
+    "subject_line": "CRACK THE VAULTS",
+    "background_asset": "cta1/sealed-vaults.webp",
+    "background_title": null,
+    "use_brand_reference": false,
+    "size": 1080,
+    "rendered_at": "2026-07-05T12:03:55.467Z",
+    "render_mode_used": "gemini"
+  },
+  "validation": {
+    "ok": true,
+    "issues": [],
+    "validated_at": "2026-07-05T12:03:42.829Z"
+  },
+  "approved_at": "2026-07-05T12:03:42.829Z",
+  "model": "gemini-3.1-flash-lite",
+  "campaign": {
+    "kind": "market",
+    "angle": "sealed_vaults",
+    "domain": null
+  }
+}

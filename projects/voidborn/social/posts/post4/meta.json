@@ -1,0 +1,37 @@
+{
+  "id": "post4",
+  "status": "rendered",
+  "created_at": "2026-07-05T11:57:27.079Z",
+  "brief": "Welcome post for VOIDBORN dark fantasy online TCG. Hook headline: \"Conquer the Null Zones\". Realm atmosphere: The Weeping Grove (kronos). Introduce four elemental realms, deck building, tactical battles, ranked play. Free to start at https://voidborn.fun. Instagram punchy + hashtags; Facebook longer story; Discord markdown feature list + play link.",
+  "template": "welcome",
+  "subject": {
+    "card": null,
+    "domain": "infernus"
+  },
+  "image": {
+    "mode": "gemini",
+    "prompt": "Cinematic square shot of a dark fantasy volcanic forge, glowing lava rivers running through cracked obsidian ground, embers floating in the air, demonic stone statues looming in the background, sharp focus, hyper-realistic, dark atmospheric lighting, high contrast, obsidian and crimson color palette.",
+    "reference_assets": [
+      "cities/ignis/ignis_city_02_cinderfall.png"
+    ],
+    "subject_line": "CONQUER THE NULL ZONES",
+    "background_asset": "cities/ignis/ignis_city_02_cinderfall.png",
+    "background_title": "Cinderfall",
+    "use_brand_reference": false,
+    "size": 1080,
+    "rendered_at": "2026-07-05T11:57:45.652Z",
+    "render_mode_used": "gemini"
+  },
+  "validation": {
+    "ok": true,
+    "issues": [],
+    "validated_at": "2026-07-05T11:57:27.080Z"
+  },
+  "approved_at": "2026-07-05T11:57:27.079Z",
+  "model": "gemini-3.1-flash-lite",
+  "campaign": {
+    "kind": "welcome",
+    "angle": null,
+    "domain": null
+  }
+}

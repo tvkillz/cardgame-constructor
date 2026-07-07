@@ -1,4 +1,5 @@
 const PDFDocument = require('pdfkit');
+const fs = require('fs');
 const path = require('path');
 const { PORTAL, bundledLogoFile, brandName } = require('./emailTemplate');
 const {
@@ -24,6 +25,37 @@ const PDF_THEME = {
   panelBg: '#ffffff',
 };
 
+/**
+ * Embedded Unicode font. pdfkit's built-in Helvetica is WinAnsi-encoded and
+ * cannot render Latin Extended glyphs (e.g. Lithuanian ė, ū), which corrupts
+ * company/buyer details. Liberation Sans is Arial-metric-compatible and covers
+ * the needed glyphs; we fall back to Helvetica if the bundled files are absent.
+ */
+const FONT_DIR = path.join(__dirname, '../../assets/fonts');
+const FONT_FILES = {
+  regular: path.join(FONT_DIR, 'LiberationSans-Regular.ttf'),
+  bold: path.join(FONT_DIR, 'LiberationSans-Bold.ttf'),
+};
+
+let FONT_REGULAR = 'Helvetica';
+let FONT_BOLD = 'Helvetica-Bold';
+
+function registerFonts(doc) {
+  try {
+    if (fs.existsSync(FONT_FILES.regular) && fs.existsSync(FONT_FILES.bold)) {
+      doc.registerFont('body', FONT_FILES.regular);
+      doc.registerFont('bodyBold', FONT_FILES.bold);
+      FONT_REGULAR = 'body';
+      FONT_BOLD = 'bodyBold';
+      return;
+    }
+  } catch {
+    /* fall back to built-in Helvetica below */
+  }
+  FONT_REGULAR = 'Helvetica';
+  FONT_BOLD = 'Helvetica-Bold';
+}
+
 
 function drawHeaderBand(doc, seller) {
   const width = doc.page.width;
@@ -42,17 +74,17 @@ function drawHeaderBand(doc, seller) {
   } else {
     doc
       .fillColor(PDF_THEME.goldBright)
-      .font('Helvetica-Bold')
+      .font(FONT_BOLD)
       .fontSize(18)
       .text(brandName(), 40, 28, { continued: false });
   }
 
   doc
     .fillColor(PDF_THEME.headerText)
-    .font('Helvetica-Bold')
+    .font(FONT_BOLD)
     .fontSize(11)
     .text('INVOICE', width - 140, 26, { width: 100, align: 'right' })
-    .font('Helvetica')
+      .font(FONT_REGULAR)
     .fontSize(9)
     .fillColor(PDF_THEME.gold)
     .text(seller.companyName, width - 200, 44, { width: 160, align: 'right' });
@@ -67,20 +99,20 @@ function drawMetaRow(doc, order, paymentMethod) {
   const rightX = 310;
   const y = doc.y;
 
-  doc.fillColor(PDF_THEME.muted).font('Helvetica-Bold').fontSize(8).text('INVOICE NUMBER', leftX, y);
-  doc.fillColor(PDF_THEME.bodyText).font('Helvetica-Bold').fontSize(12).text(`#${ref}`, leftX, y + 12);
+  doc.fillColor(PDF_THEME.muted).font(FONT_BOLD).fontSize(8).text('INVOICE NUMBER', leftX, y);
+  doc.fillColor(PDF_THEME.bodyText).font(FONT_BOLD).fontSize(12).text(`#${ref}`, leftX, y + 12);
 
-  doc.fillColor(PDF_THEME.muted).font('Helvetica-Bold').fontSize(8).text('DATE', leftX, y + 34);
+  doc.fillColor(PDF_THEME.muted).font(FONT_BOLD).fontSize(8).text('DATE', leftX, y + 34);
   doc
     .fillColor(PDF_THEME.bodyText)
-    .font('Helvetica')
+      .font(FONT_REGULAR)
     .fontSize(11)
     .text(formatInvoiceDate(order.paidAt), leftX, y + 46);
 
-  doc.fillColor(PDF_THEME.muted).font('Helvetica-Bold').fontSize(8).text('PAYMENT', rightX, y + 34);
+  doc.fillColor(PDF_THEME.muted).font(FONT_BOLD).fontSize(8).text('PAYMENT', rightX, y + 34);
   doc
     .fillColor(PDF_THEME.bodyText)
-    .font('Helvetica')
+      .font(FONT_REGULAR)
     .fontSize(11)
     .text(paymentMethod || 'Card', rightX, y + 46, { width: 240 });
 
@@ -91,14 +123,14 @@ function drawPartyBlocks(doc, buyer, seller, recipient) {
   const y = doc.y;
   const colWidth = 240;
 
-  doc.fillColor(PDF_THEME.gold).font('Helvetica-Bold').fontSize(9).text('FROM', 40, y);
+  doc.fillColor(PDF_THEME.gold).font(FONT_BOLD).fontSize(9).text('FROM', 40, y);
   doc
     .fillColor(PDF_THEME.bodyText)
-    .font('Helvetica-Bold')
+    .font(FONT_BOLD)
     .fontSize(11)
     .text(seller.companyName, 40, y + 14, { width: colWidth });
   doc
-    .font('Helvetica')
+      .font(FONT_REGULAR)
     .fontSize(10)
     .fillColor(PDF_THEME.muted)
     .text(`Company no. ${seller.companyNumber}`, 40, doc.y + 2, { width: colWidth })
@@ -106,15 +138,15 @@ function drawPartyBlocks(doc, buyer, seller, recipient) {
     .text(seller.email, 40, doc.y + 2, { width: colWidth });
 
   const billToY = y;
-  doc.fillColor(PDF_THEME.gold).font('Helvetica-Bold').fontSize(9).text('BILL TO', 310, billToY);
+  doc.fillColor(PDF_THEME.gold).font(FONT_BOLD).fontSize(9).text('BILL TO', 310, billToY);
   doc
     .fillColor(PDF_THEME.bodyText)
-    .font('Helvetica-Bold')
+    .font(FONT_BOLD)
     .fontSize(11)
     .text(buyerDisplayName(buyer), 310, billToY + 14, { width: colWidth });
 
   const lines = buyerAddressLines(buyer);
-  doc.font('Helvetica').fontSize(10).fillColor(PDF_THEME.muted);
+  doc.font(FONT_REGULAR).fontSize(10).fillColor(PDF_THEME.muted);
   if (lines.length) {
     for (const line of lines) {
       doc.text(line, 310, doc.y + 2, { width: colWidth });
@@ -136,7 +168,7 @@ function drawLineItemsTable(doc, lineItems, order) {
 
   doc.save();
   doc.rect(startX, y, tableWidth, 22).fill(PDF_THEME.headerBg);
-  doc.fillColor(PDF_THEME.headerText).font('Helvetica-Bold').fontSize(8);
+  doc.fillColor(PDF_THEME.headerText).font(FONT_BOLD).fontSize(8);
 
   let x = startX + 8;
   headers.forEach((header, index) => {
@@ -146,7 +178,7 @@ function drawLineItemsTable(doc, lineItems, order) {
   });
 
   y += 22;
-  doc.font('Helvetica').fontSize(10);
+  doc.font(FONT_REGULAR).fontSize(10);
 
   for (const line of lineItems ?? []) {
     const qty = line.quantity ?? 1;
@@ -170,7 +202,7 @@ function drawLineItemsTable(doc, lineItems, order) {
     values.forEach((value, index) => {
       doc
         .fillColor(index === 3 ? PDF_THEME.gold : PDF_THEME.bodyText)
-        .font(index === 3 ? 'Helvetica-Bold' : 'Helvetica')
+        .font(index === 3 ? FONT_BOLD : FONT_REGULAR)
         .text(value, x, y + 8, { width: colWidths[index] - 12, align: index === 0 ? 'left' : 'right' });
       x += colWidths[index];
     });
@@ -184,12 +216,12 @@ function drawLineItemsTable(doc, lineItems, order) {
   const totalLabelX = startX + tableWidth - 180;
   doc
     .fillColor(PDF_THEME.muted)
-    .font('Helvetica-Bold')
+    .font(FONT_BOLD)
     .fontSize(10)
     .text('Total incl. VAT', totalLabelX, doc.y, { width: 100, align: 'right' });
   doc
     .fillColor(PDF_THEME.gold)
-    .font('Helvetica-Bold')
+    .font(FONT_BOLD)
     .fontSize(14)
     .text(formatMoney(order.totalCents, order.currency), totalLabelX + 104, doc.y - 2, {
       width: 76,
@@ -208,7 +240,7 @@ function drawFooter(doc) {
     .stroke();
   doc
     .fillColor(PDF_THEME.muted)
-    .font('Helvetica')
+      .font(FONT_REGULAR)
     .fontSize(8)
     .text(
       `Digital goods delivered instantly to your ${brandName()} account. This document was generated automatically.`,
@@ -228,6 +260,8 @@ function buildInvoicePdf(payload) {
     doc.on('error', reject);
 
     const { order, lineItems, buyer, seller, recipient, paymentMethod } = payload;
+
+    registerFonts(doc);
 
     doc.rect(0, 0, doc.page.width, doc.page.height).fill(PDF_THEME.bodyBg);
 

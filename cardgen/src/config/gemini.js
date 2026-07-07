@@ -22,7 +22,7 @@ export function getGeminiTextModelId() {
 }
 
 export function getGeminiImageModelId() {
-  return process.env.GEMINI_IMAGE_MODEL?.trim() || 'gemini-3.1-flash-image'
+  return process.env.GEMINI_IMAGE_MODEL?.trim() || 'gemini-2.5-flash-image'
 }
 
 export function createGeminiTextClient() {

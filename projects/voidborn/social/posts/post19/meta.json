@@ -1,0 +1,38 @@
+{
+  "id": "post19",
+  "status": "rendered",
+  "created_at": "2026-07-05T12:04:16.684Z",
+  "brief": "Spotlight Bioluminescent Lurker — Assassin / Scout from the Thalassa realm. Highlight ability: Abyssal Shadow.",
+  "template": "card-spotlight",
+  "subject": {
+    "card": "thalassa_card_06_bioluminescent_lurker",
+    "domain": "thalassa"
+  },
+  "image": {
+    "mode": "composite",
+    "prompt": "Cinematic 1:1 close up shot of a terrifying bioluminescent aquatic predator with glowing cyan tentacles, dark deep-sea background, iridescent scales, atmospheric lighting, high fantasy art style.",
+    "reference_assets": [
+      "cards/thalassa/thalassa_card_06_bioluminescent_lurker.png"
+    ],
+    "subject_line": "Bioluminescent Lurker",
+    "background_asset": "cities/aqua/aqua_city_01_sunken_oakhaven.png",
+    "background_title": "Sunken Oakhaven",
+    "use_brand_reference": false,
+    "size": 1080,
+    "rendered_at": "2026-07-05T12:04:17.848Z",
+    "render_mode_used": "composite"
+  },
+  "validation": {
+    "ok": true,
+    "issues": [],
+    "validated_at": "2026-07-05T12:04:16.684Z"
+  },
+  "approved_at": "2026-07-05T12:04:16.684Z",
+  "model": "gemini-3.1-flash-lite",
+  "campaign": {
+    "kind": "card",
+    "angle": null,
+    "domain": "thalassa",
+    "card": "thalassa_card_06_bioluminescent_lurker"
+  }
+}

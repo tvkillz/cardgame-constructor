@@ -1,0 +1,38 @@
+{
+  "id": "post24",
+  "status": "rendered",
+  "created_at": "2026-07-05T12:05:10.378Z",
+  "brief": "Spotlight Mossfang Ravager — Fast Beast / Pressure Unit from the Kronos realm. Highlight ability: Mossfang Rush.",
+  "template": "card-spotlight",
+  "subject": {
+    "card": "kronos_card_05_mossfang_ravager",
+    "domain": "kronos"
+  },
+  "image": {
+    "mode": "composite",
+    "prompt": "Cinematic 1:1 close-up of a monstrous, wolf-like beast covered in thick, gnarled moss and jagged stone plating, glowing eyes staring forward, dark fantasy forest background, moody lighting, highly detailed fur and bark texture, dramatic atmosphere.",
+    "reference_assets": [
+      "cards/kronos/kronos_card_05_mossfang_ravager.png"
+    ],
+    "subject_line": "MOSSFANG RAVAGER",
+    "background_asset": "cities/terra/terra_city_03_weeping_grove.png",
+    "background_title": "The Weeping Grove",
+    "use_brand_reference": false,
+    "size": 1080,
+    "rendered_at": "2026-07-05T12:05:11.550Z",
+    "render_mode_used": "composite"
+  },
+  "validation": {
+    "ok": true,
+    "issues": [],
+    "validated_at": "2026-07-05T12:05:10.378Z"
+  },
+  "approved_at": "2026-07-05T12:05:10.378Z",
+  "model": "gemini-3.1-flash-lite",
+  "campaign": {
+    "kind": "card",
+    "angle": null,
+    "domain": "kronos",
+    "card": "kronos_card_05_mossfang_ravager"
+  }
+}

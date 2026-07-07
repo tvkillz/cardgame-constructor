@@ -1,0 +1,38 @@
+{
+  "id": "post26",
+  "status": "rendered",
+  "created_at": "2026-07-05T12:05:32.012Z",
+  "brief": "Spotlight Ash Wing Scout — Flying / Scout from the Infernus realm. Highlight ability: Aerial Ember.",
+  "template": "card-spotlight",
+  "subject": {
+    "card": "infernus_card_30_ash_wing_scout",
+    "domain": "infernus"
+  },
+  "image": {
+    "mode": "composite",
+    "prompt": "1:1 square cinematic close-up of a flaming elemental bird-scout with scorched ember-tipped feathers, diving through a dark, hazy orange volcanic canyon, high detail, epic dark fantasy style, volumetric lighting.",
+    "reference_assets": [
+      "cards/infernus/infernus_card_30_ash_wing_scout.png"
+    ],
+    "subject_line": "Ash Wing Scout",
+    "background_asset": "cities/ignis/ignis_city_03_iron_foundry.png",
+    "background_title": "The Iron Foundry",
+    "use_brand_reference": false,
+    "size": 1080,
+    "rendered_at": "2026-07-05T12:05:33.172Z",
+    "render_mode_used": "composite"
+  },
+  "validation": {
+    "ok": true,
+    "issues": [],
+    "validated_at": "2026-07-05T12:05:32.012Z"
+  },
+  "approved_at": "2026-07-05T12:05:32.012Z",
+  "model": "gemini-3.1-flash-lite",
+  "campaign": {
+    "kind": "card",
+    "angle": null,
+    "domain": "infernus",
+    "card": "infernus_card_30_ash_wing_scout"
+  }
+}

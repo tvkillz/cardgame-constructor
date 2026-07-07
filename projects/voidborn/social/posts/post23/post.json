@@ -1,0 +1,28 @@
+{
+  "instagram": {
+    "header": "🔗 Link in bio → Start your journey",
+    "caption": "The fires of Infernus demand a sacrifice. 🔥 Meet the Molten Devourer, a relentless Destroyer that turns your opponent’s power against them. With 'Consume Essence,' no foe is safe from becoming fuel for this beast’s insatiable hunger. Will you master the flame or be consumed by it? 🌋⚔️",
+    "hashtags": [
+      "#VOIDBORN",
+      "#TCG",
+      "#TradingCardGame",
+      "#FantasyArt",
+      "#CardGame",
+      "#IndieGame",
+      "#DeckBuilding",
+      "#DigitalCards",
+      "#MoltenDevourer",
+      "#Infernus",
+      "#DarkFantasy"
+    ],
+    "alt_text": "A massive, lava-infused beast from the Infernus realm with glowing molten armor, ready to strike on a battlefield."
+  },
+  "facebook": {
+    "body": "In the shattered realm of Infernus, strength is not merely measured by might, but by what one is willing to consume. The Molten Devourer stands as a testament to this brutal philosophy. As a Destroyer-class entity, it serves as the ultimate answer to high-health enemy units that threaten your board state. Its ability, Consume Essence, allows it to obliterate a target and grow exponentially, absorbing their life force into its own burning core. A 6-mana investment that can single-handedly turn the tide of a losing battle. How would you utilize the Devourer in your current Infernus build? Share your strategies in the comments below.",
+    "link_url": "https://voidborn.fun",
+    "link_cta": "Build your deck and conquer the Void at the link below:"
+  },
+  "discord": {
+    "content": "**Unit Spotlight: Molten Devourer**\n\n- **Realm:** Infernus\n- **Role:** Destroyer\n- **Mana Cost:** 6\n- **Stats:** 4/4\n- **Keyword:** Devour\n\n*Ability: Consume Essence* — Destroy a target enemy unit. This unit gains +1/+1 for every 2 health the devoured unit had.\n\nThe Molten Devourer is a high-impact late-game threat capable of scaling rapidly based on the targets it removes. Perfect for clearing the board while building an unstoppable titan.\n\n[Play VOIDBORN now](https://voidborn.fun)"
+  }
+}

@@ -5,6 +5,10 @@ const DEFAULT_SITE_URL = 'https://voidborn.fun';
 const DEFAULT_BRAND_NAME = 'VOIDBORN';
 const DEFAULT_LOGO_PATH = '/assets/brand/header.webp';
 
+/** Content-ID for the inline header logo (multipart/related). */
+const LOGO_CID = 'brandlogo';
+const INLINE_LOGO_EXT = new Set(['.png', '.jpg', '.jpeg']);
+
 /** Portal palette — matches PortalShell.css */
 const PORTAL = {
   bg: '#0a0a0c',
@@ -45,14 +49,34 @@ function logoUrl() {
 }
 
 function bundledLogoFile() {
+  // PNG first: email clients don't render WebP, and the PDF header only draws
+  // PNG/JPG. WebP is kept only as a last-resort local fallback.
   const candidates = [
-    path.join(__dirname, '../../assets/brand/header.webp'),
     path.join(__dirname, '../../assets/brand/header.png'),
-    path.join(__dirname, '../../../frontend/.build/voidborn/assets/brand/header.webp'),
     path.join(__dirname, '../../../frontend/.build/voidborn/assets/brand/header.png'),
+    path.join(__dirname, '../../assets/brand/header.webp'),
+    path.join(__dirname, '../../../frontend/.build/voidborn/assets/brand/header.webp'),
   ];
 
   return candidates.find((file) => fs.existsSync(file)) ?? null;
+}
+
+/**
+ * Inline logo attachment for multipart/related emails, or null when no
+ * embeddable (PNG/JPEG) logo is bundled. Data-URI images are unreliable in
+ * email (Gmail/Outlook.com/Yahoo strip them), so we attach via Content-ID.
+ */
+function logoAttachment() {
+  const bundled = bundledLogoFile();
+  if (!bundled) return null;
+  const ext = path.extname(bundled).toLowerCase();
+  if (!INLINE_LOGO_EXT.has(ext)) return null;
+  return {
+    filename: `logo${ext}`,
+    content: fs.readFileSync(bundled),
+    cid: LOGO_CID,
+    contentType: ext === '.png' ? 'image/png' : 'image/jpeg',
+  };
 }
 
 function logoImgHtml() {
@@ -61,11 +85,8 @@ function logoImgHtml() {
     'display:block;border:0;outline:none;height:62px;width:auto;max-width:200px;margin:0;';
 
   const bundled = bundledLogoFile();
-  if (bundled) {
-    const ext = path.extname(bundled).toLowerCase();
-    const mime = ext === '.png' ? 'image/png' : 'image/webp';
-    const data = fs.readFileSync(bundled).toString('base64');
-    return `<img src="data:${mime};base64,${data}" alt="${alt}" height="62" style="${style}" />`;
+  if (bundled && INLINE_LOGO_EXT.has(path.extname(bundled).toLowerCase())) {
+    return `<img src="cid:${LOGO_CID}" alt="${alt}" height="62" style="${style}" />`;
   }
 
   const url = escapeHtml(logoUrl());
@@ -177,11 +198,13 @@ function renderOtpBlock(token) {
 
 module.exports = {
   PORTAL,
+  LOGO_CID,
   escapeHtml,
   siteUrl,
   logoUrl,
   brandName,
   bundledLogoFile,
+  logoAttachment,
   renderPortalEmail,
   renderOtpBlock,
 };

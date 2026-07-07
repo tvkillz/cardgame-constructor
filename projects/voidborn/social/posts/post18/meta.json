@@ -1,0 +1,37 @@
+{
+  "id": "post18",
+  "status": "rendered",
+  "created_at": "2026-07-05T12:03:59.422Z",
+  "brief": "Market / Portal feature post for VOIDBORN — \"Chase the Apex\". Hunt foils, epics, and signature prints—the kind of pull that rewrites a deck overnight and makes opponents pause on turn one. Explain hunting foils, epics, and chase prints that rewrite a deck overnight. In-game credits economy (no real-money P2P). Instagram hype + link in bio; Facebook walkthrough; Discord steps + https://voidborn.fun.",
+  "template": "market-portal",
+  "subject": {
+    "card": null,
+    "domain": null
+  },
+  "image": {
+    "mode": "gemini",
+    "prompt": "Cinematic close-up of a glowing, legendary trading card floating in the air, swirling elemental energy of fire and void in the background, sharp focus, hyper-detailed, dark fantasy atmosphere, ethereal lighting, no text.",
+    "reference_assets": [
+      "cta1/discover-rare.webp"
+    ],
+    "subject_line": "CHASE THE APEX",
+    "background_asset": "cta1/discover-rare.webp",
+    "background_title": null,
+    "use_brand_reference": false,
+    "size": 1080,
+    "rendered_at": "2026-07-05T12:04:10.386Z",
+    "render_mode_used": "gemini"
+  },
+  "validation": {
+    "ok": true,
+    "issues": [],
+    "validated_at": "2026-07-05T12:03:59.422Z"
+  },
+  "approved_at": "2026-07-05T12:03:59.422Z",
+  "model": "gemini-3.1-flash-lite",
+  "campaign": {
+    "kind": "market",
+    "angle": "discover_rare",
+    "domain": null
+  }
+}

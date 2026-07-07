@@ -1,0 +1,38 @@
+{
+  "id": "post11",
+  "status": "rendered",
+  "created_at": "2026-07-05T12:00:49.748Z",
+  "brief": "Domain spotlight (playstyle / strategy) for the Infernus realm in VOIDBORN. Explain how Infernus decks win: unit roles (forge demons, lava elementals, armor, burn, chain lords, ash hounds), curve tips, synergies, and when to pick this realm for ranked. Visual identity: volcanic forge, ember-lit hellscape, demonic smiths, lava rivers, crimson and charcoal. Practical TCG advice without inventing fake card names — speak in archetypes (tanks, burn, flying, etc.). Instagram hooks players who main Infernus; Facebook longer strategy discussion; Discord bullet tips + [Play VOIDBORN](https://voidborn.fun).",
+  "template": "domain-spotlight",
+  "subject": {
+    "card": null,
+    "domain": "infernus"
+  },
+  "image": {
+    "mode": "gemini",
+    "prompt": "A square, cinematic wide shot of a massive, dark fantasy volcanic forge at the edge of a jagged cliff, overflowing with flowing rivers of bright orange molten lava, deep crimson and charcoal color palette, ember particles floating in the air, hyper-realistic, dark atmospheric lighting, no text.",
+    "reference_assets": [
+      "domains/ignis_domain.png",
+      "cities/ignis/ignis_city_02_cinderfall.png"
+    ],
+    "subject_line": "INFERNUS — DECK IDENTITY",
+    "background_asset": "cities/ignis/ignis_city_02_cinderfall.png",
+    "background_title": "Cinderfall",
+    "use_brand_reference": false,
+    "size": 1080,
+    "rendered_at": "2026-07-05T12:01:38.009Z",
+    "render_mode_used": "gemini"
+  },
+  "validation": {
+    "ok": true,
+    "issues": [],
+    "validated_at": "2026-07-05T12:00:49.748Z"
+  },
+  "approved_at": "2026-07-05T12:00:49.748Z",
+  "model": "gemini-3.1-flash-lite",
+  "campaign": {
+    "kind": "domain",
+    "angle": "playstyle",
+    "domain": "infernus"
+  }
+}
