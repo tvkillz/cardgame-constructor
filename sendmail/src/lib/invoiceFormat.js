@@ -87,7 +87,7 @@ function renderInvoiceSummaryTable({ lineItems, order, paymentMethod }) {
       <tbody>${rows}</tbody>
       <tfoot>
         <tr>
-          <td colspan="3" style="padding:12px;font-size:13px;color:${PORTAL.text};text-align:right;">Total incl. VAT</td>
+          <td colspan="3" style="padding:12px;font-size:13px;color:${PORTAL.text};text-align:right;">Total</td>
           <td style="padding:12px;font-size:15px;font-weight:700;color:${PORTAL.goldBright};text-align:right;">
             ${formatMoney(order.totalCents, order.currency)}
           </td>

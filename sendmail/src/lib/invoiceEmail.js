@@ -58,7 +58,7 @@ function buildInvoiceEmail(payload) {
     '',
     `Invoice #: ${ref}`,
     `Date: ${paidAt}`,
-    `Total incl. VAT: ${formatMoney(order.totalCents, order.currency)}`,
+    `Total: ${formatMoney(order.totalCents, order.currency)}`,
     `Payment method: ${paymentMethod || 'Card'}`,
     '',
     'Items:',

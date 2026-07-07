@@ -20,7 +20,7 @@
     },
     {
       "type": "paragraph",
-      "text": "We process your data transparently and in strict compliance with applicable data protection legislation, including the UK General Data Protection Regulation (UK GDPR) and the Data Protection Act 2018."
+      "text": "We process your data transparently and in strict compliance with applicable data protection legislation, including the EU General Data Protection Regulation (Regulation (EU) 2016/679) (\"GDPR\") and the Republic of Lithuania Law on Legal Protection of Personal Data."
     },
     {
       "type": "heading",
@@ -151,7 +151,7 @@
       "ordered": false,
       "items": [
         "Retention Timelines: We retain your data only for as long as your Account remains active or as required to fulfill legal tax records, resolve platform disputes, and maintain anti-fraud logging patterns.",
-        "Cross-Border Transfers: Some infrastructure partners may store or process data outside of the United Kingdom. When data crosses borders, we ensure strict legal protection mechanisms are active—such as Standard Contractual Clauses (SCCs)—to maintain a high standard of protection."
+        "Cross-Border Transfers: Some infrastructure partners may store or process data outside of the European Economic Area (EEA). When data crosses borders, we ensure strict legal protection mechanisms are active—such as Standard Contractual Clauses (SCCs)—to maintain a high standard of protection."
       ]
     },
     {
@@ -190,7 +190,7 @@
         "Deletion (\"Right to be Forgotten\"): The right to request complete account and data erasure, subject to legal holding obligations.",
         "Processing Restrictions: The right to stop us from using your data for specific tasks.",
         "Data Portability: The right to receive your data in a clean, machine-readable format.",
-        "Regulator Complaints: The right to flag concerns with the UK Information Commissioner's Office (ICO) or your local data protection authority."
+        "Regulator Complaints: The right to flag concerns with the State Data Protection Inspectorate of the Republic of Lithuania (Valstybinė duomenų apsaugos inspekcija, VDAI) or your local data protection authority."
       ]
     },
     {

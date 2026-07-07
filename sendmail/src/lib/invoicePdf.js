@@ -218,7 +218,7 @@ function drawLineItemsTable(doc, lineItems, order) {
     .fillColor(PDF_THEME.muted)
     .font(FONT_BOLD)
     .fontSize(10)
-    .text('Total incl. VAT', totalLabelX, doc.y, { width: 100, align: 'right' });
+    .text('Total', totalLabelX, doc.y, { width: 100, align: 'right' });
   doc
     .fillColor(PDF_THEME.gold)
     .font(FONT_BOLD)
