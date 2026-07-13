@@ -30,6 +30,8 @@ export interface LandingConfig {
   variant: LandingVariant
   introVideo: boolean
   heroMedia: 'slides' | 'video-then-slides'
+  /** Optional hero card slug order (overrides one-per-location featured cards). */
+  heroCardSlugs?: string[]
 }
 
 export interface AppConfig {

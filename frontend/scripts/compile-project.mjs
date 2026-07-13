@@ -795,7 +795,7 @@ function buildFeaturedByLocation(locationsJson) {
 }
 
 /** Slugs baked into the frontend bundle (hero + collection section). Full catalog lives in DB. */
-function buildFrontendShowcaseSlugs(featuredByLocation, collectionJson) {
+function buildFrontendShowcaseSlugs(featuredByLocation, collectionJson, heroCardSlugs) {
   const slugs = new Set()
   for (const slug of Object.values(featuredByLocation)) {
     if (slug) slugs.add(slug)
@@ -803,7 +803,33 @@ function buildFrontendShowcaseSlugs(featuredByLocation, collectionJson) {
   for (const slug of collectionJson?.cardSlugs ?? []) {
     if (slug) slugs.add(slug)
   }
+  for (const slug of heroCardSlugs ?? []) {
+    if (slug) slugs.add(slug)
+  }
   return slugs
+}
+
+function buildLandingCards(featuredByLocation, heroCardSlugs, bySlug) {
+  if (heroCardSlugs?.length) {
+    return heroCardSlugs.map((slug, fanIndex) => {
+      const card = bySlug.get(slug)
+      if (!card) throw new Error(`Hero card slug not found: ${slug}`)
+      let locationId = card.domain
+      for (const [locId, featSlug] of Object.entries(featuredByLocation)) {
+        if (featSlug === slug) {
+          locationId = locId
+          break
+        }
+      }
+      return { ...card, locationId, fanIndex }
+    })
+  }
+
+  return Object.entries(featuredByLocation).map(([locationId, slug], fanIndex) => {
+    const card = bySlug.get(slug)
+    if (!card) throw new Error(`Featured slug not found: ${slug} (location ${locationId})`)
+    return { ...card, locationId, fanIndex }
+  })
 }
 
 function writeCardsCatalogJson(out, payload) {
@@ -975,6 +1001,7 @@ function buildAppConfig({
       variant: landing.variant ?? 'voidborn',
       introVideo: landing.introVideo !== false,
       heroMedia: landing.heroMedia ?? (landing.introVideo === false ? 'slides' : 'video-then-slides'),
+      ...(landing.heroCardSlugs?.length ? { heroCardSlugs: landing.heroCardSlugs } : {}),
     },
     colors,
     arts: {
@@ -1097,10 +1124,11 @@ async function compileCards({
   supabaseUrl,
   shouldUpload,
   forceUpload,
+  heroCardSlugs,
 }) {
   const cardSlugMigration = manifest?.cardSlugMigration ?? null
   const locationByDomain = buildLocationByDomain(locationsJson)
-  const showcaseSlugs = buildFrontendShowcaseSlugs(featuredByLocation, collectionJson)
+  const showcaseSlugs = buildFrontendShowcaseSlugs(featuredByLocation, collectionJson, heroCardSlugs)
   const allCardAssets = (metadata.assets ?? []).filter(
     (a) => a.kind === 'card' && a.stats && a.ability,
   )
@@ -1206,11 +1234,7 @@ async function compileCards({
     bySlug.set(slug, record)
   }
 
-  const landingCards = Object.entries(featuredByLocation).map(([locationId, slug], fanIndex) => {
-    const card = bySlug.get(slug)
-    if (!card) throw new Error(`Featured slug not found: ${slug} (location ${locationId})`)
-    return { ...card, locationId, fanIndex }
-  })
+  const landingCards = buildLandingCards(featuredByLocation, heroCardSlugs, bySlug)
 
   const generatedAt = new Date().toISOString()
   const frontendCatalog = frontendShowcaseOnly
@@ -1452,6 +1476,7 @@ async function main() {
     heroMedia:
       landingJson.heroMedia ??
       (landingJson.introVideo === false ? 'slides' : 'video-then-slides'),
+    heroCardSlugs: landingJson.heroCardSlugs ?? null,
   }
   const descriptions = await readJson(paths.descriptions, 'copy/descriptions')
   const dominionsJson = await readJsonOptional(paths.dominions)
@@ -1542,6 +1567,7 @@ async function main() {
     supabaseUrl,
     shouldUpload,
     forceUpload,
+    heroCardSlugs: landing.heroCardSlugs,
   })
 
   appConfig.descriptions.collection = buildCollectionCopy(collectionJson, publicBase, bySlug)

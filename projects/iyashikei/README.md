@@ -26,11 +26,12 @@ Lore hooks (replaces voidborn's Aether Bleed / Null Zones):
 - [x] Generation specs (`cardgen.json`, `contentgen.json`)
 - [ ] **Landing assets** — `cd contentgen && npm run manifest && npm run generate-images && npm run apply`
 - [ ] **Showcase cards** — cardgen → `assets/cards/` (12 slugs for `FRONTEND_SHOWCASE_ONLY=1`)
+- [x] **Brand files** — `header.png`, `gamelogo.png`, `favicon.ico`, `play-lobby.png` (Shinrin moss shrine lobby)
 
 ## Next steps
 
 1. **Landing backgrounds:** `cd contentgen && npm install && npm run manifest -- --project=iyashikei` then `generate-images` + `apply`
-2. **Brand files:** add `assets/brand/gamelogo.png`, `header.png`, `play-lobby.png` manually
+2. **Brand files:** `assets/brand/` — `header.png` (source), `gamelogo.png`, `favicon.ico`, `play-lobby.png` (regenerate from header + lobby city via compile, or copy `mori_city_01_moss_shrine.png` for play lobby)
 3. **Showcase card art:** `cd cardgen && npm run generate-images-showcase -- --project=iyashikei`
 4. `FRONTEND_SHOWCASE_ONLY=1 PROJECT=iyashikei npm run compile` from `frontend/`
 

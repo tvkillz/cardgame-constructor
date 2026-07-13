@@ -154,7 +154,7 @@
 
 .iyashikei-header__accordion--open {
   max-height: 520px;
-  opacity: 1;
+  opacity: 0.7;
   margin-top: 0.65rem;
 }
 
@@ -301,44 +301,59 @@
   }
 }
 
-/* Corner cards — one per ward, framing the hero */
+/* Corner cards — two columns, equal vertical spacing */
 
 .iyashikei-hero__corners {
   position: absolute;
   inset: 0;
   z-index: 8;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  padding: clamp(5.5rem, 14vh, 8rem) clamp(0.75rem, 4vw, 2.5rem)
+    clamp(2rem, 8vh, 4rem);
+  pointer-events: none;
+  box-sizing: border-box;
+}
+
+.iyashikei-hero__column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: clamp(88px, 16vw, 148px);
+  min-height: 100%;
   pointer-events: none;
 }
 
 .iyashikei-hero__corner {
-  position: absolute;
-  width: clamp(88px, 16vw, 148px);
+  position: relative;
+  width: 100%;
   pointer-events: auto;
   animation: iyashikei-corner-float 7s ease-in-out infinite;
   animation-delay: var(--corner-delay, 0s);
 }
 
-.iyashikei-hero__corner--tl {
-  top: clamp(5.5rem, 14vh, 8rem);
-  left: clamp(0.75rem, 4vw, 2.5rem);
+.iyashikei-hero__column--left .iyashikei-hero__corner:nth-child(1) {
   --corner-tilt: -7deg;
 }
 
-.iyashikei-hero__corner--tr {
-  top: clamp(5.5rem, 14vh, 8rem);
-  right: clamp(0.75rem, 4vw, 2.5rem);
-  --corner-tilt: 6deg;
+.iyashikei-hero__column--left .iyashikei-hero__corner:nth-child(2) {
+  --corner-tilt: -4deg;
 }
 
-.iyashikei-hero__corner--bl {
-  bottom: clamp(2rem, 8vh, 4rem);
-  left: clamp(0.75rem, 4vw, 2.5rem);
+.iyashikei-hero__column--left .iyashikei-hero__corner:nth-child(3) {
   --corner-tilt: 5deg;
 }
 
-.iyashikei-hero__corner--br {
-  bottom: clamp(2rem, 8vh, 4rem);
-  right: clamp(0.75rem, 4vw, 2.5rem);
+.iyashikei-hero__column--right .iyashikei-hero__corner:nth-child(1) {
+  --corner-tilt: 6deg;
+}
+
+.iyashikei-hero__column--right .iyashikei-hero__corner:nth-child(2) {
+  --corner-tilt: 4deg;
+}
+
+.iyashikei-hero__column--right .iyashikei-hero__corner:nth-child(3) {
   --corner-tilt: -6deg;
 }
 
@@ -380,20 +395,15 @@
     filter 0.35s ease;
 }
 
+.iyashikei-hero__corner .card__frame {
+  border-color: color-mix(in srgb, var(--glow-color) 50%, #f5f0e6);
+}
+
 .iyashikei-hero__corner .iyashikei-hero__corner-card.card:hover,
 .iyashikei-hero__corner .iyashikei-hero__corner-card.card.card--hovered {
   z-index: 20;
   transform: rotate(var(--corner-tilt, 0deg)) rotateX(var(--tilt-x)) rotateY(var(--tilt-y))
     translateY(-12px) scale(1.05);
-  filter: drop-shadow(0 16px 32px rgba(44, 62, 45, 0.3))
-    drop-shadow(0 0 24px color-mix(in srgb, var(--glow-color) 45%, transparent));
-}
-
-.iyashikei-hero__corner .card__frame {
-  border-color: color-mix(in srgb, var(--glow-color) 50%, #f5f0e6);
-  box-shadow:
-    0 6px 20px rgba(44, 62, 45, 0.14),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.4);
 }
 
 @keyframes iyashikei-corner-float {

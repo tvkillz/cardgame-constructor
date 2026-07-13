@@ -1,5 +1,13 @@
 {
   "variant": "iyashikei",
   "introVideo": false,
-  "heroMedia": "slides"
+  "heroMedia": "slides",
+  "heroCardSlugs": [
+    "shinrin_card_01_kodama_keeper",
+    "naminami_card_01_tide_listener",
+    "shinrin_card_04_maple_spirit",
+    "akari_card_01_lantern_tender",
+    "naminami_card_04_shore_heron",
+    "takane_card_01_breeze_shepherd"
+  ]
 }

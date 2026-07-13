@@ -9,6 +9,8 @@ import {
 } from 'react'
 
 import { preloadImage } from '@/lib/cards/preload'
+import { formatCardStat } from '@/lib/cards/numerals'
+import { appConfig } from '@/config'
 import { DOMAIN_LABEL, type CardDomain } from '@/lib/cards/domains'
 import type { CardAbility, CardRarity } from '@/lib/cards/types'
 
@@ -44,6 +46,8 @@ interface CardComponentProps extends CardDisplayProps {
   /** Picker grids: keep thumbnail art; preview lives elsewhere. */
   thumbOnly?: boolean
   className?: string
+  /** Stat badge numerals — iyashikei hero uses kanji. */
+  numeralStyle?: 'arabic' | 'kanji'
   onHoverChange?: (isHovered: boolean) => void
   onDoubleClick?: (event: MouseEvent<HTMLElement>) => void
 }
@@ -69,6 +73,7 @@ const Card = forwardRef<HTMLElement, CardComponentProps>(function Card(
     frozen = false,
     thumbOnly = false,
     className = '',
+    numeralStyle = appConfig.landing?.variant === 'iyashikei' ? 'kanji' : 'arabic',
     onHoverChange,
     onDoubleClick,
   },
@@ -143,7 +148,7 @@ const Card = forwardRef<HTMLElement, CardComponentProps>(function Card(
   const attackStat = (
     <div className="card__stat card__stat--attack" aria-label={`Attack ${stats.attack}`}>
       <span className="card__stat-icon card__stat-icon--attack" aria-hidden="true" />
-      <span className="card__stat-value">{stats.attack}</span>
+      <span className="card__stat-value">{formatCardStat(stats.attack, numeralStyle)}</span>
     </div>
   )
 
@@ -152,7 +157,9 @@ const Card = forwardRef<HTMLElement, CardComponentProps>(function Card(
       className="card__stat card__stat--health"
       aria-label={`Health ${Math.max(0, stats.health)}`}
     >
-      <span className="card__stat-value">{Math.max(0, stats.health)}</span>
+      <span className="card__stat-value">
+        {formatCardStat(Math.max(0, stats.health), numeralStyle)}
+      </span>
     </div>
   )
 
@@ -217,7 +224,7 @@ const Card = forwardRef<HTMLElement, CardComponentProps>(function Card(
         />
         <div className="card__overlay" />
         <div className="card__stat card__stat--mana" aria-label={`Mana ${stats.mana}`}>
-          <span className="card__stat-value">{stats.mana}</span>
+          <span className="card__stat-value">{formatCardStat(stats.mana, numeralStyle)}</span>
         </div>
         <div
           className={`card__domain card__domain--${domain}`}

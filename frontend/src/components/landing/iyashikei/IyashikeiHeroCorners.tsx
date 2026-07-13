@@ -6,11 +6,40 @@ import { HERO_CARDS } from '@/config'
 import { preloadCardImages } from '@/lib/cards/preload'
 import Card from '@/components/CardPlaceholder/Card'
 import '@/components/CardPlaceholder/styles.css'
+import './styles.css'
 
-const CORNER_SLOTS = ['tl', 'tr', 'bl', 'br'] as const
+const LEFT_SLOTS = [0, 2, 4] as const
+const RIGHT_SLOTS = [1, 3, 5] as const
+
+function HeroCornerCard({
+  card,
+  index,
+}: {
+  card: (typeof HERO_CARDS)[number]
+  index: number
+}) {
+  return (
+    <div
+      className="iyashikei-hero__corner"
+      style={{ '--corner-delay': `${index * 0.75}s` } as CSSProperties}
+    >
+      <div className="iyashikei-hero__corner-shine" aria-hidden="true" />
+      <Card
+        {...card}
+        layoutMode="hero"
+        showAbility={false}
+        showKeywords={false}
+        showRarity={false}
+        totalCards={1}
+        fanIndex={0}
+        className="iyashikei-hero__corner-card"
+      />
+    </div>
+  )
+}
 
 export default function IyashikeiHeroCorners() {
-  const cards = HERO_CARDS.slice(0, CORNER_SLOTS.length)
+  const cards = HERO_CARDS.slice(0, 6)
 
   useEffect(() => {
     if (!cards.length) return
@@ -21,29 +50,20 @@ export default function IyashikeiHeroCorners() {
 
   return (
     <div className="iyashikei-hero__corners" aria-hidden={cards.length === 0}>
-      {cards.map((card, index) => {
-        const slot = CORNER_SLOTS[index] ?? 'tl'
-
-        return (
-          <div
-            key={card.id}
-            className={`iyashikei-hero__corner iyashikei-hero__corner--${slot}`}
-            style={{ '--corner-delay': `${index * 0.9}s` } as CSSProperties}
-          >
-            <div className="iyashikei-hero__corner-shine" aria-hidden="true" />
-            <Card
-              {...card}
-              layoutMode="hero"
-              showAbility={false}
-              showKeywords={false}
-              showRarity={false}
-              totalCards={1}
-              fanIndex={0}
-              className="iyashikei-hero__corner-card"
-            />
-          </div>
-        )
-      })}
+      <div className="iyashikei-hero__column iyashikei-hero__column--left">
+        {LEFT_SLOTS.map((index) => {
+          const card = cards[index]
+          if (!card) return null
+          return <HeroCornerCard key={card.id} card={card} index={index} />
+        })}
+      </div>
+      <div className="iyashikei-hero__column iyashikei-hero__column--right">
+        {RIGHT_SLOTS.map((index) => {
+          const card = cards[index]
+          if (!card) return null
+          return <HeroCornerCard key={card.id} card={card} index={index} />
+        })}
+      </div>
     </div>
   )
 }

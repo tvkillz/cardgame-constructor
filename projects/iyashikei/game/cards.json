@@ -229,6 +229,44 @@
       "format": "3:4",
       "notes": "mountain shrine steps, wind chimes",
       "image_prompt": "A summit guide with travel pack beside wind chime shrine steps, iyashikei watercolor card art, peaceful mountain vista"
+    },
+    {
+      "title": "Maple Spirit",
+      "slug": "shinrin_card_04_maple_spirit",
+      "category": "cards",
+      "domain": "shinrin",
+      "kind": "card",
+      "role": "Spirit / Buffer",
+      "stats": { "mana": 2, "attack": 1, "health": 4 },
+      "keywords": ["Ward"],
+      "ability": {
+        "name": "Autumn Hush",
+        "text": "Ward. At the start of your turn, restore 1 Health to your player."
+      },
+      "path": "cards/shinrin/shinrin_card_04_maple_spirit.png",
+      "source_file": "",
+      "format": "3:4",
+      "notes": "maple grove, fallen crimson leaves, soft afternoon",
+      "image_prompt": "A gentle maple forest spirit among crimson autumn leaves and cedar roots, iyashikei watercolor trading card art, soft komorebi light, peaceful mood"
+    },
+    {
+      "title": "Shore Heron",
+      "slug": "naminami_card_04_shore_heron",
+      "category": "cards",
+      "domain": "naminami",
+      "kind": "card",
+      "role": "Scout / Watcher",
+      "stats": { "mana": 3, "attack": 2, "health": 3 },
+      "keywords": ["Flying", "Stealth"],
+      "ability": {
+        "name": "Tidal Watch",
+        "text": "Flying. Stealth until this unit attacks. Draw a card when this unit enters play."
+      },
+      "path": "cards/naminami/naminami_card_04_shore_heron.png",
+      "source_file": "",
+      "format": "3:4",
+      "notes": "misty shore rocks, grey heron at dawn",
+      "image_prompt": "A serene grey heron standing on misty tidal rocks at dawn, iyashikei anime card art, pale blue and shell cream palette, calm coastal scene"
     }
   ]
 }
