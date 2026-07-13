@@ -1,0 +1,9 @@
+{
+  "_comment": "Deprecated mirror — source of truth is locations.json (featuredCardSlug per realm). Kept for reference; compile reads locations.json only.",
+  "featuredByLocation": {
+    "shinrin": "shinrin_card_01_kodama_keeper",
+    "naminami": "naminami_card_01_tide_listener",
+    "akari": "akari_card_01_lantern_tender",
+    "takane": "takane_card_01_breeze_shepherd"
+  }
+}

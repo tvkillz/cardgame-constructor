@@ -1,0 +1,30 @@
+{
+  "title": "Frequently Asked Questions",
+  "items": [
+    {
+      "id": "what-is-komorebi",
+      "question": "What is Komorebi?",
+      "answer": "Komorebi is a tactical trading card game set across four iyashikei countryside wards. Collect cards, build decks, trade on the market, and compete in ranked and casual matches — all with a calm, pastoral atmosphere."
+    },
+    {
+      "id": "how-to-start",
+      "question": "How do I start playing?",
+      "answer": "Create an account, claim your starter resources, and enter a match from Play Now. You can run tutorial matches with a random deck or jump into casual play while you build your collection."
+    },
+    {
+      "id": "credits",
+      "question": "What are credits used for?",
+      "answer": "Credits are the in-game currency for buying individual cards, sealed bundles, and store packs on the portal. You can also earn credits by selling duplicates and unwanted cards on the market."
+    },
+    {
+      "id": "trade-cards",
+      "question": "Can I trade or sell my cards?",
+      "answer": "Yes. List cards on the player market for others to buy, or browse listings to complete your deck. Market access requires a signed-in account."
+    },
+    {
+      "id": "free-to-play",
+      "question": "Is Komorebi free to play?",
+      "answer": "You can create an account and play without purchasing credits. Expanding your collection faster through the market and sealed bundles is optional and uses credits purchased in the store."
+    }
+  ]
+}

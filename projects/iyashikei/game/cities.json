@@ -1,0 +1,76 @@
+{
+  "cities": [
+    {
+      "slug": "mori_city_01_moss_shrine",
+      "path": "cities/mori/mori_city_01_moss_shrine.png",
+      "name": "Moss Lantern Shrine",
+      "description": "A hillside shrine wrapped in velvet moss, where stone lanterns glow faintly through cedar mist and the air smells of wet bark and green tea."
+    },
+    {
+      "slug": "mori_city_02_tea_terrace",
+      "path": "cities/mori/mori_city_02_tea_terrace.png",
+      "name": "Dew Terrace",
+      "description": "Layered tea fields catch the first light of morning; narrow stone steps wind between rows while distant farmhouses trail thin threads of woodsmoke."
+    },
+    {
+      "slug": "mori_city_03_cedar_pass",
+      "path": "cities/mori/mori_city_03_cedar_pass.png",
+      "name": "Cedar Pass",
+      "description": "An ancient forest footpath beneath towering cedars — dappled sunlight, soft needle carpet, and the distant sound of a stream you cannot yet see."
+    },
+    {
+      "slug": "umi_city_01_morning_pier",
+      "path": "cities/umi/umi_city_01_morning_pier.png",
+      "name": "Morning Pier",
+      "description": "A weathered wooden pier stretches into calm inlet water; fishing boats rest at anchor while gulls circle and the horizon blushes pink before sunrise."
+    },
+    {
+      "slug": "umi_city_02_tidal_garden",
+      "path": "cities/umi/umi_city_02_tidal_garden.png",
+      "name": "Tidal Rock Garden",
+      "description": "Smooth stones and raked sand patterns emerge between tide pools at low water — herons stand still as mirrors, and the sea breathes in slow rhythm."
+    },
+    {
+      "slug": "umi_city_03_lantern_bay",
+      "path": "cities/umi/umi_city_03_lantern_bay.png",
+      "name": "Lantern Bay",
+      "description": "Paper lanterns line a sheltered bay at twilight; their reflections tremble on dark water while a small village glows warmly along the shore."
+    },
+    {
+      "slug": "hi_city_01_harvest_hill",
+      "path": "cities/hi/hi_city_01_harvest_hill.png",
+      "name": "Harvest Hill",
+      "description": "Golden orchards crown a gentle hill at late afternoon; ladders lean against laden branches and long shadows stripe the grass like woven tatami."
+    },
+    {
+      "slug": "hi_city_02_festival_lane",
+      "path": "cities/hi/hi_city_02_festival_lane.png",
+      "name": "Festival Lantern Lane",
+      "description": "A narrow village lane hung with paper lanterns and festival banners; food stalls steam in the amber air while children chase sparklers at the lane's end."
+    },
+    {
+      "slug": "hi_city_03_onsen_outlook",
+      "path": "cities/hi/hi_city_03_onsen_outlook.png",
+      "name": "Onsen Valley Outlook",
+      "description": "A wooden veranda overlooks a misty valley where hot spring steam rises between autumn trees — the sky burns copper and the world feels unhurried."
+    },
+    {
+      "slug": "kaze_city_01_windmill_ridge",
+      "path": "cities/kaze/kaze_city_01_windmill_ridge.png",
+      "name": "Windmill Ridge",
+      "description": "Old windmills turn slowly along a highland ridge; wildflowers bend in steady breeze while cloud shadows drift across sunlit pasture below."
+    },
+    {
+      "slug": "kaze_city_02_cloud_pasture",
+      "path": "cities/kaze/kaze_city_02_cloud_pasture.png",
+      "name": "Cloud Pasture",
+      "description": "Sheep graze on a meadow so high the clouds seem within reach; a lonely fence line curves toward a distant peak wrapped in soft violet haze."
+    },
+    {
+      "slug": "kaze_city_03_chime_summit",
+      "path": "cities/kaze/kaze_city_03_chime_summit.png",
+      "name": "Wind Chime Summit",
+      "description": "A mountain shrine strung with glass wind chimes — every gust sends a chorus of clear notes across open sky and terraced steps below."
+    }
+  ]
+}

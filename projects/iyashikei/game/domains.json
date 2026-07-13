@@ -1,0 +1,32 @@
+{
+  "domains": [
+    {
+      "id": "shinrin",
+      "label": "Shinrin",
+      "categoryId": "earth",
+      "glowColor": "#7cb87c",
+      "domainAsset": "domains/mori_domain.png"
+    },
+    {
+      "id": "naminami",
+      "label": "Naminami",
+      "categoryId": "water",
+      "glowColor": "#6eb5d9",
+      "domainAsset": "domains/umi_domain.png"
+    },
+    {
+      "id": "akari",
+      "label": "Akari",
+      "categoryId": "fire",
+      "glowColor": "#e8a87c",
+      "domainAsset": "domains/hi_domain.png"
+    },
+    {
+      "id": "takane",
+      "label": "Takane",
+      "categoryId": "air",
+      "glowColor": "#b8a9c9",
+      "domainAsset": "domains/kaze_domain.png"
+    }
+  ]
+}

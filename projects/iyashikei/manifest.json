@@ -1,0 +1,62 @@
+{
+  "id": "iyashikei",
+  "name": {
+    "display": "KOMOREBI",
+    "short": "Komorebi",
+    "documentTitle": "KOMOREBI"
+  },
+  "siteUrl": "https://komorebi.example.com",
+  "assets": {
+    "publicBase": "/assets",
+    "cdnBase": null
+  },
+  "brand": {
+    "logo": "brand/gamelogo.png",
+    "headerLogo": "brand/header.png",
+    "headerLogoAlt": "Komorebi",
+    "favicon": "brand/favicon.ico",
+    "playLogo": "brand/gamelogo.png",
+    "playLogoAlt": "Komorebi",
+    "playLobby": "brand/play-lobby.png",
+    "logoAlt": "Komorebi"
+  },
+  "routes": {
+    "home": "/",
+    "play": "/play",
+    "leaderboard": "/leaderboard",
+    "portal": "/portal",
+    "portalMarket": "/portal/market",
+    "portalVaults": "/portal/vaults",
+    "portalCollection": "/portal/collection",
+    "portalTransactions": "/portal/transactions",
+    "portalProfile": "/portal/profile",
+    "portalStore": "/portal/store",
+    "checkout": "/checkout",
+    "checkoutSuccess": "/portal/checkout/success",
+    "checkoutCancel": "/portal/checkout/cancel",
+    "withdrawalSuccess": "/portal/withdrawal/success"
+  },
+  "legal": {
+    "termsUrl": "/terms",
+    "privacyUrl": "/privacy",
+    "refundPolicyUrl": "/refund-policy"
+  },
+  "anchors": {
+    "play": "#play",
+    "market": "#market",
+    "leaderboard": "#leaderboard"
+  },
+  "features": {
+    "auth": true,
+    "commerce": true,
+    "requireSignInForPlay": true
+  },
+  "cardSlugMigration": {
+    "realmToLegacyElement": {
+      "shinrin": "mori",
+      "naminami": "umi",
+      "akari": "hi",
+      "takane": "kaze"
+    }
+  }
+}

@@ -6,6 +6,8 @@ const cardgenRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '
 dotenv.config({ path: path.join(cardgenRoot, '.env') })
 
 import { runGenerate, runGenerateDomains } from './commands/generate.js'
+import { runGenerateShowcase } from './commands/generate-showcase.js'
+import { runGenerateImagesShowcase } from './commands/generate-images-showcase.js'
 import {
   runGenerateRound,
   runValidateRound,
@@ -25,6 +27,8 @@ import { runCleanupStaging } from './commands/cleanup-staging.js'
 const [command, ...rest] = process.argv.slice(2)
 
 const commands = {
+  'generate-showcase': runGenerateShowcase,
+  'generate-images-showcase': runGenerateImagesShowcase,
   generate: runGenerate,
   'generate-round': runGenerateRound,
   'generate-domains': runGenerateDomains,
@@ -59,7 +63,14 @@ Round workflow (balanced — total must divide by domain count):
 Single-domain / legacy:
   generate, validate, approve, generate-images, apply
 
+Landing showcase (hero + collection — 12 slugs from locations.json + collection.json):
+
+  generate-showcase       Gemini text for exact landing slugs
+  generate-images-showcase  Art for showcase slugs already in cards.json
+
 Examples:
+  npm run generate-showcase -- --project=iyashikei
+  npm run generate-images-showcase -- --project=iyashikei
   npm run generate-round -- --project=voidborn --per-domain=13
   npm run generate-round -- --project=voidborn --total=48
   npm run validate-round -- --round=round_20260625_08-20

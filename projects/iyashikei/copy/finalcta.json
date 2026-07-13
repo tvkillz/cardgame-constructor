@@ -1,0 +1,16 @@
+{
+  "title": "Step Into the Light",
+  "subtitle": "Wander the wards. Tend the quiet.",
+  "description": "Join a community of deck keepers, market traders, and ladder climbers who compete without hurry. Collect countryside spirits, shape gentle strategies, and leave your mark on the four wards of Komorebi.",
+  "buttonLabel": "Play Now",
+  "route": "play",
+  "backgroundImage": "cities/kaze/kaze_city_03_chime_summit.png",
+  "siege": {
+    "title": "The Gentle Season",
+    "stats": [
+      { "id": "players", "value": "12K+", "label": "Ward Keepers" },
+      { "id": "battles", "value": "48K+", "label": "Daily Matches" },
+      { "id": "cards", "value": "2M+", "label": "Spirits Collected" }
+    ]
+  }
+}

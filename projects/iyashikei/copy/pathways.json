@@ -1,0 +1,76 @@
+{
+  "title": "Gather. Trade. Tend.",
+  "description": "Komorebi rewards patience — stock your binder from sealed bundles and open listings, pass along duplicates for credits, and shape a deck that wins quietly but convincingly.",
+  "features": [
+    {
+      "id": "expand-collection",
+      "title": "Grow Your Binder",
+      "description": "Add depth across wards and seasonal releases. Every new pull opens another line you can run when the ladder shifts.",
+      "image": "cta1/expand-collection.webp",
+      "glowColor": "#7cb87c"
+    },
+    {
+      "id": "buy-cards",
+      "title": "Thoughtful Shopping",
+      "description": "Filter the catalog, find the missing piece, and buy exactly what your curve has been waiting for — no rush, no noise.",
+      "image": "cta1/buy-cards.webp",
+      "glowColor": "#6eb5d9"
+    },
+    {
+      "id": "sealed-vaults",
+      "title": "Open Sealed Bundles",
+      "description": "Crack sealed products and chase a standout pull. Each unopened bundle is a small surprise — chase card or trade bait.",
+      "image": "cta1/sealed-vaults.webp",
+      "glowColor": "#e8a87c"
+    },
+    {
+      "id": "discover-rare",
+      "title": "Chase Gentle Rarities",
+      "description": "Hunt foils, epics, and signature prints — the kind of card that rewrites a deck and makes opponents pause to admire it.",
+      "image": "cta1/discover-rare.webp",
+      "glowColor": "#b8a9c9"
+    },
+    {
+      "id": "sell-cards",
+      "title": "Pass Along Duplicates",
+      "description": "Extras still have value. List them, fund the next upgrade, and keep your binder lean for the decks you actually play.",
+      "image": "cta1/sell-cards.webp",
+      "glowColor": "#d4a85c"
+    },
+    {
+      "id": "shape-strategy",
+      "title": "Tune Your Deck",
+      "description": "Prototype lists in the deck lab — test counters, stress synergies, and lock a 30-card answer to the ladder's current pace.",
+      "image": "cta1/shape-strategy.webp",
+      "glowColor": "#9a8ab8"
+    }
+  ],
+  "tiers": [
+    {
+      "id": "uncommon",
+      "rarityLabel": "UNCOMMON",
+      "title": "Everyday Pieces",
+      "description": "Reliable spirits and utility cards that glue a list together — flexible enough to slot into multiple strategies.",
+      "glowColor": "#8ec9a0"
+    },
+    {
+      "id": "rare",
+      "rarityLabel": "RARE",
+      "title": "Keystone Cards",
+      "description": "Standout prints with real board impact — alternate art, foil shine, and effects that reward thoughtful building.",
+      "glowColor": "#b8a9c9"
+    },
+    {
+      "id": "epic",
+      "rarityLabel": "EPIC",
+      "title": "Ward Guardians",
+      "description": "High-impact spirits and combo engines that close games or turn a losing board. One well-timed play can end the match.",
+      "glowColor": "#e8a87c"
+    }
+  ],
+  "marketCta": {
+    "description": "Hundreds of listings live right now — find the card that completes your next deck.",
+    "buttonLabel": "Browse the Market",
+    "route": "portalMarket"
+  }
+}

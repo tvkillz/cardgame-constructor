@@ -1,4 +1,5 @@
 @import './styles/landing-layout.css';
+@import './styles/iyashikei-fonts.css';
 
 /* Color defaults — overridden at runtime by applyTheme(); fonts via next/font in app layout */
 :root {

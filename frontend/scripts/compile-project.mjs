@@ -390,6 +390,7 @@ const SHARED_FOOTER_ASSETS = {
   'facebook-fill.svg': 'shared/facebook.svg',
   'discord-outline.svg': 'shared/discord.svg',
   'instagram-glyph-logo-png_seeklogo-286192.png': 'shared/instagram.png',
+  'telegram.svg': 'shared/telegram.svg',
   'Visa_Inc.-Logo.wine.svg': 'shared/visa.svg',
   'mastercard-logo-vector-1.svg': 'shared/mastercard.svg',
   'Apple_Pay-White-Dark-Background-Logo.wine.svg': 'shared/apple-pay.svg',
@@ -872,6 +873,7 @@ function buildAppConfig({
   domainGlow,
   publicBase,
   cdnBase,
+  landing,
 }) {
   const loreLocations = {}
   for (const loc of locationsJson.locations) {
@@ -969,9 +971,17 @@ function buildAppConfig({
     },
     seo: buildSeoConfig(seoJson, manifest, descriptions),
     sitemap: buildSitemapConfig(sitemapJson, manifest),
+    landing: {
+      variant: landing.variant ?? 'voidborn',
+      introVideo: landing.introVideo !== false,
+      heroMedia: landing.heroMedia ?? (landing.introVideo === false ? 'slides' : 'video-then-slides'),
+    },
     colors,
     arts: {
-      introVideo: assetUrl(publicBase, manifest.brand.introVideo),
+      introVideo:
+        landing.introVideo !== false && manifest.brand?.introVideo
+          ? assetUrl(publicBase, manifest.brand.introVideo)
+          : '',
       defaultArenaLocationId: locationsJson.defaults.arenaLocationId,
       defaultLobbyLocationId: locationsJson.defaults.lobbyLocationId,
       ...(manifest.brand?.playLobby
@@ -1435,6 +1445,14 @@ async function main() {
   }
   const colors = await readJson(paths.colors, 'theme/colors')
   const ui = await readJson(paths.ui, 'theme/ui')
+  const landingJson = (await readJsonOptional(paths.landing)) ?? {}
+  const landing = {
+    variant: landingJson.variant ?? 'voidborn',
+    introVideo: landingJson.introVideo ?? true,
+    heroMedia:
+      landingJson.heroMedia ??
+      (landingJson.introVideo === false ? 'slides' : 'video-then-slides'),
+  }
   const descriptions = await readJson(paths.descriptions, 'copy/descriptions')
   const dominionsJson = await readJsonOptional(paths.dominions)
   const gamemodelJson = await readJsonOptional(paths.gamemodel)
@@ -1506,6 +1524,7 @@ async function main() {
     domainGlow,
     publicBase,
     cdnBase,
+    landing,
   })
 
   const { bySlug } = await compileCards({

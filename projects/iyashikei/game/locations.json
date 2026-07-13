@@ -1,0 +1,62 @@
+{
+  "defaults": {
+    "arenaLocationId": "naminami",
+    "lobbyLocationId": "shinrin"
+  },
+  "locations": [
+    {
+      "id": "shinrin",
+      "name": "Shinrin",
+      "domainId": "shinrin",
+      "categoryId": "earth",
+      "glowColor": "#7cb87c",
+      "featuredCardSlug": "shinrin_card_01_kodama_keeper",
+      "epithet": "The Cedar Quiet",
+      "short": "The Cedar Quiet — mossy shrines, tea terraces, and footpaths through morning mist.",
+      "imageAsset": "cities/mori/mori_city_01_moss_shrine.png",
+      "backgroundImageAsset": "cities/mori/mori_city_02_tea_terrace.png"
+    },
+    {
+      "id": "naminami",
+      "name": "Naminami",
+      "domainId": "naminami",
+      "categoryId": "water",
+      "glowColor": "#6eb5d9",
+      "featuredCardSlug": "naminami_card_01_tide_listener",
+      "epithet": "The Tide's Hush",
+      "short": "The Tide's Hush — fishing piers at dawn, tidal gardens, and lantern-lit bays.",
+      "imageAsset": "cities/umi/umi_city_01_morning_pier.png",
+      "backgroundImageAsset": "cities/umi/umi_city_02_tidal_garden.png"
+    },
+    {
+      "id": "akari",
+      "name": "Akari",
+      "domainId": "akari",
+      "categoryId": "fire",
+      "glowColor": "#e8a87c",
+      "featuredCardSlug": "akari_card_01_lantern_tender",
+      "epithet": "The Golden Threshold",
+      "short": "The Golden Threshold — harvest hills, festival lanes, and warm onsen outlooks at dusk.",
+      "imageAsset": "cities/hi/hi_city_01_harvest_hill.png",
+      "backgroundImageAsset": "cities/hi/hi_city_02_festival_lane.png"
+    },
+    {
+      "id": "takane",
+      "name": "Takane",
+      "domainId": "takane",
+      "categoryId": "air",
+      "glowColor": "#b8a9c9",
+      "featuredCardSlug": "takane_card_01_breeze_shepherd",
+      "epithet": "The Wind's Rest",
+      "short": "The Wind's Rest — windmill ridges, cloud pastures, and chime summits above the valley.",
+      "imageAsset": "cities/kaze/kaze_city_01_windmill_ridge.png",
+      "backgroundImageAsset": "cities/kaze/kaze_city_02_cloud_pasture.png"
+    }
+  ],
+  "lore": {
+    "global": {
+      "harukaze": "Haru-kaze",
+      "shizukesa": "Shizukesa"
+    }
+  }
+}

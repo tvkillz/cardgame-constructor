@@ -18,7 +18,7 @@ async function fileExists(p) {
  * Apply one approved batch to cards.json + assets.
  * @returns {Promise<{ projectId: string, batchPath: string, appliedSlugs: string[], added: number }>}
  */
-export async function applyBatch(batchFile, { projectId, dryRun = false, keepStaging = false, roundDir = null } = {}) {
+export async function applyBatch(batchFile, { projectId, dryRun = false, keepStaging = false, roundDir = null, force = false } = {}) {
   const abs = path.resolve(batchFile)
   const batch = await readJsonFile(abs)
   const pid = batch.meta?.project || projectId || resolveProjectId()
@@ -30,12 +30,21 @@ export async function applyBatch(batchFile, { projectId, dryRun = false, keepSta
   const existingSlugs = new Set(existing.map((c) => c.slug))
 
   const toAdd = []
+  const toReplace = []
   const missingImages = []
 
   for (const draft of batch.cards ?? []) {
     const entry = toCardsJsonEntry(draft)
-    if (existingSlugs.has(entry.slug)) {
+    const exists = existingSlugs.has(entry.slug)
+    if (exists && !force) {
       console.warn(`Skip (already in cards.json): ${entry.slug}`)
+      continue
+    }
+    if (exists && force) {
+      toReplace.push(entry)
+    } else if (!exists) {
+      // queued for toAdd after image copy
+    } else {
       continue
     }
 
@@ -44,30 +53,41 @@ export async function applyBatch(batchFile, { projectId, dryRun = false, keepSta
 
     if (!(await fileExists(stagedImage))) {
       missingImages.push(entry.slug)
+      if (exists && force) toReplace.pop()
       continue
     }
 
     if (dryRun) {
       console.log(`[dry-run] would copy ${stagedImage} → ${destImage}`)
-      console.log(`[dry-run] would add card ${entry.slug}`)
-      toAdd.push(entry)
+      console.log(`[dry-run] would ${exists ? 'update' : 'add'} card ${entry.slug}`)
+      if (!exists) toAdd.push(entry)
     } else {
       await ensureDir(path.dirname(destImage))
       await copyFile(stagedImage, destImage)
       const base = path.basename(stagedImage, '.png')
-      const promptSlug = base.replace(/[^a-z0-9_]/gi, '_').slice(0, 48)
-      entry.source_file = `${promptSlug}.png`
-      toAdd.push(entry)
+      entry.source_file = `${base.replace(/[^a-z0-9_]/gi, '_').slice(0, 48)}.png`
+      if (exists && force) {
+        const idx = toReplace.findIndex((c) => c.slug === entry.slug)
+        if (idx >= 0) toReplace[idx] = entry
+      } else {
+        toAdd.push(entry)
+      }
       console.log(`✓ ${entry.slug} → ${entry.path}`)
     }
+  }
+
+  const merged = [...existing]
+  for (const entry of toReplace) {
+    const idx = merged.findIndex((c) => c.slug === entry.slug)
+    if (idx >= 0) merged[idx] = entry
   }
 
   if (dryRun) {
     return {
       projectId: pid,
       batchPath: abs,
-      appliedSlugs: toAdd.map((c) => c.slug),
-      added: toAdd.length,
+      appliedSlugs: [...toReplace, ...toAdd].map((c) => c.slug),
+      added: toReplace.length + toAdd.length,
       dryRun: true,
     }
   }
@@ -76,21 +96,21 @@ export async function applyBatch(batchFile, { projectId, dryRun = false, keepSta
     console.error(`\nMissing staged images (${missingImages.length}):`)
     missingImages.forEach((s) => console.error(`  ${paths.stagingImages}/${s}.png`))
     console.error('\nGenerate images first, or apply partial batches after images exist.')
-    if (!toAdd.length) {
+    if (!toAdd.length && !toReplace.length) {
       const err = new Error('No cards applied — missing images')
       err.code = 'MISSING_IMAGES'
       throw err
     }
   }
 
-  if (!toAdd.length) {
+  if (!toAdd.length && !toReplace.length) {
     return { projectId: pid, batchPath: abs, appliedSlugs: [], added: 0 }
   }
 
-  cardsDoc.cards = [...existing, ...toAdd]
+  cardsDoc.cards = [...merged, ...toAdd]
   await writeFile(cardsJsonPath, `${JSON.stringify(cardsDoc, null, 2)}\n`, 'utf8')
 
-  const appliedSlugs = toAdd.map((c) => c.slug)
+  const appliedSlugs = [...toReplace, ...toAdd].map((c) => c.slug)
 
   if (!keepStaging) {
     const { imagesRemoved } = await cleanupAfterApply(paths, {
@@ -109,11 +129,11 @@ export async function applyBatch(batchFile, { projectId, dryRun = false, keepSta
     await writeFile(abs, `${JSON.stringify(batch, null, 2)}\n`, 'utf8')
   }
 
-  console.log(`\nAdded ${toAdd.length} card(s) to ${cardsJsonPath}`)
+  console.log(`\nAdded/updated ${appliedSlugs.length} card(s) in ${cardsJsonPath}`)
   console.log('Upload to backend (local machine):')
   console.log(`  cd frontend && PROJECT=${pid} npm run upload:site`)
 
-  return { projectId: pid, batchPath: abs, appliedSlugs, added: toAdd.length }
+  return { projectId: pid, batchPath: abs, appliedSlugs, added: appliedSlugs.length }
 }
 
 export async function runApply(argv) {
@@ -121,9 +141,10 @@ export async function runApply(argv) {
   const file = flags.file
   const dryRun = Boolean(flags['dry-run'])
   const keepStaging = Boolean(flags['keep-staging'])
+  const force = Boolean(flags.force)
 
   if (!file) {
-    console.error('Usage: npm run apply -- --file=.../approved/kronos_batch_06-15.json [--dry-run] [--keep-staging]')
+    console.error('Usage: npm run apply -- --file=.../approved/kronos_batch_06-15.json [--dry-run] [--keep-staging] [--force]')
     process.exit(1)
   }
 
@@ -132,6 +153,7 @@ export async function runApply(argv) {
       projectId: flags.project || resolveProjectId(),
       dryRun,
       keepStaging,
+      force,
     })
     if (dryRun) {
       console.log(`\nDry run complete. Would add ${result.added} card(s).`)

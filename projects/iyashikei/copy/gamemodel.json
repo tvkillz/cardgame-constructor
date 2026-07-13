@@ -1,0 +1,32 @@
+{
+  "title": "How Komorebi Plays",
+  "description": "Four pastoral wards, one thoughtful battlefield — assemble a deck, outmaneuver rivals in turn-based duels, and climb the seasonal ladder at your own pace.",
+  "pillars": [
+    {
+      "id": "tactical-battles",
+      "title": "Calm Tactics",
+      "description": "Trade blows on a living board where timing, lane pressure, and burst windows matter more than raw stats. Win the turn before you win the match.",
+      "image": "gamemodel/tactical-battles.webp",
+      "glowColor": "#6eb5d9"
+    },
+    {
+      "id": "collectible-cards",
+      "title": "Ward Collecting",
+      "description": "Pull spirits from Shinrin, Naminami, Akari, and Takane — then stitch keywords, curves, and finishers into a list that rewards patient play.",
+      "image": "gamemodel/collectible-cards.webp",
+      "glowColor": "#b8a9c9"
+    },
+    {
+      "id": "ranked-climb",
+      "title": "Seasonal Ladder",
+      "description": "Climb seasonal tiers, learn from losses, and refine your lines. The summit rewards players who adapt without losing their composure.",
+      "image": "gamemodel/ranked-climb.webp",
+      "glowColor": "#e8a87c"
+    }
+  ],
+  "tags": [
+    { "id": "deck-building", "label": "Deck Tuning" },
+    { "id": "class-champions", "label": "Ward Affinities" },
+    { "id": "replayable-depth", "label": "Shifting Metas" }
+  ]
+}

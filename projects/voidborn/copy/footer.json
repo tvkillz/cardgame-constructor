@@ -18,22 +18,28 @@
   },
   "social": [
     {
+      "id": "telegram",
+      "label": "Telegram",
+      "href": "https://t.me/voidbornfun",
+      "icon": "shared/telegram.svg"
+    },
+    {
+      "id": "instagram",
+      "label": "Instagram",
+      "href": "https://www.instagram.com/voidborn.fun/",
+      "icon": "shared/instagram.png"
+    },
+    {
       "id": "facebook",
       "label": "Facebook",
-      "href": "",
+      "href": "https://www.facebook.com/profile.php?id=61591572371089",
       "icon": "shared/facebook.svg"
     },
     {
       "id": "discord",
       "label": "Discord",
-      "href": "",
+      "href": "https://discord.gg/bEnJAMkhk",
       "icon": "shared/discord.svg"
-    },
-    {
-      "id": "instagram",
-      "label": "Instagram",
-      "href": "",
-      "icon": "shared/instagram.png"
     }
   ],
   "payments": [

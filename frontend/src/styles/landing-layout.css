@@ -98,9 +98,78 @@
   min-width: 0;
 }
 
+/* Iyashikei — light pastoral landing tokens */
+[data-landing-variant='iyashikei'] {
+  --iyashikei-heading-gradient: linear-gradient(
+    105deg,
+    #4a6a4a 0%,
+    #5a7a5a 35%,
+    #6a9ec4 70%,
+    #c9a87c 100%
+  );
+}
+
+[data-landing-variant='iyashikei'] :is(
+    .landing-section-title,
+    .locations__kicker,
+    .locations__item-title,
+    .dominions__card-name,
+    .dominions__city-name,
+    .iyashikei-hero__headline,
+    .iyashikei-hero__eyebrow
+  ) {
+  font-family: var(--font-heading, var(--font-fantasy));
+}
+
+[data-landing-variant='iyashikei'] .landing-section-title,
+[data-landing-variant='iyashikei'] .iyashikei-hero__headline {
+  text-transform: none;
+  letter-spacing: 0.12em;
+  background: var(--iyashikei-heading-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: #00000040;
+  filter: none;
+  text-shadow: none;
+}
+
+[data-landing-variant='iyashikei'] .locations__kicker {
+  text-transform: none;
+  letter-spacing: 0.14em;
+  background: var(--iyashikei-heading-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: none;
+}
+
+[data-landing-variant='iyashikei'] .locations__title {
+  text-transform: none;
+  letter-spacing: 0.12em;
+  background: var(--iyashikei-heading-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: none;
+  animation: none;
+}
+
+[data-landing-variant='iyashikei'] .landing-section-lead {
+  color: var(--text-muted);
+}
+
+[data-landing-variant='iyashikei'] .landing-section-lead strong {
+  color: var(--text-primary);
+  text-shadow: none;
+}
+
 /* Hero card fan extends below 100svh — bump gap before Locations only */
 .landing-flow > .hero + .locations {
   /* margin-top: calc(var(--landing-after-hero-gap) - var(--landing-section-gap)); */
+}
+
+[data-landing-variant='iyashikei'] .landing-flow > .iyashikei-hero + .locations {
+  /* corner cards stay inside viewport — default section gap is enough */
 }
 
 /*

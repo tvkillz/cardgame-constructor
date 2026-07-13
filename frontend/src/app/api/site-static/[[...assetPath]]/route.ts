@@ -64,6 +64,12 @@ function contentType(filePath: string): string {
 /** Vite/Rollup content-hashed filenames, e.g. index-a1b2c3d4.js */
 const HASHED_ASSET_RE = /-[a-zA-Z0-9_-]{8,}\.[a-z0-9]+$/i
 
+/** Matches deploy/nginx/site.conf.tpl — documents must not stick on old mobile browsers. */
+const DOCUMENT_CACHE =
+  'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0'
+
+const HASHED_ASSET_CACHE = 'public, max-age=31536000, immutable'
+
 /**
  * SPA shells must revalidate so deploys pick up new chunk hashes.
  * Hashed /play/assets/* (and similar) are safe to cache immutably.
@@ -73,18 +79,18 @@ function cacheControlForFile(filePath: string): string {
   const ext = path.extname(filePath).toLowerCase()
 
   if (ext === '.html') {
-    return 'no-cache'
+    return DOCUMENT_CACHE
   }
 
   if (base === 'manifest.json' || base.endsWith('.manifest.json')) {
-    return 'no-cache'
+    return DOCUMENT_CACHE
   }
 
   if (HASHED_ASSET_RE.test(base)) {
-    return 'public, max-age=31536000, immutable'
+    return HASHED_ASSET_CACHE
   }
 
-  return 'public, max-age=604800, stale-while-revalidate=86400'
+  return 'no-cache, must-revalidate, max-age=0'
 }
 
 async function resolveFile(segments: string[], request?: NextRequest): Promise<string | null> {

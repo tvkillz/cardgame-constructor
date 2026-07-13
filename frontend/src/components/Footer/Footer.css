@@ -92,31 +92,8 @@
   list-style: none;
 }
 
-@media (max-width: 419px) {
-  .site-footer__brand {
-    display: grid;
-    grid-template-areas:
-      'logo'
-      'tagline'
-      'social';
-    gap: 0.75rem;
-  }
-
-  .site-footer__brand-row {
-    display: contents;
-  }
-
-  .site-footer__brand-link {
-    grid-area: logo;
-  }
-
-  .site-footer__brand-tagline {
-    grid-area: tagline;
-  }
-
-  .site-footer__social {
-    grid-area: social;
-  }
+.site-footer__contact-social {
+  margin-top: 0.85rem;
 }
 
 .site-footer__social-link {

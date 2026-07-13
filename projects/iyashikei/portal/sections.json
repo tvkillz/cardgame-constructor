@@ -1,0 +1,32 @@
+{
+  "sections": [
+    {
+      "id": "market",
+      "label": "Market",
+      "route": "portalMarket",
+      "title": "MARKET",
+      "subtitle": "Buy, sell, and manage your market listings."
+    },
+    {
+      "id": "collection",
+      "label": "Collection",
+      "route": "portalCollection",
+      "title": "COLLECTION",
+      "subtitle": "Build and edit decks for matches. Each deck holds up to 30 cards."
+    },
+    {
+      "id": "transactions",
+      "label": "Transactions",
+      "route": "portalTransactions",
+      "title": "TRANSACTIONS",
+      "subtitle": "Review purchases, sales, and credit history."
+    },
+    {
+      "id": "profile",
+      "label": "Profile",
+      "route": "portalProfile",
+      "title": "PROFILE",
+      "subtitle": "Your keeper identity and account settings."
+    }
+  ]
+}

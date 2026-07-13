@@ -68,19 +68,6 @@ export default function Footer() {
                 />
               </Link>
 
-              {footer.social.length > 0 ? (
-                <ul className="site-footer__social" aria-label="Social media">
-                  {footer.social.map((item) => (
-                    <li key={item.id}>
-                      <SocialIcon
-                        label={item.label}
-                        href={item.href}
-                        icon={item.icon}
-                      />
-                    </li>
-                  ))}
-                </ul>
-              ) : null}
             </div>
 
             <p className="site-footer__brand-tagline">{footer.brand.tagline}</p>
@@ -120,6 +107,16 @@ export default function Footer() {
                 </a>
               </li>
             </ul>
+
+            {footer.social.length > 0 ? (
+              <ul className="site-footer__social site-footer__contact-social" aria-label="Social media">
+                {footer.social.map((item) => (
+                  <li key={item.id}>
+                    <SocialIcon label={item.label} href={item.href} icon={item.icon} />
+                  </li>
+                ))}
+              </ul>
+            ) : null}
 
             {footer.payments.length > 0 ? (
               <div className="site-footer__payments" aria-label="Accepted payment methods">

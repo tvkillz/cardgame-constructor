@@ -1,0 +1,21 @@
+{
+  "title": "The Komorebi Archive",
+  "description": "Every card is a quiet choice — drawn from forest, coast, hearth, and highland, tuned for thoughtful play, and expanded every season. Explore a living collection built for patient deck builders and ladder climbers alike.",
+  "backgroundImage": "cities/umi/umi_city_03_lantern_bay.png",
+  "stats": [
+    { "id": "catalog", "value": "600+", "label": "Unique Cards" },
+    { "id": "rarity", "value": "4", "label": "Rarity Tiers" },
+    { "id": "strategies", "value": "∞", "label": "Deck Strategies" },
+    { "id": "monthly", "value": "25+", "label": "New Cards Monthly" }
+  ],
+  "cardSlugs": [
+    "shinrin_card_03_mosswalker",
+    "naminami_card_02_pearl_diver",
+    "akari_card_02_embersmith",
+    "takane_card_02_cloud_reader",
+    "shinrin_card_02_fern_sage",
+    "naminami_card_03_coral_whisper",
+    "akari_card_03_festival_dancer",
+    "takane_card_03_summit_guide"
+  ]
+}

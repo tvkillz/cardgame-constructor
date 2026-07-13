@@ -1,0 +1,8 @@
+{
+  "categories": [
+    { "id": "earth", "label": "Forest", "locationIds": ["shinrin"] },
+    { "id": "water", "label": "Coast", "locationIds": ["naminami"] },
+    { "id": "fire", "label": "Hearth", "locationIds": ["akari"] },
+    { "id": "air", "label": "Highland", "locationIds": ["takane"] }
+  ]
+}

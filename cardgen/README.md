@@ -129,6 +129,35 @@ npm run generate-round -- --project=voidborn --per-domain=12
 
 For exactly 50: `--per-domain=12` (48 cards) + a second round with `--per-domain=1` (4 cards), or accept 52 with `--per-domain=13`.
 
+## Landing showcase cards (hero + collection)
+
+The compile step requires **12 slugs** wired in `game/locations.json` (`featuredCardSlug`) and `copy/collection.json` (`cardSlugs`). These are baked into the frontend bundle for a fast landing (same as voidborn's `FRONTEND_SHOWCASE_ONLY` flow).
+
+**Stub cards** may ship in `game/cards.json` so compile succeeds before art exists.
+
+### Option A — art only (cards.json already has entries + `image_prompt`)
+
+```bash
+npm run generate-images-showcase -- --project=iyashikei
+cd ../frontend && PROJECT=iyashikei npm run compile
+```
+
+Writes PNGs directly to `projects/iyashikei/assets/cards/{domain}/`.
+
+### Option B — full Gemini text + art (replace stubs)
+
+```bash
+npm run generate-showcase -- --project=iyashikei --force
+npm run validate -- --file=../projects/iyashikei/game/_staging/showcase/showcase_batch.json
+npm run approve -- --file=.../approved/showcase_batch.json
+npm run generate-images -- --file=.../approved/showcase_batch.json
+npm run apply -- --file=.../approved/showcase_batch.json --force
+```
+
+### Full catalog (DB + storage)
+
+Use `generate-round` for the rest of the card pool (50+ per domain). Showcase cards are only the landing subset.
+
 ## Single-domain / legacy commands
 
 Still supported for one-off batches outside a round:

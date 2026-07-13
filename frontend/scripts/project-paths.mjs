@@ -52,6 +52,7 @@ export function projectPaths(projectId) {
     manifest: path.join(root, 'manifest.json'),
     colors: path.join(root, 'theme/colors.json'),
     ui: path.join(root, 'theme/ui.json'),
+    landing: path.join(root, 'theme/landing.json'),
     descriptions: path.join(root, 'copy/descriptions.json'),
     dominions: path.join(root, 'copy/dominions.json'),
     gamemodel: path.join(root, 'copy/gamemodel.json'),

@@ -6,6 +6,8 @@
   "private": true,
   "scripts": {
     "generate": "node src/cli.js generate",
+    "generate-showcase": "node src/cli.js generate-showcase",
+    "generate-images-showcase": "node src/cli.js generate-images-showcase",
     "generate-round": "node src/cli.js generate-round",
     "generate-domains": "node src/cli.js generate-domains",
     "validate": "node src/cli.js validate",

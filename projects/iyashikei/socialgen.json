@@ -1,0 +1,43 @@
+{
+  "brandVoice": "Gentle, nostalgic, warm. Iyashikei pastoral TCG tone. Short calm hooks; slice-of-life depth on Facebook. Soft emojis on Instagram; minimal on Facebook.",
+  "audience": "TCG players who enjoy calm aesthetics, deck builders, collectors, iyashikei and slice-of-life fans",
+  "siteUrl": "https://komorebi.example.com",
+  "platforms": {
+    "instagram": {
+      "minHashtags": 8,
+      "maxHashtags": 15,
+      "defaultHashtags": [
+        "#KOMOREBI",
+        "#Iyashikei",
+        "#TCG",
+        "#TradingCardGame",
+        "#SliceOfLife",
+        "#CardGame",
+        "#IndieGame",
+        "#DeckBuilding"
+      ],
+      "linkInBioTemplate": "🔗 Link in bio → {siteUrl}"
+    },
+    "facebook": {
+      "minBodyLength": 200
+    },
+    "discord": {
+      "allowMentionEveryone": false
+    }
+  },
+  "image": {
+    "defaultMode": "auto",
+    "size": 1080,
+    "promptSuffix": "Square 1:1 social promo art for an iyashikei pastoral TCG, soft watercolor lighting, gentle nostalgic mood, no text, no watermark, atmospheric depth, leave corner space for logo overlay.",
+    "composite": {
+      "logoAsset": "brand/gamelogo.png",
+      "logoScale": 0.18,
+      "cardLogoScale": 0.16,
+      "cardLogoLeft": 24,
+      "cardLogoTop": 24,
+      "cityOverlay": 0.55,
+      "cardFrameGlow": 0.35,
+      "vignetteStrength": 0.35
+    }
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "fonts": {
+    "fantasy": "'Shippori Mincho', 'Noto Serif JP', serif",
+    "ui": "'Zen Kaku Gothic New', 'Inter', system-ui, sans-serif",
+    "googleFontsUrl": "https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;600;700&display=swap"
+  },
+  "navigation": [
+    { "label": "Play Now", "href": "/play", "route": "play" },
+    { "label": "Market", "href": "/portal/market", "route": "portalMarket" },
+    { "label": "Leaderboard", "href": "/leaderboard", "route": "leaderboard" }
+  ],
+  "accountMenu": [
+    { "id": "play", "label": "Play Now", "route": "play" },
+    { "id": "market", "label": "Market", "route": "portalMarket" },
+    { "id": "leaderboard", "label": "Leaderboard", "route": "leaderboard" },
+    { "id": "profile", "label": "Profile", "route": "portalProfile" },
+    { "id": "credits", "label": "Purchase Credits", "action": "purchaseCredits" },
+    { "id": "sign-out", "label": "Sign Out", "action": "signOut" }
+  ],
+  "heroCtas": [
+    { "label": "Play Now", "id": "play", "route": "play", "accent": "purple" },
+    { "label": "View Market", "id": "market", "route": "portalMarket", "accent": "cyan" },
+    { "label": "Leaderboard", "id": "leaderboard", "route": "leaderboard", "accent": "ember" }
+  ],
+  "playModes": [
+    {
+      "id": "casual",
+      "title": "Casual Match",
+      "subtitle": "Practice freely — no rating on the line",
+      "accent": "cyan",
+      "mark": "I"
+    },
+    {
+      "id": "ranked",
+      "title": "Ranked Ladder",
+      "subtitle": "Climb the season — wins and losses count",
+      "accent": "ember",
+      "mark": "II"
+    },
+    {
+      "id": "tutorial",
+      "title": "Ward Primer",
+      "subtitle": "Learn the rules with a guided trial deck",
+      "accent": "purple",
+      "mark": "III"
+    }
+  ],
+  "player": {
+    "fallbackName": "Keeper",
+    "opponentName": "Haru",
+    "defaultCredits": 988
+  },
+  "particles": {
+    "colors": ["#7cb87c", "#e8a87c"]
+  }
+}

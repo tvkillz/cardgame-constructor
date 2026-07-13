@@ -12,5 +12,12 @@
     "status": "demo",
     "stagingDomain": "staging.sportsydeals.com",
     "vpsProd": true
+  },
+  {
+    "id": "iyashikei",
+    "path": "./iyashikei",
+    "status": "demo",
+    "stagingDomain": "staging.komorebi.example.com",
+    "vpsProd": false
   }
 ]

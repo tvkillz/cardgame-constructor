@@ -28,6 +28,9 @@ export function projectPaths(projectId) {
     stagingRounds: path.join(root, 'game/_staging/rounds'),
     stagingImages: path.join(root, 'game/_staging/images'),
     stagingManifests: path.join(root, 'game/_staging/image-manifests'),
+    stagingShowcase: path.join(root, 'game/_staging/showcase'),
+    locations: path.join(root, 'game/locations.json'),
+    collection: path.join(root, 'copy/collection.json'),
   }
 }
 

@@ -1,0 +1,103 @@
+{
+  "projectTitle": "KOMOREBI",
+  "visualPitch": "Iyashikei pastoral TCG — soft anime watercolor backgrounds, healing slice-of-life Japanese countryside",
+  "style": {
+    "aesthetic": "iyashikei anime background art, soft watercolor, pastoral Japanese countryside, nostalgic, gentle natural lighting, Studio Ghibli-influenced environments",
+    "avoid": "dark fantasy, horror, violence, gore, neon cyberpunk, harsh contrast, text overlays, watermarks, prominent human characters, logos",
+    "palette": "muted sage greens, sea mist blues, warm sunset ambers, lavender highland skies, rice-paper creams"
+  },
+  "image": {
+    "promptPrefix": "Wide cinematic iyashikei anime landscape,",
+    "promptSuffix": "soft watercolor illustration style, gentle nostalgic mood, detailed environment art, pastoral Japanese countryside, no people, no text, no watermark, 16:9 composition.",
+    "ctaSuffix": "landscape feature illustration for a trading card game website tile, soft watercolor, atmospheric depth, gentle vignette, no text, no watermark, 16:9 composition.",
+    "gamemodelSuffix": "square pillar illustration for a trading card game website section, soft watercolor, centered composition, gentle lighting, no text, no watermark, 1:1 aspect ratio.",
+    "cardTypeSuffix": "square rarity emblem icon for a trading card game UI, soft watercolor, clean silhouette, no text, no watermark, 1:1 aspect ratio."
+  },
+  "outputSizes": {
+    "domain": { "width": 1672, "height": 941, "format": "png" },
+    "city": { "width": 1672, "height": 941, "format": "png" },
+    "cta": { "width": 1376, "height": 768, "format": "webp", "quality": 85 },
+    "gamemodel": { "width": 1024, "height": 1024, "format": "webp", "quality": 85 },
+    "card_type": { "width": 640, "height": 640, "format": "webp", "quality": 85 }
+  },
+  "domains": {
+    "shinrin": {
+      "visualIdentity": "cedar forests, moss shrines, tea terraces, morning mist, komorebi light rays",
+      "palette": "#7cb87c, #5a7a4a, #c9b896, #e8e4d8",
+      "mood": "forest stillness, green tea calm, shrine quiet"
+    },
+    "naminami": {
+      "visualIdentity": "calm inlets, fishing piers, tidal gardens, dawn and twilight coast",
+      "palette": "#6eb5d9, #a8d4e6, #f5e6d3, #4a6a7a",
+      "mood": "tide hush, salt air peace, reflective water"
+    },
+    "akari": {
+      "visualIdentity": "harvest hills, festival lanterns, onsen valleys, golden hour warmth",
+      "palette": "#e8a87c, #d4845c, #f5d4a8, #8a5a3a",
+      "mood": "hearth warmth, festival glow, unhurried dusk"
+    },
+    "takane": {
+      "visualIdentity": "windmill ridges, cloud pastures, wind chime summits, open highland sky",
+      "palette": "#b8a9c9, #8a9a6a, #e8e4f0, #6a7a9a",
+      "mood": "highland breeze, airy rest, chime clarity"
+    }
+  },
+  "elementFolders": {
+    "shinrin": "mori",
+    "naminami": "umi",
+    "akari": "hi",
+    "takane": "kaze"
+  },
+  "cta": {
+    "expand-collection": {
+      "prompt": "Layered binder pages and floating trading cards over a misty cedar forest terrace, gentle morning light, collectible TCG mood"
+    },
+    "buy-cards": {
+      "prompt": "Quiet village market stall with displayed trading cards, calm coastal inlet in background, thoughtful shopping atmosphere"
+    },
+    "sealed-vaults": {
+      "prompt": "Neat stack of sealed card bundles on a wooden veranda, warm lantern glow, anticipation of opening packs"
+    },
+    "discover-rare": {
+      "prompt": "Single radiant foil trading card catching sunset light on a hilltop, rare pull moment, soft sparkle"
+    },
+    "sell-cards": {
+      "prompt": "Organized card binder with duplicates laid out beside a small coin pouch, peaceful trading desk by a window"
+    },
+    "shape-strategy": {
+      "prompt": "Deck of trading cards arranged in a curve on tatami beside tea cup, strategy planning mood, soft afternoon light"
+    }
+  },
+  "gamemodel": {
+    "tactical-battles": {
+      "prompt": "Abstract game board with gentle spirit tokens on a misty pond surface, calm tactical duel atmosphere, no UI chrome"
+    },
+    "collectible-cards": {
+      "prompt": "Fan of illustrated trading cards over a pastoral ward panorama blending forest, coast, and highland hints"
+    },
+    "ranked-climb": {
+      "prompt": "Stone path ascending a hill through seasons, metaphor for ladder climb, peaceful determination, distant summit"
+    }
+  },
+  "cardTypes": {
+    "uncommon": {
+      "label": "Uncommon",
+      "accent": "#8ec9a0",
+      "prompt": "Soft jade leaf emblem with subtle glow, uncommon rarity icon, iyashikei watercolor style"
+    },
+    "rare": {
+      "label": "Rare",
+      "accent": "#b8a9c9",
+      "prompt": "Delicate lavender blossom crest emblem, rare rarity icon, iyashikei watercolor style"
+    },
+    "epic": {
+      "label": "Epic",
+      "accent": "#e8a87c",
+      "prompt": "Golden lantern sigil emblem with warm radiance, epic rarity icon, iyashikei watercolor style"
+    }
+  },
+  "generation": {
+    "sourceOfTruth": "game/scenes.json",
+    "showcaseCompileEnv": "FRONTEND_SHOWCASE_ONLY=1"
+  }
+}

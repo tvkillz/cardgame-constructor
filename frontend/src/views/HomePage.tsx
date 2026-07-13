@@ -1,6 +1,5 @@
 import dynamic from 'next/dynamic'
-import Header from '@/components/Header/Header'
-import Hero from '@/components/Hero/Hero'
+import { LandingHeader, LandingHero } from '@/components/landing/resolveLanding'
 
 const LocationsSection = dynamic(
   () => import('@/components/LocationsSection/LocationsSection'),
@@ -39,9 +38,9 @@ const Footer = dynamic(() => import('@/components/Footer/Footer'), { ssr: true }
 export default function HomePage() {
   return (
     <div className="app">
-      <Header />
+      <LandingHeader />
       <main className="landing-flow">
-        <Hero />
+        <LandingHero />
         <LocationsSection />
         <DominionsSection />
         <GameModelSection />

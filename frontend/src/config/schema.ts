@@ -24,6 +24,14 @@ export interface SitemapConfig {
   }
 }
 
+export type LandingVariant = 'voidborn' | 'iyashikei'
+
+export interface LandingConfig {
+  variant: LandingVariant
+  introVideo: boolean
+  heroMedia: 'slides' | 'video-then-slides'
+}
+
 export interface AppConfig {
   /** Registry / content pack id — scopes auth and backend data to this site. */
   siteId: string
@@ -92,6 +100,9 @@ export interface AppConfig {
 
   /** Sitemap + robots rules from projects/{id}/copy/sitemap.json. */
   sitemap?: SitemapConfig
+
+  /** Landing shell variant — drives hero, header, and page atmosphere. */
+  landing: LandingConfig
 
   /** Palette — drives CSS custom properties via applyTheme(). */
   colors: {

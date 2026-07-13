@@ -1,0 +1,21 @@
+{
+  "keywords_glossary": {
+    "Taunt": "Enemies must attack this unit if able.",
+    "Ward": "The next damage this unit would take is prevented.",
+    "Charge": "Can attack the turn it is played.",
+    "Stealth": "Cannot be targeted until it attacks.",
+    "Flying": "Can only be blocked by units with Flying.",
+    "Lifesteal": "Damage dealt heals your player.",
+    "Overwhelm": "Excess combat damage hits the enemy player.",
+    "Siege": "Deals bonus damage when attacking a player.",
+    "Ranged": "Can attack without being blocked in melee.",
+    "Regenerate": "Restores Health at end of turn.",
+    "Reborn": "Returns to play with 1 Health once when destroyed.",
+    "Deathrattle": "Triggers when this unit is destroyed.",
+    "Armor": "Reduces incoming damage by the listed amount.",
+    "Freeze": "A frozen unit cannot attack until end of turn.",
+    "Charm": "Redirects an enemy unit's next attack.",
+    "Devour": "Destroys a target unit on trigger.",
+    "Rooted": "Unit cannot be moved this turn."
+  }
+}

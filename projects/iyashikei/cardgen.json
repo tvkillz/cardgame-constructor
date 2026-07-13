@@ -1,0 +1,45 @@
+{
+  "gameTitle": "KOMOREBI",
+  "gamePitch": "an iyashikei (healing slice-of-life) collectible TCG set across four tranquil countryside wards — forest, coast, hearth, and highland",
+  "world": {
+    "title": "The Four Quiet Wards",
+    "description": "Beyond the hurried cities lies a chain of pastoral wards where everyday moments hold quiet power. Collect spirits of the countryside, build gentle-yet-tactical decks, and compete without losing the calm that defines Komorebi."
+  },
+  "domains": {
+    "shinrin": {
+      "visualIdentity": "cedar forests, moss shrines, tea terraces, kodama spirits, soft komorebi light, sage and cedar brown palette",
+      "flavorNotes": "guardians, druids, kodama keepers, moss spirits, rootbound healers, shrine tenders"
+    },
+    "naminami": {
+      "visualIdentity": "calm inlets, fishing piers, tidal gardens, sea mist, herons and tide listeners, pale blue and shell-white tones",
+      "flavorNotes": "tide listeners, pearl divers, heron spirits, coral whispers, wave shamans, harbor guides"
+    },
+    "akari": {
+      "visualIdentity": "golden hour hills, harvest orchards, festival lanterns, onsen steam, warm amber and copper palette",
+      "flavorNotes": "lantern tenders, festival dancers, embersmiths, hearth cooks, orchard keepers, sunset weavers"
+    },
+    "takane": {
+      "visualIdentity": "highland windmills, cloud pastures, wind chimes, open sky, lavender and meadow-green palette",
+      "flavorNotes": "breeze shepherds, cloud readers, summit guides, wind chime monks, meadow spirits, kite flyers"
+    }
+  },
+  "designRules": [
+    "Mana 1–8 (most cards 3–6). attack + health should roughly scale with mana.",
+    "Roles vary: guardians, scouts, healers, charmers, flyers, tide-callers, etc.",
+    "Ability text must spell out keyword effects like the examples (do not assume the player knows keywords).",
+    "ability.name should be evocative and unique within the batch.",
+    "Use 0–2 keywords per card from the project glossary only.",
+    "Tone: gentle iyashikei flavor — pastoral, nostalgic, healing — but still tactically interesting."
+  ],
+  "image": {
+    "aspectRatio": "3:4",
+    "promptGuidelines": "single focal spirit or countryside character, soft iyashikei anime trading card art, watercolor-influenced, gentle natural lighting, NO text, NO card frame, NO watermark, portrait 3:4 composition",
+    "promptSuffix": "Soft iyashikei anime trading card art, watercolor-influenced illustration, single focal subject, gentle natural lighting, pastoral mood, no text, no border, no watermark, portrait 3:4 aspect ratio.",
+    "notesGuidelines": "negative prompts, palette, time of day, and pastoral mood hints for the image generator"
+  },
+  "generation": {
+    "maxKeywordsPerCard": 2,
+    "exampleCardsPerDomain": 5,
+    "maxBatchPerDomain": 50
+  }
+}

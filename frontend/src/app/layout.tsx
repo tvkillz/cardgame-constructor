@@ -12,6 +12,9 @@ import '@/components/ui/Button/Button.css'
 const lobbyBg = getLobbyBackground()
 const arenaBg = getArenaBackground()
 const playLogo = appConfig.logo.playLogo
+const { fonts } = appConfig.theme
+const googleFontsUrl = fonts.googleFontsUrl
+const isIyashikei = appConfig.landing?.variant === 'iyashikei'
 
 export const metadata = buildSiteMetadata(appConfig)
 
@@ -26,6 +29,11 @@ export default function RootLayout({
       className={rootFontClassName}
       style={
         {
+          '--font-fantasy': fonts.fantasy,
+          '--font-ui': fonts.ui,
+          ...(isIyashikei
+            ? { '--font-heading': "'Hiro Misake', 'Shippori Mincho', serif" }
+            : {}),
           '--play-lobby-bg': `url(${lobbyBg})`,
           '--play-arena-bg': `url(${arenaBg})`,
           '--game-lobby-bg': `url(${lobbyBg})`,
@@ -35,6 +43,19 @@ export default function RootLayout({
       }
       suppressHydrationWarning
     >
+      <head>
+        {googleFontsUrl ? (
+          <>
+            <link rel="preconnect" href="https://fonts.googleapis.com" />
+            <link
+              rel="preconnect"
+              href="https://fonts.gstatic.com"
+              crossOrigin="anonymous"
+            />
+            <link rel="stylesheet" href={googleFontsUrl} />
+          </>
+        ) : null}
+      </head>
       <body suppressHydrationWarning>
         <ThemeProvider>
           <AuthProvider>

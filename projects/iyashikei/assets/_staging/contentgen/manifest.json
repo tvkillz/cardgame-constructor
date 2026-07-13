@@ -1,0 +1,581 @@
+{
+  "meta": {
+    "project": "iyashikei",
+    "generatedAt": "2026-07-13T08:04:27.023Z",
+    "reference": "voidborn asset sizes (domains/cities 1672×941 png, cta 1376×768 webp, gamemodel 1024×1024 webp, card_types 640×640 webp)",
+    "showcaseCompileEnv": "FRONTEND_SHOWCASE_ONLY=1"
+  },
+  "assets": [
+    {
+      "id": "shinrin_domain",
+      "kind": "domain",
+      "path": "domains/mori_domain.png",
+      "title": "Shinrin Domain",
+      "domain": null,
+      "notes": "Wide cinematic iyashikei forest landscape at early morning. Towering cedar trees, moss-covered shrine steps, soft komorebi light rays through canopy, gentle mist in valleys, tea terraces in mid-distance. Muted sage and cedar brown palette. Soft watercolor anime background style, nostalgic and healing mood. No people, no text.",
+      "slug": "shinrin_domain",
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "prompt": "Wide cinematic iyashikei anime landscape, Wide cinematic iyashikei forest landscape at early morning. Towering cedar trees, moss-covered shrine steps, soft komorebi light rays through canopy, gentle mist in valleys, tea terraces in mid-distance. Muted sage and cedar brown palette. Soft watercolor anime background style, nostalgic and healing mood. No people, no text. iyashikei anime background art, soft watercolor, pastoral Japanese countryside, nostalgic, gentle natural lighting, Studio Ghibli-influenced environments Avoid: dark fantasy, horror, violence, gore, neon cyberpunk, harsh contrast, text overlays, watermarks, prominent human characters, logos. soft watercolor illustration style, gentle nostalgic mood, detailed environment art, pastoral Japanese countryside, no people, no text, no watermark, 16:9 composition.",
+      "stagingFile": "shinrin_domain.png"
+    },
+    {
+      "id": "naminami_domain",
+      "kind": "domain",
+      "path": "domains/umi_domain.png",
+      "title": "Naminami Domain",
+      "domain": null,
+      "notes": "Wide cinematic iyashikei coastal landscape at dawn. Calm inlet, weathered fishing boats, distant headlands, pale pink sky reflecting on still water. Small wooden pier, seabirds, soft sea-mist blues and shell-white tones. Soft watercolor anime background, peaceful slice-of-life mood. No people, no text.",
+      "slug": "naminami_domain",
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "prompt": "Wide cinematic iyashikei anime landscape, Wide cinematic iyashikei coastal landscape at dawn. Calm inlet, weathered fishing boats, distant headlands, pale pink sky reflecting on still water. Small wooden pier, seabirds, soft sea-mist blues and shell-white tones. Soft watercolor anime background, peaceful slice-of-life mood. No people, no text. iyashikei anime background art, soft watercolor, pastoral Japanese countryside, nostalgic, gentle natural lighting, Studio Ghibli-influenced environments Avoid: dark fantasy, horror, violence, gore, neon cyberpunk, harsh contrast, text overlays, watermarks, prominent human characters, logos. soft watercolor illustration style, gentle nostalgic mood, detailed environment art, pastoral Japanese countryside, no people, no text, no watermark, 16:9 composition.",
+      "stagingFile": "naminami_domain.png"
+    },
+    {
+      "id": "akari_domain",
+      "kind": "domain",
+      "path": "domains/hi_domain.png",
+      "title": "Akari Domain",
+      "domain": null,
+      "notes": "Wide cinematic iyashikei countryside at golden hour. Rolling harvest hills, orchard trees, warm lantern glow from distant village, long amber shadows. Terraced fields, woodsmoke wisps, copper and honey palette. Soft watercolor anime background, warm hearth mood. No people, no text.",
+      "slug": "akari_domain",
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "prompt": "Wide cinematic iyashikei anime landscape, Wide cinematic iyashikei countryside at golden hour. Rolling harvest hills, orchard trees, warm lantern glow from distant village, long amber shadows. Terraced fields, woodsmoke wisps, copper and honey palette. Soft watercolor anime background, warm hearth mood. No people, no text. iyashikei anime background art, soft watercolor, pastoral Japanese countryside, nostalgic, gentle natural lighting, Studio Ghibli-influenced environments Avoid: dark fantasy, horror, violence, gore, neon cyberpunk, harsh contrast, text overlays, watermarks, prominent human characters, logos. soft watercolor illustration style, gentle nostalgic mood, detailed environment art, pastoral Japanese countryside, no people, no text, no watermark, 16:9 composition.",
+      "stagingFile": "akari_domain.png"
+    },
+    {
+      "id": "takane_domain",
+      "kind": "domain",
+      "path": "domains/kaze_domain.png",
+      "title": "Takane Domain",
+      "domain": null,
+      "notes": "Wide cinematic iyashikei highland landscape. Windmills on a grassy ridge, wildflowers bending in breeze, layered clouds, distant violet mountains. Open sky, lavender and meadow-green palette. Soft watercolor anime background, airy tranquil mood. No people, no text.",
+      "slug": "takane_domain",
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "prompt": "Wide cinematic iyashikei anime landscape, Wide cinematic iyashikei highland landscape. Windmills on a grassy ridge, wildflowers bending in breeze, layered clouds, distant violet mountains. Open sky, lavender and meadow-green palette. Soft watercolor anime background, airy tranquil mood. No people, no text. iyashikei anime background art, soft watercolor, pastoral Japanese countryside, nostalgic, gentle natural lighting, Studio Ghibli-influenced environments Avoid: dark fantasy, horror, violence, gore, neon cyberpunk, harsh contrast, text overlays, watermarks, prominent human characters, logos. soft watercolor illustration style, gentle nostalgic mood, detailed environment art, pastoral Japanese countryside, no people, no text, no watermark, 16:9 composition.",
+      "stagingFile": "takane_domain.png"
+    },
+    {
+      "id": "mori_city_01_moss_shrine",
+      "kind": "city",
+      "path": "cities/mori/mori_city_01_moss_shrine.png",
+      "title": "Moss Lantern Shrine",
+      "domain": "shinrin",
+      "notes": "Hillside Shinto shrine overgrown with moss, stone lanterns along worn steps, cedar forest backdrop, morning mist, soft green-gold komorebi light. Intimate framing, healing iyashikei watercolor style. No people.",
+      "slug": "mori_city_01_moss_shrine",
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "prompt": "Wide cinematic iyashikei anime landscape, Hillside Shinto shrine overgrown with moss, stone lanterns along worn steps, cedar forest backdrop, morning mist, soft green-gold komorebi light. Intimate framing, healing iyashikei watercolor style. No people. cedar forests, moss shrines, tea terraces, morning mist, komorebi light rays Palette: #7cb87c, #5a7a4a, #c9b896, #e8e4d8. Mood: forest stillness, green tea calm, shrine quiet. iyashikei anime background art, soft watercolor, pastoral Japanese countryside, nostalgic, gentle natural lighting, Studio Ghibli-influenced environments Avoid: dark fantasy, horror, violence, gore, neon cyberpunk, harsh contrast, text overlays, watermarks, prominent human characters, logos. soft watercolor illustration style, gentle nostalgic mood, detailed environment art, pastoral Japanese countryside, no people, no text, no watermark, 16:9 composition.",
+      "stagingFile": "mori_city_01_moss_shrine.png"
+    },
+    {
+      "id": "mori_city_02_tea_terrace",
+      "kind": "city",
+      "path": "cities/mori/mori_city_02_tea_terrace.png",
+      "title": "Dew Terrace",
+      "domain": "shinrin",
+      "notes": "Layered Japanese tea terraces at sunrise, dew glitter on leaves, narrow stone paths, distant farmhouse with thin smoke. Fresh cool greens, gentle slope composition. Iyashikei watercolor background. No people.",
+      "slug": "mori_city_02_tea_terrace",
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "prompt": "Wide cinematic iyashikei anime landscape, Layered Japanese tea terraces at sunrise, dew glitter on leaves, narrow stone paths, distant farmhouse with thin smoke. Fresh cool greens, gentle slope composition. Iyashikei watercolor background. No people. cedar forests, moss shrines, tea terraces, morning mist, komorebi light rays Palette: #7cb87c, #5a7a4a, #c9b896, #e8e4d8. Mood: forest stillness, green tea calm, shrine quiet. iyashikei anime background art, soft watercolor, pastoral Japanese countryside, nostalgic, gentle natural lighting, Studio Ghibli-influenced environments Avoid: dark fantasy, horror, violence, gore, neon cyberpunk, harsh contrast, text overlays, watermarks, prominent human characters, logos. soft watercolor illustration style, gentle nostalgic mood, detailed environment art, pastoral Japanese countryside, no people, no text, no watermark, 16:9 composition.",
+      "stagingFile": "mori_city_02_tea_terrace.png"
+    },
+    {
+      "id": "mori_city_03_cedar_pass",
+      "kind": "city",
+      "path": "cities/mori/mori_city_03_cedar_pass.png",
+      "title": "Cedar Pass",
+      "domain": "shinrin",
+      "notes": "Ancient cedar forest footpath, dappled sunlight through tall trunks, soft needle carpet, hint of stream sound implied by mossy rocks. Deep forest greens, tunnel-of-trees perspective. Iyashikei watercolor. No people.",
+      "slug": "mori_city_03_cedar_pass",
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "prompt": "Wide cinematic iyashikei anime landscape, Ancient cedar forest footpath, dappled sunlight through tall trunks, soft needle carpet, hint of stream sound implied by mossy rocks. Deep forest greens, tunnel-of-trees perspective. Iyashikei watercolor. No people. cedar forests, moss shrines, tea terraces, morning mist, komorebi light rays Palette: #7cb87c, #5a7a4a, #c9b896, #e8e4d8. Mood: forest stillness, green tea calm, shrine quiet. iyashikei anime background art, soft watercolor, pastoral Japanese countryside, nostalgic, gentle natural lighting, Studio Ghibli-influenced environments Avoid: dark fantasy, horror, violence, gore, neon cyberpunk, harsh contrast, text overlays, watermarks, prominent human characters, logos. soft watercolor illustration style, gentle nostalgic mood, detailed environment art, pastoral Japanese countryside, no people, no text, no watermark, 16:9 composition.",
+      "stagingFile": "mori_city_03_cedar_pass.png"
+    },
+    {
+      "id": "umi_city_01_morning_pier",
+      "kind": "city",
+      "path": "cities/umi/umi_city_01_morning_pier.png",
+      "title": "Morning Pier",
+      "domain": "naminami",
+      "notes": "Weathered wooden pier into calm inlet at dawn, small fishing boats moored, pink horizon, mirror-still water, gulls. Quiet coastal village edge. Sea-mist blues and blush dawn tones. Iyashikei watercolor. No people.",
+      "slug": "umi_city_01_morning_pier",
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "prompt": "Wide cinematic iyashikei anime landscape, Weathered wooden pier into calm inlet at dawn, small fishing boats moored, pink horizon, mirror-still water, gulls. Quiet coastal village edge. Sea-mist blues and blush dawn tones. Iyashikei watercolor. No people. calm inlets, fishing piers, tidal gardens, dawn and twilight coast Palette: #6eb5d9, #a8d4e6, #f5e6d3, #4a6a7a. Mood: tide hush, salt air peace, reflective water. iyashikei anime background art, soft watercolor, pastoral Japanese countryside, nostalgic, gentle natural lighting, Studio Ghibli-influenced environments Avoid: dark fantasy, horror, violence, gore, neon cyberpunk, harsh contrast, text overlays, watermarks, prominent human characters, logos. soft watercolor illustration style, gentle nostalgic mood, detailed environment art, pastoral Japanese countryside, no people, no text, no watermark, 16:9 composition.",
+      "stagingFile": "umi_city_01_morning_pier.png"
+    },
+    {
+      "id": "umi_city_02_tidal_garden",
+      "kind": "city",
+      "path": "cities/umi/umi_city_02_tidal_garden.png",
+      "title": "Tidal Rock Garden",
+      "domain": "naminami",
+      "notes": "Japanese-inspired tidal rock garden at low tide, raked sand patterns between smooth stones, shallow tide pools, heron standing still. Minimal zen composition, soft grey-blue palette. Iyashikei watercolor. No people.",
+      "slug": "umi_city_02_tidal_garden",
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "prompt": "Wide cinematic iyashikei anime landscape, Japanese-inspired tidal rock garden at low tide, raked sand patterns between smooth stones, shallow tide pools, heron standing still. Minimal zen composition, soft grey-blue palette. Iyashikei watercolor. No people. calm inlets, fishing piers, tidal gardens, dawn and twilight coast Palette: #6eb5d9, #a8d4e6, #f5e6d3, #4a6a7a. Mood: tide hush, salt air peace, reflective water. iyashikei anime background art, soft watercolor, pastoral Japanese countryside, nostalgic, gentle natural lighting, Studio Ghibli-influenced environments Avoid: dark fantasy, horror, violence, gore, neon cyberpunk, harsh contrast, text overlays, watermarks, prominent human characters, logos. soft watercolor illustration style, gentle nostalgic mood, detailed environment art, pastoral Japanese countryside, no people, no text, no watermark, 16:9 composition.",
+      "stagingFile": "umi_city_02_tidal_garden.png"
+    },
+    {
+      "id": "umi_city_03_lantern_bay",
+      "kind": "city",
+      "path": "cities/umi/umi_city_03_lantern_bay.png",
+      "title": "Lantern Bay",
+      "domain": "naminami",
+      "notes": "Sheltered bay at twilight, paper lanterns along waterfront, warm village lights reflecting on dark water, gentle hills. Indigo twilight and warm lantern amber. Iyashikei watercolor. No people.",
+      "slug": "umi_city_03_lantern_bay",
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "prompt": "Wide cinematic iyashikei anime landscape, Sheltered bay at twilight, paper lanterns along waterfront, warm village lights reflecting on dark water, gentle hills. Indigo twilight and warm lantern amber. Iyashikei watercolor. No people. calm inlets, fishing piers, tidal gardens, dawn and twilight coast Palette: #6eb5d9, #a8d4e6, #f5e6d3, #4a6a7a. Mood: tide hush, salt air peace, reflective water. iyashikei anime background art, soft watercolor, pastoral Japanese countryside, nostalgic, gentle natural lighting, Studio Ghibli-influenced environments Avoid: dark fantasy, horror, violence, gore, neon cyberpunk, harsh contrast, text overlays, watermarks, prominent human characters, logos. soft watercolor illustration style, gentle nostalgic mood, detailed environment art, pastoral Japanese countryside, no people, no text, no watermark, 16:9 composition.",
+      "stagingFile": "umi_city_03_lantern_bay.png"
+    },
+    {
+      "id": "hi_city_01_harvest_hill",
+      "kind": "city",
+      "path": "cities/hi/hi_city_01_harvest_hill.png",
+      "title": "Harvest Hill",
+      "domain": "akari",
+      "notes": "Gentle hill orchard at late afternoon golden hour, fruit-laden trees, wooden ladders, long striped shadows on grass. Warm copper and green-gold palette. Iyashikei watercolor countryside. No people.",
+      "slug": "hi_city_01_harvest_hill",
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "prompt": "Wide cinematic iyashikei anime landscape, Gentle hill orchard at late afternoon golden hour, fruit-laden trees, wooden ladders, long striped shadows on grass. Warm copper and green-gold palette. Iyashikei watercolor countryside. No people. harvest hills, festival lanterns, onsen valleys, golden hour warmth Palette: #e8a87c, #d4845c, #f5d4a8, #8a5a3a. Mood: hearth warmth, festival glow, unhurried dusk. iyashikei anime background art, soft watercolor, pastoral Japanese countryside, nostalgic, gentle natural lighting, Studio Ghibli-influenced environments Avoid: dark fantasy, horror, violence, gore, neon cyberpunk, harsh contrast, text overlays, watermarks, prominent human characters, logos. soft watercolor illustration style, gentle nostalgic mood, detailed environment art, pastoral Japanese countryside, no people, no text, no watermark, 16:9 composition.",
+      "stagingFile": "hi_city_01_harvest_hill.png"
+    },
+    {
+      "id": "hi_city_02_festival_lane",
+      "kind": "city",
+      "path": "cities/hi/hi_city_02_festival_lane.png",
+      "title": "Festival Lantern Lane",
+      "domain": "akari",
+      "notes": "Narrow village lane with summer festival paper lanterns and banners, food stall steam, warm amber evening light, festive but calm atmosphere. Iyashikei watercolor, no crowds — empty lane after setup. No people.",
+      "slug": "hi_city_02_festival_lane",
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "prompt": "Wide cinematic iyashikei anime landscape, Narrow village lane with summer festival paper lanterns and banners, food stall steam, warm amber evening light, festive but calm atmosphere. Iyashikei watercolor, no crowds — empty lane after setup. No people. harvest hills, festival lanterns, onsen valleys, golden hour warmth Palette: #e8a87c, #d4845c, #f5d4a8, #8a5a3a. Mood: hearth warmth, festival glow, unhurried dusk. iyashikei anime background art, soft watercolor, pastoral Japanese countryside, nostalgic, gentle natural lighting, Studio Ghibli-influenced environments Avoid: dark fantasy, horror, violence, gore, neon cyberpunk, harsh contrast, text overlays, watermarks, prominent human characters, logos. soft watercolor illustration style, gentle nostalgic mood, detailed environment art, pastoral Japanese countryside, no people, no text, no watermark, 16:9 composition.",
+      "stagingFile": "hi_city_02_festival_lane.png"
+    },
+    {
+      "id": "hi_city_03_onsen_outlook",
+      "kind": "city",
+      "path": "cities/hi/hi_city_03_onsen_outlook.png",
+      "title": "Onsen Valley Outlook",
+      "domain": "akari",
+      "notes": "Wooden veranda outlook over misty onsen valley, autumn maples, rising hot spring steam, copper sunset sky. Warm hearth mood, layered depth. Iyashikei watercolor. No people.",
+      "slug": "hi_city_03_onsen_outlook",
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "prompt": "Wide cinematic iyashikei anime landscape, Wooden veranda outlook over misty onsen valley, autumn maples, rising hot spring steam, copper sunset sky. Warm hearth mood, layered depth. Iyashikei watercolor. No people. harvest hills, festival lanterns, onsen valleys, golden hour warmth Palette: #e8a87c, #d4845c, #f5d4a8, #8a5a3a. Mood: hearth warmth, festival glow, unhurried dusk. iyashikei anime background art, soft watercolor, pastoral Japanese countryside, nostalgic, gentle natural lighting, Studio Ghibli-influenced environments Avoid: dark fantasy, horror, violence, gore, neon cyberpunk, harsh contrast, text overlays, watermarks, prominent human characters, logos. soft watercolor illustration style, gentle nostalgic mood, detailed environment art, pastoral Japanese countryside, no people, no text, no watermark, 16:9 composition.",
+      "stagingFile": "hi_city_03_onsen_outlook.png"
+    },
+    {
+      "id": "kaze_city_01_windmill_ridge",
+      "kind": "city",
+      "path": "cities/kaze/kaze_city_01_windmill_ridge.png",
+      "title": "Windmill Ridge",
+      "domain": "takane",
+      "notes": "Old wooden windmills on grassy highland ridge, wildflowers bending in wind, cloud shadows on sunlit pasture below. Open airy composition, meadow green and sky lavender. Iyashikei watercolor. No people.",
+      "slug": "kaze_city_01_windmill_ridge",
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "prompt": "Wide cinematic iyashikei anime landscape, Old wooden windmills on grassy highland ridge, wildflowers bending in wind, cloud shadows on sunlit pasture below. Open airy composition, meadow green and sky lavender. Iyashikei watercolor. No people. windmill ridges, cloud pastures, wind chime summits, open highland sky Palette: #b8a9c9, #8a9a6a, #e8e4f0, #6a7a9a. Mood: highland breeze, airy rest, chime clarity. iyashikei anime background art, soft watercolor, pastoral Japanese countryside, nostalgic, gentle natural lighting, Studio Ghibli-influenced environments Avoid: dark fantasy, horror, violence, gore, neon cyberpunk, harsh contrast, text overlays, watermarks, prominent human characters, logos. soft watercolor illustration style, gentle nostalgic mood, detailed environment art, pastoral Japanese countryside, no people, no text, no watermark, 16:9 composition.",
+      "stagingFile": "kaze_city_01_windmill_ridge.png"
+    },
+    {
+      "id": "kaze_city_02_cloud_pasture",
+      "kind": "city",
+      "path": "cities/kaze/kaze_city_02_cloud_pasture.png",
+      "title": "Cloud Pasture",
+      "domain": "takane",
+      "notes": "High meadow pasture with grazing sheep (distant small shapes only), fence line curving toward violet mountain peak, clouds at eye level. Ethereal highland calm. Iyashikei watercolor. No human figures.",
+      "slug": "kaze_city_02_cloud_pasture",
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "prompt": "Wide cinematic iyashikei anime landscape, High meadow pasture with grazing sheep (distant small shapes only), fence line curving toward violet mountain peak, clouds at eye level. Ethereal highland calm. Iyashikei watercolor. No human figures. windmill ridges, cloud pastures, wind chime summits, open highland sky Palette: #b8a9c9, #8a9a6a, #e8e4f0, #6a7a9a. Mood: highland breeze, airy rest, chime clarity. iyashikei anime background art, soft watercolor, pastoral Japanese countryside, nostalgic, gentle natural lighting, Studio Ghibli-influenced environments Avoid: dark fantasy, horror, violence, gore, neon cyberpunk, harsh contrast, text overlays, watermarks, prominent human characters, logos. soft watercolor illustration style, gentle nostalgic mood, detailed environment art, pastoral Japanese countryside, no people, no text, no watermark, 16:9 composition.",
+      "stagingFile": "kaze_city_02_cloud_pasture.png"
+    },
+    {
+      "id": "kaze_city_03_chime_summit",
+      "kind": "city",
+      "path": "cities/kaze/kaze_city_03_chime_summit.png",
+      "title": "Wind Chime Summit",
+      "domain": "takane",
+      "notes": "Mountain shrine summit with rows of glass wind chimes, terraced stone steps below, vast open sky, breeze implied by swaying chimes and grass. Clear crystalline highlights. Iyashikei watercolor. No people.",
+      "slug": "kaze_city_03_chime_summit",
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "prompt": "Wide cinematic iyashikei anime landscape, Mountain shrine summit with rows of glass wind chimes, terraced stone steps below, vast open sky, breeze implied by swaying chimes and grass. Clear crystalline highlights. Iyashikei watercolor. No people. windmill ridges, cloud pastures, wind chime summits, open highland sky Palette: #b8a9c9, #8a9a6a, #e8e4f0, #6a7a9a. Mood: highland breeze, airy rest, chime clarity. iyashikei anime background art, soft watercolor, pastoral Japanese countryside, nostalgic, gentle natural lighting, Studio Ghibli-influenced environments Avoid: dark fantasy, horror, violence, gore, neon cyberpunk, harsh contrast, text overlays, watermarks, prominent human characters, logos. soft watercolor illustration style, gentle nostalgic mood, detailed environment art, pastoral Japanese countryside, no people, no text, no watermark, 16:9 composition.",
+      "stagingFile": "kaze_city_03_chime_summit.png"
+    },
+    {
+      "id": "expand-collection",
+      "kind": "cta",
+      "path": "cta1/expand-collection.webp",
+      "title": "Grow Your Binder",
+      "domain": null,
+      "source": {
+        "id": "expand-collection",
+        "title": "Grow Your Binder",
+        "description": "Add depth across wards and seasonal releases. Every new pull opens another line you can run when the ladder shifts.",
+        "image": "cta1/expand-collection.webp",
+        "glowColor": "#7cb87c"
+      },
+      "width": 1376,
+      "height": 768,
+      "format": "webp",
+      "quality": 85,
+      "prompt": "Wide cinematic iyashikei anime landscape, Layered binder pages and floating trading cards over a misty cedar forest terrace, gentle morning light, collectible TCG mood landscape feature illustration for a trading card game website tile, soft watercolor, atmospheric depth, gentle vignette, no text, no watermark, 16:9 composition.",
+      "stagingFile": "cta__expand-collection.png"
+    },
+    {
+      "id": "buy-cards",
+      "kind": "cta",
+      "path": "cta1/buy-cards.webp",
+      "title": "Thoughtful Shopping",
+      "domain": null,
+      "source": {
+        "id": "buy-cards",
+        "title": "Thoughtful Shopping",
+        "description": "Filter the catalog, find the missing piece, and buy exactly what your curve has been waiting for — no rush, no noise.",
+        "image": "cta1/buy-cards.webp",
+        "glowColor": "#6eb5d9"
+      },
+      "width": 1376,
+      "height": 768,
+      "format": "webp",
+      "quality": 85,
+      "prompt": "Wide cinematic iyashikei anime landscape, Quiet village market stall with displayed trading cards, calm coastal inlet in background, thoughtful shopping atmosphere landscape feature illustration for a trading card game website tile, soft watercolor, atmospheric depth, gentle vignette, no text, no watermark, 16:9 composition.",
+      "stagingFile": "cta__buy-cards.png"
+    },
+    {
+      "id": "sealed-vaults",
+      "kind": "cta",
+      "path": "cta1/sealed-vaults.webp",
+      "title": "Open Sealed Bundles",
+      "domain": null,
+      "source": {
+        "id": "sealed-vaults",
+        "title": "Open Sealed Bundles",
+        "description": "Crack sealed products and chase a standout pull. Each unopened bundle is a small surprise — chase card or trade bait.",
+        "image": "cta1/sealed-vaults.webp",
+        "glowColor": "#e8a87c"
+      },
+      "width": 1376,
+      "height": 768,
+      "format": "webp",
+      "quality": 85,
+      "prompt": "Wide cinematic iyashikei anime landscape, Neat stack of sealed card bundles on a wooden veranda, warm lantern glow, anticipation of opening packs landscape feature illustration for a trading card game website tile, soft watercolor, atmospheric depth, gentle vignette, no text, no watermark, 16:9 composition.",
+      "stagingFile": "cta__sealed-vaults.png"
+    },
+    {
+      "id": "discover-rare",
+      "kind": "cta",
+      "path": "cta1/discover-rare.webp",
+      "title": "Chase Gentle Rarities",
+      "domain": null,
+      "source": {
+        "id": "discover-rare",
+        "title": "Chase Gentle Rarities",
+        "description": "Hunt foils, epics, and signature prints — the kind of card that rewrites a deck and makes opponents pause to admire it.",
+        "image": "cta1/discover-rare.webp",
+        "glowColor": "#b8a9c9"
+      },
+      "width": 1376,
+      "height": 768,
+      "format": "webp",
+      "quality": 85,
+      "prompt": "Wide cinematic iyashikei anime landscape, Single radiant foil trading card catching sunset light on a hilltop, rare pull moment, soft sparkle landscape feature illustration for a trading card game website tile, soft watercolor, atmospheric depth, gentle vignette, no text, no watermark, 16:9 composition.",
+      "stagingFile": "cta__discover-rare.png"
+    },
+    {
+      "id": "sell-cards",
+      "kind": "cta",
+      "path": "cta1/sell-cards.webp",
+      "title": "Pass Along Duplicates",
+      "domain": null,
+      "source": {
+        "id": "sell-cards",
+        "title": "Pass Along Duplicates",
+        "description": "Extras still have value. List them, fund the next upgrade, and keep your binder lean for the decks you actually play.",
+        "image": "cta1/sell-cards.webp",
+        "glowColor": "#d4a85c"
+      },
+      "width": 1376,
+      "height": 768,
+      "format": "webp",
+      "quality": 85,
+      "prompt": "Wide cinematic iyashikei anime landscape, Organized card binder with duplicates laid out beside a small coin pouch, peaceful trading desk by a window landscape feature illustration for a trading card game website tile, soft watercolor, atmospheric depth, gentle vignette, no text, no watermark, 16:9 composition.",
+      "stagingFile": "cta__sell-cards.png"
+    },
+    {
+      "id": "shape-strategy",
+      "kind": "cta",
+      "path": "cta1/shape-strategy.webp",
+      "title": "Tune Your Deck",
+      "domain": null,
+      "source": {
+        "id": "shape-strategy",
+        "title": "Tune Your Deck",
+        "description": "Prototype lists in the deck lab — test counters, stress synergies, and lock a 30-card answer to the ladder's current pace.",
+        "image": "cta1/shape-strategy.webp",
+        "glowColor": "#9a8ab8"
+      },
+      "width": 1376,
+      "height": 768,
+      "format": "webp",
+      "quality": 85,
+      "prompt": "Wide cinematic iyashikei anime landscape, Deck of trading cards arranged in a curve on tatami beside tea cup, strategy planning mood, soft afternoon light landscape feature illustration for a trading card game website tile, soft watercolor, atmospheric depth, gentle vignette, no text, no watermark, 16:9 composition.",
+      "stagingFile": "cta__shape-strategy.png"
+    },
+    {
+      "id": "tactical-battles",
+      "kind": "gamemodel",
+      "path": "gamemodel/tactical-battles.webp",
+      "title": "Calm Tactics",
+      "domain": null,
+      "source": {
+        "id": "tactical-battles",
+        "title": "Calm Tactics",
+        "description": "Trade blows on a living board where timing, lane pressure, and burst windows matter more than raw stats. Win the turn before you win the match.",
+        "image": "gamemodel/tactical-battles.webp",
+        "glowColor": "#6eb5d9"
+      },
+      "width": 1024,
+      "height": 1024,
+      "format": "webp",
+      "quality": 85,
+      "prompt": "Wide cinematic iyashikei anime landscape, Abstract game board with gentle spirit tokens on a misty pond surface, calm tactical duel atmosphere, no UI chrome square pillar illustration for a trading card game website section, soft watercolor, centered composition, gentle lighting, no text, no watermark, 1:1 aspect ratio.",
+      "stagingFile": "gamemodel__tactical-battles.png"
+    },
+    {
+      "id": "collectible-cards",
+      "kind": "gamemodel",
+      "path": "gamemodel/collectible-cards.webp",
+      "title": "Ward Collecting",
+      "domain": null,
+      "source": {
+        "id": "collectible-cards",
+        "title": "Ward Collecting",
+        "description": "Pull spirits from Shinrin, Naminami, Akari, and Takane — then stitch keywords, curves, and finishers into a list that rewards patient play.",
+        "image": "gamemodel/collectible-cards.webp",
+        "glowColor": "#b8a9c9"
+      },
+      "width": 1024,
+      "height": 1024,
+      "format": "webp",
+      "quality": 85,
+      "prompt": "Wide cinematic iyashikei anime landscape, Fan of illustrated trading cards over a pastoral ward panorama blending forest, coast, and highland hints square pillar illustration for a trading card game website section, soft watercolor, centered composition, gentle lighting, no text, no watermark, 1:1 aspect ratio.",
+      "stagingFile": "gamemodel__collectible-cards.png"
+    },
+    {
+      "id": "ranked-climb",
+      "kind": "gamemodel",
+      "path": "gamemodel/ranked-climb.webp",
+      "title": "Seasonal Ladder",
+      "domain": null,
+      "source": {
+        "id": "ranked-climb",
+        "title": "Seasonal Ladder",
+        "description": "Climb seasonal tiers, learn from losses, and refine your lines. The summit rewards players who adapt without losing their composure.",
+        "image": "gamemodel/ranked-climb.webp",
+        "glowColor": "#e8a87c"
+      },
+      "width": 1024,
+      "height": 1024,
+      "format": "webp",
+      "quality": 85,
+      "prompt": "Wide cinematic iyashikei anime landscape, Stone path ascending a hill through seasons, metaphor for ladder climb, peaceful determination, distant summit square pillar illustration for a trading card game website section, soft watercolor, centered composition, gentle lighting, no text, no watermark, 1:1 aspect ratio.",
+      "stagingFile": "gamemodel__ranked-climb.png"
+    },
+    {
+      "id": "uncommon",
+      "kind": "card_type",
+      "path": "card_types/uncommon.webp",
+      "title": "Uncommon",
+      "domain": null,
+      "width": 640,
+      "height": 640,
+      "format": "webp",
+      "quality": 85,
+      "prompt": "Soft jade leaf emblem with subtle glow, uncommon rarity icon, iyashikei watercolor style square rarity emblem icon for a trading card game UI, soft watercolor, clean silhouette, no text, no watermark, 1:1 aspect ratio.",
+      "stagingFile": "card_type__uncommon.png"
+    },
+    {
+      "id": "rare",
+      "kind": "card_type",
+      "path": "card_types/rare.webp",
+      "title": "Rare",
+      "domain": null,
+      "width": 640,
+      "height": 640,
+      "format": "webp",
+      "quality": 85,
+      "prompt": "Delicate lavender blossom crest emblem, rare rarity icon, iyashikei watercolor style square rarity emblem icon for a trading card game UI, soft watercolor, clean silhouette, no text, no watermark, 1:1 aspect ratio.",
+      "stagingFile": "card_type__rare.png"
+    },
+    {
+      "id": "epic",
+      "kind": "card_type",
+      "path": "card_types/epic.webp",
+      "title": "Epic",
+      "domain": null,
+      "width": 640,
+      "height": 640,
+      "format": "webp",
+      "quality": 85,
+      "prompt": "Golden lantern sigil emblem with warm radiance, epic rarity icon, iyashikei watercolor style square rarity emblem icon for a trading card game UI, soft watercolor, clean silhouette, no text, no watermark, 1:1 aspect ratio.",
+      "stagingFile": "card_type__epic.png"
+    }
+  ],
+  "showcaseCards": [
+    {
+      "id": "shinrin_card_01_kodama_keeper",
+      "kind": "showcase_card",
+      "path": "cards/{domain}/shinrin_card_01_kodama_keeper.png",
+      "title": "shinrin_card_01_kodama_keeper",
+      "domain": null,
+      "managedBy": "cardgen",
+      "note": "Generated via cardgen; required for FRONTEND_SHOWCASE_ONLY compile (hero + collection)."
+    },
+    {
+      "id": "naminami_card_01_tide_listener",
+      "kind": "showcase_card",
+      "path": "cards/{domain}/naminami_card_01_tide_listener.png",
+      "title": "naminami_card_01_tide_listener",
+      "domain": null,
+      "managedBy": "cardgen",
+      "note": "Generated via cardgen; required for FRONTEND_SHOWCASE_ONLY compile (hero + collection)."
+    },
+    {
+      "id": "akari_card_01_lantern_tender",
+      "kind": "showcase_card",
+      "path": "cards/{domain}/akari_card_01_lantern_tender.png",
+      "title": "akari_card_01_lantern_tender",
+      "domain": null,
+      "managedBy": "cardgen",
+      "note": "Generated via cardgen; required for FRONTEND_SHOWCASE_ONLY compile (hero + collection)."
+    },
+    {
+      "id": "takane_card_01_breeze_shepherd",
+      "kind": "showcase_card",
+      "path": "cards/{domain}/takane_card_01_breeze_shepherd.png",
+      "title": "takane_card_01_breeze_shepherd",
+      "domain": null,
+      "managedBy": "cardgen",
+      "note": "Generated via cardgen; required for FRONTEND_SHOWCASE_ONLY compile (hero + collection)."
+    },
+    {
+      "id": "shinrin_card_03_mosswalker",
+      "kind": "showcase_card",
+      "path": "cards/{domain}/shinrin_card_03_mosswalker.png",
+      "title": "shinrin_card_03_mosswalker",
+      "domain": null,
+      "managedBy": "cardgen",
+      "note": "Generated via cardgen; required for FRONTEND_SHOWCASE_ONLY compile (hero + collection)."
+    },
+    {
+      "id": "naminami_card_02_pearl_diver",
+      "kind": "showcase_card",
+      "path": "cards/{domain}/naminami_card_02_pearl_diver.png",
+      "title": "naminami_card_02_pearl_diver",
+      "domain": null,
+      "managedBy": "cardgen",
+      "note": "Generated via cardgen; required for FRONTEND_SHOWCASE_ONLY compile (hero + collection)."
+    },
+    {
+      "id": "akari_card_02_embersmith",
+      "kind": "showcase_card",
+      "path": "cards/{domain}/akari_card_02_embersmith.png",
+      "title": "akari_card_02_embersmith",
+      "domain": null,
+      "managedBy": "cardgen",
+      "note": "Generated via cardgen; required for FRONTEND_SHOWCASE_ONLY compile (hero + collection)."
+    },
+    {
+      "id": "takane_card_02_cloud_reader",
+      "kind": "showcase_card",
+      "path": "cards/{domain}/takane_card_02_cloud_reader.png",
+      "title": "takane_card_02_cloud_reader",
+      "domain": null,
+      "managedBy": "cardgen",
+      "note": "Generated via cardgen; required for FRONTEND_SHOWCASE_ONLY compile (hero + collection)."
+    },
+    {
+      "id": "shinrin_card_02_fern_sage",
+      "kind": "showcase_card",
+      "path": "cards/{domain}/shinrin_card_02_fern_sage.png",
+      "title": "shinrin_card_02_fern_sage",
+      "domain": null,
+      "managedBy": "cardgen",
+      "note": "Generated via cardgen; required for FRONTEND_SHOWCASE_ONLY compile (hero + collection)."
+    },
+    {
+      "id": "naminami_card_03_coral_whisper",
+      "kind": "showcase_card",
+      "path": "cards/{domain}/naminami_card_03_coral_whisper.png",
+      "title": "naminami_card_03_coral_whisper",
+      "domain": null,
+      "managedBy": "cardgen",
+      "note": "Generated via cardgen; required for FRONTEND_SHOWCASE_ONLY compile (hero + collection)."
+    },
+    {
+      "id": "akari_card_03_festival_dancer",
+      "kind": "showcase_card",
+      "path": "cards/{domain}/akari_card_03_festival_dancer.png",
+      "title": "akari_card_03_festival_dancer",
+      "domain": null,
+      "managedBy": "cardgen",
+      "note": "Generated via cardgen; required for FRONTEND_SHOWCASE_ONLY compile (hero + collection)."
+    },
+    {
+      "id": "takane_card_03_summit_guide",
+      "kind": "showcase_card",
+      "path": "cards/{domain}/takane_card_03_summit_guide.png",
+      "title": "takane_card_03_summit_guide",
+      "domain": null,
+      "managedBy": "cardgen",
+      "note": "Generated via cardgen; required for FRONTEND_SHOWCASE_ONLY compile (hero + collection)."
+    }
+  ],
+  "manualAssets": [
+    {
+      "kind": "brand",
+      "paths": [
+        "brand/gamelogo.png",
+        "brand/header.png",
+        "brand/play-lobby.png",
+        "brand/favicon.ico",
+        "brand/main.mp4"
+      ],
+      "note": "Brand logo/video are not auto-generated — supply manually or extend contentgen later.",
+      "referenceSizes": {
+        "brand/gamelogo.png": "1344×768 png",
+        "brand/header.png": "1344×768 png",
+        "brand/play-lobby.png": "1672×941 png"
+      }
+    }
+  ]
+}
