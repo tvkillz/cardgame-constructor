@@ -79,6 +79,7 @@ export default function IyashikeiHero() {
           </div>
         </div>
       </div>
+      <div className="iyashikei-hero__transition" aria-hidden="true" />
     </section>
   )
 }

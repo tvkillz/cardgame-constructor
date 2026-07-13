@@ -566,3 +566,43 @@
     display: none;
   }
 }
+
+/* Soft bleed into locations section */
+.iyashikei-hero__transition {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  z-index: 11;
+  height: clamp(5.5rem, 11vw, 16rem);
+  pointer-events: none;
+}
+
+.iyashikei-hero__transition::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(245, 240, 230, 0.25) 28%,
+    rgba(245, 240, 230, 0.72) 62%,
+    #f5f0e6 88%
+  );
+}
+
+.iyashikei-hero__transition::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: clamp(2.5rem, 6vw, 4.5rem);
+  background-color: #f5f0e6;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120' preserveAspectRatio='none'%3E%3Cpath fill='%23000' d='M0,64 C180,108 360,24 540,64 C720,104 900,28 1080,58 C1260,88 1350,72 1440,64 L1440,120 L0,120 Z'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120' preserveAspectRatio='none'%3E%3Cpath fill='%23000' d='M0,64 C180,108 360,24 540,64 C720,104 900,28 1080,58 C1260,88 1350,72 1440,64 L1440,120 L0,120 Z'/%3E%3C/svg%3E");
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}

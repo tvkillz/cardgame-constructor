@@ -128,7 +128,7 @@
   background: var(--iyashikei-heading-gradient);
   -webkit-background-clip: text;
   background-clip: text;
-  color: #00000040;
+  color: transparent;
   filter: none;
   text-shadow: none;
 }

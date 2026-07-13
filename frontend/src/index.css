@@ -2,6 +2,8 @@
 @import './styles/iyashikei-fonts.css';
 @import './styles/iyashikei-cards.css';
 @import './styles/iyashikei-modals.css';
+@import './styles/iyashikei-theme.css';
+@import './styles/iyashikei-landing-layouts.css';
 
 /* Color defaults — overridden at runtime by applyTheme(); fonts via next/font in app layout */
 :root {
