@@ -2,6 +2,7 @@
 # Sync with frontend/deploy/output/cors-origins.txt
 
 https://voidborn.fun
+https://komorebi.voidborn.fun
 https://www.voidborn.fun
 https://staging.voidborn.fun
 https://test.sportsydeals.com

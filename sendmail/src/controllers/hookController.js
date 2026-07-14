@@ -38,9 +38,10 @@ async function handleSendEmailHook(req, res) {
         subject: msg.subject,
         html: msg.html,
         text: msg.text,
+        brand: msg.brand,
       });
       console.log(
-        `[sendmail] hook sent action=${action} to=${msg.to} messageId=${info.messageId}`,
+        `[sendmail] hook sent action=${action} site=${msg.brand?.id || 'voidborn'} to=${msg.to} messageId=${info.messageId}`,
       );
     }
 

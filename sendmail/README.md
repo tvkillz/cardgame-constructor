@@ -98,7 +98,7 @@ Confirm/reset links in emails use that host (`/auth/v1/verify?...`), not the fro
 ## POST /test body (optional)
 
 ```json
-{ "recipients": ["you@example.com"], "template": "signup" }
+{ "recipients": ["you@example.com"], "template": "signup", "site": "iyashikei" }
 ```
 
 `template` values:
@@ -108,6 +108,8 @@ Confirm/reset links in emails use that host (`/auth/v1/verify?...`), not the fro
 | `signup` (default) | Registration / activation preview |
 | `recovery` | Password reset preview |
 | `invoice` | Invoice email + PDF preview (Test LTD seller data) |
+
+`site` (optional): `voidborn` (default) or `iyashikei` — picks branded auth email template. The live GoTrue hook auto-detects site from `redirect_to`, `user_metadata.site_id`, or `+site` email suffix.
 
 ## POST /invoice body
 

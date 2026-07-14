@@ -81,10 +81,11 @@ async function sendTestEmail(req, res) {
     }
 
     const template = String(req.body?.template || 'signup').toLowerCase();
+    const siteId = String(req.body?.site || req.body?.siteId || 'voidborn').toLowerCase();
     let preview;
 
     if (template === 'recovery') {
-      preview = buildRecoveryPreviewEmail();
+      preview = buildRecoveryPreviewEmail({ siteId });
     } else if (template === 'invoice') {
       const stamp = new Date().toISOString();
       const payload = normalizeInvoicePayload({
@@ -134,7 +135,7 @@ async function sendTestEmail(req, res) {
         template,
       });
     } else {
-      preview = buildSignupPreviewEmail();
+      preview = buildSignupPreviewEmail({ siteId });
     }
 
     const info = await sendMail({
@@ -142,6 +143,7 @@ async function sendTestEmail(req, res) {
       subject: preview.subject,
       html: preview.html,
       text: preview.text,
+      brand: preview.brand,
     });
 
     return res.json({
@@ -150,6 +152,7 @@ async function sendTestEmail(req, res) {
       accepted: info.accepted,
       recipients: to,
       template,
+      site: siteId,
     });
   } catch (err) {
     console.error('[sendmail] test send failed:', err.message);

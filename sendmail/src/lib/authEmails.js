@@ -1,9 +1,9 @@
 const {
   escapeHtml,
-  brandName,
-  renderPortalEmail,
+  renderBrandedEmail,
   renderOtpBlock,
 } = require('./emailTemplate');
+const { resolveSiteBrand, getBrand } = require('./siteBrands');
 
 function authVerifyBaseUrl(emailData) {
   return (
@@ -25,99 +25,6 @@ function buildVerifyUrl({ tokenHash, emailActionType, redirectTo, emailData }) {
   return url.toString();
 }
 
-const SUBJECTS = {
-  signup: 'Confirm your VOIDBORN account',
-  invite: 'You are invited to VOIDBORN',
-  magiclink: 'Your VOIDBORN sign-in link',
-  recovery: 'Reset your VOIDBORN password',
-  email_change: 'Confirm your VOIDBORN email change',
-  email: 'Your VOIDBORN verification code',
-  reauthentication: 'Confirm it is you — VOIDBORN',
-  password_changed_notification: 'Your VOIDBORN password was changed',
-  email_changed_notification: 'Your VOIDBORN email was changed',
-  phone_changed_notification: 'Your VOIDBORN phone number was changed',
-  identity_linked_notification: 'A sign-in method was linked to your VOIDBORN account',
-  identity_unlinked_notification: 'A sign-in method was removed from your VOIDBORN account',
-  mfa_factor_enrolled_notification: 'MFA was enabled on your VOIDBORN account',
-  mfa_factor_unenrolled_notification: 'MFA was disabled on your VOIDBORN account',
-};
-
-const ACTION_COPY = {
-  signup: {
-    headline: 'Welcome to the Realm',
-    body:
-      'Your journey into the realm begins now. Confirm your account to unlock the portal — collect cards, forge your deck, and challenge rivals across the dominions.',
-    cta: 'Activate Your Account',
-  },
-  invite: {
-    headline: 'You Are Summoned',
-    body:
-      'A champion has invited you to join the realm. Accept the invitation below to enter the portal and begin your legend.',
-    cta: 'Accept Invitation',
-  },
-  magiclink: {
-    headline: 'Your Sign-In Awaits',
-    body:
-      'Your secure passage back to the realm is ready. Use the link below to sign in — no password required.',
-    cta: 'Sign In to the Portal',
-  },
-  recovery: {
-    headline: 'Restore Your Path',
-    body:
-      'We received a request to reset your password. If this was you, forge a new one using the link below. The path closes shortly for your protection.',
-    cta: 'Reset Password',
-  },
-  email_change: {
-    headline: 'Confirm Your New Seal',
-    body:
-      'You asked to change the email bound to your account. Confirm the new address to keep your portal access secure.',
-    cta: 'Confirm Email Change',
-  },
-  email: {
-    headline: 'Verify Your Presence',
-    body:
-      'Use the link or code below to verify your identity and continue into the realm.',
-    cta: 'Verify Now',
-  },
-  reauthentication: {
-    headline: 'Prove It Is You',
-    body:
-      'For your protection, we need to confirm your identity before this sensitive action can proceed.',
-    cta: 'Confirm Identity',
-  },
-};
-
-const SECURITY_COPY = {
-  password_changed_notification: {
-    headline: 'Password Changed',
-    body: 'Your portal password was changed. If you did not make this change, secure your account immediately.',
-  },
-  email_changed_notification: {
-    headline: 'Email Address Changed',
-    body: 'The email on your account was updated. If this was unexpected, contact support and review your account security.',
-  },
-  phone_changed_notification: {
-    headline: 'Phone Number Changed',
-    body: 'A phone number linked to your account was updated.',
-  },
-  identity_linked_notification: {
-    headline: 'Sign-In Method Linked',
-    body: 'A new sign-in method was linked to your portal account.',
-  },
-  identity_unlinked_notification: {
-    headline: 'Sign-In Method Removed',
-    body: 'A sign-in method was removed from your portal account.',
-  },
-  mfa_factor_enrolled_notification: {
-    headline: 'Extra Wards Enabled',
-    body: 'Multi-factor authentication is now active on your account. Your realm is better protected.',
-  },
-  mfa_factor_unenrolled_notification: {
-    headline: 'Extra Wards Removed',
-    body: 'Multi-factor authentication was disabled on your account.',
-  },
-};
-
 function actionNeedsLink(action) {
   return [
     'signup',
@@ -130,12 +37,21 @@ function actionNeedsLink(action) {
   ].includes(action);
 }
 
-function greetingFor(name) {
-  return name ? `Greetings, ${name}.` : 'Greetings, traveler.';
+function greetingFor(brand, name) {
+  return brand.greetingName(name || '');
 }
 
-function buildAuthEmail({ user, emailData, token, tokenHash, redirectTo, emailActionType }) {
-  const subject = SUBJECTS[emailActionType] || `${brandName()} notification`;
+function buildAuthEmail({
+  user,
+  emailData,
+  token,
+  tokenHash,
+  redirectTo,
+  emailActionType,
+  brand: brandOverride,
+}) {
+  const brand = brandOverride || resolveSiteBrand({ user, emailData, redirectTo });
+  const subject = brand.subjects[emailActionType] || `${brand.brandName} notification`;
   const name =
     user.user_metadata?.display_name ||
     user.user_metadata?.full_name ||
@@ -143,28 +59,29 @@ function buildAuthEmail({ user, emailData, token, tokenHash, redirectTo, emailAc
     user.email;
 
   if (!actionNeedsLink(emailActionType)) {
-    const security = SECURITY_COPY[emailActionType] || {
+    const security = brand.securityCopy[emailActionType] || {
       headline: 'Account Notification',
-      body: `This is a security notification for your ${brandName()} account.`,
+      body: `This is a security notification for your ${brand.brandName} account.`,
     };
     const text = [
-      greetingFor(name),
+      greetingFor(brand, name),
       '',
       security.headline,
       security.body,
       '',
-      `— ${brandName()}`,
+      `— ${brand.brandName}`,
     ].join('\n');
 
     return {
       subject,
-      html: renderPortalEmail({
+      html: renderBrandedEmail(brand, {
         title: subject,
         headline: security.headline,
-        greeting: greetingFor(name),
-        bodyHtml: `<p style="margin:0;color:#ffffff;">${escapeHtml(security.body)}</p>`,
+        greeting: greetingFor(brand, name),
+        bodyHtml: `<p style="margin:0;color:${brand.palette.body};">${escapeHtml(security.body)}</p>`,
       }),
       text,
+      brand,
     };
   }
 
@@ -175,23 +92,23 @@ function buildAuthEmail({ user, emailData, token, tokenHash, redirectTo, emailAc
     emailData,
   });
 
-  const copy = ACTION_COPY[emailActionType] || {
-    headline: 'Continue to the Portal',
-    body: 'Your secure link to the realm is below.',
+  const copy = brand.actionCopy[emailActionType] || {
+    headline: 'Continue',
+    body: 'Your secure link is below.',
     cta: 'Continue',
   };
 
-  const html = renderPortalEmail({
+  const html = renderBrandedEmail(brand, {
     title: subject,
     headline: copy.headline,
-    greeting: greetingFor(name),
-        bodyHtml: `<p style="margin:0;color:#ffffff;">${escapeHtml(copy.body)}</p>${renderOtpBlock(token)}`,
+    greeting: greetingFor(brand, name),
+    bodyHtml: `<p style="margin:0;color:${brand.palette.body};">${escapeHtml(copy.body)}</p>${renderOtpBlock(token, brand)}`,
     ctaLabel: copy.cta,
     ctaUrl: confirmUrl,
   });
 
   const text = [
-    greetingFor(name),
+    greetingFor(brand, name),
     '',
     copy.headline,
     copy.body,
@@ -199,12 +116,12 @@ function buildAuthEmail({ user, emailData, token, tokenHash, redirectTo, emailAc
     `${copy.cta}: ${confirmUrl}`,
     token ? `Code: ${token}` : '',
     '',
-    `— ${brandName()}`,
+    `— ${brand.brandName}`,
   ]
     .filter(Boolean)
     .join('\n');
 
-  return { subject, html, text };
+  return { subject, html, text, brand };
 }
 
 /**
@@ -212,6 +129,7 @@ function buildAuthEmail({ user, emailData, token, tokenHash, redirectTo, emailAc
  * @see https://supabase.com/docs/guides/auth/auth-hooks/send-email-hook
  */
 function buildEmailChangeMessages({ user, emailData }) {
+  const brand = resolveSiteBrand({ user, emailData, redirectTo: emailData.redirect_to });
   const redirectTo = emailData.redirect_to || '';
   const hasSecurePair =
     Boolean(emailData.token_new) &&
@@ -230,6 +148,7 @@ function buildEmailChangeMessages({ user, emailData }) {
           tokenHash: emailData.token_hash_new,
           redirectTo,
           emailActionType: 'email_change',
+          brand,
         }),
       },
       {
@@ -241,6 +160,7 @@ function buildEmailChangeMessages({ user, emailData }) {
           tokenHash: emailData.token_hash,
           redirectTo,
           emailActionType: 'email_change',
+          brand,
         }),
       },
     ];
@@ -260,64 +180,69 @@ function buildEmailChangeMessages({ user, emailData }) {
         tokenHash,
         redirectTo,
         emailActionType: 'email_change',
+        brand,
       }),
     },
   ];
 }
 
-function buildRecoveryPreviewEmail({ recipientName = 'Traveler', confirmUrl } = {}) {
-  const subject = SUBJECTS.recovery;
-  const copy = ACTION_COPY.recovery;
+function buildRecoveryPreviewEmail({ recipientName = 'Traveler', confirmUrl, siteId = 'voidborn' } = {}) {
+  const brand = getBrand(siteId);
+  const subject = brand.subjects.recovery;
+  const copy = brand.actionCopy.recovery;
   const sampleUrl =
     confirmUrl || `${authVerifyBaseUrl({})}/auth/v1/verify?token=preview&type=recovery`;
 
   return {
     subject: `[Preview] ${subject}`,
-    html: renderPortalEmail({
+    html: renderBrandedEmail(brand, {
       title: subject,
       headline: copy.headline,
-      greeting: greetingFor(recipientName),
-      bodyHtml: `<p style="margin:0;color:#ffffff;">${escapeHtml(copy.body)}</p>`,
+      greeting: greetingFor(brand, recipientName),
+      bodyHtml: `<p style="margin:0;color:${brand.palette.body};">${escapeHtml(copy.body)}</p>`,
       ctaLabel: copy.cta,
       ctaUrl: sampleUrl,
-      footerNote: 'This is a preview of the VOIDBORN password reset email template.',
+      footerNote: brand.previewFooter.recovery,
     }),
     text: [
-      greetingFor(recipientName),
+      greetingFor(brand, recipientName),
       '',
       copy.headline,
       copy.body,
       '',
       `${copy.cta}: ${sampleUrl}`,
     ].join('\n'),
+    brand,
   };
 }
 
-function buildSignupPreviewEmail({ recipientName = 'Traveler', confirmUrl } = {}) {
-  const subject = SUBJECTS.signup;
-  const copy = ACTION_COPY.signup;
+function buildSignupPreviewEmail({ recipientName = 'Traveler', confirmUrl, siteId = 'voidborn' } = {}) {
+  const brand = getBrand(siteId);
+  const subject = brand.subjects.signup;
+  const copy = brand.actionCopy.signup;
   const sampleUrl =
     confirmUrl || `${authVerifyBaseUrl({})}/auth/v1/verify?token=preview&type=signup`;
 
   return {
     subject: `[Preview] ${subject}`,
-    html: renderPortalEmail({
+    html: renderBrandedEmail(brand, {
       title: subject,
       headline: copy.headline,
-      greeting: greetingFor(recipientName),
-      bodyHtml: `<p style="margin:0;color:#ffffff;">${escapeHtml(copy.body)}</p>`,
+      greeting: greetingFor(brand, recipientName),
+      bodyHtml: `<p style="margin:0;color:${brand.palette.body};">${escapeHtml(copy.body)}</p>`,
       ctaLabel: copy.cta,
       ctaUrl: sampleUrl,
-      footerNote: 'This is a preview of the VOIDBORN activation email template.',
+      footerNote: brand.previewFooter.signup,
     }),
     text: [
-      greetingFor(recipientName),
+      greetingFor(brand, recipientName),
       '',
       copy.headline,
       copy.body,
       '',
       `${copy.cta}: ${sampleUrl}`,
     ].join('\n'),
+    brand,
   };
 }
 
@@ -328,4 +253,5 @@ module.exports = {
   buildEmailChangeMessages,
   buildSignupPreviewEmail,
   buildRecoveryPreviewEmail,
+  resolveSiteBrand,
 };

@@ -1,5 +1,5 @@
 const nodemailer = require('nodemailer');
-const { LOGO_CID, logoAttachment } = require('../lib/emailTemplate');
+const { LOGO_CID, logoAttachment, resolveLogoAttachment, logoUrl } = require('../lib/emailTemplate');
 
 function smtpPassword() {
   return process.env.SMTP_PASS || process.env.SMTP_PASSWORD || '';
@@ -40,16 +40,18 @@ async function verifySmtp() {
   return transport;
 }
 
-async function sendMail({ to, cc, subject, html, text, attachments }) {
+async function sendMail({ to, cc, subject, html, text, attachments, brand }) {
   const transport = createTransport();
 
   // Embed the header logo as a Content-ID (multipart/related) attachment when
   // the HTML references it — data: URIs get stripped by many mail clients.
   const finalAttachments = Array.isArray(attachments) ? [...attachments] : [];
   if (html && html.includes(`cid:${LOGO_CID}`)) {
-    const logo = logoAttachment();
+    const logo = brand ? await resolveLogoAttachment(brand) : logoAttachment(brand);
     if (logo && !finalAttachments.some((att) => att && att.cid === logo.cid)) {
       finalAttachments.push(logo);
+    } else if (brand && !logo) {
+      html = html.replace(`src="cid:${LOGO_CID}"`, `src="${logoUrl(brand)}"`);
     }
   }
 

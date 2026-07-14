@@ -21,6 +21,18 @@ server {
     auth_basic_user_file /etc/nginx/constructor-htpasswd;
 
 {{/STAGING_AUTH}}
+{{#SENDMAIL_PROXY}}
+    location /api/sendmail/ {
+        auth_basic off;
+        proxy_pass http://127.0.0.1:6001/;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+{{/SENDMAIL_PROXY}}
     location /_next/static/ {
         proxy_pass http://127.0.0.1:{{PORT}};
         proxy_http_version 1.1;
