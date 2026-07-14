@@ -8,7 +8,7 @@ import { getAuthCallbackUrl } from '@/lib/auth/callback-url'
 import { getSupabaseBrowserClient, isSupabaseConfigured } from '@/lib/supabase'
 import { mapSignInError } from '@/lib/auth/errors'
 import { toSiteAuthEmail } from '@/lib/auth/site-email'
-import { getSiteId } from '@/lib/site'
+import { getAuthEmailSuffix, getSiteId } from '@/lib/site'
 import { isValidEmail, isValidPassword, isValidUsername } from '@/lib/auth/validation'
 import './AuthModal.css'
 
@@ -81,7 +81,7 @@ export default function AuthModal() {
     }
 
     const siteId = getSiteId()
-    const authEmail = toSiteAuthEmail(siteId, trimmedEmail)
+    const authEmail = toSiteAuthEmail(getAuthEmailSuffix(), trimmedEmail)
     const redirectTo = getAuthCallbackUrl()
 
     if (isForgotPassword) {

@@ -104,6 +104,17 @@ create policy "Users update own profile"
   on public.profiles for update
   using (auth.uid() = id);
 
+create or replace function public.auth_email_resolve_site_id(p_suffix text)
+returns text
+language sql
+immutable
+as $$
+  select case p_suffix
+    when 'komorebi' then 'iyashikei'
+    else p_suffix
+  end
+$$;
+
 create or replace function public.handle_new_site_user()
 returns trigger
 language plpgsql
@@ -115,7 +126,7 @@ declare
   v_display_email text;
   v_username text;
 begin
-  v_site_id := public.auth_email_site_id(new.email);
+  v_site_id := public.auth_email_resolve_site_id(public.auth_email_site_id(new.email));
   if v_site_id is null or not exists (select 1 from public.sites s where s.id = v_site_id) then
     raise exception 'invalid_site_auth_email';
   end if;

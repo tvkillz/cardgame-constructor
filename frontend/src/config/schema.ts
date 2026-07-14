@@ -38,6 +38,12 @@ export interface AppConfig {
   /** Registry / content pack id — scopes auth and backend data to this site. */
   siteId: string
 
+  /**
+   * Optional plus-address suffix for Supabase auth (e.g. user+komorebi@…).
+   * Defaults to siteId. Backend must map suffix → siteId (see sites-auth-email-alias.sql).
+   */
+  authEmailSuffix?: string
+
   /** Brand name (display, document title, aria labels). */
   name: {
     display: string

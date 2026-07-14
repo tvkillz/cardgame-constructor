@@ -41,6 +41,11 @@ const IYASHIKEI_PALETTE = {
   ctaBorder: 'rgba(106, 171, 114, 0.45)',
 };
 
+/** Map auth email suffix → internal site id (must match backend auth_email_resolve_site_id). */
+const AUTH_SUFFIX_TO_SITE = {
+  komorebi: 'iyashikei',
+};
+
 const SITE_BRANDS = {
   voidborn: {
     id: 'voidborn',
@@ -150,6 +155,14 @@ const SITE_BRANDS = {
     siteUrl: 'https://komorebi.voidborn.fun',
     logoPath: '/assets/brand/header.png',
     logoPaths: ['/assets/brand/header.png', '/assets/brand/gamelogo.png'],
+    typography: {
+      headingFamily:
+        "'Hiro Misake', 'Shippori Mincho', 'Hiragino Mincho ProN', 'Yu Mincho', Georgia, serif",
+      googleFontsUrl:
+        'https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&display=swap',
+      customFontFamily: 'Hiro Misake',
+      customFontUrl: '/fonts/hiro-misake/HiroMisakeJapaneseGraffiti-5yG0a.otf',
+    },
     palette: IYASHIKEI_PALETTE,
     greetingName: (name) => (name ? `Hello, ${name}.` : 'Hello.'),
     subjects: {
@@ -247,6 +260,12 @@ const SITE_BRANDS = {
   },
 };
 
+function siteIdFromAuthSuffix(suffix) {
+  if (!suffix) return null;
+  if (SITE_BRANDS[suffix]) return suffix;
+  return AUTH_SUFFIX_TO_SITE[suffix] || null;
+}
+
 function parseSiteIdFromEmail(email) {
   const normalized = String(email || '').trim().toLowerCase();
   const at = normalized.lastIndexOf('@');
@@ -254,8 +273,8 @@ function parseSiteIdFromEmail(email) {
   const local = normalized.slice(0, at);
   const plus = local.lastIndexOf('+');
   if (plus <= 0) return null;
-  const siteId = local.slice(plus + 1);
-  return siteId && SITE_BRANDS[siteId] ? siteId : null;
+  const suffix = local.slice(plus + 1);
+  return siteIdFromAuthSuffix(suffix);
 }
 
 function parseSiteIdFromRedirect(redirectTo) {
@@ -318,9 +337,11 @@ function bundledLogoFile(brand) {
 
 module.exports = {
   DOMAIN_TO_SITE,
+  AUTH_SUFFIX_TO_SITE,
   SITE_BRANDS,
   getBrand,
   resolveSiteBrand,
+  siteIdFromAuthSuffix,
   parseSiteIdFromEmail,
   parseSiteIdFromRedirect,
   bundledLogoFile,

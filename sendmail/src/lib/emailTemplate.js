@@ -148,6 +148,33 @@ function logoImgHtml(brand = getBrand('voidborn')) {
   return `<img src="${url}" alt="${alt}" height="62" style="${style}" />`;
 }
 
+function emailHeadStyles(brand) {
+  const typography = brand.typography;
+  if (!typography) return '';
+
+  const rules = [];
+  if (typography.googleFontsUrl) {
+    rules.push(`@import url('${typography.googleFontsUrl}');`);
+  }
+  if (typography.customFontFamily && typography.customFontUrl) {
+    const fontUrl = `${siteUrl(brand)}${typography.customFontUrl}`;
+    rules.push(
+      `@font-face{font-family:'${typography.customFontFamily}';src:url('${fontUrl}') format('opentype');font-weight:normal;font-style:normal;}`,
+    );
+  }
+  if (!rules.length) return '';
+  return `<style type="text/css">${rules.join('')}</style>`;
+}
+
+function headingFontFamily(brand) {
+  return (
+    brand.typography?.headingFamily ||
+    (brand.id === 'iyashikei'
+      ? "'Shippori Mincho', 'Hiragino Mincho ProN', 'Yu Mincho', Georgia, serif"
+      : "Georgia, 'Times New Roman', serif")
+  );
+}
+
 /**
  * Site-branded HTML email shell — voidborn dark realm or iyashikei light wards.
  */
@@ -174,10 +201,8 @@ function renderBrandedEmail(
     footerNote ||
     `If you did not request this email, you can safely ignore it. This message was sent by ${brandName(brand)}.`;
 
-  const headlineFont =
-    brand.id === 'iyashikei'
-      ? "'Hiragino Mincho ProN', 'Yu Mincho', Georgia, 'Times New Roman', serif"
-      : "Georgia, 'Times New Roman', serif";
+  const headlineFont = headingFontFamily(brand);
+  const headStyles = emailHeadStyles(brand);
 
   const ctaBlock =
     ctaLabel && ctaUrl
@@ -205,6 +230,7 @@ function renderBrandedEmail(
   <meta name="color-scheme" content="${palette.colorScheme}">
   <meta name="supported-color-schemes" content="${palette.colorScheme}">
   <title>${safeTitle}</title>
+  ${headStyles}
 </head>
 <body style="margin:0;padding:0;background-color:${palette.bg};-webkit-text-size-adjust:100%;">
   <div style="display:none;max-height:0;overflow:hidden;opacity:0;color:transparent;">

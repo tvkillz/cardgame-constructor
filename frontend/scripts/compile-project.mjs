@@ -976,6 +976,7 @@ function buildAppConfig({
 
   return {
     siteId: manifest.id,
+    ...(manifest.authEmailSuffix ? { authEmailSuffix: manifest.authEmailSuffix } : {}),
     name: manifest.name,
     domain: {
       siteUrl: manifest.siteUrl,
