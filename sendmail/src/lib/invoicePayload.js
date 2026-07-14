@@ -1,3 +1,5 @@
+const { getBrand, parseSiteIdFromEmail, siteIdFromAuthSuffix } = require('./siteBrands');
+
 function defaultSeller() {
   return {
     companyName: process.env.INVOICE_COMPANY_NAME || 'Test LTD',
@@ -7,6 +9,19 @@ function defaultSeller() {
       '123 Example Street, Testville, TE1 1ST, United Kingdom',
     email: process.env.INVOICE_COMPANY_EMAIL || process.env.SMTP_ADMIN_EMAIL || 'support@voidborn.fun',
   };
+}
+
+function normalizeSiteId(raw) {
+  if (!raw || typeof raw !== 'string') return null;
+  const id = raw.trim().toLowerCase();
+  if (!id) return null;
+  return siteIdFromAuthSuffix(id) || (getBrand(id).id === id ? id : null);
+}
+
+function resolveInvoiceSiteId(body) {
+  const explicit = normalizeSiteId(body?.siteId ?? body?.site ?? body?.site_id);
+  if (explicit) return explicit;
+  return parseSiteIdFromEmail(body?.recipient) || 'voidborn';
 }
 
 function normalizeInvoicePayload(body) {
@@ -57,7 +72,13 @@ function normalizeInvoicePayload(body) {
       ...(body.seller || {}),
     },
     paymentMethod: String(body.paymentMethod || 'Test payment'),
+    siteId: resolveInvoiceSiteId(body),
   };
 }
 
-module.exports = { defaultSeller, normalizeInvoicePayload };
+module.exports = {
+  defaultSeller,
+  normalizeInvoicePayload,
+  resolveInvoiceSiteId,
+  normalizeSiteId,
+};

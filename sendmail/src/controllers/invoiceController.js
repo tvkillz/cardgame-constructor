@@ -1,6 +1,6 @@
 const { sendMail } = require('../config/email');
 const { buildInvoiceEmail } = require('../lib/invoiceEmail');
-const { buildInvoicePdf } = require('../lib/invoicePdf');
+const { buildInvoicePdf, invoicePdfFilename } = require('../lib/invoicePdf');
 const { displayOrderRef } = require('../lib/invoiceFormat');
 const { normalizeInvoicePayload } = require('../lib/invoicePayload');
 
@@ -16,9 +16,10 @@ async function sendInvoice(req, res) {
       subject: email.subject,
       html: email.html,
       text: email.text,
+      brand: email.brand,
       attachments: [
         {
-          filename: `VOIDBORN-invoice-${ref}.pdf`,
+          filename: invoicePdfFilename(email.brand, ref),
           content: pdfBuffer,
           contentType: 'application/pdf',
         },

@@ -1,5 +1,3 @@
-const { PORTAL } = require('./emailTemplate');
-
 function shortOrderId(orderId) {
   return String(orderId ?? '').replace(/-/g, '').slice(0, 8).toUpperCase();
 }
@@ -58,42 +56,54 @@ function lineTotalCents(line) {
   return (Number(line.unitPriceCents) || 0) * (Number(line.quantity) || 1);
 }
 
-/** Shared portal-styled summary table for invoice HTML emails. */
-function renderInvoiceSummaryTable({ lineItems, order, paymentMethod }) {
+/** Shared branded summary table for invoice HTML emails. */
+function renderInvoiceSummaryTable({ lineItems, order, paymentMethod, palette }) {
+  const p = palette || {
+    border: 'rgba(123, 77, 255, 0.2)',
+    body: '#ffffff',
+    text: '#e8dcc8',
+    muted: 'rgba(232, 220, 200, 0.55)',
+    accentBright: '#f3d878',
+    colorScheme: 'dark',
+    headerBottom: '#0a0a0c',
+  };
+  const isLight = p.colorScheme === 'light';
+  const theadBg = isLight ? p.headerBottom : 'rgba(14,16,24,0.85)';
+
   const rows = (lineItems ?? []).map((line) => {
     const qty = line.quantity ?? 1;
     const unit = formatMoney(line.unitPriceCents, order.currency);
     const total = formatMoney(lineTotalCents(line), order.currency);
     return `
       <tr>
-        <td style="padding:10px 12px;border-bottom:1px solid ${PORTAL.purpleBorder};color:${PORTAL.body};">${line.title}</td>
-        <td style="padding:10px 12px;border-bottom:1px solid ${PORTAL.purpleBorder};color:${PORTAL.text};text-align:center;">${formatQuantity(qty)}</td>
-        <td style="padding:10px 12px;border-bottom:1px solid ${PORTAL.purpleBorder};color:${PORTAL.text};text-align:right;">${unit}</td>
-        <td style="padding:10px 12px;border-bottom:1px solid ${PORTAL.purpleBorder};color:${PORTAL.goldBright};text-align:right;font-weight:700;">${total}</td>
+        <td style="padding:10px 12px;border-bottom:1px solid ${p.border};color:${p.body};">${line.title}</td>
+        <td style="padding:10px 12px;border-bottom:1px solid ${p.border};color:${p.text};text-align:center;">${formatQuantity(qty)}</td>
+        <td style="padding:10px 12px;border-bottom:1px solid ${p.border};color:${p.text};text-align:right;">${unit}</td>
+        <td style="padding:10px 12px;border-bottom:1px solid ${p.border};color:${p.accentBright};text-align:right;font-weight:700;">${total}</td>
       </tr>`;
   }).join('');
 
   return `
     <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0"
-      style="margin:20px 0 0;border:1px solid ${PORTAL.purpleBorder};border-radius:6px;overflow:hidden;">
+      style="margin:20px 0 0;border:1px solid ${p.border};border-radius:6px;overflow:hidden;">
       <thead>
-        <tr style="background:rgba(14,16,24,0.85);">
-          <th align="left" style="padding:10px 12px;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:${PORTAL.muted};">Item</th>
-          <th style="padding:10px 12px;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:${PORTAL.muted};">Qty</th>
-          <th align="right" style="padding:10px 12px;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:${PORTAL.muted};">Unit</th>
-          <th align="right" style="padding:10px 12px;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:${PORTAL.muted};">Total</th>
+        <tr style="background:${theadBg};">
+          <th align="left" style="padding:10px 12px;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:${p.muted};">Item</th>
+          <th style="padding:10px 12px;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:${p.muted};">Qty</th>
+          <th align="right" style="padding:10px 12px;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:${p.muted};">Unit</th>
+          <th align="right" style="padding:10px 12px;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:${p.muted};">Total</th>
         </tr>
       </thead>
       <tbody>${rows}</tbody>
       <tfoot>
         <tr>
-          <td colspan="3" style="padding:12px;font-size:13px;color:${PORTAL.text};text-align:right;">Total</td>
-          <td style="padding:12px;font-size:15px;font-weight:700;color:${PORTAL.goldBright};text-align:right;">
+          <td colspan="3" style="padding:12px;font-size:13px;color:${p.text};text-align:right;">Total</td>
+          <td style="padding:12px;font-size:15px;font-weight:700;color:${p.accentBright};text-align:right;">
             ${formatMoney(order.totalCents, order.currency)}
           </td>
         </tr>
         <tr>
-          <td colspan="4" style="padding:0 12px 12px;font-size:12px;color:${PORTAL.muted};">
+          <td colspan="4" style="padding:0 12px 12px;font-size:12px;color:${p.muted};">
             Payment method: ${paymentMethod || 'Card'}
           </td>
         </tr>

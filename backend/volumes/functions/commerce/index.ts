@@ -163,7 +163,21 @@ async function sendOrderInvoice(
     return { sent: false, reason: 'no_email' }
   }
 
-  const siteId = userData?.user ? siteIdFromAuthEmail(userData.user.email) : null
+  let siteId = userData?.user ? siteIdFromAuthEmail(userData.user.email) : null
+  if (!siteId && userData?.user) {
+    const metaSite = userData.user.user_metadata?.site_id
+    if (typeof metaSite === 'string' && metaSite.trim()) {
+      siteId = resolveAuthEmailSiteId(metaSite.trim().toLowerCase()) || metaSite.trim()
+    }
+  }
+  if (!siteId) {
+    const { data: profileRow } = await admin
+      .from('profiles')
+      .select('site_id')
+      .eq('id', order.user_id)
+      .maybeSingle()
+    if (profileRow?.site_id) siteId = String(profileRow.site_id)
+  }
   let billing = mapBillingProfile(null)
   if (siteId) {
     const { data: profile } = await admin
@@ -194,6 +208,7 @@ async function sendOrderInvoice(
     buyer: billing,
     seller: invoiceSellerBlock(),
     paymentMethod,
+    siteId: siteId ?? undefined,
   }
 
   try {

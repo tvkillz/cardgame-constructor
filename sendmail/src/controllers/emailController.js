@@ -2,7 +2,7 @@ const { sendMail, verifySmtp, fromAddress } = require('../config/email');
 const { buildSignupPreviewEmail, buildRecoveryPreviewEmail } = require('../lib/authEmails');
 const { defaultSeller, normalizeInvoicePayload } = require('../lib/invoicePayload');
 const { buildInvoiceEmail } = require('../lib/invoiceEmail');
-const { buildInvoicePdf } = require('../lib/invoicePdf');
+const { buildInvoicePdf, invoicePdfFilename } = require('../lib/invoicePdf');
 
 function normalizeRecipients(value) {
   if (!value) return [];
@@ -89,10 +89,11 @@ async function sendTestEmail(req, res) {
     } else if (template === 'invoice') {
       const stamp = new Date().toISOString();
       const payload = normalizeInvoicePayload({
+        siteId,
         recipient: to[0],
         order: {
           id: '00000000-0000-4000-8000-000000preview',
-          orderNumber: 'VB-PREVIEW',
+          orderNumber: siteId === 'iyashikei' ? 'KB-PREVIEW' : 'VB-PREVIEW',
           paidAt: stamp,
           totalCents: 1000,
           currency: 'eur',
@@ -119,9 +120,10 @@ async function sendTestEmail(req, res) {
         subject: `[Preview] ${email.subject}`,
         html: email.html,
         text: email.text,
+        brand: email.brand,
         attachments: [
           {
-            filename: 'VOIDBORN-invoice-PREVIEW.pdf',
+            filename: invoicePdfFilename(email.brand, 'PREVIEW'),
             content: pdfBuffer,
             contentType: 'application/pdf',
           },

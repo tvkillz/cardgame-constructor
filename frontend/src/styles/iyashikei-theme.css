@@ -851,6 +851,10 @@
   color: var(--iyashi-ink-soft);
 }
 
+[data-landing-variant='iyashikei'] .portal-collection__status {
+  color: var(--iyashi-ink-soft);
+}
+
 [data-landing-variant='iyashikei'] .portal-collection__deck-tab {
   border-color: var(--iyashi-border);
   background: var(--iyashi-panel);
