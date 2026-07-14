@@ -23,7 +23,8 @@ import {
   playManaGainBurst,
   pulseAttacker,
 } from './fx'
-import { runLightWispVfx } from './vfx'
+import { iyMs } from './animScale'
+import { runKomorebiStrikeVfx } from './vfx'
 
 const { orbs: orbPresets } = gameAnimationsConfig
 
@@ -445,10 +446,6 @@ export function useGameMatchFx({
       const fromSlot = isHero ? heroBoardRefs.current[slot] : villainBoardRefs.current[slot]
       const attackerWrap = boardWrap(fromSlot)
 
-      if (attackerWrap) {
-        await pulseAttacker(attackerWrap)
-      }
-
       let targetNode: HTMLElement | null = null
       let targetWrap: HTMLElement | null = null
       if (strike.faceDamage > 0) {
@@ -460,17 +457,22 @@ export function useGameMatchFx({
       }
 
       const preset = orbPresets[slot % orbPresets.length]
-      if (fromSlot && targetNode) {
-        await runLightWispVfx({
+      const faceHit = strike.faceDamage > 0
+
+      if (targetNode) {
+        const vfxPromise = runKomorebiStrikeVfx({
           stage,
           fxLayer,
-          fromNode: fromSlot,
           targetNode,
+          attackerNode: fromSlot,
           orbPreset: preset,
           particles: gameAnimationsConfig.particles,
-          fireballAnim: gameAnimationsConfig.fireball,
-          skipReturnFlight: strike.killed || Boolean(strike.attackerEliminated),
+          faceHit,
         })
+        const pulsePromise = attackerWrap ? pulseAttacker(attackerWrap) : Promise.resolve()
+        await Promise.all([vfxPromise, pulsePromise])
+      } else if (attackerWrap) {
+        await pulseAttacker(attackerWrap)
       }
 
       if (strike.killed && strike.targetSlot !== null && targetWrap?.isConnected) {
@@ -507,7 +509,7 @@ export function useGameMatchFx({
           await runStrike(strike, metrics)
           if (playbackId !== combatPlaybackIdRef.current) return
           if (i < playbackStrikes.length - 1) {
-            await delay(COMBAT_STRIKE_GAP_MS)
+            await delay(iyMs(COMBAT_STRIKE_GAP_MS))
           }
         }
 

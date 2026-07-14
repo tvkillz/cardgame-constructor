@@ -920,6 +920,180 @@
   --store-muted: var(--iyashi-ink-soft);
 }
 
+/* Play lobby — logo plate for readability on scenic art */
+[data-landing-variant='iyashikei'] .play-page__logo-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.15rem 2rem 1.25rem;
+  margin-bottom: 0.35rem;
+  border-radius: 20px;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.79) 0%, rgba(245, 240, 230, 0.25) 58%), 
+    linear-gradient(180deg, rgba(255, 252, 247, 0.94) 0%, rgba(232, 237, 228, 0.02) 100%);
+  border: 1px solid rgba(124, 184, 124, 0.28);
+  box-shadow:
+    0 10px 28px rgba(44, 62, 45, 0.14),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(10px);
+}
+
+[data-landing-variant='iyashikei'] .play-page__logo {
+  mix-blend-mode: normal;
+  filter: drop-shadow(0 2px 8px rgba(44, 62, 45, 0.12));
+  height: clamp(72px, 14vw, 118px);
+}
+
+[data-landing-variant='iyashikei'] .play-page__center {
+  gap: 0.5rem;
+}
+
+[data-landing-variant='iyashikei'] .play-page__panel {
+  min-height: 220px;
+}
+
+/* Play lobby — mode list: stacked cards, soft washi panels */
+[data-landing-variant='iyashikei'] .play-page .vb-btn {
+  color: var(--iyashi-ink);
+  background: var(--iyashi-panel-strong);
+  border-color: var(--iyashi-border);
+  border-radius: 14px;
+  box-shadow: 0 4px 14px var(--iyashi-shadow);
+  letter-spacing: 0.06em;
+  text-transform: none;
+}
+
+[data-landing-variant='iyashikei'] .play-page .vb-btn:hover:not(:disabled) {
+  color: #243d28;
+  background: rgba(255, 255, 255, 0.92);
+  border-color: var(--iyashi-border-strong);
+  box-shadow: 0 6px 18px rgba(106, 171, 114, 0.14);
+}
+
+[data-landing-variant='iyashikei'] .play-page__modes {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.65rem;
+  width: min(100%, 340px);
+  margin-top: 60px;
+}
+
+[data-landing-variant='iyashikei'] .play-page__mode {
+  width: 100%;
+  height: auto;
+  min-height: 74px;
+  padding: 0.85rem 1rem;
+  border-radius: 16px;
+  border: 1px solid var(--iyashi-border);
+  border-left: 1px solid var(--iyashi-border);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.88) 0%, rgba(245, 240, 230, 0.82) 100%);
+  box-shadow: 0 4px 14px var(--iyashi-shadow);
+}
+
+[data-landing-variant='iyashikei'] .play-page__mode--accent-cyan,
+[data-landing-variant='iyashikei'] .play-page__mode--accent-ember,
+[data-landing-variant='iyashikei'] .play-page__mode--accent-purple {
+  border-left: 1px solid var(--iyashi-border);
+}
+
+[data-landing-variant='iyashikei'] .play-page__mode--accent-cyan:hover:not(:disabled) {
+  border-color: rgba(110, 181, 217, 0.45);
+  box-shadow:
+    0 6px 18px rgba(90, 142, 180, 0.14),
+    inset 0 0 0 1px rgba(168, 212, 232, 0.35);
+}
+
+[data-landing-variant='iyashikei'] .play-page__mode--accent-ember:hover:not(:disabled) {
+  border-color: rgba(232, 168, 124, 0.45);
+  box-shadow:
+    0 6px 18px rgba(201, 168, 124, 0.16),
+    inset 0 0 0 1px rgba(232, 200, 160, 0.35);
+}
+
+[data-landing-variant='iyashikei'] .play-page__mode--accent-purple:hover:not(:disabled) {
+  border-color: rgba(124, 184, 124, 0.48);
+  box-shadow:
+    0 6px 18px rgba(106, 171, 114, 0.14),
+    inset 0 0 0 1px rgba(184, 212, 176, 0.35);
+}
+
+[data-landing-variant='iyashikei'] .play-page__mode-sigil {
+  width: 2.65rem;
+  height: 2.65rem;
+  border-radius: 999px;
+  border: 1.5px solid rgba(124, 184, 124, 0.35);
+  background: rgba(245, 240, 230, 0.92);
+  box-shadow: 0 2px 8px rgba(44, 62, 45, 0.08);
+}
+
+[data-landing-variant='iyashikei'] .play-page__mode-sigil::before {
+  display: none;
+}
+
+[data-landing-variant='iyashikei'] .play-page__mode-sigil--cyan {
+  border-color: rgba(110, 181, 217, 0.45);
+  background: radial-gradient(circle at 30% 28%, #d4eef8 0%, #a8d4e8 42%, #6eb5d9 100%);
+  box-shadow: 0 2px 10px rgba(110, 181, 217, 0.22);
+}
+
+[data-landing-variant='iyashikei'] .play-page__mode-sigil--ember {
+  border-color: rgba(232, 168, 124, 0.45);
+  background: radial-gradient(circle at 30% 28%, #f8e8d0 0%, #e8c8a0 42%, #c9a87c 100%);
+  box-shadow: 0 2px 10px rgba(201, 168, 124, 0.22);
+}
+
+[data-landing-variant='iyashikei'] .play-page__mode-sigil--purple {
+  border-color: rgba(124, 184, 124, 0.45);
+  background: radial-gradient(circle at 30% 28%, #dce8d8 0%, #b8d4b0 42%, #7cb87c 100%);
+  box-shadow: 0 2px 10px rgba(124, 184, 124, 0.22);
+}
+
+[data-landing-variant='iyashikei'] .play-page__mode-mark {
+  font-family: var(--font-heading, var(--font-fantasy));
+  font-size: 1.05rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1;
+  color: rgba(44, 62, 45, 0.82);
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.65);
+}
+
+[data-landing-variant='iyashikei'] .play-page__mode-sigil--cyan .play-page__mode-mark,
+[data-landing-variant='iyashikei'] .play-page__mode-sigil--ember .play-page__mode-mark,
+[data-landing-variant='iyashikei'] .play-page__mode-sigil--purple .play-page__mode-mark {
+  color: rgba(44, 62, 45, 0.88);
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.75);
+}
+
+[data-landing-variant='iyashikei'] .play-page__mode-text strong {
+  font-family: var(--font-heading, var(--font-fantasy));
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--iyashi-ink);
+  text-transform: none;
+}
+
+[data-landing-variant='iyashikei'] .play-page__mode-text small {
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
+  letter-spacing: 0.02em;
+  color: var(--iyashi-ink-soft);
+  line-height: 1.35;
+}
+
+[data-landing-variant='iyashikei'] .play-page__back-btn,
+[data-landing-variant='iyashikei'] .play-page__play-btn,
+[data-landing-variant='iyashikei'] .play-page__resume-btn {
+  letter-spacing: 0.06em;
+  text-transform: none;
+}
+
+[data-landing-variant='iyashikei'] .play-page__tutorial-error {
+  color: #9a5a5a;
+}
+
 [data-landing-variant='iyashikei'] .collection__stats{
   display: none;
 }

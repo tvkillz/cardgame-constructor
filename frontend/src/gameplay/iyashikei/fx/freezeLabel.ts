@@ -2,6 +2,7 @@ import { gsap } from 'gsap'
 
 import { rectToStagePoint } from '../../shared/fx/stageMetrics'
 import type { StageMetrics } from '../../shared/fx/stageMetrics'
+import { iySec } from '../animScale'
 
 export function playFreezeLabel(
   anchorEl: HTMLElement,
@@ -27,14 +28,14 @@ export function playFreezeLabel(
     gsap.fromTo(
       label,
       { opacity: 0, scale: 0.94, y: 8 },
-      { opacity: 1, scale: 1, y: 0, duration: 0.28, ease: 'sine.out' },
+      { opacity: 1, scale: 1, y: 0, duration: iySec(0.28), ease: 'sine.out' },
     )
 
     gsap.to(label, {
       opacity: 0,
       y: success ? -22 : -16,
-      duration: 0.55,
-      delay: 0.75,
+      duration: iySec(0.55),
+      delay: iySec(0.75),
       ease: 'sine.in',
       onComplete: () => {
         label.remove()
@@ -49,7 +50,7 @@ export function playFreezeLabel(
         { filter: 'brightness(1)' },
         {
           filter: 'brightness(1.06) drop-shadow(0 0 12px rgba(184, 220, 232, 0.65))',
-          duration: 0.24,
+          duration: iySec(0.24),
           yoyo: true,
           repeat: 2,
           ease: 'sine.inOut',

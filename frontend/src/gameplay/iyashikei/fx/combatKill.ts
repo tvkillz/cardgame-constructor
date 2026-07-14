@@ -2,6 +2,7 @@ import { gsap } from 'gsap'
 
 import { rectToStagePoint } from '../../shared/fx/stageMetrics'
 import type { StageMetrics } from '../../shared/fx/stageMetrics'
+import { iySec } from '../animScale'
 
 export function pulseAttacker(attackerEl: HTMLElement): Promise<void> {
   return new Promise((resolve) => {
@@ -10,10 +11,10 @@ export function pulseAttacker(attackerEl: HTMLElement): Promise<void> {
       attackerEl,
       { filter: 'brightness(1)' },
       {
-        filter: 'brightness(1.08) drop-shadow(0 0 14px rgba(159, 212, 168, 0.55))',
-        duration: 0.24,
+        filter: 'brightness(1.05) drop-shadow(0 0 10px rgba(184, 220, 232, 0.4))',
+        duration: iySec(0.28),
         yoyo: true,
-        repeat: 2,
+        repeat: 1,
         ease: 'sine.inOut',
         onComplete: () => {
           attackerEl.classList.remove('game-board-card-wrap--striking')
@@ -46,14 +47,14 @@ export function playExecutedKill(
     gsap.fromTo(
       label,
       { opacity: 0, scale: 0.92, y: 6 },
-      { opacity: 1, scale: 1, y: 0, duration: 0.28, ease: 'sine.out' },
+      { opacity: 1, scale: 1, y: 0, duration: iySec(0.28), ease: 'sine.out' },
     )
 
     gsap.to(label, {
       opacity: 0,
       y: -20,
-      duration: 0.55,
-      delay: 0.7,
+      duration: iySec(0.55),
+      delay: iySec(0.7),
       ease: 'sine.in',
     })
 
@@ -62,8 +63,8 @@ export function playExecutedKill(
       scale: 0.92,
       y: -16,
       filter: 'brightness(1.06) saturate(0.85)',
-      duration: 0.65,
-      delay: 0.25,
+      duration: iySec(0.65),
+      delay: iySec(0.25),
       ease: 'sine.inOut',
       onComplete: () => {
         label.remove()

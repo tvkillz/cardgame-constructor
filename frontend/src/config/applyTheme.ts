@@ -32,7 +32,9 @@ export function buildThemeCssVars(): Record<string, string> {
     '--play-arena-bg': `url(${arenaBg})`,
     '--game-lobby-bg': `url(${lobbyBg})`,
     '--game-arena-bg': `url(${arenaBg})`,
-    ...(playLogo ? { '--card-back-logo': `url(${playLogo})` } : {}),
+    ...(playLogo && variant !== 'iyashikei'
+      ? { '--card-back-logo': `url(${playLogo})` }
+      : {}),
   }
 
   if (variant === 'iyashikei') {

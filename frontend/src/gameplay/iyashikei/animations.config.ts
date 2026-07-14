@@ -2,14 +2,14 @@ import type { GameAnimationsConfig } from '@/config/game/schema'
 import { iyashikeiOrbPresets } from './orbs.config'
 
 /**
- * KOMOREBI arena animation tuning — soft wisps, gentle particles.
+ * KOMOREBI arena animation tuning — ambient field combat, gentle particles.
  */
 export const gameAnimationsConfig = {
   battleTransition: {
     loadingLabel: 'Stepping into the garden…',
-    loadingDurationMs: 1600,
-    gateDurationMs: 1200,
-    panelTransitionDurationSec: 1.1,
+    loadingDurationMs: 1840,
+    gateDurationMs: 1380,
+    panelTransitionDurationSec: 1.265,
     panelTransitionEasing: 'cubic-bezier(0.65, 0, 0.35, 1)',
   },
 
@@ -20,8 +20,8 @@ export const gameAnimationsConfig = {
       glyphExit: '終',
       sublabel: 'their moment',
       sublabelExit: 'stillness',
-      exitPhaseMs: 1600,
-      hideMs: 2400,
+      exitPhaseMs: 1840,
+      hideMs: 2760,
     },
     your: {
       label: 'Your turn',
@@ -29,14 +29,14 @@ export const gameAnimationsConfig = {
       glyphExit: '終',
       sublabel: 'your move',
       sublabelExit: 'stillness',
-      exitPhaseMs: 1600,
-      hideMs: 2400,
+      exitPhaseMs: 1840,
+      hideMs: 2760,
     },
   },
 
   particles: {
-    durationMin: 0.55,
-    durationRandom: 0.35,
+    durationMin: 0.63,
+    durationRandom: 0.4,
     scaleEnd: 0.15,
     ease: 'power2.out',
   },

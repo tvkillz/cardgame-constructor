@@ -28,21 +28,21 @@
       "title": "Casual Match",
       "subtitle": "Practice freely — no rating on the line",
       "accent": "cyan",
-      "mark": "I"
+      "mark": "風"
     },
     {
       "id": "ranked",
       "title": "Ranked Ladder",
       "subtitle": "Climb the season — wins and losses count",
       "accent": "ember",
-      "mark": "II"
+      "mark": "昇"
     },
     {
       "id": "tutorial",
       "title": "Ward Primer",
       "subtitle": "Learn the rules with a guided trial deck",
       "accent": "purple",
-      "mark": "III"
+      "mark": "導"
     }
   ],
   "player": {

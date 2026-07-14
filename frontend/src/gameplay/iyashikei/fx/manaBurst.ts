@@ -1,6 +1,7 @@
 import { gsap } from 'gsap'
 
 import { getStageMetrics, rectToStagePoint } from '../../shared/fx/stageMetrics'
+import { iySec } from '../animScale'
 
 export function playManaGainBurst(
   anchorEl: HTMLElement,
@@ -29,7 +30,7 @@ export function playManaGainBurst(
       { scale: 1 },
       {
         scale: 1.18,
-        duration: 0.26,
+        duration: iySec(0.26),
         yoyo: true,
         repeat: 1,
         ease: 'sine.out',
@@ -41,14 +42,14 @@ export function playManaGainBurst(
     gsap.fromTo(
       burst,
       { opacity: 0, y: 8, scale: 0.92 },
-      { opacity: 1, y: 0, scale: 1, duration: 0.28, ease: 'sine.out' },
+      { opacity: 1, y: 0, scale: 1, duration: iySec(0.28), ease: 'sine.out' },
     )
 
     gsap.to(burst, {
       opacity: 0,
       y: -24,
-      duration: 0.65,
-      delay: 0.55,
+      duration: iySec(0.65),
+      delay: iySec(0.55),
       ease: 'sine.in',
       onComplete: () => {
         burst.remove()

@@ -19,6 +19,7 @@ import MatchResultOverlay from './MatchResultOverlay';
 import TutorialOverlay from './TutorialOverlay';
 import TutorialHighlight from './TutorialHighlight';
 import { TurnBanner } from './TurnBanner';
+import { ArenaAmbience } from './ArenaAmbience';
 import { useGameMatchFx } from './useGameMatchFx';
 import { useTurnBanners } from '../shared/useTurnBanners';
 import { useTutorial } from '@/hooks/useTutorial';
@@ -284,16 +285,20 @@ export const Game: React.FC<Props> = ({
 
   const phaseLabel =
     match.phase === 'hero_main'
-      ? '手番'
+      ? 'Your turn'
       : match.phase === 'villain_main'
-        ? '風'
+        ? 'Their turn'
         : match.phase === 'combat'
-          ? '静'
+          ? 'Settling…'
           : '';
+
+  const phaseDetail =
+    match.phase === 'hero_main' ? 'Main phase' : 'Resolution';
 
   return (
     <GameScalableContainer>
       <div className="game-stage" data-gameplay-variant={getGameplayVariant()} ref={stageRef}>
+        <ArenaAmbience />
         <div className="game-vfx-layer" ref={fxLayerRef} aria-hidden="true" />
 
         <div className="game-zone-villain" ref={villainAvatarRef}>
@@ -330,7 +335,7 @@ export const Game: React.FC<Props> = ({
         <div className="game-zone-enemy-deck" aria-label="Enemy deck">
           <div className="game-deck-card" />
           <div className="game-deck-count">{deckCount(boardMatch.villain)}</div>
-          <div className="game-deck-label">DECK</div>
+          <div className="game-deck-label">Deck</div>
         </div>
 
         {actionError && (
@@ -342,7 +347,7 @@ export const Game: React.FC<Props> = ({
         <div className="game-zone-controls" ref={controlsRef} aria-label="Turn controls">
           <div className="game-turn-box">
             <span>Turn {match.turn}</span>
-            <span>{match.phase === 'hero_main' ? 'Main Phase' : 'Resolution'}</span>
+            <span>{phaseDetail}</span>
             <strong>{phaseLabel}</strong>
           </div>
           {showBattleButton && (
@@ -354,7 +359,7 @@ export const Game: React.FC<Props> = ({
               ref={battleBtnRef}
               onClick={handleBattle}
             >
-              Battle [B]
+              Resolve [B]
             </Button>
           )}
           <Button
@@ -500,7 +505,7 @@ export const Game: React.FC<Props> = ({
         <div className="game-zone-hero-deck" ref={heroDeckRef} aria-label="Hero deck">
           <div className="game-deck-card" />
           <div className="game-deck-count">{deckCount(boardMatch.hero)}</div>
-          <div className="game-deck-label">DECK</div>
+          <div className="game-deck-label">Deck</div>
         </div>
 
         <Button
