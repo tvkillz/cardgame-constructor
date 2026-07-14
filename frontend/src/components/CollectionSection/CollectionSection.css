@@ -335,7 +335,7 @@
 }
 
 .collection__preview-caption--hidden {
-  opacity: 0;
+  /* opacity: 0; */
 }
 
 .collection__preview-domain {

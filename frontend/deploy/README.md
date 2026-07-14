@@ -45,7 +45,7 @@ bash deploy/scripts/deploy-from-local.sh --site voidborn
 This script:
 
 1. Builds locally with `DEPLOY_TARGET=staging` (auth redirects use `https://staging.voidborn.fun`)
-2. rsyncs `.build/voidborn/` + runtime files to the VPS
+2. rsyncs `.build/voidborn/` + runtime files + `public/fonts/` to the VPS
 3. Runs `npm ci --omit=dev` on the VPS
 4. Restarts `voidborn-prod` and smoke-tests port 3100
 

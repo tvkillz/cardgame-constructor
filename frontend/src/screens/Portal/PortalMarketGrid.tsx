@@ -11,6 +11,7 @@ import { useAuth } from '@/components/providers/AuthProvider'
 import { useCardCatalog } from '@/hooks/useCardCatalog'
 import { useMarketCart } from '@/hooks/useMarketCart'
 import { invalidateMarketListingsCache, useMarketListings } from '@/hooks/useMarketListings'
+import { formatRarityLabel, rarityTierOrder } from '@/lib/cards/rarity'
 import type { CardRarity, CardRecord } from '@/lib/cards/types'
 import type { PlayerMarketListing } from '@/lib/commerce/types'
 import { MARKET_SORT_OPTIONS, sortMarketCards, type MarketSort } from '@/lib/market/sort'
@@ -22,18 +23,13 @@ const GRID_COLUMNS = 5
 const ROWS_PER_PAGE = 4
 const PAGE_SIZE = GRID_COLUMNS * ROWS_PER_PAGE
 
-const RARITIES: CardRarity[] = ['common', 'uncommon', 'rare', 'epic', 'legendary']
+const RARITIES: CardRarity[] = rarityTierOrder()
 
 type MarketScope = 'all' | 'mine'
 
 type CatalogRow = { kind: 'catalog'; card: CardRecord }
 type ListingRow = { kind: 'listing'; card: CardRecord; listing: PlayerMarketListing }
 type MarketRow = CatalogRow | ListingRow
-
-function rarityLabel(rarity: CardRarity): string {
-  return rarity.charAt(0).toUpperCase() + rarity.slice(1)
-}
-
 function cardMatchesFilters(
   card: CardRecord,
   search: string,
@@ -246,7 +242,7 @@ export default function PortalMarketGrid() {
             <option value="all">All types</option>
             {RARITIES.map((rarity) => (
               <option key={rarity} value={rarity}>
-                {rarityLabel(rarity)}
+                {formatRarityLabel(rarity)}
               </option>
             ))}
           </select>

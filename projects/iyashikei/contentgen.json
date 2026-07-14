@@ -59,7 +59,7 @@
       "prompt": "Neat stack of sealed card bundles on a wooden veranda, warm lantern glow, anticipation of opening packs"
     },
     "discover-rare": {
-      "prompt": "Single radiant foil trading card catching sunset light on a hilltop, rare pull moment, soft sparkle"
+      "prompt": "Single radiant foil trading card catching sunset light on a hilltop, Sacred tier pull moment, soft sparkle"
     },
     "sell-cards": {
       "prompt": "Organized card binder with duplicates laid out beside a small coin pouch, peaceful trading desk by a window"
@@ -81,19 +81,19 @@
   },
   "cardTypes": {
     "uncommon": {
-      "label": "Uncommon",
+      "label": "Gentle",
       "accent": "#8ec9a0",
-      "prompt": "Soft jade leaf emblem with subtle glow, uncommon rarity icon, iyashikei watercolor style"
+      "prompt": "Soft jade leaf emblem with subtle glow, Gentle print tier icon, iyashikei watercolor style"
     },
     "rare": {
-      "label": "Rare",
+      "label": "Radiant",
       "accent": "#b8a9c9",
-      "prompt": "Delicate lavender blossom crest emblem, rare rarity icon, iyashikei watercolor style"
+      "prompt": "Delicate lavender blossom crest emblem, Radiant print tier icon, iyashikei watercolor style"
     },
     "epic": {
-      "label": "Epic",
+      "label": "Sacred",
       "accent": "#e8a87c",
-      "prompt": "Golden lantern sigil emblem with warm radiance, epic rarity icon, iyashikei watercolor style"
+      "prompt": "Golden lantern sigil emblem with warm radiance, Sacred print tier icon, iyashikei watercolor style"
     }
   },
   "generation": {

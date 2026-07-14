@@ -47,6 +47,7 @@ export function defaultCardgenConfig(domainsJson, cardgenJson = {}) {
       'Mana 1–8. attack + health should roughly scale with mana.',
       'Ability text must spell out keyword effects.',
     ],
+    statLabels: cardgenJson.statLabels ?? null,
     image: {
       aspectRatio: cardgenJson.image?.aspectRatio ?? '3:4',
       promptGuidelines:
@@ -87,11 +88,12 @@ export async function loadCardgenConfig(paths, domainsJson, dominionsJson) {
 }
 
 export async function loadProjectContext(projectId, paths) {
-  const [cardsJson, domainsJson, keywordsJson, dominionsJson] = await Promise.all([
+  const [cardsJson, domainsJson, keywordsJson, dominionsJson, raritiesJson] = await Promise.all([
     readJson(paths.gameCards),
     readJson(paths.domains),
     readJson(paths.keywords),
     readJson(paths.dominions).catch(() => ({ title: '', description: '' })),
+    readJson(paths.rarities).catch(() => null),
   ])
 
   const cardgen = await loadCardgenConfig(paths, domainsJson, dominionsJson)
@@ -122,6 +124,7 @@ export async function loadProjectContext(projectId, paths) {
     domainIds,
     cardgen,
     keywordsGlossary,
+    raritiesJson,
     dominions: dominionsJson,
     existingSlugs,
     existingTitles,

@@ -25,8 +25,8 @@
     },
     {
       "id": "discover-rare",
-      "title": "Chase Gentle Rarities",
-      "description": "Hunt foils, epics, and signature prints — the kind of card that rewrites a deck and makes opponents pause to admire it.",
+      "title": "Chase Sacred Prints",
+      "description": "Hunt foils, Sacred tier spirits, and signature prints — the kind of card that rewrites a deck and makes opponents pause to admire it.",
       "image": "cta1/discover-rare.webp",
       "glowColor": "#b8a9c9"
     },
@@ -48,23 +48,23 @@
   "tiers": [
     {
       "id": "uncommon",
-      "rarityLabel": "UNCOMMON",
-      "title": "Everyday Pieces",
-      "description": "Reliable spirits and utility cards that glue a list together — flexible enough to slot into multiple strategies.",
+      "rarityLabel": "GENTLE",
+      "title": "Everyday Finds",
+      "description": "Reliable spirits and utility pieces that glue a list together — flexible enough to slot into multiple strategies.",
       "glowColor": "#8ec9a0"
     },
     {
       "id": "rare",
-      "rarityLabel": "RARE",
-      "title": "Keystone Cards",
-      "description": "Standout prints with real board impact — alternate art, foil shine, and effects that reward thoughtful building.",
+      "rarityLabel": "RADIANT",
+      "title": "Lantern Prints",
+      "description": "Standout prints with real board presence — alternate art, foil shine, and effects that reward thoughtful building.",
       "glowColor": "#b8a9c9"
     },
     {
       "id": "epic",
-      "rarityLabel": "EPIC",
+      "rarityLabel": "SACRED",
       "title": "Ward Guardians",
-      "description": "High-impact spirits and combo engines that close games or turn a losing board. One well-timed play can end the match.",
+      "description": "High-impact spirits and gentle engines that can close a match with patience. One well-timed play can settle the board.",
       "glowColor": "#e8a87c"
     }
   ],

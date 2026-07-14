@@ -114,6 +114,7 @@
 
 [data-landing-variant='iyashikei'] .final-cta {
   background: var(--iyashi-paper);
+  margin: -6rem auto;
 }
 
 /* ── Section headings (beyond landing-layout) ── */
@@ -922,3 +923,5 @@
 [data-landing-variant='iyashikei'] .collection__stats{
   display: none;
 }
+
+/* [data-landing-variant='iyashikei'] */

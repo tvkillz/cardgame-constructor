@@ -156,7 +156,13 @@ log "Syncing runtime files…"
   "$FRONTEND_DIR/deploy/" \
   "$SSH_TARGET:$VPS_FRONTEND_DIR/deploy/"
 
-ssh "$SSH_TARGET" "mkdir -p '$VPS_FRONTEND_DIR/.build' '$VPS_PROJECTS_DIR'"
+ssh "$SSH_TARGET" "mkdir -p '$VPS_FRONTEND_DIR/.build' '$VPS_PROJECTS_DIR' '$VPS_FRONTEND_DIR/public/fonts'"
+
+# Hiro Misake + other static fonts live in public/ (Next serves at /fonts/*) — not inside .build/.
+log "Syncing public/fonts/…"
+"${RSYNC_SSH[@]}" \
+  "$FRONTEND_DIR/public/fonts/" \
+  "$SSH_TARGET:$VPS_FRONTEND_DIR/public/fonts/"
 
 # Stop pm2 before replacing .next chunks — avoids MODULE_NOT_FOUND if requests
 # hit the server while rsync --delete is mid-transfer.

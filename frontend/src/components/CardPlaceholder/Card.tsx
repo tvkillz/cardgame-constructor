@@ -10,6 +10,7 @@ import {
 
 import { preloadImage } from '@/lib/cards/preload'
 import { formatCardStat } from '@/lib/cards/numerals'
+import { formatRarityLabel } from '@/lib/cards/rarity'
 import { appConfig } from '@/config'
 import { DOMAIN_LABEL, type CardDomain } from '@/lib/cards/domains'
 import type { CardAbility, CardRarity } from '@/lib/cards/types'
@@ -84,6 +85,9 @@ const Card = forwardRef<HTMLElement, CardComponentProps>(function Card(
   const displayAbility = showAbility ?? (layoutMode !== 'game' && layoutMode !== 'hero')
   const displayKeywords = showKeywords ?? (layoutMode === 'hero' || displayAbility)
   const displayRarity = showRarity === true
+  const isIyashikei = appConfig.landing?.variant === 'iyashikei'
+  const spiritLabel = isIyashikei ? 'Spirit' : 'Attack'
+  const calmLabel = isIyashikei ? 'Calm' : 'Health'
   const imageSrc =
     layoutMode === 'preview' || layoutMode === 'hero'
       ? artUrl
@@ -146,7 +150,7 @@ const Card = forwardRef<HTMLElement, CardComponentProps>(function Card(
           : 1
 
   const attackStat = (
-    <div className="card__stat card__stat--attack" aria-label={`Attack ${stats.attack}`}>
+    <div className="card__stat card__stat--attack" aria-label={`${spiritLabel} ${stats.attack}`}>
       <span className="card__stat-icon card__stat-icon--attack" aria-hidden="true" />
       <span className="card__stat-value">{formatCardStat(stats.attack, numeralStyle)}</span>
     </div>
@@ -155,7 +159,7 @@ const Card = forwardRef<HTMLElement, CardComponentProps>(function Card(
   const healthStat = (
     <div
       className="card__stat card__stat--health"
-      aria-label={`Health ${Math.max(0, stats.health)}`}
+      aria-label={`${calmLabel} ${Math.max(0, stats.health)}`}
     >
       <span className="card__stat-value">
         {formatCardStat(Math.max(0, stats.health), numeralStyle)}
@@ -232,7 +236,7 @@ const Card = forwardRef<HTMLElement, CardComponentProps>(function Card(
           title={DOMAIN_LABEL[domain]}
         />
         {rarity && displayRarity && (
-          <span className={`card__rarity card__rarity--${rarity}`}>{rarity}</span>
+          <span className={`card__rarity card__rarity--${rarity}`}>{formatRarityLabel(rarity)}</span>
         )}
         {layoutMode === 'preview' ? (
           <div className="card__bottom">

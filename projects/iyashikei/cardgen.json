@@ -5,6 +5,10 @@
     "title": "The Four Quiet Wards",
     "description": "Beyond the hurried cities lies a chain of pastoral wards where everyday moments hold quiet power. Collect spirits of the countryside, build gentle-yet-tactical decks, and compete without losing the calm that defines Komorebi."
   },
+  "statLabels": {
+    "attack": "Spirit",
+    "health": "Calm"
+  },
   "domains": {
     "shinrin": {
       "visualIdentity": "cedar forests, moss shrines, tea terraces, kodama spirits, soft komorebi light, sage and cedar brown palette",
@@ -24,12 +28,15 @@
     }
   },
   "designRules": [
-    "Mana 1–8 (most cards 3–6). attack + health should roughly scale with mana.",
-    "Roles vary: guardians, scouts, healers, charmers, flyers, tide-callers, etc.",
+    "Mana 1–8 (most cards 3–6). Spirit + Calm should roughly scale with mana (stored as attack and health in JSON).",
+    "Roles vary: guardians, scouts, healers, listeners, drifters, tenders — not assassins, siege units, or burn decks.",
     "Ability text must spell out keyword effects like the examples (do not assume the player knows keywords).",
     "ability.name should be evocative and unique within the batch.",
     "Use 0–2 keywords per card from the project glossary only.",
-    "Tone: gentle iyashikei flavor — pastoral, nostalgic, healing — but still tactically interesting."
+    "Tone: gentle iyashikei flavor — pastoral, nostalgic, healing — still tactically interesting but never brutal.",
+    "Never use violent language in ability text: no damage, kill, destroy, burn, siege, or direct attacks on the player.",
+    "Frame contests as easing composure, tending Calm, redirecting engagement, or drawing/gathering — not dealing damage.",
+    "Rarity tiers (from game/rarities.json): Humble, Gentle, Radiant, Sacred, Komorebi — derived from mana unless rarity is set explicitly."
   ],
   "image": {
     "aspectRatio": "3:4",
@@ -41,5 +48,9 @@
     "maxKeywordsPerCard": 2,
     "exampleCardsPerDomain": 5,
     "maxBatchPerDomain": 50
+  },
+  "rarities": {
+    "source": "game/rarities.json",
+    "notes": "Tier ids (common, uncommon, …) match the DB enum. Display labels: Humble, Gentle, Radiant, Sacred, Komorebi."
   }
 }

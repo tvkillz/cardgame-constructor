@@ -64,7 +64,7 @@ export default function IyashikeiHero() {
       <div className="iyashikei-hero__content">
         <div className="iyashikei-hero__stage">
           <div className="iyashikei-hero__copy">
-            <p className="iyashikei-hero__eyebrow">癒し系 · iyashikei</p>
+            <p className="iyashikei-hero__eyebrow">木漏れ日 · Komorebi</p>
 
             <h1 className="iyashikei-hero__headline">
               {hero.headline.map((line, i) => (

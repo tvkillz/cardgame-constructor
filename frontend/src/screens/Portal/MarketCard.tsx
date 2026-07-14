@@ -11,16 +11,13 @@ import { useMarketCurrency } from '@/hooks/useMarketCurrency'
 import { domainLabel } from '@/lib/cards/domains'
 import { preloadImage } from '@/lib/cards/preload'
 import { toCardDisplayProps } from '@/lib/cards'
+import { formatRarityLabel } from '@/lib/cards/rarity'
 import type { CardRecord } from '@/lib/cards/types'
 import { formatMarketMoney } from '@/lib/market/currency'
 import { computeCardHoverPreviewPosition, type CardHoverPreviewPosition } from '@/lib/cards/hoverPreview'
 import '@/styles/coin-stack-icon.css'
 import '@/styles/cart-icon.css'
 import './MarketCard.css'
-
-function rarityLabel(rarity: string): string {
-  return rarity.charAt(0).toUpperCase() + rarity.slice(1)
-}
 
 function MarketCardHoverPreview({ card, position }: { card: CardRecord; position: CardHoverPreviewPosition }) {
   return (
@@ -85,7 +82,7 @@ export default function MarketCard({ card, index, onBuyCredits, onAddToCart }: M
     <>
       <article
         className={`market-card${hovered ? ' market-card--hovered' : ''}`}
-        aria-label={`${card.title}, ${rarityLabel(card.rarity)}`}
+        aria-label={`${card.title}, ${formatRarityLabel(card.rarity)}`}
         onMouseEnter={showPreview}
         onMouseLeave={hidePreview}
         onFocus={showPreview}
@@ -107,7 +104,7 @@ export default function MarketCard({ card, index, onBuyCredits, onAddToCart }: M
         <div className="market-card__footer">
           <div className="market-card__meta">
             <span className={`market-card__rarity market-card__rarity--${card.rarity}`}>
-              {rarityLabel(card.rarity)}
+              {formatRarityLabel(card.rarity)}
             </span>
             <span className="market-card__domain">{domainLabel(card.domain)}</span>
           </div>

@@ -105,11 +105,24 @@ async function writeCompiledAsset(sharp, sourcePath, rel, assetsRoot) {
   return destRel
 }
 
-function rarityFromMana(mana) {
+function rarityFromMana(mana, raritiesJson) {
+  const tiers = raritiesJson?.tiers
+  if (Array.isArray(tiers) && tiers.length) {
+    const tier = tiers.find((t) => mana >= t.manaMin && mana <= t.manaMax)
+    return tier?.id ?? 'common'
+  }
   if (mana <= 2) return 'common'
   if (mana <= 4) return 'uncommon'
   if (mana <= 6) return 'rare'
   return 'epic'
+}
+
+function buildRaritiesConfig(raritiesJson) {
+  const tiers = raritiesJson?.tiers ?? []
+  const labels = Object.fromEntries(
+    tiers.map((t) => [t.id, t.label ?? t.id.charAt(0).toUpperCase() + t.id.slice(1)]),
+  )
+  return { tiers, labels }
 }
 
 /** Shop price in cents — optional in game/cards.json (`priceCents` or `priceEur`). */
@@ -900,6 +913,7 @@ function buildAppConfig({
   publicBase,
   cdnBase,
   landing,
+  raritiesJson,
 }) {
   const loreLocations = {}
   for (const loc of locationsJson.locations) {
@@ -1041,6 +1055,7 @@ function buildAppConfig({
       usernameMaxLength: auth.usernameMaxLength ?? 24,
     },
     categories: categories.categories,
+    rarities: buildRaritiesConfig(raritiesJson),
     theme: {
       fonts: ui.fonts,
       lore: {
@@ -1125,6 +1140,7 @@ async function compileCards({
   shouldUpload,
   forceUpload,
   heroCardSlugs,
+  raritiesJson,
 }) {
   const cardSlugMigration = manifest?.cardSlugMigration ?? null
   const locationByDomain = buildLocationByDomain(locationsJson)
@@ -1213,7 +1229,7 @@ async function compileCards({
       domain,
       categoryId: domainToCategory[domain],
       role: asset.role ?? null,
-      rarity: rarityFromMana(asset.stats.mana),
+      rarity: asset.rarity ?? rarityFromMana(asset.stats.mana, raritiesJson),
       stats: asset.stats,
       keywords: asset.keywords ?? [],
       ability: {
@@ -1498,6 +1514,7 @@ async function main() {
   const scenesJson = await readJson(paths.gameScenes, 'game/scenes')
   const citiesJson = await readJsonOptional(paths.gameCities)
   const botNicknamesJson = await readJsonOptional(path.join(paths.root, 'game/bot-nicknames.json'))
+  const raritiesJson = await readJsonOptional(paths.gameRarities)
 
   const out = buildPaths(projectId)
 
@@ -1550,6 +1567,7 @@ async function main() {
     publicBase,
     cdnBase,
     landing,
+    raritiesJson,
   })
 
   const { bySlug } = await compileCards({
@@ -1568,6 +1586,7 @@ async function main() {
     shouldUpload,
     forceUpload,
     heroCardSlugs: landing.heroCardSlugs,
+    raritiesJson,
   })
 
   appConfig.descriptions.collection = buildCollectionCopy(collectionJson, publicBase, bySlug)

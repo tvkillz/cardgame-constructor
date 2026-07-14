@@ -9,17 +9,25 @@
       "domain": "shinrin",
       "kind": "card",
       "role": "Guardian / Healer",
-      "stats": { "mana": 4, "attack": 2, "health": 6 },
-      "keywords": ["Taunt", "Regenerate"],
+      "stats": {
+        "mana": 4,
+        "attack": 2,
+        "health": 6
+      },
+      "keywords": [
+        "Shelter",
+        "Bloom"
+      ],
       "ability": {
         "name": "Shrine Mending",
-        "text": "Taunt. Regenerate 1. When this unit blocks, restore 1 Health to your player."
+        "text": "Shelter. Bloom 1. When this spirit shelters others, restore 1 Calm to you."
       },
       "path": "cards/shinrin/shinrin_card_01_kodama_keeper.png",
       "source_file": "",
       "format": "3:4",
       "notes": "soft moss greens, cedar forest shrine light",
-      "image_prompt": "A gentle kodama forest spirit tending a mossy shrine lantern, soft iyashikei anime trading card art, watercolor style, cedar forest komorebi light, peaceful guardian mood"
+      "image_prompt": "A gentle kodama forest spirit tending a mossy shrine lantern, soft iyashikei anime trading card art, watercolor style, cedar forest komorebi light, peaceful guardian mood",
+      "rarity": "uncommon"
     },
     {
       "title": "Fern Sage",
@@ -28,17 +36,24 @@
       "domain": "shinrin",
       "kind": "card",
       "role": "Support / Healer",
-      "stats": { "mana": 3, "attack": 1, "health": 5 },
-      "keywords": ["Regenerate"],
+      "stats": {
+        "mana": 3,
+        "attack": 1,
+        "health": 5
+      },
+      "keywords": [
+        "Bloom"
+      ],
       "ability": {
         "name": "Verdant Counsel",
-        "text": "Regenerate 2. Give an allied unit +2 Health."
+        "text": "Bloom 2. Tend an allied spirit for +2 Calm."
       },
       "path": "cards/shinrin/shinrin_card_02_fern_sage.png",
       "source_file": "",
       "format": "3:4",
       "notes": "fern grove, morning mist",
-      "image_prompt": "An elderly forest sage with ferns and tea bowl, iyashikei watercolor card art, soft green palette, tranquil woodland clearing"
+      "image_prompt": "An elderly forest sage with ferns and tea bowl, iyashikei watercolor card art, soft green palette, tranquil woodland clearing",
+      "rarity": "uncommon"
     },
     {
       "title": "Mosswalker",
@@ -46,18 +61,25 @@
       "category": "cards",
       "domain": "shinrin",
       "kind": "card",
-      "role": "Scout / Assassin",
-      "stats": { "mana": 3, "attack": 3, "health": 3 },
-      "keywords": ["Stealth"],
+      "role": "Scout / Watcher",
+      "stats": {
+        "mana": 3,
+        "attack": 3,
+        "health": 3
+      },
+      "keywords": [
+        "Mist"
+      ],
       "ability": {
         "name": "Silent Path",
-        "text": "Stealth until this unit attacks. Deal 2 damage to a damaged enemy unit."
+        "text": "Mist until this spirit acts. Ease 2 composure from a weary opposing spirit."
       },
       "path": "cards/shinrin/shinrin_card_03_mosswalker.png",
       "source_file": "",
       "format": "3:4",
       "notes": "mossy footpath, dappled shade",
-      "image_prompt": "A lithe moss-covered woodland scout slipping along a cedar footpath, iyashikei anime card art, stealthy but calm, no violence"
+      "image_prompt": "A lithe moss-covered woodland scout slipping along a cedar footpath, iyashikei anime card art, stealthy but calm, no violence",
+      "rarity": "uncommon"
     },
     {
       "title": "Tide Listener",
@@ -65,18 +87,25 @@
       "category": "cards",
       "domain": "naminami",
       "kind": "card",
-      "role": "Support / Controller",
-      "stats": { "mana": 4, "attack": 2, "health": 5 },
-      "keywords": ["Freeze"],
+      "role": "Support / Listener",
+      "stats": {
+        "mana": 4,
+        "attack": 2,
+        "health": 5
+      },
+      "keywords": [
+        "Stillness"
+      ],
       "ability": {
         "name": "Still Water",
-        "text": "Freeze an enemy unit until end of turn. Draw a card if you played another Naminami card this turn."
+        "text": "Stillness on an opposing spirit until end of turn. Draw a card if you played another Naminami card this turn."
       },
       "path": "cards/naminami/naminami_card_01_tide_listener.png",
       "source_file": "",
       "format": "3:4",
       "notes": "calm inlet at dawn, sea mist blues",
-      "image_prompt": "A serene tide listener kneeling by calm inlet water with shell pendant, iyashikei watercolor card art, dawn coastal palette, reflective mood"
+      "image_prompt": "A serene tide listener kneeling by calm inlet water with shell pendant, iyashikei watercolor card art, dawn coastal palette, reflective mood",
+      "rarity": "uncommon"
     },
     {
       "title": "Pearl Diver",
@@ -85,17 +114,24 @@
       "domain": "naminami",
       "kind": "card",
       "role": "Scout / Value",
-      "stats": { "mana": 2, "attack": 2, "health": 2 },
-      "keywords": ["Stealth"],
+      "stats": {
+        "mana": 2,
+        "attack": 2,
+        "health": 2
+      },
+      "keywords": [
+        "Mist"
+      ],
       "ability": {
         "name": "Tidal Gift",
-        "text": "Stealth until this unit attacks. When this unit enters play, gain 1 credit."
+        "text": "Mist until this spirit acts. When this spirit enters play, gain 1 credit."
       },
       "path": "cards/naminami/naminami_card_02_pearl_diver.png",
       "source_file": "",
       "format": "3:4",
       "notes": "shallow tide pool, soft blues",
-      "image_prompt": "A young pearl diver on a weathered pier at morning tide, iyashikei anime card art, gentle coastal village mood"
+      "image_prompt": "A young pearl diver on a weathered pier at morning tide, iyashikei anime card art, gentle coastal village mood",
+      "rarity": "common"
     },
     {
       "title": "Coral Whisper",
@@ -103,18 +139,25 @@
       "category": "cards",
       "domain": "naminami",
       "kind": "card",
-      "role": "Mage / Support",
-      "stats": { "mana": 5, "attack": 3, "health": 4 },
-      "keywords": ["Charm"],
+      "role": "Listener / Support",
+      "stats": {
+        "mana": 5,
+        "attack": 3,
+        "health": 4
+      },
+      "keywords": [
+        "Kindness"
+      ],
       "ability": {
         "name": "Reef Lullaby",
-        "text": "Charm. Redirect an enemy unit's next attack. Restore 2 Health to an allied unit."
+        "text": "Kindness. Redirect an opponent's next engagement. Tend an allied spirit for +2 Calm."
       },
       "path": "cards/naminami/naminami_card_03_coral_whisper.png",
       "source_file": "",
       "format": "3:4",
       "notes": "tidal garden, bioluminescent soft glow",
-      "image_prompt": "A coral spirit whispering over tide pools and sea glass, iyashikei watercolor card art, pale blue and shell white tones"
+      "image_prompt": "A coral spirit whispering over tide pools and sea glass, iyashikei watercolor card art, pale blue and shell white tones",
+      "rarity": "rare"
     },
     {
       "title": "Lantern Tender",
@@ -123,17 +166,24 @@
       "domain": "akari",
       "kind": "card",
       "role": "Support / Buffer",
-      "stats": { "mana": 3, "attack": 1, "health": 5 },
-      "keywords": ["Ward"],
+      "stats": {
+        "mana": 3,
+        "attack": 1,
+        "health": 5
+      },
+      "keywords": [
+        "Ward"
+      ],
       "ability": {
         "name": "Warm Glow",
-        "text": "Ward. Give an allied unit Ward until end of turn."
+        "text": "Ward. Grant an allied spirit Ward until end of turn."
       },
       "path": "cards/akari/akari_card_01_lantern_tender.png",
       "source_file": "",
       "format": "3:4",
       "notes": "festival lantern lane, amber glow",
-      "image_prompt": "A lantern tender lighting paper lanterns along a harvest village lane at dusk, iyashikei anime card art, warm amber palette"
+      "image_prompt": "A lantern tender lighting paper lanterns along a harvest village lane at dusk, iyashikei anime card art, warm amber palette",
+      "rarity": "uncommon"
     },
     {
       "title": "Embersmith",
@@ -141,18 +191,25 @@
       "category": "cards",
       "domain": "akari",
       "kind": "card",
-      "role": "Aggro / Burn",
-      "stats": { "mana": 4, "attack": 4, "health": 3 },
-      "keywords": ["Siege"],
+      "role": "Hearth / Keeper",
+      "stats": {
+        "mana": 4,
+        "attack": 4,
+        "health": 3
+      },
+      "keywords": [
+        "Ripple"
+      ],
       "ability": {
         "name": "Hearth Spark",
-        "text": "Siege. Deal 1 damage to the enemy player at the end of your turn."
+        "text": "Ripple. At end of your turn, ease 1 composure from the opponent."
       },
       "path": "cards/akari/akari_card_02_embersmith.png",
       "source_file": "",
       "format": "3:4",
       "notes": "village forge at golden hour, cozy not violent",
-      "image_prompt": "A gentle embersmith at a countryside hearth forge, golden hour light, iyashikei watercolor card art, warm copper tones"
+      "image_prompt": "A gentle embersmith at a countryside hearth forge, golden hour light, iyashikei watercolor card art, warm copper tones",
+      "rarity": "uncommon"
     },
     {
       "title": "Festival Dancer",
@@ -161,17 +218,24 @@
       "domain": "akari",
       "kind": "card",
       "role": "Tempo / Buff",
-      "stats": { "mana": 3, "attack": 2, "health": 4 },
-      "keywords": ["Charge"],
+      "stats": {
+        "mana": 3,
+        "attack": 2,
+        "health": 4
+      },
+      "keywords": [
+        "Breeze"
+      ],
       "ability": {
         "name": "Summer Step",
-        "text": "Charge. Other friendly units gain +1 Attack this turn."
+        "text": "Breeze. Other friendly spirits gain +1 Spirit this turn."
       },
       "path": "cards/akari/akari_card_03_festival_dancer.png",
       "source_file": "",
       "format": "3:4",
       "notes": "summer festival, paper fans and lanterns",
-      "image_prompt": "A festival dancer with paper fan under lantern glow, iyashikei anime card art, joyful but peaceful summer evening"
+      "image_prompt": "A festival dancer with paper fan under lantern glow, iyashikei anime card art, joyful but peaceful summer evening",
+      "rarity": "uncommon"
     },
     {
       "title": "Breeze Shepherd",
@@ -179,18 +243,26 @@
       "category": "cards",
       "domain": "takane",
       "kind": "card",
-      "role": "Flying / Support",
-      "stats": { "mana": 4, "attack": 2, "health": 4 },
-      "keywords": ["Flying", "Regenerate"],
+      "role": "Drift / Support",
+      "stats": {
+        "mana": 4,
+        "attack": 2,
+        "health": 4
+      },
+      "keywords": [
+        "Drift",
+        "Bloom"
+      ],
       "ability": {
         "name": "Highland Gust",
-        "text": "Flying. Regenerate 1. Give a friendly Flying unit +1 Health."
+        "text": "Drift. Bloom 1. Give a friendly Drift spirit +1 Calm."
       },
       "path": "cards/takane/takane_card_01_breeze_shepherd.png",
       "source_file": "",
       "format": "3:4",
       "notes": "windmill ridge, lavender sky",
-      "image_prompt": "A breeze shepherd with wind chime staff on a highland ridge, iyashikei watercolor card art, open sky and wildflowers"
+      "image_prompt": "A breeze shepherd with wind chime staff on a highland ridge, iyashikei watercolor card art, open sky and wildflowers",
+      "rarity": "uncommon"
     },
     {
       "title": "Cloud Reader",
@@ -198,18 +270,25 @@
       "category": "cards",
       "domain": "takane",
       "kind": "card",
-      "role": "Control / Draw",
-      "stats": { "mana": 5, "attack": 2, "health": 5 },
-      "keywords": ["Ranged"],
+      "role": "Seer / Draw",
+      "stats": {
+        "mana": 5,
+        "attack": 2,
+        "health": 5
+      },
+      "keywords": [
+        "Whisper"
+      ],
       "ability": {
         "name": "Sky Omen",
-        "text": "Ranged. Look at the top card of your deck. You may draw it or discard it."
+        "text": "Whisper. Look at the top card of your deck. You may draw it or set it aside."
       },
       "path": "cards/takane/takane_card_02_cloud_reader.png",
       "source_file": "",
       "format": "3:4",
       "notes": "cloud pasture, soft violet haze",
-      "image_prompt": "A cloud reader on a meadow hill studying drifting clouds, iyashikei anime card art, airy highland palette"
+      "image_prompt": "A cloud reader on a meadow hill studying drifting clouds, iyashikei anime card art, airy highland palette",
+      "rarity": "rare"
     },
     {
       "title": "Summit Guide",
@@ -217,18 +296,25 @@
       "category": "cards",
       "domain": "takane",
       "kind": "card",
-      "role": "Tank / Pathfinder",
-      "stats": { "mana": 6, "attack": 3, "health": 7 },
-      "keywords": ["Taunt"],
+      "role": "Guardian / Pathfinder",
+      "stats": {
+        "mana": 6,
+        "attack": 3,
+        "health": 7
+      },
+      "keywords": [
+        "Shelter"
+      ],
       "ability": {
         "name": "Mountain Rest",
-        "text": "Taunt. Allied units behind this unit take 1 less damage from spells."
+        "text": "Shelter. Spirits behind this one take 1 less composure loss from effects."
       },
       "path": "cards/takane/takane_card_03_summit_guide.png",
       "source_file": "",
       "format": "3:4",
       "notes": "mountain shrine steps, wind chimes",
-      "image_prompt": "A summit guide with travel pack beside wind chime shrine steps, iyashikei watercolor card art, peaceful mountain vista"
+      "image_prompt": "A summit guide with travel pack beside wind chime shrine steps, iyashikei watercolor card art, peaceful mountain vista",
+      "rarity": "rare"
     },
     {
       "title": "Maple Spirit",
@@ -237,17 +323,24 @@
       "domain": "shinrin",
       "kind": "card",
       "role": "Spirit / Buffer",
-      "stats": { "mana": 2, "attack": 1, "health": 4 },
-      "keywords": ["Ward"],
+      "stats": {
+        "mana": 2,
+        "attack": 1,
+        "health": 4
+      },
+      "keywords": [
+        "Ward"
+      ],
       "ability": {
         "name": "Autumn Hush",
-        "text": "Ward. At the start of your turn, restore 1 Health to your player."
+        "text": "Ward. At the start of your turn, restore 1 Calm to you."
       },
       "path": "cards/shinrin/shinrin_card_04_maple_spirit.png",
       "source_file": "",
       "format": "3:4",
       "notes": "maple grove, fallen crimson leaves, soft afternoon",
-      "image_prompt": "A gentle maple forest spirit among crimson autumn leaves and cedar roots, iyashikei watercolor trading card art, soft komorebi light, peaceful mood"
+      "image_prompt": "A gentle maple forest spirit among crimson autumn leaves and cedar roots, iyashikei watercolor trading card art, soft komorebi light, peaceful mood",
+      "rarity": "common"
     },
     {
       "title": "Shore Heron",
@@ -256,17 +349,25 @@
       "domain": "naminami",
       "kind": "card",
       "role": "Scout / Watcher",
-      "stats": { "mana": 3, "attack": 2, "health": 3 },
-      "keywords": ["Flying", "Stealth"],
+      "stats": {
+        "mana": 3,
+        "attack": 2,
+        "health": 3
+      },
+      "keywords": [
+        "Drift",
+        "Mist"
+      ],
       "ability": {
         "name": "Tidal Watch",
-        "text": "Flying. Stealth until this unit attacks. Draw a card when this unit enters play."
+        "text": "Drift. Mist until this spirit acts. Draw a card when this spirit enters play."
       },
       "path": "cards/naminami/naminami_card_04_shore_heron.png",
       "source_file": "",
       "format": "3:4",
       "notes": "misty shore rocks, grey heron at dawn",
-      "image_prompt": "A serene grey heron standing on misty tidal rocks at dawn, iyashikei anime card art, pale blue and shell cream palette, calm coastal scene"
+      "image_prompt": "A serene grey heron standing on misty tidal rocks at dawn, iyashikei anime card art, pale blue and shell cream palette, calm coastal scene",
+      "rarity": "uncommon"
     }
   ]
 }

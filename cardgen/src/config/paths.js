@@ -21,6 +21,7 @@ export function projectPaths(projectId) {
     gameCards: path.join(root, 'game/cards.json'),
     domains: path.join(root, 'game/domains.json'),
     keywords: path.join(root, 'game/keywords.json'),
+    rarities: path.join(root, 'game/rarities.json'),
     dominions: path.join(root, 'copy/dominions.json'),
     assets: path.join(root, 'assets'),
     stagingCards: path.join(root, 'game/_staging/cards'),

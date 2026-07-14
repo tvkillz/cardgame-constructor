@@ -33,8 +33,15 @@ export async function applyBatch(batchFile, { projectId, dryRun = false, keepSta
   const toReplace = []
   const missingImages = []
 
+  let raritiesJson = null
+  try {
+    raritiesJson = JSON.parse(await readFile(paths.rarities, 'utf8'))
+  } catch {
+    /* optional */
+  }
+
   for (const draft of batch.cards ?? []) {
-    const entry = toCardsJsonEntry(draft)
+    const entry = toCardsJsonEntry(draft, { raritiesJson })
     const exists = existingSlugs.has(entry.slug)
     if (exists && !force) {
       console.warn(`Skip (already in cards.json): ${entry.slug}`)

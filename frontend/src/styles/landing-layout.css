@@ -130,7 +130,8 @@
   background-clip: text;
   color: transparent;
   filter: none;
-  text-shadow: none;
+  /* text-shadow: 5px 5px #f8f8f8; */
+  backdrop-filter: blur(2px);
 }
 
 [data-landing-variant='iyashikei'] .locations__kicker {

@@ -1,21 +1,19 @@
 {
   "keywords_glossary": {
-    "Taunt": "Enemies must attack this unit if able.",
-    "Ward": "The next damage this unit would take is prevented.",
-    "Charge": "Can attack the turn it is played.",
-    "Stealth": "Cannot be targeted until it attacks.",
-    "Flying": "Can only be blocked by units with Flying.",
-    "Lifesteal": "Damage dealt heals your player.",
-    "Overwhelm": "Excess combat damage hits the enemy player.",
-    "Siege": "Deals bonus damage when attacking a player.",
-    "Ranged": "Can attack without being blocked in melee.",
-    "Regenerate": "Restores Health at end of turn.",
-    "Reborn": "Returns to play with 1 Health once when destroyed.",
-    "Deathrattle": "Triggers when this unit is destroyed.",
-    "Armor": "Reduces incoming damage by the listed amount.",
-    "Freeze": "A frozen unit cannot attack until end of turn.",
-    "Charm": "Redirects an enemy unit's next attack.",
-    "Devour": "Destroys a target unit on trigger.",
-    "Rooted": "Unit cannot be moved this turn."
+    "Shelter": "Opponents must engage this spirit before others when able.",
+    "Ward": "The next harm this spirit would take is softened away.",
+    "Breeze": "This spirit may act the turn it enters play.",
+    "Mist": "Cannot be chosen until this spirit acts.",
+    "Drift": "Only spirits with Drift can intercept this one.",
+    "Bloom": "Restores Calm at end of turn.",
+    "Whisper": "Can influence distant spirits without close engagement.",
+    "Ripple": "When this spirit rests, ease 1 composure from the opponent.",
+    "Stillness": "A spirit in Stillness cannot act until end of turn.",
+    "Kindness": "Redirects an opponent's next engagement elsewhere.",
+    "Gather": "When this spirit enters play, draw a card or gain 1 composure.",
+    "Tend": "Restore Calm to an allied spirit or yourself.",
+    "Echo": "Repeats its gentle effect at end of turn.",
+    "Rooted": "This spirit cannot be moved this turn.",
+    "Shizukesa": "This spirit holds its ground — cannot be displaced while Calm remains."
   }
 }

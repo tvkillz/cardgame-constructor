@@ -1,4 +1,9 @@
 import { slugToTitle } from '../lib/showcaseSlugs.js'
+import { formatRarityGlossary } from '../lib/rarity.js'
+
+function statLabel(cardgen, key) {
+  return cardgen?.statLabels?.[key] ?? key
+}
 
 function formatKeywords(glossary) {
   return Object.entries(glossary)
@@ -17,6 +22,12 @@ export function buildShowcasePrompt(domain, requiredSlugs, ctx) {
   const maxKw = cardgen.generation.maxKeywordsPerCard
   const designRules = cardgen.designRules.map((r) => `- ${r}`).join('\n')
   const img = cardgen.image
+  const spirit = statLabel(cardgen, 'attack')
+  const calm = statLabel(cardgen, 'health')
+  const statNote =
+    spirit !== 'attack' || calm !== 'health'
+      ? `\n## Card stats\n- JSON fields: stats.mana, stats.attack (${spirit}), stats.health (${calm})\n- Ability copy uses "${spirit}" and "${calm}" — never attack, damage, or health in player-facing text.\n`
+      : ''
 
   const slugLines = requiredSlugs
     .map((slug) => {
@@ -42,6 +53,8 @@ Generate exactly ${requiredSlugs.length} cards for domain "${domain}".
 These cards appear on the public landing page. Use the EXACT slugs below (do not invent different indices or suffixes):
 
 ${slugLines}
+${statNote}## Rarity tiers (set rarity id from mana band)
+${formatRarityGlossary(ctx.raritiesJson)}
 
 ## Allowed keywords (use 0–${maxKw} per card, glossary only)
 ${formatKeywords(ctx.keywordsGlossary)}

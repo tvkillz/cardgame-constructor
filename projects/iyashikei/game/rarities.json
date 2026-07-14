@@ -1,0 +1,39 @@
+{
+  "tiers": [
+    {
+      "id": "common",
+      "label": "Humble",
+      "manaMin": 1,
+      "manaMax": 2,
+      "description": "Everyday spirits and simple finds — easy to slot into any list."
+    },
+    {
+      "id": "uncommon",
+      "label": "Gentle",
+      "manaMin": 3,
+      "manaMax": 4,
+      "description": "Reliable ward pieces that glue a deck together with quiet utility."
+    },
+    {
+      "id": "rare",
+      "label": "Radiant",
+      "manaMin": 5,
+      "manaMax": 6,
+      "description": "Standout prints with real board presence — foil shine and thoughtful synergy."
+    },
+    {
+      "id": "epic",
+      "label": "Sacred",
+      "manaMin": 7,
+      "manaMax": 8,
+      "description": "Signature ward guardians and engines that can close a match with patience."
+    },
+    {
+      "id": "legendary",
+      "label": "Komorebi",
+      "manaMin": 9,
+      "manaMax": 10,
+      "description": "Chase-tier spirits — rare pulls that collectors pause to admire."
+    }
+  ]
+}

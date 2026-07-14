@@ -72,6 +72,7 @@ export function projectPaths(projectId) {
     locations: path.join(root, 'game/locations.json'),
     featuredCards: path.join(root, 'game/featured-cards.json'),
     gameKeywords: path.join(root, 'game/keywords.json'),
+    gameRarities: path.join(root, 'game/rarities.json'),
     gameScenes: path.join(root, 'game/scenes.json'),
     gameCities: path.join(root, 'game/cities.json'),
     gameCards: path.join(root, 'game/cards.json'),

@@ -14,6 +14,7 @@ import { usePlayerInventory } from '@/hooks/usePlayerInventory'
 import { domainLabel } from '@/lib/cards/domains'
 import { preloadImage } from '@/lib/cards/preload'
 import { toCardDisplayProps } from '@/lib/cards'
+import { formatRarityLabel } from '@/lib/cards/rarity'
 import type { CardRecord } from '@/lib/cards/types'
 import type { PlayerMarketListing } from '@/lib/commerce/types'
 import { formatMarketMoney } from '@/lib/market/currency'
@@ -25,10 +26,6 @@ import './MarketCard.css'
 import './PlayerListingCard.css'
 
 import { computeCardHoverPreviewPosition, type CardHoverPreviewPosition } from '@/lib/cards/hoverPreview'
-
-function rarityLabel(rarity: string): string {
-  return rarity.charAt(0).toUpperCase() + rarity.slice(1)
-}
 
 type PlayerListingCardProps = {
   card: CardRecord
@@ -122,7 +119,7 @@ export default function PlayerListingCard({
         <div className="market-card__footer">
           <div className="market-card__meta">
             <span className={`market-card__rarity market-card__rarity--${card.rarity}`}>
-              {rarityLabel(card.rarity)}
+              {formatRarityLabel(card.rarity)}
             </span>
             <span className="market-card__domain">{domainLabel(card.domain)}</span>
           </div>

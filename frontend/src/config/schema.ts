@@ -301,6 +301,12 @@ export interface AppConfig {
   /** Taxonomy: elemental categories linked to location ids. */
   categories: CategoryConfig[]
 
+  /** Card rarity tiers — display labels per project (ids match DB enum). */
+  rarities?: {
+    tiers: RarityTierConfig[]
+    labels: Record<string, string>
+  }
+
   /** Player portal sections (tabs under /portal/*). */
   portal: {
     sections: PortalSectionConfig[]
@@ -344,6 +350,14 @@ export interface PortalSectionConfig {
   route: keyof AppConfig['domain']['routes']
   title: string
   subtitle: string
+}
+
+export interface RarityTierConfig {
+  id: string
+  label: string
+  manaMin: number
+  manaMax: number
+  description?: string
 }
 
 export interface CategoryConfig {

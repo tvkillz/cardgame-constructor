@@ -4,7 +4,7 @@
   "backgroundImage": "cities/umi/umi_city_03_lantern_bay.png",
   "stats": [
     { "id": "catalog", "value": "600+", "label": "Unique Cards" },
-    { "id": "rarity", "value": "4", "label": "Rarity Tiers" },
+    { "id": "rarity", "value": "5", "label": "Print Tiers" },
     { "id": "strategies", "value": "∞", "label": "Deck Strategies" },
     { "id": "monthly", "value": "25+", "label": "New Cards Monthly" }
   ],

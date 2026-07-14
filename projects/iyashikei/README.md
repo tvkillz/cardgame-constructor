@@ -18,6 +18,8 @@ Lore hooks (replaces voidborn's Aether Bleed / Null Zones):
 - **Haru-kaze** — restless spring wind eroding countryside calm
 - **Shizukesa** — sacred stillness that ward keepers must tend
 
+Card keywords use pastoral mechanics (`Shelter`, `Bloom`, `Mist`, `Breeze`, …) — see `game/keywords.json`. Stats display as **Spirit** / **Calm** (stored as `attack` / `health`). Rarity tiers: **Humble**, **Gentle**, **Radiant**, **Sacred**, **Komorebi** — see `game/rarities.json`.
+
 ## Status (step 1 complete)
 
 - [x] Copy layer (`copy/*.json`, legal stubs)

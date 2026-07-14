@@ -18,6 +18,7 @@ import { usePlayerInventory } from '@/hooks/usePlayerInventory'
 import { toCardDisplayProps } from '@/lib/cards'
 import { preloadImage } from '@/lib/cards/preload'
 import { DOMAIN_GLOW, domainLabel } from '@/lib/cards/domains'
+import { formatRarityLabel, rarityTierOrder } from '@/lib/cards/rarity'
 import type { CardRarity, CardRecord } from '@/lib/cards/types'
 import {
   canAddToDraftDeck,
@@ -45,11 +46,7 @@ import {
   type CardHoverPreviewPosition,
 } from '@/lib/cards/hoverPreview'
 
-const RARITIES: CardRarity[] = ['common', 'uncommon', 'rare', 'epic', 'legendary']
-
-function rarityLabel(rarity: CardRarity): string {
-  return rarity.charAt(0).toUpperCase() + rarity.slice(1)
-}
+const RARITIES: CardRarity[] = rarityTierOrder()
 
 export default function PortalCollection() {
   const { cards: catalog } = useCardCatalog()
@@ -338,7 +335,7 @@ export default function PortalCollection() {
                 <option value="all">All types</option>
                 {RARITIES.map((rarity) => (
                   <option key={rarity} value={rarity}>
-                    {rarityLabel(rarity)}
+                    {formatRarityLabel(rarity)}
                   </option>
                 ))}
               </select>

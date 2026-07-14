@@ -1,9 +1,17 @@
-function formatExamples(examples) {
+import { formatRarityGlossary } from '../lib/rarity.js'
+
+function statLabel(cardgen, key) {
+  return cardgen?.statLabels?.[key] ?? key
+}
+
+function formatExamples(examples, cardgen) {
   if (!examples?.length) return '(no examples)'
+  const spirit = statLabel(cardgen, 'attack')
+  const calm = statLabel(cardgen, 'health')
   return examples
     .map(
       (c) =>
-        `- ${c.title} (${c.slug}) mana ${c.stats.mana} atk ${c.stats.attack} hp ${c.stats.health} | ${c.role} | keywords: ${(c.keywords ?? []).join(', ') || 'none'} | ${c.ability.name}: ${c.ability.text}`,
+        `- ${c.title} (${c.slug}) mana ${c.stats.mana} ${spirit.toLowerCase()} ${c.stats.attack} ${calm.toLowerCase()} ${c.stats.health}${c.rarity ? ` | rarity ${c.rarity}` : ''} | ${c.role} | keywords: ${(c.keywords ?? []).join(', ') || 'none'} | ${c.ability.name}: ${c.ability.text}`,
     )
     .join('\n')
 }
@@ -33,6 +41,12 @@ export function buildCardGenerationPrompt({ domain, count, startIndex, ctx }) {
 
   const designRules = cardgen.designRules.map((r) => `- ${r}`).join('\n')
   const img = cardgen.image
+  const spirit = statLabel(cardgen, 'attack')
+  const calm = statLabel(cardgen, 'health')
+  const statNote =
+    spirit !== 'attack' || calm !== 'health'
+      ? `\n## Card stats\n- JSON fields: stats.mana, stats.attack (${spirit}), stats.health (${calm})\n- Ability copy uses "${spirit}" and "${calm}" — never attack, damage, or health in player-facing text.\n`
+      : ''
 
   return `You are designing collectible TCG unit cards for ${cardgen.gameTitle}, ${cardgen.gamePitch}.
 
@@ -55,6 +69,8 @@ Slug numbering MUST use indices ${pad(startIndex)} through ${pad(endIndex)} incl
 
 Do NOT reuse any existing slug or title. Reserved slugs in this domain include:
 ${reservedSlugs.slice(0, 30).join(', ') || '(none yet)'}${reservedSlugs.length > 30 ? '…' : ''}
+${statNote}## Rarity tiers (set rarity id from mana band unless a showcase slug needs a fixed tier)
+${formatRarityGlossary(ctx.raritiesJson)}
 
 ## Allowed keywords (use 0–${maxKw} per card, glossary only)
 ${formatKeywords(ctx.keywordsGlossary)}
@@ -65,7 +81,7 @@ ${designRules}
 - image_notes: ${img.notesGuidelines}
 
 ## Example cards from this domain (match tone and complexity)
-${formatExamples(examples)}
+${formatExamples(examples, cardgen)}
 
 Return JSON: { "cards": [ ... exactly ${count} cards ... ] }`
 }

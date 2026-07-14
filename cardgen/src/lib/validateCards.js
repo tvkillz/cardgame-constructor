@@ -1,4 +1,5 @@
 import { randomPriceCents } from './randomPrice.js'
+import { resolveRarityFromMana } from './rarity.js'
 
 const SLUG_RE = /^[a-z][a-z0-9]*_card_\d{2}_[a-z0-9_]+$/
 
@@ -82,9 +83,12 @@ export function validateCardBatch(cards, ctx) {
 }
 
 /** Normalize a draft card into cards.json shape (without merging). */
-export function toCardsJsonEntry(card) {
+export function toCardsJsonEntry(card, ctx) {
   const slug = card.slug
   const domain = card.domain
+  const mana = card.stats?.mana
+  const rarity =
+    card.rarity ?? resolveRarityFromMana(mana, ctx?.raritiesJson)
   return {
     title: card.title,
     slug,
@@ -92,6 +96,7 @@ export function toCardsJsonEntry(card) {
     domain,
     kind: 'card',
     role: card.role,
+    rarity,
     stats: { ...card.stats },
     keywords: card.keywords ?? [],
     ability: { name: card.ability.name, text: card.ability.text },

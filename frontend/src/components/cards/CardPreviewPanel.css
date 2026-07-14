@@ -67,6 +67,18 @@
   font-size: 1rem;
 }
 
+[data-landing-variant='iyashikei'] .card--preview .card__ability-name {
+  display: none;
+}
+[data-landing-variant='iyashikei'] .card__ability {
+  background: rgba(10, 10, 12, 0.24);
+}
+[data-landing-variant='iyashikei'] .card__keywords li {
+  font-weight: 220;
+  border-radius: 33px;
+  background: rgba(10, 10, 12, 0.05);
+}
+
 .card-preview-panel .card--preview .card__ability-name {
   font-size: 0.8rem;
 }
