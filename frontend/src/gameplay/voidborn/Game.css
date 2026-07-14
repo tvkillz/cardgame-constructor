@@ -307,7 +307,7 @@
   flex-direction: column;
   gap: 2px;
   font-size: 20px;
-  background: rgba(18, 24, 39, 0.72);
+  background: rgba(18, 24, 39, 0.17);
   border: 1px solid rgba(71, 85, 105, 0.7);
 }
 
@@ -318,6 +318,66 @@
 .game-zone-controls__btn {
   font-size: 0.9rem;
   letter-spacing: 0.08em;
+}
+
+/* Voidborn-only — iyashikei Game.css is bundled alongside; keep dark arena controls. */
+.game-stage[data-gameplay-variant='voidborn'] .game-zone-controls .game-zone-controls__btn {
+  text-transform: uppercase;
+  border-radius: 8px !important;
+  color: #f1e6c8;
+  background: color-mix(in srgb, var(--void-black) 50%, transparent);
+  border-color: color-mix(in srgb, var(--gold) 50%, transparent);
+  box-shadow:
+    0 0 12px color-mix(in srgb, var(--purple-glow) 15%, transparent),
+    inset 0 0 16px rgba(0, 0, 0, 0.35);
+}
+
+.game-stage[data-gameplay-variant='voidborn'] .game-zone-controls .game-zone-controls__btn:hover:not(:disabled) {
+  color: #fff;
+  border-color: color-mix(in srgb, var(--gold) 70%, transparent);
+  box-shadow:
+    0 0 22px color-mix(in srgb, var(--gold) 35%, transparent),
+    0 0 26px color-mix(in srgb, var(--purple-glow) 28%, transparent),
+    inset 0 0 20px color-mix(in srgb, var(--gold) 8%, transparent);
+}
+
+.game-stage[data-gameplay-variant='voidborn'] .game-zone-controls .game-zone-controls__btn.vb-btn--primary {
+  color: var(--play-cyan);
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, #0e3958 95%, transparent),
+    color-mix(in srgb, #08283e 95%, transparent)
+  );
+  border-color: color-mix(in srgb, var(--cyan-glow) 45%, transparent);
+}
+
+.game-stage[data-gameplay-variant='voidborn'] .game-zone-controls .game-zone-controls__btn.vb-btn--primary:hover:not(:disabled) {
+  color: #b7e9ff;
+  border-color: color-mix(in srgb, var(--gold) 78%, transparent);
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, #0e3958 95%, transparent),
+    color-mix(in srgb, #08283e 95%, transparent)
+  );
+}
+
+.game-stage[data-gameplay-variant='voidborn'] .game-turn-box {
+  padding: 10px 14px;
+  border-radius: 10px;
+  min-width: 150px;
+  color: #cbd5e1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 20px;
+  background: rgba(18, 24, 39, 0.72);
+  border: 1px solid rgba(71, 85, 105, 0.7);
+  backdrop-filter: none;
+  box-shadow: none;
+}
+
+.game-stage[data-gameplay-variant='voidborn'] .game-turn-box strong {
+  color: #38bdf8;
 }
 
 .game-zone-hero-hand {

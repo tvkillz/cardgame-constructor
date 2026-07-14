@@ -16,10 +16,12 @@ import { usePlayerDecks } from '@/hooks/usePlayerDecks'
 import { useCardCatalog } from '@/hooks/useCardCatalog'
 import { usePlayerInventory } from '@/hooks/usePlayerInventory'
 import { toCardDisplayProps } from '@/lib/cards'
+import { formatCardStat } from '@/lib/cards/numerals'
 import { preloadImage } from '@/lib/cards/preload'
 import { DOMAIN_GLOW, domainLabel } from '@/lib/cards/domains'
 import { formatRarityLabel, rarityTierOrder } from '@/lib/cards/rarity'
 import type { CardRarity, CardRecord } from '@/lib/cards/types'
+import { appConfig } from '@/config'
 import {
   canAddToDraftDeck,
   canRemoveFromDraftDeck,
@@ -49,6 +51,7 @@ import {
 const RARITIES: CardRarity[] = rarityTierOrder()
 
 export default function PortalCollection() {
+  const deckStatNumerals = appConfig.landing?.variant === 'iyashikei' ? 'kanji' : 'arabic'
   const { cards: catalog } = useCardCatalog()
   const { ownedBySlug, loading: inventoryLoading, refresh: refreshInventory } = usePlayerInventory()
   const { decks, loading: decksLoading, refresh, replaceDeck, userId } = usePlayerDecks()
@@ -428,7 +431,7 @@ export default function PortalCollection() {
                       aria-label={`Mana ${record.stats.mana}`}
                     >
                       <span className="portal-collection__mana-pip-value">
-                        {record.stats.mana}
+                        {formatCardStat(record.stats.mana, deckStatNumerals)}
                       </span>
                     </span>
                     <span

@@ -818,6 +818,33 @@
   box-shadow: 0 0 0 2px rgba(142, 201, 160, 0.2);
 }
 
+[data-landing-variant='iyashikei'] .billing-form__label {
+  color: var(--iyashi-ink-soft);
+  font-family: var(--font-ui);
+  font-weight: 600;
+}
+
+[data-landing-variant='iyashikei'] .billing-form__required {
+  color: #7a5a42;
+}
+
+[data-landing-variant='iyashikei'] .billing-form__input {
+  border-color: var(--iyashi-border);
+  background: rgba(255, 255, 255, 0.85);
+  color: var(--iyashi-ink);
+  font-family: var(--font-ui);
+  font-size: 0.88rem;
+}
+
+[data-landing-variant='iyashikei'] .billing-form__input::placeholder {
+  color: rgba(44, 62, 45, 0.42);
+}
+
+[data-landing-variant='iyashikei'] .billing-form__input:focus {
+  border-color: var(--iyashi-border-strong);
+  box-shadow: 0 0 0 2px rgba(142, 201, 160, 0.2);
+}
+
 [data-landing-variant='iyashikei'] .portal-profile__hint,
 [data-landing-variant='iyashikei'] .portal-profile__empty,
 [data-landing-variant='iyashikei'] .portal-profile__status {
@@ -842,10 +869,53 @@
   background: var(--iyashi-panel);
 }
 
+[data-landing-variant='iyashikei'] .portal-collection__stats-summary,
+[data-landing-variant='iyashikei'] .portal-collection__stats-filtered {
+  color: var(--iyashi-ink-soft);
+}
+
+[data-landing-variant='iyashikei'] .portal-collection__stats-item strong,
+[data-landing-variant='iyashikei'] .portal-collection__stats-filtered strong {
+  color: var(--iyashi-ink);
+  font-weight: 700;
+}
+
+[data-landing-variant='iyashikei'] .portal-collection__stats-sep {
+  color: rgba(44, 62, 45, 0.38);
+}
+
+[data-landing-variant='iyashikei'] .portal-collection__deck-count {
+  color: var(--iyashi-ink);
+  font-family: var(--font-heading, var(--font-fantasy));
+  text-transform: none;
+}
+
 [data-landing-variant='iyashikei'] .portal-collection__deck-row {
   border-color: var(--iyashi-border);
   background: rgba(255, 255, 255, 0.55);
   color: var(--iyashi-ink);
+}
+
+[data-landing-variant='iyashikei'] .portal-collection__deck-row-qty {
+  color: #4a5a42;
+  font-weight: 700;
+}
+
+[data-landing-variant='iyashikei'] .portal-collection__mana-pip {
+  width: 22px;
+  height: 24px;
+  font-size: 0.62rem;
+  font-weight: 400;
+  font-family: var(--font-heading, var(--font-fantasy));
+  color: #3d5240;
+  text-shadow: none;
+  background: linear-gradient(160deg, #c8dcc0 0%, #9ab89a 100%);
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  box-shadow: 0 0 8px rgba(122, 168, 122, 0.28);
+}
+
+[data-landing-variant='iyashikei'] .portal-collection__domain-dot {
+  box-shadow: 0 0 4px rgba(44, 62, 45, 0.12);
 }
 
 [data-landing-variant='iyashikei'] .collection-owned-card__qty-btn {
@@ -862,6 +932,86 @@
 
 [data-landing-variant='iyashikei'] .market-card--hovered .market-card__frame {
   box-shadow: 0 0 0 2px rgba(106, 171, 114, 0.45);
+}
+
+[data-landing-variant='iyashikei'] .market-card__domain {
+  color: var(--iyashi-ink-soft);
+  text-transform: none;
+  letter-spacing: 0.02em;
+}
+
+[data-landing-variant='iyashikei'] .market-card__price {
+  border-radius: 12px;
+  text-transform: none;
+  letter-spacing: 0.02em;
+  font-weight: 600;
+  font-size: 0.74rem;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--iyashi-border);
+  box-shadow: 0 2px 8px var(--iyashi-shadow);
+  color: var(--iyashi-ink);
+}
+
+[data-landing-variant='iyashikei'] .market-card__price--credits {
+  color: #6a5838;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 252, 247, 0.98) 0%,
+    rgba(248, 238, 220, 0.94) 100%
+  );
+  border-color: rgba(201, 168, 124, 0.42);
+}
+
+[data-landing-variant='iyashikei'] .market-card__price--credits:hover:not(:disabled) {
+  color: #5a4a32;
+  border-color: rgba(201, 168, 124, 0.62);
+  background: rgba(252, 244, 228, 0.98);
+  box-shadow: 0 4px 12px rgba(201, 168, 124, 0.16);
+}
+
+[data-landing-variant='iyashikei'] .market-card__price--money {
+  color: #3a5a68;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 252, 247, 0.98) 0%,
+    rgba(228, 240, 246, 0.94) 100%
+  );
+  border-color: rgba(110, 181, 217, 0.38);
+}
+
+[data-landing-variant='iyashikei'] .market-card__price--money:hover:not(:disabled) {
+  color: #2f4a58;
+  border-color: rgba(110, 181, 217, 0.58);
+  background: rgba(236, 246, 252, 0.98);
+  box-shadow: 0 4px 12px rgba(110, 181, 217, 0.14);
+}
+
+[data-landing-variant='iyashikei'] .market-card__price--cancel {
+  color: #8a5a5a;
+  background: rgba(252, 240, 240, 0.94);
+  border-color: rgba(212, 165, 165, 0.45);
+}
+
+[data-landing-variant='iyashikei'] .market-card__price--cancel:hover:not(:disabled) {
+  color: #7a4848;
+  border-color: rgba(212, 165, 165, 0.62);
+  background: rgba(252, 236, 236, 0.98);
+  box-shadow: 0 4px 12px rgba(212, 165, 165, 0.12);
+}
+
+[data-landing-variant='iyashikei'] .market-card .cart-icon--money {
+  color: #5a8aaa;
+}
+
+[data-landing-variant='iyashikei'] .market-card .coin-stack-icon::before,
+[data-landing-variant='iyashikei'] .market-card .coin-stack-icon::after {
+  border-color: rgba(154, 114, 24, 0.5);
+  background: radial-gradient(circle at 30% 28%, #f8eed8 0%, #e8c8a0 42%, #c9a87c 100%);
+  box-shadow: 0 1px 3px rgba(44, 62, 45, 0.1);
+}
+
+[data-landing-variant='iyashikei'] .market-card .coin-stack-icon::after {
+  box-shadow: 0 1px 3px rgba(44, 62, 45, 0.1);
 }
 
 [data-landing-variant='iyashikei'] .player-listing-card__badge {

@@ -345,10 +345,19 @@ export const Game: React.FC<Props> = ({
         )}
 
         <div className="game-zone-controls" ref={controlsRef} aria-label="Turn controls">
-          <div className="game-turn-box">
-            <span>Turn {match.turn}</span>
-            <span>{phaseDetail}</span>
-            <strong>{phaseLabel}</strong>
+          <div
+            className={`game-turn-box${
+              match.phase === 'hero_main'
+                ? ' game-turn-box--yours'
+                : match.phase === 'villain_main'
+                  ? ' game-turn-box--theirs'
+                  : ' game-turn-box--settling'
+            }`}
+            role="status"
+          >
+            <span className="game-turn-box__round">Turn {match.turn}</span>
+            <span className="game-turn-box__phase">{phaseDetail}</span>
+            <strong className="game-turn-box__status">{phaseLabel}</strong>
           </div>
           {showBattleButton && (
             <Button
