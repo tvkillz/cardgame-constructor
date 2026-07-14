@@ -1,5 +1,6 @@
-import { getSupabaseBrowserClient } from '@/lib/supabase/client'
 import { invokeCommerceAction } from '@/lib/commerce/api'
+import { getSupabaseBrowserClient } from '@/lib/supabase/client'
+import { getSupabaseAccessToken } from '@/lib/supabase/auth-headers'
 
 import {
   createDefaultLocalDecks,
@@ -21,7 +22,8 @@ export async function ensureTestDeckProvisioned(): Promise<void> {
 
   const { data } = await supabase.auth.getSession()
   const userId = data.session?.user?.id
-  if (!userId) return
+  const accessToken = await getSupabaseAccessToken()
+  if (!userId || !accessToken) return
 
   if (ensuredTestDeckUserId === userId) return
   if (ensureTestDeckInflight) return ensureTestDeckInflight

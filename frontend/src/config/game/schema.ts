@@ -41,6 +41,14 @@ export interface OrbPresetConfig {
 
 export interface TurnBannerAnimationConfig {
   label: string
+  /** Optional primary glyph (e.g. kanji). Screen readers use `label`. */
+  glyph?: string
+  /** Optional glyph shown during the exit phase (e.g. 終). */
+  glyphExit?: string
+  /** Optional quiet caption under the glyph on enter. */
+  sublabel?: string
+  /** Optional caption during exit. */
+  sublabelExit?: string
   /** Ms before overlay switches to exit phase. */
   exitPhaseMs: number
   /** Ms before overlay is hidden. */

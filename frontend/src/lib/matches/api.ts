@@ -1,10 +1,5 @@
-import { getSupabaseBrowserClient } from '@/lib/supabase/client'
-import {
-  getSupabaseBrowserUrl,
-  isSupabaseConfigured,
-  supabaseAnonKey,
-} from '@/lib/supabase/env'
-import { getSiteId } from '@/lib/site'
+import { buildSupabaseApiHeaders } from '@/lib/supabase/auth-headers'
+import { getSupabaseBrowserUrl, isSupabaseConfigured } from '@/lib/supabase/env'
 
 import type { PersistedMatchState } from './serialize'
 import type { CombatRoundResult, FreezeEvent } from '@/lib/game/match/types'
@@ -83,24 +78,7 @@ function parseMatchResponse(body: unknown): MatchApiResponse {
 }
 
 async function authHeaders(): Promise<Record<string, string> | null> {
-  if (!isSupabaseConfigured()) return null
-
-  const headers: Record<string, string> = {
-    'Content-Type': 'application/json',
-    apikey: supabaseAnonKey,
-    'X-Site-Id': getSiteId(),
-  }
-
-  const supabase = getSupabaseBrowserClient()
-  if (supabase) {
-    const { data } = await supabase.auth.getSession()
-    const token = data.session?.access_token
-    headers.Authorization = `Bearer ${token ?? supabaseAnonKey}`
-  } else {
-    headers.Authorization = `Bearer ${supabaseAnonKey}`
-  }
-
-  return headers
+  return buildSupabaseApiHeaders({ requireUser: true })
 }
 
 /** Browser → Supabase (visible in DevTools Network, not in pm2 logs). */

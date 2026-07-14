@@ -10,6 +10,7 @@ import { useAuth } from '@/components/providers/AuthProvider';
 import { Button } from '@/components/ui/Button/Button';
 import { Avatar } from './Avatar';
 import './Game.css';
+import './cards-game.css';
 import GameScalableContainer from './GameScalableContainer';
 import Card from '@/components/CardPlaceholder/Card';
 import type { CardDisplayProps } from '@/components/CardPlaceholder/Card';
@@ -17,7 +18,8 @@ import CardHoverPreview from './CardHoverPreview';
 import MatchResultOverlay from './MatchResultOverlay';
 import TutorialOverlay from './TutorialOverlay';
 import TutorialHighlight from './TutorialHighlight';
-import { useGameMatchFx } from '../shared/useGameMatchFx';
+import { TurnBanner } from './TurnBanner';
+import { useGameMatchFx } from './useGameMatchFx';
 import { useTurnBanners } from '../shared/useTurnBanners';
 import { useTutorial } from '@/hooks/useTutorial';
 import type { GameProps } from '../types';
@@ -282,11 +284,11 @@ export const Game: React.FC<Props> = ({
 
   const phaseLabel =
     match.phase === 'hero_main'
-      ? 'YOUR TURN'
+      ? '手番'
       : match.phase === 'villain_main'
-        ? 'ENEMY TURN'
+        ? '風'
         : match.phase === 'combat'
-          ? 'COMBAT'
+          ? '静'
           : '';
 
   return (
@@ -300,7 +302,7 @@ export const Game: React.FC<Props> = ({
             health={boardMatch.villain.hp}
             currentMana={boardMatch.villain.mana}
             maxMana={boardMatch.villain.maxMana}
-            colorPalette="darkRed"
+            colorPalette="opponent"
             manaRef={villainManaRef}
           />
         </div>
@@ -352,7 +354,7 @@ export const Game: React.FC<Props> = ({
               ref={battleBtnRef}
               onClick={handleBattle}
             >
-              BATTLE [B]
+              Battle [B]
             </Button>
           )}
           <Button
@@ -364,7 +366,7 @@ export const Game: React.FC<Props> = ({
             disabled={match.phase !== 'hero_main' || processing || Boolean(match.winner)}
             onClick={handleEndTurn}
           >
-            END TURN [E]
+            End turn [E]
           </Button>
         </div>
 
@@ -512,16 +514,18 @@ export const Game: React.FC<Props> = ({
         </Button>
 
         {enemyTurnPhase !== 'hidden' && (
-          <div className={`game-enemy-turn-overlay game-enemy-turn-overlay--${enemyTurnPhase === 'exit' ? 'exit' : 'enter'}`}>
-            <div className="game-enemy-turn-strip" />
-            <div className="game-enemy-turn-text">{gameAnimationsConfig.turnBanner.enemy.label}</div>
-          </div>
+          <TurnBanner
+            variant="enemy"
+            phase={enemyTurnPhase === 'exit' ? 'exit' : 'enter'}
+            config={gameAnimationsConfig.turnBanner.enemy}
+          />
         )}
         {yourTurnPhase !== 'hidden' && (
-          <div className={`game-your-turn-overlay game-your-turn-overlay--${yourTurnPhase === 'exit' ? 'exit' : 'enter'}`}>
-            <div className="game-your-turn-strip" />
-            <div className="game-your-turn-text">{gameAnimationsConfig.turnBanner.your.label}</div>
-          </div>
+          <TurnBanner
+            variant="your"
+            phase={yourTurnPhase === 'exit' ? 'exit' : 'enter'}
+            config={gameAnimationsConfig.turnBanner.your}
+          />
         )}
 
         {tutorialActive && tutorialTarget ? (

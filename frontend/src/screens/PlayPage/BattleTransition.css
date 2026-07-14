@@ -45,3 +45,21 @@
     transform: rotate(360deg);
   }
 }
+
+/* KOMOREBI / iyashikei — soft loading gate */
+[data-landing-variant='iyashikei'] .battle-enter__loading {
+  background: rgba(245, 240, 230, 0.94);
+}
+
+[data-landing-variant='iyashikei'] .battle-enter__loading p {
+  text-transform: none;
+  letter-spacing: 0.06em;
+  color: #4a7c59;
+  text-shadow: none;
+  font-family: var(--font-heading, var(--font-fantasy, serif));
+}
+
+[data-landing-variant='iyashikei'] .battle-enter__spinner {
+  border-color: rgba(106, 171, 114, 0.22);
+  border-top-color: #6aab72;
+}

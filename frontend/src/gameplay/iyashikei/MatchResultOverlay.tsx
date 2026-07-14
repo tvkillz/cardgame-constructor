@@ -13,15 +13,15 @@ export default function MatchResultOverlay({ won, onNewGame, onMenu }: MatchResu
   return (
     <div className="match-result" role="dialog" aria-modal="true" aria-live="assertive">
       <div className="match-result__panel">
-        <h2 className="match-result__title">{won ? 'Victory!' : 'Defeat'}</h2>
+        <h2 className="match-result__title">{won ? 'A quiet victory' : 'Until next time'}</h2>
         <p className="match-result__text">
           {won
-            ? 'The void bows to your triumph. The realms are yours.'
-            : 'Your champion falls. The void claims another soul.'}
+            ? 'The light stays with you. Rest a moment, then play again when you are ready.'
+            : 'Every match is a breath. Return to the garden when you wish.'}
         </p>
         <div className="match-result__actions">
           <Button type="button" variant="primary" size="md" fantasy onClick={onNewGame}>
-            New game
+            Play again
           </Button>
           <Button type="button" variant="secondary" size="md" onClick={onMenu}>
             Menu

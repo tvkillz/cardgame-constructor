@@ -1,35 +1,16 @@
-import { getSupabaseBrowserClient } from '@/lib/supabase/client'
-import { getSupabaseBrowserUrl, supabaseAnonKey, supabaseUrl } from '@/lib/supabase/env'
-import { getSiteId } from '@/lib/site'
+import { buildSupabaseApiHeaders } from '@/lib/supabase/auth-headers'
+import { getSupabaseBrowserUrl } from '@/lib/supabase/env'
 
 import type { CommerceAction, CommerceResponse } from './types'
 
 export type { CommerceAction, CommerceResponse } from './types'
 export type { StoreProduct, Wallet, WalletTransaction, InventoryItem } from './types'
 
-async function authHeaders(): Promise<Record<string, string> | null> {
-  const supabase = getSupabaseBrowserClient()
-  if (!supabaseUrl || !supabaseAnonKey) return null
-
-  const headers: Record<string, string> = {
-    'Content-Type': 'application/json',
-    apikey: supabaseAnonKey,
-    'X-Site-Id': getSiteId(),
-  }
-
-  if (supabase) {
-    const { data } = await supabase.auth.getSession()
-    headers.Authorization = `Bearer ${data.session?.access_token ?? supabaseAnonKey}`
-  } else {
-    headers.Authorization = `Bearer ${supabaseAnonKey}`
-  }
-
-  return headers
-}
-
 export async function invokeCommerceAction(action: CommerceAction): Promise<CommerceResponse> {
-  const headers = await authHeaders()
-  if (!headers) return { error: 'offline' }
+  const headers = await buildSupabaseApiHeaders({ requireUser: action.type !== 'products_list' })
+  if (!headers) {
+    return { error: action.type !== 'products_list' ? 'unauthorized' : 'offline' }
+  }
 
   const res = await fetch(`${getSupabaseBrowserUrl()}/functions/v1/commerce`, {
     method: 'POST',

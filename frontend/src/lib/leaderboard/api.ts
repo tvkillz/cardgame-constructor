@@ -1,33 +1,12 @@
-import { getSupabaseBrowserClient } from '@/lib/supabase/client'
-import {
-  getSupabaseBrowserUrl,
-  isSupabaseConfigured,
-  supabaseAnonKey,
-} from '@/lib/supabase/env'
-import { getSiteId } from '@/lib/site'
+import { buildSupabaseApiHeaders } from '@/lib/supabase/auth-headers'
+import { getSupabaseBrowserUrl, isSupabaseConfigured } from '@/lib/supabase/env'
 
 import type { LeaderboardAction, LeaderboardResponse } from './types'
 
 export type { LeaderboardAction, LeaderboardEntry, LeaderboardResponse, LeaderboardViewer } from './types'
 
 async function authHeaders(): Promise<Record<string, string> | null> {
-  if (!isSupabaseConfigured()) return null
-
-  const headers: Record<string, string> = {
-    'Content-Type': 'application/json',
-    apikey: supabaseAnonKey,
-    'X-Site-Id': getSiteId(),
-  }
-
-  const supabase = getSupabaseBrowserClient()
-  if (supabase) {
-    const { data } = await supabase.auth.getSession()
-    headers.Authorization = `Bearer ${data.session?.access_token ?? supabaseAnonKey}`
-  } else {
-    headers.Authorization = `Bearer ${supabaseAnonKey}`
-  }
-
-  return headers
+  return buildSupabaseApiHeaders({ requireUser: true })
 }
 
 export async function fetchLeaderboard(): Promise<LeaderboardResponse> {

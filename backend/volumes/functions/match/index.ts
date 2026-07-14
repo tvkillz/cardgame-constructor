@@ -28,6 +28,12 @@ function siteIdFromRequest(req: Request): string | null {
   return req.headers.get('X-Site-Id')?.trim() || req.headers.get('x-site-id')?.trim() || null
 }
 
+function resolveAuthEmailSiteId(suffix: string | null): string | null {
+  if (!suffix) return null
+  if (suffix === 'komorebi') return 'iyashikei'
+  return suffix
+}
+
 function siteIdFromAuthEmail(email: string | null | undefined): string | null {
   if (!email) return null
   const at = email.lastIndexOf('@')
@@ -36,7 +42,7 @@ function siteIdFromAuthEmail(email: string | null | undefined): string | null {
   const sepIdx = local.lastIndexOf('+')
   if (sepIdx <= 0) return null
   const parsed = local.slice(sepIdx + 1)
-  return parsed || null
+  return resolveAuthEmailSiteId(parsed || null)
 }
 
 async function assertSiteAccess(

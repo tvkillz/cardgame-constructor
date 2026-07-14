@@ -32,6 +32,13 @@ export function parseSiteAuthEmail(internalEmail: string): {
   }
 }
 
+export function resolveAuthSuffixToSiteId(suffix: string): string {
+  if (suffix === 'komorebi') return 'iyashikei'
+  return suffix
+}
+
 export function isSiteAuthEmailForSite(internalEmail: string, siteId: string): boolean {
-  return parseSiteAuthEmail(internalEmail).siteId === siteId
+  const parsed = parseSiteAuthEmail(internalEmail)
+  if (!parsed.siteId) return false
+  return resolveAuthSuffixToSiteId(parsed.siteId) === siteId
 }

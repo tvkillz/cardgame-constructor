@@ -6,7 +6,7 @@ interface AvatarProps {
   health: number;
   currentMana: number;
   maxMana: number;
-  colorPalette?: 'default' | 'darkRed';
+  colorPalette?: 'hero' | 'opponent';
   manaRef?: Ref<HTMLDivElement>;
   containerRef?: Ref<HTMLDivElement>;
 }
@@ -16,58 +16,46 @@ export const Avatar = ({
   health,
   currentMana,
   maxMana,
-  colorPalette = 'default',
+  colorPalette = 'hero',
   manaRef,
   containerRef,
 }: AvatarProps) => {
   const manaScale =
     maxMana > 6
-      ? Math.max(0.62, (6 * 26 + 5 * 4) / (maxMana * 26 + (maxMana - 1) * 4))
+      ? Math.max(0.62, (6 * 22 + 5 * 6) / (maxMana * 22 + (maxMana - 1) * 6))
       : 1;
 
   return (
-    <div className={`avatar-container palette-${colorPalette}`} ref={containerRef}>
-      
-      {/* Стек маны слева (Выровнен вертикально, как на скрине) */}
-      <div className="mana-wrapper" ref={manaRef}>
+    <div
+      className={`iyashikei-avatar iyashikei-avatar--${colorPalette}`}
+      ref={containerRef}
+    >
+      <div className="iyashikei-avatar__mana" ref={manaRef}>
         <div
-          className="mana-slots-list"
+          className="iyashikei-avatar__mana-stack"
           style={{ '--mana-scale': manaScale } as Record<string, string | number>}
         >
           {Array.from({ length: maxMana }).map((_, index) => {
             const isActive = index < currentMana;
             return (
-              <div key={index} className={`mana-slot-outer ${isActive ? 'active-slot' : ''}`}>
-                <div className={`mana-slot-inner ${isActive ? 'active' : ''}`} />
-              </div>
+              <span
+                key={index}
+                className={`iyashikei-avatar__mana-bead${isActive ? ' iyashikei-avatar__mana-bead--active' : ''}`}
+              />
             );
           })}
         </div>
-        <div className="mana-counter">{currentMana}/{maxMana}</div>
+        <span className="iyashikei-avatar__mana-count">
+          {currentMana}/{maxMana}
+        </span>
       </div>
 
-      {/* Окно аватара с круглой градиентной рамкой */}
-      <div className="avatar-circle">
-        {/* Декоративные ромбики */}
-        <div className="frame-diamond diamond-top" />
-        <div className="frame-diamond diamond-bottom" />
-        <div className="frame-diamond diamond-left" />
-        <div className="frame-diamond diamond-right" />
-
-        {/* Заглушка под арт персонажа */}
-        <div className="avatar-art-placeholder" />
-        
-        {/* Иконка ХП (Капля) — идеально сидит внизу справа */}
-        <div className="hp-drop">
-          <span className="hp-text">{health}</span>
-        </div>
+      <div className="iyashikei-avatar__portrait">
+        <div className="iyashikei-avatar__portrait-inner" aria-hidden="true" />
+        <span className="iyashikei-avatar__health">{health}</span>
       </div>
 
-      {/* Плашка с никнеймом */}
-      <div className="nickname-badge">
-        <span className="nickname-text">{name}</span>
-      </div>
-
+      <div className="iyashikei-avatar__name">{name}</div>
     </div>
   );
 };
