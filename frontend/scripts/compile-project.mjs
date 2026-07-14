@@ -36,6 +36,7 @@ import {
   upsertFeaturedCard,
 } from './card-upload.mjs'
 import { createAdminClient } from './supabase-admin.mjs'
+import { randomCardPriceCents } from './random-price.mjs'
 import { loadProjectMetadata, siteStoragePaths } from './load-project-metadata.mjs'
 import {
   buildPaths,
@@ -1195,7 +1196,7 @@ async function compileCards({
 
     const localPath = await resolveAssetFile(paths, asset.path)
     const isShowcase = showcaseSlugs.has(slug)
-    const priceCents = resolvePriceCents(asset)
+    const priceCents = resolvePriceCents(asset) ?? randomCardPriceCents()
 
     const useWebp = Boolean(sharp)
     const thumbExt = useWebp ? 'webp' : 'png'

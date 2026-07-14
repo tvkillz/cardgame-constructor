@@ -11,6 +11,7 @@ import { useWallet } from '@/hooks/useWallet'
 import { resolveDeckToDisplay, buildTutorialDeck, deckCardCount, savePlayerDeck } from '@/lib/decks'
 import { preloadWithMinDelay } from '@/lib/cards'
 import { invokeMatchAction } from '@/lib/matches'
+import { clearMatchBootCache } from '@/lib/matches/boot-cache'
 import type { HandDeckEntry } from '@/lib/decks/buildHand'
 import BattleTransition from './BattleTransition'
 import DeckSelectModal from './DeckSelectModal'
@@ -53,6 +54,7 @@ export default function PlayPage() {
     theme.playModes.find((o) => o.id === activeMode)?.title ?? ''
 
   const exitArenaToLobby = () => {
+    clearMatchBootCache()
     setBattlePhase('idle')
     setResumeMatchId(null)
     setArenaDeckId('')
@@ -108,6 +110,7 @@ export default function PlayPage() {
     setEnterBattleError(null)
 
     try {
+      clearMatchBootCache()
       const tutorialDeck = buildTutorialDeck(catalog)
       setActiveMode('tutorial')
       setResumeMatchId(null)
@@ -186,6 +189,7 @@ export default function PlayPage() {
         return
       }
 
+      clearMatchBootCache()
       setResumeMatchId(null)
       setArenaDeckId(saved.id)
       setDeckEntries(resolveDeckToDisplay(saved, catalog))

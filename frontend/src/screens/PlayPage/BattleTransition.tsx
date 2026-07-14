@@ -1,7 +1,7 @@
 'use client'
 
 import { gameAnimationsConfig } from '@/config'
-import Game from '@/components/Game/Game'
+import Game from '@/gameplay'
 import type { HandDeckEntry } from '@/lib/decks/buildHand'
 import './BattleTransition.css'
 

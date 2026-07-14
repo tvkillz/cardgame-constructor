@@ -14,7 +14,8 @@ create index sites_domain_idx on public.sites (domain);
 
 insert into public.sites (id, name, domain, status) values
   ('voidborn', 'VOIDBORN', 'voidborn.fun', 'live'),
-  ('project2', 'PROJECT TWO', 'project2.example.com', 'demo')
+  ('project2', 'PROJECT TWO', 'project2.example.com', 'demo'),
+  ('iyashikei', 'KOMOREBI', 'komorebi.voidborn.fun', 'demo')
 on conflict (id) do update set
   name = excluded.name,
   domain = excluded.domain,

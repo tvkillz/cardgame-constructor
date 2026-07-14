@@ -89,7 +89,7 @@ create policy "Users delete cards in own decks"
     )
   );
 
--- Starter deck for play-testing (10 published cards per user/site).
+-- Starter deck for play-testing (all cards when site catalog <=20, else 10).
 create or replace function public.ensure_test_deck(
   p_user_id uuid,
   p_site_id text default 'voidborn'
@@ -102,6 +102,8 @@ as $$
 declare
   v_deck_id uuid;
   v_card_count int;
+  v_site_card_total int;
+  v_deck_limit int;
   card_rec record;
   sort_idx int := 0;
 begin
@@ -128,13 +130,23 @@ begin
     return v_deck_id;
   end if;
 
+  select count(*)::int
+  into v_site_card_total
+  from public.cards c
+  where c.site_id = p_site_id
+    and c.published = true;
+
+  -- Small catalogs (showcase sites like iyashikei): grant every published card.
+  -- Large catalogs (voidborn): cap at 10 starters.
+  v_deck_limit := case when v_site_card_total <= 20 then v_site_card_total else 10 end;
+
   for card_rec in
     select c.id
     from public.cards c
     where c.site_id = p_site_id
       and c.published = true
     order by c.slug
-    limit 10
+    limit v_deck_limit
   loop
     insert into public.player_deck_cards (deck_id, card_id, quantity, sort_order)
     values (v_deck_id, card_rec.id, 1, sort_idx)

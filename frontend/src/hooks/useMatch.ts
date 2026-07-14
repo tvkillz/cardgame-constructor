@@ -8,6 +8,14 @@ import type { HandDeckEntry } from '@/lib/decks/buildHand'
 import { checkWinner, firstEmptySlot } from '@/lib/game/match'
 import type { BoardUnit, CombatRoundResult, MatchState } from '@/lib/game/match/types'
 import { fetchMatchRow, invokeMatchAction } from '@/lib/matches/api'
+import {
+  bootKeyFor,
+  matchBootCacheMatches,
+  readMatchBootCache,
+  releaseBoot,
+  tryClaimBoot,
+  writeMatchBootCache,
+} from '@/lib/matches/boot-cache'
 import { pickBotNickname } from '@/lib/game/bot-nicknames'
 import {
   endTurnFromApi,
@@ -55,6 +63,22 @@ function apiErrorMessage(res: { error?: string; message?: string }, fallback: st
   return fallback
 }
 
+type ActiveMatchRow = MatchDbRow & {
+  player_deck_id?: string | null
+  mode?: string | null
+  status?: string | null
+}
+
+function activeMatchMatchesSession(
+  row: ActiveMatchRow,
+  deckId: string,
+  mode: string,
+): boolean {
+  if (row.status && row.status !== 'active') return false
+  if (mode === 'tutorial') return row.mode === 'tutorial'
+  return row.player_deck_id === deckId && (row.mode ?? 'casual') === mode
+}
+
 export function useMatch({
   catalog,
   catalogLoading = false,
@@ -86,7 +110,10 @@ export function useMatch({
 
   useEffect(() => {
     matchIdRef.current = matchId
-  }, [matchId])
+    if (matchId && user?.id) {
+      writeMatchBootCache({ matchId, deckId, mode, userId: user.id })
+    }
+  }, [matchId, deckId, mode, user?.id])
 
   useEffect(() => {
     blockRemoteApplyRef.current =
@@ -127,6 +154,8 @@ export function useMatch({
   }, [])
 
   useEffect(() => {
+    if (matchIdRef.current) return
+
     if (catalogLoading) {
       setBooting(true)
       setBootError(null)
@@ -151,82 +180,128 @@ export function useMatch({
       return
     }
 
+    const bootKey = bootKeyFor(user.id, deckId, mode)
+    if (!tryClaimBoot(bootKey)) return
+
     let cancelled = false
+
+    async function resumeExistingMatch(
+      nextMatchId: string,
+      row: MatchDbRow,
+      opponentHint?: string | null,
+    ) {
+      const hydrated = rowToMatchState(row, catalog)
+      await preloadHeroHand(hydrated)
+      if (cancelled) return
+      setMatchId(nextMatchId)
+      writeMatchBootCache({ matchId: nextMatchId, deckId, mode, userId: user!.id })
+      setOpponentName(resolveOpponentName(opponentHint, row.opponent_name))
+      setMatchEnded(Boolean(hydrated.winner))
+      applyFromRow(row)
+      setBooting(false)
+    }
 
     async function boot() {
       setBooting(true)
       setBootError(null)
 
-      const supabaseProbe = await invokeMatchAction({ type: 'get_active' })
-      if (supabaseProbe.error === 'offline') {
-        setServerOnline(false)
-        setBootError(
-          'Supabase is not configured. Set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY, then restart the dev server.',
-        )
-        setBooting(false)
-        return
-      }
-      setServerOnline(true)
-
-      if (resumeMatchId) {
-        const res = await invokeMatchAction({ type: 'get', matchId: resumeMatchId })
-        if (cancelled) return
-
-        const row = res.match as MatchDbRow | undefined
-        if (row?.state) {
-          const hydrated = rowToMatchState(row, catalog)
-          await preloadHeroHand(hydrated)
-          setMatchId(resumeMatchId)
-          setOpponentName(resolveOpponentName(res.opponentName, row.opponent_name))
-          setMatchEnded(Boolean(hydrated.winner))
-          applyFromRow(row)
+      try {
+        const supabaseProbe = await invokeMatchAction({ type: 'get_active' })
+        if (supabaseProbe.error === 'offline') {
+          setServerOnline(false)
+          setBootError(
+            'Supabase is not configured. Set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY, then restart the dev server.',
+          )
           setBooting(false)
           return
         }
-        setBootError(apiErrorMessage(res, 'Could not resume match.'))
-        setBooting(false)
-        return
-      }
+        setServerOnline(true)
 
-      const created = await invokeMatchAction({ type: 'create', deckId, mode })
-      if (cancelled) return
+        const cached = readMatchBootCache()
+        if (cached && matchBootCacheMatches(cached, user!.id, deckId, mode)) {
+          const res = await invokeMatchAction({ type: 'get', matchId: cached.matchId })
+          if (cancelled) return
+          const row = res.match as MatchDbRow | undefined
+          if (row?.state) {
+            await resumeExistingMatch(cached.matchId, row, res.opponentName)
+            return
+          }
+        }
 
-      if (created.matchId && created.state) {
-        const hydrated = rowToMatchState(
-          {
+        if (resumeMatchId) {
+          const res = await invokeMatchAction({ type: 'get', matchId: resumeMatchId })
+          if (cancelled) return
+
+          const row = res.match as MatchDbRow | undefined
+          if (row?.state) {
+            await resumeExistingMatch(resumeMatchId, row, res.opponentName)
+            return
+          }
+          setBootError(apiErrorMessage(res, 'Could not resume match.'))
+          setBooting(false)
+          return
+        }
+
+        const activeRes = await invokeMatchAction({ type: 'get_active' })
+        if (cancelled) return
+
+        const activeRow = activeRes.match as ActiveMatchRow | null | undefined
+        if (activeRow?.state && activeMatchMatchesSession(activeRow, deckId, mode)) {
+          await resumeExistingMatch(activeRow.id, activeRow, activeRow.opponent_name)
+          return
+        }
+
+        const created = await invokeMatchAction({ type: 'create', deckId, mode })
+        if (cancelled) return
+
+        if (created.matchId && created.state) {
+          await preloadHeroHand(
+            rowToMatchState(
+              {
+                id: created.matchId,
+                revision: created.revision ?? 1,
+                state: created.state,
+                last_combat: null,
+              },
+              catalog,
+            ),
+          )
+          if (cancelled) return
+          setMatchId(created.matchId)
+          writeMatchBootCache({
+            matchId: created.matchId,
+            deckId,
+            mode,
+            userId: user!.id,
+          })
+          setOpponentName(resolveOpponentName(created.opponentName))
+          setMatchEnded(false)
+          applyFromRow({
             id: created.matchId,
             revision: created.revision ?? 1,
             state: created.state,
             last_combat: null,
-          },
-          catalog,
-        )
-        await preloadHeroHand(hydrated)
-        setMatchId(created.matchId)
-        setOpponentName(resolveOpponentName(created.opponentName))
-        setMatchEnded(false)
-        applyFromRow({
-          id: created.matchId,
-          revision: created.revision ?? 1,
-          state: created.state,
-          last_combat: null,
-        })
-        setBooting(false)
-        return
-      }
+          })
+          setBooting(false)
+          return
+        }
 
-      setBootError(
-        apiErrorMessage(
-          created,
-          'Match server unavailable. Apply matches.sql, deploy the match edge function, and restart Docker.',
-        ),
-      )
-      setBooting(false)
+        setBootError(
+          apiErrorMessage(
+            created,
+            'Match server unavailable. Apply matches.sql, deploy the match edge function, and restart Docker.',
+          ),
+        )
+        setBooting(false)
+      } finally {
+        releaseBoot(bootKey)
+      }
     }
 
     void boot()
     return () => {
       cancelled = true
+      releaseBoot(bootKey)
     }
   }, [catalog, catalogLoading, deckId, mode, resumeMatchId, user?.id, applyFromRow, preloadHeroHand])
 
@@ -266,7 +341,15 @@ export function useMatch({
     const timer = window.setInterval(() => void sync(), MATCH_SYNC_INTERVAL_MS)
     void sync()
 
-    return () => window.clearInterval(timer)
+    const onVisible = () => {
+      if (document.visibilityState === 'visible') void sync()
+    }
+    document.addEventListener('visibilitychange', onVisible)
+
+    return () => {
+      window.clearInterval(timer)
+      document.removeEventListener('visibilitychange', onVisible)
+    }
   }, [matchId, applyFromRow])
 
   const beginCombatPhase = useCallback(

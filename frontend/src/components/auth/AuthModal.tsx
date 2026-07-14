@@ -7,6 +7,7 @@ import { useAuth, type AuthModalMode } from '@/components/providers/AuthProvider
 import { getAuthCallbackUrl } from '@/lib/auth/callback-url'
 import { getSupabaseBrowserClient, isSupabaseConfigured } from '@/lib/supabase'
 import { mapSignInError } from '@/lib/auth/errors'
+import { signInWithSiteCredentials } from '@/lib/auth/sign-in'
 import { toSiteAuthEmail } from '@/lib/auth/site-email'
 import { getAuthEmailSuffix, getSiteId } from '@/lib/site'
 import { isValidEmail, isValidPassword, isValidUsername } from '@/lib/auth/validation'
@@ -153,10 +154,11 @@ export default function AuthModal() {
         return
       }
 
-      const { error: signInError } = await supabase.auth.signInWithPassword({
-        email: authEmail,
+      const { error: signInError } = await signInWithSiteCredentials(
+        supabase,
+        trimmedEmail,
         password,
-      })
+      )
 
       if (signInError) {
         setError(mapSignInError(signInError.message))

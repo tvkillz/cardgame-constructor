@@ -8,6 +8,8 @@
 --   docker compose restart rest
 -- Then from local machine:
 --   PROJECT=voidborn npm run upload:site
+-- After upload (or for rows still missing prices):
+--   docker compose exec -T db psql -U postgres < volumes/db/cards-random-prices-migration.sql
 
 alter table public.cards add column if not exists price_cents integer
   check (price_cents is null or price_cents >= 0);

@@ -51,8 +51,11 @@ One-time or when schema lags the repo:
 ```bash
 cd backend
 docker compose exec -T db psql -U postgres < volumes/db/cards-schema-migration.sql
+docker compose exec -T db psql -U postgres < volumes/db/cards-random-prices-migration.sql
 docker compose restart rest
 ```
+
+`cards-random-prices-migration.sql` sets `price_cents` (market credits, 1:1) to a random **1000–100000** ($10–$1000) for any card row where price is null or zero. Safe to re-run.
 
 Adds `price_cents`, migrates `cards.domain` to text (project domain ids).
 

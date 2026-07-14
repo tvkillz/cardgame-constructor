@@ -26,6 +26,7 @@ export default defineConfig([
       'src/screens/**',
       'src/components/Game/**',
       'src/components/CardPlaceholder/**',
+      'src/gameplay/**',
       'src/app/play/**',
       'src/config/game/**',
       'game/**',
@@ -46,7 +47,7 @@ export default defineConfig([
               message: gameOnlyImportMessage,
             },
             {
-              group: ['@/components/Game/*', '@/components/Game/**'],
+              group: ['@/components/Game/*', '@/components/Game/**', '@/gameplay/*', '@/gameplay/**'],
               message: gameOnlyImportMessage,
             },
           ],

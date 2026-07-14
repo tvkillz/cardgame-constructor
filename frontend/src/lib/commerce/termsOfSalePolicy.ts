@@ -22,7 +22,7 @@ export const TERMS_OF_SALE_POLICY = {
       items: [
         {
           label: 'Instant Delivery',
-          text: 'By completing this purchase, you give your explicit consent for Test LTD to immediately credit the Voidborn Credits to your Account profile upon successful payment processing.',
+          text: 'By completing this purchase, you give your explicit consent to immediately credit the Voidborn Credits to your Account profile upon successful payment processing.',
         },
         {
           label: 'Loss of Withdrawal Rights',

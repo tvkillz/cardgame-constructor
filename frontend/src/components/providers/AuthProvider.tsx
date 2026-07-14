@@ -82,8 +82,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         }
         if (nextSession) {
           setModalOpen(false)
-          if (event === 'SIGNED_IN') {
-            const target = pendingPathRef.current ?? appConfig.domain.routes.portalMarket
+          // Only redirect after an explicit sign-in from the auth modal — not on token
+          // refresh / tab visibility (Supabase can emit SIGNED_IN again without pendingPath).
+          if (event === 'SIGNED_IN' && pendingPathRef.current) {
+            const target = pendingPathRef.current
             pendingPathRef.current = null
             router.push(target)
           }
