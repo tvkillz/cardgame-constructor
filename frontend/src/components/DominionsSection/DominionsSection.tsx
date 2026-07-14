@@ -96,7 +96,10 @@ function DominionCard({ loc }: { loc: LocationConfig }) {
 
       <div className="dominions__card-copy">
         <h3 className="dominions__card-name">{loc.name}</h3>
-        <p className="dominions__card-type">{loc.categoryLabel} Dominion</p>
+        <p className="dominions__card-type">
+          {loc.categoryLabel}{' '}
+          {appConfig.landing?.variant === 'iyashikei' ? 'Location' : 'Dominion'}
+        </p>
 
         <div className="dominions__city-copy" key={`${loc.id}-${index}`}>
           <h4 className="dominions__city-name">{activeCity.name}</h4>

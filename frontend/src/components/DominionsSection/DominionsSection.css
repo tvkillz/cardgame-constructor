@@ -95,6 +95,12 @@
     transition-delay: calc(var(--dominions-stagger, 0) * 0.08s + 0.06s);
   }
 }
+@media (max-width: 566px) {
+  /* Section + card must both be in view — title and cards hide together on scroll-up */
+  html[data-landing-variant="iyashikei"] .dominions.visible .dominions__item--in-view {
+    transform: translateX(10vw);
+  }
+}
 
 .dominions__card {
   position: relative;

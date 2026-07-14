@@ -102,7 +102,7 @@
   }
 }
 
-/* ── Dominions: horizontal scroll filmstrip ── */
+/* ── Dominions: centered grid on wide screens, scroll on narrow ── */
 
 [data-landing-variant='iyashikei'] .dominions__inner {
   margin-top: 0;
@@ -126,7 +126,7 @@
 
 [data-landing-variant='iyashikei'] .dominions__item {
   flex: 0 0 clamp(260px, 72vw, 320px);
-  scroll-snap-align: start;
+  scroll-snap-align: center;
 }
 
 [data-landing-variant='iyashikei'] .dominions__card {
@@ -134,9 +134,23 @@
   min-height: 0;
 }
 
+[data-landing-variant='iyashikei'] .dominions__card-copy {
+  text-align: center;
+  align-items: center;
+}
+
 @media (min-width: 1150px) {
+  [data-landing-variant='iyashikei'] .dominions__grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 280px));
+    justify-content: center;
+    overflow-x: visible;
+    scroll-snap-type: none;
+  }
+
   [data-landing-variant='iyashikei'] .dominions__item {
-    flex-basis: clamp(280px, 22vw, 340px);
+    flex: unset;
+    scroll-snap-align: unset;
   }
 }
 
@@ -183,24 +197,16 @@
   grid-area: desc;
 }
 
-[data-landing-variant='iyashikei'] .gamemodel__item:nth-child(even) .gamemodel__card {
-  grid-template-columns: 1fr auto;
-  grid-template-areas:
-    'title icon'
-    'desc icon';
-  text-align: right;
-}
-
 [data-landing-variant='iyashikei'] .gamemodel__tags {
   justify-content: center;
   flex-wrap: wrap;
   max-width: min(720px, 100%);
   margin-inline: auto;
+  display: none;
 }
 
 @media (max-width: 640px) {
-  [data-landing-variant='iyashikei'] .gamemodel__card,
-  [data-landing-variant='iyashikei'] .gamemodel__item:nth-child(even) .gamemodel__card {
+  [data-landing-variant='iyashikei'] .gamemodel__card {
     grid-template-columns: auto 1fr;
     grid-template-areas:
       'icon title'
@@ -220,6 +226,8 @@
 [data-landing-variant='iyashikei'] .collection__showcase {
   grid-template-columns: 1fr;
   gap: clamp(2rem, 5vw, 3rem);
+  align-items: center;
+  justify-items: center;
 }
 
 [data-landing-variant='iyashikei'] .collection__preview {
@@ -237,6 +245,10 @@
   scroll-snap-type: x mandatory;
   padding-bottom: 0.5rem;
   -webkit-overflow-scrolling: touch;
+  width: fit-content;
+  max-width: 100%;
+  margin-inline: auto;
+  justify-content: center;
 }
 
 [data-landing-variant='iyashikei'] .collection__picker-item {
@@ -287,16 +299,22 @@
 
 [data-landing-variant='iyashikei'] .pathways__tiers {
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: clamp(0.85rem, 2vw, 1.15rem);
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  padding-bottom: 0.5rem;
+  overflow-x: visible;
+  padding-bottom: 0;
 }
 
 [data-landing-variant='iyashikei'] .pathways__tier {
-  flex: 0 0 clamp(220px, 42vw, 280px);
-  scroll-snap-align: start;
+  flex: 0 1 clamp(220px, 30vw, 280px);
+  scroll-snap-align: unset;
+}
+
+[data-landing-variant='iyashikei'] .pathways__cta {
+  width: 100%;
+  max-width: min(640px, 100%);
+  margin-inline: auto;
 }
 
 @media (max-width: 919px) {
@@ -334,10 +352,30 @@
 
 /* ── Final CTA: split copy + stats ── */
 
-[data-landing-variant='iyashikei'] .final-cta__inner {
-  margin-top: 0;
+[data-landing-variant='iyashikei'] .final-cta {
   padding-top: var(--iyashi-section-pad-y);
   padding-bottom: var(--iyashi-section-pad-bottom);
+}
+
+[data-landing-variant='iyashikei'] .final-cta__bg {
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+
+[data-landing-variant='iyashikei'] .final-cta__bg-image {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center bottom;
+  opacity: 0.72;
+  filter: grayscale(0.1) brightness(1.02) saturate(1.05);
+}
+
+[data-landing-variant='iyashikei'] .final-cta__inner {
+  margin-top: 0;
+  padding-top: 0;
+  padding-bottom: 0;
   display: grid;
   grid-template-columns: 1fr;
   gap: clamp(2rem, 5vw, 3rem);

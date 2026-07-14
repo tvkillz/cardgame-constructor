@@ -1,7 +1,7 @@
 .app {
   min-height: 100svh;
-  background: #0a0a0c;
-  color: #e8dcc8;
+  background: var(--void-black);
+  color: var(--text-primary);
 }
 
 .app main {

@@ -1,16 +1,13 @@
 import { appConfig } from './app.config'
 import { getArenaBackground, getLobbyBackground } from './selectors'
 
-/** Injects brand palette and fonts as CSS custom properties on :root. */
-export function applyTheme(): void {
+/** CSS custom properties for :root — safe for SSR inline styles and client applyTheme(). */
+export function buildThemeCssVars(): Record<string, string> {
   const { colors, landing } = appConfig
   const lobbyBg = getLobbyBackground()
   const arenaBg = getArenaBackground()
   const playLogo = appConfig.logo.playLogo
-  const root = document.documentElement
   const variant = landing?.variant ?? 'voidborn'
-
-  root.dataset.landingVariant = variant
 
   const vars: Record<string, string> = {
     '--void-black': colors.voidBlack,
@@ -49,7 +46,17 @@ export function applyTheme(): void {
     vars['--font-heading'] = "'Hiro Misake', 'Shippori Mincho', serif"
   }
 
-  for (const [key, value] of Object.entries(vars)) {
+  return vars
+}
+
+/** Injects brand palette and fonts as CSS custom properties on :root. */
+export function applyTheme(): void {
+  const root = document.documentElement
+  const variant = appConfig.landing?.variant ?? 'voidborn'
+
+  root.dataset.landingVariant = variant
+
+  for (const [key, value] of Object.entries(buildThemeCssVars())) {
     root.style.setProperty(key, value)
   }
 

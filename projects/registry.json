@@ -17,7 +17,7 @@
     "id": "iyashikei",
     "path": "./iyashikei",
     "status": "demo",
-    "stagingDomain": "staging.komorebi.example.com",
-    "vpsProd": false
+    "stagingDomain": "komorebi.voidborn.fun",
+    "vpsProd": true
   }
 ]

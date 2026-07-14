@@ -1,6 +1,6 @@
 import type { CSSProperties } from 'react'
 import { appConfig } from '@/config'
-import { getArenaBackground, getLobbyBackground } from '@/config/selectors'
+import { buildThemeCssVars } from '@/config/applyTheme'
 import { buildSiteMetadata } from '@/lib/seo/siteMetadata'
 import { AuthProvider } from '@/components/providers/AuthProvider'
 import { CookieConsentProvider } from '@/components/cookies/CookieConsentProvider'
@@ -9,12 +9,9 @@ import { rootFontClassName } from '@/lib/fonts'
 import '@/index.css'
 import '@/components/ui/Button/Button.css'
 
-const lobbyBg = getLobbyBackground()
-const arenaBg = getArenaBackground()
-const playLogo = appConfig.logo.playLogo
 const { fonts } = appConfig.theme
 const googleFontsUrl = fonts.googleFontsUrl
-const isIyashikei = appConfig.landing?.variant === 'iyashikei'
+const landingVariant = appConfig.landing?.variant ?? 'voidborn'
 
 export const metadata = buildSiteMetadata(appConfig)
 
@@ -27,20 +24,8 @@ export default function RootLayout({
     <html
       lang="en"
       className={rootFontClassName}
-      style={
-        {
-          '--font-fantasy': fonts.fantasy,
-          '--font-ui': fonts.ui,
-          ...(isIyashikei
-            ? { '--font-heading': "'Hiro Misake', 'Shippori Mincho', serif" }
-            : {}),
-          '--play-lobby-bg': `url(${lobbyBg})`,
-          '--play-arena-bg': `url(${arenaBg})`,
-          '--game-lobby-bg': `url(${lobbyBg})`,
-          '--game-arena-bg': `url(${arenaBg})`,
-          ...(playLogo ? { '--card-back-logo': `url(${playLogo})` } : {}),
-        } as CSSProperties
-      }
+      data-landing-variant={landingVariant}
+      style={buildThemeCssVars() as CSSProperties}
       suppressHydrationWarning
     >
       <head>

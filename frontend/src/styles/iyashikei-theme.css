@@ -146,7 +146,6 @@
     .pathways__feature-desc,
     .pathways__tier-desc,
     .pathways__cta-lead,
-    .dominions__city-desc,
     .collection__preview-desc,
     .collection__stat-label,
     .faq__answer
@@ -206,6 +205,9 @@
 [data-landing-variant='iyashikei'] .locations__text {
   color: var(--iyashi-ink-muted);
 }
+[data-landing-variant='iyashikei'] .locations__text:nth-of-type(2){
+  display: none;
+}
 
 [data-landing-variant='iyashikei'] .locations__text strong:not([class]) {
   color: var(--iyashi-ink);
@@ -217,8 +219,10 @@
   background: linear-gradient(105deg, #6aab72 0%, #6a9ec4 55%, #c9a87c 100%);
   background-size: 100% 100%;
   -webkit-background-clip: text;
+  font-family: var(--font-heading,var(--font-fantasy) );
+  color: black;
   background-clip: text;
-  color: transparent;
+  
   filter: none;
   animation: none;
 }
@@ -231,6 +235,8 @@
   color: transparent;
   filter: none;
   animation: none;
+  font-family: var(--font-heading,var(--font-fantasy) );
+  color: black;
 }
 
 [data-landing-variant='iyashikei'] .locations__item.vb-btn {
@@ -303,6 +309,16 @@
     0 0 0 1px var(--iyashi-border);
 }
 
+[data-landing-variant='iyashikei'] .fantasy-frame__corner,
+[data-landing-variant='iyashikei'] .fantasy-frame__inset::before {
+  display: none;
+}
+
+[data-landing-variant='iyashikei'] .fantasy-frame__dust,
+[data-landing-variant='iyashikei'] .fantasy-frame__grain {
+  display: none;
+}
+
 [data-landing-variant='iyashikei'] .fantasy-frame__vignette {
   background: radial-gradient(
     ellipse 85% 80% at 50% 50%,
@@ -330,10 +346,27 @@
   box-shadow: 0 12px 28px var(--iyashi-shadow);
 }
 
-[data-landing-variant='iyashikei'] .dominions__card-name,
-[data-landing-variant='iyashikei'] .dominions__city-name {
+[data-landing-variant='iyashikei'] .dominions__card-overlay {
+  background: linear-gradient(
+    180deg,
+    rgba(44, 62, 45, 0.08) 0%,
+    rgba(44, 62, 45, 0.38) 48%,
+    rgba(44, 62, 45, 0.9) 100%
+  );
+}
+
+[data-landing-variant='iyashikei'] .dominions__card-name {
   color: rgba(255, 255, 255, 0.96);
   text-transform: none;
+}
+
+[data-landing-variant='iyashikei'] .dominions__city-desc {
+  color: rgba(255, 255, 255, 0.92);
+  -webkit-line-clamp: 5;
+}
+
+[data-landing-variant='iyashikei'] .dominions__city-name {
+  color: rgba(255, 255, 255, 0.96);
 }
 
 [data-landing-variant='iyashikei'] .dominions__dot {
@@ -414,7 +447,7 @@
 
 [data-landing-variant='iyashikei'] .collection__preview {
   border-color: var(--iyashi-border);
-  background: var(--iyashi-panel);
+  background: rgba(255, 255, 255, 0);
   box-shadow: 0 8px 24px var(--iyashi-shadow);
 }
 
@@ -484,12 +517,47 @@
   box-shadow: 0 6px 20px var(--iyashi-shadow);
 }
 
-/* ── Final CTA ── */
-
-[data-landing-variant='iyashikei'] .final-cta__bg-image {
-  filter: grayscale(0.15) brightness(1.08) contrast(0.9);
-  opacity: 0.5;
+/* Pathways cards — soft hover (no zoom / shine sweep) */
+[data-landing-variant='iyashikei'] .pathways__card,
+[data-landing-variant='iyashikei'] .pathways__tier-card {
+  transition:
+    border-color 0.45s ease,
+    box-shadow 0.45s ease,
+    background 0.45s ease;
 }
+
+[data-landing-variant='iyashikei'] .pathways__card:hover,
+[data-landing-variant='iyashikei'] .pathways__tier-card:hover {
+  transform: none;
+  border-color: var(--iyashi-border-strong);
+  box-shadow: 0 8px 22px rgba(106, 171, 114, 0.14);
+}
+
+[data-landing-variant='iyashikei'] .pathways__card:hover .pathways__image {
+  transform: none;
+  filter: none;
+}
+
+[data-landing-variant='iyashikei'] .pathways__card:hover .pathways__media-shine {
+  transform: translateX(-120%);
+  opacity: 0;
+}
+
+[data-landing-variant='iyashikei'] .gamemodel__card:hover {
+  transform: none;
+}
+
+[data-landing-variant='iyashikei'] .gamemodel__card:hover .gamemodel__icon-wrap {
+  transform: none;
+  filter: none;
+  box-shadow: 0 0 0 1px var(--iyashi-border-strong);
+}
+
+[data-landing-variant='iyashikei'] .gamemodel__card:hover .gamemodel__icon-shine {
+  transform: translateX(-120%);
+}
+
+/* ── Final CTA ── */
 
 [data-landing-variant='iyashikei'] .final-cta__bg-scrim {
   background:
@@ -542,9 +610,14 @@
 [data-landing-variant='iyashikei'] .site-footer__brand-tagline,
 [data-landing-variant='iyashikei'] .site-footer__link,
 [data-landing-variant='iyashikei'] .site-footer__cookie-btn,
-[data-landing-variant='iyashikei'] .site-footer__contact,
 [data-landing-variant='iyashikei'] .site-footer__copyright,
 [data-landing-variant='iyashikei'] .site-footer__sub-copy {
+  color: var(--iyashi-ink-soft);
+}
+
+[data-landing-variant='iyashikei'] .site-footer__contact,
+[data-landing-variant='iyashikei'] .site-footer__contact li,
+[data-landing-variant='iyashikei'] .site-footer__contact-label {
   color: var(--iyashi-ink-soft);
 }
 
@@ -844,4 +917,8 @@
   background: rgba(255, 255, 255, 0.55);
   box-shadow: 0 4px 12px var(--iyashi-shadow);
   --store-muted: var(--iyashi-ink-soft);
+}
+
+[data-landing-variant='iyashikei'] .collection__stats{
+  display: none;
 }
