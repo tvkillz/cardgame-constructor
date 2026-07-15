@@ -8,7 +8,12 @@ export function loadFonts(): void {
   root.style.setProperty('--font-ui', fonts.ui)
 
   const href = fonts.googleFontsUrl
-  if (document.querySelector('link[data-vb-fonts]')) return
+  const existing = document.querySelector<HTMLLinkElement>('link[data-vb-fonts]')
+  if (existing) {
+    if (existing.href === href || existing.getAttribute('href') === href) return
+    existing.href = href
+    return
+  }
 
   const preconnectGoogle = document.createElement('link')
   preconnectGoogle.rel = 'preconnect'

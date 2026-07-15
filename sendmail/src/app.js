@@ -19,7 +19,8 @@ function createApp({ basePath = process.env.BASE_PATH || '' } = {}) {
 
   app.get(base || '/', (_req, res) => {
     res.json({
-      service: 'voidborn-sendmail',
+      service: 'sendmail',
+      transport: process.env.MAIL_TRANSPORT || 'smtp',
       basePath: base || '/',
       routes: {
         health: `${base}/health`,
@@ -34,7 +35,11 @@ function createApp({ basePath = process.env.BASE_PATH || '' } = {}) {
   });
 
   app.get(`${base}/health`, (_req, res) => {
-    res.json({ ok: true, service: 'voidborn-sendmail' });
+    res.json({
+      ok: true,
+      service: 'sendmail',
+      transport: process.env.MAIL_TRANSPORT || 'smtp',
+    });
   });
 
   // GoTrue hook — raw body required for Standard Webhooks signature

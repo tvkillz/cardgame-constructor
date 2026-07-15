@@ -199,10 +199,26 @@ for site in "${SITES[@]}"; do
 done
 
 # --- Rsync minimal projects/ (registry + manifests only) ---
+# Registry on the VPS must match deployed sites only — e.g. iyashikei-only VPS
+# keeps index 0 → port 3100. Never push the full local multi-site registry when
+# deploying a single site to a dedicated host.
 log "Syncing minimal projects/…"
+DEPLOY_REGISTRY_TMP="$(mktemp)"
+node -e "
+  const r = require('$REPO_ROOT/projects/registry.json');
+  const sites = $(node -e "console.log(JSON.stringify(process.argv.slice(1)))" "${SITES[@]}");
+  const filtered = r.filter((s) => sites.includes(s.id));
+  if (!filtered.length) {
+    console.error('No matching sites in local registry.json');
+    process.exit(1);
+  }
+  process.stdout.write(JSON.stringify(filtered, null, 2) + '\n');
+" > "$DEPLOY_REGISTRY_TMP"
+log "  registry.json → ${#SITES[@]} site(s): ${SITES[*]}"
 "${RSYNC_SSH[@]}" \
-  "$REPO_ROOT/projects/registry.json" \
-  "$SSH_TARGET:$VPS_PROJECTS_DIR/"
+  "$DEPLOY_REGISTRY_TMP" \
+  "$SSH_TARGET:$VPS_PROJECTS_DIR/registry.json"
+rm -f "$DEPLOY_REGISTRY_TMP"
 
 for site in "${SITES[@]}"; do
   ssh "$SSH_TARGET" "mkdir -p '$VPS_PROJECTS_DIR/$site'"
@@ -251,7 +267,14 @@ REMOTE
 
 log "Smoke-testing deployed sites…"
 for site in "${SITES[@]}"; do
-  port="$(node -e "const {prodPort,projectIndex}=require('$FRONTEND_DIR/scripts/project-ports.mjs'); console.log(prodPort('$site', projectIndex('$site')))")"
+  # Port comes from the VPS registry (after sync), not local index — dedicated hosts
+  # often run iyashikei at 3100 while local registry puts it at 3102.
+  port="$(ssh "$SSH_TARGET" "node -e \"
+    const r = require('$VPS_PROJECTS_DIR/registry.json');
+    const idx = r.findIndex((s) => s.id === '$site');
+    if (idx < 0) { process.stderr.write('site not in VPS registry\\n'); process.exit(1); }
+    console.log(Number(process.env.PM2_PROD_PORT_BASE || 3100) + idx);
+  \"")"
   status="$(ssh "$SSH_TARGET" "curl -s -o /dev/null -w '%{http_code}' --max-time 15 http://127.0.0.1:${port}/" 2>/dev/null || true)"
   status="${status:-000}"
   body="$(ssh "$SSH_TARGET" "curl -s --max-time 15 http://127.0.0.1:${port}/ 2>/dev/null | head -c 8000" || true)"

@@ -105,7 +105,13 @@ async function isValidHybridJWT(jwt: string): Promise<boolean> {
 }
 
 Deno.serve(async (req: Request) => {
-  if (req.method !== 'OPTIONS' && VERIFY_JWT) {
+  const url = new URL(req.url)
+  const { pathname } = url
+  const path_parts = pathname.split('/')
+  const service_name = path_parts[1]
+  const skipJwt = service_name === 'send-email-hook'
+
+  if (req.method !== 'OPTIONS' && VERIFY_JWT && !skipJwt) {
     try {
       const token = getAuthToken(req)
       const isValidJWT = await isValidHybridJWT(token);
@@ -124,11 +130,6 @@ Deno.serve(async (req: Request) => {
       })
     }
   }
-
-  const url = new URL(req.url)
-  const { pathname } = url
-  const path_parts = pathname.split('/')
-  const service_name = path_parts[1]
 
   if (!service_name || service_name === '') {
     const error = { msg: 'missing function name in request' }

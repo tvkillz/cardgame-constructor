@@ -754,6 +754,86 @@
   background: rgba(201, 168, 124, 0.1);
 }
 
+/* KOMOREBI credits — single sun medallion (not voidborn coin stack) */
+[data-landing-variant='iyashikei'] .coin-stack-icon {
+  width: 16px;
+  height: 16px;
+}
+
+[data-landing-variant='iyashikei'] .coin-stack-icon--sm {
+  width: 14px;
+  height: 14px;
+}
+
+[data-landing-variant='iyashikei'] .coin-stack-icon::before {
+  width: 13px;
+  height: 13px;
+  left: 50%;
+  top: 50%;
+  right: auto;
+  bottom: auto;
+  transform: translate(-50%, -50%);
+  border: 1.5px solid rgba(168, 138, 74, 0.55);
+  border-radius: 50%;
+  background:
+    radial-gradient(
+      circle at 38% 32%,
+      rgba(255, 252, 240, 0.98) 0%,
+      rgba(232, 196, 124, 0.92) 28%,
+      rgba(154, 171, 114, 0.88) 72%,
+      rgba(106, 138, 90, 0.95) 100%
+    );
+  box-shadow:
+    0 1px 3px rgba(44, 62, 45, 0.14),
+    inset 0 -2px 4px rgba(106, 138, 90, 0.2);
+}
+
+[data-landing-variant='iyashikei'] .coin-stack-icon--sm::before {
+  width: 11px;
+  height: 11px;
+}
+
+[data-landing-variant='iyashikei'] .coin-stack-icon::after {
+  display: none;
+}
+
+/* KOMOREBI cart — woven tote (not voidborn shopping cart) */
+[data-landing-variant='iyashikei'] .cart-icon {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'%3E%3Cpath stroke='%23000' stroke-width='1.6' stroke-linejoin='round' d='M4 9h16l-2 11H6L4 9z'/%3E%3Cpath stroke='%23000' stroke-width='1.6' stroke-linecap='round' d='M8 9V7a4 4 0 018 0v2'/%3E%3Cpath stroke='%23000' stroke-width='1.15' stroke-linecap='round' d='M7 13h10M7 16h10'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'%3E%3Cpath stroke='%23000' stroke-width='1.6' stroke-linejoin='round' d='M4 9h16l-2 11H6L4 9z'/%3E%3Cpath stroke='%23000' stroke-width='1.6' stroke-linecap='round' d='M8 9V7a4 4 0 018 0v2'/%3E%3Cpath stroke='%23000' stroke-width='1.15' stroke-linecap='round' d='M7 13h10M7 16h10'/%3E%3C/svg%3E");
+}
+
+[data-landing-variant='iyashikei'] .cart-icon--toolbar {
+  color: var(--iyashi-ink-soft);
+}
+
+[data-landing-variant='iyashikei'] .cart-icon--money {
+  color: #5a8aaa;
+}
+
+[data-landing-variant='iyashikei'] .portal__currency select {
+  padding: 0.45rem 0.65rem;
+  border-radius: 6px;
+  border: 1px solid rgba(124, 184, 124, 0.35);
+  background: rgba(255, 255, 255, 0.78);
+  color: var(--iyashi-ink);
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  cursor: pointer;
+  box-shadow: 0 1px 4px var(--iyashi-shadow);
+}
+
+[data-landing-variant='iyashikei'] .portal__currency select:focus {
+  border-color: rgba(106, 171, 114, 0.55);
+  box-shadow: 0 0 0 2px rgba(142, 201, 160, 0.2);
+  outline: none;
+}
+
+[data-landing-variant='iyashikei'] .portal__cart-badge {
+  color: #faf7f0;
+  background: #6aab72;
+}
+
 /* Portal sub-pages */
 [data-landing-variant='iyashikei'] .portal-market__toolbar {
   border-color: var(--iyashi-border);
@@ -1007,17 +1087,6 @@
   color: #5a8aaa;
 }
 
-[data-landing-variant='iyashikei'] .market-card .coin-stack-icon::before,
-[data-landing-variant='iyashikei'] .market-card .coin-stack-icon::after {
-  border-color: rgba(154, 114, 24, 0.5);
-  background: radial-gradient(circle at 30% 28%, #f8eed8 0%, #e8c8a0 42%, #c9a87c 100%);
-  box-shadow: 0 1px 3px rgba(44, 62, 45, 0.1);
-}
-
-[data-landing-variant='iyashikei'] .market-card .coin-stack-icon::after {
-  box-shadow: 0 1px 3px rgba(44, 62, 45, 0.1);
-}
-
 [data-landing-variant='iyashikei'] .player-listing-card__badge {
   color: #5a4a32;
   background: rgba(255, 255, 255, 0.9);
@@ -1060,7 +1129,14 @@
     radial-gradient(circle at 50% 50%, transparent 0%, rgba(245, 240, 230, 0.35) 70%);
 }
 
-[data-landing-variant='iyashikei'] .play-page__player,
+[data-landing-variant='iyashikei'] .play-page__player {
+  display: none;
+}
+
+[data-landing-variant='iyashikei'] .play-page__top {
+  justify-content: flex-end;
+}
+
 [data-landing-variant='iyashikei'] .play-page__action {
   border-color: var(--iyashi-border);
   background: rgba(255, 255, 255, 0.72);
@@ -1069,9 +1145,7 @@
 }
 
 [data-landing-variant='iyashikei'] .play-page__store-badge {
-  background: rgba(255, 255, 255, 0.55);
-  box-shadow: 0 4px 12px var(--iyashi-shadow);
-  --store-muted: var(--iyashi-ink-soft);
+  display: none;
 }
 
 /* Play lobby — logo plate for readability on scenic art */

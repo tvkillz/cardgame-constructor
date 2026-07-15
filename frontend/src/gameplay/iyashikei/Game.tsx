@@ -240,8 +240,8 @@ export const Game: React.FC<Props> = ({
   if (booting) {
     return (
       <GameScalableContainer>
-        <div className="game-stage game-stage--booting">
-          <p>Connecting to match server…</p>
+        <div className="game-stage game-stage--booting" data-gameplay-variant={getGameplayVariant()}>
+          <p>Loading…</p>
         </div>
       </GameScalableContainer>
     );
@@ -250,7 +250,10 @@ export const Game: React.FC<Props> = ({
   if (!booting && !bootError && !matchId) {
     return (
       <GameScalableContainer>
-        <div className="game-stage game-stage--booting game-stage--error">
+        <div
+          className="game-stage game-stage--booting game-stage--error"
+          data-gameplay-variant={getGameplayVariant()}
+        >
           <p>Could not start a server match. Sign in, pick a deck, and try again.</p>
           <Button
             type="button"
@@ -268,7 +271,10 @@ export const Game: React.FC<Props> = ({
   if (bootError || !match || !boardMatch) {
     return (
       <GameScalableContainer>
-        <div className="game-stage game-stage--booting game-stage--error">
+        <div
+          className="game-stage game-stage--booting game-stage--error"
+          data-gameplay-variant={getGameplayVariant()}
+        >
           <p>{bootError ?? 'Match unavailable.'}</p>
           <Button
             type="button"

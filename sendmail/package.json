@@ -12,6 +12,7 @@
     "dev": "nodemon server.js",
     "generate-secrets": "node scripts/generate-secrets.mjs",
     "test:smtp": "node scripts/test-smtp.mjs",
+    "test:brevo": "node scripts/test-brevo.mjs",
     "test:api": "node scripts/test-api.mjs",
     "build:cpanel": "node scripts/build-cpanel.mjs",
     "deploy:cpanel": "node scripts/build-cpanel.mjs --upload"

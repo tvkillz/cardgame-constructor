@@ -1,38 +1,50 @@
 # VOIDBORN sendmail — HTTP mail relay (VPS)
 
-HTTP mail relay so GoTrue on the API VPS never opens SMTP directly. Runs on the **frontend VPS** (pm2); source is in `sendmail/` and is rclone-mounted in this repo via `mount-voidborn.sh`.
+HTTP mail relay so GoTrue on the API VPS never opens SMTP directly. Runs on **each frontend VPS** (pm2); source is in `sendmail/` — same code, **transport chosen in `.env`** (`smtp` or `brevo`).
+
+**Multi-site:** voidborn VPS → SMTP; komorebi VPS → Brevo API. API edge function `send-email-hook` routes auth mail by site. See [notes/guides/sendmail-multi-site.md](../notes/guides/sendmail-multi-site.md).
 
 **Not a cPanel deploy.** Legacy `CPANEL.md` / `build:cpanel` scripts are historical reference only unless you explicitly use them elsewhere.
 
-## Routes (BASE_PATH=/api/sendmail)
+## Routes (BASE_PATH empty when nginx strips `/api/sendmail`)
 
 | Method | Path | Auth | Purpose |
 |--------|------|------|---------|
-| GET | `/health` | — | Service up |
-| GET | `/smtp-health` | Bearer `MAIL_API_KEY` | Verify SMTP login |
+| GET | `/health` | — | Service up (+ `transport`) |
+| GET | `/smtp-health` | Bearer `MAIL_API_KEY` | Verify SMTP or Brevo |
 | POST | `/test` | Bearer | Send test email |
 | POST | `/send` | Bearer | Generic HTML email |
 | POST | `/invoice` | Bearer | Order invoice — portal HTML + PDF attachment |
 | POST | `/hook` | Standard Webhooks signature | **GoTrue send-email hook** |
 
-Public URL: `https://voidborn.fun/api/sendmail/...`
+Public URL examples: `https://voidborn.fun/api/sendmail/...`, `https://komorebi.club/api/sendmail/...`
+
+## Transport modes
+
+| `MAIL_TRANSPORT` | VPS | Outbound |
+|------------------|-----|----------|
+| `smtp` (default) | voidborn | Mailbox SMTP (465/587) |
+| `brevo` | komorebi | Brevo REST API (`BREVO_API_KEY`, port 443) |
+
+```bash
+npm run test:smtp    # SMTP mode
+npm run test:brevo   # Brevo mode
+```
 
 ## Quick start (local)
 
 ```bash
 cd sendmail
 cp .env.example .env
-# edit SMTP_* and run:
+# voidborn: MAIL_TRANSPORT=smtp + SMTP_*
+# komorebi: MAIL_TRANSPORT=brevo + BREVO_*
 npm install
-npm run generate-secrets    # prints MAIL_API_KEY + SEND_EMAIL_HOOK_SECRET
-# paste generated lines into .env
-
-npm run test:smtp           # direct SMTP verify (+ send if SEND_TEST_TO set)
-npm run dev                 # PORT=6001, BASE_PATH empty locally
-npm run test:api            # hits http://127.0.0.1:6001
+npm run generate-secrets
+npm run test:smtp    # or test:brevo
+npm run dev
 ```
 
-Local dev without `BASE_PATH` — routes are `/health`, `/test`, etc. On cPanel set `BASE_PATH=/api/sendmail`.
+Local dev without `BASE_PATH` — routes are `/health`, `/test`, etc.
 
 ## cPanel deploy
 
@@ -54,25 +66,27 @@ npm run deploy:cpanel
 
 ## Wire GoTrue (registration / reset / magic link)
 
-On the **API VPS** `backend/.env`:
+On the **API VPS** `backend/.env` — hook targets the **edge router**, not a single frontend:
 
 ```env
 GOTRUE_HOOK_SEND_EMAIL_ENABLED=true
-GOTRUE_HOOK_SEND_EMAIL_URI=https://voidborn.fun/api/sendmail/hook
-GOTRUE_HOOK_SEND_EMAIL_SECRETS=v1,whsec_<same as SEND_EMAIL_HOOK_SECRET>
-SENDMAIL_URL=https://voidborn.fun/api/sendmail
+GOTRUE_HOOK_SEND_EMAIL_URI=https://api.voidborn.fun/functions/v1/send-email-hook
+GOTRUE_HOOK_SEND_EMAIL_SECRETS=v1,whsec_<shared secret>
+SEND_EMAIL_HOOK_SECRET=v1,whsec_<same>
+
+SENDMAIL_RELAYS={"voidborn":{"url":"https://voidborn.fun/api/sendmail","apiKey":"..."},"iyashikei":{"url":"https://komorebi.club/api/sendmail","apiKey":"..."}}
 ```
 
-`docker-compose.yml` passes these into the `auth` service. Then on the API VPS:
+Each frontend VPS sendmail uses the **same** `SEND_EMAIL_HOOK_SECRET`; `MAIL_API_KEY` may differ per site (stored in `SENDMAIL_RELAYS`).
 
 ```bash
 cd ~/constructor-files/backend
-docker compose up -d auth --force-recreate
+docker compose up -d auth functions --force-recreate
 ```
 
 When the hook is enabled, GoTrue **does not** use `SMTP_*` for auth emails.
 
-See `backend/MAIL-SETUP.md` for the full test flow.
+See `backend/MAIL-SETUP.md` and `notes/guides/sendmail-multi-site.md`.
 
 Set on the relay (frontend VPS pm2):
 

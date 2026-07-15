@@ -63,7 +63,7 @@ function renderBlock(template, { site, domain, port, role }) {
     PORT: port,
     WWW: role === 'production' && includeWww ? '1' : '',
     STAGING_AUTH: role === 'staging' ? '1' : '',
-    SENDMAIL_PROXY: site.id === 'voidborn' && role === 'production' ? '1' : '',
+    SENDMAIL_PROXY: role === 'production' && vpsHostsProduction(site) && site.sendmailProxy ? '1' : '',
   })
 }
 

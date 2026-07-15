@@ -55,15 +55,15 @@ Paste output into `ADDITIONAL_REDIRECT_URLS`, then recreate auth on the backend 
 
 ```env
 AUTH_VERIFY_BASE_URL=https://api.voidborn.fun
-GOTRUE_HOOK_SEND_EMAIL_URI=https://voidborn.fun/api/sendmail/hook
-SENDMAIL_URL=https://voidborn.fun/api/sendmail
+GOTRUE_HOOK_SEND_EMAIL_URI=https://api.voidborn.fun/functions/v1/send-email-hook
+SEND_EMAIL_HOOK_SECRET=v1,whsec_...
+SENDMAIL_RELAYS={"voidborn":{"url":"https://voidborn.fun/api/sendmail","apiKey":"..."},"iyashikei":{"url":"https://komorebi.club/api/sendmail","apiKey":"..."}}
 ```
 
-**sendmail** (frontend VPS `.env`):
+**voidborn sendmail** (SMTP): `SITE_URL=https://voidborn.fun`, `MAIL_TRANSPORT=smtp`  
+**komorebi sendmail** (Brevo): `SITE_URL=https://komorebi.club`, `MAIL_TRANSPORT=brevo`
 
-```env
-SITE_URL=https://voidborn.fun
-```
+See `notes/guides/sendmail-multi-site.md`.
 
-On frontend VPS: `pm2 restart voidborn-sendmail --update-env`  
+On each frontend VPS: `pm2 restart …-sendmail --update-env`  
 On API VPS: `docker compose up -d auth functions --force-recreate`

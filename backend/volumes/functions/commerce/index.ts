@@ -1,4 +1,8 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.49.8'
+import {
+  relayForSite,
+  postToSendmailRelay,
+} from '../_shared/sendmailRelay.ts'
 
 const SUPABASE_URL = Deno.env.get('SUPABASE_URL')!
 const SERVICE_ROLE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
@@ -7,8 +11,6 @@ const SITE_URL = (Deno.env.get('SITE_URL') ?? Deno.env.get('PUBLIC_SITE_URL') ??
   /\/$/,
   '',
 )
-const SENDMAIL_URL = (Deno.env.get('SENDMAIL_URL') ?? '').replace(/\/$/, '')
-const MAIL_API_KEY = Deno.env.get('MAIL_API_KEY') ?? ''
 
 const ORDER_NUMBER_PREFIX = 'VB-'
 const ORDER_NUMBER_ALPHABET = '0123456789ABCDEFGHJKMNPQRSTUVWXYZ'
@@ -139,11 +141,6 @@ async function sendOrderInvoice(
   orderId: string,
   paymentMethod = 'Test payment',
 ): Promise<InvoiceSendResult> {
-  if (!SENDMAIL_URL || !MAIL_API_KEY) {
-    console.warn('[commerce] invoice skipped: SENDMAIL_URL or MAIL_API_KEY not configured')
-    return { sent: false, reason: 'mail_not_configured' }
-  }
-
   const { data: order } = await admin
     .from('orders')
     .select('*, order_items (*)')
@@ -177,6 +174,12 @@ async function sendOrderInvoice(
       .eq('id', order.user_id)
       .maybeSingle()
     if (profileRow?.site_id) siteId = String(profileRow.site_id)
+  }
+
+  const relay = relayForSite(siteId ?? 'voidborn')
+  if (!relay) {
+    console.warn('[commerce] invoice skipped: no sendmail relay configured for site', siteId)
+    return { sent: false, reason: 'mail_not_configured' }
   }
   let billing = mapBillingProfile(null)
   if (siteId) {
@@ -212,12 +215,9 @@ async function sendOrderInvoice(
   }
 
   try {
-    const res = await fetch(`${SENDMAIL_URL}/invoice`, {
+    const res = await postToSendmailRelay(relay, '/invoice', {
       method: 'POST',
-      headers: {
-        Authorization: `Bearer ${MAIL_API_KEY}`,
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
     })
 
@@ -263,11 +263,6 @@ async function sendWithdrawalConfirmation(
   amountCredits: number,
   completedAt: string,
 ): Promise<WithdrawalEmailSendResult> {
-  if (!SENDMAIL_URL || !MAIL_API_KEY) {
-    console.warn('[commerce] withdrawal email skipped: SENDMAIL_URL or MAIL_API_KEY not configured')
-    return { sent: false, reason: 'mail_not_configured' }
-  }
-
   const { data: userData } = await admin.auth.admin.getUserById(userId)
   let recipient = userData?.user ? displayEmailFromUser(userData.user) : null
   if (!recipient) {
@@ -275,7 +270,20 @@ async function sendWithdrawalConfirmation(
     return { sent: false, reason: 'no_email' }
   }
 
-  const siteId = userData?.user ? siteIdFromAuthEmail(userData.user.email) : null
+  let siteId = userData?.user ? siteIdFromAuthEmail(userData.user.email) : null
+  if (!siteId && userData?.user) {
+    const metaSite = userData.user.user_metadata?.site_id
+    if (typeof metaSite === 'string' && metaSite.trim()) {
+      siteId = resolveAuthEmailSiteId(metaSite.trim().toLowerCase()) || metaSite.trim()
+    }
+  }
+
+  const relay = relayForSite(siteId ?? 'voidborn')
+  if (!relay) {
+    console.warn('[commerce] withdrawal email skipped: no sendmail relay configured for site', siteId)
+    return { sent: false, reason: 'mail_not_configured' }
+  }
+
   let recipientName = ''
   if (siteId) {
     const { data: profile } = await admin
@@ -298,12 +306,9 @@ async function sendWithdrawalConfirmation(
   }
 
   try {
-    const res = await fetch(`${SENDMAIL_URL}/withdrawal`, {
+    const res = await postToSendmailRelay(relay, '/withdrawal', {
       method: 'POST',
-      headers: {
-        Authorization: `Bearer ${MAIL_API_KEY}`,
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
     })
 

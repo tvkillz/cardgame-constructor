@@ -31,6 +31,11 @@ function loadRegistry(): RegistrySite[] {
 
 /** Resolve site id at request time (parallel pm2 must not bake PROJECT into the bundle). */
 function resolveProjectId(request?: NextRequest): string {
+  // pm2 sets PROJECT per process — prefer it over port→registry index so a
+  // dedicated VPS (single registry entry on 3100) still serves the right .build/.
+  const projectEnv = process.env['PROJECT']?.trim()
+  if (projectEnv) return projectEnv
+
   const host = request?.headers.get('host') ?? ''
   const hostPort = Number(host.split(':')[1] || 0)
   const port = hostPort || Number(process.env['PORT'] || 0)

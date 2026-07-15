@@ -5,6 +5,7 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 import { buildPaths, resolveProjectId } from './project-paths.mjs'
+import { injectPlayShell } from './inject-play-shell.mjs'
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const projectId = resolveProjectId()
@@ -24,5 +25,7 @@ for (const name of ['favicon.ico', 'favicon.png']) {
     fs.copyFileSync(src, dest)
   }
 }
+
+injectPlayShell(projectId)
 
 console.log('[build:game] Done.')

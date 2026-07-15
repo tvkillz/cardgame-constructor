@@ -1,4 +1,4 @@
-const { sendMail, verifySmtp, fromAddress } = require('../config/email');
+const { sendMail, verifyMailTransport, fromAddress, mailTransport } = require('../config/email');
 const { buildSignupPreviewEmail, buildRecoveryPreviewEmail } = require('../lib/authEmails');
 const { defaultSeller, normalizeInvoicePayload } = require('../lib/invoicePayload');
 const { buildInvoiceEmail } = require('../lib/invoiceEmail');
@@ -47,9 +47,18 @@ async function sendEmail(req, res) {
 
 async function smtpHealth(_req, res) {
   try {
-    await verifySmtp();
+    await verifyMailTransport();
+    const transport = mailTransport();
+    if (transport === 'brevo') {
+      return res.json({
+        success: true,
+        transport: 'brevo',
+        from: fromAddress(),
+      });
+    }
     return res.json({
       success: true,
+      transport: 'smtp',
       smtp: {
         host: process.env.SMTP_HOST,
         port: process.env.SMTP_PORT || 465,
@@ -58,8 +67,8 @@ async function smtpHealth(_req, res) {
       },
     });
   } catch (err) {
-    console.error('[sendmail] smtp health failed:', err.message);
-    return res.status(503).json({ success: false, message: err.message });
+    console.error('[sendmail] mail health failed:', err.message);
+    return res.status(503).json({ success: false, message: err.message, transport: mailTransport() });
   }
 }
 

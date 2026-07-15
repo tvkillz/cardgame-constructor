@@ -156,7 +156,8 @@
 [data-landing-variant='iyashikei'] :is(
     .auth-modal__input:focus,
     .buy-card-modal__input:focus,
-    .withdrawal-modal__field input:focus
+    .withdrawal-modal__field input:focus,
+    .credits-modal__currency select:focus
   ) {
   border-color: rgba(106, 171, 114, 0.55);
   box-shadow: 0 0 0 2px rgba(142, 201, 160, 0.2);
@@ -281,6 +282,41 @@
 
 [data-landing-variant='iyashikei'] .credits-modal__pack-price {
   color: #4a6a4a;
+}
+
+[data-landing-variant='iyashikei'] .credits-modal__custom {
+  border-top-color: rgba(124, 184, 124, 0.25);
+}
+
+[data-landing-variant='iyashikei'] .credits-modal__custom-input-wrap {
+  border: 1px solid rgba(124, 184, 124, 0.35);
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow: 0 1px 4px rgba(44, 62, 45, 0.06);
+}
+
+[data-landing-variant='iyashikei'] .credits-modal__custom-input-wrap:focus-within {
+  border-color: rgba(106, 171, 114, 0.55);
+  box-shadow: 0 0 0 2px rgba(142, 201, 160, 0.2);
+}
+
+[data-landing-variant='iyashikei'] .credits-modal__custom-input {
+  color: #2c3e2d;
+}
+
+[data-landing-variant='iyashikei'] .credits-modal__custom-input::placeholder {
+  color: rgba(44, 62, 45, 0.38);
+}
+
+[data-landing-variant='iyashikei'] .credits-modal__total-label {
+  color: rgba(44, 62, 45, 0.62);
+  text-transform: none;
+  letter-spacing: 0.04em;
+}
+
+[data-landing-variant='iyashikei'] .credits-modal__total-value {
+  font-family: var(--font-heading, var(--font-fantasy));
+  color: #4a8a5a;
+  text-shadow: none;
 }
 
 [data-landing-variant='iyashikei'] .withdrawal-modal__balance {

@@ -16,8 +16,9 @@
   {
     "id": "iyashikei",
     "path": "./iyashikei",
-    "status": "demo",
-    "stagingDomain": "komorebi.voidborn.fun",
-    "vpsProd": true
+    "status": "live",
+    "stagingDomain": "staging.komorebi.club",
+    "vpsProd": true,
+    "sendmailProxy": true
   }
 ]

@@ -6,6 +6,9 @@ const DOMAIN_TO_SITE = {
   'voidborn.fun': 'voidborn',
   'www.voidborn.fun': 'voidborn',
   'staging.voidborn.fun': 'voidborn',
+  'komorebi.club': 'iyashikei',
+  'www.komorebi.club': 'iyashikei',
+  'staging.komorebi.club': 'iyashikei',
   'komorebi.voidborn.fun': 'iyashikei',
 };
 
@@ -152,7 +155,7 @@ const SITE_BRANDS = {
   iyashikei: {
     id: 'iyashikei',
     brandName: 'KOMOREBI',
-    siteUrl: 'https://komorebi.voidborn.fun',
+    siteUrl: 'https://komorebi.club',
     logoPath: '/assets/brand/header.png',
     logoPaths: ['/assets/brand/header.png', '/assets/brand/gamelogo.png'],
     typography: {
