@@ -654,20 +654,37 @@
     rgba(252, 248, 240, 0.98) 0%,
     rgba(245, 240, 230, 0.95) 100%
   );
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+[data-landing-variant='iyashikei'] .portal__brand-name {
+  font-family: var(--font-heading);
+  letter-spacing: 0.18em;
+  color: var(--iyashi-ink);
+  text-shadow: none;
+}
+
+[data-landing-variant='iyashikei'] .portal__wordmark {
+  filter: drop-shadow(0 1px 6px rgba(245, 240, 230, 0.65));
 }
 
 [data-landing-variant='iyashikei'] .portal__logo {
   border-color: var(--iyashi-border-strong);
+  box-shadow: 0 2px 10px var(--iyashi-shadow);
 }
 
 [data-landing-variant='iyashikei'] .portal__account {
   border-color: var(--iyashi-border);
+  border-radius: 999px;
   background: var(--iyashi-panel);
+  box-shadow: 0 2px 10px var(--iyashi-shadow);
 }
 
 [data-landing-variant='iyashikei'] .portal__account-name {
   color: var(--iyashi-ink);
   text-transform: none;
+  letter-spacing: 0.06em;
 }
 
 [data-landing-variant='iyashikei'] .portal__account-credits,
@@ -675,25 +692,41 @@
   color: #8a7048;
 }
 
+[data-landing-variant='iyashikei'] .portal__menu-toggle {
+  border-left: none;
+  margin-left: 0.25rem;
+  padding-left: 0;
+}
+
 [data-landing-variant='iyashikei'] .portal__menu-toggle span {
-  background: #6aab72;
+  background: var(--iyashi-ink);
+  box-shadow: 0 0 4px rgba(245, 240, 230, 0.55);
 }
 
 [data-landing-variant='iyashikei'] .portal__account-menu {
   border-bottom-color: var(--iyashi-border);
   background: rgba(252, 248, 240, 0.98);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 [data-landing-variant='iyashikei'] .portal__account-menu-list a,
 [data-landing-variant='iyashikei'] .portal__account-menu-list button {
   color: var(--iyashi-ink-muted);
   text-transform: none;
+  letter-spacing: 0.06em;
+  border-radius: 8px;
 }
 
 [data-landing-variant='iyashikei'] .portal__account-menu-list a:hover,
 [data-landing-variant='iyashikei'] .portal__account-menu-list button:hover {
-  background: rgba(142, 201, 160, 0.18);
+  background: rgba(124, 184, 124, 0.14);
   color: var(--iyashi-ink);
+}
+
+[data-landing-variant='iyashikei'] .portal__account-menu-item--sign-out button:hover {
+  background: rgba(212, 132, 92, 0.12);
+  color: #8a5040;
 }
 
 [data-landing-variant='iyashikei'] .portal__tabs {

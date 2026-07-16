@@ -1,4 +1,5 @@
 const { sendMail, verifyMailTransport, fromAddress, mailTransport } = require('../config/email');
+const { siteSmtpConfig } = require('../config/smtp');
 const { buildSignupPreviewEmail, buildRecoveryPreviewEmail } = require('../lib/authEmails');
 const { defaultSeller, normalizeInvoicePayload } = require('../lib/invoicePayload');
 const { buildInvoiceEmail } = require('../lib/invoiceEmail');
@@ -64,6 +65,20 @@ async function smtpHealth(_req, res) {
         port: process.env.SMTP_PORT || 465,
         user: process.env.SMTP_USER,
         from: fromAddress(),
+      },
+      smtpBySite: {
+        voidborn: {
+          host: siteSmtpConfig('voidborn').host,
+          port: siteSmtpConfig('voidborn').port,
+          user: siteSmtpConfig('voidborn').user,
+          from: fromAddress('voidborn'),
+        },
+        iyashikei: {
+          host: siteSmtpConfig('iyashikei').host,
+          port: siteSmtpConfig('iyashikei').port,
+          user: siteSmtpConfig('iyashikei').user,
+          from: fromAddress('iyashikei'),
+        },
       },
     });
   } catch (err) {

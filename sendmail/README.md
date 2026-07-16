@@ -1,8 +1,8 @@
 # VOIDBORN sendmail — HTTP mail relay (VPS)
 
-HTTP mail relay so GoTrue on the API VPS never opens SMTP directly. Runs on **each frontend VPS** (pm2); source is in `sendmail/` — same code, **transport chosen in `.env`** (`smtp` or `brevo`).
+HTTP mail relay so GoTrue on the API VPS never opens SMTP directly. Can run as a **single centralized endpoint** (recommended) or per-site relays.
 
-**Multi-site:** voidborn VPS → SMTP; komorebi VPS → Brevo API. API edge function `send-email-hook` routes auth mail by site. See [notes/guides/sendmail-multi-site.md](../notes/guides/sendmail-multi-site.md).
+**Multi-site SMTP:** one relay can send both brands using `SMTP_*` (voidborn default) plus `SMTP_IYASHIKEI_*` overrides. Site routing is based on detected brand/site id.
 
 **Not a cPanel deploy.** Legacy `CPANEL.md` / `build:cpanel` scripts are historical reference only unless you explicitly use them elsewhere.
 
@@ -21,10 +21,10 @@ Public URL examples: `https://voidborn.fun/api/sendmail/...`, `https://komorebi.
 
 ## Transport modes
 
-| `MAIL_TRANSPORT` | VPS | Outbound |
-|------------------|-----|----------|
-| `smtp` (default) | voidborn | Mailbox SMTP (465/587) |
-| `brevo` | komorebi | Brevo REST API (`BREVO_API_KEY`, port 443) |
+| `MAIL_TRANSPORT` | Usage | Outbound |
+|------------------|-------|----------|
+| `smtp` (default) | Centralized relay for all sites (supports per-site SMTP creds) | Mailbox SMTP (465/587) |
+| `brevo` | Optional alternate transport | Brevo REST API (`BREVO_API_KEY`, port 443) |
 
 ```bash
 npm run test:smtp    # SMTP mode
@@ -36,8 +36,8 @@ npm run test:brevo   # Brevo mode
 ```bash
 cd sendmail
 cp .env.example .env
-# voidborn: MAIL_TRANSPORT=smtp + SMTP_*
-# komorebi: MAIL_TRANSPORT=brevo + BREVO_*
+# centralized smtp: MAIL_TRANSPORT=smtp + SMTP_* (+ SMTP_IYASHIKEI_* for komorebi)
+# optional: MAIL_TRANSPORT=brevo + BREVO_*
 npm install
 npm run generate-secrets
 npm run test:smtp    # or test:brevo
@@ -74,10 +74,10 @@ GOTRUE_HOOK_SEND_EMAIL_URI=https://api.voidborn.fun/functions/v1/send-email-hook
 GOTRUE_HOOK_SEND_EMAIL_SECRETS=v1,whsec_<shared secret>
 SEND_EMAIL_HOOK_SECRET=v1,whsec_<same>
 
-SENDMAIL_RELAYS={"voidborn":{"url":"https://voidborn.fun/api/sendmail","apiKey":"..."},"iyashikei":{"url":"https://komorebi.club/api/sendmail","apiKey":"..."}}
+SENDMAIL_RELAYS={"voidborn":{"url":"https://mail.voidborn.fun/api/sendmail","apiKey":"..."},"iyashikei":{"url":"https://mail.voidborn.fun/api/sendmail","apiKey":"..."}}
 ```
 
-Each frontend VPS sendmail uses the **same** `SEND_EMAIL_HOOK_SECRET`; `MAIL_API_KEY` may differ per site (stored in `SENDMAIL_RELAYS`).
+If both sites point to one relay URL, use the same `MAIL_API_KEY` for both entries (or keep separate keys if you run multiple relays).
 
 ```bash
 cd ~/constructor-files/backend

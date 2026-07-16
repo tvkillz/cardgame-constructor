@@ -156,8 +156,13 @@ const SITE_BRANDS = {
     id: 'iyashikei',
     brandName: 'KOMOREBI',
     siteUrl: 'https://komorebi.club',
-    logoPath: '/assets/brand/header.png',
-    logoPaths: ['/assets/brand/header.png', '/assets/brand/gamelogo.png'],
+    logoPath: '/assets/brand/gamelogo.webp',
+    logoPaths: [
+      '/assets/brand/gamelogo.webp',
+      '/assets/brand/gamelogo.png',
+      '/assets/brand/header.webp',
+      '/assets/brand/header.png',
+    ],
     typography: {
       headingFamily:
         "'Hiro Misake', 'Shippori Mincho', 'Hiragino Mincho ProN', 'Yu Mincho', Georgia, serif",
@@ -310,7 +315,14 @@ function resolveSiteBrand({ user, emailData, redirectTo } = {}) {
 function bundledLogoCandidates(brand) {
   const siteId = brand.id;
   const libDir = path.join(__dirname);
-  const fileNames = ['header.png', 'gamelogo.png', 'header.jpg', 'gamelogo.jpg'];
+  const fileNames = [
+    'gamelogo.webp',
+    'header.webp',
+    'gamelogo.png',
+    'header.png',
+    'gamelogo.jpg',
+    'header.jpg',
+  ];
   const dirs = [
     path.join(libDir, `../../assets/brand/${siteId}`),
     path.join(libDir, `../../../frontend/.build/${siteId}/assets/brand`),

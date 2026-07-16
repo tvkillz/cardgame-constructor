@@ -2,14 +2,14 @@ const fs = require('fs');
 const path = require('path');
 
 const { getBrand, bundledLogoFile: brandBundledLogo } = require('./siteBrands');
+const { LOGO_CID, prepareLogoAttachment } = require('./logoImage');
 
 const DEFAULT_SITE_URL = 'https://voidborn.fun';
 const DEFAULT_BRAND_NAME = 'VOIDBORN';
 const DEFAULT_LOGO_PATH = '/assets/brand/header.webp';
 
 /** Content-ID for the inline header logo (multipart/related). */
-const LOGO_CID = 'brandlogo';
-const INLINE_LOGO_EXT = new Set(['.png', '.jpg', '.jpeg']);
+const INLINE_LOGO_EXT = new Set(['.png', '.jpg', '.jpeg', '.webp']);
 
 /** Legacy export — voidborn portal palette. */
 const PORTAL = getBrand('voidborn').palette;
@@ -66,43 +66,22 @@ function logoUrlCandidates(brand = getBrand('voidborn')) {
 function attachmentFromLogoFile(filePath) {
   const ext = path.extname(filePath).toLowerCase();
   if (!INLINE_LOGO_EXT.has(ext)) return null;
+  const contentType =
+    ext === '.png'
+      ? 'image/png'
+      : ext === '.webp'
+        ? 'image/webp'
+        : 'image/jpeg';
   return {
     filename: `logo${ext}`,
     content: fs.readFileSync(filePath),
     cid: LOGO_CID,
-    contentType: ext === '.png' ? 'image/png' : 'image/jpeg',
+    contentType,
   };
 }
 
 async function fetchLogoFromSite(brand) {
-  for (const url of logoUrlCandidates(brand)) {
-    try {
-      const res = await fetch(url, { signal: AbortSignal.timeout(10_000) });
-      if (!res.ok) continue;
-
-      const contentType = (res.headers.get('content-type') || '').toLowerCase();
-      if (
-        !contentType.includes('image/png') &&
-        !contentType.includes('image/jpeg') &&
-        !contentType.includes('image/jpg')
-      ) {
-        continue;
-      }
-
-      const content = Buffer.from(await res.arrayBuffer());
-      if (content.length < 64) continue;
-
-      return {
-        filename: contentType.includes('png') ? 'logo.png' : 'logo.jpg',
-        content,
-        cid: LOGO_CID,
-        contentType: contentType.includes('png') ? 'image/png' : 'image/jpeg',
-      };
-    } catch {
-      // try next candidate URL
-    }
-  }
-  return null;
+  return prepareLogoAttachment(brand);
 }
 
 function bundledLogoFile(brand = getBrand('voidborn')) {
@@ -113,11 +92,7 @@ function bundledLogoFile(brand = getBrand('voidborn')) {
  * Inline logo attachment — local bundle first, then fetch from the site's public URL.
  */
 async function resolveLogoAttachment(brand = getBrand('voidborn')) {
-  const bundled = bundledLogoFile(brand);
-  if (bundled) {
-    return attachmentFromLogoFile(bundled);
-  }
-  return fetchLogoFromSite(brand);
+  return prepareLogoAttachment(brand);
 }
 
 /**

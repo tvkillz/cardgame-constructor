@@ -22,6 +22,7 @@
     "express": "^4.21.2",
     "nodemailer": "^6.9.16",
     "pdfkit": "^0.17.1",
+    "sharp": "^0.34.3",
     "standardwebhooks": "^1.0.0"
   },
   "devDependencies": {

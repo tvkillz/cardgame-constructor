@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 
-import Header from '@/components/Header/Header'
+import { LandingHeader } from '@/components/landing/resolveLanding'
 import { useAuth } from '@/components/providers/AuthProvider'
 import { fetchLeaderboard } from '@/lib/leaderboard/api'
 import type { LeaderboardEntry, LeaderboardResponse } from '@/lib/leaderboard/types'
@@ -89,7 +89,7 @@ export default function LeaderboardPage() {
 
   return (
     <div className="leaderboard-page">
-      <Header />
+      <LandingHeader />
       <main className="leaderboard-page__main">
         <header className="leaderboard-page__hero">
           <p className="leaderboard-page__kicker">Competitive ladder</p>

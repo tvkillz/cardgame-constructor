@@ -31,14 +31,32 @@ function isOrderNumberConflict(error: { code?: string; message?: string } | null
   return (error.message ?? '').toLowerCase().includes('order_number')
 }
 
-function invoiceSellerBlock() {
+function envValue(...keys: string[]): string | undefined {
+  for (const key of keys) {
+    const value = Deno.env.get(key)?.trim()
+    if (value) return value
+  }
+  return undefined
+}
+
+function invoiceSellerBlock(siteId?: string | null) {
+  const normalized = (siteId || 'voidborn').trim().toLowerCase()
+  const sitePrefix =
+    normalized === 'iyashikei' ? 'INVOICE_COMPANY_IYASHIKEI_' : 'INVOICE_COMPANY_'
+
   return {
-    companyName: Deno.env.get('INVOICE_COMPANY_NAME') ?? 'Test LTD',
-    companyNumber: Deno.env.get('INVOICE_COMPANY_NUMBER') ?? '00000000',
+    companyName:
+      envValue(`${sitePrefix}NAME`, 'INVOICE_COMPANY_NAME') ?? 'Test LTD',
+    companyNumber:
+      envValue(`${sitePrefix}NUMBER`, 'INVOICE_COMPANY_NUMBER') ?? '00000000',
     address:
-      Deno.env.get('INVOICE_COMPANY_ADDRESS') ??
+      envValue(`${sitePrefix}ADDRESS`, 'INVOICE_COMPANY_ADDRESS') ??
       '123 Example Street, Testville, TE1 1ST, United Kingdom',
-    email: Deno.env.get('INVOICE_COMPANY_EMAIL') ?? 'support@voidborn.fun',
+    email:
+      envValue(`${sitePrefix}EMAIL`, 'INVOICE_COMPANY_EMAIL') ??
+      (normalized === 'iyashikei'
+        ? 'play@komorebi.club'
+        : 'support@voidborn.fun'),
   }
 }
 
@@ -209,7 +227,7 @@ async function sendOrderInvoice(
     },
     lineItems,
     buyer: billing,
-    seller: invoiceSellerBlock(),
+    seller: invoiceSellerBlock(siteId),
     paymentMethod,
     siteId: siteId ?? undefined,
   }

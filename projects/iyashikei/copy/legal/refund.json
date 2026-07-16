@@ -9,10 +9,10 @@
     },
     {
       "type": "company",
-      "name": "Baltius, UAB",
-      "companyNumber": "307485071",
-      "address": "Klaipėdos g. 4A, Jokūbavo k., LT-97210 Kretingos r., LITHUANIA",
-      "email": "support@komorebi.example.com"
+      "name": "Test LTD",
+      "companyNumber": "00000000",
+      "address": "123 Example Street, Testville, TE1 1ST, United Kingdom",
+      "email": "play@komorebi.club"
     },
     {
       "type": "paragraph",
@@ -92,7 +92,7 @@
       "type": "list",
       "ordered": false,
       "items": [
-        "Send an email to support@komorebi.example.com.",
+        "Send an email to play@komorebi.club.",
         "Provide your specific Account username, transaction ID, and a clear explanation of the issue.",
         "Our team will investigate the billing log and respond within a reasonable timeframe."
       ]

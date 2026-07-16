@@ -9,8 +9,8 @@ Confirmation, password reset, and magic-link emails are sent by the **send-email
 | Component | Value |
 |-----------|--------|
 | GoTrue hook | `POST …/functions/v1/send-email-hook` (edge router) |
-| voidborn relay | `https://voidborn.fun/api/sendmail` — `MAIL_TRANSPORT=smtp` |
-| komorebi relay | `https://komorebi.club/api/sendmail` — `MAIL_TRANSPORT=brevo` |
+| Central relay (recommended) | `https://voidborn.fun/api/sendmail` — one pm2 sendmail, per-site SMTP in `.env` |
+| Legacy per-site relays | Separate URLs per domain (optional) |
 | Verify links | `https://api.voidborn.fun/auth/v1/verify?...` |
 | After confirm | `{site}/auth/callback` (e.g. `https://komorebi.club/auth/callback`) |
 
@@ -26,14 +26,19 @@ GOTRUE_HOOK_SEND_EMAIL_URI=https://api.voidborn.fun/functions/v1/send-email-hook
 GOTRUE_HOOK_SEND_EMAIL_SECRETS=v1,whsec_...
 SEND_EMAIL_HOOK_SECRET=v1,whsec_...   # same value — used by edge router + every sendmail instance
 
-SENDMAIL_RELAYS={"voidborn":{"url":"https://voidborn.fun/api/sendmail","apiKey":"..."},"iyashikei":{"url":"https://komorebi.club/api/sendmail","apiKey":"..."}}
+# Centralized relay — both sites hit the same sendmail endpoint
+SENDMAIL_RELAYS={"voidborn":{"url":"https://voidborn.fun/api/sendmail","apiKey":"..."},"iyashikei":{"url":"https://voidborn.fun/api/sendmail","apiKey":"..."}}
+SENDMAIL_URL=https://voidborn.fun/api/sendmail
 ```
+
+Use the **same** `url` and `apiKey` for both entries when one sendmail instance handles all sites.
+`SENDMAIL_URL` is legacy fallback; keep it set to the same common endpoint.
 
 Legacy single-relay fallback (voidborn only):
 
 ```env
 SENDMAIL_URL=https://voidborn.fun/api/sendmail
-MAIL_API_KEY=<same as voidborn sendmail MAIL_API_KEY>
+MAIL_API_KEY=<same as sendmail MAIL_API_KEY>
 ```
 
 `SMTP_*` vars remain in `.env` for reference but are **not used** for auth mail while the hook is enabled.
@@ -60,9 +65,9 @@ Same `sendmail/` code on each VPS; `.env` selects transport.
 
 **voidborn VPS** — `MAIL_TRANSPORT=smtp`, pm2 `voidborn-sendmail`, nginx `/api/sendmail/` → `:6001`.
 
-**komorebi VPS** — `MAIL_TRANSPORT=brevo`, pm2 `komorebi-sendmail`, nginx `/api/sendmail/` → `:6001`.
+**Centralized (recommended):** one sendmail on voidborn VPS with `SMTP_*` (voidborn) + `SMTP_IYASHIKEI_*` (komorebi).
 
-Shared on every relay:
+Shared on the relay:
 
 ```env
 SEND_EMAIL_HOOK_SECRET=v1,whsec_<same as API VPS>
@@ -104,11 +109,22 @@ Add to **`backend/.env`** (injected into the `functions` service):
 
 ```env
 SENDMAIL_RELAYS={"voidborn":{...},"iyashikei":{...}}
-INVOICE_COMPANY_NAME=Test LTD
-...
+SENDMAIL_URL=https://voidborn.fun/api/sendmail
+
+# voidborn seller (default)
+INVOICE_COMPANY_NAME=Baltius, UAB
+INVOICE_COMPANY_NUMBER=307485071
+INVOICE_COMPANY_ADDRESS=Klaipėdos g. 4A, Jokūbavo k., LT-97210 Kretingos r., LITHUANIA
+INVOICE_COMPANY_EMAIL=support@voidborn.fun
+
+# iyashikei / komorebi seller override
+INVOICE_COMPANY_IYASHIKEI_NAME=Test LTD
+INVOICE_COMPANY_IYASHIKEI_NUMBER=00000000
+INVOICE_COMPANY_IYASHIKEI_ADDRESS=123 Example Street, Testville, TE1 1ST, United Kingdom
+INVOICE_COMPANY_IYASHIKEI_EMAIL=support@komorebi.example.com
 ```
 
-On each sendmail VPS, set matching `INVOICE_COMPANY_*` for that brand’s PDFs when testing via `/test`.
+Commerce picks seller block by order `site_id` (`voidborn` vs `iyashikei`).
 
 **Demo flow:** sign in as admin → checkout → **Payment success (test)** → invoice email via the site’s relay.
 

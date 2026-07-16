@@ -29,6 +29,7 @@ async function verifySmtpLegacy() {
 
 async function sendMail({ to, cc, subject, html, text, attachments, brand }) {
   const finalAttachments = Array.isArray(attachments) ? [...attachments] : [];
+  const siteId = brand?.id || 'voidborn';
   if (html && html.includes(`cid:${LOGO_CID}`)) {
     const logo = brand ? await resolveLogoAttachment(brand) : logoAttachment(brand);
     if (logo && !finalAttachments.some((att) => att && att.cid === logo.cid)) {
@@ -45,6 +46,7 @@ async function sendMail({ to, cc, subject, html, text, attachments, brand }) {
     html,
     text,
     attachments: finalAttachments,
+    siteId,
   };
 
   if (mailTransport() === 'brevo') {

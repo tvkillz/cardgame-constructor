@@ -1,7 +1,8 @@
 const PDFDocument = require('pdfkit');
 const fs = require('fs');
 const path = require('path');
-const { bundledLogoFile, brandName } = require('./emailTemplate');
+const { brandName } = require('./emailTemplate');
+const { prepareLogoForPdf } = require('./logoImage');
 const { getBrand } = require('./siteBrands');
 const {
   formatMoney,
@@ -67,17 +68,16 @@ function registerFonts(doc) {
   FONT_BOLD = 'Helvetica-Bold';
 }
 
-function drawHeaderBand(doc, seller, brand, theme) {
+function drawHeaderBand(doc, seller, brand, theme, logoContent) {
   const width = doc.page.width;
   const bandHeight = 88;
 
   doc.save();
   doc.rect(0, 0, width, bandHeight).fill(theme.headerBg);
 
-  const logo = bundledLogoFile(brand);
-  if (logo && path.extname(logo).toLowerCase() === '.png') {
+  if (logoContent) {
     try {
-      doc.image(logo, 40, 18, { height: 42 });
+      doc.image(logoContent, 40, 18, { height: 42 });
     } catch {
       /* skip logo if unreadable */
     }
@@ -101,6 +101,10 @@ function drawHeaderBand(doc, seller, brand, theme) {
 
   doc.restore();
   doc.y = bandHeight + 24;
+}
+
+async function resolvePdfLogoSource(brand) {
+  return prepareLogoForPdf(brand);
 }
 
 function drawMetaRow(doc, order, paymentMethod, theme) {
@@ -260,10 +264,12 @@ function drawFooter(doc, brand, theme) {
     );
 }
 
-function buildInvoicePdf(payload) {
+async function buildInvoicePdf(payload) {
+  const brand = getBrand(payload.siteId || 'voidborn');
+  const theme = pdfThemeFromBrand(brand);
+  const logoContent = await resolvePdfLogoSource(brand);
+
   return new Promise((resolve, reject) => {
-    const brand = getBrand(payload.siteId || 'voidborn');
-    const theme = pdfThemeFromBrand(brand);
     const doc = new PDFDocument({ size: 'A4', margin: 0, bufferPages: true });
     const chunks = [];
 
@@ -277,7 +283,7 @@ function buildInvoicePdf(payload) {
 
     doc.rect(0, 0, doc.page.width, doc.page.height).fill(theme.bodyBg);
 
-    drawHeaderBand(doc, seller, brand, theme);
+    drawHeaderBand(doc, seller, brand, theme, logoContent);
     drawMetaRow(doc, order, paymentMethod, theme);
     drawPartyBlocks(doc, buyer, seller, recipient, theme);
     drawLineItemsTable(doc, lineItems, order, theme);

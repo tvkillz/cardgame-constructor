@@ -5,7 +5,7 @@
   "blocks": [
     {
       "type": "paragraph",
-      "text": "Welcome to https://komorebi.example.com (the \"Platform\"). These Terms of Service (\"Terms\") form a legal agreement between you (\"User\", \"you\") and Baltius, UAB (\"Company\", \"we\", \"us\", or \"our\"), a company registered in LITHUANIA under company number 307485071, with its registered office at Klaipėdos g. 4A, Jokūbavo k., LT-97210 Kretingos r., LITHUANIA."
+      "text": "Welcome to https://komorebi.club (the \"Platform\"). These Terms of Service (\"Terms\") form a legal agreement between you (\"User\", \"you\") and Test LTD (\"Company\", \"we\", \"us\", or \"our\"), a company registered in the United Kingdom under company number 00000000, with its registered office at 123 Example Street, Testville, TE1 1ST, United Kingdom."
     },
     {
       "type": "paragraph",
@@ -203,7 +203,7 @@
     },
     {
       "type": "paragraph",
-      "text": "These Terms are governed by and construed in accordance with the laws of the Republic of Lithuania. Any formal legal disputes that cannot be settled amicably will be handled exclusively by the competent courts of the Republic of Lithuania, at the location of our registered office (Klaipėda region), unless local consumer protection laws grant you mandatory rights to file a claim in your residential jurisdiction."
+      "text": "These Terms are governed by and construed in accordance with the laws of England and Wales. Any formal legal disputes that cannot be settled amicably will be handled exclusively by the competent courts of England and Wales, unless local consumer protection laws grant you mandatory rights to file a claim in your residential jurisdiction."
     },
     {
       "type": "heading",
@@ -216,7 +216,7 @@
     },
     {
       "type": "paragraph",
-      "text": "Email: support@komorebi.example.com"
+      "text": "Email: play@komorebi.club"
     }
   ]
 }

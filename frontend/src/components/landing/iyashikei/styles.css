@@ -13,8 +13,14 @@
   align-items: center;
   justify-content: space-between;
   padding: 0.85rem var(--landing-gutter-x, 1.5rem);
-  background: transparent;
-  border-bottom: none;
+  background: linear-gradient(
+    180deg,
+    rgba(252, 248, 240, 0.98) 0%,
+    rgba(245, 240, 230, 0.94) 100%
+  );
+  border-bottom: 1px solid rgba(124, 184, 124, 0.22);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .iyashikei-header__brand {
@@ -154,7 +160,7 @@
 
 .iyashikei-header__accordion--open {
   max-height: 520px;
-  opacity: 0.7;
+  opacity: 1;
   margin-top: 0.65rem;
 }
 
