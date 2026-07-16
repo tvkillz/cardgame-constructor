@@ -92,33 +92,38 @@ async function normalizeLogoBuffer(buffer, brand) {
   const sharp = loadSharp();
   if (!sharp) return buffer;
 
-  const isLight = brand?.palette?.colorScheme === 'light';
-  const matteBg = isLight ? brand.palette.headerTop || '#faf6ee' : null;
-  if (!matteBg) {
-    return sharp(buffer).png().toBuffer();
-  }
-
-  const { data, info } = await sharp(buffer).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
-  const bg = parseHexColor(matteBg);
-  const threshold = 28;
-
-  for (let i = 0; i < data.length; i += 4) {
-    const r = data[i];
-    const g = data[i + 1];
-    const b = data[i + 2];
-    if (r <= threshold && g <= threshold && b <= threshold) {
-      data[i] = bg.r;
-      data[i + 1] = bg.g;
-      data[i + 2] = bg.b;
-      data[i + 3] = 255;
+  try {
+    const isLight = brand?.palette?.colorScheme === 'light';
+    const matteBg = isLight ? brand.palette.headerTop || '#faf6ee' : null;
+    if (!matteBg) {
+      return sharp(buffer).png().toBuffer();
     }
-  }
 
-  return sharp(data, {
-    raw: { width: info.width, height: info.height, channels: 4 },
-  })
-    .png()
-    .toBuffer();
+    const { data, info } = await sharp(buffer).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+    const bg = parseHexColor(matteBg);
+    const threshold = 28;
+
+    for (let i = 0; i < data.length; i += 4) {
+      const r = data[i];
+      const g = data[i + 1];
+      const b = data[i + 2];
+      if (r <= threshold && g <= threshold && b <= threshold) {
+        data[i] = bg.r;
+        data[i + 1] = bg.g;
+        data[i + 2] = bg.b;
+        data[i + 3] = 255;
+      }
+    }
+
+    return sharp(data, {
+      raw: { width: info.width, height: info.height, channels: 4 },
+    })
+      .png()
+      .toBuffer();
+  } catch (err) {
+    console.warn('[sendmail] logo normalize failed:', err.message);
+    return buffer;
+  }
 }
 
 async function prepareLogoPng(brand) {

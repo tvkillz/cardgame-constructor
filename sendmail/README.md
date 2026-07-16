@@ -93,6 +93,7 @@ Set on the relay (frontend VPS pm2):
 ```env
 SITE_URL=https://voidborn.fun
 AUTH_VERIFY_BASE_URL=https://api.voidborn.fun
+AUTH_VERIFY_BASE_URL_IYASHIKEI=https://api.komorebi.club
 ```
 
 Confirm/reset links in emails use that host (`/auth/v1/verify?...`), not the frontend domain.

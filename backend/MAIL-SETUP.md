@@ -72,6 +72,8 @@ Shared on the relay:
 ```env
 SEND_EMAIL_HOOK_SECRET=v1,whsec_<same as API VPS>
 AUTH_VERIFY_BASE_URL=https://api.voidborn.fun
+# Optional — Komorebi verify links use api.komorebi.club (requires GOTRUE_MAILER_EXTERNAL_HOSTS)
+# AUTH_VERIFY_BASE_URL_IYASHIKEI=https://api.komorebi.club
 BASE_PATH=
 ```
 

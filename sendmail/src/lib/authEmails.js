@@ -5,17 +5,53 @@ const {
 } = require('./emailTemplate');
 const { resolveSiteBrand, getBrand } = require('./siteBrands');
 
-function authVerifyBaseUrl(emailData) {
-  return (
-    process.env.AUTH_VERIFY_BASE_URL ||
-    process.env.API_EXTERNAL_URL ||
-    emailData.site_url ||
-    'https://api.voidborn.fun'
-  ).replace(/\/$/, '');
+/**
+ * Auth verify host per site.
+ * Prefer AUTH_VERIFY_BASE_URL_{SITEID} (e.g. AUTH_VERIFY_BASE_URL_IYASHIKEI),
+ * then shared AUTH_VERIFY_BASE_URL / API_EXTERNAL_URL.
+ */
+function authVerifyBaseUrl(emailData = {}, brandOrSiteId) {
+  const siteId = (
+    (typeof brandOrSiteId === 'string' ? brandOrSiteId : brandOrSiteId?.id) ||
+    ''
+  )
+    .trim()
+    .toLowerCase();
+
+  const envCandidates = [];
+  if (siteId) {
+    const normalizedKey = siteId.replace(/[^a-z0-9]+/gi, '_').toUpperCase();
+    envCandidates.push(`AUTH_VERIFY_BASE_URL_${normalizedKey}`);
+    // Auth email suffix alias (komorebi → iyashikei brand)
+    if (siteId === 'iyashikei') envCandidates.push('AUTH_VERIFY_BASE_URL_KOMOREBI');
+  }
+  envCandidates.push('AUTH_VERIFY_BASE_URL', 'API_EXTERNAL_URL');
+
+  for (const key of envCandidates) {
+    const raw = process.env[key];
+    if (raw == null || String(raw).trim() === '') continue;
+    const candidate = String(raw).trim().replace(/\/$/, '');
+    try {
+      // eslint-disable-next-line no-new
+      new URL(candidate);
+      return candidate;
+    } catch {
+      console.warn(`[sendmail] ignoring invalid ${key}=${candidate}`);
+    }
+  }
+
+  const fallback = (emailData.site_url || 'https://api.voidborn.fun').replace(/\/$/, '');
+  try {
+    // eslint-disable-next-line no-new
+    new URL(fallback);
+    return fallback;
+  } catch {
+    return 'https://api.voidborn.fun';
+  }
 }
 
-function buildVerifyUrl({ tokenHash, emailActionType, redirectTo, emailData }) {
-  const base = authVerifyBaseUrl(emailData);
+function buildVerifyUrl({ tokenHash, emailActionType, redirectTo, emailData, brand }) {
+  const base = authVerifyBaseUrl(emailData, brand);
   const url = new URL('/auth/v1/verify', `${base}/`);
   url.searchParams.set('token', tokenHash);
   url.searchParams.set('type', emailActionType);
@@ -90,6 +126,7 @@ function buildAuthEmail({
     emailActionType,
     redirectTo,
     emailData,
+    brand,
   });
 
   const copy = brand.actionCopy[emailActionType] || {
@@ -191,7 +228,8 @@ function buildRecoveryPreviewEmail({ recipientName = 'Traveler', confirmUrl, sit
   const subject = brand.subjects.recovery;
   const copy = brand.actionCopy.recovery;
   const sampleUrl =
-    confirmUrl || `${authVerifyBaseUrl({})}/auth/v1/verify?token=preview&type=recovery`;
+    confirmUrl ||
+    `${authVerifyBaseUrl({}, brand)}/auth/v1/verify?token=preview&type=recovery`;
 
   return {
     subject: `[Preview] ${subject}`,
@@ -221,7 +259,8 @@ function buildSignupPreviewEmail({ recipientName = 'Traveler', confirmUrl, siteI
   const subject = brand.subjects.signup;
   const copy = brand.actionCopy.signup;
   const sampleUrl =
-    confirmUrl || `${authVerifyBaseUrl({})}/auth/v1/verify?token=preview&type=signup`;
+    confirmUrl ||
+    `${authVerifyBaseUrl({}, brand)}/auth/v1/verify?token=preview&type=signup`;
 
   return {
     subject: `[Preview] ${subject}`,

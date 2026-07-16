@@ -7,7 +7,7 @@ import { useAuth, type AuthModalMode } from '@/components/providers/AuthProvider
 import { getAuthCallbackUrl } from '@/lib/auth/callback-url'
 import { getSupabaseBrowserClient, isSupabaseConfigured } from '@/lib/supabase'
 import { mapSignInError } from '@/lib/auth/errors'
-import { signInWithSiteCredentials } from '@/lib/auth/sign-in'
+import { resetPasswordWithSiteEmail, signInWithSiteCredentials } from '@/lib/auth/sign-in'
 import { toSiteAuthEmail } from '@/lib/auth/site-email'
 import { getAuthEmailSuffix, getSiteId } from '@/lib/site'
 import { isValidEmail, isValidPassword, isValidUsername } from '@/lib/auth/validation'
@@ -88,9 +88,11 @@ export default function AuthModal() {
     if (isForgotPassword) {
       setSubmitting(true)
       try {
-        const { error: resetError } = await supabase.auth.resetPasswordForEmail(authEmail, {
+        const { error: resetError } = await resetPasswordWithSiteEmail(
+          supabase,
+          trimmedEmail,
           redirectTo,
-        })
+        )
         if (resetError) {
           setError(copy.resetFailed)
           return
@@ -138,6 +140,24 @@ export default function AuthModal() {
         })
 
         if (signUpError) {
+          const already =
+            /already\s+(been\s+)?registered|already\s+exists|user\s+already/i.test(
+              signUpError.message || '',
+            )
+          if (already) {
+            const { error: resendError } = await supabase.auth.resend({
+              type: 'signup',
+              email: authEmail,
+              options: { emailRedirectTo: redirectTo },
+            })
+            if (!resendError) {
+              setPassword('')
+              setConfirmPassword('')
+              setPendingEmailConfirmation(true)
+              setInfo(registerSentMessage)
+              return
+            }
+          }
           setError(signUpError.message || copy.errors.signUpFailed)
           return
         }

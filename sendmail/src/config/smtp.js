@@ -80,17 +80,31 @@ async function verifySmtp(siteId) {
 }
 
 async function sendViaSmtp({ to, cc, subject, html, text, attachments, siteId }) {
+  const cfg = siteSmtpConfig(siteId);
+  if (!cfg.host || !cfg.user || !cfg.pass) {
+    throw new Error(
+      `SMTP not configured for site=${cfg.siteId} (need ${
+        cfg.siteId === 'iyashikei' ? 'SMTP_IYASHIKEI_*' : 'SMTP_*'
+      })`,
+    );
+  }
+
   const transport = createTransport(siteId);
-  const info = await transport.sendMail({
-    from: fromAddress(siteId),
-    to,
-    cc,
-    subject,
-    html,
-    text,
-    attachments,
-  });
-  return info;
+  try {
+    const info = await transport.sendMail({
+      from: fromAddress(siteId),
+      to,
+      cc,
+      subject,
+      html,
+      text,
+      attachments,
+    });
+    return info;
+  } catch (err) {
+    err.message = `SMTP send failed site=${cfg.siteId} host=${cfg.host}: ${err.message}`;
+    throw err;
+  }
 }
 
 module.exports = {

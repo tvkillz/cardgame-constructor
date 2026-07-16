@@ -28,14 +28,20 @@ async function verifySmtpLegacy() {
 }
 
 async function sendMail({ to, cc, subject, html, text, attachments, brand }) {
+  let finalHtml = html;
   const finalAttachments = Array.isArray(attachments) ? [...attachments] : [];
   const siteId = brand?.id || 'voidborn';
-  if (html && html.includes(`cid:${LOGO_CID}`)) {
-    const logo = brand ? await resolveLogoAttachment(brand) : logoAttachment(brand);
-    if (logo && !finalAttachments.some((att) => att && att.cid === logo.cid)) {
-      finalAttachments.push(logo);
-    } else if (brand && !logo) {
-      html = html.replace(`src="cid:${LOGO_CID}"`, `src="${logoUrl(brand)}"`);
+  if (finalHtml && finalHtml.includes(`cid:${LOGO_CID}`)) {
+    try {
+      const logo = brand ? await resolveLogoAttachment(brand) : logoAttachment(brand);
+      if (logo && !finalAttachments.some((att) => att && att.cid === logo.cid)) {
+        finalAttachments.push(logo);
+      } else if (brand && !logo) {
+        finalHtml = finalHtml.replace(`src="cid:${LOGO_CID}"`, `src="${logoUrl(brand)}"`);
+      }
+    } catch (err) {
+      console.warn(`[sendmail] logo attach failed site=${siteId}:`, err.message);
+      finalHtml = finalHtml.replace(`src="cid:${LOGO_CID}"`, `src="${logoUrl(brand)}"`);
     }
   }
 
@@ -43,7 +49,7 @@ async function sendMail({ to, cc, subject, html, text, attachments, brand }) {
     to,
     cc,
     subject,
-    html,
+    html: finalHtml,
     text,
     attachments: finalAttachments,
     siteId,

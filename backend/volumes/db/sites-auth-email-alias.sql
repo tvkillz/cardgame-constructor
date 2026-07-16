@@ -1,5 +1,6 @@
 -- Map public auth email suffixes to internal sites.id (when they differ).
--- Example: user+komorebi@… → site iyashikei (manifest authEmailSuffix).
+-- Legacy: user+komorebi@… → site iyashikei (after migrate-komorebi-auth-suffix.sql
+-- new/canonical accounts are +iyashikei only; keep alias for stragglers).
 -- Run on API VPS after adding a new alias:
 --   docker compose exec -T db psql -U postgres < volumes/db/sites-auth-email-alias.sql
 

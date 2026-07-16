@@ -303,8 +303,14 @@ function getBrand(siteId) {
  * Pick site branding from hook context — redirect URL, user metadata, or +site email.
  */
 function resolveSiteBrand({ user, emailData, redirectTo } = {}) {
+  const metaRaw =
+    typeof user?.user_metadata?.site_id === 'string'
+      ? user.user_metadata.site_id.trim().toLowerCase()
+      : '';
+  const fromMeta = metaRaw ? siteIdFromAuthSuffix(metaRaw) || (SITE_BRANDS[metaRaw] ? metaRaw : null) : null;
+
   const siteId =
-    user?.user_metadata?.site_id ||
+    fromMeta ||
     parseSiteIdFromRedirect(redirectTo || emailData?.redirect_to) ||
     parseSiteIdFromEmail(user?.email) ||
     'voidborn';
