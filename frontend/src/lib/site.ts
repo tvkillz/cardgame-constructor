@@ -14,3 +14,7 @@ export function getAuthEmailSuffix(): string {
 export function getSitePublicUrl(): string {
   return appConfig.domain.siteUrl
 }
+
+export function getShortSiteName(): string {
+  return appConfig.name.short
+}

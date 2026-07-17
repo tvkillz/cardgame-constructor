@@ -1,19 +1,23 @@
+import { getSitePublicUrl, getShortSiteName } from '@/lib/site'
+
+const siteUrl = getSitePublicUrl().replace(/\/$/, '')
+const shortSiteName = getShortSiteName()
 export const TERMS_OF_SALE_POLICY = {
   title: 'Terms of Sale & Digital Purchase Policy',
   lastUpdated: '29 June 2026',
   intro:
-    'By clicking "BUY" or initiating a transaction to purchase Voidborn Credits on this Platform, you expressly acknowledge, understand, and agree to the following binding commercial terms:',
+    `By clicking "BUY" or initiating a transaction to purchase ${shortSiteName} Credits on this Platform, you expressly acknowledge, understand, and agree to the following binding commercial terms:`,
   sections: [
     {
       title: '1. Nature of the Purchase',
       items: [
         {
           label: 'Virtual Currency Only',
-          text: 'You are purchasing "Voidborn Credits," which constitute a limited, non-assignable, revocable, and non-transferable license to access specific digital content and features within the Game hosted on https://voidborn.fun.',
+          text: `You are purchasing "${shortSiteName} Credits," which constitute a limited, non-assignable, revocable, and non-transferable license to access specific digital content and features within the Game hosted on ${siteUrl}.`,
         },
         {
           label: 'No Monetary Value',
-          text: 'Voidborn Credits do not constitute legal tender, fiat currency, e-money, investment instruments, or store-of-value assets outside of this entertainment ecosystem. They cannot be redeemed for real-world currency from us unless processed strictly under our platform\'s withdrawal rules.',
+          text: `${shortSiteName} Credits do not constitute legal tender, fiat currency, e-money, investment instruments, or store-of-value assets outside of this entertainment ecosystem. They cannot be redeemed for real-world currency from us unless processed strictly under our platform\'s withdrawal rules.`,
         },
       ],
     },
@@ -22,7 +26,7 @@ export const TERMS_OF_SALE_POLICY = {
       items: [
         {
           label: 'Instant Delivery',
-          text: 'By completing this purchase, you give your explicit consent to immediately credit the Voidborn Credits to your Account profile upon successful payment processing.',
+          text: `By completing this purchase, you give your explicit consent to immediately credit the ${shortSiteName} Credits to your Account profile upon successful payment processing.`,
         },
         {
           label: 'Loss of Withdrawal Rights',
