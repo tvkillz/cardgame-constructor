@@ -24,6 +24,7 @@ function PathwaysFeatureItem({
 }) {
   const itemRef = useRef<HTMLLIElement>(null)
   const [inView, setInView] = useState(false)
+  const isHelix = appConfig.landing?.variant === 'helix'
 
   useEffect(() => {
     const el = itemRef.current
@@ -67,6 +68,11 @@ function PathwaysFeatureItem({
       style={{ '--pathways-stagger': staggerIndex, '--feature-glow': feature.glowColor } as CSSProperties}
     >
       <article className="pathways__card">
+        {isHelix ? (
+          <span className="pathways__channel" aria-hidden="true">
+            CH-{String(staggerIndex + 1).padStart(2, '0')}
+          </span>
+        ) : null}
         <div className="pathways__media-frame">
           <img
             src={feature.image}
@@ -75,10 +81,12 @@ function PathwaysFeatureItem({
             loading="lazy"
             decoding="async"
           />
-          <span className="pathways__media-shine" aria-hidden="true" />
+          {isHelix ? null : <span className="pathways__media-shine" aria-hidden="true" />}
         </div>
-        <h3 className="pathways__feature-title">{feature.title}</h3>
-        <p className="pathways__feature-desc">{feature.description}</p>
+        <div className="pathways__copy">
+          <h3 className="pathways__feature-title">{feature.title}</h3>
+          <p className="pathways__feature-desc">{feature.description}</p>
+        </div>
       </article>
     </li>
   )
@@ -203,6 +211,7 @@ export default function PathwaysSection() {
 
   if (!pathways?.features?.length) return null
 
+  const isHelix = appConfig.landing?.variant === 'helix'
   const marketCta = pathways.marketCta
   const marketHref = marketCta ? appConfig.domain.routes[marketCta.route] : '#'
 
@@ -210,10 +219,13 @@ export default function PathwaysSection() {
     <section
       ref={sectionRef}
       className={`pathways${isVisible ? ' visible' : ''}`}
-      aria-label="Collect, trade, and conquer"
+      aria-label={isHelix ? 'Market ops' : 'Collect, trade, and conquer'}
     >
       <div className="landing-shell pathways__inner">
         <header className="pathways__header">
+          {isHelix ? (
+            <p className="pathways__eyebrow">MARKET OPS // TRADE PROTOCOL</p>
+          ) : null}
           <h2 className="landing-section-title">{pathways.title}</h2>
           <p className="landing-section-lead">{pathways.description}</p>
         </header>
@@ -231,7 +243,11 @@ export default function PathwaysSection() {
 
         {pathways.tiers.length > 0 ? (
           <>
-            <div className="pathways__split" aria-hidden="true" />
+            {isHelix ? (
+              <p className="pathways__grade-label">PRINT GRADE // SPECTRUM</p>
+            ) : (
+              <div className="pathways__split" aria-hidden="true" />
+            )}
             <ul className="pathways__tiers" role="list">
               {pathways.tiers.map((tier, index) => (
                 <PathwaysTierItem
@@ -250,21 +266,26 @@ export default function PathwaysSection() {
             ref={ctaRef}
             className={`pathways__cta${isVisible && ctaInView ? ' pathways__cta--in-view' : ''}`}
           >
+            {isHelix ? (
+              <span className="pathways__cta-tag" aria-hidden="true">
+                LIVE FEED
+              </span>
+            ) : null}
             <p className="pathways__cta-lead">{marketCta.description}</p>
             {routeRequiresAuth(marketCta.route) ? (
               <ProtectedNavButton
                 label={marketCta.buttonLabel}
                 href={marketHref}
-                variant="gold"
+                variant={isHelix ? 'primary' : 'gold'}
                 className="pathways__cta-btn"
               />
             ) : (
               <Button
                 as="link"
                 href={marketHref}
-                variant="gold"
+                variant={isHelix ? 'primary' : 'gold'}
                 size="lg"
-                fantasy
+                fantasy={!isHelix}
                 className="pathways__cta-btn"
               >
                 {marketCta.buttonLabel}

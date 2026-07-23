@@ -617,3 +617,594 @@
     --helix-catalog-stage: 220px;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Pathways — trade protocol channel tiles (3-col grid) + print-grade + CTA
+   ═══════════════════════════════════════════════════════════════════════════ */
+[data-landing-variant='helix'] .pathways__inner {
+  margin-top: 0;
+  align-items: stretch;
+  gap: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+[data-landing-variant='helix'] .pathways__header {
+  align-items: flex-start;
+  text-align: left;
+  max-width: 42rem;
+}
+
+[data-landing-variant='helix'] .pathways__header .landing-section-title,
+[data-landing-variant='helix'] .pathways__header .landing-section-lead {
+  text-align: left;
+  margin-inline: 0;
+}
+
+[data-landing-variant='helix'] .pathways__eyebrow,
+[data-landing-variant='helix'] .pathways__grade-label {
+  margin: 0 0 0.55rem;
+  font-family: var(--font-heading, var(--font-fantasy));
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #3db8d4;
+}
+
+[data-landing-variant='helix'] .pathways__grade-label {
+  margin: clamp(0.35rem, 1.5vw, 0.75rem) 0 0;
+}
+
+/* Channel tiles — 3-col grid on desktop (6 ops → 3×2) */
+[data-landing-variant='helix'] .pathways__list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(0.75rem, 1.8vw, 1.15rem);
+  padding-left: 0;
+}
+
+[data-landing-variant='helix'] .pathways__item {
+  min-width: 0;
+}
+
+[data-landing-variant='helix'] .pathways__card {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.55rem;
+  height: 100%;
+  padding: 0.65rem;
+  border-radius: 2px;
+  border: 1px solid rgba(61, 184, 212, 0.28);
+  background: rgba(16, 22, 30, 0.72);
+  box-shadow:
+    0 10px 24px rgba(0, 0, 0, 0.35),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+  transition:
+    border-color 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+[data-landing-variant='helix'] .pathways__card:hover {
+  transform: none;
+  border-color: color-mix(in srgb, var(--feature-glow, #3db8d4) 55%, transparent);
+  background: rgba(18, 26, 36, 0.88);
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.4),
+    0 0 20px color-mix(in srgb, var(--feature-glow, #3db8d4) 14%, transparent);
+}
+
+[data-landing-variant='helix'] .pathways__channel {
+  order: 2;
+  align-self: flex-start;
+  font-family: var(--font-heading, var(--font-fantasy));
+  font-size: 0.55rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: color-mix(in srgb, var(--feature-glow, #3db8d4) 85%, #fff);
+}
+
+[data-landing-variant='helix'] .pathways__media-frame {
+  order: 1;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: 2px;
+  border: 1px solid color-mix(in srgb, var(--feature-glow, #3db8d4) 35%, transparent);
+  overflow: hidden;
+}
+
+[data-landing-variant='helix'] .pathways__card:hover .pathways__image {
+  transform: none;
+  filter: brightness(1.06);
+}
+
+[data-landing-variant='helix'] .pathways__copy {
+  order: 3;
+  gap: 0.3rem;
+  padding-block: 0.1rem;
+}
+
+[data-landing-variant='helix'] .pathways__feature-title {
+  font-family: var(--font-heading, var(--font-fantasy));
+  letter-spacing: 0.1em;
+}
+
+[data-landing-variant='helix'] .pathways__feature-desc {
+  max-width: none;
+}
+
+/* Print grade spectrum — one telemetry strip, not three cards */
+[data-landing-variant='helix'] .pathways__tiers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  width: 100%;
+  border: 1px solid rgba(61, 184, 212, 0.28);
+  border-radius: 2px;
+  background: rgba(16, 22, 30, 0.65);
+  overflow: hidden;
+}
+
+[data-landing-variant='helix'] .pathways__tier {
+  flex: 1 1 33.333%;
+  min-width: 10rem;
+}
+
+[data-landing-variant='helix'] .pathways__tier-card {
+  height: 100%;
+  gap: 0.4rem;
+  padding: clamp(1rem, 2.5vw, 1.35rem) clamp(0.9rem, 2vw, 1.25rem);
+  border-radius: 0;
+  border: none;
+  border-right: 1px solid rgba(61, 184, 212, 0.18);
+  background: transparent;
+  box-shadow: none;
+  text-align: left;
+  align-items: flex-start;
+}
+
+[data-landing-variant='helix'] .pathways__tier:last-child .pathways__tier-card {
+  border-right: none;
+}
+
+[data-landing-variant='helix'] .pathways__tier-card:hover {
+  transform: none;
+  border-color: transparent;
+  box-shadow: none;
+  background: rgba(61, 184, 212, 0.06);
+}
+
+[data-landing-variant='helix'] .pathways__tier-rarity {
+  font-size: 0.55rem;
+  letter-spacing: 0.22em;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+}
+
+[data-landing-variant='helix'] .pathways__tier-title {
+  font-family: var(--font-heading, var(--font-fantasy));
+  letter-spacing: 0.08em;
+  text-align: left;
+}
+
+[data-landing-variant='helix'] .pathways__tier-desc {
+  text-align: left;
+}
+
+/* Command-rail CTA */
+[data-landing-variant='helix'] .pathways__cta {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: clamp(0.75rem, 2vw, 1.25rem);
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
+  padding: clamp(0.85rem, 2vw, 1.1rem) clamp(1rem, 2.5vw, 1.35rem);
+  border-radius: 2px;
+  border: 1px solid rgba(61, 184, 212, 0.35);
+  background: #0a0e14;
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.35),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+  text-align: left;
+}
+
+[data-landing-variant='helix'] .pathways__cta-tag {
+  font-family: var(--font-heading, var(--font-fantasy));
+  font-size: 0.55rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  color: #3db8d4;
+  padding: 0.35rem 0.55rem;
+  border: 1px solid rgba(61, 184, 212, 0.4);
+  border-radius: 2px;
+  white-space: nowrap;
+}
+
+[data-landing-variant='helix'] .pathways__cta-lead {
+  margin: 0;
+  text-align: left;
+}
+
+[data-landing-variant='helix'] .pathways__cta-btn.vb-btn,
+[data-landing-variant='helix'] a.pathways__cta-btn,
+[data-landing-variant='helix'] button.pathways__cta-btn {
+  justify-self: end;
+  flex-shrink: 0;
+  border-radius: 6px !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase;
+  font-family: var(--font-ui) !important;
+  font-size: clamp(0.72rem, 2vw, 0.82rem) !important;
+  padding: 0.85rem 1.75rem !important;
+  color: #0c1016 !important;
+  background: linear-gradient(
+    135deg,
+    rgba(61, 184, 212, 0.95) 0%,
+    rgba(42, 155, 184, 0.98) 100%
+  ) !important;
+  border-color: rgba(61, 184, 212, 0.65) !important;
+  box-shadow: 0 4px 16px rgba(61, 184, 212, 0.28) !important;
+  animation: none !important;
+}
+
+[data-landing-variant='helix'] .pathways__cta-btn.vb-btn:hover:not(:disabled),
+[data-landing-variant='helix'] a.pathways__cta-btn:hover:not(:disabled),
+[data-landing-variant='helix'] button.pathways__cta-btn:hover:not(:disabled) {
+  color: #071016 !important;
+  border-color: rgba(127, 216, 239, 0.85) !important;
+  background: linear-gradient(
+    135deg,
+    rgba(90, 200, 224, 0.98) 0%,
+    rgba(61, 184, 212, 1) 100%
+  ) !important;
+  box-shadow: 0 6px 22px rgba(61, 184, 212, 0.4) !important;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 919px) {
+  [data-landing-variant='helix'] .pathways__list {
+    grid-template-columns: 1fr;
+    gap: 0.65rem;
+  }
+
+  [data-landing-variant='helix'] .pathways__card {
+    display: grid;
+    grid-template-columns: 2.6rem minmax(0, 1fr);
+    grid-template-areas:
+      'ch media'
+      'ch copy';
+    gap: 0.45rem 0.75rem;
+    padding: 0.55rem 0.7rem 0.55rem 0.35rem;
+  }
+
+  [data-landing-variant='helix'] .pathways__channel {
+    order: unset;
+    grid-area: ch;
+    align-self: start;
+    padding-top: 0.35rem;
+  }
+
+  [data-landing-variant='helix'] .pathways__media-frame {
+    order: unset;
+    grid-area: media;
+    aspect-ratio: 16 / 9;
+  }
+
+  [data-landing-variant='helix'] .pathways__copy {
+    order: unset;
+    grid-area: copy;
+  }
+
+  [data-landing-variant='helix'] .pathways__tier {
+    flex: 1 1 100%;
+  }
+
+  [data-landing-variant='helix'] .pathways__tier-card {
+    border-right: none;
+    border-bottom: 1px solid rgba(61, 184, 212, 0.18);
+  }
+
+  [data-landing-variant='helix'] .pathways__tier:last-child .pathways__tier-card {
+    border-bottom: none;
+  }
+
+  [data-landing-variant='helix'] .pathways__cta {
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-areas:
+      'tag lead'
+      'btn btn';
+  }
+
+  [data-landing-variant='helix'] .pathways__cta-tag {
+    grid-area: tag;
+  }
+
+  [data-landing-variant='helix'] .pathways__cta-lead {
+    grid-area: lead;
+  }
+
+  [data-landing-variant='helix'] .pathways__cta-btn {
+    grid-area: btn;
+    justify-self: stretch;
+    width: 100%;
+  }
+}
+
+@media (max-width: 520px) {
+  [data-landing-variant='helix'] .pathways__card {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      'ch'
+      'media'
+      'copy';
+    padding: 0.7rem;
+  }
+
+  [data-landing-variant='helix'] .pathways__channel {
+    justify-self: start;
+    padding-top: 0;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Final CTA — deploy gate console (not centered voidborn column / iyashi split)
+   Brief + LCD readout rows + launch bar; Play Now = cyan market button
+   ═══════════════════════════════════════════════════════════════════════════ */
+[data-landing-variant='helix'] .final-cta__inner {
+  margin-top: 0;
+  align-items: stretch;
+  gap: 0;
+  padding: clamp(2.5rem, 6vw, 4rem) 0;
+}
+
+[data-landing-variant='helix'] .final-cta__gate {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.25rem, 3vw, 1.75rem);
+  width: 100%;
+  padding: clamp(1.5rem, 3.5vw, 2.25rem) clamp(1.1rem, 3vw, 1.75rem);
+  border: 1px solid rgba(61, 184, 212, 0.35);
+  border-radius: 2px;
+  background: rgba(10, 14, 20, 0.82);
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.45),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+  overflow: hidden;
+}
+
+[data-landing-variant='helix'] .final-cta__bracket {
+  position: absolute;
+  z-index: 2;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(61, 184, 212, 0.75);
+  pointer-events: none;
+}
+
+[data-landing-variant='helix'] .final-cta__bracket--tl {
+  top: 10px;
+  left: 10px;
+  border-right: none;
+  border-bottom: none;
+}
+
+[data-landing-variant='helix'] .final-cta__bracket--tr {
+  top: 10px;
+  right: 10px;
+  border-left: none;
+  border-bottom: none;
+}
+
+[data-landing-variant='helix'] .final-cta__bracket--bl {
+  bottom: 10px;
+  left: 10px;
+  border-right: none;
+  border-top: none;
+}
+
+[data-landing-variant='helix'] .final-cta__bracket--br {
+  bottom: 10px;
+  right: 10px;
+  border-left: none;
+  border-top: none;
+}
+
+[data-landing-variant='helix'] .final-cta__eyebrow {
+  margin: 0;
+  font-family: var(--font-heading, var(--font-fantasy));
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #3db8d4;
+}
+
+[data-landing-variant='helix'] .final-cta__copy {
+  align-items: flex-start;
+  text-align: left;
+  max-width: 40rem;
+  gap: 0.65rem;
+}
+
+[data-landing-variant='helix'] .final-cta__subtitle {
+  font-family: var(--font-heading, var(--font-fantasy));
+  letter-spacing: 0.14em;
+  color: rgba(200, 220, 230, 0.88);
+}
+
+[data-landing-variant='helix'] .final-cta__desc {
+  text-align: left;
+  max-width: 38rem;
+}
+
+/* LCD readout — stacked status rows (not a 3-up stat card) */
+[data-landing-variant='helix'] .final-cta__siege {
+  max-width: none;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border-radius: 2px;
+  border: 1px solid rgba(61, 184, 212, 0.28);
+  background: rgba(8, 12, 18, 0.72);
+  box-shadow: none;
+}
+
+[data-landing-variant='helix'] .final-cta__siege-title {
+  margin: 0;
+  padding: 0.7rem 1rem;
+  border-bottom: 1px solid rgba(61, 184, 212, 0.18);
+  font-family: var(--font-heading, var(--font-fantasy));
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-align: left;
+  color: #3db8d4;
+}
+
+[data-landing-variant='helix'] .final-cta__siege-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+[data-landing-variant='helix'] .final-cta__siege-stat {
+  display: grid;
+  grid-template-columns: 2.4rem minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid rgba(61, 184, 212, 0.12);
+  text-align: left;
+}
+
+[data-landing-variant='helix'] .final-cta__siege-stat:last-child {
+  border-bottom: none;
+}
+
+[data-landing-variant='helix'] .final-cta__siege-index {
+  font-family: var(--font-heading, var(--font-fantasy));
+  font-size: 0.55rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  color: rgba(61, 184, 212, 0.75);
+}
+
+[data-landing-variant='helix'] .final-cta__siege-label {
+  justify-self: start;
+  text-align: left;
+  letter-spacing: 0.12em;
+  color: rgba(200, 214, 224, 0.7);
+}
+
+[data-landing-variant='helix'] .final-cta__siege-value {
+  font-family: var(--font-heading, var(--font-fantasy));
+  font-size: clamp(1.05rem, 2.8vw, 1.35rem);
+  letter-spacing: 0.06em;
+  background: none;
+  -webkit-background-clip: unset;
+  background-clip: unset;
+  color: #7fd8ef;
+  text-align: right;
+}
+
+/* Launch bar */
+[data-landing-variant='helix'] .final-cta__launch {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: clamp(0.75rem, 2vw, 1.25rem);
+  width: 100%;
+  padding: clamp(0.85rem, 2vw, 1.1rem) clamp(1rem, 2.5vw, 1.25rem);
+  border: 1px solid rgba(61, 184, 212, 0.4);
+  border-radius: 2px;
+  background: #0a0e14;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+}
+
+[data-landing-variant='helix'] .final-cta__launch-tag {
+  font-family: var(--font-heading, var(--font-fantasy));
+  font-size: 0.55rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  color: #0c1016;
+  padding: 0.35rem 0.55rem;
+  border-radius: 2px;
+  background: #3db8d4;
+  white-space: nowrap;
+}
+
+[data-landing-variant='helix'] .final-cta__launch-note {
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: clamp(0.78rem, 2vw, 0.9rem);
+  color: rgba(200, 214, 224, 0.78);
+  text-align: left;
+}
+
+/* Play Now — same cyan market button (beats FinalCtaSection.css !important gold) */
+[data-landing-variant='helix'] .final-cta__btn.vb-btn,
+[data-landing-variant='helix'] a.final-cta__btn,
+[data-landing-variant='helix'] button.final-cta__btn {
+  margin-top: 0;
+  justify-self: end;
+  flex-shrink: 0;
+  border-radius: 6px !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase;
+  font-family: var(--font-ui) !important;
+  font-size: clamp(0.72rem, 2vw, 0.82rem) !important;
+  padding: 0.85rem 1.75rem !important;
+  color: #0c1016 !important;
+  background: linear-gradient(
+    135deg,
+    rgba(61, 184, 212, 0.95) 0%,
+    rgba(42, 155, 184, 0.98) 100%
+  ) !important;
+  border-color: rgba(61, 184, 212, 0.65) !important;
+  box-shadow: 0 4px 16px rgba(61, 184, 212, 0.28) !important;
+  animation: none !important;
+}
+
+[data-landing-variant='helix'] .final-cta__btn.vb-btn:hover:not(:disabled),
+[data-landing-variant='helix'] a.final-cta__btn:hover:not(:disabled),
+[data-landing-variant='helix'] button.final-cta__btn:hover:not(:disabled) {
+  color: #071016 !important;
+  border-color: rgba(127, 216, 239, 0.85) !important;
+  background: linear-gradient(
+    135deg,
+    rgba(90, 200, 224, 0.98) 0%,
+    rgba(61, 184, 212, 1) 100%
+  ) !important;
+  box-shadow: 0 6px 22px rgba(61, 184, 212, 0.4) !important;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 719px) {
+  [data-landing-variant='helix'] .final-cta__launch {
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-areas:
+      'tag note'
+      'btn btn';
+  }
+
+  [data-landing-variant='helix'] .final-cta__launch-tag {
+    grid-area: tag;
+  }
+
+  [data-landing-variant='helix'] .final-cta__launch-note {
+    grid-area: note;
+  }
+
+  [data-landing-variant='helix'] .final-cta__btn.vb-btn,
+  [data-landing-variant='helix'] a.final-cta__btn,
+  [data-landing-variant='helix'] button.final-cta__btn {
+    grid-area: btn;
+    justify-self: stretch;
+    width: 100%;
+  }
+}
