@@ -24,7 +24,7 @@ export interface SitemapConfig {
   }
 }
 
-export type LandingVariant = 'voidborn' | 'iyashikei'
+export type LandingVariant = 'voidborn' | 'iyashikei' | 'helix'
 
 export interface LandingConfig {
   variant: LandingVariant

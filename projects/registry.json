@@ -20,5 +20,12 @@
     "stagingDomain": "staging.komorebi.club",
     "vpsProd": true,
     "sendmailProxy": true
+  },
+  {
+    "id": "helix",
+    "path": "./helix",
+    "status": "demo",
+    "stagingDomain": "helix.voidborn.fun",
+    "vpsProd": true
   }
 ]

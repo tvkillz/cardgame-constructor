@@ -65,7 +65,7 @@ function buildThemeCssVars(config) {
     '--game-arena-bg': `url(${arenaBg})`,
   }
 
-  if (playLogo && variant !== 'iyashikei') {
+  if (playLogo && variant !== 'iyashikei' && variant !== 'helix') {
     vars['--card-back-logo'] = `url(${playLogo})`
   }
 
@@ -78,6 +78,17 @@ function buildThemeCssVars(config) {
     vars['--iyashikei-heading-gradient'] =
       'linear-gradient(105deg, #4a6a4a 0%, #5a7a5a 35%, #6a9ec4 70%, #c9a87c 100%)'
     vars['--font-heading'] = "'Hiro Misake', 'Shippori Mincho', serif"
+  }
+
+  if (variant === 'helix') {
+    vars['--surface-paper'] = colors.voidBlack
+    vars['--surface-ink'] = colors.textPrimary
+    vars['--hero-vignette-top'] = 'rgba(12, 16, 22, 0.82)'
+    vars['--hero-vignette-mid'] = 'rgba(12, 16, 22, 0.2)'
+    vars['--hero-vignette-bottom'] = 'rgba(12, 16, 22, 0.92)'
+    vars['--helix-heading-gradient'] =
+      'linear-gradient(105deg, #e8eef4 0%, #3db8d4 42%, #8b7ec8 72%, #c4a35a 100%)'
+    vars['--font-heading'] = "'Orbitron', 'Rajdhani', system-ui, sans-serif"
   }
 
   return vars

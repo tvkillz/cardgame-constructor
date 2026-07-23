@@ -1,20 +1,29 @@
 import Header from '@/components/Header/Header'
 import Hero from '@/components/Hero/Hero'
+import HelixHeader from '@/components/landing/helix/HelixHeader'
+import HelixHero from '@/components/landing/helix/HelixHero'
+import HelixLocations from '@/components/landing/helix/HelixLocations'
 import IyashikeiHeader from '@/components/landing/iyashikei/IyashikeiHeader'
 import IyashikeiHero from '@/components/landing/iyashikei/IyashikeiHero'
+import LocationsSection from '@/components/LocationsSection/LocationsSection'
 import { appConfig } from '@/config'
 
-/** Voidborn — original dark fantasy landing shell. */
+/** Project landing shell — Header + Hero (+ Locations for helix) swap by variant. */
 export function LandingHeader() {
-  if (appConfig.landing?.variant === 'iyashikei') {
-    return <IyashikeiHeader />
-  }
+  const variant = appConfig.landing?.variant
+  if (variant === 'iyashikei') return <IyashikeiHeader />
+  if (variant === 'helix') return <HelixHeader />
   return <Header />
 }
 
 export function LandingHero() {
-  if (appConfig.landing?.variant === 'iyashikei') {
-    return <IyashikeiHero />
-  }
+  const variant = appConfig.landing?.variant
+  if (variant === 'iyashikei') return <IyashikeiHero />
+  if (variant === 'helix') return <HelixHero />
   return <Hero />
+}
+
+export function LandingLocations() {
+  if (appConfig.landing?.variant === 'helix') return <HelixLocations />
+  return <LocationsSection />
 }

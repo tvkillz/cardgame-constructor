@@ -1,0 +1,76 @@
+{
+  "title": "Collect. Trade. Calibrate.",
+  "description": "Helix rewards precision — stock your binder from sealed bundles and open listings, pass along duplicates for credits, and shape a deck that wins cleanly.",
+  "features": [
+    {
+      "id": "expand-collection",
+      "title": "Grow Your Binder",
+      "description": "Add depth across domains and seasonal releases. Every new pull opens another line you can run when the ladder shifts.",
+      "image": "cta1/expand-collection.webp",
+      "glowColor": "#4a9a8a"
+    },
+    {
+      "id": "buy-cards",
+      "title": "Precise Shopping",
+      "description": "Filter the catalog, find the missing Frame, and buy exactly what your curve has been waiting for — clean signal, no noise.",
+      "image": "cta1/buy-cards.webp",
+      "glowColor": "#3db8d4"
+    },
+    {
+      "id": "sealed-vaults",
+      "title": "Open Sealed Bundles",
+      "description": "Crack sealed products and chase a standout pull. Each unopened bundle is a small surprise — chase card or trade bait.",
+      "image": "cta1/sealed-vaults.webp",
+      "glowColor": "#d4895c"
+    },
+    {
+      "id": "discover-rare",
+      "title": "Chase Prime Prints",
+      "description": "Hunt foils, Singularity Frames, and signature prints — the kind of card that rewrites a deck and makes opponents pause.",
+      "image": "cta1/discover-rare.webp",
+      "glowColor": "#8b7ec8"
+    },
+    {
+      "id": "sell-cards",
+      "title": "Pass Along Duplicates",
+      "description": "Extras still have value. List them, fund the next upgrade, and keep your binder lean for the decks you actually play.",
+      "image": "cta1/sell-cards.webp",
+      "glowColor": "#c4a35a"
+    },
+    {
+      "id": "shape-strategy",
+      "title": "Tune Your Deck",
+      "description": "Prototype lists in the deck lab — test counters, stress synergies, and lock a 30-card answer to the ladder's current pace.",
+      "image": "cta1/shape-strategy.webp",
+      "glowColor": "#7a6eb8"
+    }
+  ],
+  "tiers": [
+    {
+      "id": "uncommon",
+      "rarityLabel": "CALIBRATED",
+      "title": "Everyday Frames",
+      "description": "Reliable units and utility pieces that glue a list together — flexible enough to slot into multiple strategies.",
+      "glowColor": "#3db8d4"
+    },
+    {
+      "id": "rare",
+      "rarityLabel": "PRIME",
+      "title": "Lab Prints",
+      "description": "Standout prints with real board presence — alternate art, foil shine, and effects that reward thoughtful building.",
+      "glowColor": "#8b7ec8"
+    },
+    {
+      "id": "epic",
+      "rarityLabel": "SINGULARITY",
+      "title": "Spire Guardians",
+      "description": "High-impact Frames and engines that can close a match with precision. One well-timed play can settle the board.",
+      "glowColor": "#d4895c"
+    }
+  ],
+  "marketCta": {
+    "description": "Hundreds of listings live right now — find the Frame that completes your next deck.",
+    "buttonLabel": "Browse the Market",
+    "route": "portalMarket"
+  }
+}

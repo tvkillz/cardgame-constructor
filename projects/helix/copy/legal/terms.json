@@ -1,0 +1,222 @@
+{
+  "eyebrow": "Legal",
+  "title": "Terms of Service",
+  "lastUpdated": "29 June 2026",
+  "blocks": [
+    {
+      "type": "paragraph",
+      "text": "Welcome to https://helix.voidborn.fun (the \"Platform\"). These Terms of Service (\"Terms\") form a legal agreement between you (\"User\", \"you\") and Test LTD (\"Company\", \"we\", \"us\", or \"our\"), a company registered in the United Kingdom under company number 00000000, with its registered office at 123 Example Street, Testville, TE1 1ST, United Kingdom."
+    },
+    {
+      "type": "paragraph",
+      "text": "By accessing our Platform, creating an account, buying digital packs, listing items on our Marketplace, or using any of our services, you agree to be bound by these Terms. If you do not agree, please do not use the Platform."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "1. Key Definitions"
+    },
+    {
+      "type": "paragraph",
+      "text": "To keep things clear, here is what we mean when we use specific terms:"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "items": [
+        "Account: Your personal dashboard and user profile on the Platform.",
+        "Balance: The internal wallet displayed in your Account, used strictly for on-platform actions.",
+        "Game: The digital card game hosted on our Platform.",
+        "Marketplace: The internal peer-to-peer shop feature where users can buy and sell eligible Virtual Items.",
+        "Services: Everything we offer through the Platform, including gameplay, account management, internal trading, wallet top-ups, and payout processing.",
+        "Virtual Items: Digital-only elements within the Game, including cards, packs, reward crates, cosmetics, and unlocks."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "2. Our Ecosystem & Services"
+    },
+    {
+      "type": "paragraph",
+      "text": "Our Platform provides a digital gaming environment where you can:"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "items": [
+        "Set up and customize your unique Account.",
+        "Fund your internal Balance via supported payment methods.",
+        "Open digital card packs or buy specific Virtual Items directly.",
+        "Engage in gameplay, build decks, and participate in events.",
+        "Trade eligible items with other players using the Marketplace.",
+        "Request withdrawals of your eligible internal Balance."
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Important License Note: Your access to the Platform and Virtual Items is licensed, not sold. You do not acquire legal ownership over any code, digital cards, or internal balances outside of this entertainment ecosystem. We reserve the right to modify, patch, or balance the Game mechanics, drop rates, and items at any time to preserve game health."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "3. Account Eligibility & Responsibilities"
+    },
+    {
+      "type": "paragraph",
+      "text": "To register an Account and use our Services, you must meet the following criteria:"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "items": [
+        "Age: You must be at least 18 years old (or the age of majority in your jurisdiction).",
+        "Capacity: You have the legal right to enter into a binding contract.",
+        "Accuracy: You agree to provide true, current, and accurate registration data.",
+        "Security: Your Account is strictly personal. You are entirely responsible for keeping your login credentials confidential and for all activity that occurs under your Account. You may not sell, trade, or share your account credentials."
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "We reserve the right to suspend or terminate accounts that violate these rules, display fraudulent patterns, or attempt to use the platform from restricted jurisdictions where our services are prohibited by law or card network rules."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "4. Virtual Items & Marketplace Rules"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "items": [
+        "Nature of Assets: Virtual Items (including digital cards) are internal game assets. They have no real-world equivalent and do not constitute legal tender, fiat currency, e-money, securities, or NFTs. They cannot be redeemed or traded outside of our official Platform mechanisms.",
+        "Marketplace Fair Play: When listing items in the peer-to-peer Marketplace, you agree not to engage in price manipulation, wash trading, collusive behavior, or exploitation of technical bugs.",
+        "Transaction Controls: We reserve the right to reverse, freeze, or cancel any Marketplace transaction that we suspect involves fraud, exploits, or market manipulation."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "5. Payments, Balances, & Withdrawals"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "5.1 Wallet Balances"
+    },
+    {
+      "type": "paragraph",
+      "text": "Your internal Balance is used exclusively for platform features. It is not a bank account or an e-money product, and it does not accrue interest."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "5.2 Payment Verification"
+    },
+    {
+      "type": "paragraph",
+      "text": "Payments are handled securely by trusted third-party processors. You must only use payment methods that you are legally authorized to hold. We do not store your full card numbers on our servers."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "5.3 Withdrawal Protocols (Payouts)"
+    },
+    {
+      "type": "paragraph",
+      "text": "If you request a payout of eligible internal funds, the following strict fraud-prevention rules apply:"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "items": [
+        "Closed-Loop Rule: To prevent money laundering, payouts will only be processed back to the exact same payment method (e.g., the same bank card) used to deposit the funds initially. The names on the account and the card must match.",
+        "Processing Fee: A 5% service fee is deducted from each successful withdrawal transaction.",
+        "Security Screenings: While we do not run mandatory upfront identity checks for regular gameplay, all withdrawal requests trigger an automated and manual security review. We reserve the right to request proof of card ownership or payment verification before clearing a payout.",
+        "Processing Times: Payout approvals depend heavily on bank networks and third-party processors. We cannot guarantee specific completion timeframes."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "6. Code of Conduct & Prohibited Behavior"
+    },
+    {
+      "type": "paragraph",
+      "text": "You agree not to engage in any of the following activities on our Platform:"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "items": [
+        "Using bots, automation macros, scrapers, or third-party cheating software.",
+        "Exploiting glitches, design vulnerabilities, or system bugs for competitive or economic advantage.",
+        "Creating duplicate accounts to abuse promotions, referral codes, or marketplace dynamics.",
+        "Using stolen or unauthorized credit cards or initiating bad-faith chargebacks.",
+        "Attempting to reverse-engineer, decompile, or steal the intellectual property of the Game."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "7. Refunds, Returns, & Disputes"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "items": [
+        "Digital Delivery: Because digital packs and virtual game assets are delivered instantly to your account profile upon purchase, all sales are considered final and non-refundable.",
+        "Exceptions: We will evaluate refund requests strictly in cases of verified double-billing, technical delivery failures, or where otherwise required by mandatory consumer laws in your local region.",
+        "Chargeback Enforcement: Initiating an unmerited chargeback or payment dispute will result in the immediate and permanent termination of your Account, and forfeiture of any linked assets or balances."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "8. Intellectual Property & Disclaimers"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "items": [
+        "Proprietary Rights: All graphics, card designs, game code, lore, UI, sound effects, and brand elements belong exclusively to the Company or its licensors. You may not copy or reuse them without our explicit permission, nor may you use our assets to train AI or machine learning models.",
+        "\"As-Is\" Provision: The Platform and Game are provided on an \"as-is\" and \"as-available\" basis. We do not promise that the server will be online 100% of the time, that the game will be perfectly bug-free, or that certain digital assets will maintain a specific secondary trade value."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "9. Liability Limits & Indemnity"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "items": [
+        "Liability Cap: To the maximum extent permitted by law, our total financial liability to you for any claim arising from your use of the Platform will never exceed the total amount you paid us during the six (6) months prior to the claim.",
+        "No Indirect Damages: We are not responsible for indirect losses, lost profits, or data loss stemming from server interruptions or account bans."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "10. Governing Law & Jurisdiction"
+    },
+    {
+      "type": "paragraph",
+      "text": "These Terms are governed by and construed in accordance with the laws of England and Wales. Any formal legal disputes that cannot be settled amicably will be handled exclusively by the competent courts of England and Wales, unless local consumer protection laws grant you mandatory rights to file a claim in your residential jurisdiction."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "11. Contact Us"
+    },
+    {
+      "type": "paragraph",
+      "text": "If you have any questions about these Terms, please reach out to our team at:"
+    },
+    {
+      "type": "paragraph",
+      "text": "Email: play@helix.voidborn.fun"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "name": "constructor-mount",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test:landing": "node scripts/test-landing.mjs"
+  }
+}

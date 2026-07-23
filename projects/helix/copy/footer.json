@@ -1,0 +1,82 @@
+{
+  "brand": {
+    "name": "HELIX",
+    "tagline": "Keep the Signal. Field the Frames."
+  },
+  "legal": [
+    { "id": "terms", "label": "Terms of Service", "href": "/terms" },
+    { "id": "privacy", "label": "Privacy Notice", "href": "/privacy" },
+    { "id": "refund", "label": "Cancellation & Refund Policy", "href": "/refund-policy" },
+    { "id": "disclaimer", "label": "Disclaimer", "href": "/disclaimer" },
+    { "id": "cookies", "label": "Cookie Policy", "href": "/cookie-policy" }
+  ],
+  "contact": {
+    "companyName": "Test LTD",
+    "companyNumber": "00000000",
+    "address": "123 Example Street, Testville, TE1 1ST, United Kingdom",
+    "email": "play@helix.voidborn.fun"
+  },
+  "social": [
+    {
+      "id": "telegram",
+      "label": "Telegram",
+      "href": "",
+      "icon": "shared/telegram.svg"
+    },
+    {
+      "id": "instagram",
+      "label": "Instagram",
+      "href": "",
+      "icon": "shared/instagram.png"
+    },
+    {
+      "id": "facebook",
+      "label": "Facebook",
+      "href": "",
+      "icon": "shared/facebook.svg"
+    },
+    {
+      "id": "discord",
+      "label": "Discord",
+      "href": "",
+      "icon": "shared/discord.svg"
+    }
+  ],
+  "payments": [
+    { "id": "visa", "label": "Visa", "icon": "shared/visa.svg" },
+    { "id": "mastercard", "label": "Mastercard", "icon": "shared/mastercard.svg" }
+  ],
+  "copyright": "© 2026 Helix. All rights reserved.",
+  "subCopyright": "© 2026 Helix. All rights reserved.",
+  "cookieSettingsLabel": "Cookie Settings",
+  "cookies": {
+    "title": "We use cookies",
+    "intro": "We use cookies and similar technologies to ensure the proper operation of our website, improve performance, enhance security, and analyse usage. Some cookies are strictly necessary for the website to function, while others are used only with your consent. You can accept all cookies, reject non-essential cookies, or manage your preferences at any time.",
+    "policyNote": "For more information, please see our Cookie Policy.",
+    "consentNote": "By clicking \"Accept All\", you consent to the use of non-essential cookies.",
+    "manageIntro": "You can control how we use cookies. Some cookies are necessary and cannot be disabled.",
+    "categories": [
+      {
+        "id": "necessary",
+        "label": "Strictly Necessary Cookies",
+        "description": "These cookies are required for the website to function properly, including login, security, and payment processing.",
+        "required": true
+      },
+      {
+        "id": "functional",
+        "label": "Functional Cookies",
+        "description": "These cookies allow us to remember your preferences and improve your experience."
+      },
+      {
+        "id": "analytics",
+        "label": "Analytics Cookies",
+        "description": "These cookies help us understand how users interact with the website and improve performance."
+      }
+    ],
+    "acceptAll": "Accept All",
+    "rejectNonEssential": "Reject Non-Essential",
+    "managePreferences": "Manage Preferences",
+    "savePreferences": "Save Preferences",
+    "closeLabel": "Close"
+  }
+}

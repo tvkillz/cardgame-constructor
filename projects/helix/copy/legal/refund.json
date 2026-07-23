@@ -1,0 +1,146 @@
+{
+  "eyebrow": "Legal",
+  "title": "Cancellation & Refund Policy",
+  "lastUpdated": "29 June 2026",
+  "blocks": [
+    {
+      "type": "paragraph",
+      "text": "This Cancellation & Refund Policy outlines the terms governing purchases made through https://helix.voidborn.fun (the \"Website\") and our connected gaming infrastructure (the \"Platform\"), operated by Test LTD (\"we\", \"us\", or \"our\")."
+    },
+    {
+      "type": "company",
+      "name": "Test LTD",
+      "companyNumber": "00000000",
+      "address": "123 Example Street, Testville, TE1 1ST, United Kingdom",
+      "email": "play@helix.voidborn.fun"
+    },
+    {
+      "type": "paragraph",
+      "text": "This document operates in tandem with our Terms of Service. In the event that any part of this policy conflicts with the mandatory consumer defense laws of your home country, those regional laws will take precedence."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "1. The Instant-Delivery Principle (All Sales Final)"
+    },
+    {
+      "type": "paragraph",
+      "text": "Our Platform provides immediate digital goods, in-game assets, and virtual entertainment services—including digital booster packs, individual cards, reward containers, and wallet currency top-ups."
+    },
+    {
+      "type": "paragraph",
+      "text": "Important Disclosure: Because digital assets are instantly credited and made accessible within your Account dashboard immediately after a successful transaction, all purchases are permanent, final, and non-refundable."
+    },
+    {
+      "type": "paragraph",
+      "text": "By completing an order on our Platform, you explicitly acknowledge and agree that the digital performance has commenced immediately upon delivery to your profile. Consequently, any statutory right to cool-off or cancel the purchase is waived to the maximum extent permitted under local regulations."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "2. Conditional Exceptions & Reimbursements"
+    },
+    {
+      "type": "paragraph",
+      "text": "While sales are generally final, our billing team may evaluate and approve a discretionary refund under the following strict conditions:"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "items": [
+        "System Failures: A verified technical glitch entirely blocked the digital item from reaching your Account inventory.",
+        "Duplicate Charging: Our payment system mistakenly processed a single order multiple times.",
+        "Fraudulent Activity: A thorough internal audit proves that a transaction was completed using unauthorized or stolen payment credentials.",
+        "Statutory Mandate: A regional consumer protection law definitively requires a refund under the specific circumstances."
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "To have a claim reviewed, you must submit your request promptly with your registered email, exact transaction timestamp, and order confirmation token."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "3. Explicitly Non-Refundable Items"
+    },
+    {
+      "type": "paragraph",
+      "text": "Under no circumstances will refunds, credits, or rollbacks be granted for:"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "items": [
+        "Virtual inventory items or balances that have been successfully deployed and are visible in your user profile.",
+        "Accidental purchases or instances of buyer's remorse after a product is delivered.",
+        "Dissatisfaction with the randomized outcomes or contents of virtual card packs, drops, or mystery crates, provided the probabilities operated as advertised.",
+        "In-game performance outcomes, leaderboard rank drops, or match progressions.",
+        "Peer-to-peer transactions conducted between players inside our internal Marketplace.",
+        "External currency conversion fees, bank processing handling costs, or international credit card transaction fees."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "4. Submission & Evaluation Process"
+    },
+    {
+      "type": "paragraph",
+      "text": "To request a transaction review:"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "items": [
+        "Send an email to play@helix.voidborn.fun.",
+        "Provide your specific Account username, transaction ID, and a clear explanation of the issue.",
+        "Our team will investigate the billing log and respond within a reasonable timeframe."
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "If a refund is authorized, it will be automatically routed back to the original payment method used during checkout. Please note that exact processing windows are governed entirely by your banking institution or card scheme network."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "5. Chargeback Enforcement & Dispute Resolution"
+    },
+    {
+      "type": "paragraph",
+      "text": "We ask that you contact our support desk directly before initiating an official payment dispute or chargeback with your bank. We are always willing to resolve legitimate billing errors amicably."
+    },
+    {
+      "type": "paragraph",
+      "text": "If a user initiates an unjustified chargeback or payment reversal for a fully delivered, validly authorized digital order, it will be categorized as payment abuse. In these instances, we reserve the immediate right to:"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "items": [
+        "Permanently freeze or terminate the associated Account.",
+        "Revoke, remove, or zero-out any digital balances, cards, or assets linked to the account.",
+        "Blacklist the user's details from completing future transactions or processing payouts.",
+        "Pursue recovery of the original transaction amount along with linked administrative penalties and chargeback fees to the full extent of the law."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "6. Global Consumer Protections"
+    },
+    {
+      "type": "paragraph",
+      "text": "If you reside within a jurisdiction (such as the UK or European Union) that guarantees mandatory statutory withdrawal windows for online digital content, those rules apply strictly under their legal limits. However, those rights evaporate once you provide your express consent to begin the immediate download or digital provisioning of the game assets, losing your right to cancel."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "7. Revisions"
+    },
+    {
+      "type": "paragraph",
+      "text": "We reserve the right to modify or adjust this Cancellation & Refund Policy dynamically. Any updates will be pushed directly to this URL with a modified \"Last Updated\" date."
+    }
+  ]
+}

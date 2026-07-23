@@ -86,8 +86,9 @@ const Card = forwardRef<HTMLElement, CardComponentProps>(function Card(
   const displayKeywords = showKeywords ?? (layoutMode === 'hero' || displayAbility)
   const displayRarity = showRarity === true
   const isIyashikei = appConfig.landing?.variant === 'iyashikei'
-  const spiritLabel = isIyashikei ? 'Spirit' : 'Attack'
-  const calmLabel = isIyashikei ? 'Calm' : 'Health'
+  const isHelix = appConfig.landing?.variant === 'helix'
+  const spiritLabel = isIyashikei ? 'Spirit' : isHelix ? 'Signal' : 'Attack'
+  const calmLabel = isIyashikei ? 'Calm' : isHelix ? 'Integrity' : 'Health'
   const imageSrc =
     layoutMode === 'preview' || layoutMode === 'hero'
       ? artUrl

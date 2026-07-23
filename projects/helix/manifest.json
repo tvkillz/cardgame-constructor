@@ -1,0 +1,62 @@
+{
+  "id": "helix",
+  "name": {
+    "display": "HELIX",
+    "short": "Helix",
+    "documentTitle": "HELIX"
+  },
+  "siteUrl": "https://helix.voidborn.fun",
+  "assets": {
+    "publicBase": "/assets",
+    "cdnBase": null
+  },
+  "brand": {
+    "logo": "brand/gamelogo.png",
+    "headerLogo": "brand/header.png",
+    "headerLogoAlt": "Helix",
+    "favicon": "brand/favicon.ico",
+    "playLogo": "brand/gamelogo.png",
+    "playLogoAlt": "Helix",
+    "playLobby": "brand/play-lobby.png",
+    "logoAlt": "Helix"
+  },
+  "routes": {
+    "home": "/",
+    "play": "/play",
+    "leaderboard": "/leaderboard",
+    "portal": "/portal",
+    "portalMarket": "/portal/market",
+    "portalVaults": "/portal/vaults",
+    "portalCollection": "/portal/collection",
+    "portalTransactions": "/portal/transactions",
+    "portalProfile": "/portal/profile",
+    "portalStore": "/portal/store",
+    "checkout": "/checkout",
+    "checkoutSuccess": "/portal/checkout/success",
+    "checkoutCancel": "/portal/checkout/cancel",
+    "withdrawalSuccess": "/portal/withdrawal/success"
+  },
+  "legal": {
+    "termsUrl": "/terms",
+    "privacyUrl": "/privacy",
+    "refundPolicyUrl": "/refund-policy"
+  },
+  "anchors": {
+    "play": "#play",
+    "market": "#market",
+    "leaderboard": "#leaderboard"
+  },
+  "features": {
+    "auth": true,
+    "commerce": true,
+    "requireSignInForPlay": true
+  },
+  "cardSlugMigration": {
+    "realmToLegacyElement": {
+      "atrium": "hab",
+      "reservoir": "cryo",
+      "core": "forge",
+      "antenna": "relay"
+    }
+  }
+}

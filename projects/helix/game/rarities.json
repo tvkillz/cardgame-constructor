@@ -1,0 +1,39 @@
+{
+  "tiers": [
+    {
+      "id": "common",
+      "label": "Chassis",
+      "manaMin": 1,
+      "manaMax": 2,
+      "description": "Standard Frames and utility units — easy to slot into any list."
+    },
+    {
+      "id": "uncommon",
+      "label": "Calibrated",
+      "manaMin": 3,
+      "manaMax": 4,
+      "description": "Reliable lab pieces that glue a deck together with clean utility."
+    },
+    {
+      "id": "rare",
+      "label": "Prime",
+      "manaMin": 5,
+      "manaMax": 6,
+      "description": "Standout Frames with real board presence — foil shine and thoughtful synergy."
+    },
+    {
+      "id": "epic",
+      "label": "Singularity",
+      "manaMin": 7,
+      "manaMax": 8,
+      "description": "Signature Spire guardians and engines that can close a match with precision."
+    },
+    {
+      "id": "legendary",
+      "label": "Helix",
+      "manaMin": 9,
+      "manaMax": 10,
+      "description": "Chase-tier Frames — rare pulls that collectors pause to admire."
+    }
+  ]
+}

@@ -1,10 +1,5 @@
 import dynamic from 'next/dynamic'
-import { LandingHeader, LandingHero } from '@/components/landing/resolveLanding'
-
-const LocationsSection = dynamic(
-  () => import('@/components/LocationsSection/LocationsSection'),
-  { ssr: true },
-)
+import { LandingHeader, LandingHero, LandingLocations } from '@/components/landing/resolveLanding'
 
 const DominionsSection = dynamic(
   () => import('@/components/DominionsSection/DominionsSection'),
@@ -41,7 +36,7 @@ export default function HomePage() {
       <LandingHeader />
       <main className="landing-flow">
         <LandingHero />
-        <LocationsSection />
+        <LandingLocations />
         <DominionsSection />
         <GameModelSection />
         <CollectionSection />

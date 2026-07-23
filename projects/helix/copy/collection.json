@@ -1,0 +1,21 @@
+{
+  "title": "Helix Catalog",
+  "description": "Every card is a calibrated choice — drawn from Hab, Cryo, Reactor, and Relay, tuned for precise play, and expanded every season. Explore a living collection built for operators and ladder climbers alike.",
+  "backgroundImage": "cities/cryo/cryo_city_01_frost_glass_bay.png",
+  "stats": [
+    { "id": "catalog", "value": "600+", "label": "Unique Cards" },
+    { "id": "rarity", "value": "5", "label": "Print Tiers" },
+    { "id": "strategies", "value": "∞", "label": "Deck Strategies" },
+    { "id": "monthly", "value": "25+", "label": "New Cards Monthly" }
+  ],
+  "cardSlugs": [
+    "atrium_card_02_root_cable_walker",
+    "reservoir_card_02_frost_glass_drone",
+    "core_card_02_conduit_frame",
+    "antenna_card_02_dish_walker",
+    "atrium_card_03_canopy_drone",
+    "reservoir_card_03_coolant_runner",
+    "core_card_03_amber_pilot",
+    "antenna_card_03_signal_mist_frame"
+  ]
+}

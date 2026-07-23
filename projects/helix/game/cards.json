@@ -1,0 +1,336 @@
+{
+  "cards": [
+    {
+      "title": "Hab Tender",
+      "slug": "atrium_card_01_hab_tender",
+      "category": "cards",
+      "domain": "atrium",
+      "kind": "card",
+      "role": "Maintenance Frame",
+      "rarity": "common",
+      "stats": {
+        "mana": 2,
+        "attack": 1,
+        "health": 2
+      },
+      "keywords": [
+        "Bootstrap"
+      ],
+      "ability": {
+        "name": "Botanical Calibration",
+        "text": "Bootstrap: When this Frame enters play, gain 1 Signal. At end of turn, restore 1 Integrity to an allied Frame."
+      },
+      "path": "cards/atrium/atrium_card_01_hab_tender.png",
+      "priceCents": 52006,
+      "source_file": "atrium_card_01_hab_tender.png",
+      "format": "3:4",
+      "notes": "Style: Cinematic live-action prop photography. Negative: anime, manga, illustration, text, watermark, human face. Palette: teal, brushed steel, warm green.",
+      "image_prompt": "A small, utilitarian robotic gardener with articulated sensor arms and a clean pale steel chassis, tending to glowing hydroponic root-cables, soft teal grow-light illumination, high-detail macro photography, depth of field."
+    },
+    {
+      "title": "Root Cable Walker",
+      "slug": "atrium_card_02_root_cable_walker",
+      "category": "cards",
+      "domain": "atrium",
+      "kind": "card",
+      "role": "Utility Guardian",
+      "rarity": "uncommon",
+      "stats": {
+        "mana": 4,
+        "attack": 2,
+        "health": 4
+      },
+      "keywords": [
+        "Shield",
+        "Hardline"
+      ],
+      "ability": {
+        "name": "Root-Network Stasis",
+        "text": "Hardline: Opponents must engage this Frame before others when able. Shield: The next harm this Frame would take is redirected to the Shield buffer instead."
+      },
+      "path": "cards/atrium/atrium_card_02_root_cable_walker.png",
+      "priceCents": 52104,
+      "source_file": "atrium_card_02_root_cable_walker.png",
+      "format": "3:4",
+      "notes": "Style: Photorealistic sci-fi hardware. Negative: anime, illustration, glowing eyes, human features. Palette: cool steel, pale teal, dark industrial shadows.",
+      "image_prompt": "A four-legged walking chassis companion constructed from recycled lab piping and steel, metallic cables coiled around its frame like roots, positioned in a quiet hydroponic chamber, soft diffused canopy lighting."
+    },
+    {
+      "title": "Canopy Drone",
+      "slug": "atrium_card_03_canopy_drone",
+      "category": "cards",
+      "domain": "atrium",
+      "kind": "card",
+      "role": "Atmospheric Relayer",
+      "rarity": "rare",
+      "stats": {
+        "mana": 6,
+        "attack": 3,
+        "health": 5
+      },
+      "keywords": [
+        "Relay",
+        "Signal"
+      ],
+      "ability": {
+        "name": "Canopy Uplink",
+        "text": "Relay: Can influence distant Frames without close engagement. Signal: This Frame holds the grid, it cannot be displaced while Integrity remains."
+      },
+      "path": "cards/atrium/atrium_card_03_canopy_drone.png",
+      "priceCents": 19376,
+      "source_file": "atrium_card_03_canopy_drone.png",
+      "format": "3:4",
+      "notes": "Style: Industrial design photography. Negative: anime, manga, cartoon, grit, grime, textures of paint, human pilots. Palette: monochromatic white, teal, chrome.",
+      "image_prompt": "A floating spherical drone with polished steel casing and holographic interface rings, drifting near glass laboratory ceilings, soft teal light reflecting off its smooth surface, high-end clean sci-fi aesthetic."
+    },
+    {
+      "title": "Cryo Tender",
+      "slug": "reservoir_card_01_cryo_tender",
+      "category": "cards",
+      "domain": "reservoir",
+      "kind": "card",
+      "role": "Calibrator",
+      "rarity": "common",
+      "stats": {
+        "mana": 2,
+        "attack": 1,
+        "health": 3
+      },
+      "keywords": [
+        "Recalibrate"
+      ],
+      "ability": {
+        "name": "Frost Stitch",
+        "text": "Recalibrate: When this Frame enters play, restore 2 Integrity to an allied Frame."
+      },
+      "path": "cards/reservoir/reservoir_card_01_cryo_tender.png",
+      "priceCents": 23081,
+      "source_file": "reservoir_card_01_cryo_tender.png",
+      "format": "3:4",
+      "notes": "No anime, no manga, no illustration, no text, no frame, focus on clean industrial design and cool color palette.",
+      "image_prompt": "A small, four-legged maintenance robot with pearl-white ceramic plating and pale cyan coolant tubes running along its back, standing in a brightly lit, sterile laboratory setting near a large glass cryo tank, soft clinical lighting, photorealistic, 3:4 portrait ratio."
+    },
+    {
+      "title": "Frost Glass Drone",
+      "slug": "reservoir_card_02_frost_glass_drone",
+      "category": "cards",
+      "domain": "reservoir",
+      "kind": "card",
+      "role": "Scanner",
+      "rarity": "uncommon",
+      "stats": {
+        "mana": 4,
+        "attack": 2,
+        "health": 4
+      },
+      "keywords": [
+        "Shield",
+        "Bootstrap"
+      ],
+      "ability": {
+        "name": "Refraction Array",
+        "text": "Bootstrap: When this Frame enters play, gain 1 Signal. Shield: This unit ignores the next source of disruption."
+      },
+      "path": "cards/reservoir/reservoir_card_02_frost_glass_drone.png",
+      "priceCents": 50207,
+      "source_file": "reservoir_card_02_frost_glass_drone.png",
+      "format": "3:4",
+      "notes": "No anime, no manga, no illustration, no text, no frame, focus on transparency and light diffusion.",
+      "image_prompt": "A sleek, hovering drone with a translucent frosted glass central chassis and internal soft glowing cyan circuitry, smooth floating movement, laboratory interior with frost-covered surfaces, photorealistic, cinematic prop photography, 3:4 portrait ratio."
+    },
+    {
+      "title": "Coolant Runner",
+      "slug": "reservoir_card_03_coolant_runner",
+      "category": "cards",
+      "domain": "reservoir",
+      "kind": "card",
+      "role": "Courier",
+      "rarity": "rare",
+      "stats": {
+        "mana": 6,
+        "attack": 4,
+        "health": 5
+      },
+      "keywords": [
+        "Link",
+        "Pulse"
+      ],
+      "ability": {
+        "name": "Thermal Equilibrium",
+        "text": "Link: Choose an allied Frame to share a keyword with. Pulse: At the end of your turn, restore 1 Integrity to all Linked Frames."
+      },
+      "path": "cards/reservoir/reservoir_card_03_coolant_runner.png",
+      "priceCents": 25955,
+      "source_file": "reservoir_card_03_coolant_runner.png",
+      "format": "3:4",
+      "notes": "No anime, no manga, no illustration, no text, no frame, high-detail mechanical textures.",
+      "image_prompt": "A bipedal research Frame with broad, cooling fins and polished pearl metallic armor, blue bioluminescent nodes, standing in a river of flowing liquid coolant inside a Spire laboratory bay, high-key clean lighting, photorealistic, 3:4 portrait ratio."
+    },
+    {
+      "title": "Ring Keeper",
+      "slug": "core_card_01_ring_keeper",
+      "category": "cards",
+      "domain": "core",
+      "kind": "card",
+      "role": "Guardian",
+      "rarity": "common",
+      "stats": {
+        "mana": 2,
+        "attack": 1,
+        "health": 3
+      },
+      "keywords": [
+        "Hardline"
+      ],
+      "ability": {
+        "name": "Magnetic Stabilization",
+        "text": "Hardline: Opponents must engage this Frame before others when able. While this Frame has Integrity, adjacent allied Frames cannot be displaced."
+      },
+      "path": "cards/core/core_card_01_ring_keeper.png",
+      "priceCents": 24865,
+      "source_file": "core_card_01_ring_keeper.png",
+      "format": "3:4",
+      "notes": "No anime, no illustration, no text. Palette: Pale steel, amber glow, copper accents. Portrait 3:4 composition.",
+      "image_prompt": "A sturdy, compact maintenance robot with a circular rotating ring torso, warm copper plating, soft amber light emanating from internal rings, standing in a sterile pale steel laboratory corridor, cinematic lighting, 8k resolution, highly detailed mechanical joints."
+    },
+    {
+      "title": "Conduit Frame",
+      "slug": "core_card_02_conduit_frame",
+      "category": "cards",
+      "domain": "core",
+      "kind": "card",
+      "role": "Relay",
+      "rarity": "uncommon",
+      "stats": {
+        "mana": 4,
+        "attack": 2,
+        "health": 4
+      },
+      "keywords": [
+        "Link",
+        "Relay"
+      ],
+      "ability": {
+        "name": "Plasma Integration",
+        "text": "Link: When this Frame enters play, establish a Link with one allied Frame (share a keyword until either leaves). Relay: Can influence distant Frames without close engagement."
+      },
+      "path": "cards/core/core_card_02_conduit_frame.png",
+      "priceCents": 85059,
+      "source_file": "core_card_02_conduit_frame.png",
+      "format": "3:4",
+      "notes": "No anime, no illustration, no text. Palette: Warm copper, pale steel, bright amber plasma glow. Portrait 3:4 composition.",
+      "image_prompt": "A sleek, bipedal relay robot with glowing plasma conduits running through its translucent limbs, soft amber lighting, clean laboratory setting, precision engineering aesthetic, depth of field, photorealistic photography."
+    },
+    {
+      "title": "Amber Pilot",
+      "slug": "core_card_03_amber_pilot",
+      "category": "cards",
+      "domain": "core",
+      "kind": "card",
+      "role": "Calibrator",
+      "rarity": "rare",
+      "stats": {
+        "mana": 6,
+        "attack": 3,
+        "health": 6
+      },
+      "keywords": [
+        "Recalibrate",
+        "Pulse"
+      ],
+      "ability": {
+        "name": "Engine Calibration",
+        "text": "Recalibrate: Restore 2 Integrity to an allied Frame. Pulse: At end of turn, apply a small Integrity restore to all linked Frames."
+      },
+      "path": "cards/core/core_card_03_amber_pilot.png",
+      "priceCents": 47310,
+      "source_file": "core_card_03_amber_pilot.png",
+      "format": "3:4",
+      "notes": "No anime, no illustration, no text. Palette: Pale steel, polished copper, warm amber light. Portrait 3:4 composition.",
+      "image_prompt": "A sophisticated laboratory drone with a central amber optical sensor, intricate copper plating, hovering above a reactor ring, soft warm glow illuminating the surrounding sterile equipment, photorealistic, cinematic prop lighting."
+    },
+    {
+      "title": "Relay Ghost",
+      "slug": "antenna_card_01_relay_ghost",
+      "category": "cards",
+      "domain": "antenna",
+      "kind": "card",
+      "role": "Relay",
+      "rarity": "common",
+      "stats": {
+        "mana": 2,
+        "attack": 1,
+        "health": 2
+      },
+      "keywords": [
+        "Relay"
+      ],
+      "ability": {
+        "name": "Ghost Transmission",
+        "text": "When this Frame enters play, gain 1 Signal and establish a Relay to an allied Frame across the grid."
+      },
+      "path": "cards/antenna/antenna_card_01_relay_ghost.png",
+      "priceCents": 63826,
+      "source_file": "antenna_card_01_relay_ghost.png",
+      "format": "3:4",
+      "notes": "Negative prompt: anime, manga, illustration, text, watermark. Palette: pale steel, soft violet, neon cyan.",
+      "image_prompt": "A small hovering drone with translucent violet panels, sleek metallic frame, floating inside a clean laboratory filled with soft cyan signal mist, cinematic lighting, photorealistic, 3:4 ratio."
+    },
+    {
+      "title": "Dish Walker",
+      "slug": "antenna_card_02_dish_walker",
+      "category": "cards",
+      "domain": "antenna",
+      "kind": "card",
+      "role": "Guardian",
+      "rarity": "uncommon",
+      "stats": {
+        "mana": 4,
+        "attack": 2,
+        "health": 4
+      },
+      "keywords": [
+        "Shield",
+        "Hardline"
+      ],
+      "ability": {
+        "name": "Aperture Guard",
+        "text": "While this Frame is active, its Shield buffer absorbs incoming Signal disruption directed at nearby allied Frames."
+      },
+      "path": "cards/antenna/antenna_card_02_dish_walker.png",
+      "priceCents": 27344,
+      "source_file": "antenna_card_02_dish_walker.png",
+      "format": "3:4",
+      "notes": "Negative prompt: anime, manga, illustration, text, watermark. Focus on structural integrity and observation gear.",
+      "image_prompt": "A tripod-legged robot walker with a large circular sensor dish for a head, standing on a polished white floor in a vast observatory, clean steel construction, soft lighting, photorealistic, 3:4 ratio."
+    },
+    {
+      "title": "Signal Mist Frame",
+      "slug": "antenna_card_03_signal_mist_frame",
+      "category": "cards",
+      "domain": "antenna",
+      "kind": "card",
+      "role": "Calibrator",
+      "rarity": "rare",
+      "stats": {
+        "mana": 6,
+        "attack": 3,
+        "health": 6
+      },
+      "keywords": [
+        "Pulse",
+        "Recalibrate"
+      ],
+      "ability": {
+        "name": "Mist Harmonizer",
+        "text": "At end of turn, apply a Pulse to restore 2 Integrity to all linked Frames and gain 1 Signal."
+      },
+      "path": "cards/antenna/antenna_card_03_signal_mist_frame.png",
+      "priceCents": 80827,
+      "source_file": "antenna_card_03_signal_mist_frame.png",
+      "format": "3:4",
+      "notes": "Negative prompt: anime, manga, illustration, text, watermark. Emphasis on atmospheric signal mist and soft glow.",
+      "image_prompt": "A tall, slender chassis robot emitting soft blue vapor from its joints, sleek aesthetic, glowing data conduits running along its limbs, laboratory setting, highly detailed, photorealistic, 3:4 ratio."
+    }
+  ]
+}

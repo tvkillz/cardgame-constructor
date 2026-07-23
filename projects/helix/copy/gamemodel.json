@@ -1,0 +1,32 @@
+{
+  "title": "How Helix Plays",
+  "description": "Four lab domains, one precise battlefield — assemble a deck, outmaneuver rivals in turn-based duels, and climb the seasonal ladder with a clean Signal.",
+  "pillars": [
+    {
+      "id": "tactical-battles",
+      "title": "Lab Tactics",
+      "description": "Trade lines on a living board where timing, lane pressure, and burst windows matter more than raw stats. Win the turn before you win the match.",
+      "image": "gamemodel/tactical-battles.webp",
+      "glowColor": "#3db8d4"
+    },
+    {
+      "id": "collectible-cards",
+      "title": "Frame Collecting",
+      "description": "Pull Frames from Atrium, Reservoir, Core, and Antenna — then stitch keywords, curves, and finishers into a list that rewards precision.",
+      "image": "gamemodel/collectible-cards.webp",
+      "glowColor": "#8b7ec8"
+    },
+    {
+      "id": "ranked-climb",
+      "title": "Seasonal Ladder",
+      "description": "Climb seasonal tiers, learn from losses, and refine your lines. The summit rewards players who adapt without losing the Signal.",
+      "image": "gamemodel/ranked-climb.webp",
+      "glowColor": "#d4895c"
+    }
+  ],
+  "tags": [
+    { "id": "deck-building", "label": "Deck Tuning" },
+    { "id": "class-champions", "label": "Domain Affinities" },
+    { "id": "replayable-depth", "label": "Shifting Metas" }
+  ]
+}

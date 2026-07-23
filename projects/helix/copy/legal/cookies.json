@@ -1,0 +1,205 @@
+{
+  "eyebrow": "Legal",
+  "title": "Tracker & Cookie Policy",
+  "lastUpdated": "29 June 2026",
+  "blocks": [
+    {
+      "type": "paragraph",
+      "text": "This Tracker & Cookie Policy describes how Test LTD (\"we\", \"us\", or \"our\") utilizes cookies, web beacons, pixels, and equivalent tracking technologies on https://helix.voidborn.fun (the \"Website\") and all connected gaming features (the \"Platform\")."
+    },
+    {
+      "type": "company",
+      "name": "Test LTD",
+      "companyNumber": "00000000",
+      "address": "123 Example Street, Testville, TE1 1ST, United Kingdom",
+      "email": "play@helix.voidborn.fun"
+    },
+    {
+      "type": "paragraph",
+      "text": "This policy functions alongside our core Privacy Notice. For information regarding our company details and corporate registration, please review that document."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "1. Understanding Tracking Technologies"
+    },
+    {
+      "type": "paragraph",
+      "text": "Cookies are minor text strings downloaded directly to your internet-connected hardware (such as computers, smartphones, or tablets) when you browse web pages. They serve as a temporary or persistent memory layer for web applications."
+    },
+    {
+      "type": "paragraph",
+      "text": "These tools allow our Platform to:"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "items": [
+        "Identify your hardware configuration upon return visits.",
+        "Retain your interface preferences and visual layouts.",
+        "Preserve secure, active account login sessions.",
+        "Monitor systemic performance and load balancing.",
+        "Mitigate cybersecurity threats, botting, and automated abuse."
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "These scripts are categorized either as session trackers (which expire the moment your web browser is closed) or persistent trackers (which remain stored inside your hardware cache until a preset expiration date passes or you clear them manually)."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "2. Classification of Trackers We Deploy"
+    },
+    {
+      "type": "paragraph",
+      "text": "We separate our on-site tracking tools into the following functional groups:"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "2.1 Core Operational Trackers (Strictly Necessary)"
+    },
+    {
+      "type": "paragraph",
+      "text": "These scripts are mandatory for the safe configuration and basic utility of our platform architecture. They cannot be toggled off inside our settings panel because the site cannot render or execute functions without them."
+    },
+    {
+      "type": "paragraph",
+      "text": "Primary Tasks: Authenticating your profile login, defending tokenized user sessions, clearing checkouts via external payment paths, blocking multi-account exploits, and shielding data entry fields from injection scripts."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "2.2 System Preference Trackers (Functional)"
+    },
+    {
+      "type": "paragraph",
+      "text": "These trackers preserve custom configurations you apply to your account profile to deliver a cohesive return experience."
+    },
+    {
+      "type": "paragraph",
+      "text": "Primary Tasks: Caching audio levels, remembering local regional language choices, saving specific custom user-interface arrangements, and managing persistence choices. Note: Disabling these will cause the site to revert to basic default profiles upon every reload."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "2.3 Diagnostic & Evaluation Trackers (Analytics)"
+    },
+    {
+      "type": "paragraph",
+      "text": "These modules collect data about how players move through our menus, layout structures, and marketplace features."
+    },
+    {
+      "type": "paragraph",
+      "text": "Primary Tasks: Counting page visits, tracking typical session durations, pinpointing broken navigation pathways, and monitoring anonymous regional connection zones."
+    },
+    {
+      "type": "paragraph",
+      "text": "Privacy Guard: This tracking operates via aggregated datasets. It compiles performance metrics without revealing or profiling your specific identity."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "3. Delegation to Third-Party Modules"
+    },
+    {
+      "type": "paragraph",
+      "text": "We integrate specific external utilities to support our infrastructure. These enterprise partners may place their own diagnostic scripts or payment-flow pixels onto your hardware:"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scope: Secure checkout networks, cloud server scaling databases, and encrypted account authorization managers."
+    },
+    {
+      "type": "paragraph",
+      "text": "Because we do not have absolute backend control over third-party cookie architecture, we advise reading the dedicated privacy frameworks posted directly on those providers' home domains."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "4. Regulatory Approvals & Legal Grounding"
+    },
+    {
+      "type": "paragraph",
+      "text": "We deploy these technologies in strict accordance with the UK GDPR, European Union ePrivacy rules, and regional electronic communication laws:"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "items": [
+        "Operational Trackers: Handled under our Legitimate Interests to host a stable, secure, and accessible entertainment platform.",
+        "Preference & Diagnostic Trackers: Handled exclusively via your explicit Consent. You will be presented with a customizable consent panel upon your very first visit to our domain."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "5. Controlling Your Tracking Parameters"
+    },
+    {
+      "type": "paragraph",
+      "text": "You hold total authority over how your hardware handles these files. You can adjust your configurations using two primary methods:"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "5.1 In-Browser Controls"
+    },
+    {
+      "type": "paragraph",
+      "text": "Most modern web browsers feature internal security settings that enable you to:"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "items": [
+        "Scan all stored cookie history on your machine.",
+        "Purge specific site-tracking caches.",
+        "Block third-party scripts across all domains automatically.",
+        "Activate \"Do Not Track\" signals."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "text": "5.2 Our Consent Dashboard"
+    },
+    {
+      "type": "paragraph",
+      "text": "You can review, alter, or completely revoke your custom tracking choices at any point by re-opening the Cookie Preferences button found in our Website footer."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "6. Categories of Automated Technical Data"
+    },
+    {
+      "type": "paragraph",
+      "text": "Our cookies and telemetry scripts may log the following automated data lines:"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "items": [
+        "Your external IP address and general geographic lookup.",
+        "Browser software versions and operating system types.",
+        "Unique platform session identification strings.",
+        "Timestamped navigation pathways and marketplace interaction logs."
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "All data harvested via these protocols is processed strictly within the boundaries of our standard Privacy Notice."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "7. Policy Revisions"
+    },
+    {
+      "type": "paragraph",
+      "text": "We reserve the right to modify this Tracker & Cookie Policy to align with new feature releases or updated privacy regulations. Any updates will be pushed directly to this URL with an altered \"Last Updated\" date."
+    }
+  ]
+}

@@ -13,8 +13,10 @@ function sizeForKind(contentgen, kind) {
 function sceneAssets(ctx) {
   const items = []
   for (const asset of ctx.scenesJson.assets ?? []) {
-    if (!asset.path || (asset.kind !== 'domain' && asset.kind !== 'city')) continue
-    const spec = sizeForKind(ctx.contentgen, asset.kind)
+    if (!asset.path) continue
+    if (asset.kind !== 'domain' && asset.kind !== 'city') continue
+    const sizeKey = asset.kind
+    const spec = sizeForKind(ctx.contentgen, sizeKey)
     items.push({
       id: asset.slug || path.basename(asset.path, path.extname(asset.path)),
       kind: asset.kind,

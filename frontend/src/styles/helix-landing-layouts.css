@@ -1,0 +1,16 @@
+/* HELIX landing — hero → locations layout rhythms. */
+
+[data-landing-variant='helix'] {
+  --helix-section-pad-y: clamp(4.5rem, 10vw, 7rem);
+  --helix-section-pad-bottom: clamp(3rem, 8vw, 5.5rem);
+}
+
+[data-landing-variant='helix'] .landing-flow {
+  gap: clamp(2.75rem, 7vw, 5rem);
+  padding-bottom: var(--helix-section-pad-bottom);
+}
+
+/* Hero angled cut bleeds into starfield locations */
+[data-landing-variant='helix'] .landing-flow > .helix-hero + .helix-locations {
+  margin-top: calc(-1 * clamp(3rem, 8vw, 5.5rem));
+}

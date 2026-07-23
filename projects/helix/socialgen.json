@@ -1,0 +1,43 @@
+{
+  "brandVoice": "Precise, hopeful, clean. Soft-sci-fi lab TCG tone. Short Signal-focused hooks; operator depth on Facebook. Minimal neon slang; no grimdark.",
+  "audience": "TCG players who enjoy sci-fi aesthetics, deck builders, collectors, robot and mecha fans",
+  "siteUrl": "https://helix.voidborn.fun",
+  "platforms": {
+    "instagram": {
+      "minHashtags": 8,
+      "maxHashtags": 15,
+      "defaultHashtags": [
+        "#HELIX",
+        "#TCG",
+        "#TradingCardGame",
+        "#SciFi",
+        "#Robots",
+        "#CardGame",
+        "#IndieGame",
+        "#DeckBuilding"
+      ],
+      "linkInBioTemplate": "🔗 Link in bio → {siteUrl}"
+    },
+    "facebook": {
+      "minBodyLength": 200
+    },
+    "discord": {
+      "allowMentionEveryone": false
+    }
+  },
+  "image": {
+    "defaultMode": "auto",
+    "size": 1080,
+    "promptSuffix": "Square 1:1 social promo art for a soft-sci-fi lab TCG, clean laboratory lighting, pale steel and cyan accents, hopeful mood, no text, no watermark, atmospheric depth, leave corner space for logo overlay.",
+    "composite": {
+      "logoAsset": "brand/gamelogo.png",
+      "logoScale": 0.18,
+      "cardLogoScale": 0.16,
+      "cardLogoLeft": 24,
+      "cardLogoTop": 24,
+      "cityOverlay": 0.55,
+      "cardFrameGlow": 0.35,
+      "vignetteStrength": 0.35
+    }
+  }
+}

@@ -12,6 +12,7 @@
     "dev:next": "next dev",
     "dev:clean": "rm -rf .next && node scripts/dev.mjs",
     "build": "node scripts/build-prod.mjs",
+    "build:landing": "BUILD_SCOPE=landing node scripts/build-prod.mjs --only-landing",
     "build:game": "node scripts/build-game.mjs",
     "build:web": "node scripts/build-web.mjs",
     "build:next": "next build",

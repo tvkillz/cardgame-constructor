@@ -1,0 +1,19 @@
+{
+  "keywords_glossary": {
+    "Link": "When this Frame enters play, establish a Link with one allied Frame (share a keyword until either leaves).",
+    "Shield": "The next harm this Frame would take is redirected to the Shield buffer instead.",
+    "Pulse": "At end of turn, apply a small Integrity restore or Signal tick as written on the card.",
+    "Jammer": "Opponents cannot choose this Frame until it acts.",
+    "Deploy": "This Frame may act the turn it enters play.",
+    "Sync": "If another allied Frame with Sync is in play, gain the listed bonus.",
+    "Overclock": "Spend 1 extra mana when playing this Frame to double its enter effect.",
+    "Static": "While Static is active on this Frame, it cannot act until end of turn.",
+    "Relay": "Can influence distant Frames without close engagement.",
+    "Hardline": "Opponents must engage this Frame before others when able.",
+    "Bootstrap": "When this Frame enters play, draw a card or gain 1 Signal.",
+    "Recalibrate": "Restore Integrity to an allied Frame or yourself.",
+    "Echo": "Repeats its lab effect at end of turn.",
+    "Anchored": "This Frame cannot be moved this turn.",
+    "Signal": "This Frame holds the grid — cannot be displaced while Integrity remains."
+  }
+}

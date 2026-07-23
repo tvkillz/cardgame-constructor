@@ -4,15 +4,18 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
+import { resolveBuildScope, withLandingAppScope } from './build-scope.mjs'
 import { hybridBuildEnv, siteHybridMarker } from './site-hybrid.mjs'
 import { buildPaths, resolveProjectId } from './project-paths.mjs'
 import { projectDistDir } from './project-next.mjs'
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const projectId = resolveProjectId()
+const scope = resolveBuildScope()
 const out = buildPaths(projectId)
 const playPagePath = path.join(root, 'src/app/play/page.tsx')
 const playPageBackup = path.join(root, '.cache/play-page.dev-backup.tsx')
+const landingOnly = scope === 'landing'
 
 function removePlayPageForHybridBuild() {
   if (!fs.existsSync(playPagePath)) return
@@ -65,6 +68,26 @@ function verifyPortalRoutes() {
   console.log(`[build:web] Verified ${portalRoutes.length} portal route(s): ${portalRoutes.join(', ')}`)
 }
 
+function verifyLandingRoute() {
+  const manifestPath = path.join(root, projectDistDir(projectId), 'app-path-routes-manifest.json')
+  if (!fs.existsSync(manifestPath)) {
+    console.warn('[build:web] No app-path-routes-manifest.json — skip landing verify')
+    return
+  }
+  const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'))
+  const routes = Object.keys(manifest)
+  if (!routes.some((r) => r === '/' || r === '/page')) {
+    throw new Error('[build:web] Landing route "/" missing from Next build')
+  }
+  const portalRoutes = routes.filter((r) => r.startsWith('/portal'))
+  if (portalRoutes.length > 0) {
+    throw new Error(
+      `[build:web] Landing scope still includes portal routes: ${portalRoutes.join(', ')}`,
+    )
+  }
+  console.log('[build:web] Verified landing route "/" (portal excluded)')
+}
+
 function verifyPlayBundle() {
   const indexHtml = path.join(out.play, 'index.html')
   if (!fs.existsSync(indexHtml)) {
@@ -89,30 +112,43 @@ function routesIncludePlayAppRoute() {
   return Object.keys(manifest).some((r) => r === '/play' || r === '/play/page')
 }
 
-console.log(`[build:web] Project: ${projectId}`)
+async function runNextBuild() {
+  cleanNextOutput()
+  // Landing already stashes play/; full hybrid still removes play page.tsx.
+  if (!landingOnly) removePlayPageForHybridBuild()
 
-cleanNextOutput()
-removePlayPageForHybridBuild()
-
-try {
-  execSync('npx next build', {
-    cwd: root,
-    stdio: 'inherit',
-    env: hybridBuildEnv({ ...process.env, PROJECT: projectId }),
-  })
-  execSync('node scripts/verify-next-build.mjs', {
-    cwd: root,
-    stdio: 'inherit',
-    env: { ...process.env, PROJECT: projectId },
-  })
-  const devStaticDir = path.join(root, out.next, 'static/development')
-  if (fs.existsSync(devStaticDir)) {
-    fs.rmSync(devStaticDir, { recursive: true, force: true })
-    console.log(`[build:web] Removed stray ${projectDistDir(projectId)}/static/development`)
+  try {
+    execSync('npx next build', {
+      cwd: root,
+      stdio: 'inherit',
+      env: hybridBuildEnv({ ...process.env, PROJECT: projectId, BUILD_SCOPE: scope }),
+    })
+    execSync('node scripts/verify-next-build.mjs', {
+      cwd: root,
+      stdio: 'inherit',
+      env: { ...process.env, PROJECT: projectId },
+    })
+    const devStaticDir = path.join(root, out.next, 'static/development')
+    if (fs.existsSync(devStaticDir)) {
+      fs.rmSync(devStaticDir, { recursive: true, force: true })
+      console.log(`[build:web] Removed stray ${projectDistDir(projectId)}/static/development`)
+    }
+    markHybridProduction()
+    if (landingOnly) {
+      verifyLandingRoute()
+    } else {
+      verifyPortalRoutes()
+      verifyPlayBundle()
+    }
+  } finally {
+    if (!landingOnly) restorePlayPage()
   }
-  markHybridProduction()
-  verifyPortalRoutes()
-  verifyPlayBundle()
-} finally {
-  restorePlayPage()
+}
+
+console.log(`[build:web] Project: ${projectId}${landingOnly ? ' (landing only)' : ''}`)
+
+if (landingOnly) {
+  await withLandingAppScope(runNextBuild)
+} else {
+  await runNextBuild()
 }

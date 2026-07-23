@@ -1,0 +1,103 @@
+{
+  "projectTitle": "HELIX",
+  "visualPitch": "Photorealistic generation-ship interiors — bright clean lab spaces, pale steel and frost glass, cinematic live-action VFX plates (not illustration)",
+  "style": {
+    "aesthetic": "photorealistic cinematic still, real-world materials and lighting, high-end live-action sci-fi production design, physically based rendering look, documentary-sharp architecture photography of a generation-ship laboratory, subtle volumetric light, believable metal glass and frost, hopeful bright lab (not grimdark)",
+    "avoid": "anime, manga, cartoon, cel shading, watercolor, illustration, concept-art sketch look, painterly brush strokes, Studio Ghibli, iyashikei pastoral, dark fantasy, horror, gore, grimdark war, neon cyberpunk overload, harsh black voids as the only mood, text overlays, watermarks, logos, readable UI text, prominent human faces, stylized non-photoreal characters",
+    "palette": "cool off-white and pale brushed steel, electric cyan instrument glow, soft violet signal haze, warm instrument amber, frost glass cyan, hab teal grow-lights"
+  },
+  "image": {
+    "promptPrefix": "Photorealistic wide cinematic still of a generation-ship interior,",
+    "promptSuffix": "photorealistic live-action VFX plate, physically based materials, clean laboratory lighting, pale steel and frosted glass, bright room not dungeon, no anime, no illustration, no people, no text, no watermark, 16:9 composition.",
+    "ctaSuffix": "photorealistic product/environment still for a trading card game website tile, real materials, pale steel and cyan accents, atmospheric depth, no anime, no illustration, no text, no watermark, 16:9 composition.",
+    "gamemodelSuffix": "photorealistic square environment still for a trading card game website section, real materials, centered composition, clean lab lighting, no anime, no illustration, no text, no watermark, 1:1 aspect ratio.",
+    "cardTypeSuffix": "photorealistic metallic emblem prop photo for a trading card game UI, machined metal and glass, clean silhouette, no anime, no illustration, no text, no watermark, 1:1 aspect ratio."
+  },
+  "outputSizes": {
+    "domain": { "width": 1672, "height": 941, "format": "png" },
+    "city": { "width": 1672, "height": 941, "format": "png" },
+    "cta": { "width": 1376, "height": 768, "format": "webp", "quality": 85 },
+    "gamemodel": { "width": 1024, "height": 1024, "format": "webp", "quality": 85 },
+    "card_type": { "width": 640, "height": 640, "format": "webp", "quality": 85 }
+  },
+  "domains": {
+    "atrium": {
+      "visualIdentity": "photoreal hydroponic halls, root-cables, canopy grow-lights, living Hab under steel ribs",
+      "palette": "#4a9a8a, #6eb5a0, #e8f0ec, #2a4a44",
+      "mood": "living quiet, greenhouse calm, soft grow-lamp hush"
+    },
+    "reservoir": {
+      "visualIdentity": "photoreal cryo tanks, frost glass, coolant rivers, pale cyan reflections",
+      "palette": "#3db8d4, #a8e0f0, #eef6f8, #2a5a6a",
+      "mood": "frost hush, coolant tide, vault stillness"
+    },
+    "core": {
+      "visualIdentity": "photoreal reactor rings, plasma conduits, amber instruments, warm engine glow",
+      "palette": "#d4895c, #c4a35a, #f5ebe0, #5a3a28",
+      "mood": "warm engine, calibrated heat, amber focus"
+    },
+    "antenna": {
+      "visualIdentity": "photoreal observation spines, void dishes, signal mist, relay galleries",
+      "palette": "#8b7ec8, #3db8d4, #eef0f8, #3a3a5a",
+      "mood": "open link, quiet starfield, signal clarity"
+    }
+  },
+  "elementFolders": {
+    "atrium": "hab",
+    "reservoir": "cryo",
+    "core": "forge",
+    "antenna": "relay"
+  },
+  "cta": {
+    "expand-collection": {
+      "prompt": "Photoreal neat Frame chassis lined on a pale steel rack in a bright lab aisle, soft cyan instrument glow, collection mood"
+    },
+    "buy-cards": {
+      "prompt": "Photoreal market kiosk on a generation-ship concourse, physical trading cards on frosted glass, soft lab lighting"
+    },
+    "sealed-vaults": {
+      "prompt": "Photoreal sealed card bundles stacked in a cryo-adjacent vault locker, pale cyan beacon light"
+    },
+    "discover-rare": {
+      "prompt": "Photoreal single foil trading card catching amber instrument light on a reactor gallery rail, soft specular highlight"
+    },
+    "sell-cards": {
+      "prompt": "Photoreal organized binder and duplicate Frames on a bright operator desk beside a credit token tray"
+    },
+    "shape-strategy": {
+      "prompt": "Photoreal deck of trading cards arranged in a curve on a pale lab table with faint cyan holographic overlays"
+    }
+  },
+  "gamemodel": {
+    "tactical-battles": {
+      "prompt": "Photoreal frosted-glass tactical table with small Frame tokens, calm duel atmosphere, no readable UI text"
+    },
+    "collectible-cards": {
+      "prompt": "Photoreal fan of physical robot Frame trading cards over a soft out-of-focus montage of Hab Cryo Core and Relay interiors"
+    },
+    "ranked-climb": {
+      "prompt": "Photoreal ascending spiral corridor of a generation ship with soft cyan wayfinding lights"
+    }
+  },
+  "cardTypes": {
+    "uncommon": {
+      "label": "Calibrated",
+      "accent": "#3db8d4",
+      "prompt": "Photoreal machined cyan calibration hex emblem prop, brushed metal and glass, Calibrated tier icon"
+    },
+    "rare": {
+      "label": "Prime",
+      "accent": "#8b7ec8",
+      "prompt": "Photoreal violet prime crest emblem prop with thin gold edge, brushed metal, Prime tier icon"
+    },
+    "epic": {
+      "label": "Singularity",
+      "accent": "#d4895c",
+      "prompt": "Photoreal amber singularity ring emblem prop with soft radiance, machined metal, Singularity tier icon"
+    }
+  },
+  "generation": {
+    "sourceOfTruth": "game/scenes.json",
+    "showcaseCompileEnv": "FRONTEND_SHOWCASE_ONLY=1"
+  }
+}

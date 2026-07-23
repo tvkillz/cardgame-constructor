@@ -1,0 +1,62 @@
+{
+  "defaults": {
+    "arenaLocationId": "core",
+    "lobbyLocationId": "atrium"
+  },
+  "locations": [
+    {
+      "id": "atrium",
+      "name": "Atrium",
+      "domainId": "atrium",
+      "categoryId": "earth",
+      "glowColor": "#4a9a8a",
+      "featuredCardSlug": "atrium_card_01_hab_tender",
+      "epithet": "The Living Hab",
+      "short": "The Living Hab — hydroponic halls, root-cables, and soft canopy light under steel ribs.",
+      "imageAsset": "cities/hab/hab_city_01_hydroponic_hall.png",
+      "backgroundImageAsset": "cities/hab/hab_city_02_root_cable_garden.png"
+    },
+    {
+      "id": "reservoir",
+      "name": "Reservoir",
+      "domainId": "reservoir",
+      "categoryId": "water",
+      "glowColor": "#3db8d4",
+      "featuredCardSlug": "reservoir_card_01_cryo_tender",
+      "epithet": "The Frost Circuit",
+      "short": "The Frost Circuit — cryo vaults, coolant rivers, and frost-glass terraces.",
+      "imageAsset": "cities/cryo/cryo_city_01_frost_glass_bay.png",
+      "backgroundImageAsset": "cities/cryo/cryo_city_02_coolant_river.png"
+    },
+    {
+      "id": "core",
+      "name": "Core",
+      "domainId": "core",
+      "categoryId": "fire",
+      "glowColor": "#d4895c",
+      "featuredCardSlug": "core_card_01_ring_keeper",
+      "epithet": "The Warm Engine",
+      "short": "The Warm Engine — reactor rings, plasma conduits, and amber instrument halls.",
+      "imageAsset": "cities/forge/forge_city_01_reactor_ring.png",
+      "backgroundImageAsset": "cities/forge/forge_city_02_plasma_conduit.png"
+    },
+    {
+      "id": "antenna",
+      "name": "Antenna",
+      "domainId": "antenna",
+      "categoryId": "air",
+      "glowColor": "#8b7ec8",
+      "featuredCardSlug": "antenna_card_01_relay_ghost",
+      "epithet": "The Open Link",
+      "short": "The Open Link — observation spines, void radio dishes, and signal-mist galleries.",
+      "imageAsset": "cities/relay/relay_city_01_observation_spine.png",
+      "backgroundImageAsset": "cities/relay/relay_city_02_void_dish_field.png"
+    }
+  ],
+  "lore": {
+    "global": {
+      "static": "Static",
+      "signal": "Signal"
+    }
+  }
+}

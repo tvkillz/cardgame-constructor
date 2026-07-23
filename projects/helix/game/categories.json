@@ -1,0 +1,8 @@
+{
+  "categories": [
+    { "id": "earth", "label": "Hab", "locationIds": ["atrium"] },
+    { "id": "water", "label": "Cryo", "locationIds": ["reservoir"] },
+    { "id": "fire", "label": "Reactor", "locationIds": ["core"] },
+    { "id": "air", "label": "Relay", "locationIds": ["antenna"] }
+  ]
+}

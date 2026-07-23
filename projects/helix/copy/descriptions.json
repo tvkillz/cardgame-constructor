@@ -1,0 +1,101 @@
+{
+  "hero": {
+    "headline": ["Keep the Signal.", "Field the Frames."],
+    "subheadline": "Aboard the Spire, four lab domains still hold a clean link — Hab, Cryo, Reactor, and Relay. Collect robot Frames, tune precise decks, and trade on a bright market before Static eats the grid."
+  },
+  "locations": {
+    "kicker": "Tour the Domains",
+    "paragraphs": [
+      "The Spire's Relay Grid is thinning. A noise called <strong class=\"locations__lore-aether\">Static</strong> crawls through conduits and frost glass, eroding the <strong class=\"locations__lore-null\">Signal</strong> — the coherent link that lets Hab grow, Cryo hold, Core warm, and Antenna listen.",
+      "As Static presses inward, Frames grow unsettled. Operators must not only win their matches, but keep these lab pockets coherent before the last clean channel dissolves into noise."
+    ]
+  },
+  "play": {
+    "screenLabel": "HELIX play screen",
+    "titleLine": "HELIX",
+    "titleAccent": ""
+  },
+  "collections": "Deck collection portal — coming soon.",
+  "leaderboard": "Seasonal ladder — ranked standings across the four domains.",
+  "portal": {
+    "gateTitle": "Sign In Required",
+    "gateMessage": "The player portal is tied to your account. Sign in to access market, vaults, and profile.",
+    "comingSoon": "This section is still calibrating — check back soon.",
+    "buyCredits": "+ BUY",
+    "withdraw": "WITHDRAW",
+    "cart": "CART",
+    "currencyLabel": "EUR"
+  },
+  "credits": {
+    "title": "Get Helix Credits",
+    "subtitle": "Base rate: 100 credits = 1 EUR. No discounts or bonus credits.",
+    "standardRate": "STANDARD RATE",
+    "popularBadge": "POPULAR",
+    "customAmount": "CUSTOM AMOUNT",
+    "amountToBuy": "AMOUNT TO BUY",
+    "amountPlaceholder": "Enter amount...",
+    "totalLabel": "TOTAL:",
+    "buy": "BUY",
+    "closeLabel": "Close"
+  },
+  "deckModal": {
+    "title": "Select Your Deck",
+    "deckPlaceholder": "Choose a deck...",
+    "cancel": "Cancel",
+    "enterBattle": "Enter Match",
+    "manageDecks": "Manage Decks"
+  },
+  "header": {
+    "signIn": "Sign In",
+    "signOut": "Sign Out",
+    "signedInAs": "Signed in as"
+  },
+  "auth": {
+    "signInTitle": "Welcome Back",
+    "signInSubtitle": "Sign in with your email and password to continue.",
+    "registerTitle": "Join the Spire",
+    "registerSubtitle": "Create an account to operate across Atrium, Reservoir, Core, and Antenna.",
+    "emailLabel": "Email",
+    "usernameLabel": "Username",
+    "passwordLabel": "Password",
+    "confirmPasswordLabel": "Confirm Password",
+    "signInSubmit": "Sign In",
+    "registerSubmit": "Create Account",
+    "switchToRegister": "New here? Register",
+    "switchToSignIn": "Already have an account? Sign In",
+    "forgotPasswordLink": "Forgot password?",
+    "forgotPasswordTitle": "Restore Access",
+    "forgotPasswordSubtitle": "Enter your email and we will send a reset link.",
+    "forgotPasswordSubmit": "Send Reset Link",
+    "resetEmailSent": "Check your email for a password reset link.",
+    "resetFailed": "Could not send reset email. Try again later.",
+    "callbackLoading": "Verifying your link…",
+    "callbackRecoveryTitle": "Set a New Password",
+    "callbackRecoverySubtitle": "Choose a new password for your account.",
+    "callbackNewPasswordLabel": "New Password",
+    "callbackConfirmPasswordLabel": "Confirm New Password",
+    "callbackUpdatePasswordSubmit": "Update Password",
+    "callbackPasswordUpdated": "Password updated. You can sign in now.",
+    "callbackFailed": "This link is invalid or expired. Request a new one.",
+    "switchBackToSignIn": "Back to sign in",
+    "closeLabel": "Close",
+    "passwordHint": "At least 8 characters, one uppercase letter, and one symbol.",
+    "playGateTitle": "Sign In Required",
+    "playGateMessage": "Sign in before entering a match.",
+    "playGateCta": "Sign In",
+    "loading": "One moment…",
+    "errors": {
+      "supabaseUnavailable": "Authentication is not configured. Set Supabase env vars on the server.",
+      "invalidEmail": "Enter a valid email address.",
+      "invalidUsername": "Username must be 3–24 characters (letters, numbers, underscore).",
+      "invalidPassword": "Password needs 8+ characters, one uppercase letter, and one symbol.",
+      "passwordMismatch": "Passwords do not match.",
+      "signInEmptyPassword": "Enter your password.",
+      "signInFailed": "Sign in failed. Please try again.",
+      "invalidCredentials": "Invalid email or password.",
+      "signUpFailed": "Registration failed. Try a different email or username.",
+      "emailConfirmation": "Check your email to confirm your account, then sign in.",
+      "emailNotConfirmed": "Confirm your email before signing in, or use Register if you have no account."
+    }
+  }
+}

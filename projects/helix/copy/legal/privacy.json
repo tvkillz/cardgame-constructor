@@ -1,0 +1,210 @@
+{
+  "eyebrow": "Legal",
+  "title": "Privacy Notice",
+  "lastUpdated": "29 June 2026",
+  "blocks": [
+    {
+      "type": "paragraph",
+      "text": "This Privacy Notice outlines how Test LTD (\"we\", \"us\", or \"our\") manages, processes, and safeguards your personal data when you interact with https://helix.voidborn.fun (the \"Website\"), our digital card game, and any integrated features (collectively, the \"Platform\")."
+    },
+    {
+      "type": "paragraph",
+      "text": "We operate as the data controller for the information collected under this policy. Our corporate details are:"
+    },
+    {
+      "type": "company",
+      "name": "Test LTD",
+      "companyNumber": "00000000",
+      "address": "123 Example Street, Testville, TE1 1ST, United Kingdom",
+      "email": "play@helix.voidborn.fun"
+    },
+    {
+      "type": "paragraph",
+      "text": "We process your data transparently and in strict compliance with applicable data protection legislation, including the UK General Data Protection Regulation (\"UK GDPR\") and the Data Protection Act 2018."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "1. Categories of Information We Collect"
+    },
+    {
+      "type": "paragraph",
+      "text": "To provide a smooth gaming and marketplace experience, we collect the following types of information:"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "items": [
+        "Profile & Account Data: Your chosen username, email address, account password (encrypted via secure hashing), and any personal details provided during registration.",
+        "Gameplay Metrics: Match logs, custom deck builds, leaderboards, player rank, historical progression, and your in-game virtual inventory.",
+        "Marketplace & Financial Records: History of digital pack purchases, wallet balance adjustments, peer-to-peer shop transactions, and withdrawal requests.",
+        "Payment Verification Data: Transaction confirmation numbers, payment status tokens, and general billing location. Please note: Full credit card numbers are handled exclusively by our secure, third-party payment gateways and never touch our servers.",
+        "Device & Technical Logs: IP addresses, operating system types, browser characteristics, login session duration, and unique device identifiers.",
+        "Direct Communications: Content from support tickets, feedback forms, and email correspondence sent to our team."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "2. Channels of Collection"
+    },
+    {
+      "type": "paragraph",
+      "text": "We obtain personal data directly from you or your device when you:"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "items": [
+        "Register an Account or log in using our secure authentication infrastructure.",
+        "Play matches, browse the internal marketplace, or use wallet features.",
+        "Execute credit top-ups or request a financial payout.",
+        "Reach out to our customer support desk.",
+        "Browse the Website (via automated cookie tracking)."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "3. Core Purposes for Data Processing"
+    },
+    {
+      "type": "paragraph",
+      "text": "We utilize the collected information for the following specific operations:"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "items": [
+        "Platform Delivery: Authenticating your identity, maintaining your digital wallet, and saving your game progress.",
+        "Transaction Processing: Clearing asset purchases, managing marketplace trades, and vetting withdrawal payouts.",
+        "Security & Risk Management: Detecting and preventing system exploits, multi-accounting abuse, bad-faith chargebacks, and fraudulent payment activities.",
+        "System Optimization: Running diagnostics, fixing bugs, and conducting anonymous performance analytics to make the game better.",
+        "Communications: Issuing critical service alerts, account recovery steps, and answering customer support inquiries."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "4. Legal Frameworks for Data Usage"
+    },
+    {
+      "type": "paragraph",
+      "text": "Under data protection laws, we only process your data when we have a valid legal justification. We rely on:"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "items": [
+        "Performance of a Contract: Required to deliver the core game services, handle player accounts, and fulfill purchases you make.",
+        "Legitimate Interests: Necessary for our business to prevent platform fraud, protect transaction integrity, and maintain cyber security, provided these don't override your fundamental privacy rights.",
+        "Legal Compliance: Required to meet mandatory accounting rules, tax obligations, anti-money laundering principles, or valid law enforcement requests.",
+        "Consent: Utilized for non-essential tracking cookies or optional marketing updates. You can withdraw your consent at any time."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "5. Information Sharing & Third Parties"
+    },
+    {
+      "type": "paragraph",
+      "text": "We do not sell your personal data. We share your information only with trusted service partners essential to running our business, including:"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "items": [
+        "Secure cloud infrastructure and database hosting platforms.",
+        "Identity verification and backend authentication networks.",
+        "Regulated payment gateways and payout processors."
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "These partners process your details strictly on our behalf under formal data processing agreements that guarantee equal levels of security and confidentiality."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "6. Tracker Technologies (Cookies)"
+    },
+    {
+      "type": "paragraph",
+      "text": "Our Website uses cookies to keep you securely logged in, remember your settings, and evaluate layout performance."
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "items": [
+        "Essential Cookies: Deployed automatically to manage security, handle sessions, and process checkout payments. Disabling these will cause parts of the site to stop working.",
+        "Analytics Cookies: Run only if you explicitly grant permission through our cookie banner. You can update these preferences at any time."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "7. Data Storage & Worldwide Transfers"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "items": [
+        "Retention Timelines: We retain your data only for as long as your Account remains active or as required to fulfill legal tax records, resolve platform disputes, and maintain anti-fraud logging patterns.",
+        "Cross-Border Transfers: Some infrastructure partners may store or process data outside of the European Economic Area (EEA). When data crosses borders, we ensure strict legal protection mechanisms are active—such as Standard Contractual Clauses (SCCs)—to maintain a high standard of protection."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "8. Data Security Measures"
+    },
+    {
+      "type": "paragraph",
+      "text": "We deploy strict technical and organizational safeguards (including data encryption, hashed password storage, and access control restrictions) to prevent unauthorized viewing, alteration, or loss of your files. However, because no online system is completely impenetrable, we cannot promise absolute security."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "9. Minor Age Restrictions"
+    },
+    {
+      "type": "paragraph",
+      "text": "Our Platform is designed exclusively for adults. We do not knowingly collect or store personal data from anyone under the age of 18. If we find out that a minor has bypassed security and registered an account, we will erase their personal data immediately."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "10. Your Privacy Rights"
+    },
+    {
+      "type": "paragraph",
+      "text": "Depending on where you live, you have the following legally protected rights regarding your personal data:"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "items": [
+        "Access & Copying: The right to request a full copy of the data we hold about you.",
+        "Correction: The right to fix inaccurate or outdated personal files.",
+        "Deletion (\"Right to be Forgotten\"): The right to request complete account and data erasure, subject to legal holding obligations.",
+        "Processing Restrictions: The right to stop us from using your data for specific tasks.",
+        "Data Portability: The right to receive your data in a clean, machine-readable format.",
+        "Regulator Complaints: The right to lodge a complaint with the Information Commissioner's Office (ICO) or your local data protection authority."
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "To request any of these rights, contact us at play@helix.voidborn.fun. For safety purposes, we will ask you to verify your identity before processing the request."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "11. Policy Updates"
+    },
+    {
+      "type": "paragraph",
+      "text": "We update this Privacy Notice periodically to reflect changes in our tech stack or regional law. Any revisions will be pushed directly to this page with an updated \"Last Updated\" timestamp."
+    }
+  ]
+}

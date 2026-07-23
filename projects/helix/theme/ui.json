@@ -1,0 +1,56 @@
+{
+  "fonts": {
+    "fantasy": "'Orbitron', 'Rajdhani', 'Segoe UI', system-ui, sans-serif",
+    "ui": "'Rajdhani', 'IBM Plex Sans', system-ui, sans-serif",
+    "googleFontsUrl": "https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap"
+  },
+  "navigation": [
+    { "label": "Play Now", "href": "/play", "route": "play" },
+    { "label": "Market", "href": "/portal/market", "route": "portalMarket" },
+    { "label": "Leaderboard", "href": "/leaderboard", "route": "leaderboard" }
+  ],
+  "accountMenu": [
+    { "id": "play", "label": "Play Now", "route": "play" },
+    { "id": "market", "label": "Market", "route": "portalMarket" },
+    { "id": "leaderboard", "label": "Leaderboard", "route": "leaderboard" },
+    { "id": "profile", "label": "Profile", "route": "portalProfile" },
+    { "id": "credits", "label": "Purchase Credits", "action": "purchaseCredits" },
+    { "id": "sign-out", "label": "Sign Out", "action": "signOut" }
+  ],
+  "heroCtas": [
+    { "label": "Play Now", "id": "play", "route": "play", "accent": "cyan" },
+    { "label": "View Market", "id": "market", "route": "portalMarket", "accent": "purple" },
+    { "label": "Leaderboard", "id": "leaderboard", "route": "leaderboard", "accent": "ember" }
+  ],
+  "playModes": [
+    {
+      "id": "casual",
+      "title": "Casual Link",
+      "subtitle": "Practice freely — no rating on the line",
+      "accent": "cyan",
+      "mark": "◇"
+    },
+    {
+      "id": "ranked",
+      "title": "Ranked Grid",
+      "subtitle": "Climb the season — wins and losses count",
+      "accent": "ember",
+      "mark": "◈"
+    },
+    {
+      "id": "tutorial",
+      "title": "Lab Primer",
+      "subtitle": "Learn the rules with a guided trial deck",
+      "accent": "purple",
+      "mark": "◎"
+    }
+  ],
+  "player": {
+    "fallbackName": "Operator",
+    "opponentName": "Static",
+    "defaultCredits": 988
+  },
+  "particles": {
+    "colors": ["#3db8d4", "#8b7ec8"]
+  }
+}

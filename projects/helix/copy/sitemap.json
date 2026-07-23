@@ -1,0 +1,51 @@
+{
+  "entries": [
+    {
+      "path": "/",
+      "changeFrequency": "weekly",
+      "priority": 1.0,
+      "comment": "Landing — hero, domains, game model, FAQ"
+    },
+    {
+      "path": "/play",
+      "changeFrequency": "weekly",
+      "priority": 0.9,
+      "comment": "Play lobby / match entry"
+    },
+    {
+      "path": "/terms",
+      "changeFrequency": "yearly",
+      "priority": 0.3
+    },
+    {
+      "path": "/privacy",
+      "changeFrequency": "yearly",
+      "priority": 0.3
+    },
+    {
+      "path": "/refund-policy",
+      "changeFrequency": "yearly",
+      "priority": 0.3
+    },
+    {
+      "path": "/disclaimer",
+      "changeFrequency": "yearly",
+      "priority": 0.3
+    },
+    {
+      "path": "/cookie-policy",
+      "changeFrequency": "yearly",
+      "priority": 0.3
+    }
+  ],
+  "robots": {
+    "disallow": [
+      "/portal/",
+      "/checkout",
+      "/auth/",
+      "/profile",
+      "/market"
+    ],
+    "comment": "Portal, checkout, auth callback, and profile require sign-in — exclude from crawl budget"
+  }
+}

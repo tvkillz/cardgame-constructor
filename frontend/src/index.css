@@ -1,10 +1,14 @@
 @import './styles/landing-layout.css';
 @import './styles/iyashikei-fonts.css';
+@import './styles/helix-fonts.css';
 @import './styles/iyashikei-cards.css';
 @import './styles/iyashikei-modals.css';
 @import './styles/iyashikei-theme.css';
 @import './styles/iyashikei-portal-pages.css';
 @import './styles/iyashikei-landing-layouts.css';
+@import './styles/helix-theme.css';
+@import './styles/helix-landing-layouts.css';
+@import './styles/helix-cards.css';
 
 /* Color defaults — overridden at runtime by applyTheme(); fonts via next/font in app layout */
 :root {

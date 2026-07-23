@@ -1,0 +1,61 @@
+{
+  "gameTitle": "HELIX",
+  "gamePitch": "a soft-sci-fi collectible TCG set aboard the generation ship Spire — four lab domains (Atrium, Reservoir, Core, Antenna) where players field Frames (robots and chassis companions) against encroaching Static",
+  "world": {
+    "title": "The Spire Grid",
+    "description": "The Spire woke its guardian units. Collect Frames across Hab, Cryo, Reactor, and Relay, keep the Signal coherent, and compete on a clean lab battlefield where precision beats chaos."
+  },
+  "statLabels": {
+    "attack": "Signal",
+    "health": "Integrity"
+  },
+  "domains": {
+    "atrium": {
+      "visualIdentity": "hydroponic halls, root-cables, canopy grow-lights, soft teal and pale steel, living Hab robots and garden Frames",
+      "flavorNotes": "hab tenders, canopy drones, root-cable walkers, greenhouse Frames, grow-lamp keepers, vine-chassis companions"
+    },
+    "reservoir": {
+      "visualIdentity": "cryo tanks, frost glass, coolant rivers, pale cyan and pearl, cold-lab robots",
+      "flavorNotes": "cryo tenders, frost glass drones, coolant runners, vault Frames, ice-bay couriers, vapor sensors"
+    },
+    "core": {
+      "visualIdentity": "reactor rings, plasma conduits, amber instruments, warm copper on pale steel, calibrated engine Frames",
+      "flavorNotes": "ring keepers, conduit Frames, instrument drones, plasma shepherds, amber pilots, forge calibrators"
+    },
+    "antenna": {
+      "visualIdentity": "observation spines, void dishes, signal mist, soft violet and cyan, relay robots",
+      "flavorNotes": "relay ghosts, dish walkers, signal mist Frames, spine observers, beacon drones, vector couriers"
+    }
+  },
+  "designRules": [
+    "Mana 1–8 (most cards 3–6). Signal + Integrity should roughly scale with mana (stored as attack and health in JSON).",
+    "Roles vary: guardians, scanners, calibrators, relays, tenders, couriers — not assassins, siege units, or burn decks.",
+    "Ability text must spell out keyword effects like the examples (do not assume the player knows keywords).",
+    "ability.name should be evocative and unique within the batch.",
+    "Use 0–2 keywords per card from the project glossary only.",
+    "Tone: soft-sci-fi lab flavor — hopeful, precise, clean — still tactically interesting but never brutal.",
+    "Never use violent language in ability text: no damage, kill, destroy, burn, siege, or direct attacks on the player.",
+    "Frame contests as disrupting Signal, restoring Integrity, redirecting engagement, or drawing/linking — not dealing damage.",
+    "Rarity tiers (from game/rarities.json): Chassis, Calibrated, Prime, Singularity, Helix — derived from mana unless rarity is set explicitly.",
+    "Subjects are robots / Frames / chassis companions — avoid prominent human faces unless a small pilot silhouette is secondary."
+  ],
+  "image": {
+    "aspectRatio": "3:4",
+    "promptGuidelines": "single focal robot Frame or chassis companion, photorealistic live-action prop/character photography, clean laboratory lighting, pale steel and accent glow, NO anime, NO illustration, NO text, NO card frame, NO watermark, portrait 3:4 composition",
+    "promptSuffix": "Photorealistic soft-sci-fi product/character still, single focal robot or Frame, clean laboratory lighting, pale steel, hopeful mood, no anime, no illustration, no text, no border, no watermark, portrait 3:4 aspect ratio.",
+    "notesGuidelines": "negative prompts must ban anime/manga/illustration; include palette, domain mood, and Frame silhouette hints"
+  },
+  "generation": {
+    "maxKeywordsPerCard": 2,
+    "exampleCardsPerDomain": 5,
+    "maxBatchPerDomain": 50
+  },
+  "rarities": {
+    "source": "game/rarities.json",
+    "notes": "Tier ids (common, uncommon, …) match the DB enum. Display labels: Chassis, Calibrated, Prime, Singularity, Helix."
+  },
+  "status": {
+    "designApproved": true,
+    "notes": "Landing showcase: 12 slugs (4 featured + 8 collection). Run generate-showcase then images/apply. heroCardSlugs in theme/landing.json for compile."
+  }
+}

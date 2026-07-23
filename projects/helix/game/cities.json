@@ -1,0 +1,76 @@
+{
+  "cities": [
+    {
+      "slug": "hab_city_01_hydroponic_hall",
+      "path": "cities/hab/hab_city_01_hydroponic_hall.png",
+      "name": "Hydroponic Hall",
+      "description": "Tall glass planters climb the Atrium ribs; soft canopy light filters through leaf and cable while condensation beads on clean steel rails."
+    },
+    {
+      "slug": "hab_city_02_root_cable_garden",
+      "path": "cities/hab/hab_city_02_root_cable_garden.png",
+      "name": "Root-Cable Garden",
+      "description": "Rooted vines braid with power conduits across a mezzanine garden — green life and pale HUD glow share the same quiet aisle."
+    },
+    {
+      "slug": "hab_city_03_canopy_observatory",
+      "path": "cities/hab/hab_city_03_canopy_observatory.png",
+      "name": "Canopy Observatory",
+      "description": "A glass cupola opens above the Hab canopy; distant starlight mixes with soft grow-lamps and a pale spiral of condensation mist."
+    },
+    {
+      "slug": "cryo_city_01_frost_glass_bay",
+      "path": "cities/cryo/cryo_city_01_frost_glass_bay.png",
+      "name": "Frost Glass Bay",
+      "description": "A wide bay of frosted panes overlooks stacked cryo tanks; pale cyan reflections slide across the floor like slow tides."
+    },
+    {
+      "slug": "cryo_city_02_coolant_river",
+      "path": "cities/cryo/cryo_city_02_coolant_river.png",
+      "name": "Coolant River",
+      "description": "A luminous coolant channel runs between catwalks; vapor curls upward while instrument panels blink in soft ice-blue."
+    },
+    {
+      "slug": "cryo_city_03_cryo_vault_terrace",
+      "path": "cities/cryo/cryo_city_03_cryo_vault_terrace.png",
+      "name": "Cryo Vault Terrace",
+      "description": "Sealed vault doors line a curved terrace; frost patterns bloom on metal while a quiet warning beacon pulses amber."
+    },
+    {
+      "slug": "forge_city_01_reactor_ring",
+      "path": "cities/forge/forge_city_01_reactor_ring.png",
+      "name": "Reactor Ring",
+      "description": "A circular reactor gallery glows with warm instrument amber; railings and conduits form clean geometric arcs under lab lighting."
+    },
+    {
+      "slug": "forge_city_02_plasma_conduit",
+      "path": "cities/forge/forge_city_02_plasma_conduit.png",
+      "name": "Plasma Conduit Walk",
+      "description": "Transparent conduit tubes carry soft plasma shimmer along a bright corridor — heat haze, not fire, under cool white overheads."
+    },
+    {
+      "slug": "forge_city_03_instrument_hall",
+      "path": "cities/forge/forge_city_03_instrument_hall.png",
+      "name": "Instrument Amber Hall",
+      "description": "Banks of calibrated instruments face a glowing core viewport; copper and amber readouts break the pale steel calm."
+    },
+    {
+      "slug": "relay_city_01_observation_spine",
+      "path": "cities/relay/relay_city_01_observation_spine.png",
+      "name": "Observation Spine",
+      "description": "A long spine of viewports looks into deep space; violet signal haze drifts past antenna lattices outside the glass."
+    },
+    {
+      "slug": "relay_city_02_void_dish_field",
+      "path": "cities/relay/relay_city_02_void_dish_field.png",
+      "name": "Void Dish Field",
+      "description": "Arrays of radio dishes tilt toward a starfield; soft purple HUD rings float above pale deck plating."
+    },
+    {
+      "slug": "relay_city_03_signal_mist_gallery",
+      "path": "cities/relay/relay_city_03_signal_mist_gallery.png",
+      "name": "Signal Mist Gallery",
+      "description": "A gallery of translucent panels fills with luminous signal mist; thin cyan vectors draw quiet constellations on the walls."
+    }
+  ]
+}

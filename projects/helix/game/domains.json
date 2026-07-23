@@ -1,0 +1,32 @@
+{
+  "domains": [
+    {
+      "id": "atrium",
+      "label": "Atrium",
+      "categoryId": "earth",
+      "glowColor": "#4a9a8a",
+      "domainAsset": "domains/hab_domain.png"
+    },
+    {
+      "id": "reservoir",
+      "label": "Reservoir",
+      "categoryId": "water",
+      "glowColor": "#3db8d4",
+      "domainAsset": "domains/cryo_domain.png"
+    },
+    {
+      "id": "core",
+      "label": "Core",
+      "categoryId": "fire",
+      "glowColor": "#d4895c",
+      "domainAsset": "domains/forge_domain.png"
+    },
+    {
+      "id": "antenna",
+      "label": "Antenna",
+      "categoryId": "air",
+      "glowColor": "#8b7ec8",
+      "domainAsset": "domains/relay_domain.png"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "title": "Hold the Link",
+  "subtitle": "Tour the domains. Keep the Signal.",
+  "description": "Join a community of operators, market traders, and ladder climbers who compete with precision. Collect Frames, shape clean strategies, and leave your mark on the four domains of Helix.",
+  "buttonLabel": "Play Now",
+  "route": "play",
+  "backgroundImage": "cities/relay/relay_city_03_signal_mist_gallery.png",
+  "siege": {
+    "title": "The Signal Season",
+    "stats": [
+      { "id": "players", "value": "12K+", "label": "Operators" },
+      { "id": "battles", "value": "48K+", "label": "Daily Matches" },
+      { "id": "cards", "value": "2M+", "label": "Frames Collected" }
+    ]
+  }
+}

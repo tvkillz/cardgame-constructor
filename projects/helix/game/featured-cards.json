@@ -1,0 +1,9 @@
+{
+  "_comment": "Deprecated mirror — source of truth is locations.json (featuredCardSlug per domain).",
+  "featuredByLocation": {
+    "atrium": "atrium_card_01_hab_tender",
+    "reservoir": "reservoir_card_01_cryo_tender",
+    "core": "core_card_01_ring_keeper",
+    "antenna": "antenna_card_01_relay_ghost"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "variant": "helix",
+  "introVideo": false,
+  "heroMedia": "slides",
+  "heroCardSlugs": [
+    "atrium_card_01_hab_tender",
+    "reservoir_card_01_cryo_tender",
+    "core_card_01_ring_keeper",
+    "antenna_card_01_relay_ghost",
+    "atrium_card_02_root_cable_walker",
+    "antenna_card_02_dish_walker"
+  ]
+}
