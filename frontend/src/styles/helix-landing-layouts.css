@@ -1,16 +1,242 @@
-/* HELIX landing — hero → locations layout rhythms. */
+/* HELIX landing — hero → locations + lower-section rhythms (helix only). */
 
 [data-landing-variant='helix'] {
-  --helix-section-pad-y: clamp(4.5rem, 10vw, 7rem);
-  --helix-section-pad-bottom: clamp(3rem, 8vw, 5.5rem);
+  --helix-section-pad-y: clamp(3.5rem, 8vw, 5.5rem);
+  --helix-section-pad-bottom: clamp(2.5rem, 6vw, 4.5rem);
 }
 
 [data-landing-variant='helix'] .landing-flow {
-  gap: clamp(2.75rem, 7vw, 5rem);
+  gap: clamp(2.5rem, 6vw, 4.5rem);
   padding-bottom: var(--helix-section-pad-bottom);
 }
 
-/* Hero angled cut bleeds into starfield locations */
+/* Hero angled cut bleeds into locations */
 [data-landing-variant='helix'] .landing-flow > .helix-hero + .helix-locations {
   margin-top: calc(-1 * clamp(3rem, 8vw, 5.5rem));
+}
+
+[data-landing-variant='helix'] .landing-flow > .helix-locations + .dominions {
+  margin-top: 0;
+}
+
+/* ── Dominions: 2×2 landscape lab bays (not voidborn 4-col portrait / iyashikei scroll) ── */
+
+[data-landing-variant='helix'] .dominions__inner {
+  margin-top: 0;
+  /* padding-top: var(--helix-section-pad-y); */
+  padding-bottom: var(--helix-section-pad-bottom);
+  gap: clamp(1.5rem, 4vw, 2.25rem);
+}
+
+[data-landing-variant='helix'] .dominions__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(0.85rem, 2vw, 1.25rem);
+}
+
+[data-landing-variant='helix'] .dominions__card {
+  aspect-ratio: 16 / 11;
+  min-height: 0;
+  border-radius: 2px;
+}
+
+[data-landing-variant='helix'] .dominions__card-copy {
+  text-align: left;
+  align-items: flex-start;
+  padding: clamp(1.1rem, 2.5vw, 1.5rem);
+  padding-top: clamp(2.1rem, 4vw, 2.6rem);
+}
+
+@media (max-width: 760px) {
+  [data-landing-variant='helix'] .dominions__grid {
+    grid-template-columns: 1fr;
+  }
+
+  [data-landing-variant='helix'] .dominions__card {
+    aspect-ratio: 16 / 10;
+  }
+}
+
+/* ── Game model: horizontal ops protocol chain (media-first steps + signal line) ── */
+
+[data-landing-variant='helix'] .gamemodel__inner {
+  margin-top: 0;
+  align-items: stretch;
+  gap: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+[data-landing-variant='helix'] .gamemodel__header {
+  align-items: flex-start;
+  text-align: left;
+  max-width: 40rem;
+}
+
+[data-landing-variant='helix'] .gamemodel__header .landing-section-title,
+[data-landing-variant='helix'] .gamemodel__header .landing-section-lead {
+  text-align: left;
+  margin-inline: 0;
+}
+
+[data-landing-variant='helix'] .gamemodel__eyebrow {
+  margin: 0 0 0.55rem;
+  font-family: var(--font-heading, var(--font-fantasy));
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #3db8d4;
+}
+
+[data-landing-variant='helix'] .gamemodel__grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.25rem, 3vw, 2rem);
+  align-items: start;
+}
+
+/* Signal rail connecting the three steps */
+[data-landing-variant='helix'] .gamemodel__grid::before {
+  content: '';
+  position: absolute;
+  top: clamp(3.2rem, 8vw, 4.2rem);
+  left: 8%;
+  right: 8%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(61, 184, 212, 0.2) 8%,
+    rgba(61, 184, 212, 0.55) 50%,
+    rgba(139, 126, 200, 0.45) 78%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+[data-landing-variant='helix'] .gamemodel__item {
+  position: relative;
+  z-index: 1;
+}
+
+[data-landing-variant='helix'] .gamemodel__card {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  text-align: left;
+  gap: 0.85rem;
+  padding: 0;
+  border-radius: 0;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+}
+
+[data-landing-variant='helix'] .gamemodel__card:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+[data-landing-variant='helix'] .gamemodel__step {
+  font-family: var(--font-heading, var(--font-fantasy));
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  color: color-mix(in srgb, var(--pillar-glow, #3db8d4) 90%, #fff);
+}
+
+[data-landing-variant='helix'] .gamemodel__icon-wrap {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: 2px;
+  border: 1px solid color-mix(in srgb, var(--pillar-glow, #3db8d4) 40%, transparent);
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(255, 255, 255, 0.04) inset;
+}
+
+[data-landing-variant='helix'] .gamemodel__card:hover .gamemodel__icon-wrap {
+  transform: translateY(-4px);
+  border-color: color-mix(in srgb, var(--pillar-glow, #3db8d4) 65%, transparent);
+  filter: brightness(1.05);
+  box-shadow:
+    0 16px 32px rgba(0, 0, 0, 0.4),
+    0 0 24px color-mix(in srgb, var(--pillar-glow, #3db8d4) 18%, transparent);
+}
+
+[data-landing-variant='helix'] .gamemodel__copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  padding-inline: 0.15rem;
+}
+
+[data-landing-variant='helix'] .gamemodel__card-title {
+  font-family: var(--font-heading, var(--font-fantasy));
+  letter-spacing: 0.1em;
+}
+
+[data-landing-variant='helix'] .gamemodel__tags {
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid rgba(61, 184, 212, 0.28);
+  border-radius: 2px;
+  background: rgba(16, 22, 30, 0.55);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 919px) {
+  [data-landing-variant='helix'] .gamemodel__grid {
+    grid-template-columns: 1fr;
+    gap: clamp(1.5rem, 4vw, 2rem);
+  }
+
+  [data-landing-variant='helix'] .gamemodel__grid::before {
+    display: none;
+  }
+
+  [data-landing-variant='helix'] .gamemodel__card {
+    display: grid;
+    grid-template-columns: minmax(0, 0.42fr) minmax(0, 1fr);
+    grid-template-areas:
+      'step step'
+      'media copy';
+    gap: 0.55rem 1rem;
+    align-items: center;
+  }
+
+  [data-landing-variant='helix'] .gamemodel__step {
+    grid-area: step;
+  }
+
+  [data-landing-variant='helix'] .gamemodel__icon-wrap {
+    grid-area: media;
+    aspect-ratio: 1;
+  }
+
+  [data-landing-variant='helix'] .gamemodel__copy {
+    grid-area: copy;
+  }
+}
+
+@media (max-width: 520px) {
+  [data-landing-variant='helix'] .gamemodel__card {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      'step'
+      'media'
+      'copy';
+  }
+
+  [data-landing-variant='helix'] .gamemodel__icon-wrap {
+    aspect-ratio: 16 / 10;
+  }
+}
+
+[data-landing-variant='helix'] :is(.collection, .pathways, .faq, .final-cta) .landing-shell {
+  padding-top: var(--helix-section-pad-y);
+  padding-bottom: var(--helix-section-pad-bottom);
 }

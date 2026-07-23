@@ -2,6 +2,7 @@
 /**
  * Production server entry — validates hybrid build before next start.
  * Used by pm2 (voidborn-prod) so PROJECT/distDir cannot silently drift.
+ * Forwards SIGTERM/SIGINT to the Next child so wrappers (test:landing) do not leave orphans.
  */
 import { spawn } from 'node:child_process'
 import fs from 'node:fs'
@@ -27,18 +28,19 @@ if (!fs.existsSync(buildIdPath)) {
 
 if (fs.existsSync(devManifest)) {
   console.error(`[start-prod] Refusing to start: ${distDir} contains dev artifacts.`)
-  console.error(`[start-prod] Rebuild locally and redeploy, or rm ${path.relative(root, devManifest)} on the server.`)
+  console.error(`[start-prod] Rebuild locally and redeploy, or rm ${path.relative(root, nextDir)}/static/development on the server.`)
   process.exit(1)
 }
 
 const port = process.env.PORT || String(prodPort(projectId, projectIndex(projectId)))
 const host = process.env.HOSTNAME || '0.0.0.0'
+const nextBin = path.join(root, 'node_modules/next/dist/bin/next')
 
 console.log(`[start-prod] project=${projectId} distDir=${distDir} http://${host}:${port}`)
 
 const child = spawn(
-  process.platform === 'win32' ? 'npx.cmd' : 'npx',
-  ['next', 'start', '-H', host, '-p', port],
+  process.execPath,
+  [nextBin, 'start', '-H', host, '-p', port],
   {
     cwd: root,
     stdio: 'inherit',
@@ -53,7 +55,41 @@ const child = spawn(
   },
 )
 
+let shuttingDown = false
+
+function shutdown(signal) {
+  if (shuttingDown) return
+  shuttingDown = true
+  if (child.exitCode != null || child.killed) {
+    process.exit(child.exitCode ?? 0)
+    return
+  }
+  try {
+    child.kill(signal)
+  } catch {
+    /* already gone */
+  }
+  const force = setTimeout(() => {
+    try {
+      child.kill('SIGKILL')
+    } catch {
+      /* ignore */
+    }
+  }, 4000)
+  force.unref?.()
+}
+
+process.on('SIGTERM', () => shutdown('SIGTERM'))
+process.on('SIGINT', () => shutdown('SIGINT'))
+
 child.on('exit', (code, signal) => {
-  if (signal) process.kill(process.pid, signal)
+  if (shuttingDown) {
+    process.exit(code ?? (signal ? 0 : 1))
+    return
+  }
+  if (signal) {
+    process.exit(0)
+    return
+  }
   process.exit(code ?? 1)
 })

@@ -1,10 +1,10 @@
 {
   "hero": {
     "headline": ["Keep the Signal.", "Field the Frames."],
-    "subheadline": "Aboard the Spire, four lab domains still hold a clean link — Hab, Cryo, Reactor, and Relay. Collect robot Frames, tune precise decks, and trade on a bright market before Static eats the grid."
+    "subheadline": "Aboard the Spire, four labs still hold a clean link — Hab, Cryo, Reactor, and Relay. Collect robot Frames, tune precise decks, and trade on a bright market before Static eats the grid."
   },
   "locations": {
-    "kicker": "Tour the Domains",
+    "kicker": "Tour the Labs",
     "paragraphs": [
       "The Spire's Relay Grid is thinning. A noise called <strong class=\"locations__lore-aether\">Static</strong> crawls through conduits and frost glass, eroding the <strong class=\"locations__lore-null\">Signal</strong> — the coherent link that lets Hab grow, Cryo hold, Core warm, and Antenna listen.",
       "As Static presses inward, Frames grow unsettled. Operators must not only win their matches, but keep these lab pockets coherent before the last clean channel dissolves into noise."
@@ -16,7 +16,7 @@
     "titleAccent": ""
   },
   "collections": "Deck collection portal — coming soon.",
-  "leaderboard": "Seasonal ladder — ranked standings across the four domains.",
+  "leaderboard": "Seasonal ladder — ranked standings across the four labs.",
   "portal": {
     "gateTitle": "Sign In Required",
     "gateMessage": "The player portal is tied to your account. Sign in to access market, vaults, and profile.",

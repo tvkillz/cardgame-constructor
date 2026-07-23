@@ -21,6 +21,7 @@ function GameModelPillarItem({
 }) {
   const itemRef = useRef<HTMLLIElement>(null)
   const [inView, setInView] = useState(false)
+  const isHelix = appConfig.landing?.variant === 'helix'
 
   useEffect(() => {
     const el = itemRef.current
@@ -67,6 +68,11 @@ function GameModelPillarItem({
         className="gamemodel__card"
         style={{ '--pillar-glow': pillar.glowColor } as CSSProperties}
       >
+        {isHelix ? (
+          <span className="gamemodel__step" aria-hidden="true">
+            STEP {String(staggerIndex + 1).padStart(2, '0')}
+          </span>
+        ) : null}
         <div className="gamemodel__icon-wrap">
           <img
             src={pillar.image}
@@ -77,8 +83,10 @@ function GameModelPillarItem({
           />
           <span className="gamemodel__icon-shine" aria-hidden="true" />
         </div>
-        <h3 className="gamemodel__card-title">{pillar.title}</h3>
-        <p className="gamemodel__card-desc">{pillar.description}</p>
+        <div className="gamemodel__copy">
+          <h3 className="gamemodel__card-title">{pillar.title}</h3>
+          <p className="gamemodel__card-desc">{pillar.description}</p>
+        </div>
       </article>
     </li>
   )
@@ -123,14 +131,19 @@ export default function GameModelSection() {
 
   if (!gameModel?.pillars?.length) return null
 
+  const isHelix = appConfig.landing?.variant === 'helix'
+
   return (
     <section
       ref={sectionRef}
       className={`gamemodel${isVisible ? ' visible' : ''}`}
-      aria-label="Game model"
+      aria-label={isHelix ? 'Ops protocol' : 'Game model'}
     >
       <div className="landing-shell gamemodel__inner">
         <header className="gamemodel__header">
+          {isHelix ? (
+            <p className="gamemodel__eyebrow">OPS PROTOCOL // SIGNAL LOOP</p>
+          ) : null}
           <h2 className="landing-section-title">{gameModel.title}</h2>
           <p className="landing-section-lead">{gameModel.description}</p>
         </header>
@@ -168,7 +181,7 @@ export default function GameModelSection() {
             >
               <span className="gamemodel__tag">
                 <span className="gamemodel__tag-marker" aria-hidden="true">
-                  ◆
+                  {isHelix ? '◇' : '◆'}
                 </span>
                 {tag.label}
               </span>

@@ -490,9 +490,12 @@
   position: relative;
   width: clamp(78px, 12.5vw, 132px);
   flex: 0 0 auto;
-  transform: translateY(var(--rail-lift, 0)) rotate(var(--rail-tilt, 0deg));
-  animation: helix-rail-float 5.2s ease-in-out infinite;
-  animation-delay: var(--rail-delay, 0s);
+  opacity: 0;
+  transform: translateY(calc(var(--rail-lift, 0px) + 28px)) rotate(var(--rail-tilt, 0deg));
+  animation:
+    helix-rail-enter 0.75s cubic-bezier(0.23, 1, 0.32, 1) forwards,
+    helix-rail-float 5.2s ease-in-out infinite;
+  animation-delay: var(--rail-delay, 0s), calc(0.75s + var(--rail-delay, 0s));
 }
 
 .helix-hero__rail-shine {
@@ -551,6 +554,17 @@
   --helix-card-glow-alpha: 0.22;
   z-index: 30;
   /* transform: rotateY(0deg) translateY(-14px) scale(1.08); */
+}
+
+@keyframes helix-rail-enter {
+  from {
+    opacity: 0;
+    transform: translateY(calc(var(--rail-lift, 0px) + 28px)) rotate(var(--rail-tilt, 0deg));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(var(--rail-lift, 0px)) rotate(var(--rail-tilt, 0deg));
+  }
 }
 
 @keyframes helix-rail-float {
@@ -631,6 +645,11 @@
   .helix-hero__rail-shine,
   .helix-hero__slide {
     animation: none;
+  }
+
+  .helix-hero__rail-slot {
+    opacity: 1;
+    transform: translateY(var(--rail-lift, 0px)) rotate(var(--rail-tilt, 0deg));
   }
 }
 

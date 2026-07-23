@@ -1,6 +1,6 @@
 {
   "title": "How Helix Plays",
-  "description": "Four lab domains, one precise battlefield — assemble a deck, outmaneuver rivals in turn-based duels, and climb the seasonal ladder with a clean Signal.",
+  "description": "Four labs, one precise battlefield — assemble a deck, outmaneuver rivals in turn-based duels, and climb the seasonal ladder with a clean Signal.",
   "pillars": [
     {
       "id": "tactical-battles",
@@ -26,7 +26,7 @@
   ],
   "tags": [
     { "id": "deck-building", "label": "Deck Tuning" },
-    { "id": "class-champions", "label": "Domain Affinities" },
+    { "id": "class-champions", "label": "Lab Affinities" },
     { "id": "replayable-depth", "label": "Shifting Metas" }
   ]
 }

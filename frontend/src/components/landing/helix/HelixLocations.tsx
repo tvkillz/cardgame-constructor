@@ -36,7 +36,7 @@ export default function HelixLocations() {
     <section
       ref={sectionRef}
       className={`helix-locations${isVisible ? ' helix-locations--visible' : ''}`}
-      aria-label="Domains"
+      aria-label="Labs"
     >
       <div className="helix-locations__cosmos" aria-hidden="true">
         <div className="helix-locations__cosmos-base" />
@@ -55,7 +55,7 @@ export default function HelixLocations() {
         </header>
 
         <div className="helix-locations__console">
-          <aside className="helix-locations__rail" aria-label="Domain channels">
+          <aside className="helix-locations__rail" aria-label="Lab channels">
             {LOCATIONS.map((loc, i) => {
               const isActive = loc.id === activeLocation
               return (
@@ -88,7 +88,7 @@ export default function HelixLocations() {
               <img
                 key={active.id}
                 src={active.image}
-                alt={`${active.name} domain preview`}
+                alt={`${active.name} lab preview`}
                 className="helix-locations__feed"
                 loading="lazy"
                 decoding="async"

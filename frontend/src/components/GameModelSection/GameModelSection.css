@@ -167,6 +167,11 @@
   transform: translateX(120%);
 }
 
+.gamemodel__copy {
+  /* Let title/desc participate in parent flex/grid (voidborn + iyashikei) */
+  display: contents;
+}
+
 .gamemodel__card-title {
   margin: 0;
   font-family: var(--font-fantasy);

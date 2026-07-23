@@ -26,13 +26,16 @@ function preloadSlide(url: string) {
   img.src = url
 }
 
-function DominionCard({ loc }: { loc: LocationConfig }) {
+function DominionCard({ loc, bayIndex }: { loc: LocationConfig; bayIndex: number }) {
   const cardRef = useRef<HTMLElement>(null)
   const slides = useMemo(() => resolveSlides(loc), [loc])
   const slideCount = slides.length
   const [index, setIndex] = useState(0)
   const [isInView, setIsInView] = useState(false)
   const activeCity = slides[index] ?? slides[0]
+  const variant = appConfig.landing?.variant
+  const typeNoun =
+    variant === 'iyashikei' ? 'Location' : variant === 'helix' ? 'Lab' : 'Dominion'
 
   const goTo = useCallback(
     (next: number) => {
@@ -81,6 +84,19 @@ function DominionCard({ loc }: { loc: LocationConfig }) {
       className="dominions__card"
       style={{ '--dominion-glow': loc.glowColor } as CSSProperties}
     >
+      {variant === 'helix' ? (
+        <>
+          <span className="dominions__bay-index" aria-hidden="true">
+            BAY {String(bayIndex + 1).padStart(2, '0')}
+          </span>
+          <span className="dominions__bracket dominions__bracket--tl" aria-hidden="true" />
+          <span className="dominions__bracket dominions__bracket--tr" aria-hidden="true" />
+          <span className="dominions__bracket dominions__bracket--bl" aria-hidden="true" />
+          <span className="dominions__bracket dominions__bracket--br" aria-hidden="true" />
+          <div className="dominions__scanline" aria-hidden="true" />
+        </>
+      ) : null}
+
       <div className="dominions__slides" aria-hidden={slideCount <= 1}>
         <img
           key={activeCity.image}
@@ -97,8 +113,7 @@ function DominionCard({ loc }: { loc: LocationConfig }) {
       <div className="dominions__card-copy">
         <h3 className="dominions__card-name">{loc.name}</h3>
         <p className="dominions__card-type">
-          {loc.categoryLabel}{' '}
-          {appConfig.landing?.variant === 'iyashikei' ? 'Location' : 'Dominion'}
+          {loc.categoryLabel} {typeNoun}
         </p>
 
         <div className="dominions__city-copy" key={`${loc.id}-${index}`}>
@@ -111,7 +126,7 @@ function DominionCard({ loc }: { loc: LocationConfig }) {
 
       {slideCount > 1 && (
         <div className="dominions__footer">
-          <div className="dominions__dots" role="tablist" aria-label={`${loc.name} cities`}>
+          <div className="dominions__dots" role="tablist" aria-label={`${loc.name} sites`}>
             {slides.map((slide, dotIndex) => (
               <button
                 key={slide.image}
@@ -131,7 +146,7 @@ function DominionCard({ loc }: { loc: LocationConfig }) {
             <button
               type="button"
               className="dominions__arrow"
-              aria-label={`Previous city in ${loc.name}`}
+              aria-label={`Previous site in ${loc.name}`}
               onClick={goPrev}
             >
               <span aria-hidden="true">‹</span>
@@ -139,7 +154,7 @@ function DominionCard({ loc }: { loc: LocationConfig }) {
             <button
               type="button"
               className="dominions__arrow"
-              aria-label={`Next city in ${loc.name}`}
+              aria-label={`Next site in ${loc.name}`}
               onClick={goNext}
             >
               <span aria-hidden="true">›</span>
@@ -205,7 +220,7 @@ function DominionCardItem({
       className={`dominions__item${mobileVisible ? ' dominions__item--in-view' : ''}`}
       style={{ '--dominions-stagger': staggerIndex } as CSSProperties}
     >
-      <DominionCard loc={loc} />
+      <DominionCard loc={loc} bayIndex={staggerIndex} />
     </li>
   )
 }
@@ -216,6 +231,12 @@ export default function DominionsSection() {
   const headerRef = useRef<HTMLElement>(null)
   const [isSectionVisible, setIsSectionVisible] = useState(false)
   const [isHeaderInView, setIsHeaderInView] = useState(false)
+  const sectionLabel =
+    appConfig.landing?.variant === 'helix'
+      ? 'Labs'
+      : appConfig.landing?.variant === 'iyashikei'
+        ? 'Locations'
+        : 'Dominions'
 
   useEffect(() => {
     const el = sectionRef.current
@@ -273,7 +294,7 @@ export default function DominionsSection() {
     <section
       ref={sectionRef}
       className={`dominions${isSectionVisible ? ' visible' : ''}`}
-      aria-label="Dominions"
+      aria-label={sectionLabel}
     >
       <div className="landing-shell dominions__inner">
         <header

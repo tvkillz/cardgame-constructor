@@ -233,7 +233,7 @@ const Card = forwardRef<HTMLElement, CardComponentProps>(function Card(
         </div>
         <div
           className={`card__domain card__domain--${domain}`}
-          aria-label={`${DOMAIN_LABEL[domain]} domain`}
+          aria-label={`${DOMAIN_LABEL[domain]}${isHelix ? ' lab' : ' domain'}`}
           title={DOMAIN_LABEL[domain]}
         />
         {rarity && displayRarity && (

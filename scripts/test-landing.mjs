@@ -4,13 +4,14 @@
  *   1) BUILD_SCOPE=landing for voidborn + iyashikei
  *   2) start production servers on registry ports
  *   3) playwright tests/landing
- *   4) stop servers
+ *   4) stop servers (process group + port fallback — no orphan next-server)
  *
  *   node scripts/test-landing.mjs
- *   npm run test:landing   (if root package.json present)
+ *   npm run test:landing
  */
 import { spawn, spawnSync } from 'node:child_process'
 import http from 'node:http'
+import net from 'node:net'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -46,7 +47,6 @@ function waitForHttp(port, { timeoutMs = 120_000, intervalMs = 500 } = {}) {
     const tryOnce = () => {
       const req = http.get({ host: '127.0.0.1', port, path: '/', timeout: 3000 }, (res) => {
         res.resume()
-        // 200 OK, or anything that means Next is up (not connection refused)
         if (res.statusCode && res.statusCode < 500) {
           resolve(res.statusCode)
           return
@@ -69,11 +69,69 @@ function waitForHttp(port, { timeoutMs = 120_000, intervalMs = 500 } = {}) {
   })
 }
 
+function portFree(port) {
+  return new Promise((resolve) => {
+    const server = net.createServer()
+    server.once('error', () => resolve(false))
+    server.once('listening', () => {
+      server.close(() => resolve(true))
+    })
+    server.listen(port, '127.0.0.1')
+  })
+}
+
+async function waitPortFree(port, timeoutMs = 10_000) {
+  const deadline = Date.now() + timeoutMs
+  while (Date.now() < deadline) {
+    if (await portFree(port)) return
+    await new Promise((r) => setTimeout(r, 150))
+  }
+}
+
+function killProcessGroup(pid, signal) {
+  if (!pid) return
+  try {
+    process.kill(-pid, signal)
+  } catch {
+    try {
+      process.kill(pid, signal)
+    } catch {
+      /* already gone */
+    }
+  }
+}
+
+/** Last-resort: free listeners on the test ports (Linux). */
+function killPortListeners(port) {
+  spawnSync('fuser', ['-k', `${port}/tcp`], {
+    stdio: 'ignore',
+  })
+}
+
+function waitExit(child, timeoutMs) {
+  if (child.exitCode != null || child.signalCode != null) {
+    return Promise.resolve()
+  }
+  return new Promise((resolve) => {
+    const onExit = () => {
+      clearTimeout(timer)
+      resolve()
+    }
+    const timer = setTimeout(() => {
+      child.off('exit', onExit)
+      resolve()
+    }, timeoutMs)
+    child.once('exit', onExit)
+  })
+}
+
 function startProd(site) {
   log(`Starting ${site.id}-prod on :${site.port}`)
+  // New process group so we can kill start-prod + next-server together.
   const child = spawn('node', ['scripts/start-prod.mjs'], {
     cwd: frontendDir,
     stdio: ['ignore', 'inherit', 'inherit'],
+    detached: true,
     env: {
       ...process.env,
       PROJECT: site.id,
@@ -93,38 +151,57 @@ function startProd(site) {
   })
 }
 
-function stopAll() {
-  for (const { site, child } of children.splice(0)) {
-    if (child.killed || child.exitCode != null) continue
-    log(`Stopping ${site.id}-prod`)
-    try {
-      child.kill('SIGTERM')
-    } catch {
-      /* already gone */
-    }
-    setTimeout(() => {
-      if (child.exitCode == null && !child.killed) {
-        try {
-          child.kill('SIGKILL')
-        } catch {
-          /* ignore */
-        }
+async function stopAll() {
+  const batch = children.splice(0)
+  await Promise.all(
+    batch.map(async ({ site, child }) => {
+      log(`Stopping ${site.id}-prod`)
+      if (child.exitCode == null && child.signalCode == null) {
+        killProcessGroup(child.pid, 'SIGTERM')
+        await waitExit(child, 5000)
       }
-    }, 3000).unref?.()
+      if (child.exitCode == null && child.signalCode == null) {
+        killProcessGroup(child.pid, 'SIGKILL')
+        await waitExit(child, 2000)
+      }
+      killPortListeners(site.port)
+      await waitPortFree(site.port, 5000)
+      if (!(await portFree(site.port))) {
+        log(`WARNING: port ${site.port} still in use after stop`)
+      } else {
+        log(`${site.id}-prod port ${site.port} free`)
+      }
+    }),
+  )
+}
+
+async function freeStalePorts() {
+  for (const site of SITES) {
+    if (await portFree(site.port)) continue
+    log(`Clearing stale listener on :${site.port}`)
+    killPortListeners(site.port)
+    await waitPortFree(site.port, 5000)
   }
 }
 
 async function main() {
+  let stopping = false
+  const onSignal = async (code) => {
+    if (stopping) return
+    stopping = true
+    await stopAll()
+    process.exit(code)
+  }
   process.on('SIGINT', () => {
-    stopAll()
-    process.exit(130)
+    void onSignal(130)
   })
   process.on('SIGTERM', () => {
-    stopAll()
-    process.exit(143)
+    void onSignal(143)
   })
 
   try {
+    await freeStalePorts()
+
     for (const site of SITES) {
       log(`Building landing: ${site.id}`)
       run('npm', ['run', 'build', '--', '--only-landing'], {
@@ -154,12 +231,12 @@ async function main() {
 
     log('OK')
   } finally {
-    stopAll()
+    await stopAll()
   }
 }
 
-main().catch((err) => {
+main().catch(async (err) => {
   console.error(`[test:landing] ${err.message || err}`)
-  stopAll()
+  await stopAll()
   process.exit(1)
 })
