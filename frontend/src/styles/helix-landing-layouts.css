@@ -308,7 +308,7 @@
    --helix-catalog-rack   → left rack column flex weight
    --helix-catalog-scan   → right scanner column flex weight
    --helix-catalog-cols   → thumb grid columns in the rack
-   --helix-catalog-thumb  → max width of each rack card
+   --helix-catalog-thumb  → mobile thumb max width (desktop fills rack height)
    --helix-catalog-stage  → max width of the big preview card
    --helix-catalog-gap    → gap between rack and scanner
    --helix-catalog-col-gap / --helix-catalog-row-gap → rack spacing (row ~2× col)
@@ -320,27 +320,30 @@
   --helix-catalog-thumb: 100px;
   --helix-catalog-stage: 300px;
   --helix-catalog-gap: clamp(1rem, 2.5vw, 1.75rem);
-  --helix-catalog-col-gap: 0.5rem;
-  --helix-catalog-row-gap: 1rem;
+  --helix-catalog-col-gap: 0.55rem;
+  --helix-catalog-row-gap: 1.1rem;
   /* Equal columns → shared gap sits on the stats strip midline (tiers | strategies) */
   grid-template-columns: minmax(0, var(--helix-catalog-rack)) minmax(0, var(--helix-catalog-scan));
   gap: var(--helix-catalog-gap);
-  align-items: start;
+  align-items: stretch;
   width: 100%;
 }
 
 [data-landing-variant='helix'] .collection__picker {
   display: grid;
-  grid-template-columns: repeat(var(--helix-catalog-cols), minmax(0, var(--helix-catalog-thumb)));
+  grid-template-columns: repeat(var(--helix-catalog-cols), minmax(0, 1fr));
+  grid-auto-rows: 1fr;
   column-gap: var(--helix-catalog-col-gap);
   row-gap: var(--helix-catalog-row-gap);
-  justify-content: space-evenly;
+  justify-content: stretch;
   order: 1;
-  align-content: start;
+  align-content: stretch;
   justify-items: stretch;
+  align-self: stretch;
   width: 100%;
   max-width: none;
-  height: auto;
+  height: 100%;
+  min-height: 0;
   box-sizing: border-box;
   padding: 0.65rem;
   border: 1px solid rgba(61, 184, 212, 0.28);
@@ -351,7 +354,12 @@
 
 [data-landing-variant='helix'] .collection__picker-item {
   width: 100%;
+  height: 100%;
+  min-height: 0;
   max-width: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 2px;
   border: 1px solid transparent;
   background: transparent;
@@ -369,11 +377,20 @@
 
 [data-landing-variant='helix'] .collection__picker-btn {
   width: 100%;
+  height: 100%;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+/* Scale thumbs to cell height (2:3) so the rack matches the specimen panel */
 [data-landing-variant='helix'] .collection__picker-btn .card {
-  width: 100%;
-  max-width: var(--helix-catalog-thumb);
+  width: auto;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  aspect-ratio: 2 / 3;
 }
 
 [data-landing-variant='helix'] .collection__preview {
@@ -389,7 +406,7 @@
   width: 100%;
   height: auto;
   justify-self: stretch;
-  align-self: start;
+  align-self: stretch;
   box-sizing: border-box;
   padding: clamp(2.25rem, 3.5vw, 2.75rem) clamp(1.1rem, 2.5vw, 1.75rem) 1.15rem;
   border-radius: 2px;
@@ -577,6 +594,7 @@
 @media (max-width: 919px) {
   [data-landing-variant='helix'] .collection__showcase {
     grid-template-columns: 1fr;
+    align-items: start;
     --helix-catalog-cols: 4;
     --helix-catalog-stage: 240px;
   }
@@ -585,10 +603,30 @@
     order: 1;
     max-width: min(320px, 100%);
     justify-self: center;
+    align-self: center;
   }
 
   [data-landing-variant='helix'] .collection__picker {
     order: 2;
+    height: auto;
+    grid-auto-rows: auto;
+    align-content: start;
+    grid-template-columns: repeat(var(--helix-catalog-cols), minmax(0, var(--helix-catalog-thumb)));
+    justify-content: space-evenly;
+  }
+
+  [data-landing-variant='helix'] .collection__picker-item {
+    height: auto;
+  }
+
+  [data-landing-variant='helix'] .collection__picker-btn {
+    height: auto;
+  }
+
+  [data-landing-variant='helix'] .collection__picker-btn .card {
+    width: 100%;
+    height: auto;
+    max-width: var(--helix-catalog-thumb);
   }
 
   [data-landing-variant='helix'] .collection__preview-stage,
