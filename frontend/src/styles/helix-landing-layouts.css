@@ -96,7 +96,7 @@
 }
 
 /* Signal rail connecting the three steps */
-[data-landing-variant='helix'] .gamemodel__grid::before {
+/* [data-landing-variant='helix'] .gamemodel__grid::before {
   content: '';
   position: absolute;
   top: clamp(3.2rem, 8vw, 4.2rem);
@@ -113,7 +113,7 @@
   );
   pointer-events: none;
   z-index: 0;
-}
+} */
 
 [data-landing-variant='helix'] .gamemodel__item {
   position: relative;
@@ -236,7 +236,384 @@
   }
 }
 
-[data-landing-variant='helix'] :is(.collection, .pathways, .faq, .final-cta) .landing-shell {
+/* [data-landing-variant='helix'] :is(.collection, .pathways, .faq, .final-cta) .landing-shell {
   padding-top: var(--helix-section-pad-y);
   padding-bottom: var(--helix-section-pad-bottom);
+} */
+
+/* ── Collection: specimen scanner — rack left, inspection bezel right ── */
+
+[data-landing-variant='helix'] .collection__inner {
+  margin-top: 0;
+  align-items: stretch;
+  gap: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+[data-landing-variant='helix'] .collection__header {
+  align-items: flex-start;
+  text-align: left;
+  max-width: 42rem;
+}
+
+[data-landing-variant='helix'] .collection__header .landing-section-title,
+[data-landing-variant='helix'] .collection__header .landing-section-lead {
+  text-align: left;
+  margin-inline: 0;
+}
+
+[data-landing-variant='helix'] .collection__eyebrow {
+  margin: 0 0 0.55rem;
+  font-family: var(--font-heading, var(--font-fantasy));
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #3db8d4;
+}
+
+/* Stats as a single telemetry strip (not 4 separate cards) */
+[data-landing-variant='helix'] .collection__stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  border: 1px solid rgba(61, 184, 212, 0.28);
+  border-radius: 2px;
+  background: rgba(16, 22, 30, 0.65);
+  overflow: hidden;
+}
+
+[data-landing-variant='helix'] .collection__stat {
+  flex: 1 1 25%;
+  min-width: 7rem;
+  border-radius: 0;
+  border: none;
+  border-right: 1px solid rgba(61, 184, 212, 0.18);
+  background: transparent;
+  box-shadow: none;
+  padding: 0.85rem 1rem;
+  align-items: flex-start;
+  text-align: left;
+}
+
+[data-landing-variant='helix'] .collection__stat:last-child {
+  border-right: none;
+}
+
+[data-landing-variant='helix'] .collection__stat-label {
+  text-align: left;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Collection — specimen scanner proportions (tune these vars)
+   --helix-catalog-rack   → left rack column flex weight
+   --helix-catalog-scan   → right scanner column flex weight
+   --helix-catalog-cols   → thumb grid columns in the rack
+   --helix-catalog-thumb  → max width of each rack card
+   --helix-catalog-stage  → max width of the big preview card
+   --helix-catalog-gap    → gap between rack and scanner
+   --helix-catalog-col-gap / --helix-catalog-row-gap → rack spacing (row ~2× col)
+   ═══════════════════════════════════════════════════════════════════════════ */
+[data-landing-variant='helix'] .collection__showcase {
+  --helix-catalog-rack: 1fr;
+  --helix-catalog-scan: 1fr;
+  --helix-catalog-cols: 4;
+  --helix-catalog-thumb: 100px;
+  --helix-catalog-stage: 300px;
+  --helix-catalog-gap: clamp(1rem, 2.5vw, 1.75rem);
+  --helix-catalog-col-gap: 0.5rem;
+  --helix-catalog-row-gap: 1rem;
+  /* Equal columns → shared gap sits on the stats strip midline (tiers | strategies) */
+  grid-template-columns: minmax(0, var(--helix-catalog-rack)) minmax(0, var(--helix-catalog-scan));
+  gap: var(--helix-catalog-gap);
+  align-items: start;
+  width: 100%;
+}
+
+[data-landing-variant='helix'] .collection__picker {
+  display: grid;
+  grid-template-columns: repeat(var(--helix-catalog-cols), minmax(0, var(--helix-catalog-thumb)));
+  column-gap: var(--helix-catalog-col-gap);
+  row-gap: var(--helix-catalog-row-gap);
+  justify-content: space-evenly;
+  order: 1;
+  align-content: start;
+  justify-items: stretch;
+  width: 100%;
+  max-width: none;
+  height: auto;
+  box-sizing: border-box;
+  padding: 0.65rem;
+  border: 1px solid rgba(61, 184, 212, 0.28);
+  border-radius: 2px;
+  background: rgba(16, 22, 30, 0.72);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+}
+
+[data-landing-variant='helix'] .collection__picker-item {
+  width: 100%;
+  max-width: none;
+  border-radius: 2px;
+  border: 1px solid transparent;
+  background: transparent;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+[data-landing-variant='helix'] .collection__picker-item--active {
+  border-color: color-mix(in srgb, var(--collection-glow, #3db8d4) 55%, transparent);
+  background: rgba(61, 184, 212, 0.1);
+  box-shadow: 0 0 16px color-mix(in srgb, var(--collection-glow, #3db8d4) 18%, transparent);
+}
+
+[data-landing-variant='helix'] .collection__picker-btn {
+  width: 100%;
+}
+
+[data-landing-variant='helix'] .collection__picker-btn .card {
+  width: 100%;
+  max-width: var(--helix-catalog-thumb);
+}
+
+[data-landing-variant='helix'] .collection__preview {
+  order: 2;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 0;
+  max-width: none;
+  width: 100%;
+  height: auto;
+  justify-self: stretch;
+  align-self: start;
+  box-sizing: border-box;
+  padding: clamp(2.25rem, 3.5vw, 2.75rem) clamp(1.1rem, 2.5vw, 1.75rem) 1.15rem;
+  border-radius: 2px;
+  border: 1px solid rgba(61, 184, 212, 0.35);
+  background: #0a0e14;
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.04) inset;
+  overflow: hidden;
+}
+
+[data-landing-variant='helix'] .collection__preview-aura,
+[data-landing-variant='helix'] .collection__preview-ring {
+  display: none;
+}
+
+[data-landing-variant='helix'] .collection__scan-field {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+[data-landing-variant='helix'] .collection__scan-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(61, 184, 212, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(61, 184, 212, 0.07) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: radial-gradient(ellipse 70% 65% at 50% 45%, black 20%, transparent 75%);
+  opacity: 0.85;
+}
+
+[data-landing-variant='helix'] .collection__scan-beam {
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 14%;
+  top: -20%;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(61, 184, 212, 0.08) 40%,
+    rgba(127, 216, 239, 0.22) 50%,
+    rgba(61, 184, 212, 0.08) 60%,
+    transparent 100%
+  );
+  animation: helix-specimen-scan 4.8s ease-in-out infinite;
+}
+
+@keyframes helix-specimen-scan {
+  0%,
+  100% {
+    top: -18%;
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  88% {
+    opacity: 1;
+  }
+  100% {
+    top: 95%;
+    opacity: 0;
+  }
+}
+
+/* Keep specimen card visible — column stack + fixed ratio so flex cannot collapse it */
+[data-landing-variant='helix'] .collection__preview-stage {
+  position: relative;
+  z-index: 2;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: calc(var(--helix-catalog-stage) * 1.5);
+}
+
+[data-landing-variant='helix'] .collection__preview-stack {
+  position: relative;
+  flex: 0 0 auto;
+  width: min(100%, var(--helix-catalog-stage));
+  aspect-ratio: 2 / 3;
+  min-height: calc(var(--helix-catalog-stage) * 1.5);
+  margin: 0 auto;
+}
+
+[data-landing-variant='helix'] .collection__preview-stack .card-preview-panel,
+[data-landing-variant='helix'] .collection__preview-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+[data-landing-variant='helix'] .collection__preview-stack .card-preview-panel {
+  filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.55));
+}
+
+[data-landing-variant='helix'] .collection__scan-label {
+  position: absolute;
+  z-index: 4;
+  top: 0.65rem;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  font-family: var(--font-heading, var(--font-fantasy));
+  font-size: 0.55rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  color: #3db8d4;
+  pointer-events: none;
+}
+
+[data-landing-variant='helix'] .collection__bracket {
+  position: absolute;
+  z-index: 4;
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(61, 184, 212, 0.75);
+  pointer-events: none;
+}
+
+[data-landing-variant='helix'] .collection__bracket--tl {
+  top: 8px;
+  left: 8px;
+  border-right: none;
+  border-bottom: none;
+}
+
+[data-landing-variant='helix'] .collection__bracket--tr {
+  top: 8px;
+  right: 8px;
+  border-left: none;
+  border-bottom: none;
+}
+
+[data-landing-variant='helix'] .collection__bracket--bl {
+  bottom: 8px;
+  left: 8px;
+  border-right: none;
+  border-top: none;
+}
+
+[data-landing-variant='helix'] .collection__bracket--br {
+  bottom: 8px;
+  right: 8px;
+  border-left: none;
+  border-top: none;
+}
+
+[data-landing-variant='helix'] .collection__preview-caption {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 0.85rem;
+  padding-inline: 0.15rem;
+  flex: 0 0 auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-landing-variant='helix'] .collection__scan-beam {
+    animation: none;
+    top: 42%;
+    opacity: 0.35;
+  }
+}
+
+@media (max-width: 1100px) {
+  [data-landing-variant='helix'] .collection__showcase {
+    --helix-catalog-cols: 3;
+    --helix-catalog-thumb: 92px;
+    --helix-catalog-stage: 250px;
+  }
+}
+
+@media (max-width: 919px) {
+  [data-landing-variant='helix'] .collection__showcase {
+    grid-template-columns: 1fr;
+    --helix-catalog-cols: 4;
+    --helix-catalog-stage: 240px;
+  }
+
+  [data-landing-variant='helix'] .collection__preview {
+    order: 1;
+    max-width: min(320px, 100%);
+    justify-self: center;
+  }
+
+  [data-landing-variant='helix'] .collection__picker {
+    order: 2;
+  }
+
+  [data-landing-variant='helix'] .collection__preview-stage,
+  [data-landing-variant='helix'] .collection__preview-stack {
+    min-height: calc(var(--helix-catalog-stage) * 1.5);
+  }
+
+  [data-landing-variant='helix'] .collection__stat {
+    flex: 1 1 50%;
+    border-bottom: 1px solid rgba(61, 184, 212, 0.15);
+  }
+
+  [data-landing-variant='helix'] .collection__stat:nth-child(2n) {
+    border-right: none;
+  }
+
+  [data-landing-variant='helix'] .collection__stat:nth-last-child(-n + 2) {
+    border-bottom: none;
+  }
+}
+
+@media (max-width: 520px) {
+  [data-landing-variant='helix'] .collection__showcase {
+    --helix-catalog-cols: 2;
+    --helix-catalog-thumb: 110px;
+    --helix-catalog-stage: 220px;
+  }
 }

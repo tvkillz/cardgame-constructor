@@ -147,6 +147,7 @@ function CollectionPreviewCrossfade({ card }: { card: CardDisplayProps }) {
       >
         <span className="collection__preview-domain">
           {DOMAIN_LABEL[visibleCard.domain as CardDomain] ?? visibleCard.domain}
+          {appConfig.landing?.variant === 'helix' ? ' Lab' : ''}
         </span>
         <span className="collection__preview-title">{visibleCard.title}</span>
       </p>
@@ -283,12 +284,13 @@ export default function CollectionSection() {
 
   const activeCard = cards[activeIndex] ?? cards[0]
   const activeProps = toCardProps(activeCard)
+  const isHelix = appConfig.landing?.variant === 'helix'
 
   return (
     <section
       ref={sectionRef}
       className={`collection${isVisible ? ' visible' : ''}`}
-      aria-label="Card collection"
+      aria-label={isHelix ? 'Frame catalog' : 'Card collection'}
     >
       {collection.backgroundImage ? (
         <div className="collection__bg" aria-hidden="true">
@@ -305,6 +307,9 @@ export default function CollectionSection() {
 
       <div className="landing-shell collection__inner">
         <header className="collection__header">
+          {isHelix ? (
+            <p className="collection__eyebrow">CATALOG // FRAME INDEX</p>
+          ) : null}
           <h2 className="landing-section-title">{collection.title}</h2>
           <p className="landing-section-lead">{collection.description}</p>
         </header>
@@ -327,8 +332,26 @@ export default function CollectionSection() {
           style={{ '--collection-glow': activeCard.glowColor } as CSSProperties}
         >
           <div className="collection__preview" aria-live="polite">
-            <div className="collection__preview-aura" aria-hidden="true" />
-            <div className="collection__preview-ring" aria-hidden="true" />
+            {isHelix ? (
+              <>
+                <span className="collection__bracket collection__bracket--tl" aria-hidden="true" />
+                <span className="collection__bracket collection__bracket--tr" aria-hidden="true" />
+                <span className="collection__bracket collection__bracket--bl" aria-hidden="true" />
+                <span className="collection__bracket collection__bracket--br" aria-hidden="true" />
+                <p className="collection__scan-label" aria-hidden="true">
+                  SPECIMEN SCAN
+                </p>
+                <div className="collection__scan-field" aria-hidden="true">
+                  <div className="collection__scan-grid" />
+                  <div className="collection__scan-beam" />
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="collection__preview-aura" aria-hidden="true" />
+                <div className="collection__preview-ring" aria-hidden="true" />
+              </>
+            )}
             <div className="collection__preview-stage">
               <CollectionPreviewCrossfade card={activeProps} />
             </div>
