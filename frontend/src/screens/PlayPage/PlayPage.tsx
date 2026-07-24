@@ -236,15 +236,58 @@ export default function PlayPage() {
 
   const inArena = battlePhase === 'arena'
   const inBattle = battlePhase !== 'idle'
+  const isHelix = appConfig.landing?.variant === 'helix'
+  const lobbyHero = isHelix ? (logo.headerLogo ?? logo.playLogo) : logo.playLogo
+
+  const renderModeButton = (
+    option: (typeof theme.playModes)[number],
+    className = '',
+  ) => (
+    <Button
+      type="button"
+      variant="secondary"
+      size="md"
+      fantasy
+      className={`play-page__mode ${className} play-page__mode--accent-${option.accent}`.trim()}
+      disabled={option.id === 'tutorial' && startingTutorial}
+      onClick={() => handleModeSelect(option.id)}
+    >
+      <span
+        className={`play-page__mode-sigil play-page__mode-sigil--${option.accent}`}
+        aria-hidden="true"
+      >
+        {option.mark ? (
+          <span className="play-page__mode-mark">{option.mark}</span>
+        ) : null}
+      </span>
+      <span className="play-page__mode-text">
+        <strong>{option.title}</strong>
+        <small>{option.subtitle}</small>
+      </span>
+    </Button>
+  )
 
   return (
     <section
-      className={`play-page${inArena ? ' play-page--arena' : ''}`}
+      className={`play-page${inArena ? ' play-page--arena' : ''}${isHelix ? ' play-page--helix' : ''}`}
       aria-label={descriptions.play.screenLabel}
     >
       {!inBattle && (
         <>
           <div className="play-page__overlay" />
+
+          {isHelix ? (
+            <>
+              <div className="play-page__hud-frame" aria-hidden="true" />
+              <span className="play-page__hud-corner play-page__hud-corner--tl" aria-hidden="true" />
+              <span className="play-page__hud-corner play-page__hud-corner--tr" aria-hidden="true" />
+              <span className="play-page__hud-corner play-page__hud-corner--bl" aria-hidden="true" />
+              <span className="play-page__hud-corner play-page__hud-corner--br" aria-hidden="true" />
+              <p className="play-page__hud-tag" aria-hidden="true">
+                RELAY // DEPLOY GATE
+              </p>
+            </>
+          ) : null}
 
           <div className="play-page__top">
             <div className="play-page__player">
@@ -265,11 +308,11 @@ export default function PlayPage() {
           </div>
 
           <div className="play-page__center">
-            {logo.playLogo ? (
+            {lobbyHero ? (
               <h1 className="play-page__logo-wrap">
                 <img
-                  src={logo.playLogo}
-                  alt={logo.playLogoAlt ?? descriptions.play.titleLine}
+                  src={lobbyHero}
+                  alt={logo.playLogoAlt ?? logo.headerLogoAlt ?? descriptions.play.titleLine}
                   className="play-page__logo"
                   width={520}
                   height={160}
@@ -313,33 +356,55 @@ export default function PlayPage() {
               <div
                 className={`play-page__modes-wrap${showModes ? ' play-page__modes-wrap--visible' : ''}`}
               >
-                <div className="play-page__modes" role="list" aria-label="Game modes">
-                  {theme.playModes.map((option) => (
-                    <Button
-                      key={option.id}
-                      type="button"
-                      variant="secondary"
-                      size="md"
-                      fantasy
-                      className={`play-page__mode play-page__mode--accent-${option.accent}`}
-                      disabled={option.id === 'tutorial' && startingTutorial}
-                      onClick={() => handleModeSelect(option.id)}
+                {isHelix ? (
+                  <div className="play-page__relay-console">
+                    <p className="play-page__relay-eyebrow">
+                      <span className="play-page__relay-bracket">[</span>
+                      LINK CONSOLE // SELECT CHANNEL
+                      <span className="play-page__relay-bracket">]</span>
+                    </p>
+                    <div
+                      className="play-page__modes play-page__modes--relay"
+                      role="list"
+                      aria-label="Game modes"
                     >
-                      <span
-                        className={`play-page__mode-sigil play-page__mode-sigil--${option.accent}`}
-                        aria-hidden="true"
-                      >
-                        {option.mark ? (
-                          <span className="play-page__mode-mark">{option.mark}</span>
-                        ) : null}
-                      </span>
-                      <span className="play-page__mode-text">
-                        <strong>{option.title}</strong>
-                        <small>{option.subtitle}</small>
-                      </span>
-                    </Button>
-                  ))}
-                </div>
+                      {theme.playModes.map((option, index) => (
+                        <article
+                          key={option.id}
+                          className="play-page__relay-slot"
+                          role="listitem"
+                        >
+                          <header className="play-page__relay-slot-head">
+                            <span className="play-page__relay-channel">
+                              CH-{String(index + 1).padStart(2, '0')}
+                            </span>
+                            <span className="play-page__relay-signal" aria-hidden="true">
+                              <i />
+                              <i />
+                              <i />
+                              <i />
+                            </span>
+                          </header>
+                          {renderModeButton(
+                            option,
+                            `play-page__relay-mode play-page__relay-mode--accent-${option.accent}`,
+                          )}
+                          <footer className="play-page__relay-slot-foot">
+                            <span className="play-page__relay-status">SYNC OK</span>
+                          </footer>
+                        </article>
+                      ))}
+                    </div>
+                  </div>
+                ) : (
+                  <div className="play-page__modes" role="list" aria-label="Game modes">
+                    {theme.playModes.map((option) => (
+                      <div key={option.id} role="listitem">
+                        {renderModeButton(option)}
+                      </div>
+                    ))}
+                  </div>
+                )}
 
                 <Button
                   type="button"
@@ -349,7 +414,7 @@ export default function PlayPage() {
                   className="play-page__back-btn"
                   onClick={() => setShowModes(false)}
                 >
-                  Return
+                  {isHelix ? 'Abort Link' : 'Return'}
                 </Button>
               </div>
 

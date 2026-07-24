@@ -7,6 +7,7 @@ export function buildThemeCssVars(): Record<string, string> {
   const lobbyBg = getLobbyBackground()
   const arenaBg = getArenaBackground()
   const playLogo = appConfig.logo.playLogo
+  const brandLogo = appConfig.logo.src
   const variant = landing?.variant ?? 'voidborn'
 
   const vars: Record<string, string> = {
@@ -35,6 +36,7 @@ export function buildThemeCssVars(): Record<string, string> {
     ...(playLogo && variant !== 'iyashikei' && variant !== 'helix'
       ? { '--card-back-logo': `url(${playLogo})` }
       : {}),
+    ...(variant === 'helix' && brandLogo ? { '--card-back-logo': `url(${brandLogo})` } : {}),
   }
 
   if (variant === 'iyashikei') {

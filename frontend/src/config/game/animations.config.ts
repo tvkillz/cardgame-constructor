@@ -1,7 +1,14 @@
 import { getGameplayVariant } from '@/gameplay/resolve'
+import { gameAnimationsConfig as helixAnimations } from '@/gameplay/helix/animations.config'
 import { gameAnimationsConfig as iyashikeiAnimations } from '@/gameplay/iyashikei/animations.config'
 import { gameAnimationsConfig as voidbornAnimations } from '@/gameplay/voidborn/animations.config'
 
+const variant = getGameplayVariant()
+
 /** Per-project arena animation tuning — edit under `src/gameplay/{variant}/`. */
 export const gameAnimationsConfig =
-  getGameplayVariant() === 'iyashikei' ? iyashikeiAnimations : voidbornAnimations
+  variant === 'iyashikei'
+    ? iyashikeiAnimations
+    : variant === 'helix'
+      ? helixAnimations
+      : voidbornAnimations

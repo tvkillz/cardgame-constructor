@@ -63,3 +63,19 @@
   border-color: rgba(106, 171, 114, 0.22);
   border-top-color: #6aab72;
 }
+
+/* HELIX — signal lock loading gate */
+[data-landing-variant='helix'] .battle-enter__loading {
+  background: rgba(12, 16, 22, 0.92);
+}
+
+[data-landing-variant='helix'] .battle-enter__loading p {
+  color: var(--helix-cyan, #3db8d4);
+  text-shadow: 0 0 16px rgba(61, 184, 212, 0.45);
+}
+
+[data-landing-variant='helix'] .battle-enter__spinner {
+  border-color: rgba(61, 184, 212, 0.22);
+  border-top-color: #3db8d4;
+  box-shadow: 0 0 18px rgba(61, 184, 212, 0.25);
+}

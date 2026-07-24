@@ -15,9 +15,9 @@
     "headerLogo": "brand/header.png",
     "headerLogoAlt": "Helix",
     "favicon": "brand/favicon.ico",
-    "playLogo": "brand/gamelogo.png",
+    "playLogo": "brand/header.png",
     "playLogoAlt": "Helix",
-    "playLobby": "brand/play-lobby.png",
+    "playLobby": "cities/relay/relay_city_02_void_dish_field.png",
     "logoAlt": "Helix"
   },
   "routes": {

@@ -1,0 +1,49 @@
+.match-result {
+  background: rgba(12, 16, 22, 0.86);
+}
+
+.match-result__panel {
+  border-radius: 2px;
+  border: 1px solid rgba(61, 184, 212, 0.45);
+  background: rgba(12, 16, 22, 0.96);
+  box-shadow:
+    0 24px 64px rgba(0, 0, 0, 0.65),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+}
+
+.match-result__title {
+  color: #7fd8ef;
+  text-shadow: 0 0 18px rgba(61, 184, 212, 0.35);
+}
+
+.match-result__text {
+  color: rgba(232, 238, 244, 0.88);
+}
+
+.match-result .vb-btn--primary {
+  color: #0c1016;
+  background: linear-gradient(135deg, rgba(61, 184, 212, 0.95) 0%, rgba(42, 155, 184, 0.98) 100%);
+  border-color: rgba(61, 184, 212, 0.65);
+}
+
+.match-result .vb-btn--secondary {
+  background: rgba(16, 22, 30, 0.88);
+  border-color: rgba(61, 184, 212, 0.35);
+  color: #e8eef4;
+}
+
+.tutorial-overlay__panel {
+  border-radius: 2px;
+  border-color: rgba(61, 184, 212, 0.42);
+  background: rgba(12, 16, 22, 0.96);
+}
+
+.tutorial-overlay__title {
+  color: #7fd8ef;
+}
+
+.tutorial-highlight {
+  box-shadow:
+    0 0 0 2px rgba(61, 184, 212, 0.75),
+    0 0 24px rgba(61, 184, 212, 0.35);
+}
