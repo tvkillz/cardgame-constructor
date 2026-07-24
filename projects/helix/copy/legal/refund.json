@@ -5,14 +5,14 @@
   "blocks": [
     {
       "type": "paragraph",
-      "text": "This Cancellation & Refund Policy outlines the terms governing purchases made through https://helix.voidborn.fun (the \"Website\") and our connected gaming infrastructure (the \"Platform\"), operated by Test LTD (\"we\", \"us\", or \"our\")."
+      "text": "This Cancellation & Refund Policy outlines the terms governing purchases made through https://helixsignal.online (the \"Website\") and our connected gaming infrastructure (the \"Platform\"), operated by Test LTD (\"we\", \"us\", or \"our\")."
     },
     {
       "type": "company",
       "name": "Test LTD",
       "companyNumber": "00000000",
       "address": "123 Example Street, Testville, TE1 1ST, United Kingdom",
-      "email": "play@helix.voidborn.fun"
+      "email": "support@helixsignal.online"
     },
     {
       "type": "paragraph",
@@ -92,7 +92,7 @@
       "type": "list",
       "ordered": false,
       "items": [
-        "Send an email to play@helix.voidborn.fun.",
+        "Send an email to support@helixsignal.online.",
         "Provide your specific Account username, transaction ID, and a clear explanation of the issue.",
         "Our team will investigate the billing log and respond within a reasonable timeframe."
       ]

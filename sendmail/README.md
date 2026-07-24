@@ -2,7 +2,7 @@
 
 HTTP mail relay so GoTrue on the API VPS never opens SMTP directly. Can run as a **single centralized endpoint** (recommended) or per-site relays.
 
-**Multi-site SMTP:** one relay can send both brands using `SMTP_*` (voidborn default) plus `SMTP_IYASHIKEI_*` overrides. Site routing is based on detected brand/site id.
+**Multi-site SMTP:** one relay can send all brands using `SMTP_*` (voidborn default) plus `SMTP_IYASHIKEI_*` / `SMTP_HELIX_*` overrides. Site routing is based on detected brand/site id.
 
 **Not a cPanel deploy.** Legacy `CPANEL.md` / `build:cpanel` scripts are historical reference only unless you explicitly use them elsewhere.
 
@@ -74,7 +74,7 @@ GOTRUE_HOOK_SEND_EMAIL_URI=https://api.voidborn.fun/functions/v1/send-email-hook
 GOTRUE_HOOK_SEND_EMAIL_SECRETS=v1,whsec_<shared secret>
 SEND_EMAIL_HOOK_SECRET=v1,whsec_<same>
 
-SENDMAIL_RELAYS={"voidborn":{"url":"https://mail.voidborn.fun/api/sendmail","apiKey":"..."},"iyashikei":{"url":"https://mail.voidborn.fun/api/sendmail","apiKey":"..."}}
+SENDMAIL_RELAYS={"voidborn":{"url":"https://voidborn.fun/api/sendmail","apiKey":"..."},"iyashikei":{"url":"https://voidborn.fun/api/sendmail","apiKey":"..."},"helix":{"url":"https://voidborn.fun/api/sendmail","apiKey":"..."}}
 ```
 
 If both sites point to one relay URL, use the same `MAIL_API_KEY` for both entries (or keep separate keys if you run multiple relays).
@@ -94,6 +94,7 @@ Set on the relay (frontend VPS pm2):
 SITE_URL=https://voidborn.fun
 AUTH_VERIFY_BASE_URL=https://api.voidborn.fun
 AUTH_VERIFY_BASE_URL_IYASHIKEI=https://api.komorebi.club
+AUTH_VERIFY_BASE_URL_HELIX=https://api.helixsignal.online
 ```
 
 Confirm/reset links in emails use that host (`/auth/v1/verify?...`), not the frontend domain.
@@ -113,7 +114,7 @@ Confirm/reset links in emails use that host (`/auth/v1/verify?...`), not the fro
 ## POST /test body (optional)
 
 ```json
-{ "recipients": ["you@example.com"], "template": "signup", "site": "iyashikei" }
+{ "recipients": ["you@example.com"], "template": "signup", "site": "helix" }
 ```
 
 `template` values:
@@ -124,7 +125,7 @@ Confirm/reset links in emails use that host (`/auth/v1/verify?...`), not the fro
 | `recovery` | Password reset preview |
 | `invoice` | Invoice email + PDF preview (Test LTD seller data) |
 
-`site` (optional): `voidborn` (default) or `iyashikei` — picks branded auth email template. The live GoTrue hook auto-detects site from `redirect_to`, `user_metadata.site_id`, or `+site` email suffix.
+`site` (optional): `voidborn` (default), `iyashikei`, or `helix` — picks branded auth email template. The live GoTrue hook auto-detects site from `redirect_to`, `user_metadata.site_id`, or `+site` email suffix.
 
 ## POST /invoice body
 

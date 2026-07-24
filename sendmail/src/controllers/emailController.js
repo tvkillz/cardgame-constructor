@@ -79,6 +79,12 @@ async function smtpHealth(_req, res) {
           user: siteSmtpConfig('iyashikei').user,
           from: fromAddress('iyashikei'),
         },
+        helix: {
+          host: siteSmtpConfig('helix').host,
+          port: siteSmtpConfig('helix').port,
+          user: siteSmtpConfig('helix').user,
+          from: fromAddress('helix'),
+        },
       },
     });
   } catch (err) {
@@ -117,7 +123,8 @@ async function sendTestEmail(req, res) {
         recipient: to[0],
         order: {
           id: '00000000-0000-4000-8000-000000preview',
-          orderNumber: siteId === 'iyashikei' ? 'KB-PREVIEW' : 'VB-PREVIEW',
+          orderNumber:
+            siteId === 'iyashikei' ? 'KB-PREVIEW' : siteId === 'helix' ? 'HX-PREVIEW' : 'VB-PREVIEW',
           paidAt: stamp,
           totalCents: 1000,
           currency: 'eur',
@@ -134,7 +141,7 @@ async function sendTestEmail(req, res) {
           postalCode: 'SW1A 1AA',
           country: 'United Kingdom',
         },
-        seller: defaultSeller(),
+        seller: defaultSeller(siteId),
         paymentMethod: 'Test payment',
       });
       const email = buildInvoiceEmail(payload);

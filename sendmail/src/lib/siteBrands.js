@@ -10,6 +10,9 @@ const DOMAIN_TO_SITE = {
   'www.komorebi.club': 'iyashikei',
   'staging.komorebi.club': 'iyashikei',
   'komorebi.voidborn.fun': 'iyashikei',
+  'helixsignal.online': 'helix',
+  'www.helixsignal.online': 'helix',
+  'helix.voidborn.fun': 'helix',
 };
 
 const VOIDBORN_PALETTE = {
@@ -42,6 +45,23 @@ const IYASHIKEI_PALETTE = {
   colorScheme: 'light',
   ctaBg: 'rgba(106, 171, 114, 0.14)',
   ctaBorder: 'rgba(106, 171, 114, 0.45)',
+};
+
+/** Soft-sci-fi lab HUD — mirrors projects/helix/theme/colors.json */
+const HELIX_PALETTE = {
+  bg: '#0c1016',
+  text: '#e8eef4',
+  title: '#e8eef4',
+  muted: 'rgba(232, 238, 244, 0.55)',
+  body: '#f0f4f8',
+  accent: '#c4a35a',
+  accentBright: '#3db8d4',
+  border: 'rgba(61, 184, 212, 0.28)',
+  headerTop: '#101820',
+  headerBottom: '#0c1016',
+  colorScheme: 'dark',
+  ctaBg: 'rgba(61, 184, 212, 0.14)',
+  ctaBorder: 'rgba(61, 184, 212, 0.5)',
 };
 
 /** Map auth email suffix → internal site id (must match backend auth_email_resolve_site_id). */
@@ -264,6 +284,119 @@ const SITE_BRANDS = {
     previewFooter: {
       signup: 'This is a preview of the KOMOREBI activation email template.',
       recovery: 'This is a preview of the KOMOREBI password reset email template.',
+    },
+  },
+
+  helix: {
+    id: 'helix',
+    brandName: 'HELIX',
+    siteUrl: 'https://helixsignal.online',
+    logoPath: '/assets/brand/header.png',
+    logoPaths: [
+      '/assets/brand/header.webp',
+      '/assets/brand/header.png',
+      '/assets/brand/gamelogo.webp',
+      '/assets/brand/gamelogo.png',
+    ],
+    typography: {
+      headingFamily: "'Orbitron', 'Rajdhani', Arial, Helvetica, sans-serif",
+      googleFontsUrl:
+        'https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700&family=Rajdhani:wght@500;600;700&display=swap',
+    },
+    palette: HELIX_PALETTE,
+    greetingName: (name) => (name ? `Operator ${name}.` : 'Operator.'),
+    subjects: {
+      signup: 'Confirm your HELIX account',
+      invite: 'You are invited to HELIX',
+      magiclink: 'Your HELIX sign-in link',
+      recovery: 'Reset your HELIX password',
+      email_change: 'Confirm your HELIX email change',
+      email: 'Your HELIX verification code',
+      reauthentication: 'Confirm it is you — HELIX',
+      password_changed_notification: 'Your HELIX password was changed',
+      email_changed_notification: 'Your HELIX email was changed',
+      phone_changed_notification: 'Your HELIX phone number was changed',
+      identity_linked_notification: 'A sign-in method was linked to your HELIX account',
+      identity_unlinked_notification: 'A sign-in method was removed from your HELIX account',
+      mfa_factor_enrolled_notification: 'MFA was enabled on your HELIX account',
+      mfa_factor_unenrolled_notification: 'MFA was disabled on your HELIX account',
+    },
+    actionCopy: {
+      signup: {
+        headline: 'Signal Locked In',
+        body:
+          'Welcome aboard the Spire. Confirm your account to field Frames, keep the Relay Grid clear of Static, and link up across Hab, Cryo, Reactor, and Relay.',
+        cta: 'Activate Link',
+      },
+      invite: {
+        headline: 'Grid Access Granted',
+        body:
+          'An operator invited you onto the HELIX grid. Accept below to enter the portal and begin your first link.',
+        cta: 'Accept Invitation',
+      },
+      magiclink: {
+        headline: 'Secure Channel Ready',
+        body:
+          'Your passwordless sign-in channel is open. Use the link below to reconnect to the portal.',
+        cta: 'Sign In to HELIX',
+      },
+      recovery: {
+        headline: 'Restore Access Credentials',
+        body:
+          'We received a request to reset your password. If this was you, forge a new credential with the link below. The channel closes soon for your protection.',
+        cta: 'Reset Password',
+      },
+      email_change: {
+        headline: 'Confirm New Contact Channel',
+        body:
+          'You asked to change the email bound to your HELIX account. Confirm the new address to keep grid access secure.',
+        cta: 'Confirm Email Change',
+      },
+      email: {
+        headline: 'Verify Operator Identity',
+        body: 'Use the link or code below to verify your identity and continue on the grid.',
+        cta: 'Verify Now',
+      },
+      reauthentication: {
+        headline: 'Re-Authenticate',
+        body:
+          'For your protection, confirm your identity before this sensitive action can proceed.',
+        cta: 'Confirm Identity',
+      },
+    },
+    securityCopy: {
+      password_changed_notification: {
+        headline: 'Password Changed',
+        body: 'Your HELIX password was changed. If you did not make this change, secure your account immediately.',
+      },
+      email_changed_notification: {
+        headline: 'Email Address Changed',
+        body: 'The email on your HELIX account was updated. If this was unexpected, contact support and review your security.',
+      },
+      phone_changed_notification: {
+        headline: 'Phone Number Changed',
+        body: 'A phone number linked to your HELIX account was updated.',
+      },
+      identity_linked_notification: {
+        headline: 'Sign-In Method Linked',
+        body: 'A new sign-in method was linked to your HELIX account.',
+      },
+      identity_unlinked_notification: {
+        headline: 'Sign-In Method Removed',
+        body: 'A sign-in method was removed from your HELIX account.',
+      },
+      mfa_factor_enrolled_notification: {
+        headline: 'Extra Auth Layer Enabled',
+        body: 'Multi-factor authentication is now active on your HELIX account.',
+      },
+      mfa_factor_unenrolled_notification: {
+        headline: 'Extra Auth Layer Removed',
+        body: 'Multi-factor authentication was disabled on your HELIX account.',
+      },
+    },
+    previewFooter: {
+      signup: 'This is a preview of the HELIX activation email template.',
+      recovery: 'This is a preview of the HELIX password reset email template.',
     },
   },
 };

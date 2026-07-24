@@ -65,7 +65,7 @@ if (update) {
 
   if (!landingOnly) {
     log('Updating portal visual snapshots…')
-    // Prefer visual-only so smoke is skipped; site -g still matches "voidborn portal visual › …"
+    // Prefer visual-only update; site -g still matches "voidborn portal visual › …"
     const visualGrep = grep ? `${grep}.*visual|visual.*${grep}` : 'visual'
     runPlaywright(['--project=portal', '-g', visualGrep, '--update-snapshots'])
   }

@@ -2,7 +2,7 @@
 
 Soft-sci-fi content pack — **HELIX** brand, project id `helix` (same — no alias split).
 
-Staging: `https://helix.voidborn.fun` (HTTP basic auth `dev` / `dev` via nginx staging vhost).
+Staging (legacy): `https://helix.voidborn.fun`. Production: `https://helixsignal.online`.
 
 ## World
 
@@ -29,7 +29,8 @@ Stats display as **Signal** / **Integrity** (stored as `attack` / `health`). Rar
 - [x] Theme tokens (`colors.json`, `ui.json` — Orbitron + Rajdhani; light lab HUD palette)
 - [x] Generation specs (`contentgen.json`, `cardgen.json`)
 - [x] Registry entry (`stagingDomain`: `helix.voidborn.fun`)
-- [x] Sites bootstrap row (`helix` / `HELIX` / `helix.voidborn.fun`)
+- [x] Sites bootstrap row (`helix` / `HELIX` / `helixsignal.online`)
+- [x] Manifest `siteUrl`: `https://helixsignal.online`
 - [ ] **Landing assets** — run contentgen below (you approve art; agent does not auto-generate)
 - [ ] **Brand files** — `header.png`, `gamelogo.png`, `favicon.ico`, `play-lobby.png` (**you** supply logo / header)
 - [ ] **Showcase cards** — 12 slugs wired; run cardgen showcase flow below
@@ -147,7 +148,35 @@ curl -sI https://helix.voidborn.fun/og-image.jpg
 
 When you add a dedicated square `brand/gamelogo.png`, set `manifest.brand.logo` back to it for tighter favicon / apple-touch crops.
 
-## Later (step 3 — not now)
+## Later (step 3 — frontend theming polish)
 
-- `sendmail` / `DOMAIN_TO_SITE` brand entry
 - Card upload: `PROJECT=helix npm run upload:site`
+
+## Sendmail (centralized on voidborn VPS)
+
+Helix is wired in `sendmail` brand map + `SMTP_HELIX_*` (PrivateEmail `support@helixsignal.online`).
+Auth verify links use `AUTH_VERIFY_BASE_URL_HELIX=https://api.helixsignal.online`.
+Logo: `sendmail/assets/brand/helix/header.png` (CID in HTML + PDF invoice header).
+
+On the **voidborn** VPS after sync:
+
+```bash
+cd /root/constructor-files/sendmail
+pm2 restart voidborn-sendmail --update-env   # or your pm2 app name
+```
+
+On the **API** VPS after `SENDMAIL_RELAYS` / CORS / redirects change:
+
+```bash
+cd /root/constructor-files/backend
+docker compose up -d kong auth functions --force-recreate
+```
+
+Test:
+
+```bash
+curl -s -X POST https://voidborn.fun/api/sendmail/test \
+  -H "Authorization: Bearer $MAIL_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"template":"signup","site":"helix"}'
+```

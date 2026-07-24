@@ -24,6 +24,9 @@ const DOMAIN_TO_SITE: Record<string, string> = {
   'www.komorebi.club': 'iyashikei',
   'staging.komorebi.club': 'iyashikei',
   'komorebi.voidborn.fun': 'iyashikei',
+  'helixsignal.online': 'helix',
+  'www.helixsignal.online': 'helix',
+  'helix.voidborn.fun': 'helix',
 }
 
 const AUTH_SUFFIX_TO_SITE: Record<string, string> = {

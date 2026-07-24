@@ -14,25 +14,43 @@ function normalizeSiteId(siteId) {
   return String(siteId || '').trim().toLowerCase();
 }
 
-function siteSmtpConfig(siteId) {
+/** Default From display name when SMTP_*_FROM_NAME is unset. */
+function defaultFromName(siteId) {
+  if (siteId === 'iyashikei') return 'KOMOREBI';
+  if (siteId === 'helix') return 'HELIX';
+  return 'VOIDBORN';
+}
+
+/**
+ * Env prefix for per-site SMTP — voidborn uses SMTP_*; others SMTP_{SITEID}_*
+ * (e.g. SMTP_IYASHIKEI_*, SMTP_HELIX_*). Missing keys fall back to SMTP_*.
+ */
+function smtpEnvPrefix(siteId) {
   const normalized = normalizeSiteId(siteId);
-  const isIyashikei = normalized === 'iyashikei';
-  const prefix = isIyashikei ? 'SMTP_IYASHIKEI_' : 'SMTP_';
+  if (!normalized || normalized === 'voidborn') return 'SMTP_';
+  return `SMTP_${normalized.toUpperCase()}_`;
+}
+
+function siteSmtpConfig(siteId) {
+  const normalized = normalizeSiteId(siteId) || 'voidborn';
+  const prefix = smtpEnvPrefix(normalized);
 
   const host = envValue(`${prefix}HOST`, 'SMTP_HOST');
   const port = Number(envValue(`${prefix}PORT`, 'SMTP_PORT') || 465);
   const user = envValue(`${prefix}USER`, 'SMTP_USER');
   const pass = envValue(`${prefix}PASS`, `${prefix}PASSWORD`, 'SMTP_PASS', 'SMTP_PASSWORD');
-  const fromName = envValue(
-    `${prefix}FROM_NAME`,
-    `${prefix}SENDER_NAME`,
-    'SMTP_FROM_NAME',
-    'SMTP_SENDER_NAME',
-  ) || (isIyashikei ? 'KOMOREBI' : 'VOIDBORN');
-  const fromEmail = envValue(`${prefix}ADMIN_EMAIL`, `${prefix}FROM_EMAIL`, 'SMTP_ADMIN_EMAIL', 'SMTP_USER') || user;
+  const fromName =
+    envValue(
+      `${prefix}FROM_NAME`,
+      `${prefix}SENDER_NAME`,
+      'SMTP_FROM_NAME',
+      'SMTP_SENDER_NAME',
+    ) || defaultFromName(normalized);
+  const fromEmail =
+    envValue(`${prefix}ADMIN_EMAIL`, `${prefix}FROM_EMAIL`, 'SMTP_ADMIN_EMAIL', 'SMTP_USER') || user;
 
   return {
-    siteId: normalized || 'voidborn',
+    siteId: normalized,
     host,
     port,
     user,
@@ -82,11 +100,8 @@ async function verifySmtp(siteId) {
 async function sendViaSmtp({ to, cc, subject, html, text, attachments, siteId }) {
   const cfg = siteSmtpConfig(siteId);
   if (!cfg.host || !cfg.user || !cfg.pass) {
-    throw new Error(
-      `SMTP not configured for site=${cfg.siteId} (need ${
-        cfg.siteId === 'iyashikei' ? 'SMTP_IYASHIKEI_*' : 'SMTP_*'
-      })`,
-    );
+    const hint = smtpEnvPrefix(cfg.siteId);
+    throw new Error(`SMTP not configured for site=${cfg.siteId} (need ${hint}* or SMTP_*)`);
   }
 
   const transport = createTransport(siteId);

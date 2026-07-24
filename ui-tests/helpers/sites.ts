@@ -33,6 +33,12 @@ export const UI_TEST_SITES: UiTestSite[] = [
     authSuffix: 'iyashikei',
     authFile: path.join(authDir, 'iyashikei.json'),
   },
+  {
+    name: 'helix',
+    url: 'http://127.0.0.1:3103',
+    authSuffix: 'helix',
+    authFile: path.join(authDir, 'helix.json'),
+  },
 ]
 
 /** @deprecated Prefer UI_TEST_SITES — kept for existing portal imports */

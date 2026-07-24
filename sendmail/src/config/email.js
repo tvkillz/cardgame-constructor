@@ -6,12 +6,12 @@ function mailTransport() {
   return (process.env.MAIL_TRANSPORT || 'smtp').trim().toLowerCase();
 }
 
-function fromAddress() {
+function fromAddress(siteId) {
   if (mailTransport() === 'brevo') {
     const { name, email } = brevoFromAddress();
     return `"${name}" <${email}>`;
   }
-  return smtpFromAddress();
+  return smtpFromAddress(siteId);
 }
 
 async function verifyMailTransport() {

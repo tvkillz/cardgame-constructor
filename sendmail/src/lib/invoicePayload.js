@@ -1,13 +1,31 @@
 const { getBrand, parseSiteIdFromEmail, siteIdFromAuthSuffix } = require('./siteBrands');
 
-function defaultSeller() {
+function defaultSeller(siteId) {
+  const normalized = String(siteId || 'voidborn').trim().toLowerCase() || 'voidborn';
+  const prefix =
+    normalized === 'voidborn' ? 'INVOICE_COMPANY_' : `INVOICE_COMPANY_${normalized.toUpperCase()}_`;
+
+  const fallbackEmail =
+    normalized === 'iyashikei'
+      ? 'play@komorebi.club'
+      : normalized === 'helix'
+        ? 'support@helixsignal.online'
+        : 'support@voidborn.fun';
+
   return {
-    companyName: process.env.INVOICE_COMPANY_NAME || 'Test LTD',
-    companyNumber: process.env.INVOICE_COMPANY_NUMBER || '00000000',
+    companyName:
+      process.env[`${prefix}NAME`] || process.env.INVOICE_COMPANY_NAME || 'Test LTD',
+    companyNumber:
+      process.env[`${prefix}NUMBER`] || process.env.INVOICE_COMPANY_NUMBER || '00000000',
     address:
+      process.env[`${prefix}ADDRESS`] ||
       process.env.INVOICE_COMPANY_ADDRESS ||
       '123 Example Street, Testville, TE1 1ST, United Kingdom',
-    email: process.env.INVOICE_COMPANY_EMAIL || process.env.SMTP_ADMIN_EMAIL || 'support@voidborn.fun',
+    email:
+      process.env[`${prefix}EMAIL`] ||
+      process.env.INVOICE_COMPANY_EMAIL ||
+      process.env.SMTP_ADMIN_EMAIL ||
+      fallbackEmail,
   };
 }
 
@@ -40,6 +58,8 @@ function normalizeInvoicePayload(body) {
     throw Object.assign(new Error('lineItems must contain at least one item'), { status: 400 });
   }
 
+  const siteId = resolveInvoiceSiteId(body);
+
   return {
     recipient,
     order: {
@@ -68,11 +88,11 @@ function normalizeInvoicePayload(body) {
       phone: String(body.buyer?.phone ?? ''),
     },
     seller: {
-      ...defaultSeller(),
+      ...defaultSeller(siteId),
       ...(body.seller || {}),
     },
     paymentMethod: String(body.paymentMethod || 'Test payment'),
-    siteId: resolveInvoiceSiteId(body),
+    siteId,
   };
 }
 

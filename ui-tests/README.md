@@ -1,6 +1,11 @@
+
+```bash
+node test-all.mjs --update -g helix
+```
+
 # UI tests
 
-Playwright suites for **landing** (full-page visual) and **portal** (smoke + viewport visual) across every site listed in one place.
+Playwright suites for **landing** (full-page visual) and **portal** (viewport visual + clicks) across every site listed in one place.
 
 ## Prerequisites
 
@@ -83,10 +88,10 @@ Commit new PNGs under:
 
 | Command | What it runs |
 |---------|----------------|
-| `npm run test:all` | Landing (Chromium) + portal (setup → smoke + visual) for **all** sites |
+| `npm run test:all` | Landing (Chromium) + portal visual for **all** sites |
 | `npm run test:all:update` | Refresh landing + portal visual baselines for all sites |
 | `npm run test:landing` | Landing visual only |
-| `npm run test:portal` | Portal smoke + visual (auth setup first) |
+| `npm run test:portal` | Portal visual (auth setup first) |
 | `npm run test:portal:update` | Portal visual baselines only |
 
 Unified script options (`node test-all.mjs` / `npm run test:all -- …`):
@@ -114,11 +119,11 @@ Repo-root helper that **builds + starts** voidborn/iyashikei then runs landing o
 
 ### Portal
 
-- **Smoke:** Buy credits modal → Collection Forge/Sell → Transactions → Profile
-- **Visual:** market, credits modal, withdraw modal, cart drawer, account menu, collection Forge/Sell, transactions, profile
+- **Visual** (also clicks through UI): market, credits modal, withdraw modal, cart drawer, account menu, collection Forge/Sell, transactions, profile
 - Auth via Playwright `storageState` (Supabase **localStorage**, not cookies)
-- Card art + cash/credit **prices** CSS-hidden; small masks for balances, username, tx lists, billing fields, footer contact
+- Card art, names, stats, domain/rarity + cash/credit **prices** CSS-hidden; market **card grid** `display:none` (chrome-only, no catalog race); small masks for balances, username, tx lists, billing fields, footer contact
 - BuyCard / BuyListing / SellCard modals skipped for now
+- No separate DOM smoke suite — visuals cover the interactive paths
 
 ---
 

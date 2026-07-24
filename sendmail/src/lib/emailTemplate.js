@@ -151,7 +151,7 @@ function headingFontFamily(brand) {
 }
 
 /**
- * Site-branded HTML email shell — voidborn dark realm or iyashikei light wards.
+ * Site-branded HTML email shell — voidborn / iyashikei / helix palettes.
  */
 function renderBrandedEmail(
   brand,

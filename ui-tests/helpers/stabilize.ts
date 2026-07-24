@@ -1,4 +1,5 @@
 import type { Page } from '@playwright/test'
+import { expect } from '@playwright/test'
 
 /**
  * Kill animations / hide media for stable screenshots.
@@ -55,7 +56,7 @@ export async function stabilizePage(page: Page): Promise<void> {
         background-image: none !important;
       }
 
-      /* Card art — hide without pink-masking whole grids */
+      /* Card art */
       .card__art,
       .market-card__frame img,
       .collection-owned-card__frame img,
@@ -64,7 +65,27 @@ export async function stabilizePage(page: Page): Promise<void> {
         background-image: none !important;
       }
 
-      /* Market / listing cash + credit prices (dynamic) */
+      /* Card name + stats + domain/rarity chrome (inventory differs per account) */
+      .card__title,
+      .card__footer,
+      .card__stat,
+      .card__stat-value,
+      .card__domain,
+      .card__rarity,
+      .card__overlay,
+      .card__combat-stats,
+      .card__bottom {
+        visibility: hidden !important;
+      }
+
+      /* Market card foot meta (rarity / domain labels) */
+      .market-card__meta,
+      .market-card__rarity,
+      .market-card__domain {
+        visibility: hidden !important;
+      }
+
+      /* Cash + credit prices */
       .market-card__price,
       .market-card__price--credits,
       .market-card__price--money,
@@ -74,16 +95,46 @@ export async function stabilizePage(page: Page): Promise<void> {
         visibility: hidden !important;
       }
 
-      /* Counts / inventory stats that churn with catalog */
+      /* Counts / inventory badges (not loading status — that must stay visible for waits) */
       .portal-market__count,
       .portal-collection__stats,
-      .portal-collection__status,
+      .portal-collection__empty,
       .collection-owned-card__owned-badge,
-      .collection-owned-card__qty-value {
+      .collection-owned-card__qty-value,
+      .portal-collection__deck-row-title,
+      .portal-collection__deck-row-qty,
+      .portal-collection__deck-count {
         visibility: hidden !important;
+      }
+
+      /*
+       * Market card grid — always collapsed for visuals.
+       * Avoids voidborn/komorebi races (empty vs loaded catalog).
+       * Chrome (tabs, filters, toolbar) still compared.
+       */
+      .portal-market-grid,
+      .portal-market-grid__loading,
+      .portal-market__load-more {
+        display: none !important;
       }
     `,
   })
+}
+
+/** Collection finished loading — real layout or a non-loading status (e.g. no decks). */
+export async function waitForCollectionReady(page: Page, timeout = 90_000): Promise<void> {
+  const ready = page
+    .locator('.portal-collection')
+    .or(page.locator('.portal-collection__status').filter({ hasNotText: 'Loading' }))
+  await expect(ready.first()).toBeVisible({ timeout })
+  // Let card frames paint after inventory swap (avoids empty-vs-grid snapshot races)
+  await page.waitForTimeout(750)
+}
+
+/** Market chrome ready — card grid is CSS-hidden, do not wait for catalog. */
+export async function waitForMarketReady(page: Page, timeout = 90_000): Promise<void> {
+  await expect(page.locator('.portal-market')).toBeVisible({ timeout })
+  await expect(page.locator('.portal-market__toolbar')).toBeVisible({ timeout })
 }
 
 /** Close cart drawer / credits / withdraw / account menu if left open between steps. */

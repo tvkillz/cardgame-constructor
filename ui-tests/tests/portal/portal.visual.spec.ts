@@ -1,6 +1,11 @@
 import { test, expect } from '@playwright/test'
 import { PORTAL_SITES } from '../../helpers/sites'
-import { closePortalOverlays, stabilizePage } from '../../helpers/stabilize'
+import {
+  closePortalOverlays,
+  stabilizePage,
+  waitForCollectionReady,
+  waitForMarketReady,
+} from '../../helpers/stabilize'
 import { portalDynamicMasks, portalScreenshotOptions } from '../../helpers/visual'
 
 test.setTimeout(180_000)
@@ -30,9 +35,7 @@ for (const site of PORTAL_SITES) {
 
     test('visual market', async ({ page }) => {
       await openPortal(page, '/portal/market')
-      await expect(page.locator('.portal-market, .portal-market-grid__loading').first()).toBeVisible({
-        timeout: 60_000,
-      })
+      await waitForMarketReady(page)
       await closePortalOverlays(page)
       await expect(page).toHaveScreenshot(`${site.name}-market.png`, shotOpts(page))
     })
@@ -72,9 +75,7 @@ for (const site of PORTAL_SITES) {
 
     test('visual collection forge', async ({ page }) => {
       await openPortal(page, '/portal/collection')
-      await expect(page.locator('.portal-collection, .portal-collection__status').first()).toBeVisible({
-        timeout: 60_000,
-      })
+      await waitForCollectionReady(page)
       const forgeBtn = page.locator('.portal__mode-btn', { hasText: 'Forge' })
       await forgeBtn.click()
       await expect(forgeBtn).toHaveAttribute('aria-pressed', 'true')
@@ -84,9 +85,7 @@ for (const site of PORTAL_SITES) {
 
     test('visual collection sell', async ({ page }) => {
       await openPortal(page, '/portal/collection')
-      await expect(page.locator('.portal-collection, .portal-collection__status').first()).toBeVisible({
-        timeout: 60_000,
-      })
+      await waitForCollectionReady(page)
       const sellBtn = page.locator('.portal__mode-btn', { hasText: 'Sell' })
       await sellBtn.click()
       await expect(sellBtn).toHaveAttribute('aria-pressed', 'true')

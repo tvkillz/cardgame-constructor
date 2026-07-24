@@ -42,7 +42,16 @@ function envValue(...keys: string[]): string | undefined {
 function invoiceSellerBlock(siteId?: string | null) {
   const normalized = (siteId || 'voidborn').trim().toLowerCase()
   const sitePrefix =
-    normalized === 'iyashikei' ? 'INVOICE_COMPANY_IYASHIKEI_' : 'INVOICE_COMPANY_'
+    !normalized || normalized === 'voidborn'
+      ? 'INVOICE_COMPANY_'
+      : `INVOICE_COMPANY_${normalized.toUpperCase()}_`
+
+  const defaultEmail =
+    normalized === 'iyashikei'
+      ? 'play@komorebi.club'
+      : normalized === 'helix'
+        ? 'support@helixsignal.online'
+        : 'support@voidborn.fun'
 
   return {
     companyName:
@@ -52,11 +61,7 @@ function invoiceSellerBlock(siteId?: string | null) {
     address:
       envValue(`${sitePrefix}ADDRESS`, 'INVOICE_COMPANY_ADDRESS') ??
       '123 Example Street, Testville, TE1 1ST, United Kingdom',
-    email:
-      envValue(`${sitePrefix}EMAIL`, 'INVOICE_COMPANY_EMAIL') ??
-      (normalized === 'iyashikei'
-        ? 'play@komorebi.club'
-        : 'support@voidborn.fun'),
+    email: envValue(`${sitePrefix}EMAIL`, 'INVOICE_COMPANY_EMAIL') ?? defaultEmail,
   }
 }
 

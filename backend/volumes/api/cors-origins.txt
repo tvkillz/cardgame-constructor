@@ -10,6 +10,9 @@ https://staging.voidborn.fun
 https://test.sportsydeals.com
 https://www.test.sportsydeals.com
 https://staging.sportsydeals.com
+https://www.helixsignal.online
+https://helixsignal.online
+https://helix.voidborn.fun
 
 # Local pm2 dev/prod (Next.js proxies /auth/v1 → API; optional if not using proxy)
 http://localhost:3000

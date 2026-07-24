@@ -100,7 +100,8 @@ function buildInvoiceEmail(payload) {
       headline: 'Payment Received',
       greeting,
       bodyHtml,
-      ctaLabel: brand.id === 'iyashikei' ? 'Visit Market' : 'Open Portal',
+      ctaLabel:
+        brand.id === 'iyashikei' ? 'Visit Market' : brand.id === 'helix' ? 'Open Grid Portal' : 'Open Portal',
       ctaUrl: `${portalUrl}/portal/market`,
       footerNote: `Your PDF invoice is attached. Questions? Contact ${seller.email}.`,
     }),

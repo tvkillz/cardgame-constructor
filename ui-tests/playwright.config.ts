@@ -2,7 +2,7 @@ import { defineConfig, devices } from '@playwright/test'
 
 /**
  * Landing: visual snapshots (public).
- * Portal: DOM smoke with auth via storageState (setup project).
+ * Portal: visual smoke with auth via storageState (setup project).
  *
  * Credentials: copy ui-tests/.env.example → ui-tests/.env
  * Servers: voidborn :3100, komorebi/iyashikei :3102 (auth must be enabled for portal).
