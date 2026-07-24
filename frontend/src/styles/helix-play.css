@@ -133,13 +133,18 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.35rem 0.5rem 0.55rem;
-  margin-bottom: 0.15rem;
-  border: none;
-  border-radius: 0;
-  background: transparent;
-  box-shadow: none;
-  backdrop-filter: none;
+  padding: 1.35rem 2.25rem 1.5rem;
+  margin-bottom: 0.45rem;
+  border-radius: 4px;
+  border: 1px solid rgba(61, 184, 212, 0.32);
+  background:
+    radial-gradient(circle at 50% 0%, rgba(61, 184, 212, 0.16) 0%, transparent 58%),
+    linear-gradient(180deg, rgba(10, 14, 20, 0.72) 0%, rgba(10, 14, 20, 0.42) 100%);
+  box-shadow:
+    0 12px 36px rgba(0, 0, 0, 0.45),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
 }
 
 [data-landing-variant='helix'] .play-page__logo {
@@ -147,9 +152,9 @@
   filter:
     drop-shadow(0 4px 18px rgba(0, 0, 0, 0.55))
     drop-shadow(0 0 28px rgba(61, 184, 212, 0.22));
-  height: clamp(96px, 22vw, 168px);
+  height: clamp(192px, 44vw, 336px);
   width: auto;
-  max-width: min(92vw, 520px);
+  max-width: min(96vw, 920px);
   object-fit: contain;
 }
 
@@ -446,8 +451,12 @@
     min-height: 92px;
   }
 
+  [data-landing-variant='helix'] .play-page__logo-wrap {
+    padding: 0.85rem 1.15rem 1rem;
+  }
+
   [data-landing-variant='helix'] .play-page__logo {
-    height: clamp(84px, 26vw, 132px);
+    height: clamp(168px, 52vw, 264px);
   }
 
   [data-landing-variant='helix'] .play-page__hud-tag {

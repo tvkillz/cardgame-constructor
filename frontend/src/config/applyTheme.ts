@@ -7,8 +7,11 @@ export function buildThemeCssVars(): Record<string, string> {
   const lobbyBg = getLobbyBackground()
   const arenaBg = getArenaBackground()
   const playLogo = appConfig.logo.playLogo
+  const headerLogo = appConfig.logo.headerLogo
   const brandLogo = appConfig.logo.src
   const variant = landing?.variant ?? 'voidborn'
+  /** Helix build ships header wordmark; gamelogo may be absent — prefer a real asset for card backs. */
+  const helixCardBackLogo = playLogo || headerLogo || brandLogo
 
   const vars: Record<string, string> = {
     '--void-black': colors.voidBlack,
@@ -36,7 +39,9 @@ export function buildThemeCssVars(): Record<string, string> {
     ...(playLogo && variant !== 'iyashikei' && variant !== 'helix'
       ? { '--card-back-logo': `url(${playLogo})` }
       : {}),
-    ...(variant === 'helix' && brandLogo ? { '--card-back-logo': `url(${brandLogo})` } : {}),
+    ...(variant === 'helix' && helixCardBackLogo
+      ? { '--card-back-logo': `url(${helixCardBackLogo})` }
+      : {}),
   }
 
   if (variant === 'iyashikei') {

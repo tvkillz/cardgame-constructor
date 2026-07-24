@@ -16,7 +16,7 @@ import GameScalableContainer from '../voidborn/GameScalableContainer';
 import Card from '@/components/CardPlaceholder/Card';
 import type { CardDisplayProps } from '@/components/CardPlaceholder/Card';
 import CardHoverPreview from '../voidborn/CardHoverPreview';
-import MatchResultOverlay from '../voidborn/MatchResultOverlay';
+import MatchResultOverlay from './MatchResultOverlay';
 import TutorialOverlay from '../voidborn/TutorialOverlay';
 import TutorialHighlight from '../voidborn/TutorialHighlight';
 import { SignalAmbience } from './SignalAmbience';
@@ -28,6 +28,7 @@ import { getGameplayVariant } from '../resolve';
 import '../voidborn/TutorialOverlay.css';
 import '../voidborn/TutorialHighlight.css';
 import './overlays.css';
+import './MatchResultOverlay.css';
 import '@/components/CardPlaceholder/styles.css';
 
 type Props = GameProps;
@@ -293,9 +294,21 @@ export const Game: React.FC<Props> = ({
           ? 'COMBAT'
           : '';
 
+  const cardBackLogo =
+    appConfig.logo.playLogo || appConfig.logo.headerLogo || appConfig.logo.src || '';
+
   return (
     <GameScalableContainer>
-      <div className="game-stage" data-gameplay-variant={getGameplayVariant()} ref={stageRef}>
+      <div
+        className="game-stage"
+        data-gameplay-variant={getGameplayVariant()}
+        ref={stageRef}
+        style={
+          cardBackLogo
+            ? ({ '--card-back-logo': `url(${cardBackLogo})` } as React.CSSProperties)
+            : undefined
+        }
+      >
         <SignalAmbience />
         <div className="game-vfx-layer" ref={fxLayerRef} aria-hidden="true" />
 
