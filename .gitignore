@@ -33,6 +33,9 @@ frontend/deploy/cpanel.local.env
 !**/.env.example
 !**/.env.*.example
 
+# Playwright saved auth (Supabase localStorage sessions)
+ui-tests/.auth/
+
 # --- Node / JS build artifacts ---
 **/node_modules/
 **/.next/

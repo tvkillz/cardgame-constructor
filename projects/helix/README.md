@@ -114,9 +114,40 @@ docker compose restart rest functions
 
 Auth emails: `player+helix@example.com` (suffix = site id). No alias SQL needed.
 
+## SEO (sitemap, robots, icons)
+
+Helix uses the same Next.js SEO pipeline as voidborn / komorebi:
+
+| Route | Source |
+|-------|--------|
+| `/sitemap.xml` | `copy/sitemap.json` → `src/app/sitemap.ts` |
+| `/robots.txt` | `copy/sitemap.json` `robots.disallow` → `src/app/robots.ts` |
+| `/icon`, `/favicon.ico`, `/favicon.png` | compile → `.build/helix/` |
+| `/apple-icon`, `/apple-touch-icon.png` | compile → `apple-touch-icon.png` |
+| `/og-image.jpg` | compile from `copy/seo.json` `image` (or brand logo) |
+
+Metadata (title, description, Open Graph, Twitter, Apple touch) comes from `copy/seo.json` + `src/lib/seo/siteMetadata.ts`.
+
+After changing SEO/brand assets:
+
+```bash
+cd frontend
+PROJECT=helix npm run compile
+# then production build + pm2 restart on the frontend VPS
+```
+
+Verify locally or on host:
+
+```bash
+curl -s https://helix.voidborn.fun/robots.txt
+curl -s https://helix.voidborn.fun/sitemap.xml | head -40
+curl -sI https://helix.voidborn.fun/apple-touch-icon.png
+curl -sI https://helix.voidborn.fun/og-image.jpg
+```
+
+When you add a dedicated square `brand/gamelogo.png`, set `manifest.brand.logo` back to it for tighter favicon / apple-touch crops.
+
 ## Later (step 3 — not now)
 
-- Frontend landing variant + portal + gameplay CSS for light lab HUD
 - `sendmail` / `DOMAIN_TO_SITE` brand entry
-- `PROJECT=helix npm run compile` + build + pm2
 - Card upload: `PROJECT=helix npm run upload:site`

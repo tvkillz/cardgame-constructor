@@ -4,13 +4,19 @@
       "path": "/",
       "changeFrequency": "weekly",
       "priority": 1.0,
-      "comment": "Landing — hero, labs, game model, FAQ"
+      "comment": "Landing — hero, labs, game model, FAQ, deploy gate"
     },
     {
       "path": "/play",
       "changeFrequency": "weekly",
       "priority": 0.9,
       "comment": "Play lobby / match entry"
+    },
+    {
+      "path": "/leaderboard",
+      "changeFrequency": "daily",
+      "priority": 0.7,
+      "comment": "Public ranked ladder"
     },
     {
       "path": "/terms",

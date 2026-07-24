@@ -1,13 +1,11 @@
 import { test, expect } from '@playwright/test';
+import { UI_TEST_SITES } from '../../helpers/sites';
 
 // Увеличиваем общий таймаут для тестов (особенно полезно для Firefox)
 test.setTimeout(120000);
 
-/** Local *-prod ports (registry index + 3100). Auth disabled on start:prod for this gate. */
-const sites = [
-  { name: 'voidborn', url: 'http://127.0.0.1:3100' },
-  { name: 'komorebi', url: 'http://127.0.0.1:3102' }, // iyashikei
-];
+/** Sites come from helpers/sites.ts (shared with portal). */
+const sites = UI_TEST_SITES;
 
 for (const site of sites) {
   // 1) Десктопный тест

@@ -207,10 +207,18 @@ async function generateOgFromLogo(sharp, logoPath, destPath) {
 }
 
 async function buildBrandSeoAssets({ sharp, paths, manifest, seoJson, out }) {
-  const logoRel = manifest.brand?.logo
-  const logoPath = logoRel && !logoRel.startsWith('http') && !logoRel.startsWith('/')
-    ? await resolveAssetFile(paths, logoRel)
-    : null
+  const logoCandidates = [
+    manifest.brand?.logo,
+    manifest.brand?.headerLogo,
+    manifest.brand?.playLogo,
+  ].filter(Boolean)
+
+  let logoPath = null
+  for (const logoRel of logoCandidates) {
+    if (logoRel.startsWith('http') || logoRel.startsWith('/')) continue
+    logoPath = await resolveAssetFile(paths, logoRel)
+    if (logoPath) break
+  }
 
   const faviconRel = manifest.brand?.favicon
   const faviconPath =
@@ -235,14 +243,18 @@ async function buildBrandSeoAssets({ sharp, paths, manifest, seoJson, out }) {
     } else {
       await copyFile(customOgPath, out.ogImage)
     }
+    console.log('Brand: og-image from seo.json image')
   } else if (sharp && logoPath) {
     await generateOgFromLogo(sharp, logoPath, out.ogImage)
+    console.log('Brand: og-image generated from brand logo')
   } else if (logoPath) {
     console.warn('Brand: skipped og-image (install sharp or add copy/seo.json image path)')
+  } else {
+    console.warn('Brand: skipped og-image (no logo/header asset found)')
   }
 
   const rasterSource = faviconPath ?? logoPath
-  /** Sharp cannot decode .ico — use logo for PNG / apple-touch derivatives. */
+  /** Sharp cannot decode .ico — use logo/header PNG for PNG / apple-touch derivatives. */
   const pngSource = faviconRel?.endsWith('.ico') ? logoPath : rasterSource
 
   if (faviconPath && faviconRel?.endsWith('.ico')) {
@@ -254,7 +266,9 @@ async function buildBrandSeoAssets({ sharp, paths, manifest, seoJson, out }) {
         .png()
         .toBuffer()
       await writeFile(out.faviconPng, png32)
-      console.log('Brand: favicon.png generated from logo (companion to favicon.ico)')
+      console.log('Brand: favicon.png generated from brand logo (companion to favicon.ico)')
+    } else if (!pngSource) {
+      console.warn('Brand: skipped favicon.png (need brand/logo or header PNG alongside .ico)')
     }
   } else if (faviconPath && faviconRel?.endsWith('.svg')) {
     await copyFile(faviconPath, out.faviconSvg)
@@ -287,11 +301,13 @@ async function buildBrandSeoAssets({ sharp, paths, manifest, seoJson, out }) {
     await sharp(appleInput, faviconRel?.endsWith('.svg') ? { density: 192 } : undefined)
       .resize(APPLE_TOUCH_SIZE, APPLE_TOUCH_SIZE, {
         fit: 'contain',
-        background: { r: 10, g: 10, b: 12, alpha: 1 },
+        background: { r: 12, g: 16, b: 22, alpha: 1 },
       })
       .png()
       .toFile(out.appleTouchIcon)
     console.log('Brand: apple-touch-icon generated')
+  } else {
+    console.warn('Brand: skipped apple-touch-icon (need sharp + logo/header PNG)')
   }
 }
 

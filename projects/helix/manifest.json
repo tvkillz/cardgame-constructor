@@ -11,7 +11,7 @@
     "cdnBase": null
   },
   "brand": {
-    "logo": "brand/gamelogo.png",
+    "logo": "brand/header.png",
     "headerLogo": "brand/header.png",
     "headerLogoAlt": "Helix",
     "favicon": "brand/favicon.ico",
