@@ -24,6 +24,8 @@ Stats display as **Signal** / **Integrity** (stored as `attack` / `health`). Rar
 
 ## Status
 
+Helix theming (landing / portal / play) and infra wiring are in place; see **[`../NEW_THEME.md`](../NEW_THEME.md)** for the reusable build order used here.
+
 - [x] Copy layer (`copy/*.json`, legal stubs retargeted)
 - [x] Game metadata (`domains`, `locations`, `cities`, `scenes` with image prompts)
 - [x] Theme tokens (`colors.json`, `ui.json` — Orbitron + Rajdhani; light lab HUD palette)
@@ -31,10 +33,9 @@ Stats display as **Signal** / **Integrity** (stored as `attack` / `health`). Rar
 - [x] Registry entry (`stagingDomain`: `helix.voidborn.fun`)
 - [x] Sites bootstrap row (`helix` / `HELIX` / `helixsignal.online`)
 - [x] Manifest `siteUrl`: `https://helixsignal.online`
-- [ ] **Landing assets** — run contentgen below (you approve art; agent does not auto-generate)
-- [ ] **Brand files** — `header.png`, `gamelogo.png`, `favicon.ico`, `play-lobby.png` (**you** supply logo / header)
-- [ ] **Showcase cards** — 12 slugs wired; run cardgen showcase flow below
-- [ ] **Frontend theming** — step 3 later (landing / portal / game CSS), not yet
+- [x] Landing / portal / play frontend packs (`frontend/src/styles/helix-*.css`, `gameplay/helix/`)
+- [x] Sendmail + SEO pipeline (see sections below)
+- [ ] Full catalog cardgen rounds / `upload:site` as needed for production depth
 
 ## Cardgen showcase (landing Frames)
 
@@ -148,9 +149,10 @@ curl -sI https://helix.voidborn.fun/og-image.jpg
 
 When you add a dedicated square `brand/gamelogo.png`, set `manifest.brand.logo` back to it for tighter favicon / apple-touch crops.
 
-## Later (step 3 — frontend theming polish)
+## Ops leftovers
 
-- Card upload: `PROJECT=helix npm run upload:site`
+- Card upload when catalog grows: `PROJECT=helix npm run upload:site`
+- UI tests: add/keep helix in `ui-tests/helpers/sites.ts` (see `ui-tests/README.md`)
 
 ## Sendmail (centralized on voidborn VPS)
 

@@ -24,7 +24,7 @@
   {
     "id": "helix",
     "path": "./helix",
-    "status": "demo",
+    "status": "live",
     "stagingDomain": "helix.voidborn.fun",
     "vpsProd": true
   }

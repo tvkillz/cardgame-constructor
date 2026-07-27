@@ -17,7 +17,7 @@ insert into public.sites (id, name, domain, status) values
   ('voidborn', 'VOIDBORN', 'voidborn.fun', 'live'),
   ('project2', 'PROJECT TWO', 'test.sportsydeals.com', 'demo'),
   ('iyashikei', 'KOMOREBI', 'komorebi.voidborn.fun', 'demo'),
-  ('helix', 'HELIX', 'helix.voidborn.fun', 'demo')
+  ('helix', 'HELIX', 'helixsignal.online', 'demo')
 on conflict (id) do update set
   name = excluded.name,
   domain = excluded.domain,

@@ -1,0 +1,38 @@
+---
+description: >-
+  Creating a new site/theme/content pack (Helix-style). Follow projects/NEW_THEME.md
+  phase order: JSON → contentgen/cardgen → landing → portal → game → APIs/SMTP.
+  Use when scaffolding projects/*, theming a new brand, or the user asks for a new theme.
+alwaysApply: false
+---
+
+# New theme / content pack
+
+When building a **new themed site** (like Helix or Komorebi), follow the playbook:
+
+**→ [`projects/NEW_THEME.md`](../../projects/NEW_THEME.md)**
+
+## Required phase order (do not skip ahead)
+
+1. **Phase 0–1** — identity + `projects/{id}/` JSON (mirror voidborn), registry, README world table  
+2. **Phase 2a–2b** — contentgen apply + brand assets; cardgen **showcase** for landing  
+3. **Phase 3** — landing **section by section** via `frontend/src/styles/{id}-*.css`  
+4. **Phase 4** — portal chrome + modals  
+5. **Phase 5** — `frontend/src/gameplay/{id}/` + `/play`  
+6. **Phase 2c / 6** — full cardgen + upload; site row, sendmail SMTP, SEO, nginx/pm2; `ui-tests` site entry  
+
+## Hard constraints
+
+- Mirror voidborn/iyashikei/helix structure — no parallel architecture.
+- Prefer variant CSS packs over forking every React section.
+- Agent edits in the rclone mount; **user** runs VPS docker/pm2/seed/nginx (`terminal-via-user.mdc`).
+- No Stripe — existing checkout/credits path only.
+- After theming is stable, add `ui-tests/helpers/sites.ts` and generate snapshots with `node test-all.mjs --update -g {name}`.
+
+## Scaffold shortcut
+
+```bash
+npm run site:add -- --id=newsie --url=https://newsie.example.com --from=voidborn
+```
+
+Then execute `projects/NEW_THEME.md` phases — `site:add` is structure only, not a finished theme.

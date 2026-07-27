@@ -88,8 +88,12 @@ Requires admin API creds: `frontend/.env.admin` on the frontend VPS (copy from `
 
 ## Adding a site (checklist)
 
-1. `npm run site:add -- --id=newsie --url=https://newsie.example.com`
-2. Edit `projects/newsie/` content
+For a **full new theme** (copy → art → landing → portal → game → APIs), follow **[`NEW_THEME.md`](./NEW_THEME.md)** (Helix playbook). Agents: `.cursor/rules/new-theme-playbook.mdc`.
+
+Minimal infra checklist after content exists:
+
+1. `npm run site:add -- --id=newsie --url=https://newsie.example.com` (or hand-scaffold like Helix)
+2. Edit `projects/newsie/` content (+ art via contentgen/cardgen — see NEW_THEME.md)
 3. `npm run compile:all && PROJECT=newsie npm run build`
 4. `pm2 start frontend/ecosystem.config.cjs --only newsie-prod`
 5. `npm run deploy:nginx` → reload nginx on frontend VPS
