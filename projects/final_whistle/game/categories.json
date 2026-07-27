@@ -1,0 +1,8 @@
+{
+  "categories": [
+    { "id": "earth", "label": "Front", "locationIds": ["striker"] },
+    { "id": "water", "label": "Mid", "locationIds": ["midfield"] },
+    { "id": "fire", "label": "Box", "locationIds": ["box"] },
+    { "id": "air", "label": "Back", "locationIds": ["backline"] }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "variant": "final_whistle",
+  "introVideo": false,
+  "heroMedia": "slides",
+  "heroCardSlugs": [
+    "striker_card_01_poacher",
+    "midfield_card_01_tempo_setter",
+    "box_card_01_set_piece_wall",
+    "backline_card_01_last_ditch",
+    "striker_card_02_far_post_ghost",
+    "backline_card_02_high_line"
+  ]
+}

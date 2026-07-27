@@ -1,0 +1,39 @@
+{
+  "tiers": [
+    {
+      "id": "common",
+      "label": "Reserve",
+      "manaMin": 1,
+      "manaMax": 2,
+      "description": "Squad depth and utility pieces — easy to slot into any list."
+    },
+    {
+      "id": "uncommon",
+      "label": "Starter",
+      "manaMin": 3,
+      "manaMax": 4,
+      "description": "Reliable first-team pieces that glue a deck together with clean utility."
+    },
+    {
+      "id": "rare",
+      "label": "Captain",
+      "manaMin": 5,
+      "manaMax": 6,
+      "description": "Standout cards with real board presence — foil shine and thoughtful synergy."
+    },
+    {
+      "id": "epic",
+      "label": "Legend",
+      "manaMin": 7,
+      "manaMax": 8,
+      "description": "Signature pitch icons and engines that can close a match with precision."
+    },
+    {
+      "id": "legendary",
+      "label": "Final Whistle",
+      "manaMin": 9,
+      "manaMax": 10,
+      "description": "Chase-tier cards — rare pulls that collectors pause to admire."
+    }
+  ]
+}

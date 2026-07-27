@@ -1,0 +1,336 @@
+{
+  "cards": [
+    {
+      "title": "Poacher",
+      "slug": "striker_card_01_poacher",
+      "category": "cards",
+      "domain": "striker",
+      "kind": "card",
+      "role": "Finisher",
+      "rarity": "common",
+      "stats": {
+        "mana": 2,
+        "attack": 2,
+        "health": 1
+      },
+      "keywords": [
+        "Bootstrap"
+      ],
+      "ability": {
+        "name": "Late Arrival",
+        "text": "Bootstrap: When this card enters play, gain 1 Threat. At end of turn, if a rival card left play this turn, restore 1 Resolve to yourself."
+      },
+      "path": "cards/striker/striker_card_01_poacher.png",
+      "priceCents": 52006,
+      "source_file": "striker_card_01_poacher.png",
+      "format": "3:4",
+      "notes": "Style: Cinematic sports photography. Negative: anime, manga, illustration, text, watermark, club logos. Palette: deep green, floodlight gold.",
+      "image_prompt": "A stylized anonymous striker silhouette in a plain kit waiting at the far post under night floodlights, wet turf spray, cinematic depth of field, no logos, no readable numbers."
+    },
+    {
+      "title": "Far-Post Ghost",
+      "slug": "striker_card_02_far_post_ghost",
+      "category": "cards",
+      "domain": "striker",
+      "kind": "card",
+      "role": "Channel Runner",
+      "rarity": "uncommon",
+      "stats": {
+        "mana": 4,
+        "attack": 3,
+        "health": 3
+      },
+      "keywords": [
+        "Switch",
+        "Deploy"
+      ],
+      "ability": {
+        "name": "Ghost Channel",
+        "text": "Deploy: This card may act the turn it enters play. Switch: Can influence distant cards without close engagement."
+      },
+      "path": "cards/striker/striker_card_02_far_post_ghost.png",
+      "priceCents": 52104,
+      "source_file": "striker_card_02_far_post_ghost.png",
+      "format": "3:4",
+      "notes": "Negative: anime, illustration, club logos, readable kit text. Palette: cool floodlight white, deep turf.",
+      "image_prompt": "Anonymous attacker drifting into a far-post channel, motion blur on wet night pitch, floodlight haze, photorealistic sports still, no logos."
+    },
+    {
+      "title": "Finishing Lane",
+      "slug": "striker_card_03_finishing_lane",
+      "category": "cards",
+      "domain": "striker",
+      "kind": "card",
+      "role": "Box Runner",
+      "rarity": "rare",
+      "stats": {
+        "mana": 6,
+        "attack": 4,
+        "health": 4
+      },
+      "keywords": [
+        "Hold",
+        "Pulse"
+      ],
+      "ability": {
+        "name": "Lane Break",
+        "text": "Hold: Rivals must engage this card before others when able. Pulse: At end of turn, apply 1 Threat tick as written if Attack is winning the lane."
+      },
+      "path": "cards/striker/striker_card_03_finishing_lane.png",
+      "priceCents": 19376,
+      "source_file": "striker_card_03_finishing_lane.png",
+      "format": "3:4",
+      "notes": "Negative: anime, club crests, text. Palette: gold flood spill, pitch green.",
+      "image_prompt": "Anonymous finisher cutting a finishing lane toward an empty goalmouth under gold floodlights, photorealistic, cinematic, no logos."
+    },
+    {
+      "title": "Tempo Setter",
+      "slug": "midfield_card_01_tempo_setter",
+      "category": "cards",
+      "domain": "midfield",
+      "kind": "card",
+      "role": "Orchestrator",
+      "rarity": "common",
+      "stats": {
+        "mana": 2,
+        "attack": 1,
+        "health": 3
+      },
+      "keywords": [
+        "Link"
+      ],
+      "ability": {
+        "name": "Dictate Tempo",
+        "text": "Link: If another allied card with Link is in play, gain 1 Resolve at end of turn."
+      },
+      "path": "cards/midfield/midfield_card_01_tempo_setter.png",
+      "priceCents": 23081,
+      "source_file": "midfield_card_01_tempo_setter.png",
+      "format": "3:4",
+      "notes": "Negative: anime, logos, text. Palette: cool greens, night charcoal.",
+      "image_prompt": "Anonymous midfielder standing over the centre circle on wet night turf, calm posture, soft floodlight rings, photorealistic, no logos."
+    },
+    {
+      "title": "Switch of Play",
+      "slug": "midfield_card_02_switch_of_play",
+      "category": "cards",
+      "domain": "midfield",
+      "kind": "card",
+      "role": "Distributor",
+      "rarity": "uncommon",
+      "stats": {
+        "mana": 4,
+        "attack": 2,
+        "health": 4
+      },
+      "keywords": [
+        "Switch",
+        "Bootstrap"
+      ],
+      "ability": {
+        "name": "Wide Switch",
+        "text": "Bootstrap: When this card enters play, gain 1 Threat. Switch: Can influence distant cards without close engagement."
+      },
+      "path": "cards/midfield/midfield_card_02_switch_of_play.png",
+      "priceCents": 50207,
+      "source_file": "midfield_card_02_switch_of_play.png",
+      "format": "3:4",
+      "notes": "Negative: anime, club logos. Focus on wide pitch geometry.",
+      "image_prompt": "Anonymous player striking a long diagonal ball across an empty half under cool white lights, photorealistic sports photography, no logos."
+    },
+    {
+      "title": "Press Trap",
+      "slug": "midfield_card_03_press_trap",
+      "category": "cards",
+      "domain": "midfield",
+      "kind": "card",
+      "role": "Presser",
+      "rarity": "rare",
+      "stats": {
+        "mana": 6,
+        "attack": 3,
+        "health": 5
+      },
+      "keywords": [
+        "Press",
+        "Pulse"
+      ],
+      "ability": {
+        "name": "Trap Spring",
+        "text": "Press: When this card enters play, apply Press to one rival card. Pulse: At end of turn, restore 1 Resolve to all Linked allies."
+      },
+      "path": "cards/midfield/midfield_card_03_press_trap.png",
+      "priceCents": 25955,
+      "source_file": "midfield_card_03_press_trap.png",
+      "format": "3:4",
+      "notes": "Negative: anime, logos, gore. Palette: deep green, clay distant.",
+      "image_prompt": "Anonymous press unit closing a midfield pocket on night turf, cinematic floodlights, photorealistic, no logos."
+    },
+    {
+      "title": "Set-Piece Wall",
+      "slug": "box_card_01_set_piece_wall",
+      "category": "cards",
+      "domain": "box",
+      "kind": "card",
+      "role": "Wall",
+      "rarity": "common",
+      "stats": {
+        "mana": 2,
+        "attack": 1,
+        "health": 3
+      },
+      "keywords": [
+        "Wall"
+      ],
+      "ability": {
+        "name": "Human Wall",
+        "text": "Wall: The next Threat this card would take is redirected to the Wall buffer instead."
+      },
+      "path": "cards/box/box_card_01_set_piece_wall.png",
+      "priceCents": 24865,
+      "source_file": "box_card_01_set_piece_wall.png",
+      "format": "3:4",
+      "notes": "Negative: anime, logos, readable kit. Palette: clay terracotta, white floodlight.",
+      "image_prompt": "Anonymous defensive wall line before the box under hard floodlights, chalk paint bright, photorealistic, no logos."
+    },
+    {
+      "title": "Six-Yard Chaos",
+      "slug": "box_card_02_six_yard_chaos",
+      "category": "cards",
+      "domain": "box",
+      "kind": "card",
+      "role": "Scrambler",
+      "rarity": "uncommon",
+      "stats": {
+        "mana": 4,
+        "attack": 3,
+        "health": 3
+      },
+      "keywords": [
+        "Deploy",
+        "Echo"
+      ],
+      "ability": {
+        "name": "Scramble Paint",
+        "text": "Deploy: This card may act the turn it enters play. Echo: Repeats its enter effect at end of turn once."
+      },
+      "path": "cards/box/box_card_02_six_yard_chaos.png",
+      "priceCents": 85059,
+      "source_file": "box_card_02_six_yard_chaos.png",
+      "format": "3:4",
+      "notes": "Negative: anime, logos. Palette: white flood, scuffed turf.",
+      "image_prompt": "Chaotic six-yard box moment with anonymous figures and empty netting under hard white light, photorealistic motion freeze, no logos."
+    },
+    {
+      "title": "Penalty Architect",
+      "slug": "box_card_03_penalty_architect",
+      "category": "cards",
+      "domain": "box",
+      "kind": "card",
+      "role": "Set-Piece Specialist",
+      "rarity": "rare",
+      "stats": {
+        "mana": 6,
+        "attack": 4,
+        "health": 5
+      },
+      "keywords": [
+        "Overload",
+        "Recover"
+      ],
+      "ability": {
+        "name": "Spot Design",
+        "text": "Overload: Spend 1 extra mana when playing this card to double its enter effect. Recover: Restore 2 Resolve to an allied card."
+      },
+      "path": "cards/box/box_card_03_penalty_architect.png",
+      "priceCents": 47310,
+      "source_file": "box_card_03_penalty_architect.png",
+      "format": "3:4",
+      "notes": "Negative: anime, logos, text. Palette: gold flood, clay seating.",
+      "image_prompt": "Anonymous set-piece specialist standing over a penalty spot under gold floodlights, empty stadium, photorealistic, no logos."
+    },
+    {
+      "title": "Last Ditch",
+      "slug": "backline_card_01_last_ditch",
+      "category": "cards",
+      "domain": "backline",
+      "kind": "card",
+      "role": "Blocker",
+      "rarity": "common",
+      "stats": {
+        "mana": 2,
+        "attack": 1,
+        "health": 3
+      },
+      "keywords": [
+        "Hold"
+      ],
+      "ability": {
+        "name": "Recovery Block",
+        "text": "Hold: Rivals must engage this card before others when able. While this card has Resolve, adjacent allies cannot be displaced."
+      },
+      "path": "cards/backline/backline_card_01_last_ditch.png",
+      "priceCents": 63826,
+      "source_file": "backline_card_01_last_ditch.png",
+      "format": "3:4",
+      "notes": "Negative: anime, logos. Palette: steel-blue night, deep green.",
+      "image_prompt": "Anonymous defender making a last-ditch recovery toward goal on wet night turf, cool floodlight, photorealistic, no logos."
+    },
+    {
+      "title": "High Line",
+      "slug": "backline_card_02_high_line",
+      "category": "cards",
+      "domain": "backline",
+      "kind": "card",
+      "role": "Shape Marshal",
+      "rarity": "uncommon",
+      "stats": {
+        "mana": 4,
+        "attack": 2,
+        "health": 4
+      },
+      "keywords": [
+        "Shape",
+        "Wall"
+      ],
+      "ability": {
+        "name": "Offside Trap",
+        "text": "Shape: This card holds the line — cannot be displaced while Resolve remains. Wall: The next Threat this card would take is redirected to the Wall buffer instead."
+      },
+      "path": "cards/backline/backline_card_02_high_line.png",
+      "priceCents": 27344,
+      "source_file": "backline_card_02_high_line.png",
+      "format": "3:4",
+      "notes": "Negative: anime, logos. Focus on defensive line geometry.",
+      "image_prompt": "Anonymous back line holding a high defensive chalk line under floodlights, empty space behind, photorealistic, no logos."
+    },
+    {
+      "title": "Keeper's Claim",
+      "slug": "backline_card_03_keepers_claim",
+      "category": "cards",
+      "domain": "backline",
+      "kind": "card",
+      "role": "Keeper",
+      "rarity": "rare",
+      "stats": {
+        "mana": 6,
+        "attack": 2,
+        "health": 6
+      },
+      "keywords": [
+        "Recover",
+        "Anchored"
+      ],
+      "ability": {
+        "name": "Claim the Air",
+        "text": "Recover: Restore 2 Resolve to yourself. Anchored: This card cannot be moved this turn."
+      },
+      "path": "cards/backline/backline_card_03_keepers_claim.png",
+      "priceCents": 80827,
+      "source_file": "backline_card_03_keepers_claim.png",
+      "format": "3:4",
+      "notes": "Negative: anime, logos, readable kit. Palette: floodlight white, six-yard green.",
+      "image_prompt": "Anonymous goalkeeper claiming a high ball in an empty six-yard box under floodlights, gloves catching light, photorealistic, no logos."
+    }
+  ]
+}

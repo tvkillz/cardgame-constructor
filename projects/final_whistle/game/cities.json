@@ -1,0 +1,76 @@
+{
+  "cities": [
+    {
+      "slug": "front_city_01_far_post_channel",
+      "path": "cities/front/front_city_01_far_post_channel.png",
+      "name": "Far-Post Channel",
+      "description": "An empty far-post channel under white floodlights; chalk arcs fade into wet turf while the stand shadows hold a quiet finishing lane."
+    },
+    {
+      "slug": "front_city_02_box_run_lane",
+      "path": "cities/front/front_city_02_box_run_lane.png",
+      "name": "Box-Run Lane",
+      "description": "A diagonal run lane cuts toward the six-yard paint; floodlight haze hangs over deep green pitch with no crowd in frame."
+    },
+    {
+      "slug": "front_city_03_finishing_arc",
+      "path": "cities/front/front_city_03_finishing_arc.png",
+      "name": "Finishing Arc",
+      "description": "The finishing arc just outside the box glows under gold flood spill; goalmouth empty, netting still, legacy waiting."
+    },
+    {
+      "slug": "mid_city_01_tempo_circle",
+      "path": "cities/mid/mid_city_01_tempo_circle.png",
+      "name": "Tempo Circle",
+      "description": "Centre circle on wet night turf; soft floodlight rings catch dew while the midfield hush holds the match's tempo."
+    },
+    {
+      "slug": "mid_city_02_switch_of_play",
+      "path": "cities/mid/mid_city_02_switch_of_play.png",
+      "name": "Switch of Play",
+      "description": "A wide switch lane across the half; chalk and grass texture stretch toward the far touchline under cool white lights."
+    },
+    {
+      "slug": "mid_city_03_press_trap",
+      "path": "cities/mid/mid_city_03_press_trap.png",
+      "name": "Press Trap",
+      "description": "A compressed midfield pocket where press traps form; empty pitch geometry, clay terrace glow in the distance."
+    },
+    {
+      "slug": "box_city_01_set_piece_wall",
+      "path": "cities/box/box_city_01_set_piece_wall.png",
+      "name": "Set-Piece Wall",
+      "description": "An empty set-piece wall line painted in chalk before the box; floodlights bleach the paint while the goal waits."
+    },
+    {
+      "slug": "box_city_02_six_yard_chaos",
+      "path": "cities/box/box_city_02_six_yard_chaos.png",
+      "name": "Six-Yard Chaos",
+      "description": "Six-yard paint under hard white light; scuffed turf and empty netting suggest the chaos that lives here every corner."
+    },
+    {
+      "slug": "box_city_03_penalty_spot",
+      "path": "cities/box/box_city_03_penalty_spot.png",
+      "name": "Penalty Spot",
+      "description": "A lone penalty spot on night turf; clay seating bands frame the box while floodlight gold softens the edges."
+    },
+    {
+      "slug": "back_city_01_high_line",
+      "path": "cities/back/back_city_01_high_line.png",
+      "name": "High Line",
+      "description": "A high defensive line chalked across the defensive third; empty space behind, floodlit and tense."
+    },
+    {
+      "slug": "back_city_02_last_ditch",
+      "path": "cities/back/back_city_02_last_ditch.png",
+      "name": "Last Ditch",
+      "description": "The last-ditch recovery lane toward goal; wet turf sheen and cool steel-blue night light along the byline."
+    },
+    {
+      "slug": "back_city_03_keepers_claim",
+      "path": "cities/back/back_city_03_keepers_claim.png",
+      "name": "Keeper's Claim",
+      "description": "The keeper's claim zone — empty six-yard box, gloves imaginary, netting quiet under floodlights."
+    }
+  ]
+}

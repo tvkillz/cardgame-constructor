@@ -1,0 +1,61 @@
+{
+  "gameTitle": "Final Whistle",
+  "gamePitch": "a football-legacy collectible TCG set under the floodlights — four pitch domains (Striker's End, Engine Room, The Box, Back Line) where managers field squads against Rival Defense",
+  "world": {
+    "title": "The Pitch Legacy",
+    "description": "Every match leaves a mark. Collect cards across Front, Mid, Box, and Back, push Attack to break lines, hold Defense that preserves legacy, and compete on a floodlit tactical board."
+  },
+  "statLabels": {
+    "attack": "Threat",
+    "health": "Resolve"
+  },
+  "domains": {
+    "striker": {
+      "visualIdentity": "attacking third, far-post channels, finishing arcs, deep green and floodlight gold",
+      "flavorNotes": "poachers, far-post ghosts, finishing lanes, box runners, late arrivals, channel cutters"
+    },
+    "midfield": {
+      "visualIdentity": "centre circle, tempo switches, press traps, wet turf and cool greens",
+      "flavorNotes": "tempo setters, switch-of-play artists, press traps, deep-lying orchestrators, half-space runners"
+    },
+    "box": {
+      "visualIdentity": "six-yard area, set-piece walls, penalty heat, clay terracotta and white floodlight",
+      "flavorNotes": "set-piece walls, six-yard chaos, penalty architects, near-post blockers, delivery specialists"
+    },
+    "backline": {
+      "visualIdentity": "defensive third, high line chalk, keeper's claim, cool steel-blue night",
+      "flavorNotes": "last-ditch blockers, high-line marshals, keeper's claim, recovery runners, shape holders"
+    }
+  },
+  "designRules": [
+    "Mana 1–8 (most cards 3–6). Threat + Resolve should roughly scale with mana (stored as attack and health in JSON).",
+    "Roles vary: finishers, tempo pieces, set-piece specialists, shape holders, pressers — not assassins or burn decks.",
+    "Ability text must spell out keyword effects like the examples (do not assume the player knows keywords).",
+    "ability.name should be evocative and unique within the batch.",
+    "Use 0–2 keywords per card from the project glossary only.",
+    "Tone: football legacy — earnest, cinematic, floodlit — tactically interesting but never meme-y or trademarked.",
+    "Never use real club names, crests, kit trademarks, or FIFA branding.",
+    "Contests as breaking lines, holding shape, restoring Resolve, redirecting engagement, or drawing/linking — football-flavored, not gore.",
+    "Rarity tiers (from game/rarities.json): Reserve, Starter, Captain, Legend, Final Whistle — derived from mana unless rarity is set explicitly.",
+    "Subjects are stylized football moments / kit figures / pitch atmosphere — avoid readable real logos and prominent identifiable celebrity faces."
+  ],
+  "image": {
+    "aspectRatio": "3:4",
+    "promptGuidelines": "single focal football figure or pitch-side moment, photorealistic live-action sports photography, floodlight lighting, deep pitch green and clay accents, NO anime, NO illustration, NO text, NO card frame, NO watermark, NO real club logos, portrait 3:4 composition",
+    "promptSuffix": "Photorealistic football-legacy product/character still, single focal subject, night floodlights, deep turf green, earnest mood, no anime, no illustration, no text, no border, no watermark, no club logos, portrait 3:4 aspect ratio.",
+    "notesGuidelines": "negative prompts must ban anime/manga/illustration and real club trademarks; include palette, domain mood, and silhouette hints"
+  },
+  "generation": {
+    "maxKeywordsPerCard": 2,
+    "exampleCardsPerDomain": 5,
+    "maxBatchPerDomain": 50
+  },
+  "rarities": {
+    "source": "game/rarities.json",
+    "notes": "Tier ids (common, uncommon, …) match the DB enum. Display labels: Reserve, Starter, Captain, Legend, Final Whistle."
+  },
+  "status": {
+    "designApproved": true,
+    "notes": "Landing showcase: 12 slugs (4 featured + 8 collection). Run generate-showcase then images/apply. heroCardSlugs in theme/landing.json for compile."
+  }
+}

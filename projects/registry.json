@@ -27,5 +27,11 @@
     "status": "live",
     "stagingDomain": "helix.voidborn.fun",
     "vpsProd": true
+  },
+  {
+    "id": "final_whistle",
+    "path": "./final_whistle",
+    "status": "demo",
+    "vpsProd": false
   }
 ]

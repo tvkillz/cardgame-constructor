@@ -1,0 +1,19 @@
+{
+  "keywords_glossary": {
+    "Press": "When this card enters play, apply Press to one rival card (it cannot act until end of turn unless written otherwise).",
+    "Wall": "The next Threat this card would take is redirected to the Wall buffer instead.",
+    "Pulse": "At end of turn, apply a small Resolve restore or Threat tick as written on the card.",
+    "Marker": "Rivals cannot choose this card until it acts.",
+    "Deploy": "This card may act the turn it enters play.",
+    "Link": "If another allied card with Link is in play, gain the listed bonus.",
+    "Overload": "Spend 1 extra mana when playing this card to double its enter effect.",
+    "Pinned": "While Pinned is active on this card, it cannot act until end of turn.",
+    "Switch": "Can influence distant cards without close engagement.",
+    "Hold": "Rivals must engage this card before others when able.",
+    "Bootstrap": "When this card enters play, draw a card or gain 1 Threat.",
+    "Recover": "Restore Resolve to an allied card or yourself.",
+    "Echo": "Repeats its pitch effect at end of turn.",
+    "Anchored": "This card cannot be moved this turn.",
+    "Shape": "This card holds the line — cannot be displaced while Resolve remains."
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "defaults": {
+    "arenaLocationId": "box",
+    "lobbyLocationId": "midfield"
+  },
+  "locations": [
+    {
+      "id": "striker",
+      "name": "Striker's End",
+      "domainId": "striker",
+      "categoryId": "earth",
+      "glowColor": "#3d7a4a",
+      "featuredCardSlug": "striker_card_01_poacher",
+      "epithet": "The Finishing Third",
+      "short": "The Finishing Third — box runs, far-post ghosts, and finishing lanes under floodlights.",
+      "imageAsset": "cities/front/front_city_01_far_post_channel.png",
+      "backgroundImageAsset": "cities/front/front_city_02_box_run_lane.png"
+    },
+    {
+      "id": "midfield",
+      "name": "Engine Room",
+      "domainId": "midfield",
+      "categoryId": "water",
+      "glowColor": "#7aab78",
+      "featuredCardSlug": "midfield_card_01_tempo_setter",
+      "epithet": "The Tempo Circle",
+      "short": "The Tempo Circle — switches of play, press traps, and the quiet control of midfield.",
+      "imageAsset": "cities/mid/mid_city_01_tempo_circle.png",
+      "backgroundImageAsset": "cities/mid/mid_city_02_switch_of_play.png"
+    },
+    {
+      "id": "box",
+      "name": "The Box",
+      "domainId": "box",
+      "categoryId": "fire",
+      "glowColor": "#c4785a",
+      "featuredCardSlug": "box_card_01_set_piece_wall",
+      "epithet": "The Six-Yard Heat",
+      "short": "The Six-Yard Heat — set-piece walls, penalty spots, and chaos in the box.",
+      "imageAsset": "cities/box/box_city_01_set_piece_wall.png",
+      "backgroundImageAsset": "cities/box/box_city_02_six_yard_chaos.png"
+    },
+    {
+      "id": "backline",
+      "name": "Back Line",
+      "domainId": "backline",
+      "categoryId": "air",
+      "glowColor": "#5a8a9a",
+      "featuredCardSlug": "backline_card_01_last_ditch",
+      "epithet": "The Last Shape",
+      "short": "The Last Shape — high lines, last-ditch blocks, and the keeper's claim.",
+      "imageAsset": "cities/back/back_city_01_high_line.png",
+      "backgroundImageAsset": "cities/back/back_city_02_last_ditch.png"
+    }
+  ],
+  "lore": {
+    "global": {
+      "attack": "Attack",
+      "defense": "Defense"
+    }
+  }
+}

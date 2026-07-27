@@ -1,0 +1,76 @@
+{
+  "title": "Collect. Trade. Shape the Squad.",
+  "description": "Final Whistle rewards precision — stock your binder from sealed bundles and open listings, pass along duplicates for credits, and shape a deck that wins cleanly under the lights.",
+  "features": [
+    {
+      "id": "expand-collection",
+      "title": "Grow Your Binder",
+      "description": "Add depth across pitch domains and seasonal releases. Every new pull opens another line you can run when the ladder shifts.",
+      "image": "cta1/expand-collection.webp",
+      "glowColor": "#3d7a4a"
+    },
+    {
+      "id": "buy-cards",
+      "title": "Precise Shopping",
+      "description": "Filter the catalog, find the missing piece, and buy exactly what your curve has been waiting for — clean Attack, no noise.",
+      "image": "cta1/buy-cards.webp",
+      "glowColor": "#7aab78"
+    },
+    {
+      "id": "sealed-vaults",
+      "title": "Open Sealed Bundles",
+      "description": "Crack sealed products and chase a standout pull. Each unopened bundle is a small surprise — chase card or trade bait.",
+      "image": "cta1/sealed-vaults.webp",
+      "glowColor": "#c4785a"
+    },
+    {
+      "id": "discover-rare",
+      "title": "Chase Captain Prints",
+      "description": "Hunt foils, Legend cards, and signature prints — the kind of card that rewrites a deck and makes rivals pause.",
+      "image": "cta1/discover-rare.webp",
+      "glowColor": "#e8c96a"
+    },
+    {
+      "id": "sell-cards",
+      "title": "Pass Along Duplicates",
+      "description": "Extras still have value. List them, fund the next upgrade, and keep your binder lean for the decks you actually play.",
+      "image": "cta1/sell-cards.webp",
+      "glowColor": "#e8c96a"
+    },
+    {
+      "id": "shape-strategy",
+      "title": "Tune Your Squad",
+      "description": "Prototype lists in the tactics room — test counters, stress synergies, and lock a 30-card answer to the ladder's current pace.",
+      "image": "cta1/shape-strategy.webp",
+      "glowColor": "#a67c52"
+    }
+  ],
+  "tiers": [
+    {
+      "id": "uncommon",
+      "rarityLabel": "STARTER",
+      "title": "First-Team Pieces",
+      "description": "Reliable cards and utility pieces that glue a list together — flexible enough to slot into multiple strategies.",
+      "glowColor": "#7aab78"
+    },
+    {
+      "id": "rare",
+      "rarityLabel": "CAPTAIN",
+      "title": "Captain Prints",
+      "description": "Standout prints with real board presence — alternate art, foil shine, and effects that reward thoughtful building.",
+      "glowColor": "#e8c96a"
+    },
+    {
+      "id": "epic",
+      "rarityLabel": "LEGEND",
+      "title": "Pitch Legends",
+      "description": "High-impact cards and engines that can close a match with precision. One well-timed play can settle the board.",
+      "glowColor": "#c4785a"
+    }
+  ],
+  "marketCta": {
+    "description": "Hundreds of listings live right now — find the card that completes your next squad.",
+    "buttonLabel": "Browse the Market",
+    "route": "portalMarket"
+  }
+}

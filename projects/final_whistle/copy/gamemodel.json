@@ -1,0 +1,32 @@
+{
+  "title": "How Final Whistle Plays",
+  "description": "Four pitch domains, one floodlit battlefield — assemble a squad, outmaneuver rivals in turn-based duels, and climb the seasonal ladder with clean Attack and steady Defense.",
+  "pillars": [
+    {
+      "id": "tactical-battles",
+      "title": "Pitch Tactics",
+      "description": "Trade lines on a living board where timing, lane pressure, and burst windows matter more than raw stats. Win the turn before you win the match.",
+      "image": "gamemodel/tactical-battles.webp",
+      "glowColor": "#7aab78"
+    },
+    {
+      "id": "collectible-cards",
+      "title": "Squad Collecting",
+      "description": "Pull cards from Striker's End, Engine Room, The Box, and Back Line — then stitch keywords, curves, and finishers into a list that rewards precision.",
+      "image": "gamemodel/collectible-cards.webp",
+      "glowColor": "#e8c96a"
+    },
+    {
+      "id": "ranked-climb",
+      "title": "Seasonal Ladder",
+      "description": "Climb seasonal tiers, learn from losses, and refine your lines. The summit rewards managers who adapt without losing their shape.",
+      "image": "gamemodel/ranked-climb.webp",
+      "glowColor": "#c4785a"
+    }
+  ],
+  "tags": [
+    { "id": "deck-building", "label": "Squad Tuning" },
+    { "id": "class-champions", "label": "Pitch Affinities" },
+    { "id": "replayable-depth", "label": "Shifting Metas" }
+  ]
+}

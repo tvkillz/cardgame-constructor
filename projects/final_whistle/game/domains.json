@@ -1,0 +1,32 @@
+{
+  "domains": [
+    {
+      "id": "striker",
+      "label": "Striker's End",
+      "categoryId": "earth",
+      "glowColor": "#3d7a4a",
+      "domainAsset": "domains/front_domain.png"
+    },
+    {
+      "id": "midfield",
+      "label": "Engine Room",
+      "categoryId": "water",
+      "glowColor": "#7aab78",
+      "domainAsset": "domains/mid_domain.png"
+    },
+    {
+      "id": "box",
+      "label": "The Box",
+      "categoryId": "fire",
+      "glowColor": "#c4785a",
+      "domainAsset": "domains/box_domain.png"
+    },
+    {
+      "id": "backline",
+      "label": "Back Line",
+      "categoryId": "air",
+      "glowColor": "#5a8a9a",
+      "domainAsset": "domains/back_domain.png"
+    }
+  ]
+}

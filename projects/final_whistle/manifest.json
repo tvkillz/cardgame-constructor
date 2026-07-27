@@ -1,0 +1,62 @@
+{
+  "id": "final_whistle",
+  "name": {
+    "display": "Final Whistle",
+    "short": "Final Whistle",
+    "documentTitle": "Final Whistle"
+  },
+  "siteUrl": "",
+  "assets": {
+    "publicBase": "/assets",
+    "cdnBase": null
+  },
+  "brand": {
+    "logo": "brand/header.png",
+    "headerLogo": "brand/header.png",
+    "headerLogoAlt": "Final Whistle",
+    "favicon": "brand/favicon.ico",
+    "playLogo": "brand/header.png",
+    "playLogoAlt": "Final Whistle",
+    "playLobby": "cities/mid/mid_city_01_tempo_circle.png",
+    "logoAlt": "Final Whistle"
+  },
+  "routes": {
+    "home": "/",
+    "play": "/play",
+    "leaderboard": "/leaderboard",
+    "portal": "/portal",
+    "portalMarket": "/portal/market",
+    "portalVaults": "/portal/vaults",
+    "portalCollection": "/portal/collection",
+    "portalTransactions": "/portal/transactions",
+    "portalProfile": "/portal/profile",
+    "portalStore": "/portal/store",
+    "checkout": "/checkout",
+    "checkoutSuccess": "/portal/checkout/success",
+    "checkoutCancel": "/portal/checkout/cancel",
+    "withdrawalSuccess": "/portal/withdrawal/success"
+  },
+  "legal": {
+    "termsUrl": "/terms",
+    "privacyUrl": "/privacy",
+    "refundPolicyUrl": "/refund-policy"
+  },
+  "anchors": {
+    "play": "#play",
+    "market": "#market",
+    "leaderboard": "#leaderboard"
+  },
+  "features": {
+    "auth": true,
+    "commerce": true,
+    "requireSignInForPlay": true
+  },
+  "cardSlugMigration": {
+    "realmToLegacyElement": {
+      "striker": "front",
+      "midfield": "mid",
+      "box": "box",
+      "backline": "back"
+    }
+  }
+}

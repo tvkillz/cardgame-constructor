@@ -1,0 +1,21 @@
+{
+  "title": "Final Whistle Catalog",
+  "description": "Every card is a deliberate choice — drawn from Front, Mid, Box, and Back, tuned for precise play, and expanded every season. Explore a living collection built for managers and ladder climbers alike.",
+  "backgroundImage": "cities/mid/mid_city_01_tempo_circle.png",
+  "stats": [
+    { "id": "catalog", "value": "600+", "label": "Unique Cards" },
+    { "id": "rarity", "value": "5", "label": "Print Tiers" },
+    { "id": "strategies", "value": "∞", "label": "Squad Strategies" },
+    { "id": "monthly", "value": "25+", "label": "New Cards Monthly" }
+  ],
+  "cardSlugs": [
+    "striker_card_02_far_post_ghost",
+    "midfield_card_02_switch_of_play",
+    "box_card_02_six_yard_chaos",
+    "backline_card_02_high_line",
+    "striker_card_03_finishing_lane",
+    "midfield_card_03_press_trap",
+    "box_card_03_penalty_architect",
+    "backline_card_03_keepers_claim"
+  ]
+}

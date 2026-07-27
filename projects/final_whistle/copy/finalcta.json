@@ -1,0 +1,16 @@
+{
+  "title": "Hold the Shape",
+  "subtitle": "Tour the pitch. Leave a legacy.",
+  "description": "Join a community of managers, market traders, and ladder climbers who compete with precision. Collect cards, shape clean strategies, and leave your mark on the four domains of Final Whistle.",
+  "buttonLabel": "Play Now",
+  "route": "play",
+  "backgroundImage": "cities/back/back_city_03_keepers_claim.png",
+  "siege": {
+    "title": "The Legacy Season",
+    "stats": [
+      { "id": "players", "value": "12K+", "label": "Managers" },
+      { "id": "battles", "value": "48K+", "label": "Daily Matches" },
+      { "id": "cards", "value": "2M+", "label": "Cards Collected" }
+    ]
+  }
+}

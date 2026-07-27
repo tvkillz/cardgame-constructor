@@ -1,0 +1,43 @@
+{
+  "brandVoice": "Earnest, cinematic, floodlit. Football-legacy TCG tone. Short pitch-side hooks; manager depth on Facebook. No meme slang; no real club trademarks.",
+  "audience": "TCG players who enjoy football aesthetics, deck builders, collectors, sports strategy fans",
+  "siteUrl": "",
+  "platforms": {
+    "instagram": {
+      "minHashtags": 8,
+      "maxHashtags": 15,
+      "defaultHashtags": [
+        "#FinalWhistle",
+        "#TCG",
+        "#TradingCardGame",
+        "#Football",
+        "#Soccer",
+        "#CardGame",
+        "#IndieGame",
+        "#DeckBuilding"
+      ],
+      "linkInBioTemplate": "🔗 Link in bio → {siteUrl}"
+    },
+    "facebook": {
+      "minBodyLength": 200
+    },
+    "discord": {
+      "allowMentionEveryone": false
+    }
+  },
+  "image": {
+    "defaultMode": "auto",
+    "size": 1080,
+    "promptSuffix": "Square 1:1 social promo art for a football-legacy TCG, night stadium floodlights, deep pitch green and warm clay accents, cinematic mood, no text, no watermark, no real club logos, atmospheric depth, leave corner space for logo overlay.",
+    "composite": {
+      "logoAsset": "brand/gamelogo.png",
+      "logoScale": 0.18,
+      "cardLogoScale": 0.16,
+      "cardLogoLeft": 24,
+      "cardLogoTop": 24,
+      "cityOverlay": 0.55,
+      "cardFrameGlow": 0.35,
+      "vignetteStrength": 0.35
+    }
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "projectTitle": "Final Whistle",
+  "visualPitch": "Photorealistic night football stadiums and empty pitch atmospheres — deep turf green, floodlight gold and white, clay/terracotta accents, cinematic live-action sports photography (not illustration)",
+  "style": {
+    "aesthetic": "photorealistic cinematic still, real-world stadium materials and lighting, high-end live-action sports production design, physically based rendering look, documentary-sharp architecture photography of football grounds at night, subtle volumetric floodlight haze, believable turf paint and concrete, earnest legacy mood (not meme, not grimdark)",
+    "avoid": "anime, manga, cartoon, cel shading, watercolor, illustration, concept-art sketch look, painterly brush strokes, neon cyberpunk, purple sci-fi glow, real club crests, readable kit numbers, FIFA branding, trademark logos, text overlays, watermarks, prominent human faces in crowd close-ups, stylized non-photoreal characters",
+    "palette": "deep pitch green and wet turf, floodlight warm gold and cool white, clay terracotta seating accents, night sky charcoal, chalk-line cream"
+  },
+  "image": {
+    "promptPrefix": "Photorealistic wide cinematic still of a football stadium at night,",
+    "promptSuffix": "photorealistic live-action sports plate, physically based materials, floodlit pitch, deep green turf, no anime, no illustration, no people in foreground, no readable text, no club logos, no watermark, 16:9 composition.",
+    "ctaSuffix": "photorealistic product/environment still for a trading card game website tile, real stadium materials, floodlight gold and pitch green accents, atmospheric depth, no anime, no illustration, no text, no watermark, 16:9 composition.",
+    "gamemodelSuffix": "photorealistic square environment still for a trading card game website section, real stadium materials, centered composition, floodlight mood, no anime, no illustration, no text, no watermark, 1:1 aspect ratio.",
+    "cardTypeSuffix": "photorealistic metallic emblem prop photo for a trading card game UI, machined metal and enamel, clean silhouette, no anime, no illustration, no text, no watermark, 1:1 aspect ratio."
+  },
+  "outputSizes": {
+    "domain": { "width": 1672, "height": 941, "format": "png" },
+    "city": { "width": 1672, "height": 941, "format": "png" },
+    "cta": { "width": 1376, "height": 768, "format": "webp", "quality": 85 },
+    "gamemodel": { "width": 1024, "height": 1024, "format": "webp", "quality": 85 },
+    "card_type": { "width": 640, "height": 640, "format": "webp", "quality": 85 }
+  },
+  "domains": {
+    "striker": {
+      "visualIdentity": "photoreal attacking third, far-post channels, finishing arcs under floodlights",
+      "palette": "#3d7a4a, #e8c96a, #f2f0e8, #1a2a1e",
+      "mood": "box runs, far-post ghosts, finishing lanes"
+    },
+    "midfield": {
+      "visualIdentity": "photoreal centre-circle tempo, wet turf switches of play, press-trap lanes",
+      "palette": "#2a5a38, #7aab78, #e8e4d8, #1a2420",
+      "mood": "tempo, switches of play, press traps"
+    },
+    "box": {
+      "visualIdentity": "photoreal six-yard area, set-piece walls, penalty-spot heat under white floodlight",
+      "palette": "#c4785a, #e8c96a, #f5ebe0, #2a1e18",
+      "mood": "set pieces, walls, six-yard chaos"
+    },
+    "backline": {
+      "visualIdentity": "photoreal defensive third, high line chalk, empty keeper's box atmosphere",
+      "palette": "#5a8a9a, #e8c96a, #eef2f4, #1a2228",
+      "mood": "last ditch, high line, keeper's claim"
+    }
+  },
+  "elementFolders": {
+    "striker": "front",
+    "midfield": "mid",
+    "box": "box",
+    "backline": "back"
+  },
+  "cta": {
+    "expand-collection": {
+      "prompt": "Photoreal neat stacks of football trading cards on a dugout bench under soft floodlight spill, collection mood, empty stadium night"
+    },
+    "buy-cards": {
+      "prompt": "Photoreal market kiosk near a stadium concourse, physical football trading cards on a clean counter, warm clay and pitch-green accents"
+    },
+    "sealed-vaults": {
+      "prompt": "Photoreal sealed card bundles stacked in a stadium store locker, soft gold beacon light, night atmosphere"
+    },
+    "discover-rare": {
+      "prompt": "Photoreal single foil football trading card catching floodlight gold on a pitch-side rail, soft specular highlight"
+    },
+    "sell-cards": {
+      "prompt": "Photoreal organized binder and duplicate cards on a manager desk beside a credit token tray"
+    },
+    "shape-strategy": {
+      "prompt": "Photoreal deck of football trading cards arranged in a curve on a tactics table with faint chalk overlays"
+    }
+  },
+  "gamemodel": {
+    "tactical-battles": {
+      "prompt": "Photoreal tactics board with small player tokens on a green pitch diagram, calm duel atmosphere, no readable UI text"
+    },
+    "collectible-cards": {
+      "prompt": "Photoreal fan of physical football trading cards over a soft out-of-focus montage of empty stadium pitch zones"
+    },
+    "ranked-climb": {
+      "prompt": "Photoreal ascending stadium stairs under floodlights with soft gold wayfinding glow"
+    }
+  },
+  "cardTypes": {
+    "uncommon": {
+      "label": "Starter",
+      "accent": "#7aab78",
+      "prompt": "Photoreal machined green enamel starter badge emblem prop, brushed metal, Starter tier icon"
+    },
+    "rare": {
+      "label": "Captain",
+      "accent": "#e8c96a",
+      "prompt": "Photoreal gold captain armband-inspired crest emblem prop with thin metal edge, Captain tier icon"
+    },
+    "epic": {
+      "label": "Legend",
+      "accent": "#c4785a",
+      "prompt": "Photoreal clay-terracotta legend ring emblem prop with soft floodlight radiance, Legend tier icon"
+    }
+  },
+  "generation": {
+    "sourceOfTruth": "game/scenes.json",
+    "showcaseCompileEnv": "FRONTEND_SHOWCASE_ONLY=1"
+  }
+}
