@@ -36,10 +36,13 @@ export function buildThemeCssVars(): Record<string, string> {
     '--play-arena-bg': `url(${arenaBg})`,
     '--game-lobby-bg': `url(${lobbyBg})`,
     '--game-arena-bg': `url(${arenaBg})`,
-    ...(playLogo && variant !== 'iyashikei' && variant !== 'helix'
+    ...(playLogo && variant !== 'iyashikei' && variant !== 'helix' && variant !== 'final_whistle'
       ? { '--card-back-logo': `url(${playLogo})` }
       : {}),
     ...(variant === 'helix' && helixCardBackLogo
+      ? { '--card-back-logo': `url(${helixCardBackLogo})` }
+      : {}),
+    ...(variant === 'final_whistle' && helixCardBackLogo
       ? { '--card-back-logo': `url(${helixCardBackLogo})` }
       : {}),
   }
@@ -64,6 +67,17 @@ export function buildThemeCssVars(): Record<string, string> {
     vars['--helix-heading-gradient'] =
       'linear-gradient(105deg, #e8eef4 0%, #3db8d4 42%, #8b7ec8 72%, #c4a35a 100%)'
     vars['--font-heading'] = "'Orbitron', 'Rajdhani', system-ui, sans-serif"
+  }
+
+  if (variant === 'final_whistle') {
+    vars['--surface-paper'] = colors.voidBlack
+    vars['--surface-ink'] = colors.textPrimary
+    vars['--hero-vignette-top'] = 'rgba(10, 18, 16, 0.82)'
+    vars['--hero-vignette-mid'] = 'rgba(10, 18, 16, 0.2)'
+    vars['--hero-vignette-bottom'] = 'rgba(10, 18, 16, 0.92)'
+    vars['--fw-heading-gradient'] =
+      'linear-gradient(105deg, #f2f0e8 0%, #e8c96a 35%, #7aab78 68%, #c4785a 100%)'
+    vars['--font-heading'] = "'Bebas Neue', 'DM Sans', system-ui, sans-serif"
   }
 
   return vars

@@ -1,0 +1,581 @@
+{
+  "meta": {
+    "project": "final_whistle",
+    "generatedAt": "2026-07-27T09:44:28.185Z",
+    "reference": "voidborn asset sizes (domains/cities 1672×941 png, cta 1376×768 webp, gamemodel 1024×1024 webp, card_types 640×640 webp)",
+    "showcaseCompileEnv": "FRONTEND_SHOWCASE_ONLY=1"
+  },
+  "assets": [
+    {
+      "id": "striker_domain",
+      "kind": "domain",
+      "path": "domains/front_domain.png",
+      "title": "Striker's End Domain",
+      "domain": null,
+      "notes": "Photorealistic night football stadium attacking third. Empty finishing lanes and far-post channels under white and gold floodlights, deep wet turf green, chalk arcs, clay terrace bands in soft distance. Live-action sports plate, real materials. No people, no club logos, no readable text, no anime, no illustration.",
+      "slug": "striker_domain",
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "prompt": "Photorealistic wide cinematic still of a football stadium at night, Photorealistic night football stadium attacking third. Empty finishing lanes and far-post channels under white and gold floodlights, deep wet turf green, chalk arcs, clay terrace bands in soft distance. Live-action sports plate, real materials. No people, no club logos, no readable text, no anime, no illustration. photorealistic cinematic still, real-world stadium materials and lighting, high-end live-action sports production design, physically based rendering look, documentary-sharp architecture photography of football grounds at night, subtle volumetric floodlight haze, believable turf paint and concrete, earnest legacy mood (not meme, not grimdark) Avoid: anime, manga, cartoon, cel shading, watercolor, illustration, concept-art sketch look, painterly brush strokes, neon cyberpunk, purple sci-fi glow, real club crests, readable kit numbers, FIFA branding, trademark logos, text overlays, watermarks, prominent human faces in crowd close-ups, stylized non-photoreal characters. photorealistic live-action sports plate, physically based materials, floodlit pitch, deep green turf, no anime, no illustration, no people in foreground, no readable text, no club logos, no watermark, 16:9 composition.",
+      "stagingFile": "striker_domain.png"
+    },
+    {
+      "id": "midfield_domain",
+      "kind": "domain",
+      "path": "domains/mid_domain.png",
+      "title": "Engine Room Domain",
+      "domain": null,
+      "notes": "Photorealistic night stadium midfield. Centre circle on wet turf, switch-of-play lanes, soft floodlight haze, cool greens and charcoal night. Empty pitch atmosphere, earnest legacy mood. Live-action sports plate. No people, no club logos, no anime, no illustration, no text.",
+      "slug": "midfield_domain",
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "prompt": "Photorealistic wide cinematic still of a football stadium at night, Photorealistic night stadium midfield. Centre circle on wet turf, switch-of-play lanes, soft floodlight haze, cool greens and charcoal night. Empty pitch atmosphere, earnest legacy mood. Live-action sports plate. No people, no club logos, no anime, no illustration, no text. photorealistic cinematic still, real-world stadium materials and lighting, high-end live-action sports production design, physically based rendering look, documentary-sharp architecture photography of football grounds at night, subtle volumetric floodlight haze, believable turf paint and concrete, earnest legacy mood (not meme, not grimdark) Avoid: anime, manga, cartoon, cel shading, watercolor, illustration, concept-art sketch look, painterly brush strokes, neon cyberpunk, purple sci-fi glow, real club crests, readable kit numbers, FIFA branding, trademark logos, text overlays, watermarks, prominent human faces in crowd close-ups, stylized non-photoreal characters. photorealistic live-action sports plate, physically based materials, floodlit pitch, deep green turf, no anime, no illustration, no people in foreground, no readable text, no club logos, no watermark, 16:9 composition.",
+      "stagingFile": "midfield_domain.png"
+    },
+    {
+      "id": "box_domain",
+      "kind": "domain",
+      "path": "domains/box_domain.png",
+      "title": "The Box Domain",
+      "domain": null,
+      "notes": "Photorealistic night stadium penalty box. Six-yard paint, set-piece wall chalk, empty goalmouth, hard white floodlight with clay terracotta accents. Live-action sports plate, real turf and netting. No people, no club logos, no anime, no illustration, no text.",
+      "slug": "box_domain",
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "prompt": "Photorealistic wide cinematic still of a football stadium at night, Photorealistic night stadium penalty box. Six-yard paint, set-piece wall chalk, empty goalmouth, hard white floodlight with clay terracotta accents. Live-action sports plate, real turf and netting. No people, no club logos, no anime, no illustration, no text. photorealistic cinematic still, real-world stadium materials and lighting, high-end live-action sports production design, physically based rendering look, documentary-sharp architecture photography of football grounds at night, subtle volumetric floodlight haze, believable turf paint and concrete, earnest legacy mood (not meme, not grimdark) Avoid: anime, manga, cartoon, cel shading, watercolor, illustration, concept-art sketch look, painterly brush strokes, neon cyberpunk, purple sci-fi glow, real club crests, readable kit numbers, FIFA branding, trademark logos, text overlays, watermarks, prominent human faces in crowd close-ups, stylized non-photoreal characters. photorealistic live-action sports plate, physically based materials, floodlit pitch, deep green turf, no anime, no illustration, no people in foreground, no readable text, no club logos, no watermark, 16:9 composition.",
+      "stagingFile": "box_domain.png"
+    },
+    {
+      "id": "backline_domain",
+      "kind": "domain",
+      "path": "domains/back_domain.png",
+      "title": "Back Line Domain",
+      "domain": null,
+      "notes": "Photorealistic night stadium defensive third. High-line chalk across empty turf, keeper's claim zone, cool steel-blue flood spill, deep green pitch. Live-action sports plate. No people, no club logos, no anime, no illustration, no text.",
+      "slug": "backline_domain",
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "prompt": "Photorealistic wide cinematic still of a football stadium at night, Photorealistic night stadium defensive third. High-line chalk across empty turf, keeper's claim zone, cool steel-blue flood spill, deep green pitch. Live-action sports plate. No people, no club logos, no anime, no illustration, no text. photorealistic cinematic still, real-world stadium materials and lighting, high-end live-action sports production design, physically based rendering look, documentary-sharp architecture photography of football grounds at night, subtle volumetric floodlight haze, believable turf paint and concrete, earnest legacy mood (not meme, not grimdark) Avoid: anime, manga, cartoon, cel shading, watercolor, illustration, concept-art sketch look, painterly brush strokes, neon cyberpunk, purple sci-fi glow, real club crests, readable kit numbers, FIFA branding, trademark logos, text overlays, watermarks, prominent human faces in crowd close-ups, stylized non-photoreal characters. photorealistic live-action sports plate, physically based materials, floodlit pitch, deep green turf, no anime, no illustration, no people in foreground, no readable text, no club logos, no watermark, 16:9 composition.",
+      "stagingFile": "backline_domain.png"
+    },
+    {
+      "id": "front_city_01_far_post_channel",
+      "kind": "city",
+      "path": "cities/front/front_city_01_far_post_channel.png",
+      "title": "Far-Post Channel",
+      "domain": "striker",
+      "notes": "Photorealistic empty far-post channel under floodlights, wet turf, chalk fade, empty stadium atmosphere. No people, no logos, no anime.",
+      "slug": "front_city_01_far_post_channel",
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "prompt": "Photorealistic wide cinematic still of a football stadium at night, Photorealistic empty far-post channel under floodlights, wet turf, chalk fade, empty stadium atmosphere. No people, no logos, no anime. photoreal attacking third, far-post channels, finishing arcs under floodlights Palette: #3d7a4a, #e8c96a, #f2f0e8, #1a2a1e. Mood: box runs, far-post ghosts, finishing lanes. photorealistic cinematic still, real-world stadium materials and lighting, high-end live-action sports production design, physically based rendering look, documentary-sharp architecture photography of football grounds at night, subtle volumetric floodlight haze, believable turf paint and concrete, earnest legacy mood (not meme, not grimdark) Avoid: anime, manga, cartoon, cel shading, watercolor, illustration, concept-art sketch look, painterly brush strokes, neon cyberpunk, purple sci-fi glow, real club crests, readable kit numbers, FIFA branding, trademark logos, text overlays, watermarks, prominent human faces in crowd close-ups, stylized non-photoreal characters. photorealistic live-action sports plate, physically based materials, floodlit pitch, deep green turf, no anime, no illustration, no people in foreground, no readable text, no club logos, no watermark, 16:9 composition.",
+      "stagingFile": "front_city_01_far_post_channel.png"
+    },
+    {
+      "id": "front_city_02_box_run_lane",
+      "kind": "city",
+      "path": "cities/front/front_city_02_box_run_lane.png",
+      "title": "Box-Run Lane",
+      "domain": "striker",
+      "notes": "Photorealistic diagonal box-run lane toward six-yard paint, floodlight haze, empty stadium. No people, no logos, no anime.",
+      "slug": "front_city_02_box_run_lane",
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "prompt": "Photorealistic wide cinematic still of a football stadium at night, Photorealistic diagonal box-run lane toward six-yard paint, floodlight haze, empty stadium. No people, no logos, no anime. photoreal attacking third, far-post channels, finishing arcs under floodlights Palette: #3d7a4a, #e8c96a, #f2f0e8, #1a2a1e. Mood: box runs, far-post ghosts, finishing lanes. photorealistic cinematic still, real-world stadium materials and lighting, high-end live-action sports production design, physically based rendering look, documentary-sharp architecture photography of football grounds at night, subtle volumetric floodlight haze, believable turf paint and concrete, earnest legacy mood (not meme, not grimdark) Avoid: anime, manga, cartoon, cel shading, watercolor, illustration, concept-art sketch look, painterly brush strokes, neon cyberpunk, purple sci-fi glow, real club crests, readable kit numbers, FIFA branding, trademark logos, text overlays, watermarks, prominent human faces in crowd close-ups, stylized non-photoreal characters. photorealistic live-action sports plate, physically based materials, floodlit pitch, deep green turf, no anime, no illustration, no people in foreground, no readable text, no club logos, no watermark, 16:9 composition.",
+      "stagingFile": "front_city_02_box_run_lane.png"
+    },
+    {
+      "id": "front_city_03_finishing_arc",
+      "kind": "city",
+      "path": "cities/front/front_city_03_finishing_arc.png",
+      "title": "Finishing Arc",
+      "domain": "striker",
+      "notes": "Photorealistic finishing arc outside the box, gold flood spill, empty goalmouth and netting. Empty stadium atmosphere. No people, no logos, no anime.",
+      "slug": "front_city_03_finishing_arc",
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "prompt": "Photorealistic wide cinematic still of a football stadium at night, Photorealistic finishing arc outside the box, gold flood spill, empty goalmouth and netting. Empty stadium atmosphere. No people, no logos, no anime. photoreal attacking third, far-post channels, finishing arcs under floodlights Palette: #3d7a4a, #e8c96a, #f2f0e8, #1a2a1e. Mood: box runs, far-post ghosts, finishing lanes. photorealistic cinematic still, real-world stadium materials and lighting, high-end live-action sports production design, physically based rendering look, documentary-sharp architecture photography of football grounds at night, subtle volumetric floodlight haze, believable turf paint and concrete, earnest legacy mood (not meme, not grimdark) Avoid: anime, manga, cartoon, cel shading, watercolor, illustration, concept-art sketch look, painterly brush strokes, neon cyberpunk, purple sci-fi glow, real club crests, readable kit numbers, FIFA branding, trademark logos, text overlays, watermarks, prominent human faces in crowd close-ups, stylized non-photoreal characters. photorealistic live-action sports plate, physically based materials, floodlit pitch, deep green turf, no anime, no illustration, no people in foreground, no readable text, no club logos, no watermark, 16:9 composition.",
+      "stagingFile": "front_city_03_finishing_arc.png"
+    },
+    {
+      "id": "mid_city_01_tempo_circle",
+      "kind": "city",
+      "path": "cities/mid/mid_city_01_tempo_circle.png",
+      "title": "Tempo Circle",
+      "domain": "midfield",
+      "notes": "Photorealistic centre circle on wet night turf, soft floodlight rings, empty stadium hush. No people, no logos, no anime.",
+      "slug": "mid_city_01_tempo_circle",
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "prompt": "Photorealistic wide cinematic still of a football stadium at night, Photorealistic centre circle on wet night turf, soft floodlight rings, empty stadium hush. No people, no logos, no anime. photoreal centre-circle tempo, wet turf switches of play, press-trap lanes Palette: #2a5a38, #7aab78, #e8e4d8, #1a2420. Mood: tempo, switches of play, press traps. photorealistic cinematic still, real-world stadium materials and lighting, high-end live-action sports production design, physically based rendering look, documentary-sharp architecture photography of football grounds at night, subtle volumetric floodlight haze, believable turf paint and concrete, earnest legacy mood (not meme, not grimdark) Avoid: anime, manga, cartoon, cel shading, watercolor, illustration, concept-art sketch look, painterly brush strokes, neon cyberpunk, purple sci-fi glow, real club crests, readable kit numbers, FIFA branding, trademark logos, text overlays, watermarks, prominent human faces in crowd close-ups, stylized non-photoreal characters. photorealistic live-action sports plate, physically based materials, floodlit pitch, deep green turf, no anime, no illustration, no people in foreground, no readable text, no club logos, no watermark, 16:9 composition.",
+      "stagingFile": "mid_city_01_tempo_circle.png"
+    },
+    {
+      "id": "mid_city_02_switch_of_play",
+      "kind": "city",
+      "path": "cities/mid/mid_city_02_switch_of_play.png",
+      "title": "Switch of Play",
+      "domain": "midfield",
+      "notes": "Photorealistic wide switch lane across the half, chalk and grass toward far touchline, cool white lights. Empty stadium. No people, no logos, no anime.",
+      "slug": "mid_city_02_switch_of_play",
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "prompt": "Photorealistic wide cinematic still of a football stadium at night, Photorealistic wide switch lane across the half, chalk and grass toward far touchline, cool white lights. Empty stadium. No people, no logos, no anime. photoreal centre-circle tempo, wet turf switches of play, press-trap lanes Palette: #2a5a38, #7aab78, #e8e4d8, #1a2420. Mood: tempo, switches of play, press traps. photorealistic cinematic still, real-world stadium materials and lighting, high-end live-action sports production design, physically based rendering look, documentary-sharp architecture photography of football grounds at night, subtle volumetric floodlight haze, believable turf paint and concrete, earnest legacy mood (not meme, not grimdark) Avoid: anime, manga, cartoon, cel shading, watercolor, illustration, concept-art sketch look, painterly brush strokes, neon cyberpunk, purple sci-fi glow, real club crests, readable kit numbers, FIFA branding, trademark logos, text overlays, watermarks, prominent human faces in crowd close-ups, stylized non-photoreal characters. photorealistic live-action sports plate, physically based materials, floodlit pitch, deep green turf, no anime, no illustration, no people in foreground, no readable text, no club logos, no watermark, 16:9 composition.",
+      "stagingFile": "mid_city_02_switch_of_play.png"
+    },
+    {
+      "id": "mid_city_03_press_trap",
+      "kind": "city",
+      "path": "cities/mid/mid_city_03_press_trap.png",
+      "title": "Press Trap",
+      "domain": "midfield",
+      "notes": "Photorealistic compressed midfield pocket geometry, clay terrace glow distant, empty pitch. No people, no logos, no anime.",
+      "slug": "mid_city_03_press_trap",
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "prompt": "Photorealistic wide cinematic still of a football stadium at night, Photorealistic compressed midfield pocket geometry, clay terrace glow distant, empty pitch. No people, no logos, no anime. photoreal centre-circle tempo, wet turf switches of play, press-trap lanes Palette: #2a5a38, #7aab78, #e8e4d8, #1a2420. Mood: tempo, switches of play, press traps. photorealistic cinematic still, real-world stadium materials and lighting, high-end live-action sports production design, physically based rendering look, documentary-sharp architecture photography of football grounds at night, subtle volumetric floodlight haze, believable turf paint and concrete, earnest legacy mood (not meme, not grimdark) Avoid: anime, manga, cartoon, cel shading, watercolor, illustration, concept-art sketch look, painterly brush strokes, neon cyberpunk, purple sci-fi glow, real club crests, readable kit numbers, FIFA branding, trademark logos, text overlays, watermarks, prominent human faces in crowd close-ups, stylized non-photoreal characters. photorealistic live-action sports plate, physically based materials, floodlit pitch, deep green turf, no anime, no illustration, no people in foreground, no readable text, no club logos, no watermark, 16:9 composition.",
+      "stagingFile": "mid_city_03_press_trap.png"
+    },
+    {
+      "id": "box_city_01_set_piece_wall",
+      "kind": "city",
+      "path": "cities/box/box_city_01_set_piece_wall.png",
+      "title": "Set-Piece Wall",
+      "domain": "box",
+      "notes": "Photorealistic empty set-piece wall chalk line before the box, floodlights bleaching paint, empty goal. No people, no logos, no anime.",
+      "slug": "box_city_01_set_piece_wall",
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "prompt": "Photorealistic wide cinematic still of a football stadium at night, Photorealistic empty set-piece wall chalk line before the box, floodlights bleaching paint, empty goal. No people, no logos, no anime. photoreal six-yard area, set-piece walls, penalty-spot heat under white floodlight Palette: #c4785a, #e8c96a, #f5ebe0, #2a1e18. Mood: set pieces, walls, six-yard chaos. photorealistic cinematic still, real-world stadium materials and lighting, high-end live-action sports production design, physically based rendering look, documentary-sharp architecture photography of football grounds at night, subtle volumetric floodlight haze, believable turf paint and concrete, earnest legacy mood (not meme, not grimdark) Avoid: anime, manga, cartoon, cel shading, watercolor, illustration, concept-art sketch look, painterly brush strokes, neon cyberpunk, purple sci-fi glow, real club crests, readable kit numbers, FIFA branding, trademark logos, text overlays, watermarks, prominent human faces in crowd close-ups, stylized non-photoreal characters. photorealistic live-action sports plate, physically based materials, floodlit pitch, deep green turf, no anime, no illustration, no people in foreground, no readable text, no club logos, no watermark, 16:9 composition.",
+      "stagingFile": "box_city_01_set_piece_wall.png"
+    },
+    {
+      "id": "box_city_02_six_yard_chaos",
+      "kind": "city",
+      "path": "cities/box/box_city_02_six_yard_chaos.png",
+      "title": "Six-Yard Chaos",
+      "domain": "box",
+      "notes": "Photorealistic six-yard paint under hard white light, scuffed turf, empty netting, stadium atmosphere. No people, no logos, no anime.",
+      "slug": "box_city_02_six_yard_chaos",
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "prompt": "Photorealistic wide cinematic still of a football stadium at night, Photorealistic six-yard paint under hard white light, scuffed turf, empty netting, stadium atmosphere. No people, no logos, no anime. photoreal six-yard area, set-piece walls, penalty-spot heat under white floodlight Palette: #c4785a, #e8c96a, #f5ebe0, #2a1e18. Mood: set pieces, walls, six-yard chaos. photorealistic cinematic still, real-world stadium materials and lighting, high-end live-action sports production design, physically based rendering look, documentary-sharp architecture photography of football grounds at night, subtle volumetric floodlight haze, believable turf paint and concrete, earnest legacy mood (not meme, not grimdark) Avoid: anime, manga, cartoon, cel shading, watercolor, illustration, concept-art sketch look, painterly brush strokes, neon cyberpunk, purple sci-fi glow, real club crests, readable kit numbers, FIFA branding, trademark logos, text overlays, watermarks, prominent human faces in crowd close-ups, stylized non-photoreal characters. photorealistic live-action sports plate, physically based materials, floodlit pitch, deep green turf, no anime, no illustration, no people in foreground, no readable text, no club logos, no watermark, 16:9 composition.",
+      "stagingFile": "box_city_02_six_yard_chaos.png"
+    },
+    {
+      "id": "box_city_03_penalty_spot",
+      "kind": "city",
+      "path": "cities/box/box_city_03_penalty_spot.png",
+      "title": "Penalty Spot",
+      "domain": "box",
+      "notes": "Photorealistic lone penalty spot on night turf, clay seating bands framing the box, floodlight gold. Empty stadium. No people, no logos, no anime.",
+      "slug": "box_city_03_penalty_spot",
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "prompt": "Photorealistic wide cinematic still of a football stadium at night, Photorealistic lone penalty spot on night turf, clay seating bands framing the box, floodlight gold. Empty stadium. No people, no logos, no anime. photoreal six-yard area, set-piece walls, penalty-spot heat under white floodlight Palette: #c4785a, #e8c96a, #f5ebe0, #2a1e18. Mood: set pieces, walls, six-yard chaos. photorealistic cinematic still, real-world stadium materials and lighting, high-end live-action sports production design, physically based rendering look, documentary-sharp architecture photography of football grounds at night, subtle volumetric floodlight haze, believable turf paint and concrete, earnest legacy mood (not meme, not grimdark) Avoid: anime, manga, cartoon, cel shading, watercolor, illustration, concept-art sketch look, painterly brush strokes, neon cyberpunk, purple sci-fi glow, real club crests, readable kit numbers, FIFA branding, trademark logos, text overlays, watermarks, prominent human faces in crowd close-ups, stylized non-photoreal characters. photorealistic live-action sports plate, physically based materials, floodlit pitch, deep green turf, no anime, no illustration, no people in foreground, no readable text, no club logos, no watermark, 16:9 composition.",
+      "stagingFile": "box_city_03_penalty_spot.png"
+    },
+    {
+      "id": "back_city_01_high_line",
+      "kind": "city",
+      "path": "cities/back/back_city_01_high_line.png",
+      "title": "High Line",
+      "domain": "backline",
+      "notes": "Photorealistic high defensive line chalk across empty defensive third, floodlit tense space. No people, no logos, no anime.",
+      "slug": "back_city_01_high_line",
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "prompt": "Photorealistic wide cinematic still of a football stadium at night, Photorealistic high defensive line chalk across empty defensive third, floodlit tense space. No people, no logos, no anime. photoreal defensive third, high line chalk, empty keeper's box atmosphere Palette: #5a8a9a, #e8c96a, #eef2f4, #1a2228. Mood: last ditch, high line, keeper's claim. photorealistic cinematic still, real-world stadium materials and lighting, high-end live-action sports production design, physically based rendering look, documentary-sharp architecture photography of football grounds at night, subtle volumetric floodlight haze, believable turf paint and concrete, earnest legacy mood (not meme, not grimdark) Avoid: anime, manga, cartoon, cel shading, watercolor, illustration, concept-art sketch look, painterly brush strokes, neon cyberpunk, purple sci-fi glow, real club crests, readable kit numbers, FIFA branding, trademark logos, text overlays, watermarks, prominent human faces in crowd close-ups, stylized non-photoreal characters. photorealistic live-action sports plate, physically based materials, floodlit pitch, deep green turf, no anime, no illustration, no people in foreground, no readable text, no club logos, no watermark, 16:9 composition.",
+      "stagingFile": "back_city_01_high_line.png"
+    },
+    {
+      "id": "back_city_02_last_ditch",
+      "kind": "city",
+      "path": "cities/back/back_city_02_last_ditch.png",
+      "title": "Last Ditch",
+      "domain": "backline",
+      "notes": "Photorealistic last-ditch recovery lane toward goal, wet turf sheen, cool steel-blue night light. Empty stadium. No people, no logos, no anime.",
+      "slug": "back_city_02_last_ditch",
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "prompt": "Photorealistic wide cinematic still of a football stadium at night, Photorealistic last-ditch recovery lane toward goal, wet turf sheen, cool steel-blue night light. Empty stadium. No people, no logos, no anime. photoreal defensive third, high line chalk, empty keeper's box atmosphere Palette: #5a8a9a, #e8c96a, #eef2f4, #1a2228. Mood: last ditch, high line, keeper's claim. photorealistic cinematic still, real-world stadium materials and lighting, high-end live-action sports production design, physically based rendering look, documentary-sharp architecture photography of football grounds at night, subtle volumetric floodlight haze, believable turf paint and concrete, earnest legacy mood (not meme, not grimdark) Avoid: anime, manga, cartoon, cel shading, watercolor, illustration, concept-art sketch look, painterly brush strokes, neon cyberpunk, purple sci-fi glow, real club crests, readable kit numbers, FIFA branding, trademark logos, text overlays, watermarks, prominent human faces in crowd close-ups, stylized non-photoreal characters. photorealistic live-action sports plate, physically based materials, floodlit pitch, deep green turf, no anime, no illustration, no people in foreground, no readable text, no club logos, no watermark, 16:9 composition.",
+      "stagingFile": "back_city_02_last_ditch.png"
+    },
+    {
+      "id": "back_city_03_keepers_claim",
+      "kind": "city",
+      "path": "cities/back/back_city_03_keepers_claim.png",
+      "title": "Keeper's Claim",
+      "domain": "backline",
+      "notes": "Photorealistic empty six-yard keeper claim zone, quiet netting under floodlights, empty stadium atmosphere. No people, no logos, no anime.",
+      "slug": "back_city_03_keepers_claim",
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "prompt": "Photorealistic wide cinematic still of a football stadium at night, Photorealistic empty six-yard keeper claim zone, quiet netting under floodlights, empty stadium atmosphere. No people, no logos, no anime. photoreal defensive third, high line chalk, empty keeper's box atmosphere Palette: #5a8a9a, #e8c96a, #eef2f4, #1a2228. Mood: last ditch, high line, keeper's claim. photorealistic cinematic still, real-world stadium materials and lighting, high-end live-action sports production design, physically based rendering look, documentary-sharp architecture photography of football grounds at night, subtle volumetric floodlight haze, believable turf paint and concrete, earnest legacy mood (not meme, not grimdark) Avoid: anime, manga, cartoon, cel shading, watercolor, illustration, concept-art sketch look, painterly brush strokes, neon cyberpunk, purple sci-fi glow, real club crests, readable kit numbers, FIFA branding, trademark logos, text overlays, watermarks, prominent human faces in crowd close-ups, stylized non-photoreal characters. photorealistic live-action sports plate, physically based materials, floodlit pitch, deep green turf, no anime, no illustration, no people in foreground, no readable text, no club logos, no watermark, 16:9 composition.",
+      "stagingFile": "back_city_03_keepers_claim.png"
+    },
+    {
+      "id": "expand-collection",
+      "kind": "cta",
+      "path": "cta1/expand-collection.webp",
+      "title": "Grow Your Binder",
+      "domain": null,
+      "source": {
+        "id": "expand-collection",
+        "title": "Grow Your Binder",
+        "description": "Add depth across pitch domains and seasonal releases. Every new pull opens another line you can run when the ladder shifts.",
+        "image": "cta1/expand-collection.webp",
+        "glowColor": "#3d7a4a"
+      },
+      "width": 1376,
+      "height": 768,
+      "format": "webp",
+      "quality": 85,
+      "prompt": "Photorealistic wide cinematic still of a football stadium at night, Photoreal neat stacks of football trading cards on a dugout bench under soft floodlight spill, collection mood, empty stadium night photorealistic product/environment still for a trading card game website tile, real stadium materials, floodlight gold and pitch green accents, atmospheric depth, no anime, no illustration, no text, no watermark, 16:9 composition.",
+      "stagingFile": "cta__expand-collection.png"
+    },
+    {
+      "id": "buy-cards",
+      "kind": "cta",
+      "path": "cta1/buy-cards.webp",
+      "title": "Precise Shopping",
+      "domain": null,
+      "source": {
+        "id": "buy-cards",
+        "title": "Precise Shopping",
+        "description": "Filter the catalog, find the missing piece, and buy exactly what your curve has been waiting for — clean Attack, no noise.",
+        "image": "cta1/buy-cards.webp",
+        "glowColor": "#7aab78"
+      },
+      "width": 1376,
+      "height": 768,
+      "format": "webp",
+      "quality": 85,
+      "prompt": "Photorealistic wide cinematic still of a football stadium at night, Photoreal market kiosk near a stadium concourse, physical football trading cards on a clean counter, warm clay and pitch-green accents photorealistic product/environment still for a trading card game website tile, real stadium materials, floodlight gold and pitch green accents, atmospheric depth, no anime, no illustration, no text, no watermark, 16:9 composition.",
+      "stagingFile": "cta__buy-cards.png"
+    },
+    {
+      "id": "sealed-vaults",
+      "kind": "cta",
+      "path": "cta1/sealed-vaults.webp",
+      "title": "Open Sealed Bundles",
+      "domain": null,
+      "source": {
+        "id": "sealed-vaults",
+        "title": "Open Sealed Bundles",
+        "description": "Crack sealed products and chase a standout pull. Each unopened bundle is a small surprise — chase card or trade bait.",
+        "image": "cta1/sealed-vaults.webp",
+        "glowColor": "#c4785a"
+      },
+      "width": 1376,
+      "height": 768,
+      "format": "webp",
+      "quality": 85,
+      "prompt": "Photorealistic wide cinematic still of a football stadium at night, Photoreal sealed card bundles stacked in a stadium store locker, soft gold beacon light, night atmosphere photorealistic product/environment still for a trading card game website tile, real stadium materials, floodlight gold and pitch green accents, atmospheric depth, no anime, no illustration, no text, no watermark, 16:9 composition.",
+      "stagingFile": "cta__sealed-vaults.png"
+    },
+    {
+      "id": "discover-rare",
+      "kind": "cta",
+      "path": "cta1/discover-rare.webp",
+      "title": "Chase Captain Prints",
+      "domain": null,
+      "source": {
+        "id": "discover-rare",
+        "title": "Chase Captain Prints",
+        "description": "Hunt foils, Legend cards, and signature prints — the kind of card that rewrites a deck and makes rivals pause.",
+        "image": "cta1/discover-rare.webp",
+        "glowColor": "#e8c96a"
+      },
+      "width": 1376,
+      "height": 768,
+      "format": "webp",
+      "quality": 85,
+      "prompt": "Photorealistic wide cinematic still of a football stadium at night, Photoreal single foil football trading card catching floodlight gold on a pitch-side rail, soft specular highlight photorealistic product/environment still for a trading card game website tile, real stadium materials, floodlight gold and pitch green accents, atmospheric depth, no anime, no illustration, no text, no watermark, 16:9 composition.",
+      "stagingFile": "cta__discover-rare.png"
+    },
+    {
+      "id": "sell-cards",
+      "kind": "cta",
+      "path": "cta1/sell-cards.webp",
+      "title": "Pass Along Duplicates",
+      "domain": null,
+      "source": {
+        "id": "sell-cards",
+        "title": "Pass Along Duplicates",
+        "description": "Extras still have value. List them, fund the next upgrade, and keep your binder lean for the decks you actually play.",
+        "image": "cta1/sell-cards.webp",
+        "glowColor": "#e8c96a"
+      },
+      "width": 1376,
+      "height": 768,
+      "format": "webp",
+      "quality": 85,
+      "prompt": "Photorealistic wide cinematic still of a football stadium at night, Photoreal organized binder and duplicate cards on a manager desk beside a credit token tray photorealistic product/environment still for a trading card game website tile, real stadium materials, floodlight gold and pitch green accents, atmospheric depth, no anime, no illustration, no text, no watermark, 16:9 composition.",
+      "stagingFile": "cta__sell-cards.png"
+    },
+    {
+      "id": "shape-strategy",
+      "kind": "cta",
+      "path": "cta1/shape-strategy.webp",
+      "title": "Tune Your Squad",
+      "domain": null,
+      "source": {
+        "id": "shape-strategy",
+        "title": "Tune Your Squad",
+        "description": "Prototype lists in the tactics room — test counters, stress synergies, and lock a 30-card answer to the ladder's current pace.",
+        "image": "cta1/shape-strategy.webp",
+        "glowColor": "#a67c52"
+      },
+      "width": 1376,
+      "height": 768,
+      "format": "webp",
+      "quality": 85,
+      "prompt": "Photorealistic wide cinematic still of a football stadium at night, Photoreal deck of football trading cards arranged in a curve on a tactics table with faint chalk overlays photorealistic product/environment still for a trading card game website tile, real stadium materials, floodlight gold and pitch green accents, atmospheric depth, no anime, no illustration, no text, no watermark, 16:9 composition.",
+      "stagingFile": "cta__shape-strategy.png"
+    },
+    {
+      "id": "tactical-battles",
+      "kind": "gamemodel",
+      "path": "gamemodel/tactical-battles.webp",
+      "title": "Pitch Tactics",
+      "domain": null,
+      "source": {
+        "id": "tactical-battles",
+        "title": "Pitch Tactics",
+        "description": "Trade lines on a living board where timing, lane pressure, and burst windows matter more than raw stats. Win the turn before you win the match.",
+        "image": "gamemodel/tactical-battles.webp",
+        "glowColor": "#7aab78"
+      },
+      "width": 1024,
+      "height": 1024,
+      "format": "webp",
+      "quality": 85,
+      "prompt": "Photorealistic wide cinematic still of a football stadium at night, Photoreal tactics board with small player tokens on a green pitch diagram, calm duel atmosphere, no readable UI text photorealistic square environment still for a trading card game website section, real stadium materials, centered composition, floodlight mood, no anime, no illustration, no text, no watermark, 1:1 aspect ratio.",
+      "stagingFile": "gamemodel__tactical-battles.png"
+    },
+    {
+      "id": "collectible-cards",
+      "kind": "gamemodel",
+      "path": "gamemodel/collectible-cards.webp",
+      "title": "Squad Collecting",
+      "domain": null,
+      "source": {
+        "id": "collectible-cards",
+        "title": "Squad Collecting",
+        "description": "Pull cards from Striker's End, Engine Room, The Box, and Back Line — then stitch keywords, curves, and finishers into a list that rewards precision.",
+        "image": "gamemodel/collectible-cards.webp",
+        "glowColor": "#e8c96a"
+      },
+      "width": 1024,
+      "height": 1024,
+      "format": "webp",
+      "quality": 85,
+      "prompt": "Photorealistic wide cinematic still of a football stadium at night, Photoreal fan of physical football trading cards over a soft out-of-focus montage of empty stadium pitch zones photorealistic square environment still for a trading card game website section, real stadium materials, centered composition, floodlight mood, no anime, no illustration, no text, no watermark, 1:1 aspect ratio.",
+      "stagingFile": "gamemodel__collectible-cards.png"
+    },
+    {
+      "id": "ranked-climb",
+      "kind": "gamemodel",
+      "path": "gamemodel/ranked-climb.webp",
+      "title": "Seasonal Ladder",
+      "domain": null,
+      "source": {
+        "id": "ranked-climb",
+        "title": "Seasonal Ladder",
+        "description": "Climb seasonal tiers, learn from losses, and refine your lines. The summit rewards managers who adapt without losing their shape.",
+        "image": "gamemodel/ranked-climb.webp",
+        "glowColor": "#c4785a"
+      },
+      "width": 1024,
+      "height": 1024,
+      "format": "webp",
+      "quality": 85,
+      "prompt": "Photorealistic wide cinematic still of a football stadium at night, Photoreal ascending stadium stairs under floodlights with soft gold wayfinding glow photorealistic square environment still for a trading card game website section, real stadium materials, centered composition, floodlight mood, no anime, no illustration, no text, no watermark, 1:1 aspect ratio.",
+      "stagingFile": "gamemodel__ranked-climb.png"
+    },
+    {
+      "id": "uncommon",
+      "kind": "card_type",
+      "path": "card_types/uncommon.webp",
+      "title": "Starter",
+      "domain": null,
+      "width": 640,
+      "height": 640,
+      "format": "webp",
+      "quality": 85,
+      "prompt": "Photoreal machined green enamel starter badge emblem prop, brushed metal, Starter tier icon photorealistic metallic emblem prop photo for a trading card game UI, machined metal and enamel, clean silhouette, no anime, no illustration, no text, no watermark, 1:1 aspect ratio.",
+      "stagingFile": "card_type__uncommon.png"
+    },
+    {
+      "id": "rare",
+      "kind": "card_type",
+      "path": "card_types/rare.webp",
+      "title": "Captain",
+      "domain": null,
+      "width": 640,
+      "height": 640,
+      "format": "webp",
+      "quality": 85,
+      "prompt": "Photoreal gold captain armband-inspired crest emblem prop with thin metal edge, Captain tier icon photorealistic metallic emblem prop photo for a trading card game UI, machined metal and enamel, clean silhouette, no anime, no illustration, no text, no watermark, 1:1 aspect ratio.",
+      "stagingFile": "card_type__rare.png"
+    },
+    {
+      "id": "epic",
+      "kind": "card_type",
+      "path": "card_types/epic.webp",
+      "title": "Legend",
+      "domain": null,
+      "width": 640,
+      "height": 640,
+      "format": "webp",
+      "quality": 85,
+      "prompt": "Photoreal clay-terracotta legend ring emblem prop with soft floodlight radiance, Legend tier icon photorealistic metallic emblem prop photo for a trading card game UI, machined metal and enamel, clean silhouette, no anime, no illustration, no text, no watermark, 1:1 aspect ratio.",
+      "stagingFile": "card_type__epic.png"
+    }
+  ],
+  "showcaseCards": [
+    {
+      "id": "striker_card_01_poacher",
+      "kind": "showcase_card",
+      "path": "cards/striker/striker_card_01_poacher.png",
+      "title": "Poacher",
+      "domain": "striker",
+      "managedBy": "cardgen",
+      "note": "Generated via cardgen; required for FRONTEND_SHOWCASE_ONLY compile (hero + collection)."
+    },
+    {
+      "id": "midfield_card_01_tempo_setter",
+      "kind": "showcase_card",
+      "path": "cards/midfield/midfield_card_01_tempo_setter.png",
+      "title": "Tempo Setter",
+      "domain": "midfield",
+      "managedBy": "cardgen",
+      "note": "Generated via cardgen; required for FRONTEND_SHOWCASE_ONLY compile (hero + collection)."
+    },
+    {
+      "id": "box_card_01_set_piece_wall",
+      "kind": "showcase_card",
+      "path": "cards/box/box_card_01_set_piece_wall.png",
+      "title": "Set-Piece Wall",
+      "domain": "box",
+      "managedBy": "cardgen",
+      "note": "Generated via cardgen; required for FRONTEND_SHOWCASE_ONLY compile (hero + collection)."
+    },
+    {
+      "id": "backline_card_01_last_ditch",
+      "kind": "showcase_card",
+      "path": "cards/backline/backline_card_01_last_ditch.png",
+      "title": "Last Ditch",
+      "domain": "backline",
+      "managedBy": "cardgen",
+      "note": "Generated via cardgen; required for FRONTEND_SHOWCASE_ONLY compile (hero + collection)."
+    },
+    {
+      "id": "striker_card_02_far_post_ghost",
+      "kind": "showcase_card",
+      "path": "cards/striker/striker_card_02_far_post_ghost.png",
+      "title": "Far-Post Ghost",
+      "domain": "striker",
+      "managedBy": "cardgen",
+      "note": "Generated via cardgen; required for FRONTEND_SHOWCASE_ONLY compile (hero + collection)."
+    },
+    {
+      "id": "midfield_card_02_switch_of_play",
+      "kind": "showcase_card",
+      "path": "cards/midfield/midfield_card_02_switch_of_play.png",
+      "title": "Switch of Play",
+      "domain": "midfield",
+      "managedBy": "cardgen",
+      "note": "Generated via cardgen; required for FRONTEND_SHOWCASE_ONLY compile (hero + collection)."
+    },
+    {
+      "id": "box_card_02_six_yard_chaos",
+      "kind": "showcase_card",
+      "path": "cards/box/box_card_02_six_yard_chaos.png",
+      "title": "Six-Yard Chaos",
+      "domain": "box",
+      "managedBy": "cardgen",
+      "note": "Generated via cardgen; required for FRONTEND_SHOWCASE_ONLY compile (hero + collection)."
+    },
+    {
+      "id": "backline_card_02_high_line",
+      "kind": "showcase_card",
+      "path": "cards/backline/backline_card_02_high_line.png",
+      "title": "High Line",
+      "domain": "backline",
+      "managedBy": "cardgen",
+      "note": "Generated via cardgen; required for FRONTEND_SHOWCASE_ONLY compile (hero + collection)."
+    },
+    {
+      "id": "striker_card_03_finishing_lane",
+      "kind": "showcase_card",
+      "path": "cards/striker/striker_card_03_finishing_lane.png",
+      "title": "Finishing Lane",
+      "domain": "striker",
+      "managedBy": "cardgen",
+      "note": "Generated via cardgen; required for FRONTEND_SHOWCASE_ONLY compile (hero + collection)."
+    },
+    {
+      "id": "midfield_card_03_press_trap",
+      "kind": "showcase_card",
+      "path": "cards/midfield/midfield_card_03_press_trap.png",
+      "title": "Press Trap",
+      "domain": "midfield",
+      "managedBy": "cardgen",
+      "note": "Generated via cardgen; required for FRONTEND_SHOWCASE_ONLY compile (hero + collection)."
+    },
+    {
+      "id": "box_card_03_penalty_architect",
+      "kind": "showcase_card",
+      "path": "cards/box/box_card_03_penalty_architect.png",
+      "title": "Penalty Architect",
+      "domain": "box",
+      "managedBy": "cardgen",
+      "note": "Generated via cardgen; required for FRONTEND_SHOWCASE_ONLY compile (hero + collection)."
+    },
+    {
+      "id": "backline_card_03_keepers_claim",
+      "kind": "showcase_card",
+      "path": "cards/backline/backline_card_03_keepers_claim.png",
+      "title": "Keeper's Claim",
+      "domain": "backline",
+      "managedBy": "cardgen",
+      "note": "Generated via cardgen; required for FRONTEND_SHOWCASE_ONLY compile (hero + collection)."
+    }
+  ],
+  "manualAssets": [
+    {
+      "kind": "brand",
+      "paths": [
+        "brand/gamelogo.png",
+        "brand/header.png",
+        "brand/play-lobby.png",
+        "brand/favicon.ico",
+        "brand/main.mp4"
+      ],
+      "note": "Brand logo/video are not auto-generated — supply manually or extend contentgen later.",
+      "referenceSizes": {
+        "brand/gamelogo.png": "1344×768 png",
+        "brand/header.png": "1344×768 png",
+        "brand/play-lobby.png": "1672×941 png"
+      }
+    }
+  ]
+}

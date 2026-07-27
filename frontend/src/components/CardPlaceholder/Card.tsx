@@ -87,8 +87,21 @@ const Card = forwardRef<HTMLElement, CardComponentProps>(function Card(
   const displayRarity = showRarity === true
   const isIyashikei = appConfig.landing?.variant === 'iyashikei'
   const isHelix = appConfig.landing?.variant === 'helix'
-  const spiritLabel = isIyashikei ? 'Spirit' : isHelix ? 'Signal' : 'Attack'
-  const calmLabel = isIyashikei ? 'Calm' : isHelix ? 'Integrity' : 'Health'
+  const isFinalWhistle = appConfig.landing?.variant === 'final_whistle'
+  const spiritLabel = isIyashikei
+    ? 'Spirit'
+    : isHelix
+      ? 'Signal'
+      : isFinalWhistle
+        ? 'Threat'
+        : 'Attack'
+  const calmLabel = isIyashikei
+    ? 'Calm'
+    : isHelix
+      ? 'Integrity'
+      : isFinalWhistle
+        ? 'Resolve'
+        : 'Health'
   const imageSrc =
     layoutMode === 'preview' || layoutMode === 'hero'
       ? artUrl
@@ -228,12 +241,15 @@ const Card = forwardRef<HTMLElement, CardComponentProps>(function Card(
           decoding="async"
         />
         <div className="card__overlay" />
-        <div className="card__stat card__stat--mana" aria-label={`Mana ${stats.mana}`}>
+        <div
+          className="card__stat card__stat--mana"
+          aria-label={`${isFinalWhistle ? 'Cost' : 'Mana'} ${stats.mana}`}
+        >
           <span className="card__stat-value">{formatCardStat(stats.mana, numeralStyle)}</span>
         </div>
         <div
           className={`card__domain card__domain--${domain}`}
-          aria-label={`${DOMAIN_LABEL[domain]}${isHelix ? ' lab' : ' domain'}`}
+          aria-label={`${DOMAIN_LABEL[domain]}${isHelix ? ' lab' : isFinalWhistle ? ' zone' : ' domain'}`}
           title={DOMAIN_LABEL[domain]}
         />
         {rarity && displayRarity && (

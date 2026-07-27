@@ -33,12 +33,13 @@
   "include": [
     "**/*.ts",
     "**/*.tsx",
+    ".build/helix/.next/types/**/*.ts",
     ".build/iyashikei/.next/types/**/*.ts",
     ".build/project2/.next/types/**/*.ts",
     ".build/voidborn/.next/types/**/*.ts",
     ".next/types/**/*.ts",
     "next-env.d.ts",
-    ".build/helix/.next/types/**/*.ts"
+    ".build/final_whistle/.next/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"

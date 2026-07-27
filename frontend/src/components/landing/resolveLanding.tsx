@@ -1,5 +1,7 @@
 import Header from '@/components/Header/Header'
 import Hero from '@/components/Hero/Hero'
+import FinalWhistleHeader from '@/components/landing/final_whistle/FinalWhistleHeader'
+import FinalWhistleHero from '@/components/landing/final_whistle/FinalWhistleHero'
 import HelixHeader from '@/components/landing/helix/HelixHeader'
 import HelixHero from '@/components/landing/helix/HelixHero'
 import HelixLocations from '@/components/landing/helix/HelixLocations'
@@ -11,6 +13,7 @@ import { appConfig } from '@/config'
 /** Project landing shell — Header + Hero (+ Locations for helix) swap by variant. */
 export function LandingHeader() {
   const variant = appConfig.landing?.variant
+  if (variant === 'final_whistle') return <FinalWhistleHeader />
   if (variant === 'iyashikei') return <IyashikeiHeader />
   if (variant === 'helix') return <HelixHeader />
   return <Header />
@@ -18,6 +21,7 @@ export function LandingHeader() {
 
 export function LandingHero() {
   const variant = appConfig.landing?.variant
+  if (variant === 'final_whistle') return <FinalWhistleHero />
   if (variant === 'iyashikei') return <IyashikeiHero />
   if (variant === 'helix') return <HelixHero />
   return <Hero />

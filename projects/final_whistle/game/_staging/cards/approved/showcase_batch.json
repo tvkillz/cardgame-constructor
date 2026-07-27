@@ -1,0 +1,365 @@
+{
+  "meta": {
+    "project": "final_whistle",
+    "kind": "showcase",
+    "status": "approved",
+    "generated_at": "2026-07-27T10:02:41.324Z",
+    "model": "gemini-3.1-flash-lite",
+    "slugs": [
+      "backline_card_01_last_ditch",
+      "backline_card_02_high_line",
+      "backline_card_03_keepers_claim",
+      "box_card_01_set_piece_wall",
+      "box_card_02_six_yard_chaos",
+      "box_card_03_penalty_architect",
+      "midfield_card_01_tempo_setter",
+      "midfield_card_02_switch_of_play",
+      "midfield_card_03_press_trap",
+      "striker_card_01_poacher",
+      "striker_card_02_far_post_ghost",
+      "striker_card_03_finishing_lane"
+    ],
+    "validation": {
+      "ok": true,
+      "error_count": 0,
+      "results": [
+        {
+          "slug": "striker_card_01_nightfall_striker",
+          "title": "Nightfall Striker",
+          "issues": [],
+          "ok": true
+        },
+        {
+          "slug": "striker_card_02_veiled_outlier",
+          "title": "Veiled Outlier",
+          "issues": [],
+          "ok": true
+        },
+        {
+          "slug": "striker_card_03_prime_strategist",
+          "title": "Prime Strategist",
+          "issues": [],
+          "ok": true
+        },
+        {
+          "slug": "midfield_card_01_metronome_midfielder",
+          "title": "Metronome Midfielder",
+          "issues": [],
+          "ok": true
+        },
+        {
+          "slug": "midfield_card_02_crossfield_maestro",
+          "title": "Crossfield Maestro",
+          "issues": [],
+          "ok": true
+        },
+        {
+          "slug": "midfield_card_03_grip_controller",
+          "title": "Grip Controller",
+          "issues": [],
+          "ok": true
+        },
+        {
+          "slug": "box_card_01_titan_anchor",
+          "title": "Titan Anchor",
+          "issues": [],
+          "ok": true
+        },
+        {
+          "slug": "box_card_02_rumble_enforcer",
+          "title": "Rumble Enforcer",
+          "issues": [],
+          "ok": true
+        },
+        {
+          "slug": "box_card_03_deadball_maestro",
+          "title": "Deadball Maestro",
+          "issues": [],
+          "ok": true
+        },
+        {
+          "slug": "backline_card_01_heroic_salvage",
+          "title": "Heroic Salvage",
+          "issues": [],
+          "ok": true
+        },
+        {
+          "slug": "backline_card_02_frontline_marshal",
+          "title": "Frontline Marshal",
+          "issues": [],
+          "ok": true
+        },
+        {
+          "slug": "backline_card_03_sovereign_keeper",
+          "title": "Sovereign Keeper",
+          "issues": [],
+          "ok": true
+        }
+      ],
+      "repaired_at": "2026-07-27T10:03:04.337Z",
+      "repair_rounds": 1
+    },
+    "approved_at": "2026-07-27T10:03:17.166Z"
+  },
+  "cards": [
+    {
+      "title": "Nightfall Striker",
+      "slug": "striker_card_01_nightfall_striker",
+      "domain": "striker",
+      "role": "Finisher",
+      "stats": {
+        "mana": 2,
+        "attack": 2,
+        "health": 1
+      },
+      "keywords": [
+        "Deploy"
+      ],
+      "ability": {
+        "name": "Instinctive Volley",
+        "text": "Deploy: This card may act the turn it enters play. When it acts against a rival, it gains +1 Threat for this turn."
+      },
+      "image_prompt": "A stealthy striker standing on the edge of the offside line in a dark stadium under harsh floodlights, focus on their sharp gaze",
+      "image_notes": "Style: Cinematic sports photography. Negative prompt: anime, manga, illustration, club crests, logos, watermarks, distorted limbs. Aspect ratio 3:4. Palette: Deep grass green and bright gold.",
+      "priceCents": 21925
+    },
+    {
+      "title": "Veiled Outlier",
+      "slug": "striker_card_02_veiled_outlier",
+      "domain": "striker",
+      "role": "Channel Cutter",
+      "stats": {
+        "mana": 4,
+        "attack": 3,
+        "health": 3
+      },
+      "keywords": [
+        "Marker"
+      ],
+      "ability": {
+        "name": "Ghostly Breach",
+        "text": "Marker: Rivals cannot choose this card until it acts. When this card acts, it breaks the line to deal its Threat directly to the rival's Resolve."
+      },
+      "image_prompt": "A blurred figure darting behind a defensive line toward the far post of a football goal, high contrast night lighting",
+      "image_notes": "Style: Atmospheric, moody sports photography. Negative prompt: anime, illustration, branding, cartoon, text. Aspect ratio 3:4. Palette: Dark emerald shadows and warm, low-angle stadium light.",
+      "priceCents": 15660
+    },
+    {
+      "title": "Prime Strategist",
+      "slug": "striker_card_03_prime_strategist",
+      "domain": "striker",
+      "role": "Set-Piece Specialist",
+      "stats": {
+        "mana": 6,
+        "attack": 5,
+        "health": 4
+      },
+      "keywords": [
+        "Link",
+        "Overload"
+      ],
+      "ability": {
+        "name": "Geometric Strike",
+        "text": "Link: If another allied card with Link is in play, this card gains +2 Threat. Overload: Spend 1 extra mana to double its enter effect, creating an additional Threat increase."
+      },
+      "image_prompt": "A focused striker aiming a curling shot from a wide angle, trajectory lines glowing faintly, professional stadium environment at night",
+      "image_notes": "Style: High-action sports photography. Negative prompt: anime, illustration, logos, club names. Aspect ratio 3:4. Palette: Intense greens, deep browns, and bright stadium gold.",
+      "priceCents": 81129
+    },
+    {
+      "title": "Metronome Midfielder",
+      "slug": "midfield_card_01_metronome_midfielder",
+      "domain": "midfield",
+      "role": "Orchestrator",
+      "stats": {
+        "mana": 2,
+        "attack": 2,
+        "health": 3
+      },
+      "keywords": [
+        "Pulse"
+      ],
+      "ability": {
+        "name": "Cadence Flow",
+        "text": "Pulse: At end of turn, restore 1 Resolve to this card. If you have another allied card with Link in play, gain 1 additional Threat."
+      },
+      "image_prompt": "A focused midfielder standing in the center circle, hands on hips, gazing across the pitch under brilliant stadium floodlights. Soft rain misting in the air, deep cool green turf, cinematic shallow depth of field, photorealistic, high-end sports photography.",
+      "image_notes": "No anime, no manga, no illustrations. Focus on high-contrast floodlight aesthetics, cool dark green tones, minimalist composition.",
+      "priceCents": 9545
+    },
+    {
+      "title": "Crossfield Maestro",
+      "slug": "midfield_card_02_crossfield_maestro",
+      "domain": "midfield",
+      "role": "Tactical Pivot",
+      "stats": {
+        "mana": 4,
+        "attack": 3,
+        "health": 5
+      },
+      "keywords": [
+        "Switch",
+        "Link"
+      ],
+      "ability": {
+        "name": "Long Range Reach",
+        "text": "Switch: This unit can influence a distant card on the pitch without close engagement. Link: If an allied card is in play, all allied cards gain +1 Threat until the end of the turn."
+      },
+      "image_prompt": "A player mid-motion, leather football suspended in the air during a long-range diagonal pass. Dynamic posture, wet grass splashing under cleats, bright stadium lights reflecting off the turf, wide-angle lens, sharp focus on the player silhouette.",
+      "image_notes": "No real club logos, no trademarked kit designs. Negative: illustration, cartoon, blur. Use high saturation greens and intense lens flare.",
+      "priceCents": 24149
+    },
+    {
+      "title": "Grip Controller",
+      "slug": "midfield_card_03_grip_controller",
+      "domain": "midfield",
+      "role": "Enforcer",
+      "stats": {
+        "mana": 6,
+        "attack": 5,
+        "health": 6
+      },
+      "keywords": [
+        "Press",
+        "Hold"
+      ],
+      "ability": {
+        "name": "Systemic Lockdown",
+        "text": "Press: When this card enters play, apply Press to one rival card. Hold: Rivals must engage this card before others when able, forcing them to exhaust their Threat against this unit's Resolve."
+      },
+      "image_prompt": "A powerful defensive midfielder crouched in a ready stance on the sideline, shadows stretching across the grass, intense spotlighting, clay-colored boundary lines, photorealistic, dramatic sports action capture.",
+      "image_notes": "No anime/manga. High-contrast, gritty stadium texture. Negative prompts: logos, branding, stylized art, watermarks.",
+      "priceCents": 6047
+    },
+    {
+      "title": "Titan Anchor",
+      "slug": "box_card_01_titan_anchor",
+      "domain": "box",
+      "role": "Defender / Wall",
+      "stats": {
+        "mana": 2,
+        "attack": 1,
+        "health": 3
+      },
+      "keywords": [
+        "Wall",
+        "Hold"
+      ],
+      "ability": {
+        "name": "Bastion Formation",
+        "text": "When this card enters play, gain Wall. Rivals must engage this card before others when able."
+      },
+      "image_prompt": "A stout, focused defender standing firm in the center of the penalty box, wearing a heavy, tactical football jersey under stadium floodlights.",
+      "image_notes": "Style: Cinematic sports photography. Negative: anime, illustration, manga, logos, text, watermarks. Aspect ratio 3:4. Colors: clay, white, deep green.",
+      "priceCents": 82847
+    },
+    {
+      "title": "Rumble Enforcer",
+      "slug": "box_card_02_rumble_enforcer",
+      "domain": "box",
+      "role": "Brawler / Disruptor",
+      "stats": {
+        "mana": 4,
+        "attack": 3,
+        "health": 4
+      },
+      "keywords": [
+        "Press"
+      ],
+      "ability": {
+        "name": "Impact Surge",
+        "text": "When this card enters play, apply Press to one rival card. It cannot act until the end of turn."
+      },
+      "image_prompt": "A gritty, aggressive football brawler sliding into the turf, causing a chaotic scramble in the penalty area.",
+      "image_notes": "Style: Dynamic live-action sports journalism. Negative: anime, illustration, manga, logos, text, watermarks. Aspect ratio 3:4. Colors: dark green, clay, blinding white light.",
+      "priceCents": 63044
+    },
+    {
+      "title": "Deadball Maestro",
+      "slug": "box_card_03_deadball_maestro",
+      "domain": "box",
+      "role": "Tactician / Specialist",
+      "stats": {
+        "mana": 6,
+        "attack": 4,
+        "health": 5
+      },
+      "keywords": [
+        "Switch",
+        "Recover"
+      ],
+      "ability": {
+        "name": "Pinpoint Delivery",
+        "text": "Choose a distant allied unit and apply Recover, restoring 2 Resolve. Then, apply Switch to reposition their tactical influence."
+      },
+      "image_prompt": "A composed, cerebral football tactician gesturing on the pitch, pointing toward a distant teammate to coordinate a strategic play.",
+      "image_notes": "Style: Portrait, cinematic sports depth. Negative: anime, illustration, manga, logos, text, watermarks. Aspect ratio 3:4. Colors: warm floodlight glow, deep shadows.",
+      "priceCents": 35260
+    },
+    {
+      "title": "Heroic Salvage",
+      "slug": "backline_card_01_heroic_salvage",
+      "domain": "backline",
+      "role": "Last-ditch blocker",
+      "stats": {
+        "mana": 3,
+        "attack": 2,
+        "health": 5
+      },
+      "keywords": [
+        "Wall"
+      ],
+      "ability": {
+        "name": "Saving Tackle",
+        "text": "When played, this unit gains Wall: the next Threat this card would take is redirected to the Wall buffer instead. Cannot be bypassed until your next turn."
+      },
+      "image_prompt": "A desperate defender sliding across wet grass to block a ball at the last second, cinematic stadium floodlights.",
+      "image_notes": "Style: high-contrast sports photography, 3:4 aspect ratio. Negative prompt: anime, manga, illustration, club logos, facial features of real athletes.",
+      "priceCents": 72293
+    },
+    {
+      "title": "Frontline Marshal",
+      "slug": "backline_card_02_frontline_marshal",
+      "domain": "backline",
+      "role": "High-line marshal",
+      "stats": {
+        "mana": 4,
+        "attack": 3,
+        "health": 4
+      },
+      "keywords": [
+        "Press",
+        "Shape"
+      ],
+      "ability": {
+        "name": "Formation Trap",
+        "text": "Press: When this card enters play, apply Press to one rival card (it cannot act until end of turn). This unit possesses Shape, meaning it cannot be displaced while Resolve remains."
+      },
+      "image_prompt": "A defensive marshal orchestrating a high line formation, intense focused expression, stadium pitch background.",
+      "image_notes": "Style: gritty professional football portrait. Negative prompt: anime, illustration, real club badges, bright colors.",
+      "priceCents": 95504
+    },
+    {
+      "title": "Sovereign Keeper",
+      "slug": "backline_card_03_sovereign_keeper",
+      "domain": "backline",
+      "role": "Keeper's claim",
+      "stats": {
+        "mana": 6,
+        "attack": 1,
+        "health": 8
+      },
+      "keywords": [
+        "Hold",
+        "Recover"
+      ],
+      "ability": {
+        "name": "Royal Decree",
+        "text": "Hold: Rivals must engage this card before others when able. At the start of your turn, Recover 2 Resolve to all allied units in the Back Line."
+      },
+      "image_prompt": "A goalkeeper jumping high to claim a cross in a crowded penalty area, authoritative stance.",
+      "image_notes": "Style: atmospheric stadium photography, 3:4 aspect ratio. Negative prompt: anime, manga, club crests, corporate trademarks.",
+      "priceCents": 77371
+    }
+  ]
+}
