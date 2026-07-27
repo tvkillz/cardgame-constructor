@@ -2,7 +2,7 @@
 
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useState, type CSSProperties } from 'react'
 import { appConfig, resolveNavHref, resolveAccountMenuHref } from '@/config'
 import type { AccountMenuItemConfig } from '@/config/schema'
 import PlayRouteLink from '@/components/auth/PlayRouteLink'
@@ -14,6 +14,21 @@ import './styles.css'
 const PurchaseCreditsModal = dynamic(
   () => import('@/components/credits/PurchaseCreditsModal'),
   { ssr: false },
+)
+
+const TICKER_SEGMENT_COUNT = 6
+
+const TICKER_ITEMS = (
+  <>
+    <span>LEAGUE NIGHT</span>
+    <span>·</span>
+    <span>FRONT · MID · BOX · BACK</span>
+    <span>·</span>
+    <span>EVERY MATCH LEAVES A LEGACY</span>
+    <span>·</span>
+    <span>COLLECT · TRADE · PLAY</span>
+    <span>·</span>
+  </>
 )
 
 export default function FinalWhistleHeader() {
@@ -113,22 +128,19 @@ export default function FinalWhistleHeader() {
     <>
       <header className="fw-header">
         <div className="fw-header__ticker" aria-hidden="true">
-          <div className="fw-header__ticker-track">
-            <span>LEAGUE NIGHT</span>
-            <span>·</span>
-            <span>FRONT · MID · BOX · BACK</span>
-            <span>·</span>
-            <span>EVERY MATCH LEAVES A LEGACY</span>
-            <span>·</span>
-            <span>COLLECT · TRADE · PLAY</span>
-            <span>·</span>
-            <span>LEAGUE NIGHT</span>
-            <span>·</span>
-            <span>FRONT · MID · BOX · BACK</span>
-            <span>·</span>
-            <span>EVERY MATCH LEAVES A LEGACY</span>
-            <span>·</span>
-            <span>COLLECT · TRADE · PLAY</span>
+          <div
+            className="fw-header__ticker-track"
+            style={{ '--ticker-segments': TICKER_SEGMENT_COUNT } as CSSProperties}
+          >
+            {Array.from({ length: TICKER_SEGMENT_COUNT }, (_, index) => (
+              <div
+                key={index}
+                className="fw-header__ticker-group"
+                aria-hidden={index > 0}
+              >
+                {TICKER_ITEMS}
+              </div>
+            ))}
           </div>
         </div>
 
