@@ -25,6 +25,11 @@ const FinalWhistleCatalogSection = dynamic(
   { ssr: true },
 )
 
+const FinalWhistlePathwaysSection = dynamic(
+  () => import('@/components/landing/final_whistle/FinalWhistlePathwaysSection'),
+  { ssr: true },
+)
+
 const CollectionSection = dynamic(
   () => import('@/components/CollectionSection/CollectionSection'),
   { ssr: true },
@@ -56,7 +61,7 @@ export default function HomePage() {
         {isFinalWhistle ? <FinalWhistleDominionsSection /> : <DominionsSection />}
         {isFinalWhistle ? <FinalWhistleGameModelSection /> : <GameModelSection />}
         {isFinalWhistle ? <FinalWhistleCatalogSection /> : <CollectionSection />}
-        <PathwaysSection />
+        {isFinalWhistle ? <FinalWhistlePathwaysSection /> : <PathwaysSection />}
         <FaqSection />
         <FinalCtaSection />
       </main>

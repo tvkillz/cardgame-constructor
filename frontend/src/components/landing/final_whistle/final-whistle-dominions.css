@@ -71,11 +71,12 @@
 }
 
 .fw-dominions__lead {
+  text-align: left;
   margin: 0;
 }
 
 .fw-dominions__panel-body {
-  display: flex;
+  display: none;
   flex-direction: column;
   gap: 0.65rem;
 }
