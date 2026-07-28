@@ -11,6 +11,10 @@ type CardPreviewPanelProps = {
   card: CardDisplayProps
   className?: string
   showRarity?: boolean
+  showAbility?: boolean
+  showKeywords?: boolean
+  /** Thumb tiles for pickers / catalog cascade — art + stats only. */
+  variant?: 'preview' | 'thumb'
 }
 
 /** Full card preview panel — shared by market hover popover and landing collection showcase. */
@@ -18,7 +22,13 @@ export default function CardPreviewPanel({
   card,
   className = '',
   showRarity = false,
+  showAbility,
+  showKeywords,
+  variant = 'preview',
 }: CardPreviewPanelProps) {
+  const isThumb = variant === 'thumb'
+  const displayAbility = showAbility ?? !isThumb
+  const displayKeywords = showKeywords ?? !isThumb
   const [artReady, setArtReady] = useState(() => isImageCached(card.artUrl))
 
   useEffect(() => {
@@ -51,8 +61,10 @@ export default function CardPreviewPanel({
         artUrl={display.artUrl}
         totalCards={1}
         fanIndex={0}
-        layoutMode="preview"
-        showAbility
+        layoutMode={isThumb ? 'compact' : 'preview'}
+        showAbility={displayAbility}
+        showKeywords={displayKeywords}
+        thumbOnly={isThumb}
         showRarity={showRarity}
       />
     </div>
