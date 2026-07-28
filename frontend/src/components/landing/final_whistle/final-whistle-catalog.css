@@ -219,6 +219,8 @@
   position: relative;
   width: min(100%, clamp(220px, 30vw, 320px));
   aspect-ratio: 2 / 3;
+  container-type: inline-size;
+  container-name: fw-catalog-hero-card;
   transform: perspective(900px) rotateY(5deg) rotateZ(-1.5deg);
   transform-style: preserve-3d;
   transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
@@ -257,7 +259,7 @@
 
 .fw-catalog__hero-panel .card--preview .card__title {
   display: block;
-  font-size: clamp(0.95rem, 2.2vw, 1.1rem);
+  font-size: 1.05em;
 }
 
 .fw-catalog__hero-panel .card--preview .card__keywords {
@@ -265,7 +267,7 @@
 }
 
 .fw-catalog__hero-panel .card--preview .card__ability-text {
-  font-size: clamp(0.78rem, 1.8vw, 0.92rem);
+  font-size: 0.9em;
   line-height: 1.38;
 }
 
@@ -347,15 +349,14 @@
   background: transparent;
   cursor: pointer;
   z-index: var(--cascade-z, 1);
+  opacity: 1;
   transform:
     translate(-50%, -50%)
     scale(var(--cascade-scale))
     rotate(var(--cascade-rz));
   filter: blur(var(--cascade-blur));
-  opacity: 0.84;
   transition:
     transform 0.42s cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 0.32s ease,
     filter 0.32s ease,
     box-shadow 0.32s ease,
     z-index 0s;
@@ -364,7 +365,6 @@
 .fw-catalog__cascade-card--active,
 .fw-catalog__cascade-card:hover,
 .fw-catalog__cascade-card:focus-visible {
-  opacity: 1;
   filter: blur(0);
   z-index: 100;
   transform:
@@ -374,7 +374,6 @@
     translateY(-6px);
   transition:
     transform 0.42s cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 0.32s ease,
     filter 0.32s ease,
     box-shadow 0.32s ease,
     z-index 0s step-end;
@@ -384,12 +383,14 @@
   position: relative;
   width: 100%;
   aspect-ratio: 2 / 3;
-  border: 1px solid color-mix(in srgb, var(--cascade-glow, #7aab78) 38%, transparent);
-  background: linear-gradient(145deg, rgba(242, 240, 232, 0.06), rgba(10, 18, 16, 0.9));
+  container-type: inline-size;
+  container-name: fw-catalog-cascade-card;
+  border: 1px solid color-mix(in srgb, var(--cascade-glow, #7aab78) 42%, #0f1814);
+  background: #0f1814;
   box-shadow:
-    0 12px 30px rgba(0, 0, 0, 0.52),
+    0 12px 30px rgba(0, 0, 0, 0.55),
     0 0 14px color-mix(in srgb, var(--cascade-glow, #7aab78) 12%, transparent),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06);
   overflow: hidden;
   transition: box-shadow 0.32s ease, border-color 0.32s ease;
 }
@@ -429,6 +430,145 @@
 
 .fw-catalog__cascade-frame .card__title {
   display: block;
+}
+
+/* Card stats + type scale with preview size (container width) */
+.fw-catalog__hero-frame .card {
+  font-size: clamp(0.52rem, 10cqi, 1rem);
+}
+
+.fw-catalog__cascade-frame .card {
+  font-size: clamp(0.42rem, 12cqi, 0.82rem);
+}
+
+.fw-catalog .card .card__frame {
+  background: linear-gradient(165deg, #1a2820 0%, #0f1814 100%);
+}
+
+.fw-catalog .card .card__stat--mana {
+  top: 0.55em;
+  left: 0.55em;
+  width: 2.15em;
+  height: 2.15em;
+  border-width: 0.12em;
+}
+
+.fw-catalog .card .card__stat--mana .card__stat-value {
+  font-size: 0.9em;
+}
+
+.fw-catalog .card .card__stat--attack {
+  width: 2.3em;
+  height: 2.3em;
+  min-width: 0;
+  padding: 0.15em 0 0 0.2em;
+}
+
+.fw-catalog .card .card__stat--attack .card__stat-value {
+  font-size: 0.85em;
+}
+
+.fw-catalog .card .card__stat--health {
+  min-width: 2.4em;
+  height: 1.55em;
+  padding: 0 0.35em;
+  border-width: 0.1em;
+}
+
+.fw-catalog .card .card__stat--health .card__stat-value {
+  font-size: 0.85em;
+}
+
+.fw-catalog .card .card__domain {
+  top: 0.55em;
+  right: 0.55em;
+  width: 1.55em;
+  height: 1.55em;
+  border-width: 0.1em;
+}
+
+.fw-catalog .card--preview .card__combat-stats {
+  padding: 0 0.55em;
+}
+
+.fw-catalog .card--preview .card__stat--attack,
+.fw-catalog .card--preview .card__stat--health {
+  min-height: 0;
+}
+
+.fw-catalog .card--compact .card__stat--attack,
+.fw-catalog .card--compact .card__stat--health {
+  bottom: 2.4em;
+}
+
+.fw-catalog .card--compact .card__stat--attack {
+  left: 0.55em;
+}
+
+.fw-catalog .card--compact .card__stat--health {
+  right: 0.55em;
+}
+
+.fw-catalog .card .card__footer {
+  padding: 0.45em 0.55em 0.65em;
+}
+
+.fw-catalog .card .card__title {
+  font-size: 1.05em;
+}
+
+.fw-catalog .card--preview .card__ability-name {
+  font-size: 0.8em;
+}
+
+.fw-catalog .card--preview .card__ability-text {
+  font-size: 0.9em;
+  line-height: 1.35;
+}
+
+.fw-catalog .card-preview-panel .card--preview .card__stat--mana {
+  top: 0.55em;
+  left: 0.55em;
+  width: 2.5em;
+  height: 2.75em;
+  font-size: inherit;
+}
+
+.fw-catalog .card-preview-panel .card--preview .card__domain {
+  top: 0.65em;
+  right: 0.65em;
+  width: 1.65em;
+  height: 1.65em;
+}
+
+.fw-catalog .card-preview-panel .card--preview .card__stat--attack {
+  min-width: 0;
+  min-height: 0;
+  width: 2.35em;
+  height: 2em;
+  padding: 0.2em 0.35em 0.2em 0.25em;
+  font-size: inherit;
+}
+
+.fw-catalog .card-preview-panel .card--preview .card__stat--health {
+  min-width: 0;
+  min-height: 0;
+  width: 2.1em;
+  height: 2.45em;
+  padding: 0.2em 0.35em;
+  font-size: inherit;
+}
+
+.fw-catalog .card-preview-panel .card--preview .card__combat-stats {
+  padding: 0 0.55em;
+}
+
+.fw-catalog .card-preview-panel .card--preview .card__footer {
+  padding: 0.45em 0.55em 0.65em;
+}
+
+.fw-catalog .card-preview-panel .card--preview .card__title {
+  font-size: 1.05em;
 }
 
 /* —— Responsive —— */
@@ -473,9 +613,9 @@
     top: auto;
     width: 100%;
     z-index: auto;
+    opacity: 1;
     transform: rotate(var(--cascade-rz));
     filter: none;
-    opacity: 1;
   }
 
   .fw-catalog__cascade-card--active,
@@ -515,12 +655,12 @@
     left: var(--cascade-x);
     top: var(--cascade-y);
     width: clamp(96px, 11vw, 138px);
+    opacity: 1;
     transform:
       translate(-50%, -50%)
       scale(var(--cascade-scale))
       rotate(var(--cascade-rz));
     filter: blur(var(--cascade-blur));
-    opacity: 0.84;
   }
 
   .fw-catalog__cascade-card--active,

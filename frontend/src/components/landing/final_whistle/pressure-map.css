@@ -290,7 +290,10 @@
 
 @media (max-width: 900px) {
   .fw-pressure__board-wrap {
-    grid-template-columns: 1fr;
+    /* grid-template-columns: 1fr;
+     */
+     display: flex;
+     flex-direction: column-reverse;
   }
 
   .fw-pressure__feed {
