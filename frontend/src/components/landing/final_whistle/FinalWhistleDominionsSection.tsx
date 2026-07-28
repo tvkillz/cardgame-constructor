@@ -21,7 +21,7 @@ export default function FinalWhistleDominionsSection() {
   const city = resolvePrimaryCity(active)
 
   return (
-    <section className="fw-dominions" aria-label="Pitch Domains">
+    <section className="fw-dominions" aria-label="Pitch zones">
       <div className="landing-shell fw-dominions__shell">
         <header className="fw-dominions__header">
           <p className="fw-dominions__kicker">MATCHDAY BOARD · SECTION 03</p>
@@ -30,7 +30,7 @@ export default function FinalWhistleDominionsSection() {
         </header>
 
         <div className="fw-dominions__layout">
-          <aside className="fw-dominions__rail" aria-label="Domain lineup">
+          <aside className="fw-dominions__rail" aria-label="Zone lineup">
             {LOCATIONS.map((location, index) => {
               const isActive = location.id === active.id
               const cityCount = location.cities?.length ?? 1
@@ -58,7 +58,7 @@ export default function FinalWhistleDominionsSection() {
               <img
                 key={active.id}
                 src={city.image}
-                alt={`${city.name} domain preview`}
+                alt={`${city.name} pitch zone preview`}
                 className="fw-dominions__image"
                 loading="lazy"
                 decoding="async"
@@ -69,7 +69,7 @@ export default function FinalWhistleDominionsSection() {
             </div>
 
             <div className="fw-dominions__caption">
-              <p className="fw-dominions__channel">Live Domain Feed</p>
+              <p className="fw-dominions__channel">Live Pitch Feed</p>
               <h3>{active.name}</h3>
               <p>{city.description || active.short}</p>
             </div>
@@ -81,7 +81,7 @@ export default function FinalWhistleDominionsSection() {
             <p className="fw-dominions__panel-copy">{active.epithet}</p>
             <dl className="fw-dominions__panel-stats">
               <div>
-                <dt>Domain Code</dt>
+                <dt>Zone Code</dt>
                 <dd>{active.domainId.toUpperCase()}</dd>
               </div>
               <div>
