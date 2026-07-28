@@ -801,7 +801,7 @@
 
 @media (max-width: 900px) {
   .fw-hero__wall-line {
-    transform: translateX(-50%) scale(0.78);
+    transform: translateX(-58.5%) scale(0.78);
     transform-origin: center bottom;
   }
 }
@@ -816,7 +816,7 @@
   .fw-hero__content {
     align-items: center;
     justify-content: center;
-    padding-bottom: clamp(12rem, 36vh, 16rem);
+    padding-bottom: clamp(12rem, 32vh, 9rem);
   }
 
   .fw-hero__lower-third {
@@ -837,8 +837,12 @@
   }
 
   .fw-hero__wall-line {
-    width: 100vw;
-    bottom: 0.75rem;
+    display: none;
+    /* width: 100vw;
+    bottom: 0.75rem; */
+  }
+  .fw-hero__wall-spotlight{
+    display: none;
   }
 
   .fw-hero__wall-slot .fw-hero__wall-card.card {
