@@ -17,6 +17,10 @@
   margin-top: clamp(-1.5rem, -3vw, -0.75rem);
 }
 
+[data-landing-variant='final_whistle'] .landing-flow > .fw-dominions + .fw-programme {
+  margin-top: clamp(-1.5rem, -3vw, -0.75rem);
+}
+
 /* Pressure map section: own stack */
 [data-landing-variant='final_whistle'] .fw-pressure {
   background: var(--fw-pitch);

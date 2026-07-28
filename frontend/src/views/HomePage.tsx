@@ -15,6 +15,10 @@ const GameModelSection = dynamic(
   () => import('@/components/GameModelSection/GameModelSection'),
   { ssr: true },
 )
+const FinalWhistleGameModelSection = dynamic(
+  () => import('@/components/landing/final_whistle/FinalWhistleGameModelSection'),
+  { ssr: true },
+)
 
 const CollectionSection = dynamic(
   () => import('@/components/CollectionSection/CollectionSection'),
@@ -45,7 +49,7 @@ export default function HomePage() {
         <LandingHero />
         <LandingLocations />
         {isFinalWhistle ? <FinalWhistleDominionsSection /> : <DominionsSection />}
-        <GameModelSection />
+        {isFinalWhistle ? <FinalWhistleGameModelSection /> : <GameModelSection />}
         <CollectionSection />
         <PathwaysSection />
         <FaqSection />

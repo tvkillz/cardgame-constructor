@@ -20,7 +20,7 @@
   color: var(--text-primary);
 }
 
-[data-landing-variant='final_whistle'] :is(.landing-section-title, .locations__kicker, .fw-pressure__title) {
+[data-landing-variant='final_whistle'] :is(.landing-section-title, .locations__kicker, .fw-pressure__title, .fw-programme__title) {
   font-family: var(--font-heading, var(--font-fantasy));
   font-weight: 400;
   letter-spacing: 0.1em;
@@ -32,6 +32,7 @@
   text-shadow: none;
   filter: none;
   animation: none;
+  text-align: left;
 }
 
 [data-landing-variant='final_whistle'] .landing-section-lead {
