@@ -767,6 +767,7 @@
 .fw-hero__wall-slot:hover .fw-hero__wall-shadow {
   opacity: 0.35;
   transform: translateX(-50%) scale(0.75);
+  z-index: 1000;
 }
 
 .fw-hero__wall-slot .fw-hero__wall-card.card {
