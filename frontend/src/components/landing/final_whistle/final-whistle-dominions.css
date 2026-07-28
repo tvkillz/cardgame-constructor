@@ -1,0 +1,276 @@
+.fw-dominions {
+  position: relative;
+  background: linear-gradient(180deg, #0d1713 0%, #0a1210 50%, #0c1512 100%);
+  overflow: hidden;
+}
+
+.fw-dominions::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 20% 0%, rgba(122, 171, 120, 0.12), transparent 46%),
+    radial-gradient(circle at 80% 100%, rgba(232, 201, 106, 0.08), transparent 50%);
+}
+
+.fw-dominions__shell {
+  position: relative;
+  z-index: 1;
+  padding-block: clamp(3rem, 8vw, 5rem);
+}
+
+.fw-dominions__header {
+  max-width: 100%;
+  margin-bottom: clamp(1.2rem, 3.2vw, 2rem);
+}
+
+.fw-dominions__kicker {
+  margin: 0 0 0.55rem;
+  font-family: var(--font-ui);
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #7aab78;
+}
+
+.fw-dominions__title {
+  margin-bottom: 0.7rem;
+}
+
+.fw-dominions__lead {
+  margin: 0;
+}
+
+.fw-dominions__layout {
+  display: grid;
+  grid-template-columns: minmax(180px, 0.55fr) minmax(0, 1.35fr) minmax(220px, 0.7fr);
+  gap: clamp(0.85rem, 2.4vw, 1.35rem);
+  align-items: stretch;
+}
+
+.fw-dominions__rail {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.fw-dominions__chip {
+  position: relative;
+  width: 100%;
+  text-align: left;
+  padding: 0.7rem 0.75rem;
+  border: 1px solid rgba(61, 122, 74, 0.38);
+  background: rgba(10, 18, 16, 0.78);
+  color: rgba(242, 240, 232, 0.9);
+  display: grid;
+  gap: 0.12rem;
+  cursor: pointer;
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.fw-dominions__chip::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: rgba(122, 171, 120, 0.5);
+}
+
+.fw-dominions__chip:hover,
+.fw-dominions__chip.is-active {
+  border-color: rgba(232, 201, 106, 0.62);
+  box-shadow: 0 0 16px color-mix(in srgb, var(--chip-glow, #e8c96a) 30%, transparent);
+  transform: translateX(2px);
+}
+
+.fw-dominions__chip-index {
+  font-family: var(--font-heading, var(--font-fantasy));
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  color: #e8c96a;
+}
+
+.fw-dominions__chip-name {
+  font-family: var(--font-heading, var(--font-fantasy));
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.fw-dominions__chip-meta {
+  font-family: var(--font-ui);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(242, 240, 232, 0.66);
+}
+
+.fw-dominions__board {
+  border: 1px solid rgba(61, 122, 74, 0.4);
+  background: rgba(10, 18, 16, 0.8);
+  overflow: hidden;
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.44),
+    inset 0 0 0 1px rgba(232, 201, 106, 0.1);
+  display: grid;
+  grid-template-rows: 1fr auto;
+}
+
+.fw-dominions__screen {
+  position: relative;
+  min-height: clamp(280px, 36vw, 430px);
+  overflow: hidden;
+}
+
+.fw-dominions__image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: fw-dom-image-in 0.45s ease;
+}
+
+@keyframes fw-dom-image-in {
+  from {
+    opacity: 0.5;
+    transform: scale(1.02);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.fw-dominions__image-scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(10, 18, 16, 0.18), rgba(10, 18, 16, 0.48)),
+    radial-gradient(circle at 50% 120%, rgba(61, 122, 74, 0.28), transparent 55%);
+}
+
+.fw-dominions__chalk {
+  position: absolute;
+  width: 34%;
+  height: 44%;
+  border: 1px solid rgba(242, 240, 232, 0.22);
+  border-radius: 50%;
+  opacity: 0.6;
+}
+
+.fw-dominions__chalk--left {
+  left: -17%;
+  top: 18%;
+}
+
+.fw-dominions__chalk--right {
+  right: -17%;
+  bottom: 14%;
+}
+
+.fw-dominions__caption {
+  padding: 0.9rem 1rem 1rem;
+  border-top: 1px solid rgba(61, 122, 74, 0.34);
+  background: linear-gradient(180deg, rgba(10, 18, 16, 0.4), rgba(10, 18, 16, 0.85));
+}
+
+.fw-dominions__caption h3 {
+  margin: 0.2rem 0 0.35rem;
+  font-family: var(--font-heading, var(--font-fantasy));
+  font-size: clamp(1rem, 2.2vw, 1.35rem);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #e8c96a;
+}
+
+.fw-dominions__caption p {
+  margin: 0;
+  color: rgba(242, 240, 232, 0.78);
+  font-family: var(--font-ui);
+  line-height: 1.6;
+}
+
+.fw-dominions__channel {
+  margin: 0;
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #c4785a;
+}
+
+.fw-dominions__panel {
+  border: 1px solid rgba(61, 122, 74, 0.38);
+  background: rgba(10, 18, 16, 0.84);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.fw-dominions__panel-label {
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #7aab78;
+}
+
+.fw-dominions__panel-title {
+  margin: 0;
+  font-family: var(--font-heading, var(--font-fantasy));
+  font-size: clamp(1.15rem, 2.3vw, 1.5rem);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #f2f0e8;
+}
+
+.fw-dominions__panel-copy {
+  margin: 0;
+  font-family: var(--font-ui);
+  color: rgba(242, 240, 232, 0.76);
+  line-height: 1.6;
+}
+
+.fw-dominions__panel-stats {
+  margin: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.fw-dominions__panel-stats div {
+  border-top: 1px solid rgba(61, 122, 74, 0.34);
+  padding-top: 0.5rem;
+}
+
+.fw-dominions__panel-stats dt {
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: #7aab78;
+}
+
+.fw-dominions__panel-stats dd {
+  margin: 0.2rem 0 0;
+  font-family: var(--font-heading, var(--font-fantasy));
+  font-size: 0.88rem;
+  letter-spacing: 0.08em;
+  color: #f2f0e8;
+}
+
+@media (max-width: 980px) {
+  .fw-dominions__layout {
+    grid-template-columns: 1fr;
+  }
+
+  .fw-dominions__rail {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
