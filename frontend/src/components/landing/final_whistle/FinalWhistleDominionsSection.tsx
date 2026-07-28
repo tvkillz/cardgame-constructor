@@ -1,99 +1,55 @@
-'use client'
-
-import { useMemo, useState, type CSSProperties } from 'react'
 import { LOCATIONS, appConfig } from '@/config'
-import type { LocationConfig } from '@/config/schema'
+import FinalWhistleZoneSlot from './FinalWhistleZoneSlot'
 import './final-whistle-dominions.css'
 
-function resolvePrimaryCity(location: LocationConfig) {
-  return location.cities?.[0] ?? { name: location.name, description: location.short, image: location.image }
-}
+const DOMAIN_ORDER = ['striker', 'midfield', 'box', 'backline'] as const
+
+const zones = [...LOCATIONS].sort(
+  (a, b) =>
+    DOMAIN_ORDER.indexOf(a.domainId as (typeof DOMAIN_ORDER)[number]) -
+    DOMAIN_ORDER.indexOf(b.domainId as (typeof DOMAIN_ORDER)[number]),
+)
 
 export default function FinalWhistleDominionsSection() {
-  const [activeId, setActiveId] = useState(LOCATIONS[0]?.id ?? '')
-  const active = useMemo(
-    () => LOCATIONS.find((location) => location.id === activeId) ?? LOCATIONS[0],
-    [activeId],
-  )
-  const copy = appConfig.descriptions.dominions
-
-  if (!active) return null
-  const city = resolvePrimaryCity(active)
+  const dominions = appConfig.descriptions.dominions
+  const locationsCopy = appConfig.descriptions.locations
 
   return (
     <section className="fw-dominions" aria-label="Pitch zones">
       <div className="landing-shell fw-dominions__shell">
-        <header className="fw-dominions__header">
-          <p className="fw-dominions__kicker">MATCHDAY BOARD · SECTION 03</p>
-          <h2 className="landing-section-title fw-dominions__title">{copy.title}</h2>
-          <p className="landing-section-lead fw-dominions__lead">{copy.description}</p>
-        </header>
-
         <div className="fw-dominions__layout">
-          <aside className="fw-dominions__rail" aria-label="Zone lineup">
-            {LOCATIONS.map((location, index) => {
-              const isActive = location.id === active.id
-              const cityCount = location.cities?.length ?? 1
-              return (
-                <button
-                  key={location.id}
-                  type="button"
-                  className={`fw-dominions__chip${isActive ? ' is-active' : ''}`}
-                  style={{ ['--chip-glow' as string]: location.glowColor } as CSSProperties}
-                  onClick={() => setActiveId(location.id)}
-                  onMouseEnter={() => setActiveId(location.id)}
-                  onFocus={() => setActiveId(location.id)}
-                  aria-pressed={isActive}
-                >
-                  <span className="fw-dominions__chip-index">{String(index + 1).padStart(2, '0')}</span>
-                  <span className="fw-dominions__chip-name">{location.name}</span>
-                  <span className="fw-dominions__chip-meta">{cityCount} match zones</span>
-                </button>
-              )
-            })}
-          </aside>
+          <aside className="fw-dominions__panel">
+            <p className="fw-dominions__kicker">MATCHDAY BOARD · SECTION 03</p>
+            <h2 className="landing-section-title fw-dominions__title">{dominions.title}</h2>
+            <p className="landing-section-lead fw-dominions__lead">{dominions.description}</p>
 
-          <article className="fw-dominions__board">
-            <div className="fw-dominions__screen">
-              <img
-                key={active.id}
-                src={city.image}
-                alt={`${city.name} pitch zone preview`}
-                className="fw-dominions__image"
-                loading="lazy"
-                decoding="async"
-              />
-              <div className="fw-dominions__image-scrim" aria-hidden="true" />
-              {/* <div className="fw-dominions__chalk fw-dominions__chalk--left" aria-hidden="true" /> */}
-              {/* <div className="fw-dominions__chalk fw-dominions__chalk--right" aria-hidden="true" /> */}
+            <div className="fw-dominions__panel-body">
+              {locationsCopy.paragraphs.map((html) => (
+                <p
+                  key={html.slice(0, 32)}
+                  className="fw-dominions__panel-text"
+                  dangerouslySetInnerHTML={{ __html: html }}
+                />
+              ))}
             </div>
 
-            <div className="fw-dominions__caption">
-              <p className="fw-dominions__channel">Live Pitch Feed</p>
-              <h3>{active.name}</h3>
-              <p>{city.description || active.short}</p>
-            </div>
-          </article>
-
-          <aside className="fw-dominions__panel" aria-live="polite">
-            <p className="fw-dominions__panel-label">Shape Notes</p>
-            <h3 className="fw-dominions__panel-title">{active.categoryLabel}</h3>
-            <p className="fw-dominions__panel-copy">{active.epithet}</p>
             <dl className="fw-dominions__panel-stats">
               <div>
-                <dt>Zone Code</dt>
-                <dd>{active.domainId.toUpperCase()}</dd>
+                <dt>Pitch Zones</dt>
+                <dd>04</dd>
               </div>
               <div>
-                <dt>Zone Focus</dt>
-                <dd>{active.short}</dd>
-              </div>
-              <div>
-                <dt>City Rotation</dt>
-                <dd>{active.cities?.length ?? 1}</dd>
+                <dt>Match Zones</dt>
+                <dd>{zones.reduce((sum, zone) => sum + (zone.cities?.length ?? 1), 0)}</dd>
               </div>
             </dl>
           </aside>
+
+          <div className="fw-dominions__zones" role="list" aria-label="All pitch zones">
+            {zones.map((location, index) => (
+              <FinalWhistleZoneSlot key={location.id} location={location} zoneIndex={index} />
+            ))}
+          </div>
         </div>
       </div>
     </section>
