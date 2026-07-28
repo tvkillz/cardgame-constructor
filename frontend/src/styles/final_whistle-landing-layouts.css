@@ -1,4 +1,4 @@
-/* Final Whistle — hard seam between hero and locations (no bleed / overlap) */
+/* Final Whistle — hard seam between hero and section 2 (no bleed / overlap) */
 
 [data-landing-variant='final_whistle'] {
   --locations-bg-bleed-top: 0;
@@ -9,72 +9,19 @@
   padding-bottom: clamp(2.5rem, 6vw, 4rem);
 }
 
-[data-landing-variant='final_whistle'] .landing-flow > .fw-hero + .locations {
-  margin-top: 0;
+[data-landing-variant='final_whistle'] .landing-flow > .fw-hero + .fw-pressure {
+  margin-top: clamp(-1.5rem, -3vw, -0.75rem);
 }
 
-/* Locations: own stack — no top fade into hero */
-[data-landing-variant='final_whistle'] .locations {
-  background: #0a1210;
-  -webkit-mask-image: none;
-  mask-image: none;
+/* Pressure map section: own stack */
+[data-landing-variant='final_whistle'] .fw-pressure {
+  background: var(--fw-pitch);
   overflow: hidden;
   isolation: isolate;
   position: relative;
   z-index: 1;
 }
 
-[data-landing-variant='final_whistle'] .locations__bg {
-  top: 0;
-  -webkit-mask-image: linear-gradient(
-    to bottom,
-    black 0%,
-    black 76%,
-    rgba(0, 0, 0, 0.55) 86%,
-    rgba(0, 0, 0, 0.2) 94%,
-    transparent 100%
-  );
-  mask-image: linear-gradient(
-    to bottom,
-    black 0%,
-    black 76%,
-    rgba(0, 0, 0, 0.55) 86%,
-    rgba(0, 0, 0, 0.2) 94%,
-    transparent 100%
-  );
-}
-
-[data-landing-variant='final_whistle'] .locations__bg-image {
-  transform: none;
-}
-
-[data-landing-variant='final_whistle'] .locations__bg-scrim {
-  background:
-    radial-gradient(
-      ellipse at 50% 0%,
-      rgba(61, 122, 74, 0.08) 0%,
-      transparent 55%
-    ),
-    linear-gradient(
-      180deg,
-      rgba(10, 18, 16, 0.92) 0%,
-      rgba(10, 18, 16, 0.72) 42%,
-      rgba(10, 18, 16, 0.88) 100%
-    );
-}
-
-[data-landing-variant='final_whistle'] .locations .landing-shell {
-  margin-top: clamp(4rem, 10vw, 7rem);
-}
-
-[data-landing-variant='final_whistle'] .locations__preview {
-  border-color: rgba(61, 122, 74, 0.35);
-}
-
-[data-landing-variant='final_whistle'] .locations__item {
-  border-color: rgba(61, 122, 74, 0.28);
-}
-
-[data-landing-variant='final_whistle'] .locations__item--active {
-  border-color: rgba(232, 201, 106, 0.45);
+[data-landing-variant='final_whistle'] .fw-pressure .landing-shell {
+  /* margin-top: clamp(4rem, 10vw, 7rem); */
 }

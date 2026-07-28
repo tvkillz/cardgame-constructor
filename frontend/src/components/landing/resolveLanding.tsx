@@ -2,6 +2,7 @@ import Header from '@/components/Header/Header'
 import Hero from '@/components/Hero/Hero'
 import FinalWhistleHeader from '@/components/landing/final_whistle/FinalWhistleHeader'
 import FinalWhistleHero from '@/components/landing/final_whistle/FinalWhistleHero'
+import FinalWhistlePressureMap from '@/components/landing/final_whistle/FinalWhistlePressureMap'
 import HelixHeader from '@/components/landing/helix/HelixHeader'
 import HelixHero from '@/components/landing/helix/HelixHero'
 import HelixLocations from '@/components/landing/helix/HelixLocations'
@@ -28,6 +29,7 @@ export function LandingHero() {
 }
 
 export function LandingLocations() {
+  if (appConfig.landing?.variant === 'final_whistle') return <FinalWhistlePressureMap />
   if (appConfig.landing?.variant === 'helix') return <HelixLocations />
   return <LocationsSection />
 }
