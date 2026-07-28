@@ -145,6 +145,7 @@
 }
 
 .fw-pressure__center-circle {
+  display: none;
   width: 32%;
   aspect-ratio: 1;
   left: 50%;

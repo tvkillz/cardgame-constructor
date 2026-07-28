@@ -283,7 +283,7 @@
   min-height: 100svh;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  overflow: visible;
   isolation: isolate;
   background: #0a1210;
 }
@@ -337,6 +337,7 @@
   inset: 0;
   z-index: 2;
   pointer-events: none;
+  overflow: hidden;
 }
 
 .fw-hero__pitch-stripes {
@@ -655,7 +656,7 @@
   z-index: 20;
   height: clamp(220px, 38vh, 380px);
   pointer-events: none;
-  /* overflow: hidden; */
+  overflow: visible;
 }
 
 .fw-hero__wall-pitch {
@@ -669,6 +670,7 @@
 }
 
 .fw-hero__wall-circle {
+  display: none;
   position: absolute;
   left: 50%;
   bottom: -42%;
