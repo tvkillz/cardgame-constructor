@@ -29,6 +29,18 @@
   margin-top: clamp(-1.5rem, -3vw, -0.75rem);
 }
 
+[data-landing-variant='final_whistle'] .landing-flow > .fw-transfer + .fw-faq {
+  margin-top: clamp(-1.5rem, -3vw, -0.75rem);
+}
+
+[data-landing-variant='final_whistle'] .landing-flow > .fw-faq + .fw-shape {
+  margin-top: clamp(-1.5rem, -3vw, -0.75rem);
+}
+
+[data-landing-variant='final_whistle'] .landing-flow + .site-footer {
+  margin-top: 0;
+}
+
 /* Pressure map section: own stack */
 [data-landing-variant='final_whistle'] .fw-pressure {
   background: var(--fw-pitch);

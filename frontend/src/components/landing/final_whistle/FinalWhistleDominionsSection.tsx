@@ -1,4 +1,7 @@
+'use client'
+
 import { LOCATIONS, appConfig } from '@/config'
+import { useFwSectionReveal } from '@/hooks/useFwSectionReveal'
 import FinalWhistleZoneSlot from './FinalWhistleZoneSlot'
 import './final-whistle-dominions.css'
 
@@ -11,11 +14,16 @@ const zones = [...LOCATIONS].sort(
 )
 
 export default function FinalWhistleDominionsSection() {
+  const { ref, visible } = useFwSectionReveal()
   const dominions = appConfig.descriptions.dominions
   const locationsCopy = appConfig.descriptions.locations
 
   return (
-    <section className="fw-dominions" aria-label="Pitch zones">
+    <section
+      ref={ref}
+      className={`fw-dominions${visible ? ' visible' : ''}`}
+      aria-label="Pitch zones"
+    >
       <div className="landing-shell fw-dominions__shell">
         <div className="fw-dominions__layout">
           <aside className="fw-dominions__panel">

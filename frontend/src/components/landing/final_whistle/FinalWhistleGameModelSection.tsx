@@ -1,16 +1,24 @@
+'use client'
+
 import type { CSSProperties } from 'react'
 import { appConfig } from '@/config'
+import { useFwSectionReveal } from '@/hooks/useFwSectionReveal'
 import './final-whistle-gamemodel.css'
 
 const PAGE_MARKS = ['01 · KICKOFF', '02 · BUILD', '03 · CLIMB']
 
 export default function FinalWhistleGameModelSection() {
+  const { ref, visible } = useFwSectionReveal()
   const gameModel = appConfig.descriptions.gameModel
 
   if (!gameModel?.pillars?.length) return null
 
   return (
-    <section className="fw-programme" aria-label="Matchday programme">
+    <section
+      ref={ref}
+      className={`fw-programme${visible ? ' visible' : ''}`}
+      aria-label="Matchday programme"
+    >
       <div className="landing-shell fw-programme__shell">
         <header className="fw-programme__header">
           <p className="fw-programme__kicker">MATCHDAY PROGRAMME · SECTION 04</p>

@@ -42,6 +42,16 @@ const PathwaysSection = dynamic(
 
 const FaqSection = dynamic(() => import('@/components/FaqSection/FaqSection'), { ssr: true })
 
+const FinalWhistleFaqSection = dynamic(
+  () => import('@/components/landing/final_whistle/FinalWhistleFaqSection'),
+  { ssr: true },
+)
+
+const FinalWhistleShapeSection = dynamic(
+  () => import('@/components/landing/final_whistle/FinalWhistleShapeSection'),
+  { ssr: true },
+)
+
 const FinalCtaSection = dynamic(
   () => import('@/components/FinalCtaSection/FinalCtaSection'),
   { ssr: true },
@@ -62,8 +72,8 @@ export default function HomePage() {
         {isFinalWhistle ? <FinalWhistleGameModelSection /> : <GameModelSection />}
         {isFinalWhistle ? <FinalWhistleCatalogSection /> : <CollectionSection />}
         {isFinalWhistle ? <FinalWhistlePathwaysSection /> : <PathwaysSection />}
-        <FaqSection />
-        <FinalCtaSection />
+        {isFinalWhistle ? <FinalWhistleFaqSection /> : <FaqSection />}
+        {isFinalWhistle ? <FinalWhistleShapeSection /> : <FinalCtaSection />}
       </main>
       <Footer />
     </div>

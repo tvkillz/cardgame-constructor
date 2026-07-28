@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { useMemo, useState } from 'react'
 import { LOCATIONS, appConfig } from '@/config'
+import { useFwSectionReveal } from '@/hooks/useFwSectionReveal'
 import './pressure-map.css'
 
 const DOMAIN_ORDER = ['striker', 'midfield', 'box', 'backline'] as const
@@ -35,6 +36,7 @@ const DOMAIN_META: Record<string, { role: string; feed: string; tempo: string; i
 }
 
 export default function FinalWhistlePressureMap() {
+  const { ref, visible } = useFwSectionReveal()
   const domains = useMemo(() => {
     return [...LOCATIONS]
       .sort(
@@ -50,7 +52,11 @@ export default function FinalWhistlePressureMap() {
   const activeMeta = DOMAIN_META[active.domainId] ?? DOMAIN_META.midfield
 
   return (
-    <section className="fw-pressure" aria-label="Legacy Pressure Map">
+    <section
+      ref={ref}
+      className={`fw-pressure${visible ? ' visible' : ''}`}
+      aria-label="Legacy Pressure Map"
+    >
       <div className="landing-shell fw-pressure__shell">
         <header className="fw-pressure__header">
           <p className="fw-pressure__eyebrow">LIVE TACTIC FEED · 73:19</p>

@@ -4,6 +4,7 @@ import { useCallback, useMemo, useRef, useState, type CSSProperties, type Pointe
 import CardPreviewPanel from '@/components/cards/CardPreviewPanel'
 import '@/components/CardPlaceholder/styles.css'
 import { appConfig } from '@/config'
+import { useFwSectionReveal } from '@/hooks/useFwSectionReveal'
 import { DOMAIN_LABEL, type CardDomain } from '@/lib/cards/domains'
 import type { CardDisplayProps } from '@/components/CardPlaceholder/Card'
 import type { CollectionCardDisplay } from '@/config/schema'
@@ -65,6 +66,7 @@ function toCardProps(card: CollectionCardDisplay): CardDisplayProps {
 }
 
 export default function FinalWhistleCatalogSection() {
+  const { ref, visible } = useFwSectionReveal()
   const collection = appConfig.descriptions.collection
   const cards = collection?.cards ?? []
   const stageRef = useRef<HTMLDivElement>(null)
@@ -102,7 +104,11 @@ export default function FinalWhistleCatalogSection() {
   const domainLabel = DOMAIN_LABEL[displayProps.domain as CardDomain] ?? displayProps.domain
 
   return (
-    <section className="fw-catalog" aria-label="Final Whistle catalog">
+    <section
+      ref={ref}
+      className={`fw-catalog${visible ? ' visible' : ''}`}
+      aria-label="Final Whistle catalog"
+    >
       <div className="fw-catalog__bg" aria-hidden="true">
         {collection.backgroundImage ? (
           <img

@@ -1,13 +1,17 @@
+'use client'
+
 import type { CSSProperties } from 'react'
 import ProtectedNavButton from '@/components/auth/ProtectedNavButton'
 import { Button } from '@/components/ui/Button/Button'
 import { appConfig } from '@/config'
+import { useFwSectionReveal } from '@/hooks/useFwSectionReveal'
 import { routeRequiresAuth } from '@/lib/auth/guards'
 import './final-whistle-pathways.css'
 
 const OPS_MARKS = ['01', '02', '03', '04', '05', '06']
 
 export default function FinalWhistlePathwaysSection() {
+  const { ref, visible } = useFwSectionReveal()
   const pathways = appConfig.descriptions.pathways
 
   if (!pathways?.features?.length) return null
@@ -16,7 +20,11 @@ export default function FinalWhistlePathwaysSection() {
   const marketHref = marketCta ? appConfig.domain.routes[marketCta.route] : '#'
 
   return (
-    <section className="fw-transfer" aria-label="Collect, trade, and shape your squad">
+    <section
+      ref={ref}
+      className={`fw-transfer${visible ? ' visible' : ''}`}
+      aria-label="Collect, trade, and shape your squad"
+    >
       <div className="landing-shell fw-transfer__shell">
         <header className="fw-transfer__header">
           <p className="fw-transfer__kicker">TRANSFER WINDOW · SECTION 06</p>
