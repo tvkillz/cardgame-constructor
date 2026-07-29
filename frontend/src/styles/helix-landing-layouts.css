@@ -1225,6 +1225,7 @@
   transform: translateY(-1px);
 }
 
+
 @media (max-width: 719px) {
   [data-landing-variant='helix'] .final-cta__launch {
     grid-template-columns: auto minmax(0, 1fr);
@@ -1248,4 +1249,11 @@
     justify-self: stretch;
     width: 100%;
   }
+}
+
+@media (max-width: 400px) {
+  [data-landing-variant='helix'] .card__ability-text {
+  font-size: 0.7rem !important
+}
+
 }
