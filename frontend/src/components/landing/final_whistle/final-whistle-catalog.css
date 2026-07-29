@@ -676,6 +676,12 @@
   }
 }
 
+@media (hover: none), (pointer: coarse) {
+  .fw-catalog__cascade-card {
+    touch-action: manipulation;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .fw-catalog__space,
   .fw-catalog__hero,

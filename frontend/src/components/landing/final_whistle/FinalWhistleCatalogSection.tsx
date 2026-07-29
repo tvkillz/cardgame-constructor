@@ -1,6 +1,14 @@
 'use client'
 
-import { useCallback, useMemo, useRef, useState, type CSSProperties, type PointerEvent } from 'react'
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type CSSProperties,
+  type PointerEvent,
+} from 'react'
 import CardPreviewPanel from '@/components/cards/CardPreviewPanel'
 import '@/components/CardPlaceholder/styles.css'
 import { appConfig } from '@/config'
@@ -11,6 +19,10 @@ import type { CollectionCardDisplay } from '@/config/schema'
 import './final-whistle-catalog.css'
 
 const DEFAULT_HERO_SLUG = 'striker_card_02_far_post_ghost'
+
+function prefersFinePointerHover() {
+  return window.matchMedia('(hover: hover) and (pointer: fine)').matches
+}
 
 type CascadeLayout = {
   x: number
@@ -70,6 +82,7 @@ export default function FinalWhistleCatalogSection() {
   const collection = appConfig.descriptions.collection
   const cards = collection?.cards ?? []
   const stageRef = useRef<HTMLDivElement>(null)
+  const [selectedIndex, setSelectedIndex] = useState(0)
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
   const [parallax, setParallax] = useState({ x: 0, y: 0 })
 
@@ -78,7 +91,11 @@ export default function FinalWhistleCatalogSection() {
     return index >= 0 ? index : 0
   }, [cards])
 
-  const displayIndex = hoveredIndex ?? defaultIndex
+  useEffect(() => {
+    setSelectedIndex(defaultIndex)
+  }, [defaultIndex])
+
+  const displayIndex = hoveredIndex ?? selectedIndex
   const displayCard = cards[displayIndex] ?? cards[0]
   const displayProps = displayCard ? toCardProps(displayCard) : null
 
@@ -220,7 +237,7 @@ export default function FinalWhistleCatalogSection() {
                 if (!layout) return null
 
                 const cardProps = toCardProps(card)
-                const isActive = displayIndex === index
+                const isActive = selectedIndex === index
 
                 return (
                   <button
@@ -240,8 +257,13 @@ export default function FinalWhistleCatalogSection() {
                         '--cascade-glow': card.glowColor,
                       } as CSSProperties
                     }
-                    onMouseEnter={() => setHoveredIndex(index)}
-                    onFocus={() => setHoveredIndex(index)}
+                    onClick={() => setSelectedIndex(index)}
+                    onMouseEnter={() => {
+                      if (prefersFinePointerHover()) setHoveredIndex(index)
+                    }}
+                    onFocus={() => {
+                      if (prefersFinePointerHover()) setHoveredIndex(index)
+                    }}
                     aria-label={`Preview ${card.title}`}
                     aria-pressed={isActive}
                   >
