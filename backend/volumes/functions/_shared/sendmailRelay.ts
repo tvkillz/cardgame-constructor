@@ -27,6 +27,8 @@ const DOMAIN_TO_SITE: Record<string, string> = {
   'helixsignal.online': 'helix',
   'www.helixsignal.online': 'helix',
   'helix.voidborn.fun': 'helix',
+  'finalwhistle.games': 'final_whistle',
+  'www.finalwhistle.games': 'final_whistle',
 }
 
 const AUTH_SUFFIX_TO_SITE: Record<string, string> = {

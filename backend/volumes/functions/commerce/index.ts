@@ -41,27 +41,43 @@ function envValue(...keys: string[]): string | undefined {
 
 function invoiceSellerBlock(siteId?: string | null) {
   const normalized = (siteId || 'voidborn').trim().toLowerCase()
-  const sitePrefix =
-    !normalized || normalized === 'voidborn'
-      ? 'INVOICE_COMPANY_'
-      : `INVOICE_COMPANY_${normalized.toUpperCase()}_`
+  const isVoidborn = normalized === 'voidborn'
+  const sitePrefix = isVoidborn
+    ? 'INVOICE_COMPANY_'
+    : `INVOICE_COMPANY_${normalized.toUpperCase()}_`
 
   const defaultEmail =
     normalized === 'iyashikei'
       ? 'play@komorebi.club'
       : normalized === 'helix'
         ? 'support@helixsignal.online'
-        : 'support@voidborn.fun'
+        : normalized === 'final_whistle'
+          ? 'support@finalwhistle.games'
+          : 'support@voidborn.fun'
+
+  const testDefaults = {
+    companyName: 'Test LTD',
+    companyNumber: '00000000',
+    address: '123 Example Street, Testville, TE1 1ST, United Kingdom',
+    email: defaultEmail,
+  }
+
+  // Non-voidborn sites must never inherit voidborn production seller (INVOICE_COMPANY_* globals).
+  if (!isVoidborn) {
+    return {
+      companyName: envValue(`${sitePrefix}NAME`) ?? testDefaults.companyName,
+      companyNumber: envValue(`${sitePrefix}NUMBER`) ?? testDefaults.companyNumber,
+      address: envValue(`${sitePrefix}ADDRESS`) ?? testDefaults.address,
+      email: envValue(`${sitePrefix}EMAIL`) ?? testDefaults.email,
+    }
+  }
 
   return {
-    companyName:
-      envValue(`${sitePrefix}NAME`, 'INVOICE_COMPANY_NAME') ?? 'Test LTD',
-    companyNumber:
-      envValue(`${sitePrefix}NUMBER`, 'INVOICE_COMPANY_NUMBER') ?? '00000000',
+    companyName: envValue(`${sitePrefix}NAME`, 'INVOICE_COMPANY_NAME') ?? testDefaults.companyName,
+    companyNumber: envValue(`${sitePrefix}NUMBER`, 'INVOICE_COMPANY_NUMBER') ?? testDefaults.companyNumber,
     address:
-      envValue(`${sitePrefix}ADDRESS`, 'INVOICE_COMPANY_ADDRESS') ??
-      '123 Example Street, Testville, TE1 1ST, United Kingdom',
-    email: envValue(`${sitePrefix}EMAIL`, 'INVOICE_COMPANY_EMAIL') ?? defaultEmail,
+      envValue(`${sitePrefix}ADDRESS`, 'INVOICE_COMPANY_ADDRESS') ?? testDefaults.address,
+    email: envValue(`${sitePrefix}EMAIL`, 'INVOICE_COMPANY_EMAIL') ?? testDefaults.email,
   }
 }
 
@@ -183,7 +199,13 @@ async function sendOrderInvoice(
     return { sent: false, reason: 'no_email' }
   }
 
-  let siteId = userData?.user ? siteIdFromAuthEmail(userData.user.email) : null
+  let siteId: string | null = null
+  const orderMeta = (order.metadata ?? {}) as Record<string, unknown>
+  if (typeof orderMeta.site_id === 'string' && orderMeta.site_id.trim()) {
+    siteId = orderMeta.site_id.trim()
+  }
+
+  if (!siteId && userData?.user) siteId = siteIdFromAuthEmail(userData.user.email)
   if (!siteId && userData?.user) {
     const metaSite = userData.user.user_metadata?.site_id
     if (typeof metaSite === 'string' && metaSite.trim()) {
@@ -736,6 +758,7 @@ async function createPendingOrder(
   userId: string,
   resolved: ResolvedCheckout,
   receiptEmail: string | null,
+  siteId: string,
 ): Promise<{ orderId: string; orderNumber: string } | { error: string }> {
   const { credits, totalCents, currency, orderItems } = resolved
 
@@ -752,6 +775,7 @@ async function createPendingOrder(
         credits_granted: credits,
         receipt_email: receiptEmail,
         metadata: {
+          site_id: siteId,
           product_id: orderItems[0]?.productId ?? null,
           card_id: orderItems[0]?.cardId ?? null,
           checkout_flow: 'internal',
@@ -1772,7 +1796,7 @@ Deno.serve(async (req) => {
     const { data: userData } = await admin.auth.admin.getUserById(userId)
     const receiptEmail = userData.user ? displayEmailFromUser(userData.user) : null
 
-    const orderResult = await createPendingOrder(admin, userId, resolvedResult.resolved, receiptEmail)
+    const orderResult = await createPendingOrder(admin, userId, resolvedResult.resolved, receiptEmail, siteId)
     if ('error' in orderResult) return json({ error: orderResult.error }, 500)
 
     const { resolved } = resolvedResult

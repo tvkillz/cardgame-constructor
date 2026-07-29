@@ -47,7 +47,8 @@ cmd_install() {
 cmd_configure() {
   require_root
   write_htpasswd
-  log "Generating HTTP nginx config from registry…"
+  log "Generating HTTP nginx config from registry${NGINX_SITES:+ (sites: $NGINX_SITES)}…"
+  # Dedicated VPS example: NGINX_SITES=final_whistle sudo -E bash deploy/scripts/setup-vps.sh configure
   node "$FRONTEND_DIR/deploy/scripts/generate-nginx.mjs" --install
   ln -sf "$NGINX_AVAILABLE" "$NGINX_ENABLED"
   rm -f /etc/nginx/sites-enabled/default

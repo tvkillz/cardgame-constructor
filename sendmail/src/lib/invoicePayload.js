@@ -2,30 +2,49 @@ const { getBrand, parseSiteIdFromEmail, siteIdFromAuthSuffix } = require('./site
 
 function defaultSeller(siteId) {
   const normalized = String(siteId || 'voidborn').trim().toLowerCase() || 'voidborn';
-  const prefix =
-    normalized === 'voidborn' ? 'INVOICE_COMPANY_' : `INVOICE_COMPANY_${normalized.toUpperCase()}_`;
+  const isVoidborn = normalized === 'voidborn';
+  const prefix = isVoidborn ? 'INVOICE_COMPANY_' : `INVOICE_COMPANY_${normalized.toUpperCase()}_`;
 
   const fallbackEmail =
     normalized === 'iyashikei'
       ? 'play@komorebi.club'
       : normalized === 'helix'
         ? 'support@helixsignal.online'
-        : 'support@voidborn.fun';
+        : normalized === 'final_whistle'
+          ? 'support@finalwhistle.games'
+          : 'support@voidborn.fun';
+
+  const testDefaults = {
+    companyName: 'Test LTD',
+    companyNumber: '00000000',
+    address: '123 Example Street, Testville, TE1 1ST, United Kingdom',
+    email: fallbackEmail,
+  };
+
+  // Non-voidborn sites must never inherit voidborn production seller (INVOICE_COMPANY_* globals).
+  if (!isVoidborn) {
+    return {
+      companyName: process.env[`${prefix}NAME`] || testDefaults.companyName,
+      companyNumber: process.env[`${prefix}NUMBER`] || testDefaults.companyNumber,
+      address: process.env[`${prefix}ADDRESS`] || testDefaults.address,
+      email: process.env[`${prefix}EMAIL`] || testDefaults.email,
+    };
+  }
 
   return {
     companyName:
-      process.env[`${prefix}NAME`] || process.env.INVOICE_COMPANY_NAME || 'Test LTD',
+      process.env[`${prefix}NAME`] || process.env.INVOICE_COMPANY_NAME || testDefaults.companyName,
     companyNumber:
-      process.env[`${prefix}NUMBER`] || process.env.INVOICE_COMPANY_NUMBER || '00000000',
+      process.env[`${prefix}NUMBER`] || process.env.INVOICE_COMPANY_NUMBER || testDefaults.companyNumber,
     address:
       process.env[`${prefix}ADDRESS`] ||
       process.env.INVOICE_COMPANY_ADDRESS ||
-      '123 Example Street, Testville, TE1 1ST, United Kingdom',
+      testDefaults.address,
     email:
       process.env[`${prefix}EMAIL`] ||
       process.env.INVOICE_COMPANY_EMAIL ||
       process.env.SMTP_ADMIN_EMAIL ||
-      fallbackEmail,
+      testDefaults.email,
   };
 }
 
@@ -87,10 +106,7 @@ function normalizeInvoicePayload(body) {
       country: String(body.buyer?.country ?? ''),
       phone: String(body.buyer?.phone ?? ''),
     },
-    seller: {
-      ...defaultSeller(siteId),
-      ...(body.seller || {}),
-    },
+    seller: defaultSeller(siteId),
     paymentMethod: String(body.paymentMethod || 'Test payment'),
     siteId,
   };

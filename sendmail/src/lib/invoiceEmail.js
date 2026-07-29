@@ -15,10 +15,10 @@ function invoicePanelStyle(palette) {
   const isLight = palette.colorScheme === 'light';
   return {
     border: palette.border,
-    background: isLight ? 'rgba(255, 255, 255, 0.92)' : 'rgba(14, 16, 24, 0.55)',
+    background: isLight ? 'rgba(255, 255, 255, 0.92)' : (palette.panelBg || 'rgba(20, 32, 24, 0.72)'),
     label: palette.muted,
-    value: isLight ? palette.text : '#ffffff',
-    accent: palette.accentBright,
+    value: isLight ? palette.text : palette.body,
+    accent: palette.accent,
   };
 }
 
@@ -100,8 +100,15 @@ function buildInvoiceEmail(payload) {
       headline: 'Payment Received',
       greeting,
       bodyHtml,
+      logoEmbed: true,
       ctaLabel:
-        brand.id === 'iyashikei' ? 'Visit Market' : brand.id === 'helix' ? 'Open Grid Portal' : 'Open Portal',
+        brand.id === 'iyashikei'
+          ? 'Visit Market'
+          : brand.id === 'helix'
+            ? 'Open Grid Portal'
+            : brand.id === 'final_whistle'
+              ? 'Open Matchday Portal'
+              : 'Open Portal',
       ctaUrl: `${portalUrl}/portal/market`,
       footerNote: `Your PDF invoice is attached. Questions? Contact ${seller.email}.`,
     }),

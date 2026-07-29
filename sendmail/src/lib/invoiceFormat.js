@@ -68,7 +68,7 @@ function renderInvoiceSummaryTable({ lineItems, order, paymentMethod, palette })
     headerBottom: '#0a0a0c',
   };
   const isLight = p.colorScheme === 'light';
-  const theadBg = isLight ? p.headerBottom : 'rgba(14,16,24,0.85)';
+  const theadBg = isLight ? p.headerBottom : p.headerBottom;
 
   const rows = (lineItems ?? []).map((line) => {
     const qty = line.quantity ?? 1;
@@ -79,7 +79,7 @@ function renderInvoiceSummaryTable({ lineItems, order, paymentMethod, palette })
         <td style="padding:10px 12px;border-bottom:1px solid ${p.border};color:${p.body};">${line.title}</td>
         <td style="padding:10px 12px;border-bottom:1px solid ${p.border};color:${p.text};text-align:center;">${formatQuantity(qty)}</td>
         <td style="padding:10px 12px;border-bottom:1px solid ${p.border};color:${p.text};text-align:right;">${unit}</td>
-        <td style="padding:10px 12px;border-bottom:1px solid ${p.border};color:${p.accentBright};text-align:right;font-weight:700;">${total}</td>
+        <td style="padding:10px 12px;border-bottom:1px solid ${p.border};color:${p.accent};text-align:right;font-weight:700;">${total}</td>
       </tr>`;
   }).join('');
 
@@ -98,7 +98,7 @@ function renderInvoiceSummaryTable({ lineItems, order, paymentMethod, palette })
       <tfoot>
         <tr>
           <td colspan="3" style="padding:12px;font-size:13px;color:${p.text};text-align:right;">Total</td>
-          <td style="padding:12px;font-size:15px;font-weight:700;color:${p.accentBright};text-align:right;">
+          <td style="padding:12px;font-size:15px;font-weight:700;color:${p.accent};text-align:right;">
             ${formatMoney(order.totalCents, order.currency)}
           </td>
         </tr>

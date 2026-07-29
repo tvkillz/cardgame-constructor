@@ -13,6 +13,8 @@ https://staging.sportsydeals.com
 https://www.helixsignal.online
 https://helixsignal.online
 https://helix.voidborn.fun
+https://finalwhistle.games
+https://www.finalwhistle.games
 
 # Local pm2 dev/prod (Next.js proxies /auth/v1 → API; optional if not using proxy)
 http://localhost:3000

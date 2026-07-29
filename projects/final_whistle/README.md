@@ -2,7 +2,8 @@
 
 Football-legacy content pack — **Final Whistle** brand, project id `final_whistle`.
 
-Slogan: **Every Match Leaves a Legacy.** Production domain: TBD (`siteUrl` empty in manifest).
+Slogan: **Every Match Leaves a Legacy.**  
+Production: `https://finalwhistle.games` · API: `https://api.finalwhistle.games` · Support: `support@finalwhistle.games`
 
 ## World
 
@@ -30,13 +31,13 @@ Phase 0–1 content pack scaffold — see **[`../NEW_THEME.md`](../NEW_THEME.md)
 - [x] Game metadata (`domains`, `locations`, `cities`, `scenes` with image prompts)
 - [x] Theme tokens (`colors.json`, `ui.json` — Bebas Neue + DM Sans; stadium night palette)
 - [x] Generation specs (`contentgen.json`, `cardgen.json`, `socialgen.json`)
-- [x] Registry entry (`status`: `demo`, no `stagingDomain`)
-- [x] Manifest `siteUrl`: `""` (no production domain yet)
+- [x] Registry entry (`status`: `live`, `vpsProd`: true, `sendmailProxy`: true)
+- [x] Manifest `siteUrl`: `https://finalwhistle.games`
 - [x] Showcase card stubs (12 slugs, 3 per domain)
 - [ ] Phase 2a — contentgen apply + brand assets
 - [ ] Phase 2b — cardgen showcase art
 - [ ] Phase 3+ — landing / portal / play frontend packs
-- [ ] Phase 6 — sites bootstrap row, sendmail SMTP, SEO deploy
+- [x] Phase 6 — sites bootstrap domain, sendmail brand, CORS / redirects
 
 ## Cardgen showcase (landing)
 

@@ -85,6 +85,12 @@ async function smtpHealth(_req, res) {
           user: siteSmtpConfig('helix').user,
           from: fromAddress('helix'),
         },
+        final_whistle: {
+          host: siteSmtpConfig('final_whistle').host,
+          port: siteSmtpConfig('final_whistle').port,
+          user: siteSmtpConfig('final_whistle').user,
+          from: fromAddress('final_whistle'),
+        },
       },
     });
   } catch (err) {
@@ -124,7 +130,13 @@ async function sendTestEmail(req, res) {
         order: {
           id: '00000000-0000-4000-8000-000000preview',
           orderNumber:
-            siteId === 'iyashikei' ? 'KB-PREVIEW' : siteId === 'helix' ? 'HX-PREVIEW' : 'VB-PREVIEW',
+            siteId === 'iyashikei'
+              ? 'KB-PREVIEW'
+              : siteId === 'helix'
+                ? 'HX-PREVIEW'
+                : siteId === 'final_whistle'
+                  ? 'FW-PREVIEW'
+                  : 'VB-PREVIEW',
           paidAt: stamp,
           totalCents: 1000,
           currency: 'eur',

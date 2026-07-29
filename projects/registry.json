@@ -31,7 +31,8 @@
   {
     "id": "final_whistle",
     "path": "./final_whistle",
-    "status": "demo",
-    "vpsProd": false
+    "status": "live",
+    "vpsProd": true,
+    "sendmailProxy": true
   }
 ]

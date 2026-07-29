@@ -33,15 +33,15 @@ function pdfThemeFromBrand(brand) {
   const p = brand.palette;
   const isLight = p.colorScheme === 'light';
   return {
-    headerBg: isLight ? p.headerTop : '#0e1018',
+    headerBg: p.headerTop,
     headerText: isLight ? p.text : p.title,
     gold: p.accent,
     goldBright: p.accentBright,
-    bodyBg: isLight ? '#faf6ee' : '#f7f2e8',
+    bodyBg: isLight ? '#faf6ee' : (p.invoicePaper || '#f7f2e8'),
     bodyText: isLight ? p.text : '#1a1814',
-    muted: isLight ? 'rgba(44, 62, 45, 0.72)' : '#5c564c',
-    border: isLight ? 'rgba(154, 138, 184, 0.35)' : '#d4c4a0',
-    tableHeaderBg: isLight ? p.headerBottom : '#0e1018',
+    muted: isLight ? p.muted : '#5c564c',
+    border: isLight ? p.border : (p.invoiceBorder || '#d4c4a0'),
+    tableHeaderBg: p.headerBottom,
     tableHeaderText: isLight ? p.text : p.title,
     panelBg: '#ffffff',
   };

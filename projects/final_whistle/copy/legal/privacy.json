@@ -5,7 +5,7 @@
   "blocks": [
     {
       "type": "paragraph",
-      "text": "This Privacy Notice outlines how Test LTD (\"we\", \"us\", or \"our\") manages, processes, and safeguards your personal data when you interact with https://finalwhistle.example.com (the \"Website\"), our digital card game, and any integrated features (collectively, the \"Platform\")."
+      "text": "This Privacy Notice outlines how Test LTD (\"we\", \"us\", or \"our\") manages, processes, and safeguards your personal data when you interact with https://finalwhistle.games (the \"Website\"), our digital card game, and any integrated features (collectively, the \"Platform\")."
     },
     {
       "type": "paragraph",
@@ -16,7 +16,7 @@
       "name": "Test LTD",
       "companyNumber": "00000000",
       "address": "123 Example Street, Testville, TE1 1ST, United Kingdom",
-      "email": "support@finalwhistle.example.com"
+      "email": "support@finalwhistle.games"
     },
     {
       "type": "paragraph",
@@ -195,7 +195,7 @@
     },
     {
       "type": "paragraph",
-      "text": "To request any of these rights, contact us at support@finalwhistle.example.com. For safety purposes, we will ask you to verify your identity before processing the request."
+      "text": "To request any of these rights, contact us at support@finalwhistle.games. For safety purposes, we will ask you to verify your identity before processing the request."
     },
     {
       "type": "heading",

@@ -141,6 +141,50 @@
 .game-field-ripple--green  { box-shadow: 0 0 0 1px rgba(61, 122, 74, 0.32), inset 0 0 18px rgba(61, 122, 74, 0.2); }
 .game-field-ripple--orange { box-shadow: 0 0 0 1px rgba(232, 201, 106, 0.35), inset 0 0 18px rgba(232, 201, 106, 0.22); }
 
+/* Brief outline football flash on strike impact */
+.game-fw-impact-ball {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 2.5px solid rgba(255, 255, 255, 0.9);
+  background: transparent;
+  opacity: 0;
+  pointer-events: none;
+  box-shadow:
+    0 0 14px rgba(255, 255, 255, 0.28),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.22);
+}
+
+.game-fw-impact-ball--face {
+  width: 52px;
+  height: 52px;
+  border-width: 3px;
+}
+
+.game-fw-impact-ball::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 44%;
+  height: 44%;
+  transform: translate(-50%, -50%);
+  border: 1.5px solid rgba(255, 255, 255, 0.55);
+  clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+  background: transparent;
+}
+
+.game-fw-impact-ball::after {
+  content: '';
+  position: absolute;
+  inset: 20%;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  background: transparent;
+}
+
 .game-vfx-particle {
   position: absolute;
   border-radius: 999px;

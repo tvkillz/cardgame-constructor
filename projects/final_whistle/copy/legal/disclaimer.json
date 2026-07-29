@@ -5,14 +5,14 @@
   "blocks": [
     {
       "type": "paragraph",
-      "text": "The features, services, and digital media hosted on https://finalwhistle.example.com (the \"Website\") and its associated gaming software (the \"Platform\") are operated by Test LTD (\"we\", \"us\", or \"our\")."
+      "text": "The features, services, and digital media hosted on https://finalwhistle.games (the \"Website\") and its associated gaming software (the \"Platform\") are operated by Test LTD (\"we\", \"us\", or \"our\")."
     },
     {
       "type": "company",
       "name": "Test LTD",
       "companyNumber": "00000000",
       "address": "123 Example Street, Testville, TE1 1ST, United Kingdom",
-      "email": "support@finalwhistle.example.com"
+      "email": "support@finalwhistle.games"
     },
     {
       "type": "paragraph",

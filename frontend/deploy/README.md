@@ -150,6 +150,7 @@ cd frontend
 npm install
 npm run compile:all
 cp deploy/env.production.example .env.production
+# set NEXT_PUBLIC_SUPABASE_URL to the site API host (e.g. https://api.finalwhistle.games)
 
 PROJECT=voidborn npm run build
 PROJECT=project2 npm run build
@@ -165,6 +166,35 @@ sudo certbot --nginx --expand -m you@example.com \
   -d staging.voidborn.fun \
   -d voidborn.fun \
   -d test.sportsydeals.com
+```
+
+### Dedicated Final Whistle VPS
+
+```bash
+# .env.production
+NEXT_PUBLIC_SUPABASE_URL=https://api.finalwhistle.games
+
+PROJECT=final_whistle npm run build
+pm2 start ecosystem.config.cjs --only final_whistle-prod
+# sendmail on same box (nginx proxies /api/sendmail → :6001)
+cd ../sendmail && npm install && pm2 start …   # see sendmail/README.md
+
+# Install only this site's nginx vhost (port 3104 + sendmail proxy):
+sudo bash deploy/scripts/setup-vps.sh install
+NGINX_SITES=final_whistle sudo -E bash deploy/scripts/setup-vps.sh configure
+
+# DNS A: finalwhistle.games + www → this VPS IP
+# DNS A: api.finalwhistle.games → API VPS IP (shared Supabase stack)
+sudo certbot --nginx --expand -m support@finalwhistle.games \
+  -d finalwhistle.games -d www.finalwhistle.games
+```
+
+Reference HTTP-only config: `deploy/nginx/final_whistle.example.conf`.
+
+Local deploys: set `VPS_HOST` to your SSH alias in `deploy/deploy.local.env`, then:
+
+```bash
+bash frontend/deploy/scripts/deploy-from-local.sh --site final_whistle
 ```
 
 **Important:** `generate-nginx.mjs` writes **HTTP-only** vhosts. After `certbot --nginx`, do not run `setup-vps.sh reload` or `generate-nginx.mjs --install` unless you plan to run certbot again — it overwrites certbot's SSL blocks.

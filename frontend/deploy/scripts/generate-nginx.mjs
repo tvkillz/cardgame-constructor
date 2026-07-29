@@ -10,6 +10,7 @@
  *
  * Usage (from frontend/):
  *   node deploy/scripts/generate-nginx.mjs
+ *   node deploy/scripts/generate-nginx.mjs --site final_whistle
  *   node deploy/scripts/generate-nginx.mjs --install
  *   node deploy/scripts/generate-nginx.mjs --cors-origins
  */
@@ -36,6 +37,18 @@ const ENABLED_LINK = '/etc/nginx/sites-enabled/constructor-frontend.conf'
 const install = process.argv.includes('--install')
 const corsOnly = process.argv.includes('--cors-origins')
 const includeWww = !process.argv.includes('--no-www')
+
+function siteFilterFromArgv() {
+  const idx = process.argv.indexOf('--site')
+  if (idx >= 0 && process.argv[idx + 1]) {
+    return process.argv[idx + 1].split(',').map((s) => s.trim()).filter(Boolean)
+  }
+  const fromEnv = (process.env.NGINX_SITES || '').trim()
+  if (fromEnv) return fromEnv.split(',').map((s) => s.trim()).filter(Boolean)
+  return null
+}
+
+const SITE_FILTER = siteFilterFromArgv()
 
 function render(template, vars) {
   let out = template
@@ -74,6 +87,8 @@ async function buildSiteBlocks(template) {
 
   for (let index = 0; index < registry.length; index++) {
     const site = registry[index]
+    if (SITE_FILTER && !SITE_FILTER.includes(site.id)) continue
+
     const port = prodPort(site.id, index)
     const staging = stagingDomainForSite(site)
 
@@ -155,6 +170,7 @@ map $http_upgrade $connection_upgrade {
 
   console.log(`[nginx] Wrote ${OUTPUT_FILE}`)
   console.log(`[nginx] Wrote ${CORS_FILE}`)
+  if (SITE_FILTER) console.log(`[nginx] Site filter: ${SITE_FILTER.join(', ')}`)
   console.log('[nginx] VPS site map (HTTP; TLS = manual certbot):')
   for (const route of routes) {
     if (route.role === 'cors-prod') continue

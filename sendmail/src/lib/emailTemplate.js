@@ -1,7 +1,11 @@
 const fs = require('fs');
 const path = require('path');
 
-const { getBrand, bundledLogoFile: brandBundledLogo } = require('./siteBrands');
+const {
+  getBrand,
+  bundledLogoFile: brandBundledLogo,
+  brandUsesInlineLogoUrl,
+} = require('./siteBrands');
 const { LOGO_CID, prepareLogoAttachment } = require('./logoImage');
 
 const DEFAULT_SITE_URL = 'https://voidborn.fun';
@@ -104,23 +108,29 @@ function logoAttachment(brand = getBrand('voidborn')) {
   return attachmentFromLogoFile(bundled);
 }
 
-function logoImgHtml(brand = getBrand('voidborn')) {
+function logoImgHtml(brand = getBrand('voidborn'), { embed = false } = {}) {
   const alt = escapeHtml(brandName(brand));
   const style =
     'display:block;border:0;outline:none;height:62px;width:auto;max-width:200px;margin:0;';
 
   const bundled = bundledLogoFile(brand);
+
+  // Invoices / mail that attaches logo — bundled CID or fetch-on-send CID.
+  if (embed) {
+    return `<img src="cid:${LOGO_CID}" alt="${alt}" height="62" style="${style}" />`;
+  }
+
+  // Auth hook fast path — public URL, no read/fetch/attach (final_whistle, voidborn default).
+  if (brandUsesInlineLogoUrl(brand)) {
+    const url = escapeHtml(logoUrl(brand));
+    return `<img src="${url}" alt="${alt}" height="62" style="${style}" />`;
+  }
+
   if (bundled && INLINE_LOGO_EXT.has(path.extname(bundled).toLowerCase())) {
     return `<img src="cid:${LOGO_CID}" alt="${alt}" height="62" style="${style}" />`;
   }
 
-  // Embed via CID after resolveLogoAttachment fetches from the site (e.g. komorebi).
-  if (brand.id !== 'voidborn' || process.env.MAIL_LOGO_FETCH === '1') {
-    return `<img src="cid:${LOGO_CID}" alt="${alt}" height="62" style="${style}" />`;
-  }
-
-  const url = escapeHtml(logoUrl(brand));
-  return `<img src="${url}" alt="${alt}" height="62" style="${style}" />`;
+  return `<img src="cid:${LOGO_CID}" alt="${alt}" height="62" style="${style}" />`;
 }
 
 function emailHeadStyles(brand) {
@@ -164,6 +174,7 @@ function renderBrandedEmail(
     ctaUrl,
     secondaryHtml = '',
     footerNote,
+    logoEmbed = false,
   },
 ) {
   const palette = brand.palette;
@@ -218,7 +229,7 @@ function renderBrandedEmail(
           <tr>
             <td style="padding:16px 24px;border-bottom:1px solid ${palette.border};background:linear-gradient(180deg,${palette.headerTop} 0%,${palette.headerBottom} 100%);">
               <a href="${escapeHtml(siteUrl(brand))}" target="_blank" rel="noopener noreferrer" style="text-decoration:none;">
-                ${logoImgHtml(brand)}
+                ${logoImgHtml(brand, { embed: logoEmbed })}
               </a>
             </td>
           </tr>

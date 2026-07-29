@@ -13,6 +13,8 @@ const DOMAIN_TO_SITE = {
   'helixsignal.online': 'helix',
   'www.helixsignal.online': 'helix',
   'helix.voidborn.fun': 'helix',
+  'finalwhistle.games': 'final_whistle',
+  'www.finalwhistle.games': 'final_whistle',
 };
 
 const VOIDBORN_PALETTE = {
@@ -62,6 +64,26 @@ const HELIX_PALETTE = {
   colorScheme: 'dark',
   ctaBg: 'rgba(61, 184, 212, 0.14)',
   ctaBorder: 'rgba(61, 184, 212, 0.5)',
+};
+
+/** Stadium night — mirrors projects/final_whistle/theme/colors.json */
+const FINAL_WHISTLE_PALETTE = {
+  bg: '#0a1210',
+  text: '#f2f0e8',
+  title: '#f2f0e8',
+  muted: 'rgba(242, 240, 232, 0.72)',
+  body: '#f2f0e8',
+  accent: '#e8c96a',
+  accentBright: '#7aab78',
+  border: 'rgba(61, 122, 74, 0.35)',
+  headerTop: '#0e1814',
+  headerBottom: '#0a1210',
+  panelBg: 'rgba(20, 32, 24, 0.72)',
+  invoicePaper: '#f5f2ea',
+  invoiceBorder: '#c4b898',
+  colorScheme: 'dark',
+  ctaBg: 'rgba(232, 201, 106, 0.14)',
+  ctaBorder: 'rgba(232, 201, 106, 0.45)',
 };
 
 /** Map auth email suffix → internal site id (must match backend auth_email_resolve_site_id). */
@@ -399,6 +421,121 @@ const SITE_BRANDS = {
       recovery: 'This is a preview of the HELIX password reset email template.',
     },
   },
+
+  final_whistle: {
+    id: 'final_whistle',
+    brandName: 'Final Whistle',
+    siteUrl: 'https://finalwhistle.games',
+    /** Use public logo URL in HTML — no HTTP fetch on auth hook (keeps GoTrue under 5s). */
+    logoInlineUrl: true,
+    logoPath: '/assets/brand/header.webp',
+    logoPaths: [
+      '/assets/brand/header.webp',
+      '/assets/brand/header.png',
+      '/assets/brand/gamelogo.webp',
+      '/assets/brand/gamelogo.png',
+    ],
+    typography: {
+      headingFamily: "'Bebas Neue', 'DM Sans', Arial, Helvetica, sans-serif",
+      googleFontsUrl:
+        'https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@500;600;700&display=swap',
+    },
+    palette: FINAL_WHISTLE_PALETTE,
+    greetingName: (name) => (name ? `Manager ${name}.` : 'Manager.'),
+    subjects: {
+      signup: 'Confirm your Final Whistle account',
+      invite: 'You are invited to Final Whistle',
+      magiclink: 'Your Final Whistle sign-in link',
+      recovery: 'Reset your Final Whistle password',
+      email_change: 'Confirm your Final Whistle email change',
+      email: 'Your Final Whistle verification code',
+      reauthentication: 'Confirm it is you — Final Whistle',
+      password_changed_notification: 'Your Final Whistle password was changed',
+      email_changed_notification: 'Your Final Whistle email was changed',
+      phone_changed_notification: 'Your Final Whistle phone number was changed',
+      identity_linked_notification: 'A sign-in method was linked to your Final Whistle account',
+      identity_unlinked_notification: 'A sign-in method was removed from your Final Whistle account',
+      mfa_factor_enrolled_notification: 'MFA was enabled on your Final Whistle account',
+      mfa_factor_unenrolled_notification: 'MFA was disabled on your Final Whistle account',
+    },
+    actionCopy: {
+      signup: {
+        headline: 'Welcome to the Pitch',
+        body:
+          'Your Final Whistle account is ready. Confirm below to build your squad, claim the board, and leave a legacy under the floodlights.',
+        cta: 'Activate Account',
+      },
+      invite: {
+        headline: 'You Are Called Up',
+        body:
+          'A manager invited you onto Final Whistle. Accept below to enter the portal and start your first matchday.',
+        cta: 'Accept Invitation',
+      },
+      magiclink: {
+        headline: 'Tunnel Access Ready',
+        body:
+          'Your passwordless sign-in is ready. Use the link below to return to the portal.',
+        cta: 'Sign In to Final Whistle',
+      },
+      recovery: {
+        headline: 'Reset Match Credentials',
+        body:
+          'We received a request to reset your password. If this was you, set a new one with the link below. The window closes soon for your protection.',
+        cta: 'Reset Password',
+      },
+      email_change: {
+        headline: 'Confirm New Contact Channel',
+        body:
+          'You asked to change the email on your Final Whistle account. Confirm the new address to keep access secure.',
+        cta: 'Confirm Email Change',
+      },
+      email: {
+        headline: 'Verify Identity',
+        body: 'Use the link or code below to verify your identity and continue.',
+        cta: 'Verify Now',
+      },
+      reauthentication: {
+        headline: 'Re-Authenticate',
+        body:
+          'For your protection, confirm your identity before this sensitive action can proceed.',
+        cta: 'Confirm Identity',
+      },
+    },
+    securityCopy: {
+      password_changed_notification: {
+        headline: 'Password Changed',
+        body: 'Your Final Whistle password was changed. If this was not you, reset it immediately.',
+      },
+      email_changed_notification: {
+        headline: 'Email Changed',
+        body: 'The email on your Final Whistle account was changed.',
+      },
+      phone_changed_notification: {
+        headline: 'Phone Changed',
+        body: 'The phone number on your Final Whistle account was changed.',
+      },
+      identity_linked_notification: {
+        headline: 'Sign-In Method Linked',
+        body: 'A new sign-in method was linked to your account.',
+      },
+      identity_unlinked_notification: {
+        headline: 'Sign-In Method Removed',
+        body: 'A sign-in method was removed from your account.',
+      },
+      mfa_factor_enrolled_notification: {
+        headline: 'Extra Protection Enabled',
+        body: 'Multi-factor authentication is now active on your account.',
+      },
+      mfa_factor_unenrolled_notification: {
+        headline: 'Extra Protection Removed',
+        body: 'Multi-factor authentication was disabled on your account.',
+      },
+    },
+    previewFooter: {
+      signup: 'This is a preview of the Final Whistle activation email template.',
+      recovery: 'This is a preview of the Final Whistle password reset email template.',
+    },
+  },
 };
 
 function siteIdFromAuthSuffix(suffix) {
@@ -489,6 +626,13 @@ function bundledLogoFile(brand) {
   return bundledLogoCandidates(brand).find((file) => fs.existsSync(file)) ?? null;
 }
 
+/** Brands that embed logo via https URL in HTML (voidborn default, final_whistle always). */
+function brandUsesInlineLogoUrl(brand) {
+  if (brand?.logoInlineUrl) return true;
+  if (brand?.id === 'voidborn' && process.env.MAIL_LOGO_FETCH !== '1') return true;
+  return false;
+}
+
 module.exports = {
   DOMAIN_TO_SITE,
   AUTH_SUFFIX_TO_SITE,
@@ -500,4 +644,5 @@ module.exports = {
   parseSiteIdFromRedirect,
   bundledLogoFile,
   bundledLogoCandidates,
+  brandUsesInlineLogoUrl,
 };
