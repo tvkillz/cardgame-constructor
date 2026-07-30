@@ -1,0 +1,57 @@
+{
+  "entries": [
+    {
+      "path": "/",
+      "changeFrequency": "weekly",
+      "priority": 1.0,
+      "comment": "Landing — hero, pitch domains, game model, FAQ, deploy gate"
+    },
+    {
+      "path": "/play",
+      "changeFrequency": "weekly",
+      "priority": 0.9,
+      "comment": "Play lobby / match entry"
+    },
+    {
+      "path": "/leaderboard",
+      "changeFrequency": "daily",
+      "priority": 0.7,
+      "comment": "Public ranked ladder"
+    },
+    {
+      "path": "/terms",
+      "changeFrequency": "yearly",
+      "priority": 0.3
+    },
+    {
+      "path": "/privacy",
+      "changeFrequency": "yearly",
+      "priority": 0.3
+    },
+    {
+      "path": "/refund-policy",
+      "changeFrequency": "yearly",
+      "priority": 0.3
+    },
+    {
+      "path": "/disclaimer",
+      "changeFrequency": "yearly",
+      "priority": 0.3
+    },
+    {
+      "path": "/cookie-policy",
+      "changeFrequency": "yearly",
+      "priority": 0.3
+    }
+  ],
+  "robots": {
+    "disallow": [
+      "/portal/",
+      "/checkout",
+      "/auth/",
+      "/profile",
+      "/market"
+    ],
+    "comment": "Portal, checkout, auth callback, and profile require sign-in — exclude from crawl budget"
+  }
+}

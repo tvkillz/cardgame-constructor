@@ -34,5 +34,11 @@
     "status": "live",
     "vpsProd": true,
     "sendmailProxy": true
+  },
+  {
+    "id": "wildreach",
+    "path": "./wildreach",
+    "status": "demo",
+    "stagingDomain": "wildreach.voidborn.fun"
   }
 ]

@@ -1,0 +1,256 @@
+{
+  "cards": [
+    {
+      "title": "Lioness Sentinel",
+      "slug": "serengeti_card_01_lioness_sentinel",
+      "category": "cards",
+      "domain": "serengeti",
+      "kind": "card",
+      "role": "Pride Sentinel",
+      "rarity": "common",
+      "stats": { "mana": 2, "attack": 2, "health": 3 },
+      "keywords": ["Hold"],
+      "ability": {
+        "name": "Pride Line",
+        "text": "Hold: Rivals must engage this card before others when able. While this card has Stamina, adjacent allies cannot be displaced."
+      },
+      "path": "cards/serengeti/serengeti_card_01_lioness_sentinel.png",
+      "priceCents": 48206,
+      "source_file": "serengeti_card_01_lioness_sentinel.png",
+      "format": "3:4",
+      "notes": "Style: BBC Earth wildlife photography. Negative: anime, illustration, gore, text, watermark. Palette: golden ochre, acacia green.",
+      "image_prompt": "Photorealistic lioness standing alert on a termite mound in golden savanna light, shallow depth of field, documentary wildlife portrait, no gore, no text."
+    },
+    {
+      "title": "Leopard Shade",
+      "slug": "serengeti_card_02_leopard_shadow",
+      "category": "cards",
+      "domain": "serengeti",
+      "kind": "card",
+      "role": "Kopje Stalker",
+      "rarity": "uncommon",
+      "stats": { "mana": 4, "attack": 3, "health": 3 },
+      "keywords": ["Marker", "Switch"],
+      "ability": {
+        "name": "Kopje Vanish",
+        "text": "Marker: Rivals cannot choose this card until it acts. Switch: Can influence distant cards without close engagement."
+      },
+      "path": "cards/serengeti/serengeti_card_02_leopard_shadow.png",
+      "priceCents": 52104,
+      "source_file": "serengeti_card_02_leopard_shadow.png",
+      "format": "3:4",
+      "notes": "Negative: anime, illustration, gore. Palette: dappled shadow, golden grass.",
+      "image_prompt": "Photorealistic leopard resting on an acacia branch, rosettes catching dappled savanna light, alert eyes, documentary wildlife portrait, no gore, no text."
+    },
+    {
+      "title": "Cheetah Gust",
+      "slug": "serengeti_card_03_cheetah_gust",
+      "category": "cards",
+      "domain": "serengeti",
+      "kind": "card",
+      "role": "Open Pursuit",
+      "rarity": "rare",
+      "stats": { "mana": 6, "attack": 5, "health": 3 },
+      "keywords": ["Deploy", "Pulse"],
+      "ability": {
+        "name": "Veld Sprint",
+        "text": "Deploy: This card may act the turn it enters play. Pulse: At end of turn, apply 1 Strike tick if this card is winning the lane."
+      },
+      "path": "cards/serengeti/serengeti_card_03_cheetah_gust.png",
+      "priceCents": 19376,
+      "source_file": "serengeti_card_03_cheetah_gust.png",
+      "format": "3:4",
+      "notes": "Negative: anime, illustration, motion blur overload. Palette: dust gold, grass green.",
+      "image_prompt": "Photorealistic cheetah mid-sprint across open savanna, dust plume, golden hour side light, documentary action freeze, no gore, no text."
+    },
+    {
+      "title": "River Tiger",
+      "slug": "bengal_card_01_river_tiger",
+      "category": "cards",
+      "domain": "bengal",
+      "kind": "card",
+      "role": "River Ambush",
+      "rarity": "common",
+      "stats": { "mana": 2, "attack": 3, "health": 2 },
+      "keywords": ["Press"],
+      "ability": {
+        "name": "Bank Strike",
+        "text": "Press: When this card enters play, apply Press to one rival card (it cannot act until end of turn unless written otherwise)."
+      },
+      "path": "cards/bengal/bengal_card_01_river_tiger.png",
+      "priceCents": 23081,
+      "source_file": "bengal_card_01_river_tiger.png",
+      "format": "3:4",
+      "notes": "Negative: anime, illustration, gore. Palette: teal water, jungle shadow.",
+      "image_prompt": "Photorealistic Bengal tiger at a river bank in monsoon forest, stripes catching dappled light, alert predatory posture, documentary wildlife portrait, no gore, no text."
+    },
+    {
+      "title": "Mangrove Croc",
+      "slug": "bengal_card_02_mangrove_croc",
+      "category": "cards",
+      "domain": "bengal",
+      "kind": "card",
+      "role": "Delta Anchor",
+      "rarity": "uncommon",
+      "stats": { "mana": 4, "attack": 2, "health": 5 },
+      "keywords": ["Wall", "Hold"],
+      "ability": {
+        "name": "Still Water",
+        "text": "Wall: The next Strike this card would take is redirected to the Wall buffer instead. Hold: Rivals must engage this card before others when able."
+      },
+      "path": "cards/bengal/bengal_card_02_mangrove_croc.png",
+      "priceCents": 50207,
+      "source_file": "bengal_card_02_mangrove_croc.png",
+      "format": "3:4",
+      "notes": "Negative: anime, illustration, gore. Palette: mangrove teal, mud brown.",
+      "image_prompt": "Photorealistic mugger crocodile half-submerged in delta water among mangrove roots, eyes above surface, documentary wildlife portrait, no gore, no text."
+    },
+    {
+      "title": "Clouded Leopard",
+      "slug": "bengal_card_03_clouded_leopard",
+      "category": "cards",
+      "domain": "bengal",
+      "kind": "card",
+      "role": "Canopy Ghost",
+      "rarity": "rare",
+      "stats": { "mana": 6, "attack": 4, "health": 4 },
+      "keywords": ["Marker", "Echo"],
+      "ability": {
+        "name": "Mist Descent",
+        "text": "Marker: Rivals cannot choose this card until it acts. Echo: Repeats its enter effect at end of turn once."
+      },
+      "path": "cards/bengal/bengal_card_03_clouded_leopard.png",
+      "priceCents": 25955,
+      "source_file": "bengal_card_03_clouded_leopard.png",
+      "format": "3:4",
+      "notes": "Negative: anime, illustration. Palette: forest green, mist grey.",
+      "image_prompt": "Photorealistic clouded leopard on a mossy branch in monsoon canopy, long tail draped, documentary wildlife portrait, no gore, no text."
+    },
+    {
+      "title": "Ridge Puma",
+      "slug": "patagonia_card_01_ridge_puma",
+      "category": "cards",
+      "domain": "patagonia",
+      "kind": "card",
+      "role": "Ledge Hunter",
+      "rarity": "common",
+      "stats": { "mana": 2, "attack": 2, "health": 3 },
+      "keywords": ["Shape"],
+      "ability": {
+        "name": "Territory Hold",
+        "text": "Shape: This card holds the ledge — cannot be displaced while Stamina remains."
+      },
+      "path": "cards/patagonia/patagonia_card_01_ridge_puma.png",
+      "priceCents": 24865,
+      "source_file": "patagonia_card_01_ridge_puma.png",
+      "format": "3:4",
+      "notes": "Negative: anime, illustration. Palette: granite grey, ember dusk.",
+      "image_prompt": "Photorealistic puma standing on a Patagonian granite ledge at dusk, wind-ruffled fur, documentary wildlife portrait, no gore, no text."
+    },
+    {
+      "title": "Emerald Jaguar",
+      "slug": "patagonia_card_02_jaguar_emerald",
+      "category": "cards",
+      "domain": "patagonia",
+      "kind": "card",
+      "role": "Canopy Stalker",
+      "rarity": "uncommon",
+      "stats": { "mana": 4, "attack": 4, "health": 3 },
+      "keywords": ["Deploy", "Press"],
+      "ability": {
+        "name": "Shadow Pounce",
+        "text": "Deploy: This card may act the turn it enters play. Press: When this card enters play, apply Press to one rival card."
+      },
+      "path": "cards/patagonia/patagonia_card_02_jaguar_emerald.png",
+      "priceCents": 85059,
+      "source_file": "patagonia_card_02_jaguar_emerald.png",
+      "format": "3:4",
+      "notes": "Negative: anime, illustration, gore. Palette: emerald canopy, ember light.",
+      "image_prompt": "Photorealistic jaguar emerging from dappled jungle shadow, rosettes catching filtered light, powerful stance, documentary wildlife portrait, no gore, no text."
+    },
+    {
+      "title": "Harpy Strike",
+      "slug": "patagonia_card_03_harpy_strike",
+      "category": "cards",
+      "domain": "patagonia",
+      "kind": "card",
+      "role": "Aerial Apex",
+      "rarity": "rare",
+      "stats": { "mana": 6, "attack": 5, "health": 3 },
+      "keywords": ["Switch", "Pulse"],
+      "ability": {
+        "name": "Thermal Dive",
+        "text": "Switch: Can influence distant cards without close engagement. Pulse: At end of turn, apply 1 Strike tick if this card is winning the lane."
+      },
+      "path": "cards/patagonia/patagonia_card_03_harpy_strike.png",
+      "priceCents": 47310,
+      "source_file": "patagonia_card_03_harpy_strike.png",
+      "format": "3:4",
+      "notes": "Negative: anime, illustration. Palette: crimson sky, dark wings.",
+      "image_prompt": "Photorealistic harpy eagle perched on a dead snag above volcanic coast, massive talons, crimson dusk sky, documentary wildlife portrait, no gore, no text."
+    },
+    {
+      "title": "Wolf Patrol",
+      "slug": "taiga_card_01_wolf_patrol",
+      "category": "cards",
+      "domain": "taiga",
+      "kind": "card",
+      "role": "Pack Scout",
+      "rarity": "common",
+      "stats": { "mana": 2, "attack": 2, "health": 3 },
+      "keywords": ["Link"],
+      "ability": {
+        "name": "Pack Signal",
+        "text": "Link: If another allied card with Link is in play, gain 1 Strike at end of turn."
+      },
+      "path": "cards/taiga/taiga_card_01_wolf_patrol.png",
+      "priceCents": 63826,
+      "source_file": "taiga_card_01_wolf_patrol.png",
+      "format": "3:4",
+      "notes": "Negative: anime, illustration, gore. Palette: snow white, pine green.",
+      "image_prompt": "Photorealistic grey wolf on a snow-dusted boreal trail, breath visible in cold air, documentary wildlife portrait, no gore, no text."
+    },
+    {
+      "title": "Snow Leopard",
+      "slug": "taiga_card_02_snow_leopard",
+      "category": "cards",
+      "domain": "taiga",
+      "kind": "card",
+      "role": "Alpine Ghost",
+      "rarity": "uncommon",
+      "stats": { "mana": 4, "attack": 3, "health": 4 },
+      "keywords": ["Marker", "Recover"],
+      "ability": {
+        "name": "Ridge Fade",
+        "text": "Marker: Rivals cannot choose this card until it acts. Recover: Restore 2 Stamina to yourself."
+      },
+      "path": "cards/taiga/taiga_card_02_snow_leopard.png",
+      "priceCents": 27344,
+      "source_file": "taiga_card_02_snow_leopard.png",
+      "format": "3:4",
+      "notes": "Negative: anime, illustration. Palette: blue hour snow, slate rock.",
+      "image_prompt": "Photorealistic snow leopard on an alpine snow ridge at blue hour, thick tail, pale eyes, documentary wildlife portrait, no gore, no text."
+    },
+    {
+      "title": "Golden Eagle",
+      "slug": "taiga_card_03_golden_eagle",
+      "category": "cards",
+      "domain": "taiga",
+      "kind": "card",
+      "role": "Sky Hunter",
+      "rarity": "rare",
+      "stats": { "mana": 6, "attack": 4, "health": 5 },
+      "keywords": ["Switch", "Recover"],
+      "ability": {
+        "name": "Boreal Dive",
+        "text": "Switch: Can influence distant cards without close engagement. Recover: Restore 2 Stamina to an allied card."
+      },
+      "path": "cards/taiga/taiga_card_03_golden_eagle.png",
+      "priceCents": 80827,
+      "source_file": "taiga_card_03_golden_eagle.png",
+      "format": "3:4",
+      "notes": "Negative: anime, illustration. Palette: golden feathers, pale sky.",
+      "image_prompt": "Photorealistic golden eagle in dive above boreal forest, wings spread wide, sharp talons extended, documentary action freeze, no gore, no text."
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "cities": [
+    {
+      "slug": "savanna_city_01_golden_veld",
+      "path": "cities/savanna/savanna_city_01_golden_veld.png",
+      "name": "Golden Veld",
+      "description": "Sun-warmed savanna grass stretches to the horizon; acacia silhouettes and dust haze hold the quiet before a pride moves."
+    },
+    {
+      "slug": "savanna_city_02_kopje_watch",
+      "path": "cities/savanna/savanna_city_02_kopje_watch.png",
+      "name": "Kopje Watch",
+      "description": "A granite kopje rises from the plain — a natural lookout where leopards read the wind and the veld below."
+    },
+    {
+      "slug": "savanna_city_03_waterhole_dusk",
+      "path": "cities/savanna/savanna_city_03_waterhole_dusk.png",
+      "name": "Waterhole Dusk",
+      "description": "A still waterhole at dusk; muddy banks and golden light — every predator knows who arrives last drinks safest."
+    },
+    {
+      "slug": "delta_city_01_monsoon_canopy",
+      "path": "cities/delta/delta_city_01_monsoon_canopy.png",
+      "name": "Monsoon Canopy",
+      "description": "Teak and fig canopy filters monsoon light; the forest floor waits in humid silence for a tiger to cross."
+    },
+    {
+      "slug": "delta_city_02_delta_mist",
+      "path": "cities/delta/delta_city_02_delta_mist.png",
+      "name": "Delta Mist",
+      "description": "River mist curls through mangrove roots; half-submerged banks hide crocodiles and the patience of ambush."
+    },
+    {
+      "slug": "delta_city_03_river_crossing",
+      "path": "cities/delta/delta_city_03_river_crossing.png",
+      "name": "River Crossing",
+      "description": "A shallow ford cuts the delta; dappled water and reeds frame the moment before a strike from the bank."
+    },
+    {
+      "slug": "ridge_city_01_granite_ridge",
+      "path": "cities/ridge/ridge_city_01_granite_ridge.png",
+      "name": "Granite Ridge",
+      "description": "Wind-scoured granite ledges above Patagonian steppe; a puma's territory written in scent along the stone."
+    },
+    {
+      "slug": "ridge_city_02_ember_coast",
+      "path": "cities/ridge/ridge_city_02_ember_coast.png",
+      "name": "Ember Coast",
+      "description": "Volcanic coast at crimson dusk; surf mist and basalt cliffs — harpy eagles read thermals above the tide."
+    },
+    {
+      "slug": "ridge_city_03_canopy_shadow",
+      "path": "cities/ridge/ridge_city_03_canopy_shadow.png",
+      "name": "Canopy Shadow",
+      "description": "Dappled jungle shadow on a forest floor; jaguar rosettes dissolve into leaf-filtered ember light."
+    },
+    {
+      "slug": "boreal_city_01_boreal_silence",
+      "path": "cities/boreal/boreal_city_01_boreal_silence.png",
+      "name": "Boreal Silence",
+      "description": "Snow-dusted pines under pale arctic light; wolf tracks cross the trail and vanish into white quiet."
+    },
+    {
+      "slug": "boreal_city_02_snow_ridge",
+      "path": "cities/boreal/boreal_city_02_snow_ridge.png",
+      "name": "Snow Ridge",
+      "description": "An alpine snow ridge at blue hour; snow leopard territory marked in prints along a narrow ledge."
+    },
+    {
+      "slug": "boreal_city_03_eagle_thermals",
+      "path": "cities/boreal/boreal_city_03_eagle_thermals.png",
+      "name": "Eagle Thermals",
+      "description": "Open sky above boreal forest; golden eagles ride cold thermals while the taiga waits below."
+    }
+  ]
+}

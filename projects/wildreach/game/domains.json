@@ -1,0 +1,32 @@
+{
+  "domains": [
+    {
+      "id": "serengeti",
+      "label": "Serengeti",
+      "categoryId": "earth",
+      "glowColor": "#c49a3a",
+      "domainAsset": "domains/savanna_domain.png"
+    },
+    {
+      "id": "bengal",
+      "label": "Bengal",
+      "categoryId": "water",
+      "glowColor": "#2a7a6a",
+      "domainAsset": "domains/delta_domain.png"
+    },
+    {
+      "id": "patagonia",
+      "label": "Patagonia",
+      "categoryId": "fire",
+      "glowColor": "#b85a3a",
+      "domainAsset": "domains/ridge_domain.png"
+    },
+    {
+      "id": "taiga",
+      "label": "Taiga",
+      "categoryId": "air",
+      "glowColor": "#6a8a9a",
+      "domainAsset": "domains/boreal_domain.png"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "_comment": "Deprecated mirror — source of truth is locations.json (featuredCardSlug per domain).",
+  "featuredByLocation": {
+    "serengeti": "serengeti_card_01_lioness_sentinel",
+    "bengal": "bengal_card_01_river_tiger",
+    "patagonia": "patagonia_card_01_ridge_puma",
+    "taiga": "taiga_card_01_wolf_patrol"
+  }
+}

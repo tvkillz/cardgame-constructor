@@ -1,0 +1,76 @@
+{
+  "title": "Collect. Trade. Shape the Hunt.",
+  "description": "Wildreach rewards patience — stock your binder from sealed bundles and open listings, pass along duplicates for credits, and shape a deck that reads the range cleanly.",
+  "features": [
+    {
+      "id": "expand-collection",
+      "title": "Grow Your Binder",
+      "description": "Add depth across world ranges and seasonal releases. Every new pull opens another line you can run when the ladder shifts.",
+      "image": "cta1/expand-collection.webp",
+      "glowColor": "#c49a3a"
+    },
+    {
+      "id": "buy-cards",
+      "title": "Precise Shopping",
+      "description": "Filter the catalog, find the missing predator, and buy exactly what your curve has been waiting for — clean Strike, no noise.",
+      "image": "cta1/buy-cards.webp",
+      "glowColor": "#2a7a6a"
+    },
+    {
+      "id": "sealed-vaults",
+      "title": "Open Sealed Bundles",
+      "description": "Crack sealed products and chase a standout pull. Each unopened bundle is a small surprise — apex card or trade bait.",
+      "image": "cta1/sealed-vaults.webp",
+      "glowColor": "#b85a3a"
+    },
+    {
+      "id": "discover-rare",
+      "title": "Chase Hunter Prints",
+      "description": "Hunt foils, Apex cards, and signature prints — the kind of predator that rewrites a deck and makes rivals pause.",
+      "image": "cta1/discover-rare.webp",
+      "glowColor": "#c49a3a"
+    },
+    {
+      "id": "sell-cards",
+      "title": "Pass Along Duplicates",
+      "description": "Extras still have value. List them, fund the next upgrade, and keep your binder lean for the decks you actually play.",
+      "image": "cta1/sell-cards.webp",
+      "glowColor": "#c49a3a"
+    },
+    {
+      "id": "shape-strategy",
+      "title": "Tune Your Range",
+      "description": "Prototype lists in the field room — test counters, stress synergies, and lock a 30-card answer to the ladder's current pace.",
+      "image": "cta1/shape-strategy.webp",
+      "glowColor": "#8a6a4a"
+    }
+  ],
+  "tiers": [
+    {
+      "id": "uncommon",
+      "rarityLabel": "SCOUT",
+      "title": "Range Scouts",
+      "description": "Reliable predators and utility pieces that glue a list together — flexible enough to slot into multiple strategies.",
+      "glowColor": "#2a7a6a"
+    },
+    {
+      "id": "rare",
+      "rarityLabel": "HUNTER",
+      "title": "Hunter Prints",
+      "description": "Standout prints with real board presence — alternate art, foil shine, and effects that reward thoughtful building.",
+      "glowColor": "#c49a3a"
+    },
+    {
+      "id": "epic",
+      "rarityLabel": "APEX",
+      "title": "Apex Predators",
+      "description": "High-impact cards and engines that can close a hunt with precision. One well-timed strike can settle the board.",
+      "glowColor": "#b85a3a"
+    }
+  ],
+  "marketCta": {
+    "description": "Hundreds of listings live right now — find the predator that completes your next range.",
+    "buttonLabel": "Browse the Market",
+    "route": "portalMarket"
+  }
+}

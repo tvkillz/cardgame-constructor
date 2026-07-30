@@ -1,0 +1,32 @@
+{
+  "title": "How Wildreach Plays",
+  "description": "Four ranges, one quiet battlefield — assemble a deck, outmaneuver rivals in turn-based duels, and climb the seasonal ladder while you observe the hunt.",
+  "pillars": [
+    {
+      "id": "tactical-battles",
+      "title": "Range Tactics",
+      "description": "Trade lines on a living board where timing, territorial pressure, and burst windows matter more than raw stats. Win the turn before you win the hunt.",
+      "image": "gamemodel/tactical-battles.webp",
+      "glowColor": "#2a7a6a"
+    },
+    {
+      "id": "collectible-cards",
+      "title": "Predator Collecting",
+      "description": "Pull hunters from Serengeti, Bengal, Patagonia, and Taiga — then stitch keywords, curves, and finishers into a list that rewards patience.",
+      "image": "gamemodel/collectible-cards.webp",
+      "glowColor": "#c49a3a"
+    },
+    {
+      "id": "ranked-climb",
+      "title": "Seasonal Ladder",
+      "description": "Climb seasonal tiers, learn from losses, and refine your lines. The summit rewards observers who adapt without losing the range.",
+      "image": "gamemodel/ranked-climb.webp",
+      "glowColor": "#b85a3a"
+    }
+  ],
+  "tags": [
+    { "id": "deck-building", "label": "Deck Tuning" },
+    { "id": "class-champions", "label": "Range Affinities" },
+    { "id": "replayable-depth", "label": "Shifting Metas" }
+  ]
+}

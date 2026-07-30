@@ -1,0 +1,13 @@
+{
+  "variant": "wildreach",
+  "introVideo": false,
+  "heroMedia": "slides",
+  "heroCardSlugs": [
+    "serengeti_card_01_lioness_sentinel",
+    "bengal_card_01_river_tiger",
+    "patagonia_card_01_ridge_puma",
+    "taiga_card_01_wolf_patrol",
+    "serengeti_card_02_leopard_shadow",
+    "taiga_card_02_snow_leopard"
+  ]
+}

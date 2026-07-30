@@ -1,0 +1,39 @@
+{
+  "tiers": [
+    {
+      "id": "common",
+      "label": "Track",
+      "manaMin": 1,
+      "manaMax": 2,
+      "description": "Young predators and range scouts — reliable pieces that read the terrain."
+    },
+    {
+      "id": "uncommon",
+      "label": "Scout",
+      "manaMin": 3,
+      "manaMax": 4,
+      "description": "Seasoned hunters with clear roles — ambush, pursuit, or aerial pressure."
+    },
+    {
+      "id": "rare",
+      "label": "Hunter",
+      "manaMin": 5,
+      "manaMax": 6,
+      "description": "Apex-range specialists with decisive board presence and foil-worthy art."
+    },
+    {
+      "id": "epic",
+      "label": "Apex",
+      "manaMin": 7,
+      "manaMax": 8,
+      "description": "Territory-defining predators that can close a hunt with one well-timed strike."
+    },
+    {
+      "id": "legendary",
+      "label": "Wildreach",
+      "manaMin": 9,
+      "manaMax": 10,
+      "description": "Chase-tier legends — rare pulls that collectors pause to admire."
+    }
+  ]
+}

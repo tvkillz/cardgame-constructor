@@ -1,0 +1,43 @@
+{
+  "brandVoice": "Documentary, cinematic, patient. Observe-the-hunt TCG tone. Short field hooks; depth on Facebook. No meme slang; no gore; respectful wildlife framing.",
+  "audience": "TCG players who enjoy wildlife aesthetics, deck builders, collectors, nature documentary fans",
+  "siteUrl": "https://wildreach.placeholder",
+  "platforms": {
+    "instagram": {
+      "minHashtags": 8,
+      "maxHashtags": 15,
+      "defaultHashtags": [
+        "#Wildreach",
+        "#TCG",
+        "#TradingCardGame",
+        "#Wildlife",
+        "#Nature",
+        "#CardGame",
+        "#IndieGame",
+        "#DeckBuilding"
+      ],
+      "linkInBioTemplate": "🔗 Link in bio → {siteUrl}"
+    },
+    "facebook": {
+      "minBodyLength": 200
+    },
+    "discord": {
+      "allowMentionEveryone": false
+    }
+  },
+  "image": {
+    "defaultMode": "auto",
+    "size": 1080,
+    "promptSuffix": "Square 1:1 social promo art for a photorealistic wildlife TCG, natural habitat lighting, savanna gold and delta teal accents, documentary mood, no text, no watermark, no gore, atmospheric depth, leave corner space for logo overlay.",
+    "composite": {
+      "logoAsset": "brand/gamelogo.png",
+      "logoScale": 0.18,
+      "cardLogoScale": 0.16,
+      "cardLogoLeft": 24,
+      "cardLogoTop": 24,
+      "cityOverlay": 0.55,
+      "cardFrameGlow": 0.35,
+      "vignetteStrength": 0.35
+    }
+  }
+}

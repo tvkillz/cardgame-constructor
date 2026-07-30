@@ -1,0 +1,61 @@
+{
+  "gameTitle": "Wildreach",
+  "gamePitch": "a photorealistic apex-predator collectible TCG across four world ranges (Serengeti, Bengal, Patagonia, Taiga) where observers field hunters against rival territory",
+  "world": {
+    "title": "Observe the Hunt",
+    "description": "Four ranges. One quiet contest for territory. Collect predators from savanna, delta, ridge, and boreal biomes — push Strike to claim ground, hold Stamina that preserves range, and compete on a documentary-cinematic board."
+  },
+  "statLabels": {
+    "attack": "Strike",
+    "health": "Stamina"
+  },
+  "domains": {
+    "serengeti": {
+      "visualIdentity": "golden savanna, acacia kopjes, open pursuit, ochre grass and dust haze",
+      "flavorNotes": "lioness sentinels, leopard shadows, cheetah gusts, hyena pressure, waterhole patience"
+    },
+    "bengal": {
+      "visualIdentity": "monsoon canopy, river delta mist, mangrove ambush, teal shadow and humid air",
+      "flavorNotes": "river tigers, mangrove crocs, clouded leopards, delta ghosts, monsoon strikers"
+    },
+    "patagonia": {
+      "visualIdentity": "granite ridges, ember coast, canopy shadow, volcanic stone and crimson dusk",
+      "flavorNotes": "ridge pumas, emerald jaguars, harpy strikes, anaconda coils, ledge hunters"
+    },
+    "taiga": {
+      "visualIdentity": "boreal silence, snow ridges, eagle thermals, pale arctic light and pine shadow",
+      "flavorNotes": "wolf patrols, snow leopards, golden eagles, lynx shadows, pack signals"
+    }
+  },
+  "designRules": [
+    "Mana 1–8 (most cards 3–6). Strike + Stamina should roughly scale with mana (stored as attack and health in JSON).",
+    "Roles vary: sentinels, stalkers, pursuers, ambushers, aerial finishers — not burn decks or gore fantasy.",
+    "Ability text must spell out keyword effects like the examples (do not assume the player knows keywords).",
+    "ability.name should be evocative and unique within the batch.",
+    "Use 0–2 keywords per card from the project glossary only.",
+    "Tone: observe the hunt — documentary, cinematic, respectful — tactically interesting but never meme-y or exploitative.",
+    "Never depict blood, gore, hunting trophies, or animal cruelty.",
+    "Contests as territorial pressure, holding ground, restoring Stamina, redirecting engagement, or pack linking — predator-flavored, not horror.",
+    "Rarity tiers (from game/rarities.json): Track, Scout, Hunter, Apex, Wildreach — derived from mana unless rarity is set explicitly.",
+    "Subjects are photorealistic predator portraits in natural habitat — anatomically believable, no anthropomorphism."
+  ],
+  "image": {
+    "aspectRatio": "3:4",
+    "promptGuidelines": "single focal predator portrait in natural habitat, photorealistic documentary wildlife photography, golden hour or blue hour lighting, shallow depth of field, NO anime, NO illustration, NO text, NO card frame, NO watermark, NO gore, portrait 3:4 composition",
+    "promptSuffix": "Photorealistic wildlife documentary product/character still, single focal predator, natural habitat, earnest observe-the-hunt mood, no anime, no illustration, no text, no border, no watermark, no gore, portrait 3:4 aspect ratio.",
+    "notesGuidelines": "negative prompts must ban anime/manga/illustration and gore; include palette, domain mood, and species hints"
+  },
+  "generation": {
+    "maxKeywordsPerCard": 2,
+    "exampleCardsPerDomain": 5,
+    "maxBatchPerDomain": 50
+  },
+  "rarities": {
+    "source": "game/rarities.json",
+    "notes": "Tier ids (common, uncommon, …) match the DB enum. Display labels: Track, Scout, Hunter, Apex, Wildreach."
+  },
+  "status": {
+    "designApproved": true,
+    "notes": "Landing showcase: 12 slugs (4 featured + 8 collection). Run generate-showcase then images/apply. heroCardSlugs in theme/landing.json for compile."
+  }
+}

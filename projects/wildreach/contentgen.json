@@ -1,0 +1,103 @@
+{
+  "projectTitle": "Wildreach",
+  "visualPitch": "Photorealistic apex predators across four world ranges — golden savanna, monsoon delta, ember ridge, and boreal quiet — documentary wildlife cinematography (not illustration)",
+  "style": {
+    "aesthetic": "photorealistic cinematic wildlife still, BBC Earth / National Geographic production design, natural habitat plates and predator portraits, shallow depth of field, golden hour and blue hour lighting, physically based materials, earnest observe-the-hunt mood (not grimdark, not cartoon)",
+    "avoid": "anime, manga, cartoon, cel shading, watercolor, illustration, concept-art sketch look, painterly brush strokes, neon cyberpunk, purple sci-fi glow, blood, gore, hunting trophies, prominent human faces, zoo signage, text overlays, watermarks, anthropomorphic animals",
+    "palette": "savanna ochre and acacia gold, delta teal and jungle shadow, ridge ember and volcanic stone, boreal slate and frost white"
+  },
+  "image": {
+    "promptPrefix": "Photorealistic wide cinematic wildlife habitat still,",
+    "promptSuffix": "documentary wildlife photography plate, natural materials and lighting, empty habitat or single predator portrait as specified, no anime, no illustration, no gore, no people, no readable text, no watermark, 16:9 composition.",
+    "ctaSuffix": "photorealistic product/environment still for a trading card game website tile, natural habitat materials, atmospheric depth, documentary mood, no anime, no illustration, no text, no watermark, 16:9 composition.",
+    "gamemodelSuffix": "photorealistic square environment still for a trading card game website section, natural habitat materials, centered composition, documentary lighting, no anime, no illustration, no text, no watermark, 1:1 aspect ratio.",
+    "cardTypeSuffix": "photorealistic metallic emblem prop photo for a trading card game UI, brushed metal and enamel, clean silhouette, no anime, no illustration, no text, no watermark, 1:1 aspect ratio."
+  },
+  "outputSizes": {
+    "domain": { "width": 1672, "height": 941, "format": "png" },
+    "city": { "width": 1672, "height": 941, "format": "png" },
+    "cta": { "width": 1376, "height": 768, "format": "webp", "quality": 85 },
+    "gamemodel": { "width": 1024, "height": 1024, "format": "webp", "quality": 85 },
+    "card_type": { "width": 640, "height": 640, "format": "webp", "quality": 85 }
+  },
+  "domains": {
+    "serengeti": {
+      "visualIdentity": "golden savanna, acacia silhouettes, kopje watchpoints, dust haze at golden hour",
+      "palette": "#c49a3a, #8a6a2a, #e8dcc8, #2a2418",
+      "mood": "open pursuit, pride pressure, cheetah speed"
+    },
+    "bengal": {
+      "visualIdentity": "monsoon rainforest, river delta mist, mangrove roots, dappled teal water",
+      "palette": "#2a7a6a, #4a9a8a, #d8e8e0, #1a2824",
+      "mood": "river ambush, mangrove patience, sudden strike"
+    },
+    "patagonia": {
+      "visualIdentity": "granite ridges, ember coast at dusk, jungle canopy shadow, volcanic basalt",
+      "palette": "#b85a3a, #c49a5a, #e8dcd0, #2a1e18",
+      "mood": "ledge hunting, canopy stalking, harpy strikes"
+    },
+    "taiga": {
+      "visualIdentity": "boreal pine forest, snow ridges, pale arctic light, eagle thermals",
+      "palette": "#6a8a9a, #a8c0d0, #e8eef4, #1a2228",
+      "mood": "wolf patrol, snow-leopard patience, aerial finish"
+    }
+  },
+  "elementFolders": {
+    "serengeti": "savanna",
+    "bengal": "delta",
+    "patagonia": "ridge",
+    "taiga": "boreal"
+  },
+  "cta": {
+    "expand-collection": {
+      "prompt": "Photoreal neat stacks of wildlife trading cards on a weathered field journal beside binoculars, savanna golden hour, collection mood"
+    },
+    "buy-cards": {
+      "prompt": "Photoreal market display of wildlife trading cards on a clean wooden counter, delta teal and savanna gold accents, documentary product still"
+    },
+    "sealed-vaults": {
+      "prompt": "Photoreal sealed card bundles stacked in a rustic field crate, soft warm beacon light, anticipation of opening packs"
+    },
+    "discover-rare": {
+      "prompt": "Photoreal single foil wildlife trading card catching golden light on a mossy log, soft specular highlight, hunter tier mood"
+    },
+    "sell-cards": {
+      "prompt": "Photoreal organized binder and duplicate wildlife cards on a ranger desk beside a credit token tray"
+    },
+    "shape-strategy": {
+      "prompt": "Photoreal deck of wildlife trading cards arranged in a curve on a map table with faint range boundary overlays"
+    }
+  },
+  "gamemodel": {
+    "tactical-battles": {
+      "prompt": "Photoreal range map with small predator tokens on terrain zones, calm duel atmosphere, documentary field-research mood, no readable UI text"
+    },
+    "collectible-cards": {
+      "prompt": "Photoreal fan of physical wildlife trading cards over a soft out-of-focus montage of habitat zones across four continents"
+    },
+    "ranked-climb": {
+      "prompt": "Photoreal ascending mountain trail steps through boreal forest with soft golden wayfinding glow at dawn"
+    }
+  },
+  "cardTypes": {
+    "uncommon": {
+      "label": "Scout",
+      "accent": "#4a9a8a",
+      "prompt": "Photoreal machined teal enamel scout badge emblem prop, brushed metal, Scout tier icon"
+    },
+    "rare": {
+      "label": "Hunter",
+      "accent": "#c49a3a",
+      "prompt": "Photoreal gold hunter crest emblem prop with thin metal edge, Hunter tier icon"
+    },
+    "epic": {
+      "label": "Apex",
+      "accent": "#b85a3a",
+      "prompt": "Photoreal ember-red apex ring emblem prop with soft golden radiance, Apex tier icon"
+    }
+  },
+  "generation": {
+    "sourceOfTruth": "game/scenes.json",
+    "showcaseCompileEnv": "FRONTEND_SHOWCASE_ONLY=1"
+  }
+}

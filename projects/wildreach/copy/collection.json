@@ -1,0 +1,21 @@
+{
+  "title": "Wildreach Catalog",
+  "description": "Every card is a calibrated choice — drawn from Savanna, Delta, Ridge, and Boreal ranges, tuned for precise play, and expanded every season. Explore a living collection built for observers and ladder climbers alike.",
+  "backgroundImage": "cities/delta/delta_city_01_monsoon_canopy.png",
+  "stats": [
+    { "id": "catalog", "value": "600+", "label": "Unique Cards" },
+    { "id": "rarity", "value": "5", "label": "Print Tiers" },
+    { "id": "strategies", "value": "∞", "label": "Deck Strategies" },
+    { "id": "monthly", "value": "25+", "label": "New Cards Monthly" }
+  ],
+  "cardSlugs": [
+    "serengeti_card_02_leopard_shadow",
+    "bengal_card_02_mangrove_croc",
+    "patagonia_card_02_jaguar_emerald",
+    "taiga_card_02_snow_leopard",
+    "serengeti_card_03_cheetah_gust",
+    "bengal_card_03_clouded_leopard",
+    "patagonia_card_03_harpy_strike",
+    "taiga_card_03_golden_eagle"
+  ]
+}

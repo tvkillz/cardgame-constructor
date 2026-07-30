@@ -1,0 +1,62 @@
+{
+  "defaults": {
+    "arenaLocationId": "bengal",
+    "lobbyLocationId": "serengeti"
+  },
+  "locations": [
+    {
+      "id": "serengeti",
+      "name": "Serengeti",
+      "domainId": "serengeti",
+      "categoryId": "earth",
+      "glowColor": "#c49a3a",
+      "featuredCardSlug": "serengeti_card_01_lioness_sentinel",
+      "epithet": "The Golden Veld",
+      "short": "The Golden Veld — open pursuit, pride pressure, and cheetah speed across sun-warmed grass.",
+      "imageAsset": "cities/savanna/savanna_city_01_golden_veld.png",
+      "backgroundImageAsset": "cities/savanna/savanna_city_02_kopje_watch.png"
+    },
+    {
+      "id": "bengal",
+      "name": "Bengal",
+      "domainId": "bengal",
+      "categoryId": "water",
+      "glowColor": "#2a7a6a",
+      "featuredCardSlug": "bengal_card_01_river_tiger",
+      "epithet": "The Delta Veil",
+      "short": "The Delta Veil — river ambush, mangrove patience, and sudden strikes from monsoon shadow.",
+      "imageAsset": "cities/delta/delta_city_01_monsoon_canopy.png",
+      "backgroundImageAsset": "cities/delta/delta_city_02_delta_mist.png"
+    },
+    {
+      "id": "patagonia",
+      "name": "Patagonia",
+      "domainId": "patagonia",
+      "categoryId": "fire",
+      "glowColor": "#b85a3a",
+      "featuredCardSlug": "patagonia_card_01_ridge_puma",
+      "epithet": "The Ember Ridge",
+      "short": "The Ember Ridge — granite ledges, canopy stalking, and harpy strikes above volcanic coast.",
+      "imageAsset": "cities/ridge/ridge_city_01_granite_ridge.png",
+      "backgroundImageAsset": "cities/ridge/ridge_city_02_ember_coast.png"
+    },
+    {
+      "id": "taiga",
+      "name": "Taiga",
+      "domainId": "taiga",
+      "categoryId": "air",
+      "glowColor": "#6a8a9a",
+      "featuredCardSlug": "taiga_card_01_wolf_patrol",
+      "epithet": "The Boreal Quiet",
+      "short": "The Boreal Quiet — wolf patrols, snow-leopard patience, and golden-eagle finishes on cold wind.",
+      "imageAsset": "cities/boreal/boreal_city_01_boreal_silence.png",
+      "backgroundImageAsset": "cities/boreal/boreal_city_02_snow_ridge.png"
+    }
+  ],
+  "lore": {
+    "global": {
+      "attack": "Strike",
+      "defense": "Stamina"
+    }
+  }
+}

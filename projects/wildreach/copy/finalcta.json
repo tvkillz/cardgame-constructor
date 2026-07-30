@@ -1,0 +1,16 @@
+{
+  "title": "Hold the Range",
+  "subtitle": "Tour the ranges. Observe the hunt.",
+  "description": "Join a community of observers, market traders, and ladder climbers who compete with patience. Collect predators, shape clean strategies, and leave your mark on the four ranges of Wildreach.",
+  "buttonLabel": "Play Now",
+  "route": "play",
+  "backgroundImage": "cities/boreal/boreal_city_03_eagle_thermals.png",
+  "siege": {
+    "title": "The Range Season",
+    "stats": [
+      { "id": "players", "value": "12K+", "label": "Observers" },
+      { "id": "battles", "value": "48K+", "label": "Daily Hunts" },
+      { "id": "cards", "value": "2M+", "label": "Cards Collected" }
+    ]
+  }
+}

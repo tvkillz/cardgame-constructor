@@ -1,0 +1,8 @@
+{
+  "categories": [
+    { "id": "earth", "label": "Savanna", "locationIds": ["serengeti"] },
+    { "id": "water", "label": "Delta", "locationIds": ["bengal"] },
+    { "id": "fire", "label": "Ridge", "locationIds": ["patagonia"] },
+    { "id": "air", "label": "Boreal", "locationIds": ["taiga"] }
+  ]
+}

@@ -1,0 +1,581 @@
+{
+  "meta": {
+    "project": "wildreach",
+    "generatedAt": "2026-07-30T10:06:37.885Z",
+    "reference": "voidborn asset sizes (domains/cities 1672×941 png, cta 1376×768 webp, gamemodel 1024×1024 webp, card_types 640×640 webp)",
+    "showcaseCompileEnv": "FRONTEND_SHOWCASE_ONLY=1"
+  },
+  "assets": [
+    {
+      "id": "serengeti_domain",
+      "kind": "domain",
+      "path": "domains/savanna_domain.png",
+      "title": "Serengeti Domain",
+      "domain": null,
+      "notes": "Photorealistic East African savanna at golden hour. Acacia silhouettes, warm ochre grass, distant dust haze, documentary wildlife cinematography. Empty habitat plate — no animals in frame. No people, no text, no watermark, no anime, no illustration.",
+      "slug": "serengeti_domain",
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "prompt": "Photorealistic wide cinematic wildlife habitat still, Photorealistic East African savanna at golden hour. Acacia silhouettes, warm ochre grass, distant dust haze, documentary wildlife cinematography. Empty habitat plate — no animals in frame. No people, no text, no watermark, no anime, no illustration. photorealistic cinematic wildlife still, BBC Earth / National Geographic production design, natural habitat plates and predator portraits, shallow depth of field, golden hour and blue hour lighting, physically based materials, earnest observe-the-hunt mood (not grimdark, not cartoon) Avoid: anime, manga, cartoon, cel shading, watercolor, illustration, concept-art sketch look, painterly brush strokes, neon cyberpunk, purple sci-fi glow, blood, gore, hunting trophies, prominent human faces, zoo signage, text overlays, watermarks, anthropomorphic animals. documentary wildlife photography plate, natural materials and lighting, empty habitat or single predator portrait as specified, no anime, no illustration, no gore, no people, no readable text, no watermark, 16:9 composition.",
+      "stagingFile": "serengeti_domain.png"
+    },
+    {
+      "id": "bengal_domain",
+      "kind": "domain",
+      "path": "domains/delta_domain.png",
+      "title": "Bengal Domain",
+      "domain": null,
+      "notes": "Photorealistic South Asian river delta and monsoon rainforest. Mangrove roots, mist over still water, teal shadow and humid air. Empty habitat plate. No people, no text, no watermark, no anime, no illustration.",
+      "slug": "bengal_domain",
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "prompt": "Photorealistic wide cinematic wildlife habitat still, Photorealistic South Asian river delta and monsoon rainforest. Mangrove roots, mist over still water, teal shadow and humid air. Empty habitat plate. No people, no text, no watermark, no anime, no illustration. photorealistic cinematic wildlife still, BBC Earth / National Geographic production design, natural habitat plates and predator portraits, shallow depth of field, golden hour and blue hour lighting, physically based materials, earnest observe-the-hunt mood (not grimdark, not cartoon) Avoid: anime, manga, cartoon, cel shading, watercolor, illustration, concept-art sketch look, painterly brush strokes, neon cyberpunk, purple sci-fi glow, blood, gore, hunting trophies, prominent human faces, zoo signage, text overlays, watermarks, anthropomorphic animals. documentary wildlife photography plate, natural materials and lighting, empty habitat or single predator portrait as specified, no anime, no illustration, no gore, no people, no readable text, no watermark, 16:9 composition.",
+      "stagingFile": "bengal_domain.png"
+    },
+    {
+      "id": "patagonia_domain",
+      "kind": "domain",
+      "path": "domains/ridge_domain.png",
+      "title": "Patagonia Domain",
+      "domain": null,
+      "notes": "Photorealistic Patagonian granite ridge at crimson dusk. Wind-scoured stone, ember sky, distant steppe. Empty habitat plate. No people, no text, no watermark, no anime, no illustration.",
+      "slug": "patagonia_domain",
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "prompt": "Photorealistic wide cinematic wildlife habitat still, Photorealistic Patagonian granite ridge at crimson dusk. Wind-scoured stone, ember sky, distant steppe. Empty habitat plate. No people, no text, no watermark, no anime, no illustration. photorealistic cinematic wildlife still, BBC Earth / National Geographic production design, natural habitat plates and predator portraits, shallow depth of field, golden hour and blue hour lighting, physically based materials, earnest observe-the-hunt mood (not grimdark, not cartoon) Avoid: anime, manga, cartoon, cel shading, watercolor, illustration, concept-art sketch look, painterly brush strokes, neon cyberpunk, purple sci-fi glow, blood, gore, hunting trophies, prominent human faces, zoo signage, text overlays, watermarks, anthropomorphic animals. documentary wildlife photography plate, natural materials and lighting, empty habitat or single predator portrait as specified, no anime, no illustration, no gore, no people, no readable text, no watermark, 16:9 composition.",
+      "stagingFile": "patagonia_domain.png"
+    },
+    {
+      "id": "taiga_domain",
+      "kind": "domain",
+      "path": "domains/boreal_domain.png",
+      "title": "Taiga Domain",
+      "domain": null,
+      "notes": "Photorealistic boreal forest and snow ridge at blue hour. Pine silhouettes, pale arctic light, frost on branches. Empty habitat plate. No people, no text, no watermark, no anime, no illustration.",
+      "slug": "taiga_domain",
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "prompt": "Photorealistic wide cinematic wildlife habitat still, Photorealistic boreal forest and snow ridge at blue hour. Pine silhouettes, pale arctic light, frost on branches. Empty habitat plate. No people, no text, no watermark, no anime, no illustration. photorealistic cinematic wildlife still, BBC Earth / National Geographic production design, natural habitat plates and predator portraits, shallow depth of field, golden hour and blue hour lighting, physically based materials, earnest observe-the-hunt mood (not grimdark, not cartoon) Avoid: anime, manga, cartoon, cel shading, watercolor, illustration, concept-art sketch look, painterly brush strokes, neon cyberpunk, purple sci-fi glow, blood, gore, hunting trophies, prominent human faces, zoo signage, text overlays, watermarks, anthropomorphic animals. documentary wildlife photography plate, natural materials and lighting, empty habitat or single predator portrait as specified, no anime, no illustration, no gore, no people, no readable text, no watermark, 16:9 composition.",
+      "stagingFile": "taiga_domain.png"
+    },
+    {
+      "id": "savanna_city_01_golden_veld",
+      "kind": "city",
+      "path": "cities/savanna/savanna_city_01_golden_veld.png",
+      "title": "Golden Veld",
+      "domain": "serengeti",
+      "notes": "Photorealistic golden savanna grassland at dawn, acacia trees, warm ochre light, documentary still. No animals, no people, no text, no anime.",
+      "slug": "savanna_city_01_golden_veld",
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "prompt": "Photorealistic wide cinematic wildlife habitat still, Photorealistic golden savanna grassland at dawn, acacia trees, warm ochre light, documentary still. No animals, no people, no text, no anime. golden savanna, acacia silhouettes, kopje watchpoints, dust haze at golden hour Palette: #c49a3a, #8a6a2a, #e8dcc8, #2a2418. Mood: open pursuit, pride pressure, cheetah speed. photorealistic cinematic wildlife still, BBC Earth / National Geographic production design, natural habitat plates and predator portraits, shallow depth of field, golden hour and blue hour lighting, physically based materials, earnest observe-the-hunt mood (not grimdark, not cartoon) Avoid: anime, manga, cartoon, cel shading, watercolor, illustration, concept-art sketch look, painterly brush strokes, neon cyberpunk, purple sci-fi glow, blood, gore, hunting trophies, prominent human faces, zoo signage, text overlays, watermarks, anthropomorphic animals. documentary wildlife photography plate, natural materials and lighting, empty habitat or single predator portrait as specified, no anime, no illustration, no gore, no people, no readable text, no watermark, 16:9 composition.",
+      "stagingFile": "savanna_city_01_golden_veld.png"
+    },
+    {
+      "id": "savanna_city_02_kopje_watch",
+      "kind": "city",
+      "path": "cities/savanna/savanna_city_02_kopje_watch.png",
+      "title": "Kopje Watch",
+      "domain": "serengeti",
+      "notes": "Photorealistic granite kopje rising from African plain, lookout vantage, golden hour. No animals, no people, no text, no anime.",
+      "slug": "savanna_city_02_kopje_watch",
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "prompt": "Photorealistic wide cinematic wildlife habitat still, Photorealistic granite kopje rising from African plain, lookout vantage, golden hour. No animals, no people, no text, no anime. golden savanna, acacia silhouettes, kopje watchpoints, dust haze at golden hour Palette: #c49a3a, #8a6a2a, #e8dcc8, #2a2418. Mood: open pursuit, pride pressure, cheetah speed. photorealistic cinematic wildlife still, BBC Earth / National Geographic production design, natural habitat plates and predator portraits, shallow depth of field, golden hour and blue hour lighting, physically based materials, earnest observe-the-hunt mood (not grimdark, not cartoon) Avoid: anime, manga, cartoon, cel shading, watercolor, illustration, concept-art sketch look, painterly brush strokes, neon cyberpunk, purple sci-fi glow, blood, gore, hunting trophies, prominent human faces, zoo signage, text overlays, watermarks, anthropomorphic animals. documentary wildlife photography plate, natural materials and lighting, empty habitat or single predator portrait as specified, no anime, no illustration, no gore, no people, no readable text, no watermark, 16:9 composition.",
+      "stagingFile": "savanna_city_02_kopje_watch.png"
+    },
+    {
+      "id": "savanna_city_03_waterhole_dusk",
+      "kind": "city",
+      "path": "cities/savanna/savanna_city_03_waterhole_dusk.png",
+      "title": "Waterhole Dusk",
+      "domain": "serengeti",
+      "notes": "Photorealistic African waterhole at dusk, muddy banks, still water reflecting sunset. No animals, no people, no text, no anime.",
+      "slug": "savanna_city_03_waterhole_dusk",
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "prompt": "Photorealistic wide cinematic wildlife habitat still, Photorealistic African waterhole at dusk, muddy banks, still water reflecting sunset. No animals, no people, no text, no anime. golden savanna, acacia silhouettes, kopje watchpoints, dust haze at golden hour Palette: #c49a3a, #8a6a2a, #e8dcc8, #2a2418. Mood: open pursuit, pride pressure, cheetah speed. photorealistic cinematic wildlife still, BBC Earth / National Geographic production design, natural habitat plates and predator portraits, shallow depth of field, golden hour and blue hour lighting, physically based materials, earnest observe-the-hunt mood (not grimdark, not cartoon) Avoid: anime, manga, cartoon, cel shading, watercolor, illustration, concept-art sketch look, painterly brush strokes, neon cyberpunk, purple sci-fi glow, blood, gore, hunting trophies, prominent human faces, zoo signage, text overlays, watermarks, anthropomorphic animals. documentary wildlife photography plate, natural materials and lighting, empty habitat or single predator portrait as specified, no anime, no illustration, no gore, no people, no readable text, no watermark, 16:9 composition.",
+      "stagingFile": "savanna_city_03_waterhole_dusk.png"
+    },
+    {
+      "id": "delta_city_01_monsoon_canopy",
+      "kind": "city",
+      "path": "cities/delta/delta_city_01_monsoon_canopy.png",
+      "title": "Monsoon Canopy",
+      "domain": "bengal",
+      "notes": "Photorealistic monsoon rainforest canopy, filtered green light, humid atmosphere. No animals, no people, no text, no anime.",
+      "slug": "delta_city_01_monsoon_canopy",
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "prompt": "Photorealistic wide cinematic wildlife habitat still, Photorealistic monsoon rainforest canopy, filtered green light, humid atmosphere. No animals, no people, no text, no anime. monsoon rainforest, river delta mist, mangrove roots, dappled teal water Palette: #2a7a6a, #4a9a8a, #d8e8e0, #1a2824. Mood: river ambush, mangrove patience, sudden strike. photorealistic cinematic wildlife still, BBC Earth / National Geographic production design, natural habitat plates and predator portraits, shallow depth of field, golden hour and blue hour lighting, physically based materials, earnest observe-the-hunt mood (not grimdark, not cartoon) Avoid: anime, manga, cartoon, cel shading, watercolor, illustration, concept-art sketch look, painterly brush strokes, neon cyberpunk, purple sci-fi glow, blood, gore, hunting trophies, prominent human faces, zoo signage, text overlays, watermarks, anthropomorphic animals. documentary wildlife photography plate, natural materials and lighting, empty habitat or single predator portrait as specified, no anime, no illustration, no gore, no people, no readable text, no watermark, 16:9 composition.",
+      "stagingFile": "delta_city_01_monsoon_canopy.png"
+    },
+    {
+      "id": "delta_city_02_delta_mist",
+      "kind": "city",
+      "path": "cities/delta/delta_city_02_delta_mist.png",
+      "title": "Delta Mist",
+      "domain": "bengal",
+      "notes": "Photorealistic river delta mist through mangrove roots, still water, teal shadows. No animals, no people, no text, no anime.",
+      "slug": "delta_city_02_delta_mist",
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "prompt": "Photorealistic wide cinematic wildlife habitat still, Photorealistic river delta mist through mangrove roots, still water, teal shadows. No animals, no people, no text, no anime. monsoon rainforest, river delta mist, mangrove roots, dappled teal water Palette: #2a7a6a, #4a9a8a, #d8e8e0, #1a2824. Mood: river ambush, mangrove patience, sudden strike. photorealistic cinematic wildlife still, BBC Earth / National Geographic production design, natural habitat plates and predator portraits, shallow depth of field, golden hour and blue hour lighting, physically based materials, earnest observe-the-hunt mood (not grimdark, not cartoon) Avoid: anime, manga, cartoon, cel shading, watercolor, illustration, concept-art sketch look, painterly brush strokes, neon cyberpunk, purple sci-fi glow, blood, gore, hunting trophies, prominent human faces, zoo signage, text overlays, watermarks, anthropomorphic animals. documentary wildlife photography plate, natural materials and lighting, empty habitat or single predator portrait as specified, no anime, no illustration, no gore, no people, no readable text, no watermark, 16:9 composition.",
+      "stagingFile": "delta_city_02_delta_mist.png"
+    },
+    {
+      "id": "delta_city_03_river_crossing",
+      "kind": "city",
+      "path": "cities/delta/delta_city_03_river_crossing.png",
+      "title": "River Crossing",
+      "domain": "bengal",
+      "notes": "Photorealistic shallow river ford in Asian delta, reeds and dappled water. No animals, no people, no text, no anime.",
+      "slug": "delta_city_03_river_crossing",
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "prompt": "Photorealistic wide cinematic wildlife habitat still, Photorealistic shallow river ford in Asian delta, reeds and dappled water. No animals, no people, no text, no anime. monsoon rainforest, river delta mist, mangrove roots, dappled teal water Palette: #2a7a6a, #4a9a8a, #d8e8e0, #1a2824. Mood: river ambush, mangrove patience, sudden strike. photorealistic cinematic wildlife still, BBC Earth / National Geographic production design, natural habitat plates and predator portraits, shallow depth of field, golden hour and blue hour lighting, physically based materials, earnest observe-the-hunt mood (not grimdark, not cartoon) Avoid: anime, manga, cartoon, cel shading, watercolor, illustration, concept-art sketch look, painterly brush strokes, neon cyberpunk, purple sci-fi glow, blood, gore, hunting trophies, prominent human faces, zoo signage, text overlays, watermarks, anthropomorphic animals. documentary wildlife photography plate, natural materials and lighting, empty habitat or single predator portrait as specified, no anime, no illustration, no gore, no people, no readable text, no watermark, 16:9 composition.",
+      "stagingFile": "delta_city_03_river_crossing.png"
+    },
+    {
+      "id": "ridge_city_01_granite_ridge",
+      "kind": "city",
+      "path": "cities/ridge/ridge_city_01_granite_ridge.png",
+      "title": "Granite Ridge",
+      "domain": "patagonia",
+      "notes": "Photorealistic Patagonian granite ridge, wind-scoured stone, steppe below, crimson dusk sky. No animals, no people, no text, no anime.",
+      "slug": "ridge_city_01_granite_ridge",
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "prompt": "Photorealistic wide cinematic wildlife habitat still, Photorealistic Patagonian granite ridge, wind-scoured stone, steppe below, crimson dusk sky. No animals, no people, no text, no anime. granite ridges, ember coast at dusk, jungle canopy shadow, volcanic basalt Palette: #b85a3a, #c49a5a, #e8dcd0, #2a1e18. Mood: ledge hunting, canopy stalking, harpy strikes. photorealistic cinematic wildlife still, BBC Earth / National Geographic production design, natural habitat plates and predator portraits, shallow depth of field, golden hour and blue hour lighting, physically based materials, earnest observe-the-hunt mood (not grimdark, not cartoon) Avoid: anime, manga, cartoon, cel shading, watercolor, illustration, concept-art sketch look, painterly brush strokes, neon cyberpunk, purple sci-fi glow, blood, gore, hunting trophies, prominent human faces, zoo signage, text overlays, watermarks, anthropomorphic animals. documentary wildlife photography plate, natural materials and lighting, empty habitat or single predator portrait as specified, no anime, no illustration, no gore, no people, no readable text, no watermark, 16:9 composition.",
+      "stagingFile": "ridge_city_01_granite_ridge.png"
+    },
+    {
+      "id": "ridge_city_02_ember_coast",
+      "kind": "city",
+      "path": "cities/ridge/ridge_city_02_ember_coast.png",
+      "title": "Ember Coast",
+      "domain": "patagonia",
+      "notes": "Photorealistic volcanic coast at sunset, basalt cliffs, surf mist, ember sky. No animals, no people, no text, no anime.",
+      "slug": "ridge_city_02_ember_coast",
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "prompt": "Photorealistic wide cinematic wildlife habitat still, Photorealistic volcanic coast at sunset, basalt cliffs, surf mist, ember sky. No animals, no people, no text, no anime. granite ridges, ember coast at dusk, jungle canopy shadow, volcanic basalt Palette: #b85a3a, #c49a5a, #e8dcd0, #2a1e18. Mood: ledge hunting, canopy stalking, harpy strikes. photorealistic cinematic wildlife still, BBC Earth / National Geographic production design, natural habitat plates and predator portraits, shallow depth of field, golden hour and blue hour lighting, physically based materials, earnest observe-the-hunt mood (not grimdark, not cartoon) Avoid: anime, manga, cartoon, cel shading, watercolor, illustration, concept-art sketch look, painterly brush strokes, neon cyberpunk, purple sci-fi glow, blood, gore, hunting trophies, prominent human faces, zoo signage, text overlays, watermarks, anthropomorphic animals. documentary wildlife photography plate, natural materials and lighting, empty habitat or single predator portrait as specified, no anime, no illustration, no gore, no people, no readable text, no watermark, 16:9 composition.",
+      "stagingFile": "ridge_city_02_ember_coast.png"
+    },
+    {
+      "id": "ridge_city_03_canopy_shadow",
+      "kind": "city",
+      "path": "cities/ridge/ridge_city_03_canopy_shadow.png",
+      "title": "Canopy Shadow",
+      "domain": "patagonia",
+      "notes": "Photorealistic jungle forest floor, dappled ember light through canopy, leaf litter. No animals, no people, no text, no anime.",
+      "slug": "ridge_city_03_canopy_shadow",
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "prompt": "Photorealistic wide cinematic wildlife habitat still, Photorealistic jungle forest floor, dappled ember light through canopy, leaf litter. No animals, no people, no text, no anime. granite ridges, ember coast at dusk, jungle canopy shadow, volcanic basalt Palette: #b85a3a, #c49a5a, #e8dcd0, #2a1e18. Mood: ledge hunting, canopy stalking, harpy strikes. photorealistic cinematic wildlife still, BBC Earth / National Geographic production design, natural habitat plates and predator portraits, shallow depth of field, golden hour and blue hour lighting, physically based materials, earnest observe-the-hunt mood (not grimdark, not cartoon) Avoid: anime, manga, cartoon, cel shading, watercolor, illustration, concept-art sketch look, painterly brush strokes, neon cyberpunk, purple sci-fi glow, blood, gore, hunting trophies, prominent human faces, zoo signage, text overlays, watermarks, anthropomorphic animals. documentary wildlife photography plate, natural materials and lighting, empty habitat or single predator portrait as specified, no anime, no illustration, no gore, no people, no readable text, no watermark, 16:9 composition.",
+      "stagingFile": "ridge_city_03_canopy_shadow.png"
+    },
+    {
+      "id": "boreal_city_01_boreal_silence",
+      "kind": "city",
+      "path": "cities/boreal/boreal_city_01_boreal_silence.png",
+      "title": "Boreal Silence",
+      "domain": "taiga",
+      "notes": "Photorealistic snow-dusted boreal pine forest, pale arctic light, quiet trail. No animals, no people, no text, no anime.",
+      "slug": "boreal_city_01_boreal_silence",
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "prompt": "Photorealistic wide cinematic wildlife habitat still, Photorealistic snow-dusted boreal pine forest, pale arctic light, quiet trail. No animals, no people, no text, no anime. boreal pine forest, snow ridges, pale arctic light, eagle thermals Palette: #6a8a9a, #a8c0d0, #e8eef4, #1a2228. Mood: wolf patrol, snow-leopard patience, aerial finish. photorealistic cinematic wildlife still, BBC Earth / National Geographic production design, natural habitat plates and predator portraits, shallow depth of field, golden hour and blue hour lighting, physically based materials, earnest observe-the-hunt mood (not grimdark, not cartoon) Avoid: anime, manga, cartoon, cel shading, watercolor, illustration, concept-art sketch look, painterly brush strokes, neon cyberpunk, purple sci-fi glow, blood, gore, hunting trophies, prominent human faces, zoo signage, text overlays, watermarks, anthropomorphic animals. documentary wildlife photography plate, natural materials and lighting, empty habitat or single predator portrait as specified, no anime, no illustration, no gore, no people, no readable text, no watermark, 16:9 composition.",
+      "stagingFile": "boreal_city_01_boreal_silence.png"
+    },
+    {
+      "id": "boreal_city_02_snow_ridge",
+      "kind": "city",
+      "path": "cities/boreal/boreal_city_02_snow_ridge.png",
+      "title": "Snow Ridge",
+      "domain": "taiga",
+      "notes": "Photorealistic alpine snow ridge at blue hour, narrow ledge, distant forest below. No animals, no people, no text, no anime.",
+      "slug": "boreal_city_02_snow_ridge",
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "prompt": "Photorealistic wide cinematic wildlife habitat still, Photorealistic alpine snow ridge at blue hour, narrow ledge, distant forest below. No animals, no people, no text, no anime. boreal pine forest, snow ridges, pale arctic light, eagle thermals Palette: #6a8a9a, #a8c0d0, #e8eef4, #1a2228. Mood: wolf patrol, snow-leopard patience, aerial finish. photorealistic cinematic wildlife still, BBC Earth / National Geographic production design, natural habitat plates and predator portraits, shallow depth of field, golden hour and blue hour lighting, physically based materials, earnest observe-the-hunt mood (not grimdark, not cartoon) Avoid: anime, manga, cartoon, cel shading, watercolor, illustration, concept-art sketch look, painterly brush strokes, neon cyberpunk, purple sci-fi glow, blood, gore, hunting trophies, prominent human faces, zoo signage, text overlays, watermarks, anthropomorphic animals. documentary wildlife photography plate, natural materials and lighting, empty habitat or single predator portrait as specified, no anime, no illustration, no gore, no people, no readable text, no watermark, 16:9 composition.",
+      "stagingFile": "boreal_city_02_snow_ridge.png"
+    },
+    {
+      "id": "boreal_city_03_eagle_thermals",
+      "kind": "city",
+      "path": "cities/boreal/boreal_city_03_eagle_thermals.png",
+      "title": "Eagle Thermals",
+      "domain": "taiga",
+      "notes": "Photorealistic open sky above boreal forest, cold thermals, distant treeline. No animals, no people, no text, no anime.",
+      "slug": "boreal_city_03_eagle_thermals",
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "prompt": "Photorealistic wide cinematic wildlife habitat still, Photorealistic open sky above boreal forest, cold thermals, distant treeline. No animals, no people, no text, no anime. boreal pine forest, snow ridges, pale arctic light, eagle thermals Palette: #6a8a9a, #a8c0d0, #e8eef4, #1a2228. Mood: wolf patrol, snow-leopard patience, aerial finish. photorealistic cinematic wildlife still, BBC Earth / National Geographic production design, natural habitat plates and predator portraits, shallow depth of field, golden hour and blue hour lighting, physically based materials, earnest observe-the-hunt mood (not grimdark, not cartoon) Avoid: anime, manga, cartoon, cel shading, watercolor, illustration, concept-art sketch look, painterly brush strokes, neon cyberpunk, purple sci-fi glow, blood, gore, hunting trophies, prominent human faces, zoo signage, text overlays, watermarks, anthropomorphic animals. documentary wildlife photography plate, natural materials and lighting, empty habitat or single predator portrait as specified, no anime, no illustration, no gore, no people, no readable text, no watermark, 16:9 composition.",
+      "stagingFile": "boreal_city_03_eagle_thermals.png"
+    },
+    {
+      "id": "expand-collection",
+      "kind": "cta",
+      "path": "cta1/expand-collection.webp",
+      "title": "Grow Your Binder",
+      "domain": null,
+      "source": {
+        "id": "expand-collection",
+        "title": "Grow Your Binder",
+        "description": "Add depth across world ranges and seasonal releases. Every new pull opens another line you can run when the ladder shifts.",
+        "image": "cta1/expand-collection.webp",
+        "glowColor": "#c49a3a"
+      },
+      "width": 1376,
+      "height": 768,
+      "format": "webp",
+      "quality": 85,
+      "prompt": "Photorealistic wide cinematic wildlife habitat still, Photoreal neat stacks of wildlife trading cards on a weathered field journal beside binoculars, savanna golden hour, collection mood photorealistic product/environment still for a trading card game website tile, natural habitat materials, atmospheric depth, documentary mood, no anime, no illustration, no text, no watermark, 16:9 composition.",
+      "stagingFile": "cta__expand-collection.png"
+    },
+    {
+      "id": "buy-cards",
+      "kind": "cta",
+      "path": "cta1/buy-cards.webp",
+      "title": "Precise Shopping",
+      "domain": null,
+      "source": {
+        "id": "buy-cards",
+        "title": "Precise Shopping",
+        "description": "Filter the catalog, find the missing predator, and buy exactly what your curve has been waiting for — clean Strike, no noise.",
+        "image": "cta1/buy-cards.webp",
+        "glowColor": "#2a7a6a"
+      },
+      "width": 1376,
+      "height": 768,
+      "format": "webp",
+      "quality": 85,
+      "prompt": "Photorealistic wide cinematic wildlife habitat still, Photoreal market display of wildlife trading cards on a clean wooden counter, delta teal and savanna gold accents, documentary product still photorealistic product/environment still for a trading card game website tile, natural habitat materials, atmospheric depth, documentary mood, no anime, no illustration, no text, no watermark, 16:9 composition.",
+      "stagingFile": "cta__buy-cards.png"
+    },
+    {
+      "id": "sealed-vaults",
+      "kind": "cta",
+      "path": "cta1/sealed-vaults.webp",
+      "title": "Open Sealed Bundles",
+      "domain": null,
+      "source": {
+        "id": "sealed-vaults",
+        "title": "Open Sealed Bundles",
+        "description": "Crack sealed products and chase a standout pull. Each unopened bundle is a small surprise — apex card or trade bait.",
+        "image": "cta1/sealed-vaults.webp",
+        "glowColor": "#b85a3a"
+      },
+      "width": 1376,
+      "height": 768,
+      "format": "webp",
+      "quality": 85,
+      "prompt": "Photorealistic wide cinematic wildlife habitat still, Photoreal sealed card bundles stacked in a rustic field crate, soft warm beacon light, anticipation of opening packs photorealistic product/environment still for a trading card game website tile, natural habitat materials, atmospheric depth, documentary mood, no anime, no illustration, no text, no watermark, 16:9 composition.",
+      "stagingFile": "cta__sealed-vaults.png"
+    },
+    {
+      "id": "discover-rare",
+      "kind": "cta",
+      "path": "cta1/discover-rare.webp",
+      "title": "Chase Hunter Prints",
+      "domain": null,
+      "source": {
+        "id": "discover-rare",
+        "title": "Chase Hunter Prints",
+        "description": "Hunt foils, Apex cards, and signature prints — the kind of predator that rewrites a deck and makes rivals pause.",
+        "image": "cta1/discover-rare.webp",
+        "glowColor": "#c49a3a"
+      },
+      "width": 1376,
+      "height": 768,
+      "format": "webp",
+      "quality": 85,
+      "prompt": "Photorealistic wide cinematic wildlife habitat still, Photoreal single foil wildlife trading card catching golden light on a mossy log, soft specular highlight, hunter tier mood photorealistic product/environment still for a trading card game website tile, natural habitat materials, atmospheric depth, documentary mood, no anime, no illustration, no text, no watermark, 16:9 composition.",
+      "stagingFile": "cta__discover-rare.png"
+    },
+    {
+      "id": "sell-cards",
+      "kind": "cta",
+      "path": "cta1/sell-cards.webp",
+      "title": "Pass Along Duplicates",
+      "domain": null,
+      "source": {
+        "id": "sell-cards",
+        "title": "Pass Along Duplicates",
+        "description": "Extras still have value. List them, fund the next upgrade, and keep your binder lean for the decks you actually play.",
+        "image": "cta1/sell-cards.webp",
+        "glowColor": "#c49a3a"
+      },
+      "width": 1376,
+      "height": 768,
+      "format": "webp",
+      "quality": 85,
+      "prompt": "Photorealistic wide cinematic wildlife habitat still, Photoreal organized binder and duplicate wildlife cards on a ranger desk beside a credit token tray photorealistic product/environment still for a trading card game website tile, natural habitat materials, atmospheric depth, documentary mood, no anime, no illustration, no text, no watermark, 16:9 composition.",
+      "stagingFile": "cta__sell-cards.png"
+    },
+    {
+      "id": "shape-strategy",
+      "kind": "cta",
+      "path": "cta1/shape-strategy.webp",
+      "title": "Tune Your Range",
+      "domain": null,
+      "source": {
+        "id": "shape-strategy",
+        "title": "Tune Your Range",
+        "description": "Prototype lists in the field room — test counters, stress synergies, and lock a 30-card answer to the ladder's current pace.",
+        "image": "cta1/shape-strategy.webp",
+        "glowColor": "#8a6a4a"
+      },
+      "width": 1376,
+      "height": 768,
+      "format": "webp",
+      "quality": 85,
+      "prompt": "Photorealistic wide cinematic wildlife habitat still, Photoreal deck of wildlife trading cards arranged in a curve on a map table with faint range boundary overlays photorealistic product/environment still for a trading card game website tile, natural habitat materials, atmospheric depth, documentary mood, no anime, no illustration, no text, no watermark, 16:9 composition.",
+      "stagingFile": "cta__shape-strategy.png"
+    },
+    {
+      "id": "tactical-battles",
+      "kind": "gamemodel",
+      "path": "gamemodel/tactical-battles.webp",
+      "title": "Range Tactics",
+      "domain": null,
+      "source": {
+        "id": "tactical-battles",
+        "title": "Range Tactics",
+        "description": "Trade lines on a living board where timing, territorial pressure, and burst windows matter more than raw stats. Win the turn before you win the hunt.",
+        "image": "gamemodel/tactical-battles.webp",
+        "glowColor": "#2a7a6a"
+      },
+      "width": 1024,
+      "height": 1024,
+      "format": "webp",
+      "quality": 85,
+      "prompt": "Photorealistic wide cinematic wildlife habitat still, Photoreal range map with small predator tokens on terrain zones, calm duel atmosphere, documentary field-research mood, no readable UI text photorealistic square environment still for a trading card game website section, natural habitat materials, centered composition, documentary lighting, no anime, no illustration, no text, no watermark, 1:1 aspect ratio.",
+      "stagingFile": "gamemodel__tactical-battles.png"
+    },
+    {
+      "id": "collectible-cards",
+      "kind": "gamemodel",
+      "path": "gamemodel/collectible-cards.webp",
+      "title": "Predator Collecting",
+      "domain": null,
+      "source": {
+        "id": "collectible-cards",
+        "title": "Predator Collecting",
+        "description": "Pull hunters from Serengeti, Bengal, Patagonia, and Taiga — then stitch keywords, curves, and finishers into a list that rewards patience.",
+        "image": "gamemodel/collectible-cards.webp",
+        "glowColor": "#c49a3a"
+      },
+      "width": 1024,
+      "height": 1024,
+      "format": "webp",
+      "quality": 85,
+      "prompt": "Photorealistic wide cinematic wildlife habitat still, Photoreal fan of physical wildlife trading cards over a soft out-of-focus montage of habitat zones across four continents photorealistic square environment still for a trading card game website section, natural habitat materials, centered composition, documentary lighting, no anime, no illustration, no text, no watermark, 1:1 aspect ratio.",
+      "stagingFile": "gamemodel__collectible-cards.png"
+    },
+    {
+      "id": "ranked-climb",
+      "kind": "gamemodel",
+      "path": "gamemodel/ranked-climb.webp",
+      "title": "Seasonal Ladder",
+      "domain": null,
+      "source": {
+        "id": "ranked-climb",
+        "title": "Seasonal Ladder",
+        "description": "Climb seasonal tiers, learn from losses, and refine your lines. The summit rewards observers who adapt without losing the range.",
+        "image": "gamemodel/ranked-climb.webp",
+        "glowColor": "#b85a3a"
+      },
+      "width": 1024,
+      "height": 1024,
+      "format": "webp",
+      "quality": 85,
+      "prompt": "Photorealistic wide cinematic wildlife habitat still, Photoreal ascending mountain trail steps through boreal forest with soft golden wayfinding glow at dawn photorealistic square environment still for a trading card game website section, natural habitat materials, centered composition, documentary lighting, no anime, no illustration, no text, no watermark, 1:1 aspect ratio.",
+      "stagingFile": "gamemodel__ranked-climb.png"
+    },
+    {
+      "id": "uncommon",
+      "kind": "card_type",
+      "path": "card_types/uncommon.webp",
+      "title": "Scout",
+      "domain": null,
+      "width": 640,
+      "height": 640,
+      "format": "webp",
+      "quality": 85,
+      "prompt": "Photoreal machined teal enamel scout badge emblem prop, brushed metal, Scout tier icon photorealistic metallic emblem prop photo for a trading card game UI, brushed metal and enamel, clean silhouette, no anime, no illustration, no text, no watermark, 1:1 aspect ratio.",
+      "stagingFile": "card_type__uncommon.png"
+    },
+    {
+      "id": "rare",
+      "kind": "card_type",
+      "path": "card_types/rare.webp",
+      "title": "Hunter",
+      "domain": null,
+      "width": 640,
+      "height": 640,
+      "format": "webp",
+      "quality": 85,
+      "prompt": "Photoreal gold hunter crest emblem prop with thin metal edge, Hunter tier icon photorealistic metallic emblem prop photo for a trading card game UI, brushed metal and enamel, clean silhouette, no anime, no illustration, no text, no watermark, 1:1 aspect ratio.",
+      "stagingFile": "card_type__rare.png"
+    },
+    {
+      "id": "epic",
+      "kind": "card_type",
+      "path": "card_types/epic.webp",
+      "title": "Apex",
+      "domain": null,
+      "width": 640,
+      "height": 640,
+      "format": "webp",
+      "quality": 85,
+      "prompt": "Photoreal ember-red apex ring emblem prop with soft golden radiance, Apex tier icon photorealistic metallic emblem prop photo for a trading card game UI, brushed metal and enamel, clean silhouette, no anime, no illustration, no text, no watermark, 1:1 aspect ratio.",
+      "stagingFile": "card_type__epic.png"
+    }
+  ],
+  "showcaseCards": [
+    {
+      "id": "serengeti_card_01_lioness_sentinel",
+      "kind": "showcase_card",
+      "path": "cards/serengeti/serengeti_card_01_lioness_sentinel.png",
+      "title": "Lioness Sentinel",
+      "domain": "serengeti",
+      "managedBy": "cardgen",
+      "note": "Generated via cardgen; required for FRONTEND_SHOWCASE_ONLY compile (hero + collection)."
+    },
+    {
+      "id": "bengal_card_01_river_tiger",
+      "kind": "showcase_card",
+      "path": "cards/bengal/bengal_card_01_river_tiger.png",
+      "title": "River Tiger",
+      "domain": "bengal",
+      "managedBy": "cardgen",
+      "note": "Generated via cardgen; required for FRONTEND_SHOWCASE_ONLY compile (hero + collection)."
+    },
+    {
+      "id": "patagonia_card_01_ridge_puma",
+      "kind": "showcase_card",
+      "path": "cards/patagonia/patagonia_card_01_ridge_puma.png",
+      "title": "Ridge Puma",
+      "domain": "patagonia",
+      "managedBy": "cardgen",
+      "note": "Generated via cardgen; required for FRONTEND_SHOWCASE_ONLY compile (hero + collection)."
+    },
+    {
+      "id": "taiga_card_01_wolf_patrol",
+      "kind": "showcase_card",
+      "path": "cards/taiga/taiga_card_01_wolf_patrol.png",
+      "title": "Wolf Patrol",
+      "domain": "taiga",
+      "managedBy": "cardgen",
+      "note": "Generated via cardgen; required for FRONTEND_SHOWCASE_ONLY compile (hero + collection)."
+    },
+    {
+      "id": "serengeti_card_02_leopard_shadow",
+      "kind": "showcase_card",
+      "path": "cards/serengeti/serengeti_card_02_leopard_shadow.png",
+      "title": "Leopard Shade",
+      "domain": "serengeti",
+      "managedBy": "cardgen",
+      "note": "Generated via cardgen; required for FRONTEND_SHOWCASE_ONLY compile (hero + collection)."
+    },
+    {
+      "id": "bengal_card_02_mangrove_croc",
+      "kind": "showcase_card",
+      "path": "cards/bengal/bengal_card_02_mangrove_croc.png",
+      "title": "Mangrove Croc",
+      "domain": "bengal",
+      "managedBy": "cardgen",
+      "note": "Generated via cardgen; required for FRONTEND_SHOWCASE_ONLY compile (hero + collection)."
+    },
+    {
+      "id": "patagonia_card_02_jaguar_emerald",
+      "kind": "showcase_card",
+      "path": "cards/patagonia/patagonia_card_02_jaguar_emerald.png",
+      "title": "Emerald Jaguar",
+      "domain": "patagonia",
+      "managedBy": "cardgen",
+      "note": "Generated via cardgen; required for FRONTEND_SHOWCASE_ONLY compile (hero + collection)."
+    },
+    {
+      "id": "taiga_card_02_snow_leopard",
+      "kind": "showcase_card",
+      "path": "cards/taiga/taiga_card_02_snow_leopard.png",
+      "title": "Snow Leopard",
+      "domain": "taiga",
+      "managedBy": "cardgen",
+      "note": "Generated via cardgen; required for FRONTEND_SHOWCASE_ONLY compile (hero + collection)."
+    },
+    {
+      "id": "serengeti_card_03_cheetah_gust",
+      "kind": "showcase_card",
+      "path": "cards/serengeti/serengeti_card_03_cheetah_gust.png",
+      "title": "Cheetah Gust",
+      "domain": "serengeti",
+      "managedBy": "cardgen",
+      "note": "Generated via cardgen; required for FRONTEND_SHOWCASE_ONLY compile (hero + collection)."
+    },
+    {
+      "id": "bengal_card_03_clouded_leopard",
+      "kind": "showcase_card",
+      "path": "cards/bengal/bengal_card_03_clouded_leopard.png",
+      "title": "Clouded Leopard",
+      "domain": "bengal",
+      "managedBy": "cardgen",
+      "note": "Generated via cardgen; required for FRONTEND_SHOWCASE_ONLY compile (hero + collection)."
+    },
+    {
+      "id": "patagonia_card_03_harpy_strike",
+      "kind": "showcase_card",
+      "path": "cards/patagonia/patagonia_card_03_harpy_strike.png",
+      "title": "Harpy Strike",
+      "domain": "patagonia",
+      "managedBy": "cardgen",
+      "note": "Generated via cardgen; required for FRONTEND_SHOWCASE_ONLY compile (hero + collection)."
+    },
+    {
+      "id": "taiga_card_03_golden_eagle",
+      "kind": "showcase_card",
+      "path": "cards/taiga/taiga_card_03_golden_eagle.png",
+      "title": "Golden Eagle",
+      "domain": "taiga",
+      "managedBy": "cardgen",
+      "note": "Generated via cardgen; required for FRONTEND_SHOWCASE_ONLY compile (hero + collection)."
+    }
+  ],
+  "manualAssets": [
+    {
+      "kind": "brand",
+      "paths": [
+        "brand/gamelogo.png",
+        "brand/header.png",
+        "brand/play-lobby.png",
+        "brand/favicon.ico",
+        "brand/main.mp4"
+      ],
+      "note": "Brand logo/video are not auto-generated — supply manually or extend contentgen later.",
+      "referenceSizes": {
+        "brand/gamelogo.png": "1344×768 png",
+        "brand/header.png": "1344×768 png",
+        "brand/play-lobby.png": "1672×941 png"
+      }
+    }
+  ]
+}
