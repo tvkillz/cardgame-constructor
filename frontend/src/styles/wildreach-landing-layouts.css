@@ -1,10 +1,9 @@
 /* WILDREACH landing — section spacing + viewport-fit panels */
 
 [data-landing-variant='wildreach'] {
-  --wr-section-pad-y: clamp(2rem, 4.5vw, 3.25rem);
+  --wr-section-pad-y: clamp(1.75rem, 4vw, 3rem);
   --wr-section-pad-bottom: clamp(1.75rem, 4vw, 3rem);
   --landing-after-hero-gap: clamp(2.5rem, 7vw, 5rem);
-  --wr-vh-pad: clamp(0.55rem, 1.6vh, 1.15rem);
 }
 
 [data-landing-variant='wildreach'] .landing-flow {
@@ -12,28 +11,19 @@
   padding-bottom: var(--wr-section-pad-bottom);
 }
 
-[data-landing-variant='wildreach'] .landing-flow > .wr-hero + .wr-atlas {
-  margin-top: 0;
-}
-
+[data-landing-variant='wildreach'] .landing-flow > .wr-hero + .wr-atlas,
 [data-landing-variant='wildreach'] .landing-flow > .wr-atlas + .wr-survey,
 [data-landing-variant='wildreach'] .landing-flow > .wr-survey + .wr-protocol {
   margin-top: 0;
 }
 
-[data-landing-variant='wildreach'] .wr-survey {
-  margin-top: -10vw !important;
-}
-
-/* Sections 2–4: one full screen each, no intra-section scroll */
+/* Sections 2–4: one viewport each on desktop; flex fills remaining space */
 [data-landing-variant='wildreach'] :is(.wr-atlas, .wr-survey, .wr-protocol) {
   box-sizing: border-box;
-  height: 100svh;
-  max-height: 100svh;
-  min-height: 0;
+  min-height: 100svh;
   display: flex;
   flex-direction: column;
-  padding-block: var(--wr-vh-pad);
+  padding-block: var(--wr-section-pad-y);
   overflow: hidden;
 }
 
@@ -43,7 +33,7 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  gap: clamp(0.45rem, 1.2vh, 0.95rem);
+  gap: clamp(0.75rem, 1.8vw, 1.35rem);
 }
 
 [data-landing-variant='wildreach'] :is(.wr-atlas__header, .wr-survey__header, .wr-protocol__header) {
@@ -52,29 +42,23 @@
 }
 
 [data-landing-variant='wildreach'] :is(.wr-atlas__title, .wr-survey__title, .wr-protocol__title) {
-  margin: 0 0 0.35rem;
-  font-size: clamp(1.35rem, 3.2vh, 2.35rem);
+  margin: 0 0 0.45rem;
 }
 
 [data-landing-variant='wildreach'] :is(.wr-atlas__lead, .wr-survey__lead, .wr-protocol__lead) {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  /* -webkit-line-clamp: 2; */
-  overflow: hidden;
   margin: 0;
-  font-size: clamp(0.82rem, 1.55vh, 1rem);
-  line-height: 1.45;
+  line-height: 1.5;
 }
 
 [data-landing-variant='wildreach'] :is(.wr-atlas__eyebrow, .wr-survey__eyebrow, .wr-protocol__eyebrow) {
-  margin: 0 0 0.35rem;
+  margin: 0 0 0.4rem;
 }
 
 [data-landing-variant='wildreach'] .wr-atlas__board {
-  flex: 0 1 auto;
-  height: 85%;
-  max-height: 85%;
+  flex: 1 1 auto;
   min-height: 0;
+  height: auto;
+  max-height: none;
 }
 
 [data-landing-variant='wildreach'] .wr-survey__stage,
@@ -83,22 +67,9 @@
   min-height: 0;
 }
 
-[data-landing-variant='wildreach'] .wr-survey__stage {
-  flex: 0 1 auto;
-  height: 68%;
-  max-height: 90%;
-  align-items: stretch;
-}
-
-/* Section 2 plate fills the board cell */
-[data-landing-variant='wildreach'] .wr-atlas__plate {
-  height: 91%;
-  min-height: 0;
-  aspect-ratio: auto;
-}
-
+[data-landing-variant='wildreach'] .wr-atlas__plate,
 [data-landing-variant='wildreach'] .wr-atlas__frame {
-  height: 80%;
+  height: 100%;
   min-height: 0;
   aspect-ratio: auto;
 }
@@ -109,7 +80,6 @@
   align-self: stretch;
 }
 
-/* Section 3: hide + ledger share the stage row height (no solo %) */
 [data-landing-variant='wildreach'] .wr-survey__hide,
 [data-landing-variant='wildreach'] .wr-survey__ledger {
   height: auto;
@@ -120,21 +90,6 @@
 
 [data-landing-variant='wildreach'] .wr-survey__transect {
   flex: 0 0 auto;
-}
-
-@media (max-width: 900px) {
-  [data-landing-variant='wildreach'] .wr-survey__stage {
-    height: 50%;
-    max-height: 80%;
-  }
-}
-
-@media (max-width: 538px) {
-  [data-landing-variant='wildreach'] .wr-survey__transect {
-    display: flex;
-    flex-direction: column;
-    grid-template-columns: none;
-  }
 }
 
 [data-landing-variant='wildreach'] .wr-protocol__pass-art {
@@ -148,35 +103,90 @@
 }
 
 [data-landing-variant='wildreach'] .wr-protocol__pass-desc {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
-  overflow: hidden;
-  font-size: clamp(0.78rem, 1.4vh, 0.88rem);
   line-height: 1.4;
+}
+
+[data-landing-variant='wildreach'] .wr-protocol__pass {
+  height: auto;
+  min-height: 0;
 }
 
 [data-landing-variant='wildreach'] .wr-hero__transition {
   height: clamp(2rem, 5vw, 3.25rem);
 }
 
-/* Compact chrome on short / stacked viewports */
-@media (max-width: 960px) {
+/* Tablet / phone: natural flow, no clipped panels or overlapping seams */
+@media (max-width: 900px) {
   [data-landing-variant='wildreach'] :is(.wr-atlas, .wr-survey, .wr-protocol) {
-    padding-block: clamp(0.45rem, 1.2vh, 0.85rem);
+    height: auto;
+    max-height: none;
+    min-height: 0;
+    overflow: visible;
+    padding-block: clamp(1.75rem, 5vw, 2.75rem);
   }
 
-  [data-landing-variant='wildreach'] :is(.wr-atlas__lead, .wr-survey__lead, .wr-protocol__lead) {
-    /* -webkit-line-clamp: 1; */
+  [data-landing-variant='wildreach'] :is(.wr-atlas, .wr-survey, .wr-protocol) > .landing-shell {
+    height: auto;
+    gap: 1rem;
+  }
+
+  [data-landing-variant='wildreach'] .wr-atlas__board {
+    flex: none;
+    min-height: min(58svh, 520px);
+  }
+
+  [data-landing-variant='wildreach'] .wr-atlas__legend {
+    max-height: none;
+  }
+
+  [data-landing-variant='wildreach'] .wr-atlas__plate,
+  [data-landing-variant='wildreach'] .wr-atlas__frame {
+    height: 100%;
+    min-height: 0;
+  }
+
+  [data-landing-variant='wildreach'] .wr-survey__stage {
+    flex: none;
+    min-height: min(52svh, 480px);
+  }
+
+  [data-landing-variant='wildreach'] .wr-protocol__passes {
+    flex: none;
   }
 }
 
-@media (max-height: 700px) {
-  [data-landing-variant='wildreach'] :is(.wr-atlas__lead, .wr-survey__lead, .wr-protocol__lead) {
-    display: none;
+/* Phone: icon row above plate, image fills leftover height */
+@media (max-width: 700px) {
+  [data-landing-variant='wildreach'] .wr-atlas__board {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    min-height: min(68svh, 560px);
   }
 
-  [data-landing-variant='wildreach'] :is(.wr-atlas__title, .wr-survey__title, .wr-protocol__title) {
-    font-size: clamp(1.15rem, 3vh, 1.75rem);
+  [data-landing-variant='wildreach'] .wr-atlas__legend {
+    flex: 0 0 auto;
+  }
+
+  [data-landing-variant='wildreach'] .wr-atlas__plate,
+  [data-landing-variant='wildreach'] .wr-atlas__frame {
+    flex: 1 1 auto;
+    height: auto;
+    min-height: min(48svh, 420px);
+  }
+}
+
+@media (max-width: 1039px) {
+  [data-landing-variant='wildreach'] .wr-protocol__passes {
+    display: flex;
+    flex-direction: column;
+  }
+
+  [data-landing-variant='wildreach'] .wr-protocol__pass {
+    min-height: 14rem;
+  }
+
+  [data-landing-variant='wildreach'] .wr-protocol__pass-art {
+    min-height: 10rem;
   }
 }

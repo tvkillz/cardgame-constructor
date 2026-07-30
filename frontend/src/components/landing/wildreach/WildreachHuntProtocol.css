@@ -134,7 +134,7 @@
 .wr-protocol__pass {
   min-width: 0;
   min-height: 0;
-  height: 70%;
+  height: auto;
   opacity: 0;
   transform: translateY(20px);
   transition:
@@ -272,11 +272,31 @@
   }
 }
 
-@media (max-width: 560px) {
-  .wr-protocol__pass-desc {
-    -webkit-line-clamp: 2;
+@media (max-width: 700px) {
+  .wr-protocol {
+    padding: clamp(1.5rem, 5vw, 2.25rem) 0;
   }
 
+  .wr-protocol__shell {
+    gap: 0.85rem;
+  }
+
+  .wr-protocol__title {
+    font-size: clamp(1.55rem, 7vw, 2.1rem);
+    margin-bottom: 0.45rem;
+  }
+
+  .wr-protocol__lead {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .wr-protocol__pass-hit {
+    gap: 0.45rem;
+  }
+}
+
+@media (max-width: 560px) {
   .wr-protocol__pass-phase {
     font-size: 0.52rem;
     letter-spacing: 0.12em;

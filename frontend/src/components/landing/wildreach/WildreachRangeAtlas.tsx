@@ -79,6 +79,7 @@ export default function WildreachRangeAtlas() {
                   type="button"
                   className={`wr-atlas__marker${isActive ? ' wr-atlas__marker--active' : ''}`}
                   style={{ '--range-glow': loc.glowColor } as CSSProperties}
+                  onClick={() => setActiveId(loc.id)}
                   onMouseEnter={() => setActiveId(loc.id)}
                   onFocus={() => setActiveId(loc.id)}
                   aria-pressed={isActive}
