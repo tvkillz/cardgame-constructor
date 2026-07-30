@@ -959,7 +959,9 @@
 
   .wr-hero__cluster {
     width: min(100%, calc(100vw - 2.75rem));
-    max-width: 360px;
+    max-width: 1000px;
+    padding-top: 10vw;
+    
   }
 
   .wr-hero__cluster-slot {
