@@ -13,12 +13,13 @@
 
 [data-landing-variant='wildreach'] .landing-flow > .wr-hero + .wr-atlas,
 [data-landing-variant='wildreach'] .landing-flow > .wr-atlas + .wr-survey,
-[data-landing-variant='wildreach'] .landing-flow > .wr-survey + .wr-protocol {
+[data-landing-variant='wildreach'] .landing-flow > .wr-survey + .wr-protocol,
+[data-landing-variant='wildreach'] .landing-flow > .wr-protocol + .wr-catalog {
   margin-top: 0;
 }
 
-/* Sections 2–4: one viewport each on desktop; flex fills remaining space */
-[data-landing-variant='wildreach'] :is(.wr-atlas, .wr-survey, .wr-protocol) {
+/* Sections 2–5: shared vertical rhythm; desktop panels fill the viewport */
+[data-landing-variant='wildreach'] :is(.wr-atlas, .wr-survey, .wr-protocol, .wr-catalog) {
   box-sizing: border-box;
   min-height: 100svh;
   display: flex;
@@ -27,7 +28,7 @@
   overflow: hidden;
 }
 
-[data-landing-variant='wildreach'] :is(.wr-atlas, .wr-survey, .wr-protocol) > .landing-shell {
+[data-landing-variant='wildreach'] :is(.wr-atlas, .wr-survey, .wr-protocol, .wr-catalog) > .landing-shell {
   flex: 1 1 auto;
   min-height: 0;
   height: 100%;
@@ -36,21 +37,21 @@
   gap: clamp(0.75rem, 1.8vw, 1.35rem);
 }
 
-[data-landing-variant='wildreach'] :is(.wr-atlas__header, .wr-survey__header, .wr-protocol__header) {
+[data-landing-variant='wildreach'] :is(.wr-atlas__header, .wr-survey__header, .wr-protocol__header, .wr-catalog__header) {
   flex: 0 0 auto;
   max-width: 42rem;
 }
 
-[data-landing-variant='wildreach'] :is(.wr-atlas__title, .wr-survey__title, .wr-protocol__title) {
+[data-landing-variant='wildreach'] :is(.wr-atlas__title, .wr-survey__title, .wr-protocol__title, .wr-catalog__title) {
   margin: 0 0 0.45rem;
 }
 
-[data-landing-variant='wildreach'] :is(.wr-atlas__lead, .wr-survey__lead, .wr-protocol__lead) {
+[data-landing-variant='wildreach'] :is(.wr-atlas__lead, .wr-survey__lead, .wr-protocol__lead, .wr-catalog__lead) {
   margin: 0;
   line-height: 1.5;
 }
 
-[data-landing-variant='wildreach'] :is(.wr-atlas__eyebrow, .wr-survey__eyebrow, .wr-protocol__eyebrow) {
+[data-landing-variant='wildreach'] :is(.wr-atlas__eyebrow, .wr-survey__eyebrow, .wr-protocol__eyebrow, .wr-catalog__eyebrow) {
   margin: 0 0 0.4rem;
 }
 
@@ -92,6 +93,15 @@
   flex: 0 0 auto;
 }
 
+[data-landing-variant='wildreach'] .wr-catalog__board {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+[data-landing-variant='wildreach'] .wr-catalog__ledger {
+  flex: 0 0 auto;
+}
+
 [data-landing-variant='wildreach'] .wr-protocol__pass-art {
   flex: 1 1 auto;
   min-height: 0;
@@ -117,7 +127,7 @@
 
 /* Tablet / phone: natural flow, no clipped panels or overlapping seams */
 @media (max-width: 900px) {
-  [data-landing-variant='wildreach'] :is(.wr-atlas, .wr-survey, .wr-protocol) {
+  [data-landing-variant='wildreach'] :is(.wr-atlas, .wr-survey, .wr-protocol, .wr-catalog) {
     height: auto;
     max-height: none;
     min-height: 0;
@@ -125,7 +135,7 @@
     padding-block: clamp(1.75rem, 5vw, 2.75rem);
   }
 
-  [data-landing-variant='wildreach'] :is(.wr-atlas, .wr-survey, .wr-protocol) > .landing-shell {
+  [data-landing-variant='wildreach'] :is(.wr-atlas, .wr-survey, .wr-protocol, .wr-catalog) > .landing-shell {
     height: auto;
     gap: 1rem;
   }
@@ -150,7 +160,8 @@
     min-height: min(52svh, 480px);
   }
 
-  [data-landing-variant='wildreach'] .wr-protocol__passes {
+  [data-landing-variant='wildreach'] .wr-protocol__passes,
+  [data-landing-variant='wildreach'] .wr-catalog__board {
     flex: none;
   }
 }

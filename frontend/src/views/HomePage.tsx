@@ -28,6 +28,11 @@ const WildreachHuntProtocol = dynamic(
   { ssr: true },
 )
 
+const WildreachCatalog = dynamic(
+  () => import('@/components/landing/wildreach/WildreachCatalog'),
+  { ssr: true },
+)
+
 const FinalWhistleCatalogSection = dynamic(
   () => import('@/components/landing/final_whistle/FinalWhistleCatalogSection'),
   { ssr: true },
@@ -92,7 +97,13 @@ export default function HomePage() {
         ) : (
           <GameModelSection />
         )}
-        {isFinalWhistle ? <FinalWhistleCatalogSection /> : <CollectionSection />}
+        {isFinalWhistle ? (
+          <FinalWhistleCatalogSection />
+        ) : isWildreach ? (
+          <WildreachCatalog />
+        ) : (
+          <CollectionSection />
+        )}
         {isFinalWhistle ? <FinalWhistlePathwaysSection /> : <PathwaysSection />}
         {isFinalWhistle ? <FinalWhistleFaqSection /> : <FaqSection />}
         {isFinalWhistle ? <FinalWhistleShapeSection /> : <FinalCtaSection />}
