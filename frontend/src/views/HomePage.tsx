@@ -23,6 +23,10 @@ const FinalWhistleGameModelSection = dynamic(
   () => import('@/components/landing/final_whistle/FinalWhistleGameModelSection'),
   { ssr: true },
 )
+const WildreachHuntProtocol = dynamic(
+  () => import('@/components/landing/wildreach/WildreachHuntProtocol'),
+  { ssr: true },
+)
 
 const FinalWhistleCatalogSection = dynamic(
   () => import('@/components/landing/final_whistle/FinalWhistleCatalogSection'),
@@ -81,7 +85,13 @@ export default function HomePage() {
         ) : (
           <DominionsSection />
         )}
-        {isFinalWhistle ? <FinalWhistleGameModelSection /> : <GameModelSection />}
+        {isFinalWhistle ? (
+          <FinalWhistleGameModelSection />
+        ) : isWildreach ? (
+          <WildreachHuntProtocol />
+        ) : (
+          <GameModelSection />
+        )}
         {isFinalWhistle ? <FinalWhistleCatalogSection /> : <CollectionSection />}
         {isFinalWhistle ? <FinalWhistlePathwaysSection /> : <PathwaysSection />}
         {isFinalWhistle ? <FinalWhistleFaqSection /> : <FaqSection />}

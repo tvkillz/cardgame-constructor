@@ -20,8 +20,17 @@
   margin-top: calc(-0.5 * clamp(1.25rem, 3vw, 2.25rem));
 }
 
+/* Survey → Hunt Protocol: ~50% tighter */
+[data-landing-variant='wildreach'] .landing-flow > .wr-survey + .wr-protocol {
+  margin-top: calc(-0.5 * clamp(1.25rem, 3vw, 2.25rem));
+}
+
 [data-landing-variant='wildreach'] .wr-atlas {
   padding-bottom: clamp(1.5rem, 3.5vw, 2.5rem);
+}
+
+[data-landing-variant='wildreach'] .wr-survey {
+  padding-bottom: clamp(1.35rem, 3vw, 2.25rem);
 }
 
 [data-landing-variant='wildreach'] .wr-hero__transition {

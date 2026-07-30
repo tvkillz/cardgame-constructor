@@ -37,7 +37,8 @@ Phase 1 scaffold complete. See **[`../NEW_THEME.md`](../NEW_THEME.md)** for the 
 - [x] Phase 3 (hero) — field-glass hero + trail specimens + card chrome
 - [x] Phase 3 (section 2) — Range Atlas
 - [x] Phase 3 (section 3) — Field Survey (hide-cam + site ledger)
-- [ ] Phase 3 (remaining) — pathways / gamemodel / collection / FAQ / etc.
+- [x] Phase 3 (section 4) — Hunt Protocol (three passes)
+- [ ] Phase 3 (remaining) — pathways / collection / FAQ / etc.
 - [ ] Phase 4–6 — portal, play pack, infra
 
 ## Cardgen showcase (landing predators)
