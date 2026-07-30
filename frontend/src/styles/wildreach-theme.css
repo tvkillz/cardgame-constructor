@@ -1,0 +1,102 @@
+/* WILDREACH — documentary field palette for full landing. Scoped to wildreach only. */
+
+[data-landing-variant='wildreach'] {
+  --wr-void: #0a100e;
+  --wr-void-soft: #101814;
+  --wr-void-lift: #18241e;
+  --wr-ink: #f0ebe4;
+  --wr-ink-muted: rgba(240, 235, 228, 0.72);
+  --wr-ink-soft: rgba(240, 235, 228, 0.55);
+  --wr-border: rgba(196, 154, 58, 0.32);
+  --wr-border-strong: rgba(196, 154, 58, 0.55);
+  --wr-panel: rgba(16, 24, 20, 0.82);
+  --wr-panel-strong: rgba(22, 34, 28, 0.94);
+  --wr-shadow: rgba(0, 0, 0, 0.4);
+  --wr-gold: #c49a3a;
+  --wr-teal: #2a7a6a;
+  --wr-ember: #b85a3a;
+  --wr-slate: #6a8a9a;
+  --wr-section-gradient: linear-gradient(180deg, #0a100e 0%, #101814 50%, #080c0a 100%);
+}
+
+[data-landing-variant='wildreach'] .app {
+  background: var(--wr-void);
+  color: var(--text-primary);
+}
+
+[data-landing-variant='wildreach'] :is(.landing-section-title, .locations__kicker) {
+  font-family: var(--font-heading, var(--font-fantasy));
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--wr-heading-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: none;
+  filter: none;
+  animation: none;
+}
+
+[data-landing-variant='wildreach'] .landing-section-lead {
+  color: var(--wr-ink-muted);
+}
+
+[data-landing-variant='wildreach'] .landing-section-lead strong {
+  color: var(--wr-ink);
+  text-shadow: none;
+}
+
+[data-landing-variant='wildreach'] .vb-btn {
+  border-radius: 4px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-family: var(--font-ui);
+}
+
+[data-landing-variant='wildreach'] .vb-btn--primary {
+  background: linear-gradient(135deg, rgba(196, 154, 58, 0.95) 0%, rgba(168, 120, 40, 0.98) 100%);
+  border-color: rgba(196, 154, 58, 0.55);
+  color: #0a100e;
+  box-shadow: 0 4px 16px rgba(196, 154, 58, 0.22);
+}
+
+[data-landing-variant='wildreach'] .vb-btn--primary:hover:not(:disabled) {
+  box-shadow: 0 6px 20px rgba(196, 154, 58, 0.32);
+}
+
+[data-landing-variant='wildreach'] .vb-btn--secondary {
+  background: var(--wr-panel);
+  border-color: var(--wr-border);
+  color: var(--wr-ink);
+}
+
+[data-landing-variant='wildreach'] .vb-btn--secondary:hover:not(:disabled) {
+  border-color: var(--wr-border-strong);
+  background: var(--wr-panel-strong);
+}
+
+[data-landing-variant='wildreach'] .site-footer {
+  background: linear-gradient(180deg, #0a100e 0%, #080c0a 100%);
+  border-top: 1px solid var(--wr-border);
+}
+
+[data-landing-variant='wildreach'] .site-footer__heading {
+  font-family: var(--font-heading, var(--font-fantasy));
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--wr-gold);
+}
+
+[data-landing-variant='wildreach'] .site-footer__brand-tagline,
+[data-landing-variant='wildreach'] .site-footer__link,
+[data-landing-variant='wildreach'] .site-footer__cookie-btn,
+[data-landing-variant='wildreach'] .site-footer__copyright,
+[data-landing-variant='wildreach'] .site-footer__sub-copy {
+  color: var(--wr-ink-muted);
+}
+
+[data-landing-variant='wildreach'] .site-footer__link:hover,
+[data-landing-variant='wildreach'] .site-footer__cookie-btn:hover {
+  color: var(--wr-gold);
+}

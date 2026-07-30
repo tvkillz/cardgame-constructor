@@ -10,6 +10,10 @@ const FinalWhistleDominionsSection = dynamic(
   () => import('@/components/landing/final_whistle/FinalWhistleDominionsSection'),
   { ssr: true },
 )
+const WildreachFieldSurvey = dynamic(
+  () => import('@/components/landing/wildreach/WildreachFieldSurvey'),
+  { ssr: true },
+)
 
 const GameModelSection = dynamic(
   () => import('@/components/GameModelSection/GameModelSection'),
@@ -60,7 +64,9 @@ const FinalCtaSection = dynamic(
 const Footer = dynamic(() => import('@/components/Footer/Footer'), { ssr: true })
 
 export default function HomePage() {
-  const isFinalWhistle = appConfig.landing?.variant === 'final_whistle'
+  const variant = appConfig.landing?.variant
+  const isFinalWhistle = variant === 'final_whistle'
+  const isWildreach = variant === 'wildreach'
 
   return (
     <div className="app">
@@ -68,7 +74,13 @@ export default function HomePage() {
       <main className="landing-flow">
         <LandingHero />
         <LandingLocations />
-        {isFinalWhistle ? <FinalWhistleDominionsSection /> : <DominionsSection />}
+        {isFinalWhistle ? (
+          <FinalWhistleDominionsSection />
+        ) : isWildreach ? (
+          <WildreachFieldSurvey />
+        ) : (
+          <DominionsSection />
+        )}
         {isFinalWhistle ? <FinalWhistleGameModelSection /> : <GameModelSection />}
         {isFinalWhistle ? <FinalWhistleCatalogSection /> : <CollectionSection />}
         {isFinalWhistle ? <FinalWhistlePathwaysSection /> : <PathwaysSection />}

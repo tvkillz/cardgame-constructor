@@ -8,6 +8,9 @@ import HelixHero from '@/components/landing/helix/HelixHero'
 import HelixLocations from '@/components/landing/helix/HelixLocations'
 import IyashikeiHeader from '@/components/landing/iyashikei/IyashikeiHeader'
 import IyashikeiHero from '@/components/landing/iyashikei/IyashikeiHero'
+import WildreachHeader from '@/components/landing/wildreach/WildreachHeader'
+import WildreachHero from '@/components/landing/wildreach/WildreachHero'
+import WildreachRangeAtlas from '@/components/landing/wildreach/WildreachRangeAtlas'
 import LocationsSection from '@/components/LocationsSection/LocationsSection'
 import { appConfig } from '@/config'
 
@@ -17,6 +20,7 @@ export function LandingHeader() {
   if (variant === 'final_whistle') return <FinalWhistleHeader />
   if (variant === 'iyashikei') return <IyashikeiHeader />
   if (variant === 'helix') return <HelixHeader />
+  if (variant === 'wildreach') return <WildreachHeader />
   return <Header />
 }
 
@@ -25,11 +29,13 @@ export function LandingHero() {
   if (variant === 'final_whistle') return <FinalWhistleHero />
   if (variant === 'iyashikei') return <IyashikeiHero />
   if (variant === 'helix') return <HelixHero />
+  if (variant === 'wildreach') return <WildreachHero />
   return <Hero />
 }
 
 export function LandingLocations() {
   if (appConfig.landing?.variant === 'final_whistle') return <FinalWhistlePressureMap />
   if (appConfig.landing?.variant === 'helix') return <HelixLocations />
+  if (appConfig.landing?.variant === 'wildreach') return <WildreachRangeAtlas />
   return <LocationsSection />
 }

@@ -22,6 +22,10 @@
 @import './styles/final_whistle-cards.css';
 @import './styles/final_whistle-portal-pages.css';
 @import './styles/final_whistle-play.css';
+@import './styles/wildreach-fonts.css';
+@import './styles/wildreach-theme.css';
+@import './styles/wildreach-cards.css';
+@import './styles/wildreach-landing-layouts.css';
 
 /* Color defaults — overridden at runtime by applyTheme(); fonts via next/font in app layout */
 :root {

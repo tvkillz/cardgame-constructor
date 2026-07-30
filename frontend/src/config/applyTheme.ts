@@ -36,13 +36,20 @@ export function buildThemeCssVars(): Record<string, string> {
     '--play-arena-bg': `url(${arenaBg})`,
     '--game-lobby-bg': `url(${lobbyBg})`,
     '--game-arena-bg': `url(${arenaBg})`,
-    ...(playLogo && variant !== 'iyashikei' && variant !== 'helix' && variant !== 'final_whistle'
+    ...(playLogo &&
+    variant !== 'iyashikei' &&
+    variant !== 'helix' &&
+    variant !== 'final_whistle' &&
+    variant !== 'wildreach'
       ? { '--card-back-logo': `url(${playLogo})` }
       : {}),
     ...(variant === 'helix' && helixCardBackLogo
       ? { '--card-back-logo': `url(${helixCardBackLogo})` }
       : {}),
     ...(variant === 'final_whistle' && helixCardBackLogo
+      ? { '--card-back-logo': `url(${helixCardBackLogo})` }
+      : {}),
+    ...(variant === 'wildreach' && helixCardBackLogo
       ? { '--card-back-logo': `url(${helixCardBackLogo})` }
       : {}),
   }
@@ -78,6 +85,17 @@ export function buildThemeCssVars(): Record<string, string> {
     vars['--fw-heading-gradient'] =
       'linear-gradient(105deg, #f2f0e8 0%, #e8c96a 35%, #7aab78 68%, #c4785a 100%)'
     vars['--font-heading'] = "'Bebas Neue', 'DM Sans', system-ui, sans-serif"
+  }
+
+  if (variant === 'wildreach') {
+    vars['--surface-paper'] = colors.voidBlack
+    vars['--surface-ink'] = colors.textPrimary
+    vars['--hero-vignette-top'] = 'rgba(10, 16, 14, 0.78)'
+    vars['--hero-vignette-mid'] = 'rgba(10, 16, 14, 0.18)'
+    vars['--hero-vignette-bottom'] = 'rgba(10, 16, 14, 0.94)'
+    vars['--wr-heading-gradient'] =
+      'linear-gradient(105deg, #f0ebe4 0%, #c49a3a 38%, #2a7a6a 72%, #b85a3a 100%)'
+    vars['--font-heading'] = "'Barlow Condensed', 'Source Sans 3', system-ui, sans-serif"
   }
 
   return vars

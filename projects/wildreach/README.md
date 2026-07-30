@@ -32,9 +32,13 @@ Phase 1 scaffold complete. See **[`../NEW_THEME.md`](../NEW_THEME.md)** for the 
 - [x] Theme tokens (`colors.json`, `ui.json` — Oswald + Inter; natural palette)
 - [x] Generation specs (`contentgen.json`, `cardgen.json`, `socialgen.json`)
 - [x] Showcase card stubs (12 slugs in `game/cards.json`)
-- [ ] Phase 2a — contentgen apply + brand assets
-- [ ] Phase 2b — cardgen showcase + compile showcase-only
-- [ ] Phase 3–6 — landing CSS, portal, play pack, infra
+- [x] Phase 2a — contentgen apply + brand assets
+- [x] Phase 2b — cardgen showcase art
+- [x] Phase 3 (hero) — field-glass hero + trail specimens + card chrome
+- [x] Phase 3 (section 2) — Range Atlas
+- [x] Phase 3 (section 3) — Field Survey (hide-cam + site ledger)
+- [ ] Phase 3 (remaining) — pathways / gamemodel / collection / FAQ / etc.
+- [ ] Phase 4–6 — portal, play pack, infra
 
 ## Cardgen showcase (landing predators)
 
