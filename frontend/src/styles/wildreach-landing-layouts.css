@@ -1,38 +1,182 @@
-/* WILDREACH landing — section spacing */
+/* WILDREACH landing — section spacing + viewport-fit panels */
 
 [data-landing-variant='wildreach'] {
   --wr-section-pad-y: clamp(2rem, 4.5vw, 3.25rem);
   --wr-section-pad-bottom: clamp(1.75rem, 4vw, 3rem);
   --landing-after-hero-gap: clamp(2.5rem, 7vw, 5rem);
+  --wr-vh-pad: clamp(0.55rem, 1.6vh, 1.15rem);
 }
 
 [data-landing-variant='wildreach'] .landing-flow {
-  gap: clamp(1.25rem, 3vw, 2.25rem);
+  gap: 0;
   padding-bottom: var(--wr-section-pad-bottom);
 }
 
 [data-landing-variant='wildreach'] .landing-flow > .wr-hero + .wr-atlas {
-  margin-top: calc(-1 * clamp(1.25rem, 3.5vw, 2.5rem));
+  margin-top: 0;
 }
 
-/* Atlas → Field Survey: ~50% tighter than default flow gap */
-[data-landing-variant='wildreach'] .landing-flow > .wr-atlas + .wr-survey {
-  margin-top: calc(-0.5 * clamp(1.25rem, 3vw, 2.25rem));
-}
-
-/* Survey → Hunt Protocol: ~50% tighter */
+[data-landing-variant='wildreach'] .landing-flow > .wr-atlas + .wr-survey,
 [data-landing-variant='wildreach'] .landing-flow > .wr-survey + .wr-protocol {
-  margin-top: calc(-0.5 * clamp(1.25rem, 3vw, 2.25rem));
-}
-
-[data-landing-variant='wildreach'] .wr-atlas {
-  padding-bottom: clamp(1.5rem, 3.5vw, 2.5rem);
+  margin-top: 0;
 }
 
 [data-landing-variant='wildreach'] .wr-survey {
-  padding-bottom: clamp(1.35rem, 3vw, 2.25rem);
+  margin-top: -10vw !important;
+}
+
+/* Sections 2–4: one full screen each, no intra-section scroll */
+[data-landing-variant='wildreach'] :is(.wr-atlas, .wr-survey, .wr-protocol) {
+  box-sizing: border-box;
+  height: 100svh;
+  max-height: 100svh;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding-block: var(--wr-vh-pad);
+  overflow: hidden;
+}
+
+[data-landing-variant='wildreach'] :is(.wr-atlas, .wr-survey, .wr-protocol) > .landing-shell {
+  flex: 1 1 auto;
+  min-height: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.45rem, 1.2vh, 0.95rem);
+}
+
+[data-landing-variant='wildreach'] :is(.wr-atlas__header, .wr-survey__header, .wr-protocol__header) {
+  flex: 0 0 auto;
+  max-width: 42rem;
+}
+
+[data-landing-variant='wildreach'] :is(.wr-atlas__title, .wr-survey__title, .wr-protocol__title) {
+  margin: 0 0 0.35rem;
+  font-size: clamp(1.35rem, 3.2vh, 2.35rem);
+}
+
+[data-landing-variant='wildreach'] :is(.wr-atlas__lead, .wr-survey__lead, .wr-protocol__lead) {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  /* -webkit-line-clamp: 2; */
+  overflow: hidden;
+  margin: 0;
+  font-size: clamp(0.82rem, 1.55vh, 1rem);
+  line-height: 1.45;
+}
+
+[data-landing-variant='wildreach'] :is(.wr-atlas__eyebrow, .wr-survey__eyebrow, .wr-protocol__eyebrow) {
+  margin: 0 0 0.35rem;
+}
+
+[data-landing-variant='wildreach'] .wr-atlas__board {
+  flex: 0 1 auto;
+  height: 85%;
+  max-height: 85%;
+  min-height: 0;
+}
+
+[data-landing-variant='wildreach'] .wr-survey__stage,
+[data-landing-variant='wildreach'] .wr-protocol__passes {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+[data-landing-variant='wildreach'] .wr-survey__stage {
+  flex: 0 1 auto;
+  height: 68%;
+  max-height: 90%;
+  align-items: stretch;
+}
+
+/* Section 2 plate fills the board cell */
+[data-landing-variant='wildreach'] .wr-atlas__plate {
+  height: 91%;
+  min-height: 0;
+  aspect-ratio: auto;
+}
+
+[data-landing-variant='wildreach'] .wr-atlas__frame {
+  height: 80%;
+  min-height: 0;
+  aspect-ratio: auto;
+}
+
+[data-landing-variant='wildreach'] .wr-atlas__legend {
+  min-height: 0;
+  max-height: 100%;
+  align-self: stretch;
+}
+
+/* Section 3: hide + ledger share the stage row height (no solo %) */
+[data-landing-variant='wildreach'] .wr-survey__hide,
+[data-landing-variant='wildreach'] .wr-survey__ledger {
+  height: auto;
+  max-height: 100%;
+  min-height: 0;
+  align-self: stretch;
+}
+
+[data-landing-variant='wildreach'] .wr-survey__transect {
+  flex: 0 0 auto;
+}
+
+@media (max-width: 900px) {
+  [data-landing-variant='wildreach'] .wr-survey__stage {
+    height: 50%;
+    max-height: 80%;
+  }
+}
+
+@media (max-width: 538px) {
+  [data-landing-variant='wildreach'] .wr-survey__transect {
+    display: flex;
+    flex-direction: column;
+    grid-template-columns: none;
+  }
+}
+
+[data-landing-variant='wildreach'] .wr-protocol__pass-art {
+  flex: 1 1 auto;
+  min-height: 0;
+  aspect-ratio: auto;
+}
+
+[data-landing-variant='wildreach'] .wr-protocol__pass-copy {
+  flex: 0 0 auto;
+}
+
+[data-landing-variant='wildreach'] .wr-protocol__pass-desc {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  font-size: clamp(0.78rem, 1.4vh, 0.88rem);
+  line-height: 1.4;
 }
 
 [data-landing-variant='wildreach'] .wr-hero__transition {
   height: clamp(2rem, 5vw, 3.25rem);
+}
+
+/* Compact chrome on short / stacked viewports */
+@media (max-width: 960px) {
+  [data-landing-variant='wildreach'] :is(.wr-atlas, .wr-survey, .wr-protocol) {
+    padding-block: clamp(0.45rem, 1.2vh, 0.85rem);
+  }
+
+  [data-landing-variant='wildreach'] :is(.wr-atlas__lead, .wr-survey__lead, .wr-protocol__lead) {
+    /* -webkit-line-clamp: 1; */
+  }
+}
+
+@media (max-height: 700px) {
+  [data-landing-variant='wildreach'] :is(.wr-atlas__lead, .wr-survey__lead, .wr-protocol__lead) {
+    display: none;
+  }
+
+  [data-landing-variant='wildreach'] :is(.wr-atlas__title, .wr-survey__title, .wr-protocol__title) {
+    font-size: clamp(1.15rem, 3vh, 1.75rem);
+  }
 }

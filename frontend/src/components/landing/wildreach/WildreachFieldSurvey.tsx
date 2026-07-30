@@ -114,11 +114,6 @@ export default function WildreachFieldSurvey() {
           onMouseLeave={() => setPauseAuto(false)}
         >
           <div className="wr-survey__hide">
-            <div className="wr-survey__lens" aria-hidden="true">
-              <span className="wr-survey__lens-ring" />
-              <span className="wr-survey__lens-ring wr-survey__lens-ring--inner" />
-            </div>
-
             <img
               key={activeSite.image}
               src={activeSite.image}
