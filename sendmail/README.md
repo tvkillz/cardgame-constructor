@@ -74,7 +74,7 @@ GOTRUE_HOOK_SEND_EMAIL_URI=https://api.voidborn.fun/functions/v1/send-email-hook
 GOTRUE_HOOK_SEND_EMAIL_SECRETS=v1,whsec_<shared secret>
 SEND_EMAIL_HOOK_SECRET=v1,whsec_<same>
 
-SENDMAIL_RELAYS={"voidborn":{"url":"https://voidborn.fun/api/sendmail","apiKey":"..."},"iyashikei":{"url":"https://voidborn.fun/api/sendmail","apiKey":"..."},"helix":{"url":"https://voidborn.fun/api/sendmail","apiKey":"..."}}
+SENDMAIL_RELAYS={"voidborn":{"url":"https://voidborn.fun/api/sendmail","apiKey":"..."},"iyashikei":{"url":"https://voidborn.fun/api/sendmail","apiKey":"..."},"helix":{"url":"https://voidborn.fun/api/sendmail","apiKey":"..."},"final_whistle":{"url":"https://voidborn.fun/api/sendmail","apiKey":"..."},"wildreach":{"url":"https://voidborn.fun/api/sendmail","apiKey":"..."}}
 ```
 
 If both sites point to one relay URL, use the same `MAIL_API_KEY` for both entries (or keep separate keys if you run multiple relays).
@@ -95,6 +95,8 @@ SITE_URL=https://voidborn.fun
 AUTH_VERIFY_BASE_URL=https://api.voidborn.fun
 AUTH_VERIFY_BASE_URL_IYASHIKEI=https://api.komorebi.club
 AUTH_VERIFY_BASE_URL_HELIX=https://api.helixsignal.online
+AUTH_VERIFY_BASE_URL_FINAL_WHISTLE=https://api.finalwhistle.games
+# AUTH_VERIFY_BASE_URL_WILDREACH=…  # set when Wildreach API host exists
 ```
 
 Confirm/reset links in emails use that host (`/auth/v1/verify?...`), not the frontend domain.
@@ -114,7 +116,7 @@ Confirm/reset links in emails use that host (`/auth/v1/verify?...`), not the fro
 ## POST /test body (optional)
 
 ```json
-{ "recipients": ["you@example.com"], "template": "signup", "site": "helix" }
+{ "recipients": ["you@example.com"], "template": "signup", "site": "wildreach" }
 ```
 
 `template` values:
@@ -125,7 +127,7 @@ Confirm/reset links in emails use that host (`/auth/v1/verify?...`), not the fro
 | `recovery` | Password reset preview |
 | `invoice` | Invoice email + PDF preview (Test LTD seller data) |
 
-`site` (optional): `voidborn` (default), `iyashikei`, or `helix` — picks branded auth email template. The live GoTrue hook auto-detects site from `redirect_to`, `user_metadata.site_id`, or `+site` email suffix.
+`site` (optional): `voidborn` (default), `iyashikei`, `helix`, `final_whistle`, or `wildreach` — picks branded auth email template. The live GoTrue hook auto-detects site from `redirect_to`, `user_metadata.site_id`, or `+site` email suffix.
 
 ## POST /invoice body
 

@@ -12,7 +12,9 @@ function defaultSeller(siteId) {
         ? 'support@helixsignal.online'
         : normalized === 'final_whistle'
           ? 'support@finalwhistle.games'
-          : 'support@voidborn.fun';
+          : normalized === 'wildreach'
+            ? 'support@wildreach.placeholder'
+            : 'support@voidborn.fun';
 
   const testDefaults = {
     companyName: 'Test LTD',

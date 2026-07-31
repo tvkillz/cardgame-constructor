@@ -19,6 +19,7 @@ function defaultFromName(siteId) {
   if (siteId === 'iyashikei') return 'KOMOREBI';
   if (siteId === 'helix') return 'HELIX';
   if (siteId === 'final_whistle') return 'Final Whistle';
+  if (siteId === 'wildreach') return 'WILDREACH';
   return 'VOIDBORN';
 }
 

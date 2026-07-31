@@ -108,7 +108,9 @@ function buildInvoiceEmail(payload) {
             ? 'Open Grid Portal'
             : brand.id === 'final_whistle'
               ? 'Open Matchday Portal'
-              : 'Open Portal',
+              : brand.id === 'wildreach'
+                ? 'Open Field Portal'
+                : 'Open Portal',
       ctaUrl: `${portalUrl}/portal/market`,
       footerNote: `Your PDF invoice is attached. Questions? Contact ${seller.email}.`,
     }),

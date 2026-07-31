@@ -91,6 +91,12 @@ async function smtpHealth(_req, res) {
           user: siteSmtpConfig('final_whistle').user,
           from: fromAddress('final_whistle'),
         },
+        wildreach: {
+          host: siteSmtpConfig('wildreach').host,
+          port: siteSmtpConfig('wildreach').port,
+          user: siteSmtpConfig('wildreach').user,
+          from: fromAddress('wildreach'),
+        },
       },
     });
   } catch (err) {
@@ -136,7 +142,9 @@ async function sendTestEmail(req, res) {
                 ? 'HX-PREVIEW'
                 : siteId === 'final_whistle'
                   ? 'FW-PREVIEW'
-                  : 'VB-PREVIEW',
+                  : siteId === 'wildreach'
+                    ? 'WR-PREVIEW'
+                    : 'VB-PREVIEW',
           paidAt: stamp,
           totalCents: 1000,
           currency: 'eur',

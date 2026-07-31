@@ -90,3 +90,38 @@ FRONTEND_SHOWCASE_ONLY=1 PROJECT=wildreach npm run compile
 ```
 
 Auth email suffix = site id: `player+wildreach@example.com`.
+
+## Sendmail (centralized on voidborn VPS)
+
+Wildreach is wired in `sendmail` brand map + `SMTP_WILDREACH_*` (mailbox TBD until production domain).
+Auth verify: `AUTH_VERIFY_BASE_URL_WILDREACH` (placeholder until Wildreach API host exists).
+Logo: `sendmail/assets/brand/wildreach/header.png` (CID in HTML + PDF invoice header).
+
+`siteUrl` currently points at staging `https://wildreach.voidborn.fun`. When the production domain is known, update:
+
+1. `sendmail/src/lib/siteBrands.js` — `SITE_BRANDS.wildreach.siteUrl` + `DOMAIN_TO_SITE`
+2. `projects/wildreach/manifest.json` + footer/legal `support@…`
+3. `sendmail/.env` — `SMTP_WILDREACH_*`, `MAIL_LOGO_URL_WILDREACH`, `INVOICE_COMPANY_WILDREACH_*`, `AUTH_VERIFY_BASE_URL_WILDREACH`
+4. API VPS `SENDMAIL_RELAYS` — add `"wildreach": { "url": "…", "apiKey": "…" }`
+
+On the **voidborn** VPS after sync:
+
+```bash
+cd /root/constructor-files/sendmail
+# merge SMTP_WILDREACH_* + INVOICE_COMPANY_WILDREACH_* from .env.example into .env
+pm2 restart voidborn-sendmail --update-env
+```
+
+Test:
+
+```bash
+curl -s -X POST https://voidborn.fun/api/sendmail/test \
+  -H "Authorization: Bearer $MAIL_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"template":"signup","site":"wildreach"}'
+
+curl -s -X POST https://voidborn.fun/api/sendmail/test \
+  -H "Authorization: Bearer $MAIL_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"template":"invoice","site":"wildreach"}'
+```

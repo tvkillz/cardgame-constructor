@@ -161,7 +161,7 @@ function headingFontFamily(brand) {
 }
 
 /**
- * Site-branded HTML email shell — voidborn / iyashikei / helix palettes.
+ * Site-branded HTML email shell — voidborn / iyashikei / helix / final_whistle / wildreach palettes.
  */
 function renderBrandedEmail(
   brand,

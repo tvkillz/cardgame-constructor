@@ -15,6 +15,9 @@ const DOMAIN_TO_SITE = {
   'helix.voidborn.fun': 'helix',
   'finalwhistle.games': 'final_whistle',
   'www.finalwhistle.games': 'final_whistle',
+  'wildreach.voidborn.fun': 'wildreach',
+  'wildreach.placeholder': 'wildreach',
+  'www.wildreach.placeholder': 'wildreach',
 };
 
 const VOIDBORN_PALETTE = {
@@ -84,6 +87,26 @@ const FINAL_WHISTLE_PALETTE = {
   colorScheme: 'dark',
   ctaBg: 'rgba(232, 201, 106, 0.14)',
   ctaBorder: 'rgba(232, 201, 106, 0.45)',
+};
+
+/** Field dossier / wildlife — mirrors projects/wildreach/theme/colors.json */
+const WILDREACH_PALETTE = {
+  bg: '#0a100e',
+  text: '#f0ebe4',
+  title: '#f0ebe4',
+  muted: 'rgba(240, 235, 228, 0.55)',
+  body: '#f0ebe4',
+  accent: '#c49a3a',
+  accentBright: '#2a7a6a',
+  border: 'rgba(196, 154, 58, 0.32)',
+  headerTop: '#101814',
+  headerBottom: '#0a100e',
+  panelBg: 'rgba(16, 24, 20, 0.82)',
+  invoicePaper: '#f4efe6',
+  invoiceBorder: '#c4b898',
+  colorScheme: 'dark',
+  ctaBg: 'rgba(196, 154, 58, 0.14)',
+  ctaBorder: 'rgba(196, 154, 58, 0.5)',
 };
 
 /** Map auth email suffix → internal site id (must match backend auth_email_resolve_site_id). */
@@ -534,6 +557,120 @@ const SITE_BRANDS = {
     previewFooter: {
       signup: 'This is a preview of the Final Whistle activation email template.',
       recovery: 'This is a preview of the Final Whistle password reset email template.',
+    },
+  },
+
+  wildreach: {
+    id: 'wildreach',
+    brandName: 'WILDREACH',
+    /** Staging until production domain is assigned — update siteUrl + DOMAIN_TO_SITE when live. */
+    siteUrl: 'https://wildreach.voidborn.fun',
+    logoPath: '/assets/brand/header.png',
+    logoPaths: [
+      '/assets/brand/header.png',
+      '/assets/brand/header.webp',
+      '/assets/brand/gamelogo.png',
+      '/assets/brand/gamelogo.webp',
+    ],
+    typography: {
+      headingFamily: "'Barlow Condensed', 'Source Sans 3', Arial, Helvetica, sans-serif",
+      googleFontsUrl:
+        'https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Source+Sans+3:wght@500;600;700&display=swap',
+    },
+    palette: WILDREACH_PALETTE,
+    greetingName: (name) => (name ? `Observer ${name}.` : 'Observer.'),
+    subjects: {
+      signup: 'Confirm your WILDREACH account',
+      invite: 'You are invited to WILDREACH',
+      magiclink: 'Your WILDREACH sign-in link',
+      recovery: 'Reset your WILDREACH password',
+      email_change: 'Confirm your WILDREACH email change',
+      email: 'Your WILDREACH verification code',
+      reauthentication: 'Confirm it is you — WILDREACH',
+      password_changed_notification: 'Your WILDREACH password was changed',
+      email_changed_notification: 'Your WILDREACH email was changed',
+      phone_changed_notification: 'Your WILDREACH phone number was changed',
+      identity_linked_notification: 'A sign-in method was linked to your WILDREACH account',
+      identity_unlinked_notification: 'A sign-in method was removed from your WILDREACH account',
+      mfa_factor_enrolled_notification: 'MFA was enabled on your WILDREACH account',
+      mfa_factor_unenrolled_notification: 'MFA was disabled on your WILDREACH account',
+    },
+    actionCopy: {
+      signup: {
+        headline: 'Range Access Granted',
+        body:
+          'Welcome to the field. Confirm your account to track apex predators across Serengeti, Bengal, Patagonia, and Taiga — build your deck and hold territory.',
+        cta: 'Open the Range',
+      },
+      invite: {
+        headline: 'You Are Called to the Field',
+        body:
+          'An observer invited you onto the Wildreach trail. Accept below to enter the portal and begin your first hunt.',
+        cta: 'Accept Invitation',
+      },
+      magiclink: {
+        headline: 'Field Pass Ready',
+        body:
+          'Your passwordless trail pass is ready. Use the link below to return to the portal — no password needed.',
+        cta: 'Sign In to Wildreach',
+      },
+      recovery: {
+        headline: 'Restore Trail Credentials',
+        body:
+          'We received a request to reset your password. If this was you, set a new one with the link below. The trail closes soon for your protection.',
+        cta: 'Reset Password',
+      },
+      email_change: {
+        headline: 'Confirm New Contact Channel',
+        body:
+          'You asked to change the email bound to your Wildreach account. Confirm the new address to keep range access secure.',
+        cta: 'Confirm Email Change',
+      },
+      email: {
+        headline: 'Verify Observer Identity',
+        body: 'Use the link or code below to verify your identity and continue on the trail.',
+        cta: 'Verify Now',
+      },
+      reauthentication: {
+        headline: 'Re-Authenticate',
+        body:
+          'For your protection, confirm your identity before this sensitive action can proceed.',
+        cta: 'Confirm Identity',
+      },
+    },
+    securityCopy: {
+      password_changed_notification: {
+        headline: 'Password Changed',
+        body: 'Your Wildreach password was changed. If you did not make this change, secure your account immediately.',
+      },
+      email_changed_notification: {
+        headline: 'Email Address Changed',
+        body: 'The email on your Wildreach account was updated. If this was unexpected, contact support and review your security.',
+      },
+      phone_changed_notification: {
+        headline: 'Phone Number Changed',
+        body: 'A phone number linked to your Wildreach account was updated.',
+      },
+      identity_linked_notification: {
+        headline: 'Sign-In Method Linked',
+        body: 'A new sign-in method was linked to your Wildreach account.',
+      },
+      identity_unlinked_notification: {
+        headline: 'Sign-In Method Removed',
+        body: 'A sign-in method was removed from your Wildreach account.',
+      },
+      mfa_factor_enrolled_notification: {
+        headline: 'Extra Field Wards Enabled',
+        body: 'Multi-factor authentication is now active on your Wildreach account.',
+      },
+      mfa_factor_unenrolled_notification: {
+        headline: 'Extra Field Wards Removed',
+        body: 'Multi-factor authentication was disabled on your Wildreach account.',
+      },
+    },
+    previewFooter: {
+      signup: 'This is a preview of the WILDREACH activation email template.',
+      recovery: 'This is a preview of the WILDREACH password reset email template.',
     },
   },
 };
