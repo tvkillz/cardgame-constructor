@@ -177,6 +177,10 @@
   font-size: clamp(0.32rem, 4cqw, 0.5rem);
 }
 
+/* [data-landing-variant='wildreach'].wr-catalog__specimen-card.card:hover{
+  transform: none !important;
+} */
+
 /* Beat shared mobile hero fixed 22px stats — keep cqw scaling */
 @media (max-width: 640px) {
   [data-landing-variant='wildreach'] .card.card--hero .card__stat,

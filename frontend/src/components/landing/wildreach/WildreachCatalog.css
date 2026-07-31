@@ -244,7 +244,6 @@
   width: min(100%, var(--wr-catalog-stage));
   aspect-ratio: 2 / 3;
   min-height: calc(var(--wr-catalog-stage) * 1.5);
-  animation: wr-catalog-plate-in 0.55s ease;
 }
 
 .wr-catalog__mount-stage .card-preview-panel {
@@ -335,17 +334,6 @@
   font-size: clamp(0.4rem, 4.5cqw, 0.68rem);
 }
 
-@keyframes wr-catalog-plate-in {
-  from {
-    opacity: 0.4;
-    transform: scale(0.97) translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
 .wr-catalog__caption {
   flex-shrink: 0;
   min-width: 0;
@@ -428,6 +416,10 @@
   transition-delay: calc(0.06s + var(--specimen-i, 0) * 0.04s);
 }
 
+.wr-catalog__specimen .card:hover{
+  transform: none;
+}
+
 .wr-catalog--visible .wr-catalog__specimen {
   opacity: 1;
   transform: none;
@@ -445,8 +437,7 @@
   transition:
     border-color 0.25s ease,
     background 0.25s ease,
-    box-shadow 0.25s ease,
-    transform 0.25s ease;
+    box-shadow 0.25s ease;
 }
 
 .wr-catalog__specimen-btn:hover {
@@ -456,11 +447,16 @@
 
 .wr-catalog__specimen--active .wr-catalog__specimen-btn {
   border-color: color-mix(in srgb, var(--specimen-glow, #c49a3a) 65%, #c49a3a);
-  background: color-mix(in srgb, var(--specimen-glow, #c49a3a) 12%, rgba(10, 16, 14, 0.92));
+  background:
+    radial-gradient(
+      ellipse 90% 80% at 50% 45%,
+      color-mix(in srgb, var(--specimen-glow, #c49a3a) 28%, transparent) 0%,
+      transparent 70%
+    ),
+    color-mix(in srgb, var(--specimen-glow, #c49a3a) 14%, rgba(10, 16, 14, 0.92));
   box-shadow:
-    0 0 0 1px color-mix(in srgb, var(--specimen-glow, #c49a3a) 22%, transparent),
-    0 10px 22px rgba(0, 0, 0, 0.3);
-  transform: translateY(-2px);
+    0 0 0 1px color-mix(in srgb, var(--specimen-glow, #c49a3a) 28%, transparent),
+    0 0 22px color-mix(in srgb, var(--specimen-glow, #c49a3a) 35%, transparent);
 }
 
 .wr-catalog__specimen-pin {
@@ -515,6 +511,12 @@
   .wr-catalog__tray {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
+
+  .wr-catalog__caption{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 @media (max-width: 700px) {
@@ -550,10 +552,6 @@
   .wr-catalog__specimen-btn {
     padding: 0.3rem 0.2rem 0.35rem;
   }
-
-  .wr-catalog__specimen--active .wr-catalog__specimen-btn {
-    transform: none;
-  }
 }
 
 @media (max-width: 520px) {
@@ -569,7 +567,6 @@
 @media (prefers-reduced-motion: reduce) {
   .wr-catalog,
   .wr-catalog__specimen,
-  .wr-catalog__mount-stage,
   .wr-catalog__mount-mist {
     animation: none;
     transition: none;

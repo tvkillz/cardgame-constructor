@@ -416,7 +416,8 @@
 
 @media (max-width: 700px) {
   .wr-atlas {
-    padding: clamp(1.5rem, 5vw, 2.25rem) 0;
+    padding-bottom: 0 !important;
+    /* padding: clamp(1.5rem, 5vw, 2.25rem) 0; */
   }
 
   .wr-atlas__shell {

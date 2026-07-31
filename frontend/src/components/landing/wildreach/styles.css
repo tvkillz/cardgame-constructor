@@ -989,6 +989,12 @@
   .wr-hero__cluster-slot {
     --wr-hover-boost: 2.25;
   }
+  .wr-survey{
+    padding: 0 !important;
+  }
+  .wr-catalog{
+    padding: 0 !important;
+  }
 }
 
 @media (max-width: 640px) {

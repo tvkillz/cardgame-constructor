@@ -89,6 +89,13 @@ export default function WildreachFieldSurvey() {
     0,
   )
 
+  const stepRange = (delta: number) => {
+    const next =
+      (rangeIndex + delta + LOCATIONS.length) % LOCATIONS.length
+    const loc = LOCATIONS[next]
+    if (loc) setActiveRangeId(loc.id)
+  }
+
   return (
     <section
       ref={sectionRef}
@@ -201,31 +208,51 @@ export default function WildreachFieldSurvey() {
         </div>
 
         <nav className="wr-survey__transect" aria-label="Select range">
-          {LOCATIONS.map((loc, index) => {
-            const isActive = loc.id === activeRangeId
-            const meta = RANGE_SIGNAL[loc.domainId] ?? RANGE_SIGNAL.serengeti
-            return (
-              <button
-                key={loc.id}
-                type="button"
-                className={`wr-survey__blaze${isActive ? ' wr-survey__blaze--active' : ''}`}
-                style={{ '--range-glow': loc.glowColor } as CSSProperties}
-                aria-pressed={isActive}
-                onClick={() => setActiveRangeId(loc.id)}
-                onMouseEnter={() => setActiveRangeId(loc.id)}
-                onFocus={() => setActiveRangeId(loc.id)}
-              >
-                <span className="wr-survey__blaze-index" aria-hidden="true">
-                  0{index + 1}
-                </span>
-                <span className="wr-survey__blaze-copy">
-                  <span className="wr-survey__blaze-name">{loc.name}</span>
-                  <span className="wr-survey__blaze-signal">{meta.signal}</span>
-                </span>
-                <span className="wr-survey__blaze-cat">{loc.categoryLabel}</span>
-              </button>
-            )
-          })}
+          <button
+            type="button"
+            className="wr-survey__transect-arrow wr-survey__transect-arrow--prev"
+            aria-label="Previous range"
+            onClick={() => stepRange(-1)}
+          >
+            <span aria-hidden="true">‹</span>
+          </button>
+
+          <div className="wr-survey__transect-track">
+            {LOCATIONS.map((loc, index) => {
+              const isActive = loc.id === activeRangeId
+              const meta = RANGE_SIGNAL[loc.domainId] ?? RANGE_SIGNAL.serengeti
+              return (
+                <button
+                  key={loc.id}
+                  type="button"
+                  className={`wr-survey__blaze${isActive ? ' wr-survey__blaze--active' : ''}`}
+                  style={{ '--range-glow': loc.glowColor } as CSSProperties}
+                  aria-pressed={isActive}
+                  onClick={() => setActiveRangeId(loc.id)}
+                  onMouseEnter={() => setActiveRangeId(loc.id)}
+                  onFocus={() => setActiveRangeId(loc.id)}
+                >
+                  <span className="wr-survey__blaze-index" aria-hidden="true">
+                    0{index + 1}
+                  </span>
+                  <span className="wr-survey__blaze-copy">
+                    <span className="wr-survey__blaze-name">{loc.name}</span>
+                    <span className="wr-survey__blaze-signal">{meta.signal}</span>
+                  </span>
+                  <span className="wr-survey__blaze-cat">{loc.categoryLabel}</span>
+                </button>
+              )
+            })}
+          </div>
+
+          <button
+            type="button"
+            className="wr-survey__transect-arrow wr-survey__transect-arrow--next"
+            aria-label="Next range"
+            onClick={() => stepRange(1)}
+          >
+            <span aria-hidden="true">›</span>
+          </button>
         </nav>
       </div>
     </section>

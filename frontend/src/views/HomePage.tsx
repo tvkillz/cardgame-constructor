@@ -43,6 +43,11 @@ const FinalWhistlePathwaysSection = dynamic(
   { ssr: true },
 )
 
+const WildreachPathways = dynamic(
+  () => import('@/components/landing/wildreach/WildreachPathways'),
+  { ssr: true },
+)
+
 const CollectionSection = dynamic(
   () => import('@/components/CollectionSection/CollectionSection'),
   { ssr: true },
@@ -104,7 +109,13 @@ export default function HomePage() {
         ) : (
           <CollectionSection />
         )}
-        {isFinalWhistle ? <FinalWhistlePathwaysSection /> : <PathwaysSection />}
+        {isFinalWhistle ? (
+          <FinalWhistlePathwaysSection />
+        ) : isWildreach ? (
+          <WildreachPathways />
+        ) : (
+          <PathwaysSection />
+        )}
         {isFinalWhistle ? <FinalWhistleFaqSection /> : <FaqSection />}
         {isFinalWhistle ? <FinalWhistleShapeSection /> : <FinalCtaSection />}
       </main>

@@ -14,7 +14,8 @@
 [data-landing-variant='wildreach'] .landing-flow > .wr-hero + .wr-atlas,
 [data-landing-variant='wildreach'] .landing-flow > .wr-atlas + .wr-survey,
 [data-landing-variant='wildreach'] .landing-flow > .wr-survey + .wr-protocol,
-[data-landing-variant='wildreach'] .landing-flow > .wr-protocol + .wr-catalog {
+[data-landing-variant='wildreach'] .landing-flow > .wr-protocol + .wr-catalog,
+[data-landing-variant='wildreach'] .landing-flow > .wr-catalog + .wr-pathways {
   margin-top: 0;
 }
 
@@ -123,6 +124,31 @@
 
 [data-landing-variant='wildreach'] .wr-hero__transition {
   height: clamp(2rem, 5vw, 3.25rem);
+}
+
+[data-landing-variant='wildreach'] .wr-pathways {
+  box-sizing: border-box;
+  padding-block: var(--wr-section-pad-y);
+  overflow: hidden;
+}
+
+[data-landing-variant='wildreach'] .wr-pathways__shell {
+  gap: clamp(0.75rem, 1.8vw, 1.35rem);
+}
+
+[data-landing-variant='wildreach'] .wr-pathways__header {
+  max-width: 42rem;
+}
+
+[data-landing-variant='wildreach'] .wr-pathways__gallery {
+  flex: 0 0 auto;
+}
+
+@media (max-width: 900px) {
+  [data-landing-variant='wildreach'] .wr-pathways {
+    overflow: visible;
+    padding-block: clamp(1.75rem, 5vw, 2.75rem);
+  }
 }
 
 /* Tablet / phone: natural flow, no clipped panels or overlapping seams */

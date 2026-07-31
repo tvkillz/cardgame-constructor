@@ -100,7 +100,7 @@ export default function WildreachCatalog() {
               <span className="wr-catalog__corner wr-catalog__corner--br" aria-hidden="true" />
               <div className="wr-catalog__mount-mist" aria-hidden="true" />
               <div className="wr-catalog__mount-stage">
-                <CardPreviewPanel key={activeCard.id} card={activeProps} />
+                <CardPreviewPanel card={activeProps} />
               </div>
             </div>
 
