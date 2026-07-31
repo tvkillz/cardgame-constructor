@@ -25,8 +25,11 @@
 @import './styles/wildreach-fonts.css';
 @import './styles/wildreach-theme.css';
 @import './styles/wildreach-modals.css';
+@import './styles/wildreach-portal-chrome.css';
+@import './styles/wildreach-portal-pages.css';
 @import './styles/wildreach-cards.css';
 @import './styles/wildreach-landing-layouts.css';
+@import './styles/wildreach-play.css';
 
 /* Color defaults — overridden at runtime by applyTheme(); fonts via next/font in app layout */
 :root {

@@ -24,7 +24,12 @@ export interface SitemapConfig {
   }
 }
 
-export type LandingVariant = 'voidborn' | 'iyashikei' | 'helix'
+export type LandingVariant =
+  | 'voidborn'
+  | 'iyashikei'
+  | 'helix'
+  | 'final_whistle'
+  | 'wildreach'
 
 export interface LandingConfig {
   variant: LandingVariant

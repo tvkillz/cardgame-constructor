@@ -34,6 +34,7 @@ export default function DeckSelectModal({
   const copy = appConfig.descriptions.deckModal
   const selectedDeck = decks.find((d) => d.id === selectedDeckId)
   const canEnter = Boolean(selectedDeckId)
+  const modeMark = appConfig.landing?.variant === 'wildreach' ? '◈' : '⚔'
 
   return (
     <div
@@ -54,7 +55,12 @@ export default function DeckSelectModal({
         <h2 id="deck-modal-title" className="deck-modal__title">
           {copy.title}
         </h2>
-        <p className="deck-modal__mode">⚔ {modeLabel}</p>
+        <p className="deck-modal__mode">
+          <span className="deck-modal__mode-mark" aria-hidden="true">
+            {modeMark}
+          </span>{' '}
+          {modeLabel}
+        </p>
 
         <label className="deck-modal__field">
           <span className="deck-modal__field-label">Deck</span>

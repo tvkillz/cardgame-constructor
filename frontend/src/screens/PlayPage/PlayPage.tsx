@@ -236,8 +236,11 @@ export default function PlayPage() {
 
   const inArena = battlePhase === 'arena'
   const inBattle = battlePhase !== 'idle'
-  const isHelix = appConfig.landing?.variant === 'helix'
-  const lobbyHero = isHelix ? (logo.headerLogo ?? logo.playLogo) : logo.playLogo
+  const landingVariant = appConfig.landing?.variant
+  const isHelix = landingVariant === 'helix'
+  const isWildreach = landingVariant === 'wildreach'
+  const lobbyHero =
+    isHelix || isWildreach ? (logo.headerLogo ?? logo.playLogo) : logo.playLogo
 
   const renderModeButton = (
     option: (typeof theme.playModes)[number],
@@ -269,7 +272,7 @@ export default function PlayPage() {
 
   return (
     <section
-      className={`play-page${inArena ? ' play-page--arena' : ''}${isHelix ? ' play-page--helix' : ''}`}
+      className={`play-page${inArena ? ' play-page--arena' : ''}${isHelix ? ' play-page--helix' : ''}${isWildreach ? ' play-page--wildreach' : ''}`}
       aria-label={descriptions.play.screenLabel}
     >
       {!inBattle && (
@@ -285,6 +288,15 @@ export default function PlayPage() {
               <span className="play-page__hud-corner play-page__hud-corner--br" aria-hidden="true" />
               <p className="play-page__hud-tag" aria-hidden="true">
                 RELAY // DEPLOY GATE
+              </p>
+            </>
+          ) : null}
+
+          {isWildreach ? (
+            <>
+              <div className="play-page__trail-frame" aria-hidden="true" />
+              <p className="play-page__trail-tag" aria-hidden="true">
+                FIELD LOG // OPEN RANGE
               </p>
             </>
           ) : null}
@@ -396,6 +408,38 @@ export default function PlayPage() {
                       ))}
                     </div>
                   </div>
+                ) : isWildreach ? (
+                  <div className="play-page__trail-console">
+                    <p className="play-page__trail-eyebrow">
+                      <span className="play-page__trail-bracket">◇</span>
+                      RANGE SELECT // CHOOSE YOUR HUNT
+                      <span className="play-page__trail-bracket">◇</span>
+                    </p>
+                    <div
+                      className="play-page__modes play-page__modes--trail"
+                      role="list"
+                      aria-label="Game modes"
+                    >
+                      {theme.playModes.map((option, index) => (
+                        <article
+                          key={option.id}
+                          className="play-page__trail-slot"
+                          role="listitem"
+                        >
+                          <header className="play-page__trail-slot-head">
+                            <span className="play-page__trail-index">
+                              Trail {String(index + 1).padStart(2, '0')}
+                            </span>
+                            <span className="play-page__trail-blaze" aria-hidden="true" />
+                          </header>
+                          {renderModeButton(
+                            option,
+                            `play-page__trail-mode play-page__trail-mode--accent-${option.accent}`,
+                          )}
+                        </article>
+                      ))}
+                    </div>
+                  </div>
                 ) : (
                   <div className="play-page__modes" role="list" aria-label="Game modes">
                     {theme.playModes.map((option) => (
@@ -414,7 +458,7 @@ export default function PlayPage() {
                   className="play-page__back-btn"
                   onClick={() => setShowModes(false)}
                 >
-                  {isHelix ? 'Abort Link' : 'Return'}
+                  {isHelix ? 'Abort Link' : isWildreach ? 'Leave Range' : 'Return'}
                 </Button>
               </div>
 

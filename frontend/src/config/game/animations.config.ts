@@ -1,6 +1,8 @@
 import { getGameplayVariant } from '@/gameplay/resolve'
 import { gameAnimationsConfig as helixAnimations } from '@/gameplay/helix/animations.config'
 import { gameAnimationsConfig as iyashikeiAnimations } from '@/gameplay/iyashikei/animations.config'
+import { gameAnimationsConfig as finalWhistleAnimations } from '@/gameplay/final_whistle/animations.config'
+import { gameAnimationsConfig as wildreachAnimations } from '@/gameplay/wildreach/animations.config'
 import { gameAnimationsConfig as voidbornAnimations } from '@/gameplay/voidborn/animations.config'
 
 const variant = getGameplayVariant()
@@ -11,4 +13,8 @@ export const gameAnimationsConfig =
     ? iyashikeiAnimations
     : variant === 'helix'
       ? helixAnimations
-      : voidbornAnimations
+      : variant === 'final_whistle'
+        ? finalWhistleAnimations
+        : variant === 'wildreach'
+          ? wildreachAnimations
+          : voidbornAnimations

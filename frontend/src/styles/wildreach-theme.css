@@ -292,12 +292,17 @@
   border-top: 1px solid var(--wr-border);
 }
 
-/* Match landing-shell column so brand / links share the content edge */
+/* Landing footer only — portal footer width is overridden in wildreach-portal-chrome.css */
 [data-landing-variant='wildreach'] .site-footer__inner {
   max-width: var(--landing-content-max, 1200px);
   margin-inline: auto;
   width: 100%;
   box-sizing: border-box;
+}
+
+[data-landing-variant='wildreach'] .portal__footer .site-footer__inner {
+  max-width: none;
+  margin-inline: 0;
 }
 
 [data-landing-variant='wildreach'] .site-footer__wordmark {

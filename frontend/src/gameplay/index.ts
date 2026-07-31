@@ -1,6 +1,7 @@
 import { Game as FinalWhistleGame } from './final_whistle/Game'
 import { Game as HelixGame } from './helix/Game'
 import { Game as IyashikeiGame } from './iyashikei/Game'
+import { Game as WildreachGame } from './wildreach/Game'
 import { getGameplayVariant } from './resolve'
 import { Game as VoidbornGame } from './voidborn/Game'
 
@@ -10,7 +11,7 @@ export type { GameProps } from './types'
 
 const gameplayVariant = getGameplayVariant()
 
-/** Arena shell for the compiled project (`voidborn` | `iyashikei` | `helix` | `final_whistle`). */
+/** Arena shell for the compiled project. */
 export const Game =
   gameplayVariant === 'iyashikei'
     ? IyashikeiGame
@@ -18,6 +19,8 @@ export const Game =
       ? HelixGame
       : gameplayVariant === 'final_whistle'
         ? FinalWhistleGame
-        : VoidbornGame
+        : gameplayVariant === 'wildreach'
+          ? WildreachGame
+          : VoidbornGame
 
 export default Game
