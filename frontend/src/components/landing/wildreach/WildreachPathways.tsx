@@ -251,66 +251,63 @@ export default function WildreachPathways() {
           <h2 className="wr-pathways__title">{pathways.title}</h2>
           <p className="wr-pathways__lead">{pathways.description}</p>
         </header>
-      </div>
 
-      <div className="wr-pathways__gallery">
-        <div className="wr-pathways__rail">
+        <div className="wr-pathways__gallery">
+          <div className="wr-pathways__rail">
+            <div className="wr-pathways__controls">
+              <button
+                type="button"
+                className="wr-pathways__nav"
+                aria-label="Previous pathway"
+                disabled={activeIndex <= 0}
+                onClick={() => scrollBySlide(-1)}
+              >
+                <span aria-hidden="true">‹</span>
+              </button>
+              <button
+                type="button"
+                className="wr-pathways__nav"
+                aria-label="Next pathway"
+                disabled={activeIndex >= features.length - 1}
+                onClick={() => scrollBySlide(1)}
+              >
+                <span aria-hidden="true">›</span>
+              </button>
+            </div>
+          </div>
 
-          <div className="wr-pathways__controls">
-            <button
-              type="button"
-              className="wr-pathways__nav"
-              aria-label="Previous pathway"
-              disabled={activeIndex <= 0}
-              onClick={() => scrollBySlide(-1)}
-            >
-              <span aria-hidden="true">‹</span>
-            </button>
-            <button
-              type="button"
-              className="wr-pathways__nav"
-              aria-label="Next pathway"
-              disabled={activeIndex >= features.length - 1}
-              onClick={() => scrollBySlide(1)}
-            >
-              <span aria-hidden="true">›</span>
-            </button>
+          <ul
+            ref={trackRef}
+            className={`wr-pathways__track${trackReady ? ' wr-pathways__track--ready' : ''}`}
+            role="list"
+            aria-label="Trade pathways gallery"
+          >
+            {features.map((feature, index) => (
+              <GalleryCard
+                key={feature.id}
+                feature={feature}
+                index={index}
+                isActive={index === activeIndex}
+                onActivate={() => activateIndex(index)}
+              />
+            ))}
+          </ul>
+
+          <div className="wr-pathways__dots" role="tablist" aria-label="Gallery position">
+            {features.map((feature, index) => (
+              <button
+                key={feature.id}
+                type="button"
+                role="tab"
+                aria-selected={index === activeIndex}
+                aria-label={`Show ${feature.title}`}
+                className={`wr-pathways__dot${index === activeIndex ? ' wr-pathways__dot--active' : ''}`}
+                onClick={() => activateIndex(index)}
+              />
+            ))}
           </div>
         </div>
 
-        <ul
-          ref={trackRef}
-          className={`wr-pathways__track${trackReady ? ' wr-pathways__track--ready' : ''}`}
-          role="list"
-          aria-label="Trade pathways gallery"
-        >
-          {features.map((feature, index) => (
-            <GalleryCard
-              key={feature.id}
-              feature={feature}
-              index={index}
-              isActive={index === activeIndex}
-              onActivate={() => activateIndex(index)}
-            />
-          ))}
-        </ul>
-
-        <div className="wr-pathways__dots" role="tablist" aria-label="Gallery position">
-          {features.map((feature, index) => (
-            <button
-              key={feature.id}
-              type="button"
-              role="tab"
-              aria-selected={index === activeIndex}
-              aria-label={`Show ${feature.title}`}
-              className={`wr-pathways__dot${index === activeIndex ? ' wr-pathways__dot--active' : ''}`}
-              onClick={() => activateIndex(index)}
-            />
-          ))}
-        </div>
-      </div>
-
-      <div className="landing-shell wr-pathways__shell wr-pathways__shell--footer">
         {pathways.tiers.length > 0 ? (
           <div className="wr-pathways__spectrum">
             <p className="wr-pathways__spectrum-label">PRINT SPECTRUM · RANGE GRADES</p>

@@ -125,10 +125,11 @@
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(0.55rem, 1.5vw, 1.1rem);
-  align-items: stretch;
+  align-items: start;
   min-width: 0;
   min-height: 0;
-  flex: 1 1 auto;
+  width: 100%;
+  max-width: 100%;
 }
 
 .wr-protocol__pass {
@@ -152,7 +153,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.55rem;
-  height: 100%;
+  height: auto;
   min-width: 0;
   min-height: 0;
 }
@@ -160,9 +161,12 @@
 .wr-protocol__pass-art {
   position: relative;
   width: 100%;
+  max-width: 100%;
   min-width: 0;
   min-height: 0;
-  flex: 1 1 auto;
+  flex: 0 0 auto;
+  aspect-ratio: 16 / 9;
+  max-height: 14rem;
   border-radius: 6px;
   overflow: hidden;
   border: 1px solid color-mix(in srgb, var(--pass-glow, #c49a3a) 35%, rgba(196, 154, 58, 0.18));

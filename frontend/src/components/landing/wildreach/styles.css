@@ -45,6 +45,7 @@
     0 0 18px rgba(196, 154, 58, 0.45),
     0 0 36px rgba(196, 154, 58, 0.22),
     inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  transform: translateX(2px);
 }
 
 .wr-header__mark::after {
@@ -645,6 +646,7 @@
 /* Right-half curated deck showcase */
 .wr-hero__showcase {
   position: relative;
+  z-index: 5;
   width: 100%;
   min-height: clamp(340px, 62vh, 600px);
   display: flex;
@@ -652,6 +654,8 @@
   justify-content: center;
   overflow: visible;
   animation: wr-fade-right 1s cubic-bezier(0.22, 1, 0.36, 1) 0.12s backwards;
+  /* Let title stay clickable; only card slots capture pointer */
+  pointer-events: none;
 }
 
 @keyframes wr-fade-right {
@@ -699,6 +703,7 @@
   width: clamp(78px, 12.65vw, 136px);
   aspect-ratio: 2 / 3;
   opacity: 1;
+  pointer-events: auto;
   transform: translateY(var(--cluster-lift, 0px)) rotate(var(--cluster-tilt, 0deg))
     scale(var(--cluster-scale, 1));
   animation:
@@ -814,6 +819,7 @@
   cursor: pointer;
   filter: brightness(0.88) saturate(0.92);
   transition: filter 0.35s ease;
+  z-index: 100;
 }
 
 .wr-hero__cluster-slot .wr-hero__cluster-card.card .card__title {
@@ -834,7 +840,7 @@
 /* Hover / lit: show native paint size (+50%), straighten, pause float */
 .wr-hero__cluster-slot:hover,
 .wr-hero__cluster-slot--lit {
-  z-index: 24 !important;
+  z-index: 1000 !important;
   animation-play-state: paused;
   translate: 0 0;
   transform: translateY(calc(var(--cluster-lift, 0px) - 12px)) rotate(0deg)
@@ -948,6 +954,7 @@
   }
 
   .wr-hero__showcase {
+    width: 100%;
     order: 2;
     z-index: 6;
     /* Sit close so the enlarged hover card can cover the heading */

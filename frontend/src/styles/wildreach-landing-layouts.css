@@ -1,9 +1,17 @@
-/* WILDREACH landing — section spacing + viewport-fit panels */
+/* WILDREACH landing — section spacing + constrained media (no ultra-wide sausage stretch) */
 
 [data-landing-variant='wildreach'] {
   --wr-section-pad-y: clamp(1.75rem, 4vw, 3rem);
   --wr-section-pad-bottom: clamp(1.75rem, 4vw, 3rem);
   --landing-after-hero-gap: clamp(2.5rem, 7vw, 5rem);
+  --landing-content-max: 1200px;
+  --wr-media-aspect: 16 / 9;
+  --wr-media-max-h: 28rem;
+  /* Shared inset: matches .landing-shell content edge (max-width + gutter) */
+  --wr-content-inline: max(
+    var(--landing-gutter-x),
+    calc((100% - var(--landing-content-max)) / 2 + var(--landing-gutter-x))
+  );
 }
 
 [data-landing-variant='wildreach'] .landing-flow {
@@ -15,98 +23,175 @@
 [data-landing-variant='wildreach'] .landing-flow > .wr-atlas + .wr-survey,
 [data-landing-variant='wildreach'] .landing-flow > .wr-survey + .wr-protocol,
 [data-landing-variant='wildreach'] .landing-flow > .wr-protocol + .wr-catalog,
-[data-landing-variant='wildreach'] .landing-flow > .wr-catalog + .wr-pathways {
+[data-landing-variant='wildreach'] .landing-flow > .wr-catalog + .wr-pathways,
+[data-landing-variant='wildreach'] .landing-flow > .wr-pathways + .faq,
+[data-landing-variant='wildreach'] .landing-flow > .faq + .final-cta {
   margin-top: 0;
 }
 
-/* Sections 2–5: shared vertical rhythm; desktop panels fill the viewport */
-[data-landing-variant='wildreach'] :is(.wr-atlas, .wr-survey, .wr-protocol, .wr-catalog) {
+/* Content shells: centered, capped — leave balanced side space on ultra-wide */
+[data-landing-variant='wildreach'] :is(
+  .wr-atlas,
+  .wr-survey,
+  .wr-protocol,
+  .wr-catalog,
+  .wr-pathways,
+  .faq,
+  .final-cta
+) > .landing-shell {
+  width: 100%;
+  max-width: var(--landing-content-max);
+  margin-inline: auto;
+}
+
+/* Atlas / Survey / Protocol: natural height, fixed media proportions */
+[data-landing-variant='wildreach'] :is(.wr-atlas, .wr-survey, .wr-protocol) {
   box-sizing: border-box;
-  min-height: 100svh;
+  min-height: 0;
+  height: auto;
   display: flex;
   flex-direction: column;
   padding-block: var(--wr-section-pad-y);
   overflow: hidden;
 }
 
-[data-landing-variant='wildreach'] :is(.wr-atlas, .wr-survey, .wr-protocol, .wr-catalog) > .landing-shell {
-  flex: 1 1 auto;
+[data-landing-variant='wildreach'] :is(.wr-atlas, .wr-survey, .wr-protocol) > .landing-shell {
+  flex: 0 1 auto;
   min-height: 0;
-  height: 100%;
+  height: auto;
   display: flex;
   flex-direction: column;
-  gap: clamp(0.75rem, 1.8vw, 1.35rem);
+  gap: clamp(0.85rem, 2vw, 1.35rem);
 }
 
-[data-landing-variant='wildreach'] :is(.wr-atlas__header, .wr-survey__header, .wr-protocol__header, .wr-catalog__header) {
+[data-landing-variant='wildreach'] :is(
+  .wr-atlas__header,
+  .wr-survey__header,
+  .wr-protocol__header,
+  .wr-catalog__header
+) {
   flex: 0 0 auto;
   max-width: 42rem;
 }
 
-[data-landing-variant='wildreach'] :is(.wr-atlas__title, .wr-survey__title, .wr-protocol__title, .wr-catalog__title) {
+[data-landing-variant='wildreach'] :is(
+  .wr-atlas__title,
+  .wr-survey__title,
+  .wr-protocol__title,
+  .wr-catalog__title
+) {
   margin: 0 0 0.45rem;
 }
 
-[data-landing-variant='wildreach'] :is(.wr-atlas__lead, .wr-survey__lead, .wr-protocol__lead, .wr-catalog__lead) {
+[data-landing-variant='wildreach'] :is(
+  .wr-atlas__lead,
+  .wr-survey__lead,
+  .wr-protocol__lead,
+  .wr-catalog__lead
+) {
   margin: 0;
   line-height: 1.5;
 }
 
-[data-landing-variant='wildreach'] :is(.wr-atlas__eyebrow, .wr-survey__eyebrow, .wr-protocol__eyebrow, .wr-catalog__eyebrow) {
+[data-landing-variant='wildreach'] :is(
+  .wr-atlas__eyebrow,
+  .wr-survey__eyebrow,
+  .wr-protocol__eyebrow,
+  .wr-catalog__eyebrow
+) {
   margin: 0 0 0.4rem;
 }
 
+/* —— Range Atlas —— */
 [data-landing-variant='wildreach'] .wr-atlas__board {
-  flex: 1 1 auto;
+  flex: 0 1 auto;
   min-height: 0;
   height: auto;
   max-height: none;
-}
-
-[data-landing-variant='wildreach'] .wr-survey__stage,
-[data-landing-variant='wildreach'] .wr-protocol__passes {
-  flex: 1 1 auto;
-  min-height: 0;
-}
-
-[data-landing-variant='wildreach'] .wr-atlas__plate,
-[data-landing-variant='wildreach'] .wr-atlas__frame {
-  height: 100%;
-  min-height: 0;
-  aspect-ratio: auto;
+  align-items: start;
+  width: 100%;
+  max-width: 100%;
 }
 
 [data-landing-variant='wildreach'] .wr-atlas__legend {
   min-height: 0;
-  max-height: 100%;
+  max-height: none;
   align-self: stretch;
+  height: auto;
 }
 
-[data-landing-variant='wildreach'] .wr-survey__hide,
+[data-landing-variant='wildreach'] .wr-atlas__plate {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  min-height: 0;
+  aspect-ratio: var(--wr-media-aspect);
+  max-height: var(--wr-media-max-h);
+}
+
+[data-landing-variant='wildreach'] .wr-atlas__frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-height: none;
+  aspect-ratio: auto;
+}
+
+/* —— Field Survey —— */
+[data-landing-variant='wildreach'] .wr-survey__stage {
+  flex: 0 1 auto;
+  min-height: 0;
+  height: auto;
+  align-items: start;
+  width: 100%;
+  max-width: 100%;
+}
+
+[data-landing-variant='wildreach'] .wr-survey__hide {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  min-height: 0;
+  aspect-ratio: var(--wr-media-aspect);
+  max-height: var(--wr-media-max-h);
+}
+
 [data-landing-variant='wildreach'] .wr-survey__ledger {
   height: auto;
-  max-height: 100%;
+  max-height: var(--wr-media-max-h);
   min-height: 0;
   align-self: stretch;
 }
 
 [data-landing-variant='wildreach'] .wr-survey__transect {
   flex: 0 0 auto;
+  width: 100%;
+  max-width: 100%;
 }
 
-[data-landing-variant='wildreach'] .wr-catalog__board {
-  flex: 1 1 auto;
+/* —— Hunt Protocol —— */
+[data-landing-variant='wildreach'] .wr-protocol__passes {
+  flex: 0 1 auto;
   min-height: 0;
+  height: auto;
+  align-items: start;
+  width: 100%;
+  max-width: 100%;
 }
 
-[data-landing-variant='wildreach'] .wr-catalog__ledger {
-  flex: 0 0 auto;
+[data-landing-variant='wildreach'] .wr-protocol__pass {
+  height: auto;
+  min-height: 0;
 }
 
 [data-landing-variant='wildreach'] .wr-protocol__pass-art {
-  flex: 1 1 auto;
+  flex: 0 0 auto;
+  width: 100%;
+  max-width: 100%;
   min-height: 0;
-  aspect-ratio: auto;
+  aspect-ratio: var(--wr-media-aspect);
+  max-height: min(14rem, var(--wr-media-max-h));
 }
 
 [data-landing-variant='wildreach'] .wr-protocol__pass-copy {
@@ -117,9 +202,32 @@
   line-height: 1.4;
 }
 
-[data-landing-variant='wildreach'] .wr-protocol__pass {
-  height: auto;
+/* Catalog keeps a taller panel feel but still capped to content max */
+[data-landing-variant='wildreach'] .wr-catalog {
+  box-sizing: border-box;
   min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding-block: var(--wr-section-pad-y);
+  overflow: hidden;
+}
+
+[data-landing-variant='wildreach'] .wr-catalog > .landing-shell {
+  flex: 0 1 auto;
+  min-height: 0;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.75rem, 1.8vw, 1.35rem);
+}
+
+[data-landing-variant='wildreach'] .wr-catalog__board {
+  flex: 0 1 auto;
+  min-height: 0;
+}
+
+[data-landing-variant='wildreach'] .wr-catalog__ledger {
+  flex: 0 0 auto;
 }
 
 [data-landing-variant='wildreach'] .wr-hero__transition {
@@ -133,7 +241,10 @@
 }
 
 [data-landing-variant='wildreach'] .wr-pathways__shell {
-  gap: clamp(0.75rem, 1.8vw, 1.35rem);
+  gap: clamp(0.85rem, 2vw, 1.35rem);
+  max-width: var(--landing-content-max, 1200px);
+  margin-inline: auto;
+  overflow: hidden;
 }
 
 [data-landing-variant='wildreach'] .wr-pathways__header {
@@ -142,16 +253,21 @@
 
 [data-landing-variant='wildreach'] .wr-pathways__gallery {
   flex: 0 0 auto;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
 }
 
-@media (max-width: 900px) {
-  [data-landing-variant='wildreach'] .wr-pathways {
-    overflow: visible;
-    padding-block: clamp(1.75rem, 5vw, 2.75rem);
-  }
+[data-landing-variant='wildreach'] .faq,
+[data-landing-variant='wildreach'] .final-cta {
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
-/* Tablet / phone: natural flow, no clipped panels or overlapping seams */
+[data-landing-variant='wildreach'] .landing-section-title {
+  text-align: initial;
+}
+
 @media (max-width: 900px) {
   [data-landing-variant='wildreach'] :is(.wr-atlas, .wr-survey, .wr-protocol, .wr-catalog) {
     height: auto;
@@ -168,48 +284,85 @@
 
   [data-landing-variant='wildreach'] .wr-atlas__board {
     flex: none;
-    min-height: min(58svh, 520px);
+    min-height: 0;
   }
 
   [data-landing-variant='wildreach'] .wr-atlas__legend {
     max-height: none;
   }
 
-  [data-landing-variant='wildreach'] .wr-atlas__plate,
-  [data-landing-variant='wildreach'] .wr-atlas__frame {
-    height: 100%;
+  [data-landing-variant='wildreach'] .wr-atlas__plate {
+    height: auto;
     min-height: 0;
+    max-height: none;
+    aspect-ratio: var(--wr-media-aspect);
+  }
+
+  [data-landing-variant='wildreach'] .wr-atlas__frame {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    aspect-ratio: auto;
   }
 
   [data-landing-variant='wildreach'] .wr-survey__stage {
     flex: none;
-    min-height: min(52svh, 480px);
+    min-height: 0;
+  }
+
+  [data-landing-variant='wildreach'] .wr-survey__hide {
+    max-height: none;
+  }
+
+  [data-landing-variant='wildreach'] .wr-survey__ledger {
+    max-height: none;
   }
 
   [data-landing-variant='wildreach'] .wr-protocol__passes,
   [data-landing-variant='wildreach'] .wr-catalog__board {
     flex: none;
   }
+
+  [data-landing-variant='wildreach'] .wr-protocol__pass-art {
+    max-height: none;
+  }
+
+  [data-landing-variant='wildreach'] .faq,
+  [data-landing-variant='wildreach'] .final-cta {
+    overflow: visible;
+  }
+
+  /* Keep pathways clipped so gallery cards never bleed into FAQ / catalog */
+  [data-landing-variant='wildreach'] .wr-pathways {
+    overflow: hidden;
+    padding-block: clamp(1.75rem, 5vw, 2.75rem);
+  }
 }
 
-/* Phone: icon row above plate, image fills leftover height */
 @media (max-width: 700px) {
   [data-landing-variant='wildreach'] .wr-atlas__board {
     display: flex;
     flex-direction: column;
     gap: 0.65rem;
-    min-height: min(68svh, 560px);
+    min-height: 0;
   }
 
   [data-landing-variant='wildreach'] .wr-atlas__legend {
     flex: 0 0 auto;
   }
 
-  [data-landing-variant='wildreach'] .wr-atlas__plate,
-  [data-landing-variant='wildreach'] .wr-atlas__frame {
-    flex: 1 1 auto;
+  [data-landing-variant='wildreach'] .wr-atlas__plate {
+    flex: 0 0 auto;
+    width: 100%;
     height: auto;
-    min-height: min(48svh, 420px);
+    min-height: 0;
+    aspect-ratio: var(--wr-media-aspect);
+  }
+
+  [data-landing-variant='wildreach'] .wr-atlas__frame {
+    position: absolute;
+    inset: 0;
+    height: 100%;
   }
 }
 
@@ -220,10 +373,11 @@
   }
 
   [data-landing-variant='wildreach'] .wr-protocol__pass {
-    min-height: 14rem;
+    min-height: 0;
   }
 
   [data-landing-variant='wildreach'] .wr-protocol__pass-art {
-    min-height: 10rem;
+    min-height: 0;
+    aspect-ratio: var(--wr-media-aspect);
   }
 }
